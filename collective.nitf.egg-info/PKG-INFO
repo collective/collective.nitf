@@ -1,0 +1,24 @@
+Metadata-Version: 1.0
+Name: collective.nitf
+Version: 1.0
+Summary: A Dexterity-based content type inspired on the News Industry Text Format specification.
+Home-page: http://svn.plone.org/svn/collective/
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        1.0dev (unreleased)
+        -------------------
+        
+        - Initial release
+        
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
