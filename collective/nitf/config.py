@@ -2,6 +2,8 @@
 
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
+from collective.nitf import _
+
 PROPERTIES = SimpleVocabulary([
     SimpleTerm(value=u'Analysis',
                title=_(u'Analysis')),

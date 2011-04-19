@@ -30,6 +30,7 @@ setup(name='collective.nitf',
           'Plone',
           'plone.app.dexterity',
           'collective.autopermission',
+          'collective.testcaselayer',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]
