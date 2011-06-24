@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="sg.questions"
+    purge="False">
+    <configlet title="NITF News Articles"
+        action_id="nitf_news"
+        appId="collective.nitf"
+        category="Products"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@nitf_news_settings"
+        icon_expr="string:${portal_url}/++resource++collective.nitf/nitf_icon.png"
+        visible="True"
+        i18n:attributes="title">
+        <permission>Manage portal</permission>
+    </configlet>
+</object>

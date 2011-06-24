@@ -1,7 +1,9 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:transmogrifier="http://namespaces.plone.org/transmogrifier"
     i18n_domain="collective.nitf">
 
     <!-- Include configuration for dependencies listed in setup.py -->
@@ -9,7 +11,15 @@
 
     <!-- Grok the package to initialise schema interfaces and content classes -->
     <grok:grok package="." />
-
+    <!-- collective.transmogrifier registrations for importing articles -->
+    <include package="collective.transmogrifier" file="meta.zcml" />
+    <include package="collective.transmogrifier" />
+    <browser:page
+        name="collective_nitf_settings"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.NITFSettingsControlPanel"
+        permission="cmf.ManagePortal"
+        />  
     <!-- Register an extension profile to make the product installable -->
     <genericsetup:registerProfile
         name="default"
@@ -19,4 +29,10 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <transmogrifier:registerConfig
+        name="nitfmigrator"
+        title="Converts standard News Items into NITF objects"
+        description="Converts standard News Items into NITF objects"
+        configuration="migrator.cfg"
+        />
 </configure>

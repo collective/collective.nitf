@@ -40,3 +40,11 @@ class INITF(form.Schema):
             title=_(u'Author'),
             required=False,
         )
+
+
+class NewsItem_View(grok.View):
+    grok.context(INITF)
+    grok.require('zope2.View')
+
+
+
