@@ -1,4 +1,5 @@
 # encoding: utf-8
+import transaction
 from zope.interface import classProvides
 from zope.interface import implements
 
@@ -19,11 +20,8 @@ class NewsReader(object):
         self.name = name
 
     def __iter__(self):
-        for item in self.previous:
-            yield item
-
-        for res in self.results:
-            yield res
+        for result in self.results:
+            yield result
 
 
 class NITFTransform(object):
@@ -37,5 +35,18 @@ class NITFTransform(object):
 
     def __iter__(self):
         for item in self.previous:
+            objct = item.getObject()
+            parent = objct.__parent__
+            print item.getPath(), parent
+            o_id = item['id']
+            n_id = o_id + '-old'
+            parent[n_id] = objct
+            del parent[o_id]
+            print o_id
+            parent.invokeFactory('collective.nitf.content', id=o_id, title=item["Title"])
+            del parent[n_id]
+            item = parent[o_id]
+            item.reindexObject()
+            print item.id, item.Type()
             yield item
 

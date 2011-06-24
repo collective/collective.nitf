@@ -2,6 +2,7 @@
 
 from five import grok
 from zope import schema
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 from plone.directives import form, dexterity
 
@@ -40,6 +41,10 @@ class INITF(form.Schema):
             title=_(u'Author'),
             required=False,
         )
+
+
+class INITFLayer(IDefaultBrowserLayer):
+    """ Browser layer for collective.nitf """
 
 
 class NewsItem_View(grok.View):

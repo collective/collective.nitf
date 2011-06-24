@@ -13,7 +13,7 @@
     <grok:grok package="." />
     <!-- collective.transmogrifier registrations for importing articles -->
     <include package="collective.transmogrifier" file="meta.zcml" />
-    <include package="collective.transmogrifier" />
+
     <browser:page
         name="collective_nitf_settings"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -29,10 +29,26 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <genericsetup:registerProfile
+        name="uninstall"
+        title="Remove NITF"
+        directory="profiles/uninstall"
+        description="Installs the collective.nitf package"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
     <transmogrifier:registerConfig
         name="nitfmigrator"
         title="Converts standard News Items into NITF objects"
         description="Converts standard News Items into NITF objects"
         configuration="migrator.cfg"
+        />
+
+    <utility component=".migrator.NewsReader"
+        name="collective.nitf.reader"
+        />
+
+    <utility component=".migrator.NITFTransform"
+        name="collective.nitf.transform"
         />
 </configure>
