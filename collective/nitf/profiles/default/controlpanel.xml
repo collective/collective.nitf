@@ -4,7 +4,7 @@
     i18n:domain="sg.questions"
     purge="False">
     <configlet title="NITF News Articles"
-        action_id="nitf_news"
+        action_id="nitf_news_settings"
         appId="collective.nitf"
         category="Products"
         condition_expr=""

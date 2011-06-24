@@ -16,7 +16,7 @@
     <include package="collective.transmogrifier" />
 
     <browser:page
-        name="collective_nitf_settings"
+        name="nitf_news_settings"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".controlpanel.NITFSettingsControlPanel"
         permission="cmf.ManagePortal"
