@@ -81,7 +81,7 @@ class NewsItem_View(grok.View):
             elif brain.getObject().getContentType() in VIDEO_MIMETYPES:
                 ibrain['media_type'] = 'video'
             else:
-                ibrain['media_type'] = 'file'
+                ibrain['media_type'] = None
             media_items.append(ibrain)
         return media_items
 
