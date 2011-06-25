@@ -37,16 +37,13 @@ class NITFTransform(object):
         for item in self.previous:
             objct = item.getObject()
             parent = objct.__parent__
-            print item.getPath(), parent
             o_id = item['id']
             n_id = o_id + '-old'
             parent[n_id] = objct
             del parent[o_id]
-            print o_id
             parent.invokeFactory('collective.nitf.content', id=o_id, title=item["Title"])
             del parent[n_id]
             item = parent[o_id]
             item.reindexObject()
-            print item.id, item.Type()
             yield item
 

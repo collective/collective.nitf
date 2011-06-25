@@ -1,0 +1,30 @@
+
+<div id="media-wrapper" tal:define="viewlet_id viewlet/__name__;
+    here_url context/@@plone_context_state/object_url;
+    cols string:1;">
+    <tal:defs define="img_brains view/get_media_files;
+                      key_no   python: int(cols)-len(img_brains);
+                      lines python: viewlet.mediaRows(img_brains, cols);">
+                      
+        <div id="media-bar" tal:condition="lines">
+            <div class="navi prev" tal:condition="python: key_no < 0"></div>
+            <div class="thumbnails">
+                <div class="items">
+                    <tal:lines repeat="line lines">
+                    <tal:row repeat="item line">
+                    <div class="mediawrap imgwrap">
+                        <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_${viewlet/image_size}; class string:media-${item/media_type}" />
+                        <a class="mediaplayer" tal:condition="python:item['media_type'] is 'video'" href="video" style="display: block; height: 90px; width: 90px;" tal:attributes="href string:${item/image_url}; class string:media-${item/media_type}">
+                        </a>
+                    </div>
+                    </tal:row>
+                    </tal:lines>
+                </div>
+
+                <br class="visualClear" clear="all" />
+            </div>
+            <div class="navi next" tal:condition="python: key_no < 0"></div>
+        </div>
+    </tal:defs>
+</div>
+<div class="visualClear"></div>
