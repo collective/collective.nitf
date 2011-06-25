@@ -22,10 +22,6 @@
                <img tal:replace="structure python: context.tag(scale='mini', css_class='newsImage')" src="" alt="" />
             </a>
         </div>
-        <p class="discreet" tal:content="view/get_images">
-          Image Caption
-        </p>
-
 
         <div metal:define-slot="inside" tal:replace="structure context/body/output">The body</div>
     </metal:block>

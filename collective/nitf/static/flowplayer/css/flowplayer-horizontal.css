@@ -1,0 +1,95 @@
+/* this file is copied from
+http://flowplayer.org//css/playlist-horizontal.css
+which is used on this example page:
+http://flowplayer.org/demos/plugins/javascript/playlist/horizontal.htm
+
+Images are copied from there as well.
+*/
+
+.flowPlaylistVisible a.playListFlowPlayer {
+    padding-left: 38px;
+    padding-bottom: 8px;
+}
+
+.flowPlaylistHidden .playlist_wrap {
+    display: none;
+}
+
+#pl {
+    height:80px;
+    border:1px solid #ddd;
+    width:584px;
+    position:relative;
+    overflow:hidden;
+    padding:5px 0;
+    float:left;
+    background:#f5fbfb url(++resource++collective.flowplayer.css/gradient.png) repeat-x scroll 0 0;
+}
+
+#pl div#flowPlaylist {
+    height:80px;
+    position:absolute;
+    width:10000em;
+}
+
+#pl div#flowPlaylist a {
+    background:transparent url(++resource++collective.flowplayer.css/entry.png) no-repeat scroll 0%;
+    color:#666;
+    float:left;
+    font-family:"bitstream vera sans","lucida grande","verdana";
+    font-size:11px;
+    height:60px;
+    margin:0px 4px;
+    padding:10px;
+    text-decoration:none;
+    width:117px;
+    
+}
+
+#pl div#flowPlaylist a:hover {
+    background-position:-140px 0;
+    color:#000;
+}
+
+#pl div#flowPlaylist a.playing {
+    background-position:-280px 0;       
+    color:#000;
+}
+
+#pl div#flowPlaylist a.paused {
+    background-position:-420px 0;       
+    color:#000;
+}
+
+#pl div#flowPlaylist a.progress {
+    opacity:0.8;
+}
+
+#pl div#flowPlaylist em {    
+    float:right;
+    margin-top:15px;
+    color:red;
+    font-style:normal;
+}
+
+a.nextPage, a.prevPage {
+    display:block;
+    width:18px;
+    height:18px;
+    background:url(++resource++collective.flowplayer.css/left.png) no-repeat;
+    margin:30px 10px;
+    cursor:pointer;
+    float:left;
+}
+
+a.nextPage:hover, a.prevPage:hover {
+    background-position:0px -18px;      
+}
+
+a.nextPage {
+    background-image:url(++resource++collective.flowplayer.css/right.png);    
+}
+
+a.nextPage.disabled, a.prevPage.disabled {
+    visibility:hidden;      
+}

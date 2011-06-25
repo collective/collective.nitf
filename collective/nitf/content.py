@@ -8,6 +8,7 @@ from Products.CMFPlone.utils import getToolByName
 from plone.directives import form, dexterity
 from plone.app.textfield import RichText
 from plone.app.layout.viewlets.interfaces import IAboveContentBody
+from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 
 from collective.nitf import _
 from collective.nitf import INITFBrowserLayer
@@ -111,3 +112,14 @@ class MediaViewlet(grok.Viewlet):
                 this_row.append(key)
             rows.append(this_row)
         return rows
+
+
+class MediaLinksViewlet(grok.Viewlet):
+    grok.context(INITF)
+    grok.name('collective.nitf.links.media')
+    grok.template('media_links')
+    grok.viewletmanager(IHtmlHeadLinks)
+    grok.view(IMediaView)
+    grok.layer(INITFBrowserLayer)
+
+

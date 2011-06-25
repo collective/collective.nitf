@@ -2,7 +2,8 @@
 <div id="media-wrapper" tal:define="viewlet_id viewlet/__name__;
     here_url context/@@plone_context_state/object_url;
     cols string:1;">
-    <tal:defs define="img_brains view/get_media_files;
+    <tal:defs define="dummy python: viewlet.update('tile');
+                      img_brains view/get_media_files;
                       key_no   python: int(cols)-len(img_brains);
                       lines python: viewlet.mediaRows(img_brains, cols);">
                       
@@ -14,7 +15,7 @@
                     <tal:row repeat="item line">
                     <div class="mediawrap imgwrap" tal:condition="item/media_type">
                         <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_${viewlet/image_size}; class string:media-${item/media_type}" />
-                        <a class="mediaplayer" tal:condition="python:item['media_type'] is 'video'" href="video" style="display: block; height: 90px; width: 90px;" tal:attributes="href string:${item/image_url}; class string:media-${item/media_type}">
+                        <a class="mediaplayer" tal:condition="python:item['media_type'] is 'video'" href="video" style="display: block; height: 64px; width: 64px;" tal:attributes="href string:${item/image_url}; class string:media-${item/media_type}">
                         </a>
                     </div>
                     </tal:row>

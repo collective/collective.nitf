@@ -1,0 +1,66 @@
+/*
+	root element for the scrollable.
+	when scrolling occurs this element stays still.
+*/
+.thumbnails {
+	/* required settings */
+	position:relative;
+	overflow:hidden;
+	width: 524px;
+	height:116px;
+
+	/* custom decorations */
+	background:url(/++resource++cienciasalud.newsmedia/images/h300.png) repeat-x;
+    border: 1px solid #cccccc;
+}
+
+/*
+	root element for scrollable items. Must be absolutely positioned
+	and it should have a extremely large width to accomodate scrollable items.
+	it's enough that you set the width and height for the root element and
+	not for this element.
+*/
+.items {
+	/* this cannot be too large */
+	width:20000em;
+	position:absolute;
+	clear:both;
+}
+
+#content .items ul {
+	float:left;
+	width:524px;
+    height:116px;
+    list-style-type: none;
+    margin: 0 auto;
+}
+
+.imgwrap {
+    display: inline;
+}
+
+/* single scrollable item */
+#content .thumbnails .mediawrap {
+	float:left;
+    width: 90px;
+    height: 90px;
+    text-align: center;
+	margin:10px 3px 10px 5px;
+	background-color:#fff;
+	padding:2px;
+	border:1px solid #ccc;
+	
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+
+#content .thumbnails .mediawrap img {
+    vertical-align: middle;
+}
+
+/* active item */
+.thumbnails .active {
+	border:2px solid #000;
+	position:relative;
+	cursor:default;
+}

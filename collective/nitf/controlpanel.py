@@ -6,9 +6,14 @@ from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from plone.directives import form
+from plone.formwidget.autocomplete import AutocompleteMultiFieldWidget
 from plone.app.registry.browser import controlpanel
 
 from collective.nitf import _
+from collective.nitf.config import NORMAL
+from collective.nitf.config import PROPERTIES
+from collective.nitf.config import URGENCIES
 
 try:
     # only in z3c.form 2.0
@@ -18,8 +23,24 @@ except ImportError:
 
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 
-class INITFSettings(Interface):
+class INITFSettings(form.Schema):
     """ Interface for the form on the control panel. """
+    
+    form.widget(urgency_list=CheckBoxFieldWidget)
+    urgency_list = schema.Choice(
+            title=_(u'Priority List (Urgency)'),
+            vocabulary=URGENCIES,
+            required=False,
+            default=NORMAL,
+        )
+
+    form.widget(property_list=CheckBoxFieldWidget)
+    property_list = schema.Choice(
+            title=_(u'Property List'),
+            vocabulary=PROPERTIES,
+            required=False,
+        )
+
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
     grok.context(IPloneSiteRoot)

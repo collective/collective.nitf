@@ -13,6 +13,7 @@ from plone.dexterity.interfaces import IDexterityFTI
 
 from collective.transmogrifier.transmogrifier import Transmogrifier
 from collective.nitf.content import MediaViewlet
+from collective.nitf.content import MediaLinksViewlet
 from collective.nitf.tests.layer import BrowserLayer
 
 
@@ -39,8 +40,18 @@ class TestNITFBrowser(PloneTestCase):
         viewlet = MediaViewlet(self.folder.n1, TestRequest(), view, 'plone.abovecontentbody')
         self.assertNotEquals(viewlet, None)
         viewlet.update()
-        open('/tmp/viewlet.html', 'w').write(viewlet.render())
         
+
+    def test_links_viewlet(self):
+        transmogrifier = Transmogrifier(self.portal)
+        transmogrifier("nitfmigrator")
+        view = queryMultiAdapter((self.folder.n1, TestRequest()),
+                                  name=u"newsitem_view")
+        view.update()
+        viewlet = MediaLinksViewlet(self.folder.n1, TestRequest(), view, 'plone.htmlhead.links')
+        self.assertNotEquals(viewlet, None)
+        viewlet.update()
+        open('/tmp/viewlet.html', 'w').write(viewlet.render())
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
