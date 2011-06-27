@@ -30,7 +30,7 @@
  </property>
 
  <!-- View information -->
- <property name="default_view">view</property>
+ <property name="default_view">newsitem_view</property>
  <property name="default_view_fallback">False</property>
  <property name="view_methods">
   <element value="view"/>
@@ -44,7 +44,11 @@
  <alias from="view" to="@@view"/>
 
  <!-- Actions -->
- <action title="View" action_id="view" category="object" condition_expr=""
+ <action title="News Article View" action_id="newsitem_view" category="object" condition_expr=""
+    url_expr="string:${object_url}" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="NITF View" action_id="view" category="object" condition_expr=""
     url_expr="string:${object_url}" visible="True">
   <permission value="View"/>
  </action>

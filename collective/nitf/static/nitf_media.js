@@ -1,4 +1,5 @@
 jq(function($) {
+    $(".thumbnails").scrollable();
     $(".items img[src].media-image").prepOverlay({
         subtype:'image',
         urlmatch: '/image_.+$',
