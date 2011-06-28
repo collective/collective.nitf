@@ -87,17 +87,35 @@ class NewsItem_View(grok.View):
         return media_items
 
 
+class Media_View(NewsItem_View):
+    grok.context(INITF)
+    grok.name('media_view')
+    grok.title(u'Media View')
+    grok.require('zope2.View')
+
+
+class MediaViewletManager(grok.ViewletManager):
+    grok.context(INITF)
+    grok.name('collective.nitf.carousel')
+    grok.view(Media_View)
+    grok.layer(INITFBrowserLayer)
+
+
 class MediaViewlet(grok.Viewlet):
     grok.context(INITF)
-    grok.name('media_viewlet')
+    grok.name('collective.nitf.media.tile')
     grok.viewletmanager(IAboveContentBody)
-    grok.view(IMediaView)
+    grok.view(NewsItem_View)
     grok.template('media_viewlet')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
-    
-    def update(self, image_size='thumb'):
-        self.image_size = image_size
+   
+    image_size = 'tile'
+
+    def update(self, image_size=None):
+        if image_size is not None:
+            self.image_size = image_size
+        self.media_name = "media-%s" % self.image_size
 
     def mediaRows(self, keys, cols='5'):
         rows = []
@@ -114,6 +132,15 @@ class MediaViewlet(grok.Viewlet):
         return rows
 
 
+class MediaPreviewViewlet(MediaViewlet):
+    grok.name('collective.nitf.media.preview')
+    grok.viewletmanager(MediaViewletManager)
+    grok.view(Media_View)
+    grok.layer(INITFBrowserLayer)
+
+    image_size = 'preview'
+
+
 class MediaLinksViewlet(grok.Viewlet):
     grok.context(INITF)
     grok.name('collective.nitf.links.media')
@@ -121,5 +148,3 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.viewletmanager(IHtmlHeadLinks)
     grok.view(IMediaView)
     grok.layer(INITFBrowserLayer)
-
-

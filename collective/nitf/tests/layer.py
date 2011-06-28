@@ -25,27 +25,17 @@ class MigrationTestLayer(collective.testcaselayer.ptc.BasePTCLayer):
         self.populateContainer(self.folder)
         self.portal._delObject('front-page')
 
-    def populateContainer(self, container):
-        container.invokeFactory('News Item', 'n1')
-        container.invokeFactory('News Item', 'n2')
-        container.invokeFactory('News Item', 'n3')
-        container.invokeFactory('News Item', 'n4')
+    def populateContainer(self, container, default_type='News Item', limit=4):
+        for n in range(0,4):
+            n_id = 'n%s' % str(n+1)
+            container.invokeFactory(default_type, n_id)
 
-        container['n1'].setTitle('News 1')
-        container['n1'].setDescription('Description 1')
-        container['n1'].setText('News one')
-        
-        container['n2'].setTitle('News 2')
-        container['n2'].setDescription('Description 2')
-        container['n2'].setText('News two')
-   
-        container['n3'].setTitle('News 3')
-        container['n3'].setDescription('Description 3')
-        container['n3'].setText('News three')
-        
-        container['n4'].setTitle('News 4')
-        container['n4'].setDescription('Description 4')
-        container['n4'].setText('News four')
+            container[n_id].setTitle('News %s' % str(n+1))
+            container[n_id].setDescription('Description %s' % str(n+1))
+            if default_type is 'News Item':
+                container[n_id].setText('News %s' % str(n+1))
+            if default_type is 'collective.nitf.content':
+                container[n_id].setBody('News %s' % str(n+1))
 
 
 MigrationLayer = MigrationTestLayer([collective.testcaselayer.ptc.ptc_layer])
@@ -78,7 +68,7 @@ class BrowserTestLayer(MigrationTestLayer):
         self.addProfile('collective.nitf:default')
         self.logo = zptlogo
         self.login()
-        self.populateContainer(self.folder)
+        self.populateContainer(self.folder, 'collective.nitf.content')
         self.add_image(self.folder, "zlogo1.gif")
         self.add_image(self.folder, "zlogo2.gif")
 

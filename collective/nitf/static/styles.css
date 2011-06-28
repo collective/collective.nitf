@@ -78,19 +78,18 @@ a.imgdel:link {
 }
 
 
-#box {
-	background:url(/++resource++cienciasalud.newsmedia/images/black.png) no-repeat;
+.previews #media-bar {
+	background:url(/++resource++collective.nitf/images/black.png) no-repeat;
     width:656px;
     height:524px;
-    position:absolute;
-    display:none;
+    display:block;
 }
 
 /* 
     image is contained on the overlay background image. 
     the closing button is thus just a transparent container. 
 */
-#box .close {
+.previews #media-bar .close {
     position:absolute;
     left:8px;
     top:8px;
@@ -100,12 +99,12 @@ a.imgdel:link {
     text-decoration:none;
 }
 
-#content #box a:visited {
+#content .previews #media-bar a:visited {
     border: none;
 }
 
 /* overlay scrollable */
-#images {   
+.previews .thumbnails {   
     position:absolute;
     overflow:hidden;
     margin:50px;
@@ -114,7 +113,7 @@ a.imgdel:link {
 }
 
 /* single image */
-#images .items div {
+.previews .thumbnails .items div {
     float:left;
     width:557px;
     height:400px;
@@ -122,7 +121,7 @@ a.imgdel:link {
 }
 
 /* the tooltip */
-#images .items .info {
+.previews .thumbnails .items .info {
     float:none;
     background:#333;
     color:#fff;
@@ -134,19 +133,19 @@ a.imgdel:link {
     width:490px;
 }
 
-#images .items .info h3 {
+.previews .thumbnails .items .info h3 {
     color:#cde;
     margin-top:10px;
 }
     
 
 /* override button style on the overlay */
-#box .navi {
+.previews #media-bar .navi {
     position:absolute;
     bottom:33px;
     left:50px;
 }
 
-#box .next {
+.previews #media-bar .next {
     left:580px;
 }

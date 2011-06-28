@@ -10,7 +10,7 @@
 	height:116px;
 
 	/* custom decorations */
-	background:url(/++resource++cienciasalud.newsmedia/images/h300.png) repeat-x;
+	background:url(/++resource++collective.nitf/images/h300.png) repeat-x;
     border: 1px solid #cccccc;
 }
 
@@ -40,7 +40,7 @@
 }
 
 /* single scrollable item */
-#content .thumbnails .mediawrap {
+.tiles .thumbnails .mediawrap {
 	float:left;
     width: 90px;
     height: 90px;
@@ -54,7 +54,7 @@
 	-webkit-border-radius:4px;
 }
 
-#content .thumbnails .mediawrap img {
+.tiles .thumbnails .mediawrap img {
     vertical-align: middle;
 }
 

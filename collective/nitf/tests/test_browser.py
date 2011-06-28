@@ -22,8 +22,6 @@ class TestNITFBrowser(PloneTestCase):
     layer = BrowserLayer
 
     def test_newsitem_view(self):
-        transmogrifier = Transmogrifier(self.portal)
-        transmogrifier("nitfmigrator")
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         self.assertNotEquals(view, None)
@@ -31,20 +29,37 @@ class TestNITFBrowser(PloneTestCase):
         image_count = len(view.get_images())
         self.assertEquals(image_count, 2)
 
+
+    def test_media_view(self):
+        view = queryMultiAdapter((self.folder.n1, TestRequest()),
+                                  name=u"media_view")
+        self.assertNotEquals(view, None)
+        view.update()
+        image_count = len(view.get_images())
+        self.assertEquals(image_count, 2)
+
+
     def test_media_viewlet(self):
-        transmogrifier = Transmogrifier(self.portal)
-        transmogrifier("nitfmigrator")
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         view.update()
-        viewlet = MediaViewlet(self.folder.n1, TestRequest(), view, 'plone.abovecontentbody')
+        viewlet = MediaViewlet(self.folder.n1, TestRequest(), view,
+                                  'plone.abovecontentbody')
+        self.assertNotEquals(viewlet, None)
+        viewlet.update()
+        
+
+    def test_media_viewlet(self):
+        view = queryMultiAdapter((self.folder.n1, TestRequest()),
+                                  name=u"newsitem_view")
+        view.update()
+        viewlet = MediaViewlet(self.folder.n1, TestRequest(), view,
+                                  'plone.abovecontentbody')
         self.assertNotEquals(viewlet, None)
         viewlet.update()
         
 
     def test_links_viewlet(self):
-        transmogrifier = Transmogrifier(self.portal)
-        transmogrifier("nitfmigrator")
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         view.update()
