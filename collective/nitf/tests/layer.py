@@ -2,6 +2,7 @@
 from StringIO import StringIO
 
 from Products.PloneTestCase import ptc
+from plone.app.textfield.value import RichTextValue
 import collective.testcaselayer.ptc
 
 ptc.setupPloneSite()
@@ -21,7 +22,8 @@ class MigrationTestLayer(collective.testcaselayer.ptc.BasePTCLayer):
     def afterSetUp(self):
         # Install the collective.nitf product
         self.addProfile('collective.nitf:default')
-        self.loginAsPortalOwner()
+        #self.loginAsPortalOwner()
+        self.login()
         self.populateContainer(self.folder)
         self.portal._delObject('front-page')
 
@@ -30,12 +32,14 @@ class MigrationTestLayer(collective.testcaselayer.ptc.BasePTCLayer):
             n_id = 'n%s' % str(n+1)
             container.invokeFactory(default_type, n_id)
 
-            container[n_id].setTitle('News %s' % str(n+1))
-            container[n_id].setDescription('Description %s' % str(n+1))
-            if default_type is 'News Item':
-                container[n_id].setText('News %s' % str(n+1))
-            if default_type is 'collective.nitf.content':
-                container[n_id].setBody('News %s' % str(n+1))
+            container[n_id].setTitle(u'News %s' % str(n+1))
+            container[n_id].setDescription(u'Description %s' % str(n+1))
+            if default_type == 'News Item':
+                container[n_id].setText(u'News %s' % str(n+1))
+            if default_type == 'collective.nitf.content':
+                container[n_id].body = RichTextValue(u'<p>News %s</p>' % str(n+1),
+                                        None, 'text/html')
+            container[n_id].reindexObject()
 
 
 MigrationLayer = MigrationTestLayer([collective.testcaselayer.ptc.ptc_layer])

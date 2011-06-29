@@ -18,9 +18,11 @@ class TestNITFIntegration(PloneTestCase):
     layer = MigrationLayer
 
     def test_transmogrify(self):
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        results = catalog({'Type': u'News Article',},)
+        self.assertEqual(len(results), 0)
         transmogrifier = Transmogrifier(self.portal)
         transmogrifier("nitfmigrator")
-        catalog = getToolByName(self.portal, 'portal_catalog')
         results = catalog({'Type': u'News Article',},)
         self.assertEqual(len(results), 4)
 
