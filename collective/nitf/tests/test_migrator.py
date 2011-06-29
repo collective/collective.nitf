@@ -21,7 +21,7 @@ class TestNITFIntegration(PloneTestCase):
         transmogrifier = Transmogrifier(self.portal)
         transmogrifier("nitfmigrator")
         catalog = getToolByName(self.portal, 'portal_catalog')
-        results = catalog({'Type': u'NITF',},)
+        results = catalog({'Type': u'News Article',},)
         self.assertEqual(len(results), 4)
 
 
