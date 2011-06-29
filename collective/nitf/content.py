@@ -22,18 +22,21 @@ class INITF(form.Schema):
     """
 
     body = RichText(
-            title=_(u'Body'),
+            title=_(u'Body text'),
             required=False,
+            default=u'',
         )
 
     property_ = schema.Choice(
             title=_(u'Property'),
             vocabulary=PROPERTIES,
+            default='Current',
         )
 
     section = schema.Text(
             title=_(u'Section'),
             required=False,
+            default=u'',
         )
 
     urgency = schema.Choice(
@@ -45,6 +48,7 @@ class INITF(form.Schema):
     byline = schema.Text(
             title=_(u'Author'),
             required=False,
+            default=u'',
         )
 
 
@@ -69,7 +73,12 @@ class NewsItem_View(grok.View):
         return self.get_media_files(types=('File',))
 
     def get_media_files(self, types=('Image', 'File',)):
-        media_brains = self.catalog.searchResults({'Type': types,},
+        context_path = '/'.join(self.context.getPhysicalPath())
+        media_brains = self.catalog.searchResults(
+                        {'Type': types,
+                         'path': {'query': context_path,
+                                  'depth': 1},
+                         },
                         sort_on="getObjPositionInParent")
         media_items = []
         for brain in media_brains:

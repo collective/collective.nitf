@@ -69,8 +69,10 @@ class BrowserTestLayer(MigrationTestLayer):
         self.logo = zptlogo
         self.login()
         self.populateContainer(self.folder, 'collective.nitf.content')
-        self.add_image(self.folder, "zlogo1.gif")
-        self.add_image(self.folder, "zlogo2.gif")
+        for nitf in self.folder.values():
+            self.add_image(nitf, "zlogo1.gif")
+            self.add_image(nitf, "zlogo2.gif")
+        self.login()
 
     def add_image(self, container, m_id):
         container.invokeFactory('Image', id=m_id, title=u"Logo GIF",

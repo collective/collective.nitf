@@ -18,6 +18,8 @@ from collective.nitf.tests.layer import BrowserLayer
 
 
 class TestNITFBrowser(PloneTestCase):
+    """ The tests begin with 4 NITF News Articles in the user's folder,
+        self.folder. Each article has 2 Images, and the views should """
 
     layer = BrowserLayer
 
@@ -63,7 +65,8 @@ class TestNITFBrowser(PloneTestCase):
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         view.update()
-        viewlet = MediaLinksViewlet(self.folder.n1, TestRequest(), view, 'plone.htmlhead.links')
+        viewlet = MediaLinksViewlet(self.folder.n1, TestRequest(),
+                                  view, 'plone.htmlhead.links')
         self.assertNotEquals(viewlet, None)
         viewlet.update()
         open('/tmp/viewlet.html', 'w').write(viewlet.render())
