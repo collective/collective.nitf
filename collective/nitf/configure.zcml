@@ -45,11 +45,16 @@
         configuration="migrator.cfg"
         />
 
-    <utility component=".migrator.NewsReader"
-        name="collective.nitf.reader"
+    <utility component=".migrator.CatalogNewsSource"
+        name="collective.nitf.news.source"
         />
 
-    <utility component=".migrator.NITFTransform"
-        name="collective.nitf.transform"
+    <utility component=".migrator.NewsToNITFTransform"
+        name="collective.nitf.news.transform"
         />
+
+    <utility component=".migrator.NITFImageImport"
+        name="collective.nitf.image.import"
+        />
+
 </configure>

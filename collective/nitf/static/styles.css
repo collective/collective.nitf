@@ -59,7 +59,7 @@ a.imgdel:link {
 }
 /* next/prev buttons */
 .navi {
-	background:url(/++resource++cienciasalud.newsmedia/images/hori_large.png) no-repeat;
+	background:url(/++resource++collective.nitf/images/hori_large.png) no-repeat;
     width:30px;
     height:30px;
     float:left;
@@ -79,9 +79,10 @@ a.imgdel:link {
 
 
 .previews #media-bar {
-	background:url(/++resource++collective.nitf/images/black.png) no-repeat;
-    width:656px;
-    height:524px;
+	/*background:url(/++resource++collective.nitf/images/black.png) no-repeat;*/
+    background-color: #222222;
+    width:500px;
+    height:500px;
     display:block;
 }
 
@@ -108,14 +109,14 @@ a.imgdel:link {
     position:absolute;
     overflow:hidden;
     margin:50px;
-    width:557px;
+    width:400px;
     height:400px;   
 }
 
 /* single image */
 .previews .thumbnails .items div {
     float:left;
-    width:557px;
+    width:400px;
     height:400px;
     margin-right:30px;
 }
@@ -142,10 +143,10 @@ a.imgdel:link {
 /* override button style on the overlay */
 .previews #media-bar .navi {
     position:absolute;
-    bottom:33px;
-    left:50px;
+    bottom:220px;
+    left:5px;
 }
 
 .previews #media-bar .next {
-    left:580px;
+    left:452px;
 }

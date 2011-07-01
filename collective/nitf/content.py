@@ -56,10 +56,11 @@ class IMediaView(Interface):
     """ Marker view for media views"""
 
 
-class NewsItem_View(grok.View):
+class Media_View(grok.View):
     grok.context(INITF)
     grok.implements(IMediaView)
-    grok.name('newsitem_view')
+    grok.name('media_view')
+    grok.title(u'Media View')
     grok.require('zope2.View')
 
     def update(self):
@@ -96,11 +97,11 @@ class NewsItem_View(grok.View):
         return media_items
 
 
-class Media_View(NewsItem_View):
-    grok.context(INITF)
-    grok.name('media_view')
-    grok.title(u'Media View')
+class NewsItem_View(Media_View):
+    grok.implements(IMediaView)
+    grok.name('newsitem_view')
     grok.require('zope2.View')
+    grok.layer(INITFBrowserLayer)
 
 
 class MediaViewletManager(grok.ViewletManager):

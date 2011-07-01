@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 import random
 from StringIO import StringIO
+import logging
+import sys
+
+logging.basicConfig()
+logger = logging.getLogger('collective.nitf')
 
 from zope.event import notify
 from zope.lifecycleevent import ObjectAddedEvent
@@ -57,15 +62,17 @@ class MigrationTestLayer(collective.testcaselayer.ptc.BasePTCLayer):
             notify(ObjectAddedEvent(container[n_id]))
             container[n_id].setTitle(u'News %s' % str(n+1))
             container[n_id].setDescription(u'Description %s' % str(n+1))
+            container[n_id].setSubject((u"Category 1", u"Category 2", u"A third category"))
             if default_type == 'News Item':
                 container[n_id].setText(u'News %s' % str(n+1))
                 # Randomly sets images on news items
                 if random.choice([True, False]):
                     container[n_id].setImage(StringIO(zptlogo))
-                    container[n_id].setImageCaption(u'Zope LOGO')
+                    container[n_id].setImageCaption(u'Zope LOGO %s' % str(n+1))
             if default_type == 'collective.nitf.content':
                 container[n_id].body = RichTextValue(u'<p>News %s</p>' % str(n+1),
                                         'text/html', 'text/x-html-safe')
+            logger.debug(u"Populating: %s %s %s" % (default_type, n_id, container[n_id].getImage()))
             container[n_id].reindexObject()
 
 
