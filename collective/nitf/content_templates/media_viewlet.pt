@@ -1,12 +1,12 @@
 <div id="media-wrapper" tal:define="viewlet_id viewlet/__name__;
     here_url context/@@plone_context_state/object_url;
-    cols string:1;" tal:attributes="class string:${viewlet/image_size}s">
+    cols string:5;" tal:attributes="class string:${viewlet/image_size}s">
     <tal:defs define="img_brains view/get_media_files;
                       key_no   python: int(cols)-len(img_brains);
                       lines python: viewlet.mediaRows(img_brains, cols);">
-                      
+
         <div id="media-bar" tal:condition="lines">
-            <div class="navi prev" tal:condition="python: key_no < 0"></div>
+            <span class="navi prev"></span>
             <div class="thumbnails">
                 <div class="items">
                     <tal:lines repeat="line lines">
@@ -22,7 +22,7 @@
 
                 <br class="visualClear" clear="all" />
             </div>
-            <div class="navi next" tal:condition="python: key_no < 0"></div>
+            <span class="navi next"></span>
         </div>
     </tal:defs>
 </div>

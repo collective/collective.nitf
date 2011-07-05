@@ -52,16 +52,17 @@ class INITF(form.Schema):
         )
 
 
+
 class IMediaView(Interface):
-    """ Marker view for media views"""
+    """ Marker interface for media views """
 
 
 class Media_View(grok.View):
     grok.context(INITF)
-    grok.implements(IMediaView)
     grok.name('media_view')
     grok.title(u'Media View')
     grok.require('zope2.View')
+    grok.layer(INITFBrowserLayer)
 
     def update(self):
         self.catalog = getToolByName(self.context, 'portal_catalog')
@@ -73,14 +74,15 @@ class Media_View(grok.View):
     def get_videos(self):
         return self.get_media_files(types=('File',))
 
-    def get_media_files(self, types=('Image', 'File',)):
+    def get_media_files(self, types=('Image', 'File',), limit=None):
         context_path = '/'.join(self.context.getPhysicalPath())
         media_brains = self.catalog.searchResults(
                         {'Type': types,
                          'path': {'query': context_path,
                                   'depth': 1},
                          },
-                        sort_on="getObjPositionInParent")
+                        sort_on="getObjPositionInParent",
+                        limit=limit)
         media_items = []
         for brain in media_brains:
             ibrain = { 'id': brain.id,
@@ -98,10 +100,24 @@ class Media_View(grok.View):
 
 
 class NewsItem_View(Media_View):
-    grok.implements(IMediaView)
+    grok.context(INITF)
     grok.name('newsitem_view')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
+
+    def image(self):
+        imgs = self.get_media_files(types=('Image',), limit=1)
+        if len(imgs):
+            return imgs[0]
+
+
+class NewsMedia_View(NewsItem_View):
+    grok.context(INITF)
+    grok.layer(INITFBrowserLayer)
+    grok.name('newsmedia_view')
+    grok.require('zope2.View')
+    grok.template('newsitem_view')
+    grok.view(IMediaView)
 
 
 class MediaViewletManager(grok.ViewletManager):
@@ -115,7 +131,7 @@ class MediaViewlet(grok.Viewlet):
     grok.context(INITF)
     grok.name('collective.nitf.media.tile')
     grok.viewletmanager(IAboveContentBody)
-    grok.view(NewsItem_View)
+    grok.view(NewsMedia_View)
     grok.template('media_viewlet')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
@@ -143,6 +159,7 @@ class MediaViewlet(grok.Viewlet):
 
 
 class MediaPreviewViewlet(MediaViewlet):
+    grok.context(INITF)
     grok.name('collective.nitf.media.preview')
     grok.viewletmanager(MediaViewletManager)
     grok.view(Media_View)
@@ -156,5 +173,4 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.name('collective.nitf.links.media')
     grok.template('media_links')
     grok.viewletmanager(IHtmlHeadLinks)
-    grok.view(IMediaView)
     grok.layer(INITFBrowserLayer)

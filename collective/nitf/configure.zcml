@@ -13,7 +13,6 @@
     <grok:grok package="." />
     <!-- collective.transmogrifier registrations for importing articles -->
     <include package="collective.transmogrifier" file="meta.zcml" />
-    <include package="collective.transmogrifier" />
 
     <browser:page
         name="nitf_news_settings"

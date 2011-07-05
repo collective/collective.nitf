@@ -27,6 +27,7 @@
  <property name="behaviors">
      <element value="plone.app.content.interfaces.INameFromTitle" />
      <element value="plone.app.dexterity.behaviors.metadata.IDublinCore" />
+     <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
  </property>
 
  <!-- View information -->
@@ -35,6 +36,7 @@
  <property name="view_methods">
   <element value="view"/>
   <element value="newsitem_view"/>
+  <element value="newsmedia_view"/>
   <element value="media_view"/>
  </property>
 

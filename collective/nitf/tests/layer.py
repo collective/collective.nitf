@@ -9,10 +9,11 @@ logger = logging.getLogger('collective.nitf')
 
 from zope.event import notify
 from zope.lifecycleevent import ObjectAddedEvent
+from zope.lifecycleevent import ObjectCreatedEvent
 from Products.PloneTestCase import ptc
 from plone.app.textfield.value import RichTextValue
 import collective.testcaselayer.ptc
-
+from plone.dexterity.utils import createContent
 ptc.setupPloneSite()
 
 zptlogo = (
@@ -56,23 +57,31 @@ class MigrationTestLayer(collective.testcaselayer.ptc.BasePTCLayer):
         self.portal._delObject('front-page')
 
     def populateContainer(self, container, default_type='News Item', limit=4):
-        for n in range(0,4):
+        for n in range(0,limit):
             n_id = 'n%s' % str(n+1)
-            container.invokeFactory(default_type, n_id)
+            context = createContent('collective.nitf.content',
+                                    id=n_id,
+                                    title=u'News %s' % str(n+1),
+                                    description=u'Description %s' % str(n+1),
+                                    subject=(u"Category 1", u"Category 2", u"A third category"))
+            notify(ObjectCreatedEvent(context))
+            container[n_id] = context
+            #container.invokeFactory(default_type, n_id)
             notify(ObjectAddedEvent(container[n_id]))
-            container[n_id].setTitle(u'News %s' % str(n+1))
-            container[n_id].setDescription(u'Description %s' % str(n+1))
-            container[n_id].setSubject((u"Category 1", u"Category 2", u"A third category"))
+            #container[n_id].setTitle(u'News %s' % str(n+1))
+            #container[n_id].setDescription(u'Description %s' % str(n+1))
+            #container[n_id].setSubject((u"Category 1", u"Category 2", u"A third category"))
             if default_type == 'News Item':
                 container[n_id].setText(u'News %s' % str(n+1))
                 # Randomly sets images on news items
                 if random.choice([True, False]):
                     container[n_id].setImage(StringIO(zptlogo))
                     container[n_id].setImageCaption(u'Zope LOGO %s' % str(n+1))
+                logger.debug(u"Populating: %s %s %s" % (default_type, n_id, container[n_id].getImage()))
             if default_type == 'collective.nitf.content':
                 container[n_id].body = RichTextValue(u'<p>News %s</p>' % str(n+1),
                                         'text/html', 'text/x-html-safe')
-            logger.debug(u"Populating: %s %s %s" % (default_type, n_id, container[n_id].getImage()))
+                logger.debug(u"Populating: %s %s %s" % (default_type, n_id, container[n_id].objectIds()))
             container[n_id].reindexObject()
 
 
@@ -90,7 +99,7 @@ class BrowserTestLayer(MigrationTestLayer):
         for nitf in self.folder.values():
             self.add_image(nitf, "zlogo1.gif")
             self.add_image(nitf, "zlogo2.gif")
-        self.login()
+            nitf.reindexObject()
 
     def add_image(self, container, m_id):
         container.invokeFactory('Image', id=m_id, title=u"Logo GIF",
