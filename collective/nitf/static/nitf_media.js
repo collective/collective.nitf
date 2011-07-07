@@ -1,6 +1,6 @@
 jq(function($) {
     $(".thumbnails").scrollable({size: 3,});
-    $(".items img[src].media-image").prepOverlay({
+    $(".thumbnails .items img[src].media-image").prepOverlay({
         subtype:'image',
         urlmatch: '/image_.+$',
         urlreplace: '/image_large',
@@ -17,6 +17,7 @@ jq(function($) {
             $("#mediabox #images").data("scrollable").seekTo(0, 0);
         }
     });
+    /*
     $("#mediabox div.info").tooltip({
         position: 'bottom center',
         offset: [-85, -30],
@@ -25,7 +26,7 @@ jq(function($) {
 
         // position tooltips relative to the parent scrollable
         relative: true
-    });
+    });*/
     flowplayer("a.media-video", "./++resource++collective.nitf/flowplayer/flowplayer.swf", {
         // change the default controlbar to modern
         plugins: {

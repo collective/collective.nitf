@@ -172,9 +172,12 @@ a.imgdel:link {
 }
 #mediabox #images .items div {
 	float:left;
-	width:557px;
+	width:400px;
 	height:400px;
-	margin-right:30px;
+        text-align: center;
+}
+#mediabox #images .items img:hover {
+    cursor: pointer;
 }
 /* next/prev buttons */
 #mediabox .navi {
@@ -194,18 +197,14 @@ a.imgdel:link {
 #mediabox .next {
 	left:580px;
 }
-#mediabox div.close {
-    background-image: url("pb_close.png");
-}
 #mediabox #images .items .info {
     float:none;
     background:#333;
     color:#fff;
     font-size:13px;
     margin-top:-137px;
-    padding:5px 75px;
+    padding:5px 0px;
     height:125px;
-    display:none;
     width:400px;
 }
 
