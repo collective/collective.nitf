@@ -28,6 +28,7 @@ setup(name='collective.nitf',
       install_requires=[
           'setuptools',
           'Plone',
+          'plone.app.referenceablebehavior',
           'plone.app.dexterity',
           'plone.app.transmogrifier',
           'transmogrify.dexterity',
