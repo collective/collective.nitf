@@ -202,7 +202,7 @@ a.imgdel:link {
     background:#333;
     color:#fff;
     font-size:13px;
-    margin-top:-137px;
+    margin:-50px 0 0 30px;
     padding:5px 0px;
     height:125px;
     width:400px;
@@ -211,5 +211,9 @@ a.imgdel:link {
 #mediabox #images .items .info h3 {
     color:#cde;
     margin-top:10px;
+}
+#mediabox #images .items .info p {
+    text-align: justify;
+    font-size: 11px;
 }
 

@@ -17,8 +17,8 @@ jq(function($) {
             $("#mediabox #images").data("scrollable").seekTo(0, 0);
         }
     });
-    /*
-    $("#mediabox div.info").tooltip({
+    
+    $("#mediabox #images img").tooltip({
         position: 'bottom center',
         offset: [-85, -30],
         opacity: 0.8,
@@ -26,7 +26,7 @@ jq(function($) {
 
         // position tooltips relative to the parent scrollable
         relative: true
-    });*/
+    });
     flowplayer("a.media-video", "./++resource++collective.nitf/flowplayer/flowplayer.swf", {
         // change the default controlbar to modern
         plugins: {
