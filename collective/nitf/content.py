@@ -87,6 +87,7 @@ class Media_View(grok.View):
         for brain in media_brains:
             ibrain = { 'id': brain.id,
                        'title': brain.Title,
+                       'description': brain.Description,
                        'image_url': brain.getURL(),
                        }
             if brain.getObject().getContentType() in IMAGE_MIMETYPES:
@@ -116,7 +117,7 @@ class NewsMedia_View(NewsItem_View):
     grok.layer(INITFBrowserLayer)
     grok.name('newsmedia_view')
     grok.require('zope2.View')
-    grok.template('newsitem_view')
+    grok.template('newsmedia_view')
     grok.view(IMediaView)
 
 

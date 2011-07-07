@@ -1,12 +1,31 @@
 jq(function($) {
-    $(".thumbnails").scrollable();
+    $(".thumbnails").scrollable({size: 3,});
     $(".items img[src].media-image").prepOverlay({
         subtype:'image',
         urlmatch: '/image_.+$',
         urlreplace: '/image_large',
     });
 
+    $("#mediabox #images").scrollable({size: 1,});
+    $(".newsImageContainer a").overlay({
+            effect: 'apple',
+            target: '#mediabox',
+            mask: { maskId: 'mask' },
 
+            // when box is opened, scroll to correct position (in 0 seconds)
+            onLoad: function() {
+            $("#mediabox #images").data("scrollable").seekTo(0, 0);
+        }
+    });
+    $("#mediabox div.info").tooltip({
+        position: 'bottom center',
+        offset: [-85, -30],
+        opacity: 0.8,
+        effect: 'fade',
+
+        // position tooltips relative to the parent scrollable
+        relative: true
+    });
     flowplayer("a.media-video", "./++resource++collective.nitf/flowplayer/flowplayer.swf", {
         // change the default controlbar to modern
         plugins: {

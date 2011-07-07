@@ -25,7 +25,29 @@
               Image Caption
             </p>
         </div>
-
+        <div id="mediabox" tal:define="here_url context/@@plone_context_state/object_url;"
+                              tal:attributes="class string:larges">
+            <tal:defs define="img_brains view/get_media_files;">
+            <!-- overlay scrollable -->
+            <div id="images" tal:condition="img_brains">
+                <div class="items">
+                    <tal:lines repeat="item img_brains">
+                    <div>
+                        <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_preview; class string:media-${item/media_type}" />
+                        <div class="info">
+                            <h3 tal:content="item/title|nothing">A Blue Flower</h3>
+                            <p tal:content="item/description|nothing">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.</p>
+                        </div>
+                    </div>
+                    </tal:lines>
+                </div>
+            </div>
+            <!-- prev/next buttons -->
+            <span class="navi prev"></span>
+            <span class="navi next"></span>
+            <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
+            </tal:defs>
+        </div>
         <div metal:define-macro="text-field-view"
             id="parent-fieldname-text" class="stx">
             <div metal:define-slot="inside" tal:replace="structure context/body/output">The body</div>
