@@ -9,18 +9,23 @@
 
 <metal:content-core fill-slot="content-core">
     <metal:block define-macro="content-core"
-          tal:define="kssClassesView context/@@kss_field_decorator_view;
+            tal:define="here_url context/@@plone_context_state/object_url;
+                      kssClassesView context/@@kss_field_decorator_view;
                       getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
                       text context/body;">
 
         <div class="newsImageContainer"
              tal:condition="view/image|nothing"
                tal:define="img_brain view/image">
-            <a href="#"
+            <!--a href="#"
                tal:attributes="href string:${img_brain/image_url}/image_view_fullscreen"
+               id="parent-fieldname-image"-->
+            <a href="#"
+                tal:attributes="href string:${here_url}/media_view"
                id="parent-fieldname-image">
                <img class="newsImage" tal:attributes="src string:${img_brain/image_url}/image_mini" src="" alt="" />
             </a>
+            <!--/a-->
            <p class="discreet" tal:condition="img_brain/title|nothing" tal:content="img_brain/title">
               Image Caption
             </p>
@@ -43,8 +48,8 @@
                 </div>
             </div>
             <!-- prev/next buttons -->
-            <span class="navi prev"></span>
-            <span class="navi next"></span>
+            <span class="nav prev"></span>
+            <span class="nav next"></span>
             <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
             </tal:defs>
         </div>

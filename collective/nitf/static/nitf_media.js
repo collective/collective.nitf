@@ -1,13 +1,20 @@
 jq(function($) {
     $(".thumbnails").scrollable({size: 3,});
-    $(".thumbnails .items img[src].media-image").prepOverlay({
+    $(".tiles .thumbnails .items img[src].media-image").prepOverlay({
         subtype:'image',
         urlmatch: '/image_.+$',
         urlreplace: '/image_large',
     });
 
-    $("#mediabox #images").scrollable({size: 1,});
-    $(".newsImageContainer a").overlay({
+    $(".newsImageContainer a").prepOverlay({
+        subtype:'ajax',
+        filter: '#media-wrapper',
+        onLoad: function() {
+            $(".previews #thumbs").scrollable();
+            $(".previews #media-bar #images").data("scrollable").seekTo(0, 0);
+        }
+    });
+    /*$(".newsImageContainer img").overlay({
             effect: 'apple',
             target: '#mediabox',
             mask: { maskId: 'mask' },
@@ -17,8 +24,9 @@ jq(function($) {
             $("#mediabox #images").data("scrollable").seekTo(0, 0);
         }
     });
+    */
     
-    $("#mediabox #images img").tooltip({
+    $(".previews #images img").tooltip({
         position: 'bottom center',
         offset: [-85, -30],
         opacity: 0.8,

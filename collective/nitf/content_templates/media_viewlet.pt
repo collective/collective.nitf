@@ -7,7 +7,7 @@
 
         <div id="media-bar" tal:condition="lines">
             <span class="navi prev"></span>
-            <div class="thumbnails">
+            <div id="thumbs" class="thumbnails">
                 <div class="items">
                     <tal:lines repeat="line lines">
                     <tal:row repeat="item line">
@@ -27,3 +27,8 @@
     </tal:defs>
 </div>
 <div class="visualClear"></div>
+<script>
+    jq(function($) {
+            $(".previews .thumbnails").scrollable();
+        });
+</script>
