@@ -161,7 +161,7 @@ a.imgdel:link {
     width:500px;
     height:500px;
 /*    position: absolute;*/
-    display:block;
+    display:none;
     margin: 0 auto;
 }
 #mediabox #images {   
@@ -182,24 +182,26 @@ a.imgdel:link {
 }
 /* next/prev buttons */
 #mediabox .navi {
-    background:url(/++resource++collective.nitf/images/hori_large.png) no-repeat;
+    clear: none;
     width:30px;
     height:30px;
     float:left;
     margin:40px 5px;
-}
-
-#mediabox .navi {
+    position: absolute;
+    bottom: -30px;
+/*
 	position:absolute;
 	bottom:33px;
 	left:50px;
+*/
 }
 
 #mediabox .next {
-	left:580px;
+	right: 0px;
 }
 #mediabox #images .items .info {
     float:none;
+    display: none;
     background:#333;
     color:#fff;
     font-size:13px;
