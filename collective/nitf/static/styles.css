@@ -108,8 +108,10 @@ a.imgdel:link {
 }
 
 /* overlay scrollable */
-.previews .thumbnails {   
+.previews .thumbnails {
+/*
     position:absolute;
+*/
     overflow:hidden;
     margin:50px;
     width:400px;
@@ -172,10 +174,17 @@ a.imgdel:link {
     height:400px;   
 }
 #mediabox #images .items div {
+/*
 	float:left;
+*/
+    display: inline-block;
+}
+#mediabox #images .items div span {
+    display: table-cell;
+    vertical-align: middle;
 	width:400px;
 	height:400px;
-        text-align: center;
+    text-align: center;
 }
 #mediabox #images .items img:hover {
     cursor: pointer;

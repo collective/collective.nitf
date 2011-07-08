@@ -12,9 +12,11 @@
                     <tal:lines repeat="line lines">
                     <tal:row repeat="item line">
                     <div class="mediawrap imgwrap" tal:condition="item/media_type">
-                        <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_${viewlet/image_size}; class string:media-${item/media_type}" />
-                        <a class="mediaplayer" tal:condition="python:item['media_type'] is 'video'" href="video" style="display: block; height: 64px; width: 64px;" tal:attributes="href string:${item/image_url}; class string:media-${item/media_type}">
-                        </a>
+                        <span>
+                            <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_${viewlet/image_size}; class string:media-${item/media_type}" />
+                            <a class="mediaplayer" tal:condition="python:item['media_type'] is 'video'" href="video" style="display: block; height: 64px; width: 64px;" tal:attributes="href string:${item/image_url}; class string:media-${item/media_type}">
+                            </a>
+                        </span>
                     </div>
                     </tal:row>
                     </tal:lines>

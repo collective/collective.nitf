@@ -42,8 +42,6 @@
 /* single scrollable item */
 .tiles .thumbnails .mediawrap {
 	float:left;
-    width: 90px;
-    height: 90px;
     text-align: center;
 	margin:10px 3px 10px 5px;
 	background-color:#fff;
@@ -52,6 +50,13 @@
 	
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
+}
+.tiles .thumbnails .mediawrap span {
+    display: table-cell;
+    vertical-align: middle;
+    width: 90px;
+    height: 90px;
+    text-align: center;
 }
 
 .tiles .thumbnails .mediawrap img {

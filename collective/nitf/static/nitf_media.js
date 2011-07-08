@@ -1,5 +1,6 @@
 jq(function($) {
-    $(".thumbnails").scrollable({size: 3,});
+    $(".tiles .thumbnails").scrollable({size: 3,});
+    $(".previews .thumbnails").scrollable({size: 1, circular: true,});
     $("#mediabox #images").scrollable({size: 1, circular: true,});
     $(".tiles .thumbnails .items img[src].media-image").prepOverlay({
         subtype:'image',

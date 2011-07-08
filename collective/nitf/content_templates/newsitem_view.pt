@@ -36,11 +36,13 @@
                 <div class="items">
                     <tal:lines repeat="item img_brains">
                     <div>
-                        <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_preview; class string:media-${item/media_type}" />
-                        <div class="info">
-                            <h3 tal:content="item/title|nothing">A Blue Flower</h3>
-                            <p tal:content="item/description|nothing">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.</p>
-                        </div>
+                        <span>
+                            <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_preview; class string:media-${item/media_type}" />
+                            <div class="info">
+                                <h3 tal:content="item/title|nothing">A Blue Flower</h3>
+                                <p tal:content="item/description|nothing">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.</p>
+                            </div>
+                        </span>
                     </div>
                     </tal:lines>
                 </div>

@@ -12,11 +12,11 @@
           tal:define="kssClassesView context/@@kss_field_decorator_view;
                       getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
                       text context/body;">
-        <div id="mediabox" tal:define="here_url context/@@plone_context_state/object_url;"
-                              tal:attributes="class string:larges">
-            <tal:defs define="img_brains view/get_media_files;">
+        <div id="media-bar" tal:define="here_url context/@@plone_context_state/object_url;"
+                              tal:attributes="class string:previews">
+            <tal:defs define="img_brains view/get_images;">
             <!-- overlay scrollable -->
-            <div id="images" tal:condition="img_brains">
+            <div class="thumbnails" tal:condition="img_brains">
                 <div class="items">
                     <tal:lines repeat="item img_brains">
                     <div>
@@ -30,8 +30,8 @@
                 </div>
             </div>
             <!-- prev/next buttons -->
-            <span class="nav prev"></span>
-            <span class="nav next"></span>
+            <span class="navi prev"></span>
+            <span class="navi next"></span>
             <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
             </tal:defs>
         </div>
