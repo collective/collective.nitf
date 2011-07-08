@@ -8,12 +8,12 @@ jq(function($) {
 
     $(".newsImageContainer a").prepOverlay({
         subtype:'ajax',
-        filter: '#media-wrapper',
+        filter: '#mediabox',
         onLoad: function() {
-            $(".previews #thumbs").scrollable();
-            $(".previews #media-bar #images").data("scrollable").seekTo(0, 0);
+        $("#mediabox #images").data("scrollable").seekTo(0, 0);
         }
     });
+    $("#mediabox #images").scrollable();
     /*$(".newsImageContainer img").overlay({
             effect: 'apple',
             target: '#mediabox',
@@ -24,7 +24,6 @@ jq(function($) {
             $("#mediabox #images").data("scrollable").seekTo(0, 0);
         }
     });
-    */
     
     $(".previews #images img").tooltip({
         position: 'bottom center',
@@ -35,6 +34,7 @@ jq(function($) {
         // position tooltips relative to the parent scrollable
         relative: true
     });
+    */
     flowplayer("a.media-video", "./++resource++collective.nitf/flowplayer/flowplayer.swf", {
         // change the default controlbar to modern
         plugins: {

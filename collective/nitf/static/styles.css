@@ -160,8 +160,8 @@ a.imgdel:link {
 /*    background:url(/++resource++collective.nitf/images/black.png) no-repeat;*/
     width:500px;
     height:500px;
-    position: absolute;
-    display:none;
+/*    position: absolute;*/
+    display:block;
 }
 #mediabox #images {   
     position:absolute;
