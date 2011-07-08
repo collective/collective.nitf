@@ -22,7 +22,7 @@
                id="parent-fieldname-image"-->
             <a href="#mediabox"
                id="parent-fieldname-image">
-               <img class="newsImage" tal:attributes="src string:${img_brain/image_url}/image_mini" src="" alt="" />
+               <img class="newsImage nitf" tal:attributes="src string:${img_brain/image_url}/image_mini" src="" alt="" />
             </a>
             <!--/a-->
            <p class="discreet" tal:condition="img_brain/title|nothing" tal:content="img_brain/title">

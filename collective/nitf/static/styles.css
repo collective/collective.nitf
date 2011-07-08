@@ -1,3 +1,7 @@
+.newsImage.nitf {
+    cursor: pointer;
+}
+
 #media-bar {
     margin: 0 auto;
     width: 500px;
