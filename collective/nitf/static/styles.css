@@ -10,61 +10,6 @@
     margin-bottom: 20px;
 }
 
-#img-edit-form {
-    padding: 10px;
-}
-
-.imgblock {
-    margin: 10px 20px;
-    padding: 10px;
-    border: 1px solid #cccccc;
-}
-
-.imgblock li {
-    height: 218px;
-    width: 218px;
-    display: inline-table;
-    margin: 10px 5px;
-    text-align: center;
-	background-color:#ddd;
-	border:1px solid #ccc;
-    vertical-align: text-bottom;
-	
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-}
-
-.imglist {
-    list-style-type: none;
-    margin: 0 auto;
-}
-
-.imglist .imgwrap {
-    display: table-cell;
-    width: 192px;
-    height: 192px;
-    text-align: center;
-	margin:0;
-	padding:2px;
-    vertical-align: bottom;
-}
-.imgblock li img {
-    vertical-align: text-top;
-}
-
-.imgdel {
-    display: block;
-    margin-bottom: 0;
-}
-
-a.imgdel:link {
-    border-bottom: 0 solid #fff;
-}
-
-/* overlay styling */
-#mask {
-    background-color: #999999;
-}
 /* next/prev buttons */
 .navi {
     background:url(/++resource++collective.nitf/images/hori_large.png) no-repeat;
@@ -85,83 +30,8 @@ a.imgdel:link {
     visibility:hidden;      
 }
 
-
-.previews #media-bar {
-    background-color: #222222;
-    width:500px;
-    height:500px;
-    display:block;
-}
-
-/* 
-    image is contained on the overlay background image. 
-    the closing button is thus just a transparent container. 
-*/
-.previews #media-bar .close {
-    position:absolute;
-    left:8px;
-    top:8px;
-    cursor:pointer;
-    height:35px;
-    width:35px;
-    text-decoration:none;
-}
-
-#content .previews #media-bar a:visited {
-    border: none;
-}
-
-/* overlay scrollable */
-.previews .thumbnails {
-/*
-    position:absolute;
-*/
-    overflow:hidden;
-    margin:50px;
-    width:400px;
-    height:400px;   
-}
-
-/* single image */
-.previews .thumbnails .items div {
-    float:left;
-    width:400px;
-    height:400px;
-    margin-right:30px;
-}
-
-/* the tooltip */
-.previews .thumbnails .items .info {
-    float:none;
-    background:#333;
-    color:#fff;
-    font-size:13px;
-    margin-top:-137px;
-    padding:5px 75px;
-    height:125px;
-    display:none;
-    width:400px;
-}
-
-.previews .thumbnails .items .info h3 {
-    color:#cde;
-    margin-top:10px;
-}
-    
-
-/* override button style on the overlay */
-.previews #media-bar .navi {
-    position:absolute;
-    bottom:220px;
-    left:5px;
-}
-
-.previews #media-bar .next {
-    left:452px;
-}
-
-/******* NEWSITEM VIEW *****/
-#mediabox{
+/******* NEWSITEM/MEDIA VIEWS *****/
+#mediabox {
     background-color: #222222;
 /*    background:url(/++resource++collective.nitf/images/black.png) no-repeat;*/
     width:500px;
@@ -169,6 +39,9 @@ a.imgdel:link {
 /*    position: absolute;*/
     display:none;
     margin: 0 auto;
+}
+.mediaview #mediabox {
+    display: block;
 }
 #mediabox #images {   
     position:absolute;

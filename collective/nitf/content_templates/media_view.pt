@@ -12,30 +12,35 @@
           tal:define="kssClassesView context/@@kss_field_decorator_view;
                       getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
                       text context/body;">
-        <div id="media-bar" tal:define="here_url context/@@plone_context_state/object_url;"
-                              tal:attributes="class string:previews">
-            <tal:defs define="img_brains view/get_images;">
-            <!-- overlay scrollable -->
-            <div class="thumbnails" tal:condition="img_brains">
-                <div class="items">
-                    <tal:lines repeat="item img_brains">
-                    <div>
-                        <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_preview; class string:media-${item/media_type}" />
-                        <div class="info">
-                            <h3 tal:content="item/title|nothing">A Blue Flower</h3>
-                            <p tal:content="item/description|nothing">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.</p>
+        <div class="mediaview">
+            <metal:mediamacro define-macro="media-box">
+            <div id="mediabox" tal:define="here_url context/@@plone_context_state/object_url;"
+                                  tal:attributes="class string:previews">
+                <tal:defs define="img_brains view/get_images;">
+                <div id="images" tal:condition="img_brains">
+                    <div class="items">
+                        <tal:lines repeat="item img_brains">
+                        <div>
+                            <span>
+                                <img class="imgthumb" tal:condition="python:item['media_type'] is 'image'" src="img" tal:attributes="src string:${item/image_url}/image_preview; class string:media-${item/media_type}" />
+                                <div class="info">
+                                    <h3 tal:content="item/title|nothing">A Blue Flower</h3>
+                                    <p tal:content="item/description|nothing">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.</p>
+                                </div>
+                            </span>
                         </div>
+                        </tal:lines>
                     </div>
-                    </tal:lines>
                 </div>
+                <!-- prev/next buttons -->
+                <div class="navi prev"></div>
+                <div class="navi next"></div>
+                <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
+                </tal:defs>
+                <br class="visualClear" clear="all" />
             </div>
-            <!-- prev/next buttons -->
-            <span class="navi prev"></span>
-            <span class="navi next"></span>
-            <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
-            </tal:defs>
+            </metal:mediamacro>
         </div>
-
     <!--div id="box" tal:replace="structure provider:collective.nitf.carousel">
     </div-->
 
