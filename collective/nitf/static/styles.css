@@ -105,4 +105,27 @@
     text-align: justify;
     font-size: 11px;
 }
+.navibuttons {
+    display: block;
+    bottom: -460px;
+    position:relative;
+}
+/* next/prev buttons */
+#mediabox .navibuttons .navi {
+    clear: none;
+    width:30px;
+    height:30px;
+    float:left;
+    margin: 0 5px;
+    position: inherit;
+    bottom: auto;
+/*
+	position:absolute;
+	bottom:33px;
+	left:50px;
+*/
+}
 
+#mediabox .navibuttons .next {
+	float: right;
+}

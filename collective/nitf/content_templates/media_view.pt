@@ -33,8 +33,12 @@
                     </div>
                 </div>
                 <!-- prev/next buttons -->
-                <div class="navi prev"></div>
-                <div class="navi next"></div>
+                <div class="navibuttons" metal:define-slot="navi">
+                    <metal:navi define-macro="navi">
+                        <div class="navi prev"></div>
+                        <div class="navi next"></div>
+                    </metal:navi>
+                </div>
                 <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
                 </tal:defs>
                 <br class="visualClear" clear="all" />

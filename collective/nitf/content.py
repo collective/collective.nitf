@@ -21,6 +21,12 @@ class INITF(form.Schema):
     """A news item based on the News Industry Text Format specification.
     """
 
+    byline = schema.Text(
+            title=_(u'Author'),
+            required=False,
+            default=u'',
+        )
+
     body = RichText(
             title=_(u'Body text'),
             required=False,
@@ -43,12 +49,6 @@ class INITF(form.Schema):
             title=_(u'Urgency'),
             vocabulary=URGENCIES,
             default=NORMAL,
-        )
-
-    byline = schema.Text(
-            title=_(u'Author'),
-            required=False,
-            default=u'',
         )
 
 
