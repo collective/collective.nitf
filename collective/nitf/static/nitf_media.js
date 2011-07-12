@@ -8,6 +8,7 @@ jq(function($) {
         urlreplace: '/image_large',
     });
 
+    $("#mediabox").appendTo("body");
     $(".newsImageContainer a").prepOverlay({
         subtype:'inline',
         target: '#mediabox',
