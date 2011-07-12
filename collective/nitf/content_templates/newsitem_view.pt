@@ -29,11 +29,13 @@
               Image Caption
             </p>
         </div>
-        <div id="mediabox" metal:use-macro="context/media_view/macros/media-box" tal:define="here_url context/@@plone_context_state/object_url;"
-            tal:attributes="class string:previews">
-            <metal:navi fill-slot="navi">
-                <metal:buttons use-macro="context/media_view/macros/navi" />
-            </metal:navi>
+        <div class="newsview">
+            <div id="mediabox" metal:use-macro="context/media_view/macros/media-box" tal:define="here_url context/@@plone_context_state/object_url;"
+                tal:attributes="class string:previews">
+                <metal:navi fill-slot="navi">
+                    <metal:buttons use-macro="context/media_view/macros/navi" />
+                </metal:navi>
+            </div>
         </div>
 
         <div metal:define-macro="text-field-view"

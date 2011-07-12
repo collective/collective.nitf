@@ -8,12 +8,14 @@ jq(function($) {
         urlreplace: '/image_large',
     });
 
-    $("#mediabox").appendTo("body");
+    $(".newsview #mediabox").appendTo("body");
+    $("#mediabox #images").scrollable();
     $(".newsImageContainer a").prepOverlay({
         subtype:'inline',
         target: '#mediabox',
+        /*
+            */
     });
-    $("#mediabox #images").scrollable();
 
     $("#mediabox #images img").tooltip({
         position: 'bottom center',
