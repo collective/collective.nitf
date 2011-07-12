@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+$Id$
+"""
+
 import unittest
 
 from zope.component import createObject
@@ -26,14 +30,13 @@ class TestNITFBrowser(PloneTestCase):
     layer = BrowserLayer
 
     def test_media_view(self):
-        view = getMultiAdapter((self.folder.n1, TestRequest()),name="media_view")
+        view = getMultiAdapter((self.folder.n1, TestRequest()), name="media_view")
         self.assertNotEquals(view, None)
         view.update()
         image_count = len(view.get_images())
         self.assertEquals(image_count, 2)
 
-"""
-    def test_newsitem_view(self):
+    def _test_newsitem_view(self):
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         self.assertNotEquals(view, None)
@@ -41,8 +44,7 @@ class TestNITFBrowser(PloneTestCase):
         image_count = len(view.get_images())
         self.assertEquals(image_count, 2)
 
-
-    def test_media_viewlet(self):
+    def _test_media_viewlet(self):
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         view.update()
@@ -50,9 +52,8 @@ class TestNITFBrowser(PloneTestCase):
                                   'plone.abovecontentbody')
         self.assertNotEquals(viewlet, None)
         viewlet.update()
-        
 
-    def test_media_viewlet(self):
+    def _test_media_viewlet(self):
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         view.update()
@@ -60,9 +61,8 @@ class TestNITFBrowser(PloneTestCase):
                                   'plone.abovecontentbody')
         self.assertNotEquals(viewlet, None)
         viewlet.update()
-        
 
-    def test_links_viewlet(self):
+    def _test_links_viewlet(self):
         view = queryMultiAdapter((self.folder.n1, TestRequest()),
                                   name=u"newsitem_view")
         view.update()
@@ -71,7 +71,7 @@ class TestNITFBrowser(PloneTestCase):
         self.assertNotEquals(viewlet, None)
         viewlet.update()
         open('/tmp/viewlet.html', 'w').write(viewlet.render())
-"""
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)

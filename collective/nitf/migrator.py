@@ -1,4 +1,9 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+
+"""
+$Id$
+"""
+
 import logging
 import sys
 
@@ -41,8 +46,10 @@ _marker = object()
 class NITFTransformView(grok.View):
     grok.context(IPloneSiteRoot)
     grok.name(u'transform')
+
     def render(self):
-        portal_state = queryMultiAdapter((self.context, self.request), name=u'plone_portal_state')
+        portal_state = queryMultiAdapter((self.context, self.request),
+                                         name=u'plone_portal_state')
         portal = portal_state.portal()
         self.transmogrify(portal)
 
@@ -56,6 +63,7 @@ class NITFTransformView(grok.View):
         self.transmogrifier = Transmogrifier(context)
         self.transmogrifier("nitfmigrator")
 
+
 class CatalogNewsSource(object):
     classProvides(ISectionBlueprint)
     implements(ISection)
@@ -63,7 +71,7 @@ class CatalogNewsSource(object):
     def __init__(self, transmogrifier, name, options, previous):
         self.context = transmogrifier.context
         self.catalog = getToolByName(self.context, 'portal_catalog')
-        self.results = self.catalog({'Type': 'News Item',},)
+        self.results = self.catalog({'Type': 'News Item', }, )
         self.previous = previous
         self.name = name
 
@@ -122,10 +130,10 @@ class NewsToNITFTransform(object):
                         # otherwise we set the missing value
                         default = queryMultiAdapter((
                                 nitf_obj,
-                                nitf_obj.REQUEST, # request
-                                None, # form
+                                nitf_obj.REQUEST,  # request
+                                None,  # form
                                 field,
-                                None, # Widget
+                                None,  # Widget
                                 ), IValue, name='default')
                         if default is not None:
                             default = default.get()
@@ -141,12 +149,12 @@ class NewsToNITFTransform(object):
             nitf_obj.setTitle(u'%s' % news_obj.title)
             nitf_obj.setDescription(u'%s' % news_obj.Description())
             nitf_obj.setCreators(news_obj.creators)
-            nitf_obj.body = RichTextValue(news_obj.getText(), 'text/html', 
+            nitf_obj.body = RichTextValue(news_obj.getText(), 'text/html',
                                           'text/x-html-safe')
             notify(ObjectCreatedEvent(nitf_obj))
             parent[nitf_obj.id] = nitf_obj
             parent[nitf_obj.id].reindexObject()
-            yield parent[nitf_obj.id]#item
+            yield parent[nitf_obj.id]  # item
 
 
 class NITFImageImport(object):
@@ -178,14 +186,14 @@ class NITFImageImport(object):
             #parent[o_id] = new_object
 
             #nitf_obj = parent[o_id]
-            nitf_obj = new_object 
+            nitf_obj = new_object
             self.setFieldsDefaults(nitf_obj, news_obj)
             #get all fields for this obj
             nitf_obj.setTitle(u'%s' % news_obj.title)
             nitf_obj.setDescription(u'%s' % news_obj.Description())
             nitf_obj.setCreators(news_obj.creators)
             nitf_obj.setSubject(news_obj.Subject())
-            nitf_obj.body = RichTextValue(news_obj.getText(), 'text/html', 
+            nitf_obj.body = RichTextValue(news_obj.getText(), 'text/html',
                                           'text/x-html-safe')
             parent[o_id] = nitf_obj
             nitf_obj = parent[o_id]
@@ -201,7 +209,7 @@ class NITFImageImport(object):
                                         image=news_obj.getRawImage())
             notify(ObjectModifiedEvent(parent[o_id]))
             parent[o_id].reindexObject()
-            logger.debug(u"\nObject: %s: Contained IDs :%s" %(nitf_obj,
+            logger.debug(u"\nObject: %s: Contained IDs :%s" % (nitf_obj,
                                                       nitf_obj.objectIds()))
             logger.debug(u"\t\tportal_type: %s title: %s description: %s creators: %s subject: %s" % (
                     nitf_obj.portal_type, nitf_obj.title, nitf_obj.description, nitf_obj.creators, nitf_obj.subject))
@@ -238,10 +246,10 @@ class NITFImageImport(object):
                     # otherwise we set the missing value
                     default = queryMultiAdapter((
                         obj,
-                        obj.REQUEST, # request
-                            None, # form
+                        obj.REQUEST,  # request
+                            None,  # form
                             field,
-                            None, # Widget
+                            None,  # Widget
                             ), IValue, name='default')
                     if default is not None:
                         default = default.get()
@@ -254,4 +262,3 @@ class NITFImageImport(object):
                             pass
                     value = default
                 field.set(field.interface(obj), value)
-

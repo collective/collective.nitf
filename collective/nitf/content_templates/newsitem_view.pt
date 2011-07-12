@@ -35,7 +35,7 @@
                 <metal:buttons use-macro="context/media_view/macros/navi" />
             </metal:navi>
         </div>
-  
+
         <div metal:define-macro="text-field-view"
             id="parent-fieldname-text" class="stx">
             <div metal:define-slot="inside" tal:replace="structure context/body/output">The body</div>

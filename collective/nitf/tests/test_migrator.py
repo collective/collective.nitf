@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+$Id$
+"""
+
 import unittest
 
 from zope.component import createObject
@@ -19,14 +23,12 @@ class TestNITFIntegration(PloneTestCase):
 
     def test_transmogrify(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
-        results = catalog({'portal_type': u'collective.nitf.content',},)
+        results = catalog({'portal_type': u'collective.nitf.content', }, )
         self.assertEqual(len(results), 0)
         transmogrifier = Transmogrifier(self.portal)
         transmogrifier("nitfmigrator")
-        results = catalog({'portal_type': u'collective.nitf.content',},)
+        results = catalog({'portal_type': u'collective.nitf.content', }, )
         self.assertEqual(len(results), 4)
-
-
 
     def test_migrate_dry_run(self):
         pass

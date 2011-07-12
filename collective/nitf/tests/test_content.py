@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+$Id$
+"""
+
 import unittest
 
 from zope.component import createObject

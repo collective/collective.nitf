@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+"""
+$Id$
+"""
+
 import math
 from five import grok
 from zope import schema
@@ -16,6 +21,7 @@ from collective.nitf.config import PROPERTIES, URGENCIES, NORMAL
 
 VIDEO_MIMETYPES = ['video/mp4', 'video/x-flv']
 IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
+
 
 class INITF(form.Schema):
     """A news item based on the News Industry Text Format specification.
@@ -52,7 +58,6 @@ class INITF(form.Schema):
         )
 
 
-
 class IMediaView(Interface):
     """ Marker interface for media views """
 
@@ -85,11 +90,11 @@ class Media_View(grok.View):
                         limit=limit)
         media_items = []
         for brain in media_brains:
-            ibrain = { 'id': brain.id,
-                       'title': brain.Title,
-                       'description': brain.Description,
-                       'image_url': brain.getURL(),
-                       }
+            ibrain = {'id': brain.id,
+                      'title': brain.Title,
+                      'description': brain.Description,
+                      'image_url': brain.getURL(),
+                      }
             if brain.getObject().getContentType() in IMAGE_MIMETYPES:
                 ibrain['media_type'] = 'image'
             elif brain.getObject().getContentType() in VIDEO_MIMETYPES:
@@ -136,7 +141,7 @@ class MediaViewlet(grok.Viewlet):
     grok.template('media_viewlet')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
-   
+
     image_size = 'tile'
 
     def update(self, image_size=None):
