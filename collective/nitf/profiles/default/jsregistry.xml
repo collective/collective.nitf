@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts">
+ <javascript cacheable="True" compression="safe" cookable="True"
+    enabled="True" expression="" id="++resource++collective.nitf/jquery.tools.min.js" inline="False"/>
  <javascript authenticated="False" cacheable="True" compression="none"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="++resource++plone.app.jquerytools.plugins.js" inline="False"/>
