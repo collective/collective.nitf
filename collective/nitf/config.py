@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+"""
+$Id$
+"""
+
+PROJECTNAME = 'collective.nitf'
+CONTROLPANEL_ID = 'nitf-settings'
+
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from collective.nitf import _
@@ -46,3 +53,7 @@ URGENCIES = SimpleVocabulary([
     SimpleTerm(value=NORMAL, title=_(u'Normal')),
     SimpleTerm(value=LOW, title=_(u'Low')),
     ])
+
+# defaults
+DEFAULT_PROPERTY = u'Current'
+DEFAULT_URGENCY = NORMAL

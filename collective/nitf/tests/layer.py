@@ -8,6 +8,7 @@ import random
 from StringIO import StringIO
 import logging
 
+# TODO: mover el logger a un layer que afecte solo al transmogrifier
 logging.basicConfig()
 logger = logging.getLogger('collective.nitf')
 

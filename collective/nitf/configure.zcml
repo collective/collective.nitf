@@ -14,12 +14,15 @@
     <!-- collective.transmogrifier registrations for importing articles -->
     <include package="collective.transmogrifier" file="meta.zcml" />
 
+    <include package="plone.app.registry" />
+
     <browser:page
-        name="nitf_news_settings"
+        name="nitf-settings"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".controlpanel.NITFSettingsControlPanel"
         permission="cmf.ManagePortal"
-        />  
+        />
+
     <!-- Register an extension profile to make the product installable -->
     <genericsetup:registerProfile
         name="default"

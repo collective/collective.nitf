@@ -1,19 +1,13 @@
-from five import grok
+# -*- coding: utf-8 -*-
 
-from zope.interface import Interface
+"""
+$Id$
+"""
+
 from zope import schema
-from zope.component import getMultiAdapter
-from Products.CMFCore.utils import getToolByName
+from zope.interface import Interface
 
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from plone.directives import form
-from plone.formwidget.autocomplete import AutocompleteMultiFieldWidget
 from plone.app.registry.browser import controlpanel
-
-from collective.nitf import _
-from collective.nitf.config import NORMAL
-from collective.nitf.config import PROPERTIES
-from collective.nitf.config import URGENCIES
 
 try:
     # only in z3c.form 2.0
@@ -21,41 +15,57 @@ try:
 except ImportError:
     from plone.z3cform.textlines import TextLinesFieldWidget
 
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from collective.nitf import _
+from collective.nitf import config
 
-class INITFSettings(form.Schema):
-    """ Interface for the form on the control panel. """
-    
-    form.widget(urgency_list=CheckBoxFieldWidget)
-    urgency_list = schema.Choice(
-            title=_(u'Priority List (Urgency)'),
-            vocabulary=URGENCIES,
-            required=False,
-            default=NORMAL,
+
+class INITFSettings(Interface):
+    """Interface for the form on the control panel"""
+
+    sections = schema.Set(
+            title=_(u'Available Sections'),
+            required=True,
+            default=set(),
+            value_type=schema.TextLine(title=_(u'Section')),
         )
 
-    form.widget(property_list=CheckBoxFieldWidget)
-    property_list = schema.Choice(
-            title=_(u'Property List'),
-            vocabulary=PROPERTIES,
+    default_section = schema.Choice(
+            title=_(u'Default Section'),
+            vocabulary=u'collective.nitf.Sections',
             required=False,
+        )
+
+    default_property_ = schema.Choice(
+            title=_(u'Default Property'),
+            vocabulary=config.PROPERTIES,
+            required=False,
+            default=config.DEFAULT_PROPERTY
+        )
+
+    default_urgency = schema.Choice(
+            title=_(u'Default Urgency'),
+            vocabulary=config.URGENCIES,
+            required=False,
+            default=config.DEFAULT_URGENCY
         )
 
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
-    grok.context(IPloneSiteRoot)
-    grok.name("nitf_news_settings")
-    grok.require("cmf.ManagePortal")
+    """"""
 
     schema = INITFSettings
-    label = _(u"News Article Questions Settings") 
-    description = _(u"Here you can modify the settings for News Articles.")
+    label = _(u'NITF Settings')
+    description = _(u'Here you can modify the settings for collective.nitf.')
 
     def updateFields(self):
         super(NITFSettingsEditForm, self).updateFields()
+        self.fields['sections'].widgetFactory = TextLinesFieldWidget
 
     def updateWidgets(self):
         super(NITFSettingsEditForm, self).updateWidgets()
+        self.widgets['sections'].rows = 8
+        self.widgets['sections'].style = u'width: 30%;'
+
 
 class NITFSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     form = NITFSettingsEditForm

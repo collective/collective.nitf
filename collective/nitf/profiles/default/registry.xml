@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <registry>
-    <records name="collective.nitf.Settings" interface="collective.nitf.controlpanel.INITFSettings" />
+    <records interface="collective.nitf.controlpanel.INITFSettings" />
 </registry>

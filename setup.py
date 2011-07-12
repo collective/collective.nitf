@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+$Id$
+"""
+
 from setuptools import setup, find_packages
 import os
 
@@ -17,7 +21,7 @@ setup(name='collective.nitf',
         "Programming Language :: Python",
         ],
       keywords='plone dexterity nitf',
-      author='Héctor Velarde',
+      author='Héctor Velarde, Joaquín Rosales',
       author_email='hector.velarde@gmail.com',
       url='http://svn.plone.org/svn/collective/',
       license='GPL',
@@ -28,12 +32,13 @@ setup(name='collective.nitf',
       install_requires=[
           'setuptools',
           'Plone',
-          'plone.app.referenceablebehavior',
           'plone.app.dexterity',
+          'plone.app.referenceablebehavior',
+          'plone.app.registry',
           'plone.app.transmogrifier',
-          'transmogrify.dexterity',
           'collective.autopermission',
           'collective.testcaselayer',
+          'transmogrify.dexterity',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]

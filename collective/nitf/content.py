@@ -5,29 +5,37 @@ $Id$
 """
 
 import math
+import unicodedata
+
 from five import grok
 from zope import schema
+from zope.component import getUtility
 from zope.interface import Interface
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.CMFPlone.utils import getToolByName
-from plone.directives import form, dexterity
+from plone.directives import form
 from plone.app.textfield import RichText
 from plone.app.layout.viewlets.interfaces import IAboveContentBody
 from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
+from plone.registry.interfaces import IRegistry
 
 from collective.nitf import _
+from collective.nitf import config
 from collective.nitf import INITFBrowserLayer
-from collective.nitf.config import PROPERTIES, URGENCIES, NORMAL
+from collective.nitf.controlpanel import INITFSettings
 
 VIDEO_MIMETYPES = ['video/mp4', 'video/x-flv']
 IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 
+# TODO: los valores por defecto se deben tomar del panel del control
 class INITF(form.Schema):
     """A news item based on the News Industry Text Format specification.
     """
 
-    byline = schema.Text(
+    byline = schema.TextLine(
             title=_(u'Author'),
             required=False,
             default=u'',
@@ -36,30 +44,66 @@ class INITF(form.Schema):
     body = RichText(
             title=_(u'Body text'),
             required=False,
-            default=u'',
         )
 
     property_ = schema.Choice(
             title=_(u'Property'),
-            vocabulary=PROPERTIES,
-            default='Current',
+            vocabulary=config.PROPERTIES,
         )
 
-    section = schema.Text(
+    section = schema.Choice(
             title=_(u'Section'),
-            required=False,
-            default=u'',
+            vocabulary=u'collective.nitf.Sections',
         )
 
     urgency = schema.Choice(
             title=_(u'Urgency'),
-            vocabulary=URGENCIES,
-            default=NORMAL,
+            vocabulary=config.URGENCIES,
         )
 
 
+@form.default_value(field=INITF['property_'])
+def property_default_value(data):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(INITFSettings)
+    return settings.default_property_
+
+
+class SectionsVocabulary(object):
+    """Creates a vocabulary with the sections stored in the registry; the
+    vocabulary is normalized to allow the use of non-ascii characters.
+    """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(INITFSettings)
+        items = []
+        for section in settings.sections:
+            token = unicodedata.normalize('NFKD', section).encode('ascii', 'ignore').lower()
+            items.append((token, section))
+
+        return SimpleVocabulary.fromItems(items)
+
+grok.global_utility(SectionsVocabulary, name=u'collective.nitf.Sections')
+
+
+@form.default_value(field=INITF['section'])
+def section_default_value(data):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(INITFSettings)
+    return settings.default_section
+
+
+@form.default_value(field=INITF['urgency'])
+def urgency_default_value(data):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(INITFSettings)
+    return settings.default_urgency
+
+
 class IMediaView(Interface):
-    """ Marker interface for media views """
+    """Marker interface for media views"""
 
 
 class Media_View(grok.View):
