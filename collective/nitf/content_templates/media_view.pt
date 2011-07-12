@@ -45,6 +45,11 @@
             </div>
             </metal:mediamacro>
         </div>
+        <div metal:define-macro="text-field-view"
+            id="parent-fieldname-text" class="stx">
+            <div metal:define-slot="inside" tal:replace="structure context/body/output">The body</div>
+        </div>
+
     <!--div id="box" tal:replace="structure provider:collective.nitf.carousel">
     </div-->
 
