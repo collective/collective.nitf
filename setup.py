@@ -29,16 +29,20 @@ setup(name='collective.nitf',
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
+      extras_require=dict(
+        test=[
+            'plone.testing',
+        ]
+      ),
       install_requires=[
-          'setuptools',
-          'Plone',
-          'plone.app.dexterity',
-          'plone.app.referenceablebehavior',
-          'plone.app.registry',
-          'plone.app.transmogrifier',
-          'collective.autopermission',
-          'collective.testcaselayer',
-          'transmogrify.dexterity',
+        'setuptools',
+        'plone.app.dexterity',
+        'plone.app.referenceablebehavior',
+        'plone.app.registry',
+        'plone.app.transmogrifier',
+        'collective.autopermission',
+        'collective.testcaselayer',
+        'transmogrify.dexterity',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]
