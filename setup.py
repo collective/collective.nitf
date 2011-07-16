@@ -31,7 +31,7 @@ setup(name='collective.nitf',
       zip_safe=False,
       extras_require=dict(
         test=[
-            'plone.testing',
+            'Products.PloneTestCase',
         ]
       ),
       install_requires=[
