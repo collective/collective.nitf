@@ -1,0 +1,145 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-07-15 23:57+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.nitf\n"
+
+#: ./profiles/default/types/collective.nitf.content.xml
+msgid "A NITF news article"
+msgstr ""
+
+#: ./config.py:16
+msgid "Analysis"
+msgstr ""
+
+#: ./config.py:18
+msgid "Archive-Material"
+msgstr ""
+
+#: ./content.py:39
+msgid "Author"
+msgstr ""
+
+#: ./controlpanel.py:26
+msgid "Available Sections"
+msgstr ""
+
+#: ./config.py:20
+msgid "Background"
+msgstr ""
+
+#: ./content.py:45
+msgid "Body text"
+msgstr ""
+
+#: ./config.py:22
+msgid "Current"
+msgstr ""
+
+#: ./controlpanel.py:39
+msgid "Default Property"
+msgstr ""
+
+#: ./controlpanel.py:33
+msgid "Default Section"
+msgstr ""
+
+#: ./controlpanel.py:46
+msgid "Default Urgency"
+msgstr ""
+
+#: ./config.py:24
+msgid "Feature"
+msgstr ""
+
+#: ./config.py:26
+msgid "Forecast"
+msgstr ""
+
+#: ./controlpanel.py:58
+msgid "Here you can modify the settings for collective.nitf."
+msgstr ""
+
+#: ./config.py:52
+msgid "High"
+msgstr ""
+
+#: ./config.py:28
+msgid "History"
+msgstr ""
+
+#: ./config.py:54
+msgid "Low"
+msgstr ""
+
+#: ./controlpanel.py:57
+#: ./profiles/default/controlpanel.xml
+msgid "NITF Settings"
+msgstr ""
+
+#: ./profiles/default/types/collective.nitf.content.xml
+msgid "News Article"
+msgstr ""
+
+#: ./config.py:53
+msgid "Normal"
+msgstr ""
+
+#: ./config.py:30
+msgid "Obituary"
+msgstr ""
+
+#: ./config.py:32
+msgid "Opinion"
+msgstr ""
+
+#: ./config.py:34
+msgid "Polls-Surveys"
+msgstr ""
+
+#: ./config.py:36
+msgid "Profile"
+msgstr ""
+
+#: ./content.py:50
+msgid "Property"
+msgstr ""
+
+#: ./config.py:38
+msgid "Results-Listings-Tables"
+msgstr ""
+
+#: ./content.py:55
+#: ./controlpanel.py:29
+msgid "Section"
+msgstr ""
+
+#: ./config.py:40
+msgid "Sidebar-Supporting-Info"
+msgstr ""
+
+#: ./config.py:42
+msgid "Summary"
+msgstr ""
+
+#: ./config.py:44
+msgid "Transcript-Verbatim"
+msgstr ""
+
+#: ./content.py:60
+msgid "Urgency"
+msgstr ""
+
