@@ -4,7 +4,7 @@
 
  <!-- Basic metadata -->
  <property name="title" i18n:translate="">News Article</property>
- <property name="description" i18n:translate="">A NITF news article</property>
+ <property name="description" i18n:translate="">A news article</property>
  <property name="content_icon">++resource++collective.nitf/nitf_icon.png</property>
  <property name="allow_discussion">True</property>
  <property name="global_allow">True</property>

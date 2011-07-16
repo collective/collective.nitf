@@ -16,8 +16,16 @@ msgstr ""
 "Domain: collective.nitf\n"
 "X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
+#: Profile title in configure.zcml
+msgid "collective.nitf"
+msgstr ""
+
+#: Profile description in configure.zcml
+msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
+msgstr "Un tipo de contenido inspirado en la especificación del Formato de Texto de la Industria de Noticias."
+
 #: ./profiles/default/types/collective.nitf.content.xml
-msgid "A NITF news article"
+msgid "A news article"
 msgstr "Un artículo de noticias"
 
 #: ./config.py:16

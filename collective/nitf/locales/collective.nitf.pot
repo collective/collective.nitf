@@ -17,8 +17,16 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.nitf\n"
 
+#: Profile title in configure.zcml
+msgid "collective.nitf"
+msgstr ""
+
+#: Profile description in configure.zcml
+msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
+msgstr ""
+
 #: ./profiles/default/types/collective.nitf.content.xml
-msgid "A NITF news article"
+msgid "A news article"
 msgstr ""
 
 #: ./config.py:16

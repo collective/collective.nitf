@@ -26,17 +26,17 @@
     <!-- Register an extension profile to make the product installable -->
     <genericsetup:registerProfile
         name="default"
-        title="NITF"
-        description="NITF-based content type"
+        title="collective.nitf"
+        description="A Dexterity-based content type inspired on the News Industry Text Format specification."
         directory="profiles/default"
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
     <genericsetup:registerProfile
         name="uninstall"
-        title="Remove NITF"
+        title="collective.nitf uninstall"
         directory="profiles/uninstall"
-        description="Installs the collective.nitf package"
+        description="Uninstall profile for the collective.nitf package."
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
