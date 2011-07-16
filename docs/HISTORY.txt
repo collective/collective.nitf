@@ -4,4 +4,4 @@ Changelog
 1.0dev (unreleased)
 -------------------
 
-- Initial release
+- i18n and Spanish translation [hvelarde]
