@@ -10,7 +10,7 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
 
 
-class MyProduct(PloneSandboxLayer):
+class Fixture(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
@@ -24,8 +24,12 @@ class MyProduct(PloneSandboxLayer):
         self.applyProfile(portal, 'collective.nitf:default')
 
 
-NITF_FIXTURE = MyProduct()
-NITF_INTEGRATION_TESTING = IntegrationTesting(bases=(NITF_FIXTURE,),
-                                              name="NITF:Integration")
-NITF_FUNCTIONAL_TESTING = FunctionalTesting(bases=(NITF_FIXTURE,),
-                                            name="NITF:Functional")
+FIXTURE = Fixture()
+INTEGRATION_TESTING = IntegrationTesting(
+    bases=(FIXTURE,),
+    name='collective.nitf:Integration',
+    )
+FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(FIXTURE,),
+    name='collective.nitf:Functional',
+    )

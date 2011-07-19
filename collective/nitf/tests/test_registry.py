@@ -17,12 +17,12 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.nitf import config
 from collective.nitf.controlpanel import INITFSettings
-from collective.nitf.testing import NITF_INTEGRATION_TESTING
+from collective.nitf.testing import INTEGRATION_TESTING
 
 
 class RegistryTest(unittest.TestCase):
 
-    layer = NITF_INTEGRATION_TESTING
+    layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']

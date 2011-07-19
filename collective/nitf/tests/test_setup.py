@@ -12,7 +12,7 @@ from plone.app.testing import login
 from plone.app.testing import setRoles
 
 from collective.nitf import config
-from collective.nitf.testing import NITF_INTEGRATION_TESTING
+from collective.nitf.testing import INTEGRATION_TESTING
 
 TYPES = (
     'collective.nitf.content',
@@ -27,7 +27,7 @@ JS = (
 class TestInstall(unittest.TestCase):
     """ensure product is properly installed"""
 
-    layer = NITF_INTEGRATION_TESTING
+    layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
@@ -54,7 +54,7 @@ class TestInstall(unittest.TestCase):
 class TestUninstall(unittest.TestCase):
     """ensure product is properly uninstalled"""
 
-    layer = NITF_INTEGRATION_TESTING
+    layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']

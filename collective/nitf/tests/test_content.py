@@ -14,12 +14,12 @@ from plone.app.testing import setRoles
 from plone.dexterity.interfaces import IDexterityFTI
 
 from collective.nitf.content import INITF
-from collective.nitf.testing import NITF_INTEGRATION_TESTING
+from collective.nitf.testing import INTEGRATION_TESTING
 
 
 class TestNITFIntegration(unittest.TestCase):
 
-    layer = NITF_INTEGRATION_TESTING
+    layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
