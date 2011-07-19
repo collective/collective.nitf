@@ -4,22 +4,29 @@
 $Id$
 """
 
-import unittest
+import unittest2 as unittest
 
 from zope.component import createObject
 from zope.component import queryUtility
 
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from plone.dexterity.interfaces import IDexterityFTI
 
-from Products.PloneTestCase.ptc import PloneTestCase
-from collective.nitf.tests.layer import Layer
-
 from collective.nitf.content import INITF
+from collective.nitf.testing import NITF_INTEGRATION_TESTING
 
 
-class TestNITFIntegration(PloneTestCase):
+class TestNITFIntegration(unittest.TestCase):
 
-    layer = Layer
+    layer = NITF_INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
 
     def test_adding(self):
         self.folder.invokeFactory('collective.nitf.content', 'n1')

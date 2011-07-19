@@ -4,27 +4,30 @@
 $Id$
 """
 
-import unittest
+import unittest2 as unittest
 
 from zope.component import getMultiAdapter
 
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import logout
+from plone.app.testing import setRoles
 from plone.registry import Registry
 
 from Products.CMFCore.utils import getToolByName
-from Products.PloneTestCase.ptc import PloneTestCase
 
 from collective.nitf import config
 from collective.nitf.controlpanel import INITFSettings
-from collective.nitf.tests.layer import Layer
+from collective.nitf.testing import NITF_INTEGRATION_TESTING
 
 
-class RegistryTest(PloneTestCase):
+class RegistryTest(unittest.TestCase):
 
-    layer = Layer
+    layer = NITF_INTEGRATION_TESTING
 
-    def afterSetUp(self):
+    def setUp(self):
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         # Set up the NITF settings registry
-        self.loginAsPortalOwner()
         self.registry = Registry()
         self.registry.registerInterface(INITFSettings)
 
@@ -39,7 +42,7 @@ class RegistryTest(PloneTestCase):
         # Test that the NITF setting control panel view can not be accessed
         # by anonymous users
         from AccessControl import Unauthorized
-        self.logout()
+        logout()
         self.assertRaises(Unauthorized,
                           self.portal.restrictedTraverse,
                          '@@nitf-settings')

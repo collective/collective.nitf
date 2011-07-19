@@ -31,7 +31,7 @@ setup(name='collective.nitf',
       zip_safe=False,
       extras_require=dict(
         test=[
-            'Products.PloneTestCase',
+            'plone.app.testing',
         ]
       ),
       install_requires=[
@@ -40,8 +40,6 @@ setup(name='collective.nitf',
         'plone.app.referenceablebehavior',
         'plone.app.registry',
         'plone.app.transmogrifier',
-        'collective.autopermission',
-        'collective.testcaselayer',
         'transmogrify.dexterity',
       ],
       entry_points="""
