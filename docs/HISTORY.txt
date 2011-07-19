@@ -4,6 +4,7 @@ Changelog
 1.0dev (unreleased)
 -------------------
 
+- updated testing infrastructure [hvelarde]
 - i18n and Spanish translation [hvelarde]
 - fixed content type fields and control panel; added default value methods;
   added vocabulary for sections; added tests for registry [hvelarde]
