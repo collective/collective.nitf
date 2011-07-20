@@ -4,28 +4,28 @@
 $Id$
 """
 
-import unittest
+import unittest2 as unittest
 
 from zope.component import createObject
 from zope.component import queryUtility
 
-from Products.PloneTestCase.ptc import PloneTestCase
 from Products.CMFPlone.utils import getToolByName
 from plone.dexterity.interfaces import IDexterityFTI
 
 from collective.transmogrifier.transmogrifier import Transmogrifier
-from collective.nitf.tests.layer import MigrationLayer
+from collective.nitf.testing import INTEGRATION_TESTING
 
 
-class TestNITFIntegration(PloneTestCase):
+class TestNITFIntegration(unittest.TestCase):
 
-    layer = MigrationLayer
+    layer = INTEGRATION_TESTING
 
     def test_transmogrify(self):
-        catalog = getToolByName(self.portal, 'portal_catalog')
+        portal = self.layer['portal']
+        catalog = getToolByName(portal, 'portal_catalog')
         results = catalog({'portal_type': u'collective.nitf.content', }, )
         self.assertEqual(len(results), 0)
-        transmogrifier = Transmogrifier(self.portal)
+        transmogrifier = Transmogrifier(portal)
         transmogrifier("nitfmigrator")
         results = catalog({'portal_type': u'collective.nitf.content', }, )
         self.assertEqual(len(results), 4)

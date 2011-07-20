@@ -64,14 +64,19 @@ class MigrationTestLayer(collective.testcaselayer.ptc.BasePTCLayer):
     def populateContainer(self, container, default_type='News Item', limit=4):
         for n in range(0, limit):
             n_id = 'n%s' % str(n + 1)
-            context = createContent('collective.nitf.content',
+            #context = createContent('collective.nitf.content',
+            #                        id=n_id,
+            #                        title=u'News %s' % str(n+1),
+            #                        description=u'Description %s' % str(n+1),
+            #                        subject=(u"Category 1", u"Category 2", u"A third category"))
+            #notify(ObjectCreatedEvent(context))
+            #container[n_id] = context
+            container.invokeFactory(default_type,
                                     id=n_id,
                                     title=u'News %s' % str(n + 1),
                                     description=u'Description %s' % str(n + 1),
-                                    subject=(u"Category 1", u"Category 2", u"A third category"))
-            notify(ObjectCreatedEvent(context))
-            container[n_id] = context
-            #container.invokeFactory(default_type, n_id)
+                                    subject=(u"Category 1", u"Category 2", u"A third category")
+                                    )
             notify(ObjectAddedEvent(container[n_id]))
             #container[n_id].setTitle(u'News %s' % str(n+1))
             #container[n_id].setDescription(u'Description %s' % str(n+1))

@@ -8,7 +8,7 @@
 
     <!-- Include configuration for dependencies listed in setup.py -->
     <includeDependencies package="." />
-
+    <include package="five.grok" />
     <!-- Grok the package to initialise schema interfaces and content classes -->
     <grok:grok package="." />
     <!-- collective.transmogrifier registrations for importing articles -->
@@ -22,7 +22,13 @@
         class=".controlpanel.NITFSettingsControlPanel"
         permission="cmf.ManagePortal"
         />
-
+    <browser:menuItem
+        for="collective.nitf.content.INITF"
+        menu="plone_displayviews"
+        title="News Item View"
+        action="@@newsitem_view"
+        description=""
+        />
     <!-- Register an extension profile to make the product installable -->
     <genericsetup:registerProfile
         name="default"

@@ -177,6 +177,16 @@ class MediaViewletManager(grok.ViewletManager):
     grok.layer(INITFBrowserLayer)
 
 
+class BylineViewlet(grok.Viewlet):
+    grok.context(INITF)
+    grok.name('collective.nitf.byline')
+    grok.viewletmanager(IAboveContentBody)
+    grok.view(NewsMedia_View)
+    grok.template('byline_viewlet')
+    grok.require('zope2.View')
+    grok.layer(INITFBrowserLayer)
+   
+
 class MediaViewlet(grok.Viewlet):
     grok.context(INITF)
     grok.name('collective.nitf.media.tile')

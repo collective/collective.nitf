@@ -4,7 +4,7 @@
 $Id$
 """
 
-import unittest
+import unittest2 as unittest
 
 from zope.component import createObject
 from zope.component import getMultiAdapter
@@ -12,7 +12,6 @@ from zope.component import queryMultiAdapter
 from zope.component import queryUtility
 from zope.publisher.browser import TestRequest
 
-from Products.PloneTestCase.ptc import PloneTestCase
 from Products.CMFPlone.utils import getToolByName
 from plone.dexterity.interfaces import IDexterityFTI
 
@@ -20,14 +19,14 @@ from collective.transmogrifier.transmogrifier import Transmogrifier
 from collective.nitf.content import INITF
 from collective.nitf.content import MediaViewlet
 from collective.nitf.content import MediaLinksViewlet
-from collective.nitf.tests.layer import BrowserLayer
+from collective.nitf.testing import INTEGRATION_TESTING
 
 
-class TestNITFBrowser(PloneTestCase):
+class TestNITFBrowser(unittest.TestCase):
     """ The tests begin with 4 NITF News Articles in the user's folder,
         self.folder. Each article has 2 Images, and the views should """
 
-    layer = BrowserLayer
+    layer = INTEGRATION_TESTING
 
     def test_media_view(self):
         view = getMultiAdapter((self.folder.n1, TestRequest()), name="media_view")
