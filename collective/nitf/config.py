@@ -11,7 +11,7 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from collective.nitf import _
 
-PROPERTIES = SimpleVocabulary([
+NEWS_TYPES = SimpleVocabulary([
     SimpleTerm(value=u'Analysis',
                title=_(u'Analysis')),
     SimpleTerm(value=u'Archive-Material',
@@ -55,5 +55,5 @@ URGENCIES = SimpleVocabulary([
     ])
 
 # defaults
-DEFAULT_PROPERTY = u'Current'
+DEFAULT_NEWS_TYPE = u'Current'
 DEFAULT_URGENCY = NORMAL

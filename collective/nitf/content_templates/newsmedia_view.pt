@@ -4,22 +4,38 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="collective.nitf">
 <body>
 
-<metal:content-core fill-slot="content-core">
-    <metal:block define-macro="content-core"
-          tal:define="kssClassesView context/@@kss_field_decorator_view;
-                      getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                      text context/body;">
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main"
+        tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime">
 
-        <div metal:define-macro="text-field-view"
-            id="parent-fieldname-text" class="stx">
-            <div metal:define-slot="inside" tal:replace="structure context/body/output">The body</div>
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading" tal:content="context/title" />
+
+        <h2 class="" tal:content="context/subtitle" />
+
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+        <p class="documentDescription" tal:content="context/description" />
+
+        <p class="">
+            <span i18n:translate="">By</span>
+            <span tal:content="context/byline" />
+        </p>
+
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+
+        <div metal:define-macro="text-field-view" id="parent-fieldname-text" class="stx">
+            <div metal:define-slot="inside" tal:replace="structure context/text/output">The body</div>
         </div>
-    </metal:block>
-</metal:content-core>
+
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+
+    </tal:main-macro>
+</metal:main>
 
 </body>
 </html>
-

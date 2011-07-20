@@ -67,13 +67,13 @@ class RegistryTest(unittest.TestCase):
         self.failUnless('default_section' in INITFSettings)
         self.assertEquals(record_default_section.value, None)
 
-    def test_record_default_property_(self):
-        # Test that the default_property_ record is in the control panel
-        record_default_property_ = self.registry.records[
-            'collective.nitf.controlpanel.INITFSettings.default_property_']
-        self.failUnless('default_property_' in INITFSettings)
-        self.assertEquals(record_default_property_.value,
-                          config.DEFAULT_PROPERTY)
+    def test_record_default_kind(self):
+        # Test that the default_kind record is in the control panel
+        record_default_kind = self.registry.records[
+            'collective.nitf.controlpanel.INITFSettings.default_kind']
+        self.failUnless('default_kind' in INITFSettings)
+        self.assertEquals(record_default_kind.value,
+                          config.DEFAULT_NEWS_TYPE)
 
     def test_record_default_urgency(self):
         # Test that the default_urgency record is in the control panel

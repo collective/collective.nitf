@@ -1,2 +1,0 @@
-AUTOR
-<div  tal:content="context/byline | default">Autor</div>

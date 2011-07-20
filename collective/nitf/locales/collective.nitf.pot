@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-15 23:57+0000\n"
+"POT-Creation-Date: 2011-07-20 23:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,6 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.nitf\n"
-
-#: Profile title in configure.zcml
-msgid "collective.nitf"
-msgstr ""
-
-#: Profile description in configure.zcml
-msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
-msgstr ""
 
 #: ./profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
@@ -37,7 +29,7 @@ msgstr ""
 msgid "Archive-Material"
 msgstr ""
 
-#: ./content.py:39
+#: ./content.py:53
 msgid "Author"
 msgstr ""
 
@@ -49,8 +41,14 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: ./content.py:45
+#: ./content.py:60
 msgid "Body text"
+msgstr ""
+
+#: ./content_templates/media_view.pt:25
+#: ./content_templates/newsitem_view.pt:25
+#: ./content_templates/newsmedia_view.pt:25
+msgid "By"
 msgstr ""
 
 #: ./config.py:22
@@ -58,7 +56,7 @@ msgid "Current"
 msgstr ""
 
 #: ./controlpanel.py:39
-msgid "Default Property"
+msgid "Default News Type"
 msgstr ""
 
 #: ./controlpanel.py:33
@@ -102,6 +100,10 @@ msgstr ""
 msgid "News Article"
 msgstr ""
 
+#: ./content.py:66
+msgid "News Type"
+msgstr ""
+
 #: ./config.py:53
 msgid "Normal"
 msgstr ""
@@ -122,21 +124,21 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: ./content.py:50
-msgid "Property"
-msgstr ""
-
 #: ./config.py:38
 msgid "Results-Listings-Tables"
 msgstr ""
 
-#: ./content.py:55
+#: ./content.py:72
 #: ./controlpanel.py:29
 msgid "Section"
 msgstr ""
 
 #: ./config.py:40
 msgid "Sidebar-Supporting-Info"
+msgstr ""
+
+#: ./content.py:43
+msgid "Subtitle"
 msgstr ""
 
 #: ./config.py:42
@@ -147,7 +149,7 @@ msgstr ""
 msgid "Transcript-Verbatim"
 msgstr ""
 
-#: ./content.py:60
+#: ./content.py:78
 msgid "Urgency"
 msgstr ""
 

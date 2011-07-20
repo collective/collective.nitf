@@ -35,11 +35,11 @@ class INITFSettings(Interface):
             required=False,
         )
 
-    default_property_ = schema.Choice(
-            title=_(u'Default Property'),
-            vocabulary=config.PROPERTIES,
+    default_kind = schema.Choice(
+            title=_(u'Default News Type'),
+            vocabulary=config.NEWS_TYPES,
             required=False,
-            default=config.DEFAULT_PROPERTY
+            default=config.DEFAULT_NEWS_TYPE
         )
 
     default_urgency = schema.Choice(

@@ -35,38 +35,56 @@ class INITF(form.Schema):
     """A news item based on the News Industry Text Format specification.
     """
 
+    #title = schema.TextLine()
+        # nitf/head/title and nitf/body/body.head/hedline/hl1
+
+    subtitle = schema.TextLine(
+            # nitf/body/body.head/hedline/hl2
+            title=_(u'Subtitle'),
+            required=False,
+            default=u'',
+        )
+
+    #abstract = schema.TextLine()
+        # nitf/body/body.head/abstract
+
     byline = schema.TextLine(
+            # nitf/body/body.head/byline/person
             title=_(u'Author'),
             required=False,
             default=u'',
         )
 
-    body = RichText(
+    text = RichText(
+            # nitf/body/body.content
             title=_(u'Body text'),
             required=False,
         )
 
-    property_ = schema.Choice(
-            title=_(u'Property'),
-            vocabulary=config.PROPERTIES,
+    kind = schema.Choice(
+            # nitf/head/tobject/tobject.property/@tobject.property.type
+            title=_(u'News Type'),
+            vocabulary=config.NEWS_TYPES,
         )
 
     section = schema.Choice(
+            # nitf/head/pubdata/@position.section
             title=_(u'Section'),
             vocabulary=u'collective.nitf.Sections',
         )
 
     urgency = schema.Choice(
+            # nitf/head/docdata/urgency/@ed-urg
             title=_(u'Urgency'),
             vocabulary=config.URGENCIES,
         )
 
 
-@form.default_value(field=INITF['property_'])
-def property_default_value(data):
+@form.default_value(field=INITF['kind'])
+def kind_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
-    return settings.default_property_
+    return settings.default_kind
 
 
 class SectionsVocabulary(object):
@@ -176,16 +194,6 @@ class MediaViewletManager(grok.ViewletManager):
     grok.view(Media_View)
     grok.layer(INITFBrowserLayer)
 
-
-class BylineViewlet(grok.Viewlet):
-    grok.context(INITF)
-    grok.name('collective.nitf.byline')
-    grok.viewletmanager(IAboveContentBody)
-    grok.view(NewsMedia_View)
-    grok.template('byline_viewlet')
-    grok.require('zope2.View')
-    grok.layer(INITFBrowserLayer)
-   
 
 class MediaViewlet(grok.Viewlet):
     grok.context(INITF)

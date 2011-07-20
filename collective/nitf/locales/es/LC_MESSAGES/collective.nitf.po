@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2011-07-15 23:57+0000\n"
+"POT-Creation-Date: 2011-07-20 23:09+0000\n"
 "PO-Revision-Date: 2011-07-15 23:22+0000\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,6 @@ msgstr ""
 "Domain: collective.nitf\n"
 "X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
-#: Profile title in configure.zcml
-msgid "collective.nitf"
-msgstr ""
-
-#: Profile description in configure.zcml
-msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
-msgstr "Un tipo de contenido inspirado en la especificación del Formato de Texto de la Industria de Noticias."
-
 #: ./profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
 msgstr "Un artículo de noticias"
@@ -36,7 +28,7 @@ msgstr "Análisis"
 msgid "Archive-Material"
 msgstr "Material de archivo"
 
-#: ./content.py:39
+#: ./content.py:53
 msgid "Author"
 msgstr "Autor"
 
@@ -46,18 +38,24 @@ msgstr "Secciones disponibles"
 
 #: ./config.py:20
 msgid "Background"
-msgstr ""
+msgstr "Contexto"
 
-#: ./content.py:45
+#: ./content.py:60
 msgid "Body text"
-msgstr ""
+msgstr "Cuerpo del texto"
+
+#: ./content_templates/media_view.pt:25
+#: ./content_templates/newsitem_view.pt:25
+#: ./content_templates/newsmedia_view.pt:25
+msgid "By"
+msgstr "Por"
 
 #: ./config.py:22
 msgid "Current"
 msgstr "Actualidad"
 
 #: ./controlpanel.py:39
-msgid "Default Property"
+msgid "Default News Type"
 msgstr "Tipo de noticia por defecto"
 
 #: ./controlpanel.py:33
@@ -101,6 +99,10 @@ msgstr "Configuración de NITF"
 msgid "News Article"
 msgstr "Artículo de noticias"
 
+#: ./content.py:66
+msgid "News Type"
+msgstr "Tipo de noticia"
+
 #: ./config.py:53
 msgid "Normal"
 msgstr "Normal"
@@ -121,15 +123,11 @@ msgstr "Encuestas/Sondeos"
 msgid "Profile"
 msgstr "Perfil"
 
-#: ./content.py:50
-msgid "Property"
-msgstr "Tipo"
-
 #: ./config.py:38
 msgid "Results-Listings-Tables"
 msgstr "Resultados-Listados-Tablas"
 
-#: ./content.py:55
+#: ./content.py:72
 #: ./controlpanel.py:29
 msgid "Section"
 msgstr "Sección"
@@ -137,6 +135,10 @@ msgstr "Sección"
 #: ./config.py:40
 msgid "Sidebar-Supporting-Info"
 msgstr "Material de apoyo"
+
+#: ./content.py:43
+msgid "Subtitle"
+msgstr "Subtítulo"
 
 #: ./config.py:42
 msgid "Summary"
@@ -146,7 +148,7 @@ msgstr "Resumen"
 msgid "Transcript-Verbatim"
 msgstr "Transcripción literal"
 
-#: ./content.py:60
+#: ./content.py:78
 msgid "Urgency"
 msgstr "Urgencia"
 
