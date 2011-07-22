@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<object name="portal_catalog">
+    <!-- TODO: http://maurits.vanrees.org/weblog/archive/2009/12/catalog -->
+    <index name="subtitle" meta_type="ZCTextIndex">
+        <indexed_attr value="subtitle"/>
+        <extra name="index_type" value="Okapi BM25 Rank"/>
+        <extra name="lexicon_id" value="plone_lexicon"/>
+    </index>
+    <index name="byline" meta_type="ZCTextIndex">
+        <indexed_attr value="byline"/>
+        <extra name="index_type" value="Okapi BM25 Rank"/>
+        <extra name="lexicon_id" value="plone_lexicon"/>
+    </index>
+    <index name="kind" meta_type="FieldIndex">
+        <indexed_attr value="kind"/>
+    </index>
+    <index name="section" meta_type="FieldIndex">
+        <indexed_attr value="section"/>
+    </index>
+    <index name="urgency" meta_type="FieldIndex">
+        <indexed_attr value="urgency"/>
+    </index>
+    <index name="SearchableText" meta_type="ZCTextIndex">
+        <indexed_attr value="SearchableText"/>
+        <extra name="index_type" value="Okapi BM25 Rank"/>
+        <extra name="lexicon_id" value="plone_lexicon"/>
+    </index>
+    <column value="subtitle"/>
+    <column value="byline"/>
+    <column value="kind"/>
+    <column value="section"/>
+    <column value="urgency"/>
+    <column value="SearchableText"/>
+</object>

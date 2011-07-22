@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-$Id$
+$Id: content.py 242664 2011-07-20 23:36:38Z hvelarde $
 """
 
 import math
@@ -15,10 +15,13 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.CMFPlone.utils import getToolByName
-from plone.directives import form
-from plone.app.textfield import RichText
+
 from plone.app.layout.viewlets.interfaces import IAboveContentBody
 from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
+from plone.app.textfield import RichText
+from plone.app.textfield.interfaces import ITransformer
+from plone.directives import form
+from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 
 from collective.nitf import _
@@ -120,8 +123,25 @@ def urgency_default_value(data):
     return settings.default_urgency
 
 
+@indexer(INITF)
+def textIndexer(obj):
+    """SearchableText contains id, title, subtitle, abstract, author and body
+    text as plain text.
+    """
+    transformer = ITransformer(obj)
+    text = transformer(obj.text, 'text/plain')
+    return '%s %s %s %s %s %s' % (obj.id,
+                                  obj.Title(),
+                                  obj.subtitle,
+                                  obj.Description(),
+                                  obj.byline,
+                                  text)
+grok.global_adapter(textIndexer, name='SearchableText')
+
+
 class IMediaView(Interface):
-    """Marker interface for media views"""
+    """Marker interface for media views.
+    """
 
 
 class Media_View(grok.View):
