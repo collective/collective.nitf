@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-$Id$
-"""
-
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from zope.i18nmessageid import MessageFactory
 

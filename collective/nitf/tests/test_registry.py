@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-$Id$
-"""
-
 import unittest2 as unittest
 
 from zope.component import getMultiAdapter

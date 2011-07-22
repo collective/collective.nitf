@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-$Id: content.py 242664 2011-07-20 23:36:38Z hvelarde $
-"""
-
 import math
 import unicodedata
 

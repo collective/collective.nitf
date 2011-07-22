@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-$Id$
-"""
-
 import logging
 import sys
 

@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-$Id$
-"""
-
 PROJECTNAME = 'collective.nitf'
 CONTROLPANEL_ID = 'nitf-settings'
 

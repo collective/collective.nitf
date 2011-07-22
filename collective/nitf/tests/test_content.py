@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-$Id: test_content.py 242547 2011-07-19 01:05:39Z hvelarde $
-"""
-
 import unittest2 as unittest
 
 from zope.component import createObject
