@@ -29,7 +29,6 @@ VIDEO_MIMETYPES = ['video/mp4', 'video/x-flv']
 IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 
-# TODO: los valores por defecto se deben tomar del panel del control
 class INITF(form.Schema):
     """A news item based on the News Industry Text Format specification.
     """
@@ -98,9 +97,8 @@ class SectionsVocabulary(object):
         items = []
         for section in settings.sections:
             token = unicodedata.normalize('NFKD', section).encode('ascii', 'ignore').lower()
-            items.append((token, section))
-
-        return SimpleVocabulary.fromItems(items)
+            items.append(SimpleVocabulary.createTerm(section, token, section))
+        return SimpleVocabulary(items)
 
 grok.global_utility(SectionsVocabulary, name=u'collective.nitf.Sections')
 
