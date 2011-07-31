@@ -6,23 +6,23 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.nitf">
 
-<head>
+<head tal:define="portal_state context/@@plone_portal_state;
+                  portal_url portal_state/portal_url;">
+    <metal:styleslot fill-slot="style_slot">
+        <!-- link rel="stylesheet" type="text/css" media="screen" href=""
+            tal:attributes="href string:${portal_url}/++resource++collective.nitf/styles.css" /-->
+    </metal:styleslot>
+
     <metal:javascriptslot fill-slot="javascript_head_slot">
         <script type="text/javascript" src=""
-                tal:attributes="src string:/++resource++collective.nitf/jquery-ui-1.8.14.custom.min.js"></script>
+                tal:attributes="src string:${portal_url}/++resource++collective.nitf/jquery-ui-1.8.14.custom.min.js"></script>
 	    <script>
 	    $(function() {
-		    $( "#sortable" ).sortable();
-		    $( "#sortable" ).disableSelection();
+		    $("#sortable").sortable();
+		    $("#sortable").disableSelection();
 	    });
 	    </script>
     </metal:javascriptslot>
-    <metal:styleslot fill-slot="style_slot">
-	    <style>
-	    #sortable { list-style-type: none !important; margin: 0 !important; padding: 0; }
-	    #sortable li { margin: 5px; padding: 1px; float: left; width: 128px; height: 128px; }
-	    </style>
-    </metal:styleslot>
 </head>
 
 <body tal:define="errors options/state/getErrors">
