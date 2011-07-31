@@ -55,4 +55,8 @@
     url_expr="string:${object_url}/edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
+ <action title="Media Sorter" action_id="media_sorter" category="folder" condition_expr=""
+    url_expr="string:${object_url}/@@media_sorter" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
 </object>

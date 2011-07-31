@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.nitf">
+
+<head>
+    <metal:javascriptslot fill-slot="javascript_head_slot">
+        <script type="text/javascript" src=""
+                tal:attributes="src string:/++resource++collective.nitf/jquery-ui-1.8.14.custom.min.js"></script>
+	    <script>
+	    $(function() {
+		    $( "#sortable" ).sortable();
+		    $( "#sortable" ).disableSelection();
+	    });
+	    </script>
+    </metal:javascriptslot>
+    <metal:styleslot fill-slot="style_slot">
+	    <style>
+	    #sortable { list-style-type: none !important; margin: 0 !important; padding: 0; }
+	    #sortable li { margin: 5px; padding: 1px; float: left; width: 128px; height: 128px; }
+	    </style>
+    </metal:styleslot>
+</head>
+
+<body tal:define="errors options/state/getErrors">
+    <metal:main fill-slot="main">
+        <tal:protect tal:condition="python: not checkPermission('List folder contents', here)"
+                     tal:replace="here/raiseUnauthorized" />
+
+        <metal:main_macro define-macro="main">
+            <metal:pic_sorter_macro define-macro="pic_sorter"
+                                    tal:define="imgs python:context.getFolderContents({'portal_type':'Image'});">
+
+            <h1 class="documentFirstHeading">Media Sorter Proof-of-Concept</h1>
+            <p>This example cames from
+                <a href="http://jqueryui.com/demos/sortable/#display-grid">jQuery UI - Sortable Demos &amp; Documentation.</a>
+               The sort order is still not saved.
+            </p>
+
+            <tal:sortable tal:condition="imgs">
+            <ul id="sortable">
+                <tal:items tal:repeat="item imgs">
+	            <li class="ui-state-default">
+	                <a href=""
+                       tal:define="item_url item/getURL|item/absolute_url;
+                                   item_title_or_id item/pretty_title_or_id;
+                                   item_description item/Description;"
+                         tal:attributes="href string:${item_url}/view;">
+                        <img src="" alt="" title=""
+                             tal:attributes="src string:${item_url}/image_thumb;
+                                             alt item_title_or_id;
+                                             title item_description;" />
+                    </a>
+                </li>
+                </tal:items>
+            </ul>
+            </tal:sortable>
+
+            <p class="discreet"
+               i18n:domain="atcontenttypes"
+               i18n:translate="text_no_albums_uploaded"
+               tal:condition="python:not imgs">
+                No images uploaded yet.
+            </p>
+
+            </metal:pic_sorter_macro>
+        </metal:main_macro>
+    </metal:main>
+</body>
+</html>

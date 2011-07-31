@@ -256,3 +256,8 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.template('media_links')
     grok.viewletmanager(IHtmlHeadLinks)
     grok.layer(INITFBrowserLayer)
+
+
+class Media_Sorter(grok.View):
+    grok.context(INITF)
+    grok.require('cmf.ModifyPortalContent')
