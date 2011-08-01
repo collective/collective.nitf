@@ -61,6 +61,7 @@
 
 .mediaview #mediabox {
     display: block;
+    margin-bottom: 1em;
     }
 
 #mediabox #images {

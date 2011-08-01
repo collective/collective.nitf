@@ -1,15 +1,13 @@
-<link rel="stylesheet" type="text/css"
-      media="screen" href="style.css"
+<link rel="stylesheet" type="text/css" media="screen" href=""
       tal:attributes="href string:${context/absolute_url}/++resource++collective.nitf/styles.css" />
-<link rel="stylesheet" type="text/css"
-      media="screen" href="style.css"
+<link rel="stylesheet" type="text/css" media="screen" href=""
       tal:attributes="href string:${context/absolute_url}/++resource++collective.nitf/scrollable-horizontal.css" />
-<link rel="stylesheet" type="text/css"
-      media="screen" href="style.css"
+<link rel="stylesheet" type="text/css" media="screen" href=""
       tal:attributes="href string:${context/absolute_url}/++resource++collective.nitf/scrollable-button.css" />
-<script type="text/javascript" src="js.js"
-    tal:attributes="src string:${context/absolute_url}/++resource++collective.nitf/flowplayer/flowplayer.min.js"></script>
-<script type="text/javascript" src="js.js"
-    tal:attributes="src string:${context/absolute_url}/++resource++collective.nitf/flowplayer/flowplayer.playlist.min.js"></script>
-<script type="text/javascript" src="js.js"
-    tal:attributes="src string:${context/absolute_url}/++resource++collective.nitf/nitf_media.js"></script>
+
+<script type="text/javascript" src=""
+        tal:attributes="src string:${context/absolute_url}/++resource++collective.nitf/flowplayer/flowplayer.min.js"></script>
+<script type="text/javascript" src=""
+        tal:attributes="src string:${context/absolute_url}/++resource++collective.nitf/flowplayer/flowplayer.playlist.min.js"></script>
+<script type="text/javascript" src=""
+        tal:attributes="src string:${context/absolute_url}/++resource++collective.nitf/nitf_media.js"></script>

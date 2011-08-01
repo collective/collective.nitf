@@ -1,9 +1,9 @@
-<div id="media-wrapper" tal:define="viewlet_id viewlet/__name__;
-    here_url context/@@plone_context_state/object_url;
-    cols string:4;" tal:attributes="class string:${viewlet/image_size}s">
-    <tal:defs define="img_brains view/get_images;
-                      key_no python:int(cols)-len(img_brains);
-                      lines python:viewlet.mediaRows(img_brains, cols);">
+<div id="media-wrapper" class=""
+     tal:attributes="class string:${viewlet/image_size}s">
+
+    <tal:defs define="images view/get_images;
+                      cols python:4;
+                      lines python:viewlet.mediaRows(images, cols);">
 
         <div id="media-bar" tal:condition="lines">
             <span class="navi prev"></span>
@@ -13,15 +13,15 @@
                     <tal:row repeat="item line">
                     <div class="mediawrap imgwrap" tal:condition="item/media_type">
                         <span>
-                            <img class="imgthumb"
+                            <img class="" src="" alt="" title=""
                                  tal:condition="python:item['media_type'] is 'image'"
-                                 src="img"
                                  tal:attributes="src string:${item/image_url}/image_${viewlet/image_size};
-                                                 class string:media-${item/media_type}" />
-                            <a class="mediaplayer"
+                                                 class string:media-${item/media_type};
+                                                 alt string:${item/title};
+                                                 title string:${item/description}" />
+
+                            <a class="" href="" style="display: block; height: 64px; width: 64px;"
                                tal:condition="python:item['media_type'] is 'video'"
-                               href="video"
-                               style="display: block; height: 64px; width: 64px;"
                                tal:attributes="href string:${item/image_url};
                                                class string:media-${item/media_type}">
                             </a>
@@ -31,15 +31,18 @@
                     </tal:lines>
                 </div>
 
-                <br class="visualClear" clear="all" />
+                <div class="visualClear"><!-- --></div>
+
             </div>
             <span class="navi next"></span>
         </div>
     </tal:defs>
 </div>
-<div class="visualClear"></div>
+
+<div class="visualClear"><!-- --></div>
+
 <script>
     jq(function($) {
-            $(".previews .thumbnails").scrollable();
+        $(".previews .thumbnails").scrollable();
         });
 </script>

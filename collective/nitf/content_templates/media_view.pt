@@ -8,8 +8,7 @@
 <body>
 
 <metal:main fill-slot="main">
-    <tal:main-macro metal:define-macro="main"
-        tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime">
+    <tal:main-macro metal:define-macro="main">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
@@ -29,29 +28,29 @@
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <div class="mediaview">
+
             <metal:mediamacro define-macro="media-box">
-            <div id="mediabox" tal:define="here_url context/@@plone_context_state/object_url;"
-                               tal:attributes="class string:previews">
-                <tal:defs define="img_brains view/get_images;">
-                <div id="images" tal:condition="img_brains">
+            <div id="mediabox">
+                <div id="images" tal:condition="img_brains"
+                     tal:define="img_brains view/get_images">
                     <div class="items">
                         <tal:lines repeat="item img_brains">
                         <div>
                             <span>
-                                <img tal:condition="python:item['media_type'] is 'image'"
-                                     class="imgthumb"
-                                     src="img"
+                                <img class="" src="" alt=""
+                                     tal:condition="python:item['media_type'] is 'image'"
                                      tal:attributes="src string:${item/image_url}/image_preview;
-                                                     class string:media-${item/media_type}" />
-                                <div class="info">
-                                    <h3 tal:content="item/title|nothing">A Blue Flower</h3>
-                                    <p tal:content="item/description|nothing">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur.</p>
+                                                     class string:media-${item/media_type};
+                                                     alt string:${item/title}" />
+                                <div class="info" tal:condition="item/description|nothing">
+                                    <p tal:content="item/description">Image Caption</p>
                                 </div>
                             </span>
                         </div>
                         </tal:lines>
                     </div>
                 </div>
+
                 <!-- prev/next buttons -->
                 <div class="navibuttons" metal:define-slot="navi">
                     <metal:navi define-macro="navi">
@@ -60,13 +59,13 @@
                     </metal:navi>
                 </div>
                 <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
-                </tal:defs>
-                <br class="visualClear" clear="all" />
+
+                <div class="visualClear"><!-- --></div>
+
             </div>
             </metal:mediamacro>
-        </div>
 
-        <br class="visualClear" clear="all" />
+        </div>
 
         <div metal:define-macro="text-field-view" id="parent-fieldname-text" class="stx">
             <div metal:define-slot="inside" tal:replace="structure context/text/output">The body</div>

@@ -8,8 +8,7 @@
 <body>
 
 <metal:main fill-slot="main">
-    <tal:main-macro metal:define-macro="main"
-        tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime">
+    <tal:main-macro metal:define-macro="main">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
@@ -28,29 +27,21 @@
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        <div class="newsImageContainer"
-             tal:condition="view/image|nothing"
-               tal:define="img_brain view/image">
-            <!--a href="#"
-               tal:attributes="href string:${img_brain/image_url}/image_view_fullscreen"
-               id="parent-fieldname-image"-->
-            <a href="#mediabox"
-               id="parent-fieldname-image">
-               <img class="newsImage nitf"
-                    src="" alt=""
-                    tal:attributes="src string:${img_brain/image_url}/image_mini" />
+        <div class="newsImageContainer" tal:condition="view/image|nothing"
+             tal:define="image view/image">
+            <a href="#mediabox" id="parent-fieldname-image">
+               <img class="newsImage nitf" src="" alt=""
+                    tal:attributes="src string:${image/image_url}/image_mini;
+                                    alt image/title" />
             </a>
-            <!--/a-->
-           <p class="discreet" tal:condition="img_brain/title|nothing" tal:content="img_brain/title">
-              Image Caption
+            <p class="discreet" tal:condition="image/description|nothing"
+               tal:content="image/description">
+                Image Caption
             </p>
         </div>
 
         <div class="newsview">
-            <div id="mediabox"
-                 metal:use-macro="context/media_view/macros/media-box"
-                 tal:define="here_url context/@@plone_context_state/object_url;"
-                 tal:attributes="class string:previews">
+            <div id="mediabox" metal:use-macro="context/media_view/macros/media-box">
                 <metal:navi fill-slot="navi">
                     <metal:buttons use-macro="context/media_view/macros/navi" />
                 </metal:navi>
