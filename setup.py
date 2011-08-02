@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0'
+version = '1.0dev'
 
 setup(name='collective.nitf',
       version=version,
@@ -21,15 +21,11 @@ setup(name='collective.nitf',
       author_email='hector.velarde@gmail.com',
       url='http://svn.plone.org/svn/collective/',
       license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
+      packages=find_packages('src'),
+      package_dir={'': 'src'},
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
-      extras_require=dict(
-        test=[
-            'plone.app.testing',
-        ]
-      ),
       install_requires=[
         'setuptools',
         'plone.app.dexterity',
@@ -37,7 +33,10 @@ setup(name='collective.nitf',
         'plone.app.registry',
         'plone.app.transmogrifier',
         'transmogrify.dexterity',
-      ],
+        ],
+      extras_require={
+        'test': ['plone.app.testing'],
+        },
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
