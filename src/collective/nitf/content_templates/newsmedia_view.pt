@@ -20,7 +20,7 @@
 
         <p class="documentDescription" tal:content="context/description" />
 
-        <p class="">
+        <p class="nitfByline" tal:condition="context/byline|nothing">
             <span i18n:translate="">By</span>
             <span tal:content="context/byline" />
         </p>
