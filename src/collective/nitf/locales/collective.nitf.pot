@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-20 23:09+0000\n"
+"POT-Creation-Date: 2011-08-02 23:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,139 +17,145 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.nitf\n"
 
-#: ./profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
 msgstr ""
 
-#: ./config.py:16
+#: collective/nitf/config.py:12
 msgid "Analysis"
 msgstr ""
 
-#: ./config.py:18
+#: collective/nitf/config.py:14
 msgid "Archive-Material"
 msgstr ""
 
-#: ./content.py:53
+#: collective/nitf/content.py:51
 msgid "Author"
 msgstr ""
 
-#: ./controlpanel.py:26
+#: collective/nitf/controlpanel.py:22
 msgid "Available Sections"
 msgstr ""
 
-#: ./config.py:20
+#: collective/nitf/config.py:16
 msgid "Background"
 msgstr ""
 
-#: ./content.py:60
+#: collective/nitf/content.py:58
 msgid "Body text"
 msgstr ""
 
-#: ./content_templates/media_view.pt:25
-#: ./content_templates/newsitem_view.pt:25
-#: ./content_templates/newsmedia_view.pt:25
+#: collective/nitf/content_templates/media_view.pt:26
+#: collective/nitf/content_templates/newsitem_view.pt:26
+#: collective/nitf/content_templates/newsmedia_view.pt:26
 msgid "By"
 msgstr ""
 
-#: ./config.py:22
+#: collective/nitf/content_templates/media_view.pt:79
+#: collective/nitf/content_templates/newsitem_view.pt:62
+#: collective/nitf/content_templates/newsmedia_view.pt:41
+msgid "Contents"
+msgstr ""
+
+#: collective/nitf/config.py:18
 msgid "Current"
 msgstr ""
 
-#: ./controlpanel.py:39
+#: collective/nitf/controlpanel.py:35
 msgid "Default News Type"
 msgstr ""
 
-#: ./controlpanel.py:33
+#: collective/nitf/controlpanel.py:29
 msgid "Default Section"
 msgstr ""
 
-#: ./controlpanel.py:46
+#: collective/nitf/controlpanel.py:42
 msgid "Default Urgency"
 msgstr ""
 
-#: ./config.py:24
+#: collective/nitf/config.py:20
 msgid "Feature"
 msgstr ""
 
-#: ./config.py:26
+#: collective/nitf/config.py:22
 msgid "Forecast"
 msgstr ""
 
-#: ./controlpanel.py:58
+#: collective/nitf/controlpanel.py:54
 msgid "Here you can modify the settings for collective.nitf."
 msgstr ""
 
-#: ./config.py:52
+#: collective/nitf/config.py:48
 msgid "High"
 msgstr ""
 
-#: ./config.py:28
+#: collective/nitf/config.py:24
 msgid "History"
 msgstr ""
 
-#: ./config.py:54
+#: collective/nitf/config.py:50
 msgid "Low"
 msgstr ""
 
-#: ./controlpanel.py:57
-#: ./profiles/default/controlpanel.xml
+#: collective/nitf/controlpanel.py:53
+#: collective/nitf/profiles/default/controlpanel.xml
 msgid "NITF Settings"
 msgstr ""
 
-#: ./profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "News Article"
 msgstr ""
 
-#: ./content.py:66
+#: collective/nitf/content.py:64
 msgid "News Type"
 msgstr ""
 
-#: ./config.py:53
+#: collective/nitf/config.py:49
 msgid "Normal"
 msgstr ""
 
-#: ./config.py:30
+#: collective/nitf/config.py:26
 msgid "Obituary"
 msgstr ""
 
-#: ./config.py:32
+#: collective/nitf/config.py:28
 msgid "Opinion"
 msgstr ""
 
-#: ./config.py:34
+#: collective/nitf/config.py:30
 msgid "Polls-Surveys"
 msgstr ""
 
-#: ./config.py:36
+#: collective/nitf/config.py:32
 msgid "Profile"
 msgstr ""
 
-#: ./config.py:38
+#: collective/nitf/config.py:34
 msgid "Results-Listings-Tables"
 msgstr ""
 
-#: ./content.py:72
-#: ./controlpanel.py:29
+#: collective/nitf/content.py:70
+#: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr ""
 
-#: ./config.py:40
+#: collective/nitf/config.py:36
 msgid "Sidebar-Supporting-Info"
 msgstr ""
 
-#: ./content.py:43
+#: collective/nitf/content.py:41
 msgid "Subtitle"
 msgstr ""
 
-#: ./config.py:42
+#: collective/nitf/config.py:38
 msgid "Summary"
 msgstr ""
 
-#: ./config.py:44
+#: collective/nitf/config.py:40
 msgid "Transcript-Verbatim"
 msgstr ""
 
-#: ./content.py:78
+#: collective/nitf/content.py:76
 msgid "Urgency"
 msgstr ""
 
