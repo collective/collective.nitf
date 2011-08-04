@@ -41,6 +41,8 @@ class INITF(form.Schema):
     subtitle = schema.TextLine(
             # nitf/body/body.head/hedline/hl2
             title=_(u'Subtitle'),
+            description=_(u'help_subtitle',
+                          default=u'A subordinate headline for the article.'),
             required=False,
             default=u'',
         )
@@ -70,12 +72,17 @@ class INITF(form.Schema):
     section = schema.Choice(
             # nitf/head/pubdata/@position.section
             title=_(u'Section'),
+            description=_(u'help_section',
+                          default=u'Named section where the article will '
+                                   'appear.'),
             vocabulary=u'collective.nitf.Sections',
         )
 
     urgency = schema.Choice(
             # nitf/head/docdata/urgency/@ed-urg
             title=_(u'Urgency'),
+            description=_(u'help_urgency',
+                          default=u'News importance.'),
             vocabulary=config.URGENCIES,
         )
 

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2011-08-04 17:47+0000\n"
+"POT-Creation-Date: 2011-08-04 18:33+0000\n"
 "PO-Revision-Date: 2011-08-04 17:47+0000\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Análisis"
 msgid "Archive-Material"
 msgstr "Material de archivo"
 
-#: collective/nitf/content.py:53
+#: collective/nitf/content.py:55
 msgid "Author"
 msgstr "Autor"
 
@@ -40,7 +40,7 @@ msgstr "Secciones disponibles"
 msgid "Background"
 msgstr "Contexto"
 
-#: collective/nitf/content.py:60
+#: collective/nitf/content.py:62
 msgid "Body text"
 msgstr "Cuerpo del texto"
 
@@ -92,7 +92,7 @@ msgstr "Alta"
 msgid "History"
 msgstr "Historia"
 
-#: collective/nitf/content.py:84
+#: collective/nitf/content.py:92
 msgid "Location"
 msgstr "Localización"
 
@@ -109,7 +109,7 @@ msgstr "Configuración de NITF"
 msgid "News Article"
 msgstr "Artículo de noticias"
 
-#: collective/nitf/content.py:66
+#: collective/nitf/content.py:68
 msgid "News Type"
 msgstr "Tipo de noticia"
 
@@ -143,7 +143,7 @@ msgstr "Contenido relacionado"
 msgid "Results-Listings-Tables"
 msgstr "Resultados-Listados-Tablas"
 
-#: collective/nitf/content.py:72
+#: collective/nitf/content.py:74
 #: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr "Sección"
@@ -164,12 +164,27 @@ msgstr "Resumen"
 msgid "Transcript-Verbatim"
 msgstr "Transcripción literal"
 
-#: collective/nitf/content.py:78
+#: collective/nitf/content.py:83
 msgid "Urgency"
 msgstr "Urgencia"
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:85
+#: collective/nitf/content.py:93
 msgid "help_location"
 msgstr "El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la historia)."
+
+#. Default: "Named section where the article will appear."
+#: collective/nitf/content.py:75
+msgid "help_section"
+msgstr "Nombre de la sección en la que aparecerá el artículo."
+
+#. Default: "A subordinate headline for the article."
+#: collective/nitf/content.py:44
+msgid "help_subtitle"
+msgstr "Un titular subordinado para el artículo."
+
+#. Default: "News importance."
+#: collective/nitf/content.py:84
+msgid "help_urgency"
+msgstr "Importancia de la noticia."
 

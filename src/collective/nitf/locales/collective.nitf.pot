@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-04 17:47+0000\n"
+"POT-Creation-Date: 2011-08-04 18:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Archive-Material"
 msgstr ""
 
-#: collective/nitf/content.py:53
+#: collective/nitf/content.py:55
 msgid "Author"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: collective/nitf/content.py:60
+#: collective/nitf/content.py:62
 msgid "Body text"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-#: collective/nitf/content.py:84
+#: collective/nitf/content.py:92
 msgid "Location"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgstr ""
 msgid "News Article"
 msgstr ""
 
-#: collective/nitf/content.py:66
+#: collective/nitf/content.py:68
 msgid "News Type"
 msgstr ""
 
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Results-Listings-Tables"
 msgstr ""
 
-#: collective/nitf/content.py:72
+#: collective/nitf/content.py:74
 #: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr ""
@@ -165,12 +165,27 @@ msgstr ""
 msgid "Transcript-Verbatim"
 msgstr ""
 
-#: collective/nitf/content.py:78
+#: collective/nitf/content.py:83
 msgid "Urgency"
 msgstr ""
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:85
+#: collective/nitf/content.py:93
 msgid "help_location"
+msgstr ""
+
+#. Default: "Named section where the article will appear."
+#: collective/nitf/content.py:75
+msgid "help_section"
+msgstr ""
+
+#. Default: "A subordinate headline for the article."
+#: collective/nitf/content.py:44
+msgid "help_subtitle"
+msgstr ""
+
+#. Default: "News importance."
+#: collective/nitf/content.py:84
+msgid "help_urgency"
 msgstr ""
 
