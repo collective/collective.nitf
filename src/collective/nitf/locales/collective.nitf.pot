@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.nitf\n"
 
-#: ./profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr ""
 msgid "NITF Settings"
 msgstr ""
 
-#: ./profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "News Article"
 msgstr ""
 

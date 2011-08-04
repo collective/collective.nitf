@@ -97,14 +97,17 @@ class INITF(form.Schema):
             required=False,
         )
 
-    def getImage(self):
-        img = None
-        if len(self.context.objectIds()):
-            return self.context[self.context.objectIds()[0]]
-        return
-    
-    def image_thumb(self):
-        return self.getImage()
+    form.order_after(location='IRelatedItems.relatedItems')
+    location = schema.TextLine(
+            # nitf/head/docdata/evloc
+            title=_(u'Location'),
+            description=_(u'help_location',
+                          default=u'Event location. Where an event took '
+                                   'place (as opposed to where the story was '
+                                   'written).'),
+            required=False,
+        )
+
 
 @form.default_value(field=INITF['kind'])
 def kind_default_value(data):
