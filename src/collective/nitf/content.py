@@ -69,21 +69,18 @@ class INITF(form.Schema):
             # nitf/head/tobject/tobject.property/@tobject.property.type
             title=_(u'News Type'),
             vocabulary=config.NEWS_TYPES,
-            required=False,
         )
 
     section = schema.Choice(
             # nitf/head/pubdata/@position.section
             title=_(u'Section'),
             vocabulary=u'collective.nitf.Sections',
-            required=False,
         )
 
     urgency = schema.Choice(
             # nitf/head/docdata/urgency/@ed-urg
             title=_(u'Urgency'),
             vocabulary=config.URGENCIES,
-            required=False,
         )
 
     form.order_after(location='IRelatedItems.relatedItems')
