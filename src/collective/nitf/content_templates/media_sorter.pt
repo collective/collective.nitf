@@ -57,6 +57,7 @@
                     msg2 += "\n" + ids;
                     msg2 += "\n" + prev_msg;
                     $.post(move_url, { delta: delta, item_id: a_id});
+                    $("#sortable").sortable("refresh");
                     //return alert(msg + msg2);
                 }
             });

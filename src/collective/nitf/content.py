@@ -71,7 +71,6 @@ class INITF(form.Schema):
             # nitf/head/tobject/tobject.property/@tobject.property.type
             title=_(u'News Type'),
             vocabulary=config.NEWS_TYPES,
-            required=False,
         )
 
     section = schema.Choice(
@@ -81,7 +80,6 @@ class INITF(form.Schema):
                           default=u'Named section where the article will '
                                    'appear.'),
             vocabulary=u'collective.nitf.Sections',
-            required=False,
         )
 
     urgency = schema.Choice(
@@ -90,7 +88,6 @@ class INITF(form.Schema):
             description=_(u'help_urgency',
                           default=u'News importance.'),
             vocabulary=config.URGENCIES,
-            required=False,
         )
 
     form.order_after(location='IRelatedItems.relatedItems')
