@@ -16,10 +16,51 @@
     <metal:javascriptslot fill-slot="javascript_head_slot">
         <script type="text/javascript" src=""
                 tal:attributes="src string:${portal_url}/++resource++collective.nitf/jquery-ui-1.8.14.custom.min.js"></script>
-	    <script>
+	    <script type="text/javascript">
 	    $(function() {
-		    $("#sortable").sortable();
-		    $("#sortable").disableSelection();
+            $("#sortable").sortable({
+                update: function(event, ui){
+                    var id_cleaner = function(ids) {
+                        var cleaned = new Array();
+                        for (i=0;i<ids.length;i++) {
+                           cleaned[i] = ids[i].replace('sortable-', "");
+                           }
+                       return cleaned;
+                            
+                    };
+                    var item = $("#sortable").data("sortable").currentItem;
+                    var items= $("#sortable").sortable("toArray");
+                    var prev = $("#sortable").data("sortable").domPosition.prev;
+                    var prev_pos = undefined;
+                    var a_id = item.attr("id").replace('sortable-', "");
+                    var pos = item.index();
+                    var msg = "Position " + pos;
+                    var msg2 = "\nId " + a_id;
+                    var base = $("base").attr("href");
+                    var move_url = base + "folder_moveitem";
+                    var query = {delta: "1", id: a_id};
+                    var ids = id_cleaner($("#sortable").sortable("toArray"));
+                    var prev_msg = "\nPrev pos: ";
+
+                    if (typeof prev === "undefined") {
+                        prev_pos = 0;
+                    } else {
+                        prev_pos = items.indexOf(prev.id);
+                    }
+
+                    var delta = pos - prev_pos;
+
+                    prev_msg += prev_pos;
+                    msg2 += "\nDelta: " + delta;
+                    msg2 += "\n" + move_url;
+                    msg2 += "\n" + query;
+                    msg2 += "\n" + ids;
+                    msg2 += "\n" + prev_msg;
+                    $.post(move_url, { delta: delta, item_id: a_id});
+                    //return alert(msg + msg2);
+                }
+            });
+		    //$("#sortable").disableSelection();
 	    });
 	    </script>
     </metal:javascriptslot>
@@ -43,12 +84,17 @@
             <tal:sortable tal:condition="imgs">
             <ul id="sortable">
                 <tal:items tal:repeat="item imgs">
-	            <li class="ui-state-default">
+                <li class="ui-state-default"
+                       tal:define="item_id item/getId|item/id
+                                   quoted_id item/quoted_id|python: view.quote_plus(id);"
+                                   tal:attributes="id string:sortable-${item_id};
+                                   class string:sort-${repeat/item/index}">
 	                <a href=""
                        tal:define="item_url item/getURL|item/absolute_url;
                                    item_title_or_id item/pretty_title_or_id;
                                    item_description item/Description;"
-                         tal:attributes="href string:${item_url}/view;">
+                       tal:attributes="href string:${item_url}/view;
+                                       id string:folder-contents-item-${item_id};">
                         <img src="" alt="" title=""
                              tal:attributes="src string:${item_url}/image_thumb;
                                              alt item_title_or_id;

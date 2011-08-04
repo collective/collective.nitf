@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2011-08-04 18:33+0000\n"
+"POT-Creation-Date: 2011-08-04 20:57+0000\n"
 "PO-Revision-Date: 2011-08-04 17:47+0000\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,10 @@ msgstr ""
 msgid "A news article"
 msgstr "Un artículo de noticias"
 
+#: collective/nitf/content_templates/media_uploader.pt:52
+msgid "Add files..."
+msgstr "Agregar archivos"
+
 #: collective/nitf/config.py:12
 msgid "Analysis"
 msgstr "Análisis"
@@ -28,9 +32,13 @@ msgstr "Análisis"
 msgid "Archive-Material"
 msgstr "Material de archivo"
 
-#: collective/nitf/content.py:55
+#: collective/nitf/content.py:59
 msgid "Author"
 msgstr "Autor"
+
+#: collective/nitf/content_templates/media_uploader.pt:44
+msgid "Automatic upload"
+msgstr "Subir automáticamente"
 
 #: collective/nitf/controlpanel.py:22
 msgid "Available Sections"
@@ -40,7 +48,7 @@ msgstr "Secciones disponibles"
 msgid "Background"
 msgstr "Contexto"
 
-#: collective/nitf/content.py:62
+#: collective/nitf/content.py:66
 msgid "Body text"
 msgstr "Cuerpo del texto"
 
@@ -49,6 +57,10 @@ msgstr "Cuerpo del texto"
 #: collective/nitf/content_templates/newsmedia_view.pt:26
 msgid "By"
 msgstr "Por"
+
+#: collective/nitf/content_templates/media_uploader.pt:61
+msgid "Cancel upload"
+msgstr "Cancelar archivos"
 
 #: collective/nitf/content_templates/media_view.pt:84
 #: collective/nitf/content_templates/newsitem_view.pt:67
@@ -72,6 +84,10 @@ msgstr "Sección por defecto"
 msgid "Default Urgency"
 msgstr "Urgencia por defecto"
 
+#: collective/nitf/content_templates/media_uploader.pt:65
+msgid "Delete files"
+msgstr "Quitar archivos"
+
 #: collective/nitf/config.py:20
 msgid "Feature"
 msgstr "Crónica"
@@ -92,13 +108,17 @@ msgstr "Alta"
 msgid "History"
 msgstr "Historia"
 
-#: collective/nitf/content.py:92
+#: collective/nitf/content.py:99
 msgid "Location"
 msgstr "Localización"
 
 #: collective/nitf/config.py:50
 msgid "Low"
 msgstr "Baja"
+
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
+msgid "Media Uploader"
+msgstr "Subir archivos"
 
 #: collective/nitf/controlpanel.py:53
 #: collective/nitf/profiles/default/controlpanel.xml
@@ -109,7 +129,7 @@ msgstr "Configuración de NITF"
 msgid "News Article"
 msgstr "Artículo de noticias"
 
-#: collective/nitf/content.py:68
+#: collective/nitf/content.py:72
 msgid "News Type"
 msgstr "Tipo de noticia"
 
@@ -143,7 +163,7 @@ msgstr "Contenido relacionado"
 msgid "Results-Listings-Tables"
 msgstr "Resultados-Listados-Tablas"
 
-#: collective/nitf/content.py:74
+#: collective/nitf/content.py:79
 #: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr "Sección"
@@ -152,7 +172,11 @@ msgstr "Sección"
 msgid "Sidebar-Supporting-Info"
 msgstr "Material de apoyo"
 
-#: collective/nitf/content.py:43
+#: collective/nitf/content_templates/media_uploader.pt:57
+msgid "Start upload"
+msgstr "Comenzar a subir"
+
+#: collective/nitf/content.py:47
 msgid "Subtitle"
 msgstr "Subtítulo"
 
@@ -164,27 +188,31 @@ msgstr "Resumen"
 msgid "Transcript-Verbatim"
 msgstr "Transcripción literal"
 
-#: collective/nitf/content.py:83
+#: collective/nitf/content_templates/media_uploader.pt:45
+msgid "Upload queue"
+msgstr "Subir manualmente"
+
+#: collective/nitf/content.py:89
 msgid "Urgency"
 msgstr "Urgencia"
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:93
+#: collective/nitf/content.py:100
 msgid "help_location"
 msgstr "El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la historia)."
 
 #. Default: "Named section where the article will appear."
-#: collective/nitf/content.py:75
+#: collective/nitf/content.py:80
 msgid "help_section"
 msgstr "Nombre de la sección en la que aparecerá el artículo."
 
 #. Default: "A subordinate headline for the article."
-#: collective/nitf/content.py:44
+#: collective/nitf/content.py:48
 msgid "help_subtitle"
 msgstr "Un titular subordinado para el artículo."
 
 #. Default: "News importance."
-#: collective/nitf/content.py:84
+#: collective/nitf/content.py:90
 msgid "help_urgency"
 msgstr "Importancia de la noticia."
 

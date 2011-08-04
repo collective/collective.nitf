@@ -61,6 +61,7 @@ class NITFTransformView(grok.View):
 
 
 class CatalogNewsSource(object):
+    """ Returns items from a catalog search. """
     classProvides(ISectionBlueprint)
     implements(ISection)
 
