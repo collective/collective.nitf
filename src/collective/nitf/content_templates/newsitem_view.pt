@@ -55,7 +55,7 @@
         </div>
 
         <div metal:define-macro="text-field-view" id="parent-fieldname-text" class="stx">
-            <div metal:define-slot="inside" tal:replace="structure context/text/output">The body</div>
+            <div metal:define-slot="inside" tal:replace="structure context/text/raw">The body</div>
         </div>
 
         <fieldset id="related-items" tal:condition="context/relatedItems">

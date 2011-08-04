@@ -6,10 +6,14 @@ import unicodedata
 from five import grok
 from zope import schema
 from zope.component import getUtility
+from zope.component import getMultiAdapter
 from zope.interface import Interface
+from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
+from Products.ATContentTypes.interfaces import IImageContent
+from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone.utils import getToolByName
 
 from plone.app.layout.viewlets.interfaces import IAboveContentBody
@@ -65,18 +69,21 @@ class INITF(form.Schema):
             # nitf/head/tobject/tobject.property/@tobject.property.type
             title=_(u'News Type'),
             vocabulary=config.NEWS_TYPES,
+            required=False,
         )
 
     section = schema.Choice(
             # nitf/head/pubdata/@position.section
             title=_(u'Section'),
             vocabulary=u'collective.nitf.Sections',
+            required=False,
         )
 
     urgency = schema.Choice(
             # nitf/head/docdata/urgency/@ed-urg
             title=_(u'Urgency'),
             vocabulary=config.URGENCIES,
+            required=False,
         )
 
     form.order_after(location='IRelatedItems.relatedItems')
@@ -90,6 +97,14 @@ class INITF(form.Schema):
             required=False,
         )
 
+    def getImage(self):
+        img = None
+        if len(self.context.objectIds()):
+            return self.context[self.context.objectIds()[0]]
+        return
+    
+    def image_thumb(self):
+        return self.getImage()
 
 @form.default_value(field=INITF['kind'])
 def kind_default_value(data):
@@ -97,6 +112,28 @@ def kind_default_value(data):
     settings = registry.forInterface(INITFSettings)
     return settings.default_kind
 
+
+class ImageContentAdapter(SchemaAdapterBase, grok.Adapter):
+    grok.context(INITF)
+    grok.provides(IImageContent)
+
+    def __init__(self, context):
+        super(ImageContentAdapter, self).__init__(context)
+        self.context = context
+
+    def getImage(self):
+        img = None
+        if len(self.context.objectIds()):
+            return self.context[self.context.objectIds()[0]]
+        return
+
+    def setImage(self):
+        return
+
+    def tag(self):
+        return
+
+alsoProvides(INITF, IImageContent)
 
 class SectionsVocabulary(object):
     """Creates a vocabulary with the sections stored in the registry; the
@@ -275,3 +312,19 @@ class MediaLinksViewlet(grok.Viewlet):
 class Media_Sorter(grok.View):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
+
+
+class Media_Uploader(grok.View):
+    grok.context(INITF)
+    grok.require('cmf.ModifyPortalContent')
+
+    files = []
+
+    def update(self, uploaderfiles=None):
+        #self.files = self.request.form.items()
+        #if uploaderfiles is not None:
+        #    self.files = uploaderfiles
+        if getattr(self.request, "METHOD", None):
+            if self.request["METHOD"] == "POST":
+                self.files = u"Post"
+                return u"POST"
