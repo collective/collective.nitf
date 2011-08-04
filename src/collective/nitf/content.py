@@ -17,6 +17,7 @@ from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.directives import form
+from plone.directives import dexterity
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 
@@ -138,7 +139,7 @@ class IMediaView(Interface):
     """
 
 
-class Media_View(grok.View):
+class Media_View(dexterity.DisplayForm):
     grok.context(INITF)
     grok.name('media_view')
     grok.title(u'Media View')
