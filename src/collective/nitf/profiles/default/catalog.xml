@@ -20,6 +20,11 @@
     <index name="urgency" meta_type="FieldIndex">
         <indexed_attr value="urgency"/>
     </index>
+    <index name="location" meta_type="ZCTextIndex">
+        <indexed_attr value="location"/>
+        <extra name="index_type" value="Okapi BM25 Rank"/>
+        <extra name="lexicon_id" value="plone_lexicon"/>
+    </index>
     <index name="SearchableText" meta_type="ZCTextIndex">
         <indexed_attr value="SearchableText"/>
         <extra name="index_type" value="Okapi BM25 Rank"/>
@@ -30,5 +35,6 @@
     <column value="kind"/>
     <column value="section"/>
     <column value="urgency"/>
+    <column value="location"/>
     <column value="SearchableText"/>
 </object>

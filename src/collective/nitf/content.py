@@ -37,7 +37,7 @@ class INITF(form.Schema):
     #title = schema.TextLine()
         # nitf/head/title and nitf/body/body.head/hedline/hl1
 
-    form.order_before(subtitle='IDublinCore.description')
+    form.order_after(subtitle='IDublinCore.title')
     subtitle = schema.TextLine(
             # nitf/body/body.head/hedline/hl2
             title=_(u'Subtitle'),
@@ -77,6 +77,17 @@ class INITF(form.Schema):
             # nitf/head/docdata/urgency/@ed-urg
             title=_(u'Urgency'),
             vocabulary=config.URGENCIES,
+        )
+
+    form.order_after(location='IRelatedItems.relatedItems')
+    location = schema.TextLine(
+            # nitf/head/docdata/evloc
+            title=_(u'Location'),
+            description=_(u'help_location',
+                          default=u'Event location. Where an event took '
+                                   'place (as opposed to where the story was '
+                                   'written).'),
+            required=False,
         )
 
 
@@ -126,12 +137,13 @@ def textIndexer(obj):
     """
     transformer = ITransformer(obj)
     text = transformer(obj.text, 'text/plain')
-    return '%s %s %s %s %s %s' % (obj.id,
-                                  obj.Title(),
-                                  obj.subtitle,
-                                  obj.Description(),
-                                  obj.byline,
-                                  text)
+    return '%s %s %s %s %s %s %s' % (obj.id,
+                                     obj.Title(),
+                                     obj.subtitle,
+                                     obj.Description(),
+                                     obj.byline,
+                                     text,
+                                     obj.location)
 grok.global_adapter(textIndexer, name='SearchableText')
 
 

@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2011-08-02 23:36+0000\n"
-"PO-Revision-Date: 2011-08-02 23:36+0000\n"
+"POT-Creation-Date: 2011-08-04 17:47+0000\n"
+"PO-Revision-Date: 2011-08-04 17:47+0000\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Análisis"
 msgid "Archive-Material"
 msgstr "Material de archivo"
 
-#: collective/nitf/content.py:51
+#: collective/nitf/content.py:53
 msgid "Author"
 msgstr "Autor"
 
@@ -40,7 +40,7 @@ msgstr "Secciones disponibles"
 msgid "Background"
 msgstr "Contexto"
 
-#: collective/nitf/content.py:58
+#: collective/nitf/content.py:60
 msgid "Body text"
 msgstr "Cuerpo del texto"
 
@@ -50,9 +50,9 @@ msgstr "Cuerpo del texto"
 msgid "By"
 msgstr "Por"
 
-#: collective/nitf/content_templates/media_view.pt:79
-#: collective/nitf/content_templates/newsitem_view.pt:62
-#: collective/nitf/content_templates/newsmedia_view.pt:41
+#: collective/nitf/content_templates/media_view.pt:84
+#: collective/nitf/content_templates/newsitem_view.pt:67
+#: collective/nitf/content_templates/newsmedia_view.pt:46
 msgid "Contents"
 msgstr "Contenido"
 
@@ -92,6 +92,10 @@ msgstr "Alta"
 msgid "History"
 msgstr "Historia"
 
+#: collective/nitf/content.py:84
+msgid "Location"
+msgstr "Localización"
+
 #: collective/nitf/config.py:50
 msgid "Low"
 msgstr "Baja"
@@ -105,7 +109,7 @@ msgstr "Configuración de NITF"
 msgid "News Article"
 msgstr "Artículo de noticias"
 
-#: collective/nitf/content.py:64
+#: collective/nitf/content.py:66
 msgid "News Type"
 msgstr "Tipo de noticia"
 
@@ -129,11 +133,17 @@ msgstr "Encuestas/Sondeos"
 msgid "Profile"
 msgstr "Perfil"
 
+#: collective/nitf/content_templates/media_view.pt:79
+#: collective/nitf/content_templates/newsitem_view.pt:62
+#: collective/nitf/content_templates/newsmedia_view.pt:41
+msgid "Related items"
+msgstr "Contenido relacionado"
+
 #: collective/nitf/config.py:34
 msgid "Results-Listings-Tables"
 msgstr "Resultados-Listados-Tablas"
 
-#: collective/nitf/content.py:70
+#: collective/nitf/content.py:72
 #: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr "Sección"
@@ -142,7 +152,7 @@ msgstr "Sección"
 msgid "Sidebar-Supporting-Info"
 msgstr "Material de apoyo"
 
-#: collective/nitf/content.py:41
+#: collective/nitf/content.py:43
 msgid "Subtitle"
 msgstr "Subtítulo"
 
@@ -154,7 +164,12 @@ msgstr "Resumen"
 msgid "Transcript-Verbatim"
 msgstr "Transcripción literal"
 
-#: collective/nitf/content.py:76
+#: collective/nitf/content.py:78
 msgid "Urgency"
 msgstr "Urgencia"
+
+#. Default: "Event location. Where an event took place (as opposed to where the story was written)."
+#: collective/nitf/content.py:85
+msgid "help_location"
+msgstr "El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la historia)."
 

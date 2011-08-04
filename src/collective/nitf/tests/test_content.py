@@ -90,9 +90,18 @@ class TestNITFIntegration(unittest.TestCase):
         self.assertEquals(1, len(result))
         self.assertEquals(result[0].getURL(), n1.absolute_url())
 
+    def test_location_indexed(self):
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        n1 = self.folder['n1']
+        n1.location = 'Mexico City'
+        n1.reindexObject()
+        result = self.portal.portal_catalog(location='Mexico City')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), n1.absolute_url())
+
     def test_searchable_text_indexed(self):
-        """SearchableText must contain id, title, subtitle, abstract, author
-        and body text as plain text.
+        """SearchableText must contain id, title, subtitle, abstract, author,
+        body text and location as plain text.
         """
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         n1 = self.folder['n1']
@@ -101,6 +110,7 @@ class TestNITFIntegration(unittest.TestCase):
         n1.description = 'Abstract'
         n1.byline = 'Author'
         n1.text = RichTextValue('Body text', 'text/plain', 'text/html')
+        n1.location = 'Mexico City'
         n1.reindexObject()
         result = self.portal.portal_catalog(SearchableText='n1')
         self.assertEquals(1, len(result))
@@ -118,6 +128,9 @@ class TestNITFIntegration(unittest.TestCase):
         self.assertEquals(1, len(result))
         self.assertEquals(result[0].getURL(), n1.absolute_url())
         result = self.portal.portal_catalog(SearchableText='Body text')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), n1.absolute_url())
+        result = self.portal.portal_catalog(SearchableText='Mexico City')
         self.assertEquals(1, len(result))
         self.assertEquals(result[0].getURL(), n1.absolute_url())
 
