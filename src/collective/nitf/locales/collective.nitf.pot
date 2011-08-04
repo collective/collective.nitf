@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-02 23:36+0000\n"
+"POT-Creation-Date: 2011-08-04 17:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Archive-Material"
 msgstr ""
 
-#: collective/nitf/content.py:51
+#: collective/nitf/content.py:53
 msgid "Author"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: collective/nitf/content.py:58
+#: collective/nitf/content.py:60
 msgid "Body text"
 msgstr ""
 
@@ -51,9 +51,9 @@ msgstr ""
 msgid "By"
 msgstr ""
 
-#: collective/nitf/content_templates/media_view.pt:79
-#: collective/nitf/content_templates/newsitem_view.pt:62
-#: collective/nitf/content_templates/newsmedia_view.pt:41
+#: collective/nitf/content_templates/media_view.pt:84
+#: collective/nitf/content_templates/newsitem_view.pt:67
+#: collective/nitf/content_templates/newsmedia_view.pt:46
 msgid "Contents"
 msgstr ""
 
@@ -93,6 +93,10 @@ msgstr ""
 msgid "History"
 msgstr ""
 
+#: collective/nitf/content.py:84
+msgid "Location"
+msgstr ""
+
 #: collective/nitf/config.py:50
 msgid "Low"
 msgstr ""
@@ -106,7 +110,7 @@ msgstr ""
 msgid "News Article"
 msgstr ""
 
-#: collective/nitf/content.py:64
+#: collective/nitf/content.py:66
 msgid "News Type"
 msgstr ""
 
@@ -130,11 +134,17 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
+#: collective/nitf/content_templates/media_view.pt:79
+#: collective/nitf/content_templates/newsitem_view.pt:62
+#: collective/nitf/content_templates/newsmedia_view.pt:41
+msgid "Related items"
+msgstr ""
+
 #: collective/nitf/config.py:34
 msgid "Results-Listings-Tables"
 msgstr ""
 
-#: collective/nitf/content.py:70
+#: collective/nitf/content.py:72
 #: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr ""
@@ -143,7 +153,7 @@ msgstr ""
 msgid "Sidebar-Supporting-Info"
 msgstr ""
 
-#: collective/nitf/content.py:41
+#: collective/nitf/content.py:43
 msgid "Subtitle"
 msgstr ""
 
@@ -155,7 +165,12 @@ msgstr ""
 msgid "Transcript-Verbatim"
 msgstr ""
 
-#: collective/nitf/content.py:76
+#: collective/nitf/content.py:78
 msgid "Urgency"
+msgstr ""
+
+#. Default: "Event location. Where an event took place (as opposed to where the story was written)."
+#: collective/nitf/content.py:85
+msgid "help_location"
 msgstr ""
 
