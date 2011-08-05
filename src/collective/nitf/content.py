@@ -101,17 +101,6 @@ class INITF(form.Schema):
             required=False,
         )
 
-    form.order_after(location='IRelatedItems.relatedItems')
-    location = schema.TextLine(
-            # nitf/head/docdata/evloc
-            title=_(u'Location'),
-            description=_(u'help_location',
-                          default=u'Event location. Where an event took '
-                                   'place (as opposed to where the story was '
-                                   'written).'),
-            required=False,
-        )
-
 
 @form.default_value(field=INITF['kind'])
 def kind_default_value(data):
@@ -141,6 +130,7 @@ class ImageContentAdapter(SchemaAdapterBase, grok.Adapter):
         return
 
 alsoProvides(INITF, IImageContent)
+
 
 class SectionsVocabulary(object):
     """Creates a vocabulary with the sections stored in the registry; the
