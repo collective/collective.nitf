@@ -26,7 +26,7 @@
         <metal:styleslot fill-slot="style_slot">
             <!-- link rel="stylesheet" type="text/css" media="screen" href=""
                 tal:attributes="href string:${portal_url}/++resource++collective.nitf/styles.css" /-->
-            <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/sunny/jquery-ui.css" id="theme">
+            <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" id="theme">
             <link rel="stylesheet" href="style.css" 
                 tal:attributes="href string:${portal_url}/++resource++collective.nitf/style.css" />
             <link rel="stylesheet" type="text/css" media="screen" href=""
@@ -40,10 +40,6 @@
             tal:replace="here/raiseUnauthorized" />
             <metal:main_macro define-macro="main">
             <metal:uploader define-macro="file_uploader">
-            <form id="radio" class="ui-buttonset">
-                <input type="radio" value="auto" name="radio" id="demo1" class="ui-helper-hidden-accessible"><label for="demo1" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" aria-pressed="false" role="button"><span class="ui-button-text" i18n:translate="">Automatic upload</span></label>
-                <input type="radio" checked="" value="queue" name="radio" id="demo2" class="ui-helper-hidden-accessible"><label for="demo2" aria-pressed="true" class="ui-state-active ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button"><span class="ui-button-text" i18n:translate="">Upload queue</span></label>
-            </form>
             <div id="fileupload" class="ui-widget">
                 <form action="." tal:attributes="action string:${context/absolute_url}/media_uploader" method="POST" enctype="multipart/form-data">
                     <div class="fileupload-buttonbar ui-widget-header ui-corner-top">
@@ -71,6 +67,8 @@
                     <div class="fileupload-progressbar"></div>
                 </div>
             </div>
+            <script type="text/x-jquery-tmpl" id="template-upload"></script>
+            <script type="text/x-jquery-tmpl" id="template-download"></script>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
             <script src="../jquery.tmpl.min.js"

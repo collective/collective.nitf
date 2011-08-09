@@ -40,7 +40,7 @@
             // Generic:
             // --------
             var upload_tmpl =
-                '<tr class="template-upload{{if error}} ui-state-error{{/if}}"><td class="preview"></td><td class="name">${name}</td><td class="preview"></td><td class="name">${name}</td><td class="size">${sizef}</td>{{if error}}<td class="error" colspan="2">Error:{{if error === "maxFileSize"}}File is too big{{else error === "minFileSize"}}File is too small{{else error === "acceptFileTypes"}}Filetype not allowed{{else error === "maxNumberOfFiles"}}Max number of files exceeded{{else}}${error}{{/if}}</td>{{else}}<td class="progress"><div></div></td><td class="start"><button>Start</button></td>{{/if}}<td class="cancel"><button>Cancel</button></td></tr>';
+                '<tr class="template-upload{{if error}} ui-state-error{{/if}}"><td class="preview"></td><td class="name">${name}</td><td class="size">${sizef}</td>{{if error}}<td class="error" colspan="2">Error:{{if error === "maxFileSize"}}File is too big{{else error === "minFileSize"}}File is too small{{else error === "acceptFileTypes"}}Filetype not allowed{{else error === "maxNumberOfFiles"}}Max number of files exceeded{{else}}${error}{{/if}}</td>{{else}}<td class="progress"><div></div></td><td class="start"><button>Start</button></td>{{/if}}<td class="cancel"><button>Cancel</button></td></tr>';
 
             var download_tmpl =
                 '<tr class="template-download{{if error}} ui-state-error{{/if}}">{{if error}}<td></td><td class="name">${name}</td><td class="size">${sizef}</td><td class="error" colspan="2">Error:{{if error === 1}}File exceeds upload_max_filesize (php.ini directive){{else error === 2}}File exceeds MAX_FILE_SIZE (HTML form directive){{else error === 3}}File was only partially uploaded{{else error === 4}}No File was uploaded{{else error === 5}}Missing a temporary folder{{else error === 6}}Failed to write file to disk{{else error === 7}}File upload stopped by extension{{else error === "maxFileSize"}}File is too big{{else error === "minFileSize"}}File is too small{{else error === "acceptFileTypes"}}Filetype not allowed{{else error === "maxNumberOfFiles"}}Max number of files exceeded{{else error === "uploadedBytes"}}Uploaded bytes exceed file size{{else error === "emptyResult"}}Empty file upload result{{else}}${error}{{/if}}</td>{{else}}<td class="preview">{{if thumbnail_url}}<a href="${url}" target="_blank"><img src="${thumbnail_url}"></a>{{/if}}</td><td class="name"><a href="${url}"{{if thumbnail_url}} target="_blank"{{/if}}>${name}</a></td><td class="size">${sizef}</td><td colspan="2"></td>{{/if}}<td class="delete"><button data-type="${delete_type}" data-url="${delete_url}">Delete</button></td></tr>';
@@ -51,16 +51,18 @@
             //$('a[rel=gallery]').imagegallery();
             // File Upload:
             // ------------
-            $('#radio').buttonset();
             //$('#fileupload').fileupload({uploadTemplate: upload_tmpl, downloadTemplate: download_tmpl, autoUpload: false,});
             $('#fileupload').fileupload({
                 maxFileSize: settings.max_file_size,
                 uploadTemplate: upload_tmpl,
                 downloadTemplate: download_tmpl,
-                autoUpload: 'false',
+                autoUpload: false,
                 authenticityTokenName: settings.authenticity_token &&
                     settings.authenticity_token.name
             });
+
+            /*
+            $('#radio').buttonset();
             $('#radio input').click(function (e) {
                 $('#fileupload').fileupload(
                     'option',
@@ -68,6 +70,8 @@
                     $(this).val() === 'auto'
                 );
             });
+            */
+
             // Create jQuery UI buttons for existing files:
             $('#fileupload .files .delete button').button({
                 text: false,
