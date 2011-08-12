@@ -17,7 +17,8 @@ from Products.CMFPlone.utils import getToolByName
 from plone.dexterity.interfaces import IDexterityFTI
 
 from collective.transmogrifier.transmogrifier import Transmogrifier
-from collective.nitf.content import INITF, INITFBrowserLayer
+from collective.nitf import INITFBrowserLayer
+from collective.nitf.content import INITF
 from collective.nitf.content import MediaViewlet
 from collective.nitf.content import MediaLinksViewlet
 from collective.nitf.testing import INTEGRATION_TESTING

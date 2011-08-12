@@ -58,7 +58,8 @@
             <div metal:define-slot="inside" tal:replace="structure context/text/raw">The body</div>
         </div>
 
-        <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
+        <fieldset id="related-items" tal:condition="exists:context/relatedItems">
+
             <legend i18n:translate="">Related items</legend>
             <tal:relateditems tal:content="structure view/w/IRelatedItems.relatedItems/render" />
         </fieldset>
