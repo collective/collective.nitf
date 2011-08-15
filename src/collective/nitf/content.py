@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import json
 import math
 import unicodedata
 
@@ -9,6 +9,7 @@ from five import grok
 from zope import schema
 from zope.component import getUtility
 from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 from zope.interface import Interface
 from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
@@ -349,11 +350,37 @@ class Media_Uploader(dexterity.DisplayForm):
 
     files = []
 
-    def update(self, uploaderfiles=None):
-        #self.files = self.request.form.items()
-        #if uploaderfiles is not None:
-        #    self.files = uploaderfiles
-        if getattr(self.request, "METHOD", None):
-            if self.request["METHOD"] == "POST":
-                self.files = u"Post"
-                return u"POST"
+    def __call__(self, *args, **kwargs):
+        if hasattr(self.request, "REQUEST_METHOD"):
+            if self.request["REQUEST_METHOD"] == "POST":
+                if getattr(self.request, "files[]", None) is not None:
+                    files = self.request['files[]']
+                    json_view = queryMultiAdapter((self.context, self.request), name=u"api")
+                    if json_view:
+                        return json_view()
+        return super(Media_Uploader, self).__call__(*args, **kwargs)
+
+
+class JSON_View(grok.View):
+    grok.context(INITF)
+    grok.name('api')
+    grok.require('cmf.ModifyPortalContent')
+
+    json_var = { 'name': 'File-Name.jpg',
+                 'size': 999999,
+                 'url': '\/\/nohost.org',
+                 'thumbnail_url': '//nohost.org',
+                 'delete_url': '//nohost.org',
+                 'delete_type': '//nohost.org',
+                 }
+
+    def __call__(self, json_var=None):
+        self.response.setHeader('Content-Type', 'text/plain')
+        if isinstance(json_var, basestring) :
+            self.json_var = json_var
+        return super(JSON_View, self).__call__()
+
+    def render(self):
+        if getattr(self.request, "REQUEST_METHOD", None) is not None:
+            self.files = self.request["REQUEST_METHOD"]
+            return json.dumps(self.json_var)

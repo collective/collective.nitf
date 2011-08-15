@@ -86,14 +86,19 @@ class TestNITFBrowser(unittest.TestCase):
         image_count = len(view.get_images())
         self.assertEquals(image_count, 2)
 
-    def _test_media_viewlet(self):
+    def _test_sorter_view(self):
         view = queryMultiAdapter((self.nitf, self.request),
-                                  name=u"newsitem_view")
+                                  name=u"media_sorter")
+        self.assertNotEquals(view, None)
         view.update()
-        viewlet = MediaViewlet(self.nitf, self.request, view,
-                                  'plone.abovecontentbody')
-        self.assertNotEquals(viewlet, None)
-        viewlet.update()
+        image_count = len(view.get_images())
+        self.assertEquals(image_count, 2)
+
+    def _test_uploader_view(self):
+        view = queryMultiAdapter((self.nitf, self.request),
+                                  name=u"media_uploader")
+        self.assertNotEquals(view, None)
+        view.update()
 
     def _test_media_viewlet(self):
         view = queryMultiAdapter((self.nitf, self.request),
