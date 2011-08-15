@@ -15,7 +15,6 @@ TYPES = (
     )
 
 JS = (
-    '++resource++plone.app.jquerytools.plugins.js',
     '++resource++collective.nitf/jquery.tools.min.js',
     )
 
@@ -41,7 +40,6 @@ class TestInstall(unittest.TestCase):
 
     def test_javascripts(self):
         portal_js = getattr(self.portal, 'portal_javascripts')
-        #print '\n'.join(portal_js.getResourceIds())
         for js in JS:
             self.failUnless(js in portal_js.getResourceIds(),
                             '%s javascript not installed' % js)
