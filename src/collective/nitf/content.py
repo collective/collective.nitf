@@ -338,12 +338,12 @@ class Embed(dexterity.DisplayForm):
         return settings.embedly_key
 
 
-class Media_Sorter(grok.View):
+class Media_Sorter(dexterity.DisplayForm):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
 
 
-class Media_Uploader(grok.View):
+class Media_Uploader(dexterity.DisplayForm):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
 
