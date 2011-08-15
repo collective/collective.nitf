@@ -3,11 +3,13 @@
 import unittest2 as unittest
 
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.registry import Registry
+from plone.registry.interfaces import IRegistry
 
 from Products.CMFCore.utils import getToolByName
 
@@ -100,21 +102,26 @@ class RegistryUninstallTest(unittest.TestCase):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         login(self.portal, TEST_USER_NAME)
-        # Set up the NITF settings registry
-        self.registry = Registry()
-        self.registry.registerInterface(INITFSettings)
+        self.registry = getUtility(IRegistry)
         # uninstall the package
         self.qi = getattr(self.portal, 'portal_quickinstaller')
         self.qi.uninstallProducts(products=[config.PROJECTNAME])
-
-    def test_record_sections_uninstalled(self):
+        # run manually uninstall step on registry as this is not yet
+        # implemented in the uninstaller
         setup_tool = getToolByName(self.portal, 'portal_setup')
         setup_tool.runImportStepFromProfile('profile-collective.nitf:uninstall', 'plone.app.registry')
-        # Test that the sections record is not in the control panel
-        import pdb; pdb.set_trace()
-        record_sections = self.registry.records[
-            'collective.nitf.controlpanel.INITFSettings.sections']
-        self.failIf('sections' in INITFSettings)
+
+    def test_records_uninstalled(self):
+        # Test that the records were removed from the control panel
+        records = [
+            'collective.nitf.controlpanel.INITFSettings.sections',
+            'collective.nitf.controlpanel.INITFSettings.default_section',
+            'collective.nitf.controlpanel.INITFSettings.default_kind',
+            'collective.nitf.controlpanel.INITFSettings.default_urgency',
+            'collective.nitf.controlpanel.INITFSettings.embedly_key',
+            ]
+        for r in records:
+            self.failIf(r in self.registry)
 
 
 def test_suite():
