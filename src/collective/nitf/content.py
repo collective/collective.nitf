@@ -1,37 +1,25 @@
 # -*- coding: utf-8 -*-
-import json
-import math
-import unicodedata
 
-from Acquisition import aq_inner
+import unicodedata
 
 from five import grok
 from zope import schema
 from zope.component import getUtility
-from zope.component import getMultiAdapter
-from zope.component import queryMultiAdapter
-from zope.interface import Interface
 from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.ATContentTypes.interfaces import IImageContent
-from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
-from Products.CMFPlone.utils import getToolByName
 
-from plone.app.layout.viewlets.interfaces import IAboveContentBody
-from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.directives import form
-from plone.directives import dexterity
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 
 from collective.nitf import _
 from collective.nitf import config
-from collective.nitf import INITFBrowserLayer
 from collective.nitf.controlpanel import INITFSettings
 
 VIDEO_MIMETYPES = ['video/mp4', 'video/x-flv']

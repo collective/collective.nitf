@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import json
 import math
 
@@ -6,7 +7,6 @@ from Acquisition import aq_inner
 
 from five import grok
 from zope.component import getUtility
-from zope.component import getMultiAdapter
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 
@@ -18,7 +18,6 @@ from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from plone.directives import dexterity
 from plone.registry.interfaces import IRegistry
 
-from collective.nitf import _
 from collective.nitf import INITFBrowserLayer
 from collective.nitf.content import INITF
 from collective.nitf.controlpanel import INITFSettings
@@ -211,17 +210,17 @@ class JSON_View(grok.View):
     grok.name('api')
     grok.require('cmf.ModifyPortalContent')
 
-    json_var = { 'name': 'File-Name.jpg',
-                 'size': 999999,
-                 'url': '\/\/nohost.org',
-                 'thumbnail_url': '//nohost.org',
-                 'delete_url': '//nohost.org',
-                 'delete_type': '//nohost.org',
-                 }
+    json_var = {'name': 'File-Name.jpg',
+                'size': 999999,
+                'url': '\/\/nohost.org',
+                'thumbnail_url': '//nohost.org',
+                'delete_url': '//nohost.org',
+                'delete_type': '//nohost.org',
+                }
 
     def __call__(self, json_var=None):
         self.response.setHeader('Content-Type', 'text/plain')
-        if isinstance(json_var, basestring) :
+        if isinstance(json_var, basestring):
             self.json_var = json_var
         return super(JSON_View, self).__call__()
 
