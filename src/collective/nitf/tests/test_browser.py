@@ -19,8 +19,8 @@ from plone.dexterity.interfaces import IDexterityFTI
 from collective.transmogrifier.transmogrifier import Transmogrifier
 from collective.nitf import INITFBrowserLayer
 from collective.nitf.content import INITF
-from collective.nitf.content import MediaViewlet
-from collective.nitf.content import MediaLinksViewlet
+from collective.nitf.browser import MediaViewlet
+from collective.nitf.browser import MediaLinksViewlet
 from collective.nitf.testing import INTEGRATION_TESTING
 
 zptlogo = (
@@ -86,14 +86,19 @@ class TestNITFBrowser(unittest.TestCase):
         image_count = len(view.get_images())
         self.assertEquals(image_count, 2)
 
-    def _test_media_viewlet(self):
+    def _test_sorter_view(self):
         view = queryMultiAdapter((self.nitf, self.request),
-                                  name=u"newsitem_view")
+                                  name=u"media_sorter")
+        self.assertNotEquals(view, None)
         view.update()
-        viewlet = MediaViewlet(self.nitf, self.request, view,
-                                  'plone.abovecontentbody')
-        self.assertNotEquals(viewlet, None)
-        viewlet.update()
+        image_count = len(view.get_images())
+        self.assertEquals(image_count, 2)
+
+    def _test_uploader_view(self):
+        view = queryMultiAdapter((self.nitf, self.request),
+                                  name=u"media_uploader")
+        self.assertNotEquals(view, None)
+        view.update()
 
     def _test_media_viewlet(self):
         view = queryMultiAdapter((self.nitf, self.request),
