@@ -79,6 +79,43 @@ class RegistryTest(unittest.TestCase):
         self.assertEquals(record_default_urgency.value,
                           config.DEFAULT_URGENCY)
 
+    def test_record_embedly_key(self):
+        # Test that the embedly_key record is in the control panel
+        record_embedly_key = self.registry.records[
+            'collective.nitf.controlpanel.INITFSettings.embedly_key']
+        self.failUnless('embedly_key' in INITFSettings)
+        self.assertEquals(record_embedly_key.value, None)
+
+
+from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import login
+
+
+class RegistryUninstallTest(unittest.TestCase):
+    """ensure registry is properly uninstalled"""
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        login(self.portal, TEST_USER_NAME)
+        # Set up the NITF settings registry
+        self.registry = Registry()
+        self.registry.registerInterface(INITFSettings)
+        # uninstall the package
+        self.qi = getattr(self.portal, 'portal_quickinstaller')
+        self.qi.uninstallProducts(products=[config.PROJECTNAME])
+
+    def test_record_sections_uninstalled(self):
+        setup_tool = getToolByName(self.portal, 'portal_setup')
+        setup_tool.runImportStepFromProfile('profile-collective.nitf:uninstall', 'plone.app.registry')
+        # Test that the sections record is not in the control panel
+        import pdb; pdb.set_trace()
+        record_sections = self.registry.records[
+            'collective.nitf.controlpanel.INITFSettings.sections']
+        self.failIf('sections' in INITFSettings)
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)

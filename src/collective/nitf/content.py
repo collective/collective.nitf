@@ -3,6 +3,8 @@
 import math
 import unicodedata
 
+from Acquisition import aq_inner
+
 from five import grok
 from zope import schema
 from zope.component import getUtility
@@ -13,6 +15,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.ATContentTypes.interfaces import IImageContent
+from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone.utils import getToolByName
 
@@ -304,6 +307,35 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.template('media_links')
     grok.viewletmanager(IHtmlHeadLinks)
     grok.layer(INITFBrowserLayer)
+
+
+class Embed(dexterity.DisplayForm):
+    grok.context(INITF)
+    grok.require('zope2.View')
+
+    def links(self):
+        """Return a catalog search result of links to show.
+        """
+
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+
+        links = catalog(object_provides=IATLink.__identifier__,
+                        path='/'.join(context.getPhysicalPath()),
+                        sort_on='getObjPositionInParent')
+
+        links = [brain.getObject() for brain in links]
+        links = [{'title': obj.Title(),
+                  'url': obj.remoteUrl,
+                  'description': obj.Description()} for obj in links]
+        return links
+
+    def key(self):
+        """Return Embedly key.
+        """
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(INITFSettings)
+        return settings.embedly_key
 
 
 class Media_Sorter(grok.View):

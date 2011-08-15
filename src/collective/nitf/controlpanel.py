@@ -16,38 +16,43 @@ from collective.nitf import config
 
 
 class INITFSettings(Interface):
-    """Interface for the form on the control panel"""
+    """Interface for the form on the control panel.
+    """
 
     sections = schema.Set(
             title=_(u'Available Sections'),
             required=True,
             default=set(),
-            value_type=schema.TextLine(title=_(u'Section')),
-        )
+            value_type=schema.TextLine(title=_(u'Section')),)
 
     default_section = schema.Choice(
             title=_(u'Default Section'),
             vocabulary=u'collective.nitf.Sections',
-            required=False,
-        )
+            required=False,)
 
     default_kind = schema.Choice(
             title=_(u'Default News Type'),
             vocabulary=config.NEWS_TYPES,
             required=False,
-            default=config.DEFAULT_NEWS_TYPE
-        )
+            default=config.DEFAULT_NEWS_TYPE,)
 
     default_urgency = schema.Choice(
             title=_(u'Default Urgency'),
             vocabulary=config.URGENCIES,
             required=False,
-            default=config.DEFAULT_URGENCY
-        )
+            default=config.DEFAULT_URGENCY,)
+
+    embedly_key = schema.TextLine(
+            title=_(u'Embedly Key'),
+            description=_(u'help_embedly_key',
+                          default=u'Use this if you want to embed links '
+                                   'instead of list them.'),
+            required=False,)
 
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
-    """"""
+    """
+    """
 
     schema = INITFSettings
     label = _(u'NITF Settings')

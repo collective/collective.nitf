@@ -12,6 +12,7 @@
  <property name="allowed_content_types">
      <element value="File" />
      <element value="Image" />
+     <element value="Link" />
  </property>
 
  <!-- schema interface -->
@@ -39,6 +40,7 @@
   <element value="newsitem_view"/>
   <element value="newsmedia_view"/>
   <element value="media_view"/>
+  <element value="embed"/>
  </property>
 
  <!-- Method aliases -->
@@ -60,7 +62,7 @@
     url_expr="string:${object_url}/@@media_sorter" visible="True">
   <permission value="Modify portal content"/>
  </action>
- <action i18n:attributes="title" title="Media Uploader" action_id="media_uploader" category="folder" condition_expr=""
+ <action title="Media Uploader" action_id="media_uploader" category="folder" condition_expr=""
     url_expr="string:${object_url}/@@media_uploader" visible="True">
   <permission value="Modify portal content"/>
  </action>
