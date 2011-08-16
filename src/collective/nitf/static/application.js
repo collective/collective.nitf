@@ -57,6 +57,7 @@
                 uploadTemplate: upload_tmpl,
                 downloadTemplate: download_tmpl,
                 autoUpload: false,
+                sequentialUploads: true,
                 authenticityTokenName: settings.authenticity_token &&
                     settings.authenticity_token.name
             });
