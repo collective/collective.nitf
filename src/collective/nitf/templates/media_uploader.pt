@@ -56,10 +56,10 @@
                             <span class="ui-button-icon-primary ui-icon ui-icon-cancel"></span>
                             <span class="ui-button-text" i18n:translate="">Cancel upload</span>
                         </button>
-                        <button type="button" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary">
+                        <!--button type="button" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary">
                             <span class="ui-button-icon-primary ui-icon ui-icon-trash"></span>
                             <span class="ui-button-text" i18n:translate="">Delete files</span>
-                        </button>
+                        </button-->
                     </div>
                 </form>
                 <div class="fileupload-content">
