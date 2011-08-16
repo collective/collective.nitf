@@ -268,8 +268,7 @@ class JSON_View(grok.View):
                                         name=u'plone_context_state')
         context_name = context_state.object_title()
         context_url = context_state.object_url()
-        del_url = '%s?del=%s' % (context_state.absolute_url(),
-                                 urllib.quote(context.id))
+        del_url = context_url
         info = {'name': context_name,
                 'url':  context_url,
                 'size': context.size(),
