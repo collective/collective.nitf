@@ -57,6 +57,7 @@
                 uploadTemplate: upload_tmpl,
                 downloadTemplate: download_tmpl,
                 autoUpload: false,
+                sequentialUploads: true,
                 authenticityTokenName: settings.authenticity_token &&
                     settings.authenticity_token.name
             });
@@ -82,7 +83,8 @@
             $('#fileupload .files .template-download a').each(
                 $.blueimpUIX.fileupload.prototype._enableDragToDesktop
             );*/
-            $.getJSON($('#fileupload form').prop('action'), function (files) {
+            //$.getJSON($('#fileupload form').prop('action'), function (files) {
+            $.getJSON('./api', function (files) {
                 var fu = $('#fileupload').data('fileupload');
                 fu._adjustMaxNumberOfFiles(-files.length);
                 fu._renderDownload(files)
