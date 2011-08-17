@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+
 import json
 import math
-import urllib
+
 
 from Acquisition import aq_inner
-from Acquisition import aq_parent
 
 from five import grok
 from zope.container.interfaces import INameChooser
@@ -262,7 +262,6 @@ class JSON_View(grok.View):
         if context is None:
             context = self.context
         context = aq_inner(context)
-        container = aq_parent(context)
 
         context_state = queryMultiAdapter((context, self.request),
                                         name=u'plone_context_state')
