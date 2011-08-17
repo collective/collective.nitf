@@ -35,10 +35,12 @@ class IMediaView(Interface):
     """
 
 
-class NITF(dexterity.DisplayForm):
-    """All NITF views must derive from here.
-    """
+class Media_View(dexterity.DisplayForm):
     grok.context(INITF)
+    grok.name('media_view')
+    grok.title(u'Media View')
+    grok.require('zope2.View')
+    grok.layer(INITFBrowserLayer)
 
     def update(self):
         self.catalog = getToolByName(self.context, 'portal_catalog')
@@ -76,14 +78,8 @@ class NITF(dexterity.DisplayForm):
         return media_items
 
 
-class Media_View(NITF):
-    grok.name('media_view')
-    grok.title(u'Media View')
-    grok.require('zope2.View')
-    grok.layer(INITFBrowserLayer)
-
-
-class NewsItem_View(NITF):
+class NewsItem_View(Media_View):
+    grok.context(INITF)
     grok.name('newsitem_view')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
@@ -94,7 +90,8 @@ class NewsItem_View(NITF):
             return imgs[0]
 
 
-class NewsMedia_View(NITF):
+class NewsMedia_View(NewsItem_View):
+    grok.context(INITF)
     grok.layer(INITFBrowserLayer)
     grok.name('newsmedia_view')
     grok.require('zope2.View')
@@ -102,7 +99,8 @@ class NewsMedia_View(NITF):
     grok.view(IMediaView)
 
 
-class MediaViewletManager(NITF):
+class MediaViewletManager(grok.ViewletManager):
+    grok.context(INITF)
     grok.name('collective.nitf.carousel')
     grok.view(Media_View)
     grok.layer(INITFBrowserLayer)
@@ -157,7 +155,8 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.layer(INITFBrowserLayer)
 
 
-class Embed(NITF):
+class Embed(dexterity.DisplayForm):
+    grok.context(INITF)
     grok.require('zope2.View')
 
     def links(self):
@@ -185,11 +184,13 @@ class Embed(NITF):
         return settings.embedly_key
 
 
-class Media_Sorter(NITF):
+class Media_Sorter(dexterity.DisplayForm):
+    grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
 
 
-class Media_Uploader(NITF):
+class Media_Uploader(dexterity.DisplayForm):
+    grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
 
     files = []
