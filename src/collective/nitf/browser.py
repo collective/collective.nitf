@@ -33,12 +33,10 @@ class IMediaView(Interface):
     """
 
 
-class Media_View(dexterity.DisplayForm):
+class NITF(dexterity.DisplayForm):
+    """All NITF views must derive from here.
+    """
     grok.context(INITF)
-    grok.name('media_view')
-    grok.title(u'Media View')
-    grok.require('zope2.View')
-    grok.layer(INITFBrowserLayer)
 
     def update(self):
         self.catalog = getToolByName(self.context, 'portal_catalog')
@@ -76,8 +74,14 @@ class Media_View(dexterity.DisplayForm):
         return media_items
 
 
-class NewsItem_View(Media_View):
-    grok.context(INITF)
+class Media_View(NITF):
+    grok.name('media_view')
+    grok.title(u'Media View')
+    grok.require('zope2.View')
+    grok.layer(INITFBrowserLayer)
+
+
+class NewsItem_View(NITF):
     grok.name('newsitem_view')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
@@ -88,8 +92,7 @@ class NewsItem_View(Media_View):
             return imgs[0]
 
 
-class NewsMedia_View(NewsItem_View):
-    grok.context(INITF)
+class NewsMedia_View(NITF):
     grok.layer(INITFBrowserLayer)
     grok.name('newsmedia_view')
     grok.require('zope2.View')
@@ -97,8 +100,7 @@ class NewsMedia_View(NewsItem_View):
     grok.view(IMediaView)
 
 
-class MediaViewletManager(grok.ViewletManager):
-    grok.context(INITF)
+class MediaViewletManager(NITF):
     grok.name('collective.nitf.carousel')
     grok.view(Media_View)
     grok.layer(INITFBrowserLayer)
@@ -153,8 +155,7 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.layer(INITFBrowserLayer)
 
 
-class Embed(dexterity.DisplayForm):
-    grok.context(INITF)
+class Embed(NITF):
     grok.require('zope2.View')
 
     def links(self):
@@ -182,13 +183,11 @@ class Embed(dexterity.DisplayForm):
         return settings.embedly_key
 
 
-class Media_Sorter(dexterity.DisplayForm):
-    grok.context(INITF)
+class Media_Sorter(NITF):
     grok.require('cmf.ModifyPortalContent')
 
 
-class Media_Uploader(dexterity.DisplayForm):
-    grok.context(INITF)
+class Media_Uploader(NITF):
     grok.require('cmf.ModifyPortalContent')
 
     files = []
