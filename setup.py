@@ -32,7 +32,6 @@ setup(name='collective.nitf',
         'plone.app.referenceablebehavior',
         'plone.app.registry',
         'plone.app.transmogrifier',
-        'transmogrify.dexterity',
         ],
       extras_require={
         'test': ['plone.app.testing'],
