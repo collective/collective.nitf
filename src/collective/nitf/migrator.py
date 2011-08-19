@@ -1,17 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import logging
-import sys
+import pprint
 
-logger = logging.getLogger('collective.nitf')
-logger.setLevel(logging.DEBUG)
-handler = logging.StreamHandler(sys.stdout)
-formatter = logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s")
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-logger.debug(u'\nBegin collective.nitf LOG')
-
-import transaction
 from five import grok
 from zope.component import createObject
 from zope.component import queryUtility
@@ -19,29 +9,33 @@ from zope.component import queryMultiAdapter
 from zope.event import notify
 from zope.interface import classProvides
 from zope.interface import implements
-from zope.lifecycleevent import ObjectCreatedEvent
 from zope.lifecycleevent import ObjectAddedEvent
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.schema import getFieldsInOrder
 
+from Products.Archetypes.Schema import getNames
+from Products.ATContentTypes.interfaces import IATNewsItem
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.CMFPlone.utils import getToolByName, _createObjectByType
+from Products.CMFPlone.utils import getToolByName
 from plone.app.textfield.value import RichTextValue
-from plone.dexterity.utils import createContentInContainer
 from plone.dexterity.utils import iterSchemata
 from plone.dexterity.interfaces import IDexterityFTI
-from plone.uuid.interfaces import IMutableUUID
 from z3c.form.interfaces import IValue
 
 from collective.transmogrifier.interfaces import ISection, ISectionBlueprint
 from collective.transmogrifier.transmogrifier import Transmogrifier
+
+from collective.nitf.content import INITF
+from collective.nitf.content import kind_default_value
+from collective.nitf.content import section_default_value
+from collective.nitf.content import urgency_default_value
 
 _marker = object()
 
 
 class NITFTransformView(grok.View):
     grok.context(IPloneSiteRoot)
-    grok.name(u'transform')
+    grok.name('nitf-migrator')
 
     def render(self):
         portal_state = queryMultiAdapter((self.context, self.request),
@@ -49,119 +43,108 @@ class NITFTransformView(grok.View):
         portal = portal_state.portal()
         self.transmogrify(portal)
 
-        cat = getToolByName(portal, 'portal_catalog')
-        cat.refreshCatalog(clear=False)
-        logger.info('Catálogo principal actualizado')
-
-        return 'Import terminado...'
+        return 'Migration finished...'
 
     def transmogrify(self, context):
         self.transmogrifier = Transmogrifier(context)
         self.transmogrifier("nitfmigrator")
 
 
-class CatalogNewsSource(object):
-    """ Returns items from a catalog search. """
+class NewsItemSource(object):
+    """Returns an iterator of objects from the catalog that implement
+    IATNewsItem.
+    """
     classProvides(ISectionBlueprint)
     implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
-        self.context = transmogrifier.context
-        self.catalog = getToolByName(self.context, 'portal_catalog')
-        self.results = self.catalog({'Type': 'News Item', }, )
         self.previous = previous
-        self.name = name
+
+        context = transmogrifier.context
+        catalog = getToolByName(context, 'portal_catalog')
+        self.results = catalog(object_provides=IATNewsItem.__identifier__,
+                               path='/'.join(context.getPhysicalPath()))
 
     def __iter__(self):
-        for result in self.results:
-            yield result
+        for item in self.previous:
+            yield item
+
+        for item in self.results:
+            obj = item.getObject()
+            path = '/'.join(obj.getPhysicalPath())
+
+            schema = dict()
+            schema['_type'] = 'collective.nitf.content'
+            schema['_path'] = '%s-tmp' % path
+
+            for name in getNames(obj.Schema()):
+                field = obj.getField(name)
+                schema[name] = field.get(obj)
+
+            yield schema
 
 
-class NewsToNITFTransform(object):
+class SchemaUpdater(object):
+    """Update NITF schema as transmogrify.dexterity is not ready.
+    """
     classProvides(ISectionBlueprint)
     implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
-        self.context = transmogrifier.context
         self.previous = previous
-        self.name = name
+        self.context = transmogrifier.context
+        self.options = options
 
     def __iter__(self):
         for item in self.previous:
-            item
-        for item in self.previous:
-            objct = item.getObject()
-            parent = objct.__parent__
-            o_id = item['id']
-            n_id = o_id + '-old'
-            parent.manage_renameObject(o_id, n_id)
-            news_obj = parent[n_id]
-            #parent[n_id] = objct
-            #del parent[o_id]
-            parent.invokeFactory('collective.nitf.content', id=o_id,
-                                 )
-            nitf_obj = parent[o_id]
-            #fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
-            #factory = fti.factory
-            #nitf_obj = createObject(factory)
-            #get all fields for this obj
-            for schemata in iterSchemata(nitf_obj):
-                for name, field in getFieldsInOrder(schemata):
-                    # FIXME creators field isn't setting at all.
-                    #       problem with dexterity, apparently
-                    #if name is 'creators':
-                    #    continue
-                    #setting value from the blueprint cue
-                    if name == 'creators':
-                        value = news_obj.Creators()
-                        creator_list = []
-                        for creator in value:
-                            creator_list.append(unicode(creator))
 
-                        value = tuple(creator_list)
-                    else:
-                        value = news_obj.get(name, _marker)
-                    if value is _marker:
-                        # No value is given from the pipeline,
-                        # so we try to set the default value
-                        # otherwise we set the missing value
-                        default = queryMultiAdapter((
-                                nitf_obj,
-                                nitf_obj.REQUEST,  # request
-                                None,  # form
-                                field,
-                                None,  # Widget
-                                ), IValue, name='default')
-                        if default is not None:
-                            default = default.get()
-                        if default is None:
-                            default = getattr(field, 'default', None)
-                        if default is None:
-                            try:
-                                default = field.missing_value
-                            except AttributeError:
-                                pass
-                        value = default
-                    field.set(field.interface(nitf_obj), value)
-            nitf_obj.setTitle(u'%s' % news_obj.title)
-            nitf_obj.setDescription(u'%s' % news_obj.Description())
-            nitf_obj.setCreators(news_obj.creators)
-            nitf_obj.body = RichTextValue(news_obj.getText(), 'text/html',
-                                          'text/x-html-safe')
-            notify(ObjectCreatedEvent(nitf_obj))
-            parent[nitf_obj.id] = nitf_obj
-            parent[nitf_obj.id].reindexObject()
-            yield parent[nitf_obj.id]  # item
+            path = item['_path']
+            obj = self.context.unrestrictedTraverse(path)
+            newsitem = self.context.unrestrictedTraverse(path.partition('-tmp')[0])
+
+            if not INITF.providedBy(obj):  # not a NITF
+                yield item; continue
+
+            if not IATNewsItem.providedBy(newsitem):  # not a News Item
+                yield item; continue
+
+            #obj.id = newsitem.getId()
+            obj.title = newsitem.Title()
+            obj.subtitle = ''
+            obj.description = newsitem.Description()
+            #obj.abstract = newsitem.Description()
+            obj.byline = ''
+            #obj.text = newsitem.getText()
+            obj.kind = kind_default_value(None)
+            obj.section = section_default_value(None)
+            obj.urgency = urgency_default_value(None)
+            obj.location = newsitem.getLocation()
+
+            obj.subject = newsitem.Subject()
+            obj.rights = newsitem.Rights()
+            #obj.relatedItems = newsitem.getRelatedItems()
+            obj.language = newsitem.Language()
+            obj.modification_date = newsitem.ModificationDate()
+            obj.contributors = newsitem.Contributors()
+            #obj.creation_date = newsitem.CreationDate()
+            obj.creators = newsitem.Creators()
+            obj.effectiveDate = newsitem.getEffectiveDate()
+            obj.excludeFromNav = newsitem.getExcludeFromNav()
+            obj.expirationDate = newsitem.getExpirationDate()
+
+            obj.reindexObject()
+            notify(ObjectModifiedEvent(obj))
+
+            yield item
 
 
 class NITFImageImport(object):
+    # image, imageCaption
     classProvides(ISectionBlueprint)
     implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
-        self.context = transmogrifier.context
         self.previous = previous
-        self.name = name
 
     def __iter__(self):
         for item in self.previous:
@@ -206,16 +189,6 @@ class NITFImageImport(object):
                                         image=news_obj.getRawImage())
             notify(ObjectModifiedEvent(parent[o_id]))
             parent[o_id].reindexObject()
-            logger.debug(u"\nObject: %s: Contained IDs :%s" % (nitf_obj,
-                                                      nitf_obj.objectIds()))
-            logger.debug(u"\t\tportal_type: %s title: %s description: %s creators: %s subject: %s" % (
-                    nitf_obj.portal_type, nitf_obj.title, nitf_obj.description, nitf_obj.creators, nitf_obj.subject))
-            logger.debug(u"\t\tDate Created: %s Date Modified: %s Expiration Date: %s Effective Date: %s" % (
-                    nitf_obj.CreationDate(), nitf_obj.ModificationDate(),
-                    nitf_obj.ExpirationDate(), nitf_obj.EffectiveDate()))
-            if nitf_obj.objectIds():
-                for objc in nitf_obj.objectIds():
-                    logger.debug(u"%s" % nitf_obj[objc].tag())
             # FIXME debugging lines
             #print nitf_obj.Type(), nitf_obj.Title(), nitf_obj.Description(),
             #        nitf_obj.creators, nitf_obj.body.raw, nitf_obj.body.output
@@ -259,3 +232,17 @@ class NITFImageImport(object):
                             pass
                     value = default
                 field.set(field.interface(obj), value)
+
+
+class PrettyPrinter(object):
+    classProvides(ISectionBlueprint)
+    implements(ISection)
+
+    def __init__(self, transmogrifier, name, options, previous):
+        self.previous = previous
+        self.pprint = pprint.PrettyPrinter().pprint
+
+    def __iter__(self):
+        for item in self.previous:
+            self.pprint(sorted(item.items()))
+            yield item
