@@ -16,8 +16,6 @@
     <include package="five.grok" />
     <!-- Grok the package to initialise schema interfaces and content classes -->
     <grok:grok package="." />
-    <!-- collective.transmogrifier registrations for importing articles -->
-    <include package="collective.transmogrifier" file="meta.zcml" />
 
     <include package="plone.app.registry" />
 
@@ -43,6 +41,11 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <!-- collective.transmogrifier registrations for importing articles -->
+    <include package="collective.transmogrifier" file="meta.zcml" />
+    <include package="collective.transmogrifier" />
+    <include package="plone.app.transmogrifier" />
+
     <genericsetup:registerProfile
         name="uninstall"
         title="collective.nitf uninstall"
@@ -58,16 +61,24 @@
         configuration="migrator.cfg"
         />
 
-    <utility component=".migrator.CatalogNewsSource"
-        name="collective.nitf.news.source"
+    <utility
+        component="collective.nitf.migrator.NewsItemSource"
+        name="collective.nitf.migrator.newsitemsource"
         />
 
-    <utility component=".migrator.NewsToNITFTransform"
-        name="collective.nitf.news.transform"
+    <utility
+        component="collective.nitf.migrator.SchemaUpdater"
+        name="collective.nitf.migrator.schemaupdater"
         />
 
-    <utility component=".migrator.NITFImageImport"
+    <utility
+        component="collective.nitf.migrator.NITFImageImport"
         name="collective.nitf.image.import"
+        />
+
+    <utility
+        component="collective.nitf.migrator.PrettyPrinter"
+        name="collective.nitf.migrator.pprinter"
         />
 
 </configure>
