@@ -11,16 +11,13 @@ from zope.interface import classProvides
 from zope.interface import implements
 from zope.lifecycleevent import ObjectAddedEvent
 from zope.lifecycleevent import ObjectModifiedEvent
-from zope.schema import getFieldsInOrder
 
 from Products.Archetypes.Schema import getNames
 from Products.ATContentTypes.interfaces import IATNewsItem
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import getToolByName
 from plone.app.textfield.value import RichTextValue
-from plone.dexterity.utils import iterSchemata
 from plone.dexterity.interfaces import IDexterityFTI
-from z3c.form.interfaces import IValue
 
 from collective.transmogrifier.interfaces import ISection, ISectionBlueprint
 from collective.transmogrifier.transmogrifier import Transmogrifier
@@ -99,38 +96,40 @@ class SchemaUpdater(object):
         for item in self.previous:
 
             path = item['_path']
-            obj = self.context.unrestrictedTraverse(path)
-            newsitem = self.context.unrestrictedTraverse(path.partition('-tmp')[0])
+            obj = self.context.unrestrictedTraverse(path, None)
+
+            if not obj:  # path does not exist
+                yield item; continue
 
             if not INITF.providedBy(obj):  # not a NITF
                 yield item; continue
 
-            if not IATNewsItem.providedBy(newsitem):  # not a News Item
-                yield item; continue
-
-            #obj.id = newsitem.getId()
-            obj.title = newsitem.Title()
+            # Content
+            obj.title = item['title']
             obj.subtitle = ''
-            obj.description = newsitem.Description()
-            #obj.abstract = newsitem.Description()
+            obj.description = item['description']
+            #obj.abstract = item['description']
             obj.byline = ''
-            #obj.text = newsitem.getText()
+            obj.text = RichTextValue(item['text'], 'text/html', 'text/x-html-safe')
             obj.kind = kind_default_value(None)
             obj.section = section_default_value(None)
             obj.urgency = urgency_default_value(None)
-            obj.location = newsitem.getLocation()
 
-            obj.subject = newsitem.Subject()
-            obj.rights = newsitem.Rights()
-            #obj.relatedItems = newsitem.getRelatedItems()
-            obj.language = newsitem.Language()
-            obj.modification_date = newsitem.ModificationDate()
-            obj.contributors = newsitem.Contributors()
-            #obj.creation_date = newsitem.CreationDate()
-            obj.creators = newsitem.Creators()
-            obj.effectiveDate = newsitem.getEffectiveDate()
-            obj.excludeFromNav = newsitem.getExcludeFromNav()
-            obj.expirationDate = newsitem.getExpirationDate()
+            # Categorization
+            obj.setSubject(item['subject'])
+            # TODO: solve relatedItems issue
+            #obj.relatedItems = item['relatedItems']?
+            obj.location = item['location']
+            obj.setLanguage(item['language'])
+
+            # Dates
+            obj.setEffectiveDate(item['effectiveDate'])
+            obj.setExpirationDate(item['expirationDate'])
+
+            # Ownership
+            obj.setCreators(item['creators'])
+            obj.setContributors(item['contributors'])
+            obj.setRights(item['rights'])
 
             obj.reindexObject()
             notify(ObjectModifiedEvent(obj))
@@ -194,44 +193,6 @@ class NITFImageImport(object):
             #        nitf_obj.creators, nitf_obj.body.raw, nitf_obj.body.output
             del parent[n_id]
             yield item
-
-    def setFieldsDefaults(self, obj, base_obj):
-        for schemata in iterSchemata(obj):
-            for name, field in getFieldsInOrder(schemata):
-                # FIXME creators field isn't setting at all.
-                #       problem with dexterity, apparently
-                #setting value from the blueprint cue
-                if name == 'creators':
-                    value = base_obj.Creators()
-                    creator_list = []
-                    for creator in value:
-                        creator_list.append(unicode(creator))
-
-                    value = tuple(creator_list)
-                else:
-                    value = base_obj.get(self.name, _marker)
-                if value is _marker:
-                    # No value is given from the pipeline,
-                    # so we try to set the default value
-                    # otherwise we set the missing value
-                    default = queryMultiAdapter((
-                        obj,
-                        obj.REQUEST,  # request
-                            None,  # form
-                            field,
-                            None,  # Widget
-                            ), IValue, name='default')
-                    if default is not None:
-                        default = default.get()
-                    if default is None:
-                        default = getattr(field, 'default', None)
-                    if default is None:
-                        try:
-                            default = field.missing_value
-                        except AttributeError:
-                            pass
-                    value = default
-                field.set(field.interface(obj), value)
 
 
 class PrettyPrinter(object):
