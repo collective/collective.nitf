@@ -15,6 +15,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 from Products.Archetypes.Schema import getNames
 from Products.ATContentTypes.interfaces import IATNewsItem
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import _createObjectByType
 from Products.CMFPlone.utils import getToolByName
 from plone.app.textfield.value import RichTextValue
 from plone.dexterity.interfaces import IDexterityFTI
@@ -82,7 +83,7 @@ class NewsItemSource(object):
 
 
 class SchemaUpdater(object):
-    """Update NITF schema as transmogrify.dexterity is not ready.
+    """Update NITF schema.
     """
     classProvides(ISectionBlueprint)
     implements(ISection)
@@ -130,6 +131,45 @@ class SchemaUpdater(object):
             obj.setCreators(item['creators'])
             obj.setContributors(item['contributors'])
             obj.setRights(item['rights'])
+
+            obj.reindexObject()
+            notify(ObjectModifiedEvent(obj))
+
+            yield item
+
+
+class ImageMigrator(object):
+    """News Item image field converted to ATImage.
+    """
+    classProvides(ISectionBlueprint)
+    implements(ISection)
+
+    def __init__(self, transmogrifier, name, options, previous):
+        self.previous = previous
+        self.context = transmogrifier.context
+        self.options = options
+
+    def __iter__(self):
+        for item in self.previous:
+
+            path = item['_path']
+            obj = self.context.unrestrictedTraverse(path, None)
+
+            if not obj:  # path does not exist
+                yield item; continue
+
+            if not INITF.providedBy(obj):  # not a NITF
+                yield item; continue
+
+            try:
+                _createObjectByType('Image', obj, 'image')
+            except:
+                yield item; continue
+
+            image = obj['image']
+            image.setImage(item['image'])
+            image.setTitle('image')
+            image.setDescription(item['imageCaption'])
 
             obj.reindexObject()
             notify(ObjectModifiedEvent(obj))

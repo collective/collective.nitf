@@ -72,8 +72,8 @@
         />
 
     <utility
-        component="collective.nitf.migrator.NITFImageImport"
-        name="collective.nitf.image.import"
+        component="collective.nitf.migrator.ImageMigrator"
+        name="collective.nitf.migrator.imagemigrator"
         />
 
     <utility
