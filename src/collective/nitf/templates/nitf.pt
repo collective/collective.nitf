@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nitf xmlns="http://iptc.org/std/NITF/2006-10-18/" version="-//IPTC//DTD NITF 3.5//EN"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<head>
+    <title tal:content="context/title" />
+    <tobject tobject.type="news">
+        <tobject.property tobject.property.type="feature"
+                          tal:attributes="tobject.property.type context/kind" />
+    </tobject>
+    <!-- this article is an update of a previous release -->
+    <docdata management-status="usable">
+
+        <!-- the document id, which should be unique per publisher -->
+        <doc-id id-string=""
+                tal:attributes="id-string context/getId" />
+
+        <!-- event location: where events in this document took place -->
+        <evloc city="" state-prov="" iso-cc=""
+               tal:content="context/location"/>
+
+        <urgency ed-urg="3"
+                 tal:attributes="ed-urg context/urgency" />
+
+        <!-- date.issue: when the document was sent to a receiver -->
+        <date.issue norm=""/>
+
+        <date.release norm=""
+                      tal:attributes="norm context/effective" />
+
+        <date.expire norm=""
+                     tal:attributes="norm context/expires" />
+
+        <doc.copyright holder=""
+                     tal:attributes="holder context/Rights" />
+
+        <doc.rights tal:content="context/Rights" />
+
+        <key-list tal:repeat="subject context/subject">
+            <keyword key="" tal:attributes="key subject" />
+        </key-list>
+
+        <identified-content />
+    </docdata>
+    <pubdata type="web" name="" position.section="" ex-ref=""
+             tal:attributes="position.section context/section" />
+    <revision-history />
+</head>
+<body>
+    <body.head>
+        <hedline>
+            <hl1 tal:content="context/title" />
+            <hl2 tal:content="context/subtitle" />
+        </hedline>
+        <note />
+        <byline tal:content="context/byline" />
+        <distributor />
+        <dateline>
+            <location />
+        </dateline>
+        <abstract tal:content="context/description" />
+    </body.head>
+    <body.content>
+        <tal:media >
+        <media media-type="">
+            <media-reference mime-type="" source="" alternate-text="" height="" width="" />
+            <media-caption tal:content="string:The caption" />
+        </media>
+        </tal:media>
+
+        <div tal:replace="structure context/text/output">The body</div>
+
+    </body.content>
+    <body.end>
+        <tagline>
+            <copyrite tal:content="context/Rights" />
+        </tagline>
+    </body.end>
+</body>
+</nitf>

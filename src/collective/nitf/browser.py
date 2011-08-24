@@ -35,6 +35,13 @@ class IMediaView(Interface):
     """
 
 
+class NITF(dexterity.DisplayForm):
+    """Shows news article in NITF XML format.
+    """
+    grok.context(INITF)
+    grok.require('zope2.View')
+
+
 class Media_View(dexterity.DisplayForm):
     grok.context(INITF)
     grok.name('media_view')
