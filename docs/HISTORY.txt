@@ -4,7 +4,15 @@ Changelog
 1.0dev (unreleased)
 -------------------
 
-- updated testing infrastructure [hvelarde]
-- i18n and Spanish translation [hvelarde]
-- fixed content type fields and control panel; added default value methods;
-  added vocabulary for sections; added tests for registry [hvelarde]
+- added migration from News Items using collective.transmogrifier
+  [hvelarde]
+- added support to upload multiple in batchs using jQuery File Upload
+- added support to organize images using jQuery UI Sortable
+  [saibatizoku]
+- updated testing infrastructure to use plone.app.testing
+- added i18n and Spanish translation
+- added control panel using plone.app.registry
+- added default value methods
+- added vocabulary for sections
+- added tests for registry
+  [hvelarde]
