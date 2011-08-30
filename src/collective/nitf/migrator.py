@@ -12,6 +12,7 @@ from zope.interface import implements
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.lifecycleevent import ObjectModifiedEvent
 
+from Products.Archetypes.Field import Image
 from Products.Archetypes.Schema import getNames
 from Products.ATContentTypes.interfaces import IATNewsItem
 from Products.CMFPlone.interfaces import IPloneSiteRoot
@@ -100,10 +101,7 @@ class SchemaUpdater(object):
             path = item['_path']
             obj = self.context.unrestrictedTraverse(path, None)
 
-            if not obj:  # path does not exist
-                yield item; continue
-
-            if not INITF.providedBy(obj):  # not a NITF
+            if not INITF.providedBy(obj):  # path does not exist or not a NITF
                 yield item; continue
 
             # Content
@@ -151,16 +149,13 @@ class ImageMigrator(object):
     def __iter__(self):
         for item in self.previous:
 
-            if not item['image']:  # no image to migrate
+            if not isinstance(item['image'], Image):  # no image or not an Image
                 yield item; continue
 
             path = item['_path']
             container = self.context.unrestrictedTraverse(path, None)
 
-            if not container:  # path does not exist
-                yield item; continue
-
-            if not INITF.providedBy(container):  # not a NITF
+            if not INITF.providedBy(container):  # path does not exist or not a NITF
                 yield item; continue
 
             try:
@@ -195,19 +190,13 @@ class ReplaceObject(object):
             path = item['_path']
             nitf = self.context.unrestrictedTraverse(path, None)
 
-            if not nitf:  # path does not exist
-                yield item; continue
-
-            if not INITF.providedBy(nitf):  # not a NITF
+            if not INITF.providedBy(nitf):  # path does not exist or not a NITF
                 yield item; continue
 
             path = item['_from']
             newsitem = self.context.unrestrictedTraverse(path, None)
 
-            if not newsitem:  # path does not exist
-                yield item; continue
-
-            if not IATNewsItem.providedBy(newsitem):  # not a News Item
+            if not IATNewsItem.providedBy(newsitem):  # path does not exist or not a News Item
                 yield item; continue
 
             # delete News Item and replace NITF UUID to assure link integrity
