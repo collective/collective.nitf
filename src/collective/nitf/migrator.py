@@ -152,6 +152,9 @@ class ImageMigrator(object):
     def __iter__(self):
         for item in self.previous:
 
+            if not item['image']:  # no image to migrate
+                yield item; continue
+
             container = self.context.unrestrictedTraverse(item['_path'], None)
 
             if not container:  # path does not exist
