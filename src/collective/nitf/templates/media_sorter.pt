@@ -86,8 +86,7 @@
             <ul id="sortable">
                 <tal:items tal:repeat="item imgs">
                 <li class="ui-state-default"
-                       tal:define="item_id item/getId|item/id
-                                   quoted_id item/quoted_id|python: view.quote_plus(id);"
+                       tal:define="item_id item/getId|item/id;"
                                    tal:attributes="id string:sortable-${item_id};
                                    class string:sort-${repeat/item/index}">
 	                <a href=""
