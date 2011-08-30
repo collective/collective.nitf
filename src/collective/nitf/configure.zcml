@@ -77,6 +77,11 @@
         />
 
     <utility
+        component="collective.nitf.migrator.ReplaceObject"
+        name="collective.nitf.migrator.replaceobject"
+        />
+
+    <utility
         component="collective.nitf.migrator.PrettyPrinter"
         name="collective.nitf.migrator.pprinter"
         />

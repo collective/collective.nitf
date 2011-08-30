@@ -4,6 +4,7 @@ import pprint
 
 from five import grok
 from plone.app.textfield.value import RichTextValue
+from plone.uuid.interfaces import IMutableUUID
 from zope.component import queryMultiAdapter
 from zope.event import notify
 from zope.interface import classProvides
@@ -60,6 +61,9 @@ class NewsItemSource(object):
         self.results = catalog(object_provides=IATNewsItem.__identifier__,
                                path='/'.join(context.getPhysicalPath()))
 
+        # set up new object suffix using generateUniqueId script from Plone
+        self.tmp = '-tmp.%s' % context.generateUniqueId()
+
     def __iter__(self):
         for item in self.previous:
             yield item
@@ -70,7 +74,8 @@ class NewsItemSource(object):
 
             schema = dict()
             schema['_type'] = 'collective.nitf.content'
-            schema['_path'] = '%s-tmp' % path
+            schema['_from'] = path  # we store here the original path
+            schema['_path'] = path + self.tmp
 
             for name in getNames(obj.Schema()):
                 field = obj.getField(name)
@@ -94,8 +99,7 @@ class SchemaUpdater(object):
     def __iter__(self):
         for item in self.previous:
 
-            path = item['_path']
-            obj = self.context.unrestrictedTraverse(path, None)
+            obj = self.context.unrestrictedTraverse(item['_path'], None)
 
             if not obj:  # path does not exist
                 yield item; continue
@@ -116,8 +120,8 @@ class SchemaUpdater(object):
 
             # Categorization
             obj.setSubject(item['subject'])
-            # TODO: solve relatedItems issue
-            #obj.relatedItems = item['relatedItems']?
+            # TODO: reimplement when relatedItems issue is solved
+            #obj.relatedItems = item['relatedItems']
             obj.location = item['location']
             obj.setLanguage(item['language'])
 
@@ -148,26 +152,73 @@ class ImageMigrator(object):
     def __iter__(self):
         for item in self.previous:
 
-            path = item['_path']
-            obj = self.context.unrestrictedTraverse(path, None)
+            container = self.context.unrestrictedTraverse(item['_path'], None)
 
-            if not obj:  # path does not exist
+            if not container:  # path does not exist
                 yield item; continue
 
-            if not INITF.providedBy(obj):  # not a NITF
+            if not INITF.providedBy(container):  # not a NITF
                 yield item; continue
 
             try:
-                _createObjectByType('Image', obj, 'image', title='image')
+                _createObjectByType('Image', container, 'image', title='image')
             except:
                 # could not create image
                 yield item; continue
 
-            image = obj['image']
+            image = container['image']
             image.setDescription(item['imageCaption'])
             image.setImage(item['image'])
 
             notify(ObjectAddedEvent(image))
+
+            yield item
+
+
+class ReplaceObject(object):
+    """Deletes News Items and renames NITF news articles using its ids;
+    assures link integrity by reusing original UUID.
+    """
+    classProvides(ISectionBlueprint)
+    implements(ISection)
+
+    def __init__(self, transmogrifier, name, options, previous):
+        self.previous = previous
+        self.context = transmogrifier.context
+
+    def __iter__(self):
+        for item in self.previous:
+
+            path = item['_path']
+            nitf = self.context.unrestrictedTraverse(path, None)
+
+            if not nitf:  # path does not exist
+                yield item; continue
+
+            if not INITF.providedBy(nitf):  # not a NITF
+                yield item; continue
+
+            path = item['_from']
+            newsitem = self.context.unrestrictedTraverse(path, None)
+
+            if not newsitem:  # path does not exist
+                yield item; continue
+
+            if not IATNewsItem.providedBy(newsitem):  # not a News Item
+                yield item; continue
+
+            # delete News Item and replace NITF UUID to assure link integrity
+            id = newsitem.getId()
+            uuid = newsitem.UID()
+            folder = newsitem.aq_parent
+            # FIXME: this seems to be trigering manage_beforeDelete in
+            # Archetypes/Referenceable.py removing News Item object references
+            # before we replace them with the new NITF news article object
+            folder.manage_delObjects([id])
+            folder.manage_renameObject(nitf.getId(), id)
+            IMutableUUID(nitf).set(uuid)
+
+            notify(ObjectModifiedEvent(nitf))
 
             yield item
 
