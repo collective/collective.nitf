@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import pprint
+import zope.event
 
 from five import grok
 from plone.app.textfield.value import RichTextValue
 from plone.uuid.interfaces import IMutableUUID
 from zope.component import queryMultiAdapter
-from zope.event import notify
 from zope.interface import classProvides
 from zope.interface import implements
-from zope.lifecycleevent import ObjectAddedEvent
+from zope.lifecycleevent import ObjectCreatedEvent
 from zope.lifecycleevent import ObjectModifiedEvent
 
 from Products.Archetypes.Schema import getNames
@@ -25,8 +25,6 @@ from collective.nitf.content import INITF
 from collective.nitf.content import kind_default_value
 from collective.nitf.content import section_default_value
 from collective.nitf.content import urgency_default_value
-
-_marker = object()
 
 
 class NITFTransformView(grok.View):
@@ -61,7 +59,7 @@ class NewsItemSource(object):
         self.results = catalog(object_provides=IATNewsItem.__identifier__,
                                path='/'.join(context.getPhysicalPath()))
 
-        # set up new object suffix using generateUniqueId script from Plone
+        # set up new object id suffix using generateUniqueId script from Plone
         self.tmp = '-tmp.%s' % context.generateUniqueId()
 
     def __iter__(self):
@@ -99,7 +97,8 @@ class SchemaUpdater(object):
     def __iter__(self):
         for item in self.previous:
 
-            obj = self.context.unrestrictedTraverse(item['_path'], None)
+            path = item['_path']
+            obj = self.context.unrestrictedTraverse(path, None)
 
             if not obj:  # path does not exist
                 yield item; continue
@@ -134,7 +133,7 @@ class SchemaUpdater(object):
             obj.setContributors(item['contributors'])
             obj.setRights(item['rights'])
 
-            notify(ObjectModifiedEvent(obj))
+            zope.event.notify(ObjectModifiedEvent(obj))
 
             yield item
 
@@ -155,7 +154,8 @@ class ImageMigrator(object):
             if not item['image']:  # no image to migrate
                 yield item; continue
 
-            container = self.context.unrestrictedTraverse(item['_path'], None)
+            path = item['_path']
+            container = self.context.unrestrictedTraverse(path, None)
 
             if not container:  # path does not exist
                 yield item; continue
@@ -173,7 +173,7 @@ class ImageMigrator(object):
             image.setDescription(item['imageCaption'])
             image.setImage(item['image'])
 
-            notify(ObjectAddedEvent(image))
+            zope.event.notify(ObjectCreatedEvent(image))
 
             yield item
 
@@ -221,7 +221,7 @@ class ReplaceObject(object):
             folder.manage_renameObject(nitf.getId(), id)
             IMutableUUID(nitf).set(uuid)
 
-            notify(ObjectModifiedEvent(nitf))
+            zope.event.notify(ObjectModifiedEvent(nitf))
 
             yield item
 
