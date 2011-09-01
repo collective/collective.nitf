@@ -1,24 +1,64 @@
 # -*- coding: utf-8 -*-
 
 import unittest2 as unittest
-from StringIO import StringIO
+
+from AccessControl import Unauthorized
 
 from zope.component import createObject
-from zope.component import queryMultiAdapter
+from zope.component import getMultiAdapter
 from zope.component import queryUtility
-from zope.interface import directlyProvides
-from zope.publisher.browser import TestRequest
 
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.testing.z2 import Browser
-from plone.app.textfield.value import RichTextValue
-from Products.CMFPlone.utils import getToolByName
 from plone.dexterity.interfaces import IDexterityFTI
 
-from collective.transmogrifier.transmogrifier import Transmogrifier
 from collective.nitf import INITFBrowserLayer
 from collective.nitf.content import INITF
+from collective.nitf.testing import INTEGRATION_TESTING
+
+
+class ViewTest(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.request = self.layer['request']
+        directlyProvides(self.request, INITFBrowserLayer)
+
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_view(self):
+        view = getMultiAdapter((self.n1, self.request), name=u'newsmedia_view')
+        #view = self.n1.restrictedTraverse('newsitem_view')
+        self.assertEquals(None, view.image())
+
+    def test_organize(self):
+        # view can not be accessed by anonymous users
+        logout()
+        self.assertRaises(Unauthorized,
+                          self.n1.restrictedTraverse,
+                         '@@organize')
+
+
+def test_suite():
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)
+
+
+from StringIO import StringIO
+
+from zope.component import queryMultiAdapter
+from zope.interface import directlyProvides
+
+from plone.testing.z2 import Browser
+from Products.CMFPlone.utils import getToolByName
+
 from collective.nitf.browser import MediaViewlet
 from collective.nitf.browser import MediaLinksViewlet
 from collective.nitf.testing import INTEGRATION_TESTING
@@ -44,7 +84,7 @@ zptlogo = (
     )
 
 
-class TestNITFBrowser(unittest.TestCase):
+class _TestNITFBrowser(unittest.TestCase):
     """ The tests begin with 4 NITF News Articles in the user's folder,
         self.folder. Each article has 2 Images, and the views should """
 
@@ -118,7 +158,3 @@ class TestNITFBrowser(unittest.TestCase):
         self.assertNotEquals(viewlet, None)
         viewlet.update()
         open('/tmp/viewlet.html', 'w').write(viewlet.render())
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

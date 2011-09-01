@@ -26,7 +26,6 @@
                            cleaned[i] = ids[i].replace('sortable-', "");
                            }
                        return cleaned;
-                            
                     };
                     var item = $("#sortable").data("sortable").currentItem;
                     var items= $("#sortable").sortable("toArray");
@@ -76,11 +75,8 @@
             <metal:pic_sorter_macro define-macro="pic_sorter"
                                     tal:define="imgs python:context.getFolderContents({'portal_type':'Image'});">
 
-            <h1 class="documentFirstHeading">Media Sorter Proof-of-Concept</h1>
-            <p>This example cames from
-                <a href="http://jqueryui.com/demos/sortable/#display-grid">jQuery UI - Sortable Demos &amp; Documentation.</a>
-               The sort order is still not saved.
-            </p>
+            <h1 class="documentFirstHeading" i18n:translate="">Organize</h1>
+            <p i18n:translate="">Drag and drop images to change their order on the gallery.</p>
 
             <tal:sortable tal:condition="imgs">
             <ul id="sortable">

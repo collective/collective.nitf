@@ -3,7 +3,6 @@
 import json
 import math
 
-
 from Acquisition import aq_inner
 
 from five import grok
@@ -191,7 +190,7 @@ class Embed(dexterity.DisplayForm):
         return settings.embedly_key
 
 
-class Media_Sorter(dexterity.DisplayForm):
+class Organize(dexterity.DisplayForm):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
 

@@ -58,8 +58,8 @@
     url_expr="string:${object_url}/edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
- <action title="Media Sorter" action_id="media_sorter" category="folder" condition_expr=""
-    url_expr="string:${object_url}/@@media_sorter" visible="True">
+ <action title="Organize" action_id="organize" category="folder" condition_expr=""
+    url_expr="string:${object_url}/@@organize" visible="True">
   <permission value="Modify portal content"/>
  </action>
  <action title="Media Uploader" action_id="media_uploader" category="folder" condition_expr=""
