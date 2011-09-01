@@ -4,17 +4,13 @@ import unittest2 as unittest
 
 from AccessControl import Unauthorized
 
-from zope.component import createObject
-from zope.component import getMultiAdapter
-from zope.component import queryUtility
+from zope.app.file.tests.test_image import zptlogo
 
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.dexterity.interfaces import IDexterityFTI
 
 from collective.nitf import INITFBrowserLayer
-from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 
 
@@ -23,10 +19,9 @@ class ViewTest(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def setUp(self):
+        self.portal = self.layer['portal']
         self.request = self.layer['request']
         directlyProvides(self.request, INITFBrowserLayer)
-
-        self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
         setRoles(self.portal, TEST_USER_ID, ['Member'])
@@ -35,9 +30,12 @@ class ViewTest(unittest.TestCase):
         self.n1 = self.folder['n1']
 
     def test_view(self):
-        view = getMultiAdapter((self.n1, self.request), name=u'newsmedia_view')
-        #view = self.n1.restrictedTraverse('newsitem_view')
-        self.assertEquals(None, view.image())
+        view = self.n1.restrictedTraverse('newsitem_view')
+        view.update()
+        self.assertEquals(view.image(), None)
+        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
+        self.assertEquals(len(view.get_images()), 1)
+        self.assertEquals(view.image()['id'], 'foo')
 
     def test_organize(self):
         # view can not be accessed by anonymous users
@@ -45,6 +43,13 @@ class ViewTest(unittest.TestCase):
         self.assertRaises(Unauthorized,
                           self.n1.restrictedTraverse,
                          '@@organize')
+
+    def test_media_uploader(self):
+        # view can not be accessed by anonymous users
+        logout()
+        self.assertRaises(Unauthorized,
+                          self.n1.restrictedTraverse,
+                         '@@media_uploader')
 
 
 def test_suite():
@@ -56,32 +61,9 @@ from StringIO import StringIO
 from zope.component import queryMultiAdapter
 from zope.interface import directlyProvides
 
-from plone.testing.z2 import Browser
-from Products.CMFPlone.utils import getToolByName
-
 from collective.nitf.browser import MediaViewlet
 from collective.nitf.browser import MediaLinksViewlet
 from collective.nitf.testing import INTEGRATION_TESTING
-
-zptlogo = (
-    'GIF89a\x10\x00\x10\x00\xd5\x00\x00\xff\xff\xff\xff\xff\xfe\xfc\xfd\xfd'
-    '\xfa\xfb\xfc\xf7\xf9\xfa\xf5\xf8\xf9\xf3\xf6\xf8\xf2\xf5\xf7\xf0\xf4\xf6'
-    '\xeb\xf1\xf3\xe5\xed\xef\xde\xe8\xeb\xdc\xe6\xea\xd9\xe4\xe8\xd7\xe2\xe6'
-    '\xd2\xdf\xe3\xd0\xdd\xe3\xcd\xdc\xe1\xcb\xda\xdf\xc9\xd9\xdf\xc8\xd8\xdd'
-    '\xc6\xd7\xdc\xc4\xd6\xdc\xc3\xd4\xda\xc2\xd3\xd9\xc1\xd3\xd9\xc0\xd2\xd9'
-    '\xbd\xd1\xd8\xbd\xd0\xd7\xbc\xcf\xd7\xbb\xcf\xd6\xbb\xce\xd5\xb9\xcd\xd4'
-    '\xb6\xcc\xd4\xb6\xcb\xd3\xb5\xcb\xd2\xb4\xca\xd1\xb2\xc8\xd0\xb1\xc7\xd0'
-    '\xb0\xc7\xcf\xaf\xc6\xce\xae\xc4\xce\xad\xc4\xcd\xab\xc3\xcc\xa9\xc2\xcb'
-    '\xa8\xc1\xca\xa6\xc0\xc9\xa4\xbe\xc8\xa2\xbd\xc7\xa0\xbb\xc5\x9e\xba\xc4'
-    '\x9b\xbf\xcc\x98\xb6\xc1\x8d\xae\xbaFgs\x00\x00\x00\x00\x00\x00\x00\x00'
-    '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-    '\x00,\x00\x00\x00\x00\x10\x00\x10\x00\x00\x06z@\x80pH,\x12k\xc8$\xd2f\x04'
-    '\xd4\x84\x01\x01\xe1\xf0d\x16\x9f\x80A\x01\x91\xc0ZmL\xb0\xcd\x00V\xd4'
-    '\xc4a\x87z\xed\xb0-\x1a\xb3\xb8\x95\xbdf8\x1e\x11\xca,MoC$\x15\x18{'
-    '\x006}m\x13\x16\x1a\x1f\x83\x85}6\x17\x1b $\x83\x00\x86\x19\x1d!%)\x8c'
-    '\x866#\'+.\x8ca`\x1c`(,/1\x94B5\x19\x1e"&*-024\xacNq\xba\xbb\xb8h\xbeb'
-    '\x00A\x00;'
-    )
 
 
 class _TestNITFBrowser(unittest.TestCase):
@@ -117,28 +99,6 @@ class _TestNITFBrowser(unittest.TestCase):
         view.update()
         image_count = len(view.get_images())
         self.assertEquals(image_count, 2)
-
-    def _test_newsitem_view(self):
-        view = queryMultiAdapter((self.nitf, self.request),
-                                  name=u"newsitem_view")
-        self.assertNotEquals(view, None)
-        view.update()
-        image_count = len(view.get_images())
-        self.assertEquals(image_count, 2)
-
-    def _test_sorter_view(self):
-        view = queryMultiAdapter((self.nitf, self.request),
-                                  name=u"media_sorter")
-        self.assertNotEquals(view, None)
-        view.update()
-        image_count = len(view.get_images())
-        self.assertEquals(image_count, 2)
-
-    def _test_uploader_view(self):
-        view = queryMultiAdapter((self.nitf, self.request),
-                                  name=u"media_uploader")
-        self.assertNotEquals(view, None)
-        view.update()
 
     def _test_media_viewlet(self):
         view = queryMultiAdapter((self.nitf, self.request),
