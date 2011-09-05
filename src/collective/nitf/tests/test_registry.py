@@ -81,13 +81,6 @@ class RegistryTest(unittest.TestCase):
         self.assertEquals(record_default_urgency.value,
                           config.DEFAULT_URGENCY)
 
-    def test_record_embedly_key(self):
-        # Test that the embedly_key record is in the control panel
-        record_embedly_key = self.registry.records[
-            'collective.nitf.controlpanel.INITFSettings.embedly_key']
-        self.failUnless('embedly_key' in INITFSettings)
-        self.assertEquals(record_embedly_key.value, None)
-
 
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
@@ -118,7 +111,6 @@ class RegistryUninstallTest(unittest.TestCase):
             'collective.nitf.controlpanel.INITFSettings.default_section',
             'collective.nitf.controlpanel.INITFSettings.default_kind',
             'collective.nitf.controlpanel.INITFSettings.default_urgency',
-            'collective.nitf.controlpanel.INITFSettings.embedly_key',
             ]
         for r in records:
             self.failIf(r in self.registry)

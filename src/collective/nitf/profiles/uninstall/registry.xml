@@ -4,5 +4,4 @@
     <record name="collective.nitf.controlpanel.INITFSettings.default_section" delete="true" />
     <record name="collective.nitf.controlpanel.INITFSettings.default_kind" delete="true" />
     <record name="collective.nitf.controlpanel.INITFSettings.default_urgency" delete="true" />
-    <record name="collective.nitf.controlpanel.INITFSettings.embedly_key" delete="true" />
 </registry>

@@ -42,13 +42,6 @@ class INITFSettings(Interface):
             required=False,
             default=config.DEFAULT_URGENCY,)
 
-    embedly_key = schema.TextLine(
-            title=_(u'Embedly Key'),
-            description=_(u'help_embedly_key',
-                          default=u'Use this if you want to embed links '
-                                   'instead of list them.'),
-            required=False,)
-
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
     """

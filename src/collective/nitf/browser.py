@@ -7,7 +7,6 @@ from Acquisition import aq_inner
 
 from five import grok
 from zope.container.interfaces import INameChooser
-from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 
@@ -17,11 +16,9 @@ from Products.CMFPlone.utils import getToolByName
 from plone.app.layout.viewlets.interfaces import IAboveContentBody
 from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from plone.directives import dexterity
-from plone.registry.interfaces import IRegistry
 
 from collective.nitf import INITFBrowserLayer
 from collective.nitf.content import INITF
-from collective.nitf.controlpanel import INITFSettings
 
 VIDEO_MIMETYPES = ['video/mp4', 'video/x-flv']
 IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
@@ -95,6 +92,23 @@ class NewsItem_View(Media_View):
         if len(imgs):
             return imgs[0]
 
+    def links(self):
+        """Return a catalog search result of links to show.
+        """
+
+        context = aq_inner(self.context)
+        catalog = getToolByName(context, 'portal_catalog')
+
+        links = catalog(object_provides=IATLink.__identifier__,
+                        path='/'.join(context.getPhysicalPath()),
+                        sort_on='getObjPositionInParent')
+
+        links = [brain.getObject() for brain in links]
+        links = [{'title': obj.Title(),
+                  'url': obj.remoteUrl,
+                  'description': obj.Description()} for obj in links]
+        return links
+
 
 class NewsMedia_View(NewsItem_View):
     grok.context(INITF)
@@ -159,35 +173,6 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.template('media_links')
     grok.viewletmanager(IHtmlHeadLinks)
     grok.layer(INITFBrowserLayer)
-
-
-class Embed(dexterity.DisplayForm):
-    grok.context(INITF)
-    grok.require('zope2.View')
-
-    def links(self):
-        """Return a catalog search result of links to show.
-        """
-
-        context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
-
-        links = catalog(object_provides=IATLink.__identifier__,
-                        path='/'.join(context.getPhysicalPath()),
-                        sort_on='getObjPositionInParent')
-
-        links = [brain.getObject() for brain in links]
-        links = [{'title': obj.Title(),
-                  'url': obj.remoteUrl,
-                  'description': obj.Description()} for obj in links]
-        return links
-
-    def key(self):
-        """Return Embedly key.
-        """
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(INITFSettings)
-        return settings.embedly_key
 
 
 class Organize(dexterity.DisplayForm):

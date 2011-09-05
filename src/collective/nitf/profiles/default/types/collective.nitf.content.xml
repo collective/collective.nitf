@@ -40,7 +40,6 @@
   <element value="newsitem_view"/>
   <element value="newsmedia_view"/>
   <element value="media_view"/>
-  <element value="embed"/>
  </property>
 
  <!-- Method aliases -->
