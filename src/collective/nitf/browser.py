@@ -20,40 +20,26 @@ from plone.directives import dexterity
 from collective.nitf import INITFBrowserLayer
 from collective.nitf.content import INITF
 
-VIDEO_MIMETYPES = ['video/mp4', 'video/x-flv']
 IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 grok.templatedir('templates')
 
 
-class IMediaView(Interface):
-    """Marker interface for media views.
-    """
-
-
-class NITF(dexterity.DisplayForm):
-    """Shows news article in NITF XML format.
+class View(dexterity.DisplayForm):
+    """Default view looks like a News Item.
     """
     grok.context(INITF)
-    grok.require('zope2.View')
-
-
-class Media_View(dexterity.DisplayForm):
-    grok.context(INITF)
-    grok.name('media_view')
-    grok.title(u'Media View')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
 
+    def image(self):
+        imgs = self.get_media_files(types=('Image',), limit=1)
+        if len(imgs):
+            return imgs[0]
+
     def update(self):
         self.catalog = getToolByName(self.context, 'portal_catalog')
-        self.get_images()
-
-    def get_images(self):
-        return self.get_media_files(types=('Image',))
-
-    def get_videos(self):
-        return self.get_media_files(types=('File',))
+        self.images()
 
     def get_media_files(self, types=('Image', 'File',), limit=None):
         context_path = '/'.join(self.context.getPhysicalPath())
@@ -71,26 +57,14 @@ class Media_View(dexterity.DisplayForm):
                       'description': brain.Description,
                       'image_url': brain.getURL(),
                       }
-            if brain.getObject().getContentType() in IMAGE_MIMETYPES:
-                ibrain['media_type'] = 'image'
-            elif brain.getObject().getContentType() in VIDEO_MIMETYPES:
-                ibrain['media_type'] = 'video'
-            else:
-                ibrain['media_type'] = None
             media_items.append(ibrain)
         return media_items
 
+    def images(self):
+        return self.get_media_files(types=('Image',))
 
-class NewsItem_View(Media_View):
-    grok.context(INITF)
-    grok.name('newsitem_view')
-    grok.require('zope2.View')
-    grok.layer(INITFBrowserLayer)
-
-    def image(self):
-        imgs = self.get_media_files(types=('Image',), limit=1)
-        if len(imgs):
-            return imgs[0]
+    def files(self):
+        return self.get_media_files(types=('File',))
 
     def links(self):
         """Return a catalog search result of links to show.
@@ -110,7 +84,20 @@ class NewsItem_View(Media_View):
         return links
 
 
-class NewsMedia_View(NewsItem_View):
+class Media_View(View):
+    grok.context(INITF)
+    grok.name('media_view')
+    grok.title(u'Media View')
+    grok.require('zope2.View')
+    grok.layer(INITFBrowserLayer)
+
+
+class IMediaView(Interface):
+    """Marker interface for media views.
+    """
+
+
+class NewsMedia_View(View):
     grok.context(INITF)
     grok.layer(INITFBrowserLayer)
     grok.name('newsmedia_view')
@@ -173,6 +160,13 @@ class MediaLinksViewlet(grok.Viewlet):
     grok.template('media_links')
     grok.viewletmanager(IHtmlHeadLinks)
     grok.layer(INITFBrowserLayer)
+
+
+class NITF(dexterity.DisplayForm):
+    """Shows news article in NITF XML format.
+    """
+    grok.context(INITF)
+    grok.require('zope2.View')
 
 
 class Organize(dexterity.DisplayForm):

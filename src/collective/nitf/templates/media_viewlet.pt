@@ -1,7 +1,7 @@
 <div id="media-wrapper" class=""
      tal:attributes="class string:${viewlet/image_size}s">
 
-    <tal:defs define="images view/get_images;
+    <tal:defs define="images view/images;
                       cols python:4;
                       lines python:viewlet.mediaRows(images, cols);">
 
@@ -11,20 +11,13 @@
                 <div class="items">
                     <tal:lines repeat="line lines">
                     <tal:row repeat="item line">
-                    <div class="mediawrap imgwrap" tal:condition="item/media_type">
+                    <div class="mediawrap imgwrap">
                         <span>
-                            <img class="" src="" alt="" title=""
-                                 tal:condition="python:item['media_type'] is 'image'"
+                            <img class="media-image" src="" alt="" title=""
                                  tal:attributes="src string:${item/image_url}/image_${viewlet/image_size};
-                                                 class string:media-${item/media_type};
                                                  alt string:${item/title};
                                                  title string:${item/description}" />
 
-                            <a class="" href="" style="display: block; height: 64px; width: 64px;"
-                               tal:condition="python:item['media_type'] is 'video'"
-                               tal:attributes="href string:${item/image_url};
-                                               class string:media-${item/media_type}">
-                            </a>
                         </span>
                     </div>
                     </tal:row>

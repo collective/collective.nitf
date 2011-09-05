@@ -25,13 +25,7 @@
         class=".controlpanel.NITFSettingsControlPanel"
         permission="cmf.ManagePortal"
         />
-    <browser:menuItem
-        for="collective.nitf.content.INITF"
-        menu="plone_displayviews"
-        title="News Item View"
-        action="@@newsitem_view"
-        description=""
-        />
+
     <!-- Register an extension profile to make the product installable -->
     <genericsetup:registerProfile
         name="default"
