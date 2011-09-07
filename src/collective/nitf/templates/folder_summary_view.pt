@@ -27,7 +27,6 @@
                        tal:attributes="href string:$item_url">
                        <img class="tileImage" src="" alt="" tal:condition="item_object/objectIds"
                         tal:attributes="src python: '%s/image_mini' % item_object[item_object.objectIds()[0]].absolute_url();" />
-                                 <span tal:content="item/portal_type" />
                     </a>
                     </tal:nitf>
                     <h2 class="tileHeadline"
