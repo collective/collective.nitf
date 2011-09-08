@@ -46,6 +46,9 @@ class ViewTest(unittest.TestCase):
         images = view.images()
         self.assertEquals(len(images), 1)
 
+    def test_folder_summary_view(self):
+        self.folder.restrictedTraverse('folder_summary_view')
+
     def test_gallery(self):
         self.n1.restrictedTraverse('newsmedia_view')
 
@@ -65,7 +68,6 @@ class ViewTest(unittest.TestCase):
         self.assertRaises(Unauthorized,
                           self.n1.restrictedTraverse,
                          '@@media_uploader')
-
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)

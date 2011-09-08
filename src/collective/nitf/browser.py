@@ -106,6 +106,13 @@ class NewsMedia_View(View):
     grok.view(IMediaView)
 
 
+class Folder_Summary_View(grok.View):
+    grok.context(Interface)
+    grok.layer(INITFBrowserLayer)
+    grok.name("folder_summary_view")
+    grok.require('zope2.View')
+
+
 class MediaViewletManager(grok.ViewletManager):
     grok.context(INITF)
     grok.name('collective.nitf.carousel')
