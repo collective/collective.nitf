@@ -13,9 +13,9 @@ optionflags = doctest.REPORT_ONLY_FIRST_FAILURE
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTests([
-        layered(doctest.DocFileSuite('functional.txt',
+        layered(doctest.DocFileSuite('tests/functional.txt',
+                                     package='collective.nitf',
                                      optionflags=optionflags),
                 layer=FUNCTIONAL_TESTING),
-        doctest.DocTestSuite(module='collective.nitf'),
-    ])
+        ])
     return suite
