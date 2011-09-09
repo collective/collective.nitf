@@ -13,6 +13,12 @@
 
     <!-- Include configuration for dependencies listed in setup.py -->
     <includeDependencies package="." />
+
+    <permission
+        id="collective.nitf.AddNewsArticle"
+        title="collective.nitf: Add News Article"
+        />
+
     <include package="five.grok" />
     <!-- Grok the package to initialise schema interfaces and content classes -->
     <grok:grok package="." />
