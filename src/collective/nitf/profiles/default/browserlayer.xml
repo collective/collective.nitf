@@ -2,5 +2,5 @@
     <!-- Register the package-specific browser layer, so that it will be activated when this package is installed. -->
     <layers>
         <layer name="collective.nitf.layer"
-               interface="collective.nitf.INITFBrowserLayer" />
+               interface="collective.nitf.interfaces.INITFBrowserLayer" />
     </layers>

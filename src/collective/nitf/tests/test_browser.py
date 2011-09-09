@@ -12,7 +12,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 
-from collective.nitf import INITFBrowserLayer
+from collective.nitf.interfaces import INITFBrowserLayer
 from collective.nitf.testing import INTEGRATION_TESTING
 
 
@@ -68,6 +68,7 @@ class ViewTest(unittest.TestCase):
         self.assertRaises(Unauthorized,
                           self.n1.restrictedTraverse,
                          '@@media_uploader')
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)

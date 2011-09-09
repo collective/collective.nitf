@@ -17,8 +17,8 @@ from plone.app.layout.viewlets.interfaces import IAboveContentBody
 from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from plone.directives import dexterity
 
-from collective.nitf import INITFBrowserLayer
 from collective.nitf.content import INITF
+from collective.nitf.interfaces import INITFBrowserLayer, IMediaView
 
 IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 
@@ -90,11 +90,6 @@ class Media_View(View):
     grok.title(u'Media View')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
-
-
-class IMediaView(Interface):
-    """Marker interface for media views.
-    """
 
 
 class NewsMedia_View(View):
