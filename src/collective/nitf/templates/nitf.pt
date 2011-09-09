@@ -19,15 +19,18 @@
         <evloc city="" state-prov="" iso-cc=""
                tal:content="context/location"/>
 
-        <urgency ed-urg="3"
+        <urgency ed-urg=""
                  tal:attributes="ed-urg context/urgency" />
 
         <!-- date.issue: when the document was sent to a receiver -->
         <date.issue norm=""/>
 
+        <!-- date.release: when the receiver may publish that content.
+		     used in conjunction with management-status attribute of docdata -->
         <date.release norm=""
                       tal:attributes="norm context/effective" />
 
+        <!-- date.expire: when the publisher no longer wants the receiver to publish the article -->
         <date.expire norm=""
                      tal:attributes="norm context/expires" />
 
