@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<atcttool>
+ <topic_indexes>
+  <index name="subtitle" description="Subordinate headline of the article"
+     enabled="False" friendlyName="Subtitle">
+   <criteria>ATSimpleStringCriterion</criteria>
+  </index>
+  <index name="byline" description=""
+     enabled="True" friendlyName="Author">
+   <criteria>ATSimpleStringCriterion</criteria>
+  </index>
+  <index name="kind" description=""
+     enabled="True" friendlyName="News Type">
+   <criteria>ATListCriterion</criteria>
+   <criteria>ATSelectionCriterion</criteria>
+   <criteria>ATSimpleStringCriterion</criteria>
+  </index>
+  <index name="section" description="Named section where the article appears"
+     enabled="True" friendlyName="Section">
+   <criteria>ATListCriterion</criteria>
+   <criteria>ATSelectionCriterion</criteria>
+   <criteria>ATSimpleStringCriterion</criteria>
+  </index>
+  <index name="urgency" description="News importance"
+     enabled="False" friendlyName="Urgency">
+   <criteria>ATSimpleIntCriterion</criteria>
+   <criteria>ATListCriterion</criteria>
+   <criteria>ATSelectionCriterion</criteria>
+   <criteria>ATSimpleStringCriterion</criteria>
+  </index>
+ </topic_indexes>
+ <topic_metadata>
+  <metadata name="subtitle"
+     description="Subordinate headline of the article" enabled="False"
+     friendlyName="Subtitle"/>
+  <metadata name="byline"
+     description="" enabled="True"
+     friendlyName="Author"/>
+  <metadata name="kind"
+     description="" enabled="True"
+     friendlyName="News Type"/>
+  <metadata name="section"
+     description="Named section where the article appears" enabled="True"
+     friendlyName="Section"/>
+  <metadata name="urgency"
+     description="News importance" enabled="True"
+     friendlyName="Urgency"/>
+ </topic_metadata>
+</atcttool>
