@@ -1,28 +1,35 @@
 <?xml version="1.0"?>
-<atcttool>
+<atcttool
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plone">
  <topic_indexes>
   <index name="subtitle" description="Subordinate headline of the article"
-     enabled="False" friendlyName="Subtitle">
+     enabled="False" friendlyName="Subtitle"
+     i18n:attributes="description;friendlyName">
    <criteria>ATSimpleStringCriterion</criteria>
   </index>
   <index name="byline" description=""
-     enabled="True" friendlyName="Author">
+     enabled="True" friendlyName="Author"
+     i18n:attributes="description;friendlyName">
    <criteria>ATSimpleStringCriterion</criteria>
   </index>
   <index name="kind" description=""
-     enabled="True" friendlyName="News Type">
+     enabled="True" friendlyName="News Type"
+     i18n:attributes="description;friendlyName">
    <criteria>ATListCriterion</criteria>
    <criteria>ATSelectionCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
   </index>
   <index name="section" description="Named section where the article appears"
-     enabled="True" friendlyName="Section">
+     enabled="True" friendlyName="Section"
+     i18n:attributes="description;friendlyName">
    <criteria>ATListCriterion</criteria>
    <criteria>ATSelectionCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
   </index>
   <index name="urgency" description="News importance"
-     enabled="False" friendlyName="Urgency">
+     enabled="True" friendlyName="Urgency"
+     i18n:attributes="description;friendlyName">
    <criteria>ATSimpleIntCriterion</criteria>
    <criteria>ATListCriterion</criteria>
    <criteria>ATSelectionCriterion</criteria>
@@ -32,18 +39,23 @@
  <topic_metadata>
   <metadata name="subtitle"
      description="Subordinate headline of the article" enabled="False"
-     friendlyName="Subtitle"/>
+     friendlyName="Subtitle"
+     i18n:attributes="description;friendlyName" />
   <metadata name="byline"
      description="" enabled="True"
-     friendlyName="Author"/>
+     friendlyName="Author"
+     i18n:attributes="description;friendlyName" />
   <metadata name="kind"
      description="" enabled="True"
-     friendlyName="News Type"/>
+     friendlyName="News Type"
+     i18n:attributes="description;friendlyName" />
   <metadata name="section"
      description="Named section where the article appears" enabled="True"
-     friendlyName="Section"/>
+     friendlyName="Section"
+     i18n:attributes="description;friendlyName" />
   <metadata name="urgency"
      description="News importance" enabled="True"
-     friendlyName="Urgency"/>
+     friendlyName="Urgency"
+     i18n:attributes="description;friendlyName" />
  </topic_metadata>
 </atcttool>

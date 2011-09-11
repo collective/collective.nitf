@@ -5,11 +5,12 @@ import unittest2 as unittest
 from zope.component import createObject
 from zope.component import queryUtility
 
+from collective.transmogrifier.transmogrifier import Transmogrifier
 from plone.app.textfield.value import RichTextValue
-from Products.CMFPlone.utils import getToolByName
 from plone.dexterity.interfaces import IDexterityFTI
 
-from collective.transmogrifier.transmogrifier import Transmogrifier
+from Products.CMFPlone.utils import getToolByName
+
 from collective.nitf.testing import INTEGRATION_TESTING
 
 
@@ -36,17 +37,23 @@ def populateContainer(self, container, default_type='News Item', limit=4):
         container[n_id].reindexObject()
 
 
-class TestNITFIntegration(unittest.TestCase):
+class MigrationTest(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
+    def setUp(self):
+        self.portal = self.layer['portal']
+
     def test_transmogrify(self):
-        portal = self.layer['portal']
-        catalog = getToolByName(portal, 'portal_catalog')
-        results = catalog({'portal_type': u'collective.nitf.content', }, )
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        results = catalog(portal_type='News Item')
+        self.assertEqual(len(results), 4)
+        results = catalog(portal_type='collective.nitf.content')
         self.assertEqual(len(results), 0)
-        transmogrifier = Transmogrifier(portal)
+
+        transmogrifier = Transmogrifier(self.portal)
         transmogrifier("nitfmigrator")
+
         results = catalog({'portal_type': u'collective.nitf.content', }, )
         self.assertEqual(len(results), 4)
 
