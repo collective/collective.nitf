@@ -46,14 +46,11 @@ class ViewTest(unittest.TestCase):
         images = view.images()
         self.assertEquals(len(images), 1)
 
-    def test_folder_summary_view(self):
-        self.folder.restrictedTraverse('folder_summary_view')
-
     def test_gallery(self):
-        self.n1.restrictedTraverse('newsmedia_view')
+        self.n1.unrestrictedTraverse('@@newsmedia_view')
 
     def test_nitf(self):
-        self.n1.restrictedTraverse('nitf')
+        self.n1.unrestrictedTraverse('@@nitf')
 
     def test_organize(self):
         # view can not be accessed by anonymous users
@@ -68,6 +65,23 @@ class ViewTest(unittest.TestCase):
         self.assertRaises(Unauthorized,
                           self.n1.restrictedTraverse,
                          '@@media_uploader')
+
+
+class HelperViewTest(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        directlyProvides(self.request, INITFBrowserLayer)
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        self.folder = self.portal['test-folder']
+
+    # TODO: rewrite this test to verify the view is in INITFBrowserLayer
+    def test_folder_summary_view(self):
+        view = self.folder.unrestrictedTraverse('@@folder_summary_view')
 
 
 def test_suite():
