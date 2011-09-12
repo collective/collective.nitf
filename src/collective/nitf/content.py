@@ -2,15 +2,12 @@
 
 import unicodedata
 
+
 from five import grok
 from zope import schema
 from zope.component import getUtility
-from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
-
-from Products.ATContentTypes.interfaces import IImageContent
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
@@ -21,9 +18,6 @@ from plone.registry.interfaces import IRegistry
 from collective.nitf import _
 from collective.nitf import config
 from collective.nitf.controlpanel import INITFSettings
-
-VIDEO_MIMETYPES = ['video/mp4', 'video/x-flv']
-IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 
 class INITF(form.Schema):
@@ -43,7 +37,7 @@ class INITF(form.Schema):
             default=u'',
         )
 
-    #abstract = schema.TextLine()
+    #description = schema.Text()
         # nitf/body/body.head/abstract
 
     byline = schema.TextLine(
@@ -99,29 +93,6 @@ def kind_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
     return settings.default_kind
-
-
-class ImageContentAdapter(SchemaAdapterBase, grok.Adapter):
-    grok.context(INITF)
-    grok.provides(IImageContent)
-
-    def __init__(self, context):
-        super(ImageContentAdapter, self).__init__(context)
-        self.context = context
-
-    def getImage(self):
-        img = None
-        if len(self.context.objectIds()):
-            return self.context[self.context.objectIds()[0]]
-        return
-
-    def setImage(self):
-        return
-
-    def tag(self):
-        return
-
-alsoProvides(INITF, IImageContent)
 
 
 class SectionsVocabulary(object):

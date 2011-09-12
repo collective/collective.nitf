@@ -14,7 +14,7 @@ from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 
 
-class TestNITFIntegration(unittest.TestCase):
+class IntegrationTest(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
