@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <object name="collective.nitf.content" meta_type="Dexterity FTI"
-   i18n:domain="collective.nitf" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="collective.nitf">
 
  <!-- Basic metadata -->
  <property name="title" i18n:translate="">News Article</property>
@@ -57,11 +58,13 @@
   <permission value="Modify portal content"/>
  </action>
  <action title="Organize" action_id="organize" category="folder" condition_expr=""
-    url_expr="string:${object_url}/@@organize" visible="True">
+    url_expr="string:${object_url}/@@organize" visible="True"
+    i18n:attributes="title">
   <permission value="Modify portal content"/>
  </action>
  <action title="Media Uploader" action_id="media_uploader" category="folder" condition_expr=""
-    url_expr="string:${object_url}/@@media_uploader" visible="True">
+    url_expr="string:${object_url}/@@media_uploader" visible="True"
+    i18n:attributes="title">
   <permission value="Modify portal content"/>
  </action>
 </object>

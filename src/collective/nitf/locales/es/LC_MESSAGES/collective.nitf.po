@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2011-09-02 20:01+0000\n"
+"POT-Creation-Date: 2011-09-11 19:08+0000\n"
 "PO-Revision-Date: 2011-08-04 17:47+0000\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Análisis"
 msgid "Archive-Material"
 msgstr "Material de archivo"
 
-#: collective/nitf/content.py:51
+#: collective/nitf/content.py:52
 msgid "Author"
 msgstr "Autor"
 
@@ -44,13 +44,13 @@ msgstr "Secciones disponibles"
 msgid "Background"
 msgstr "Contexto"
 
-#: collective/nitf/content.py:58
+#: collective/nitf/content.py:59
 msgid "Body text"
 msgstr "Cuerpo del texto"
 
 #: collective/nitf/templates/media_view.pt:26
-#: collective/nitf/templates/newsitem_view.pt:26
 #: collective/nitf/templates/newsmedia_view.pt:26
+#: collective/nitf/templates/view.pt:26
 msgid "By"
 msgstr "Por"
 
@@ -58,9 +58,9 @@ msgstr "Por"
 msgid "Cancel upload"
 msgstr "Cancelar archivos"
 
-#: collective/nitf/templates/media_view.pt:84
-#: collective/nitf/templates/newsitem_view.pt:67
+#: collective/nitf/templates/media_view.pt:82
 #: collective/nitf/templates/newsmedia_view.pt:46
+#: collective/nitf/templates/view.pt:67
 msgid "Contents"
 msgstr "Contenido"
 
@@ -104,13 +104,17 @@ msgstr "Alta"
 msgid "History"
 msgstr "Historia"
 
-#: collective/nitf/content.py:88
+#: collective/nitf/content.py:89
 msgid "Location"
 msgstr "Localización"
 
 #: collective/nitf/config.py:50
 msgid "Low"
 msgstr "Baja"
+
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
+msgid "Media Uploader"
+msgstr "Carga por lotes"
 
 #: collective/nitf/controlpanel.py:51
 #: collective/nitf/profiles/default/controlpanel.xml
@@ -121,7 +125,7 @@ msgstr "Configuración de NITF"
 msgid "News Article"
 msgstr "Artículo de noticias"
 
-#: collective/nitf/content.py:64
+#: collective/nitf/content.py:65
 msgid "News Type"
 msgstr "Tipo de noticia"
 
@@ -137,6 +141,7 @@ msgstr "Obituario"
 msgid "Opinion"
 msgstr "Opinión"
 
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
 #: collective/nitf/templates/organize.pt:78
 msgid "Organize"
 msgstr "Organizar"
@@ -149,9 +154,9 @@ msgstr "Encuestas/Sondeos"
 msgid "Profile"
 msgstr "Perfil"
 
-#: collective/nitf/templates/media_view.pt:79
-#: collective/nitf/templates/newsitem_view.pt:62
+#: collective/nitf/templates/media_view.pt:77
 #: collective/nitf/templates/newsmedia_view.pt:41
+#: collective/nitf/templates/view.pt:62
 msgid "Related items"
 msgstr "Contenido relacionado"
 
@@ -159,7 +164,7 @@ msgstr "Contenido relacionado"
 msgid "Results-Listings-Tables"
 msgstr "Resultados-Listados-Tablas"
 
-#: collective/nitf/content.py:70
+#: collective/nitf/content.py:71
 #: collective/nitf/controlpanel.py:26
 msgid "Section"
 msgstr "Sección"
@@ -172,7 +177,7 @@ msgstr "Material de apoyo"
 msgid "Start upload"
 msgstr "Comenzar a subir"
 
-#: collective/nitf/content.py:39
+#: collective/nitf/content.py:40
 msgid "Subtitle"
 msgstr "Subtítulo"
 
@@ -184,27 +189,27 @@ msgstr "Resumen"
 msgid "Transcript-Verbatim"
 msgstr "Transcripción literal"
 
-#: collective/nitf/content.py:79
+#: collective/nitf/content.py:80
 msgid "Urgency"
 msgstr "Urgencia"
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:89
+#: collective/nitf/content.py:90
 msgid "help_location"
 msgstr "El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la historia)."
 
 #. Default: "Named section where the article will appear."
-#: collective/nitf/content.py:71
+#: collective/nitf/content.py:72
 msgid "help_section"
 msgstr "Nombre de la sección en la que aparecerá el artículo."
 
 #. Default: "A subordinate headline for the article."
-#: collective/nitf/content.py:40
+#: collective/nitf/content.py:41
 msgid "help_subtitle"
 msgstr "Un titular subordinado para el artículo."
 
 #. Default: "News importance."
-#: collective/nitf/content.py:80
+#: collective/nitf/content.py:81
 msgid "help_urgency"
 msgstr "Importancia de la noticia."
 
