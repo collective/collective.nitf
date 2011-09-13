@@ -47,6 +47,13 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <genericsetup:importStep
+        name="collective.nitf"
+        title="collective.nitf special import handlers"
+        description="Uninstall profile for the collective.nitf package."
+        handler="collective.nitf.setuphandlers.setupVarious" />
+        />
+
     <transmogrifier:registerConfig
         name="nitfmigrator"
         title="Converts standard News Items into NITF objects"

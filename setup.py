@@ -33,6 +33,8 @@ setup(name='collective.nitf',
         'plone.app.referenceablebehavior',
         'plone.app.registry',
         'plone.app.transmogrifier',
+        'plone.behavior',
+        'plone.app.relationfield',
         ],
       extras_require={
         'test': ['plone.app.testing'],
