@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.nitf">
+<body>
+
+<metal:title fill-slot="content-title">
+    <metal:content-title use-macro="context/@@view/macros/content-title" />
+</metal:title>
+
+<metal:description fill-slot="content-description">
+    <tal:content-description metal:define-macro="content-description" />
+</metal:description>
+
+<metal:main fill-slot="content-core">
+    <tal:content-core metal:define-macro="content-core">
+        <div class="mediaview">
+            <div tal:condition="exists:provider:collective.nitf.carousel" tal:content="structure provider:collective.nitf.carousel" />
+        </div>
+    </tal:content-core>
+</metal:main>
+
+</body>
+</html>

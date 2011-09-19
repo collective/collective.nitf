@@ -94,11 +94,20 @@ class Media_View(View):
 
 class NewsMedia_View(View):
     grok.context(INITF)
+    grok.implements(IMediaView)
     grok.layer(INITFBrowserLayer)
     grok.name('newsmedia_view')
     grok.require('zope2.View')
     grok.template('newsmedia_view')
-    grok.view(IMediaView)
+
+
+class Gallery_View(View):
+    grok.context(INITF)
+    grok.implements(IMediaView)
+    grok.layer(INITFBrowserLayer)
+    grok.name('gallery')
+    grok.require('zope2.View')
+    grok.template('gallery')
 
 
 class Folder_Summary_View(grok.View):
@@ -119,7 +128,7 @@ class MediaViewlet(grok.Viewlet):
     grok.context(INITF)
     grok.name('collective.nitf.media.tile')
     grok.viewletmanager(IAboveContentBody)
-    grok.view(NewsMedia_View)
+    grok.view(IMediaView)
     grok.template('media_viewlet')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
@@ -144,6 +153,18 @@ class MediaViewlet(grok.Viewlet):
                 this_row.append(key)
             rows.append(this_row)
         return rows
+
+
+class MediaGalleryViewlet(MediaViewlet):
+    grok.context(INITF)
+    grok.layer(INITFBrowserLayer)
+    grok.name('collective.nitf.media.gallery')
+    grok.order(0)
+    grok.template('gallery_viewlet')
+    grok.view(Gallery_View)
+    grok.viewletmanager(IAboveContentBody)
+
+    image_size = 'tile'
 
 
 class MediaPreviewViewlet(MediaViewlet):

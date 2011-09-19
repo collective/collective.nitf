@@ -2,12 +2,41 @@ jq(function($) {
     $(".tiles .thumbnails").scrollable({size: 3,});
     $(".previews .thumbnails").scrollable({size: 1, circular: true,});
     $("#mediabox #images").scrollable({size: 1, circular: true,});
-    $(".tiles .thumbnails .items img[src].media-image").prepOverlay({
+    $(".template-newsmedia_view .tiles .thumbnails .items img[src].media-image").prepOverlay({
         subtype:'image',
         urlmatch: '/image_.+$',
         urlreplace: '/image_large',
     });
 
+    $(".template-gallery .tiles .thumbnails .items img.media-image").click(function() {
+        // see if same thumb is being clicked
+        if ($(this).hasClass("active")) { return; }
+
+        // calclulate large image's URL based on the thumbnail URL (flickr specific)
+        var url = $(this).attr("src").replace("_tile", "_preview");
+
+        // get handle to element that wraps the image and make it semi-transparent
+        var wrap = $("#gallery-canvas").fadeTo("medium", 0.5);
+
+        // the large image from www.flickr.com
+        var img = new Image();
+
+
+        // call this function after it's loaded
+        img.onload = function() {
+
+            // make wrapper fully visible
+            wrap.fadeTo("fast", 1);
+
+            // change the image
+            wrap.find("img").attr("src", url);
+        };
+        img.src = url;
+
+        // activate item
+        $(".template-gallery .tiles .thumbnails .items img.media-image").removeClass("active");
+        $(this).addClass("active");
+    }).filter(":first").click();
     $(".newsview #mediabox").appendTo("body");
     $("#mediabox #images").scrollable();
     $(".newsImageContainer a").prepOverlay({

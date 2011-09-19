@@ -47,9 +47,15 @@
 	background-color:#fff;
 	padding:2px;
 	border:1px solid #ccc;
+    width: auto;
 	
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
+}
+#gallery-canvas {
+    display: block;
+    margin: 5px;
+    text-align: center;
 }
 .tiles .thumbnails .mediawrap span {
     display: table-cell;
