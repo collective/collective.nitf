@@ -1,0 +1,34 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-09-19 17:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.nitf\n"
+
+#: menuitems in configure.zcml
+msgid "News Article View"
+msgstr ""
+
+#: menuitems in configure.zcml
+msgid "Displays news article with image"
+msgstr ""
+
+#: menuitems in configure.zcml
+msgid "Gallery View"
+msgstr ""
+
+#: menuitems in configure.zcml
+msgid "Displays an image gallery stored in the news article"
+msgstr ""
