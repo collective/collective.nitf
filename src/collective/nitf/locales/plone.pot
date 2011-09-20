@@ -49,3 +49,11 @@ msgstr ""
 msgid "Urgency"
 msgstr ""
 
+#: ./profiles/default/types/collective.nitf.content.xml
+msgid "Media Uploader"
+msgstr ""
+
+#: ./profiles/default/types/collective.nitf.content.xml
+#: ./templates/organize.pt:78
+msgid "Organize"
+msgstr ""

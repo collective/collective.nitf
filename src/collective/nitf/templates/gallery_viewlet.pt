@@ -1,3 +1,4 @@
 <div id="gallery-canvas">
-    <img src="http://static.flowplayer.org/tools/img/blank.gif" />
+    <img src="static/blank.gif"
+        tal:attributes="src string:${context/absolute_url}/++resource++collective.nift/blank.gif" />
 </div>

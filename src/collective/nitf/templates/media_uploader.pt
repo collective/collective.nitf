@@ -42,7 +42,7 @@
             <metal:uploader define-macro="file_uploader">
             <div id="fileupload" class="ui-widget">
                 <form action="." tal:attributes="action string:${context/absolute_url}/media_uploader" method="POST" enctype="multipart/form-data">
-                    <div class="fileupload-buttonbar ui-widget-header ui-corner-top">
+                    <div class="fileupload-buttonbar ui-widget-header ui-corner-top" i18n:domain="collective.nitf">
                         <label class="fileinput-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary">
                             <span class="ui-button-icon-primary ui-icon ui-icon-plusthick"></span>
                             <span class="ui-button-text" i18n:translate="">Add files...</span>

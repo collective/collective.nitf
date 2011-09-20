@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: collective.nitf\n"
 "POT-Creation-Date: 2011-09-11 18:59+0000\n"
 "PO-Revision-Date: 2011-09-11 18:59+0000\n"
-"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
+"Last-Translator: Joaquín Rosales <globojorro@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -20,6 +20,10 @@ msgstr ""
 msgid "Author"
 msgstr "Autor"
 
+#: ./profiles/default/types/collective.nitf.content.xml
+msgid "Media Uploader"
+msgstr "Carga por lotes"
+
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Named section where the article appears"
 msgstr "Nombre de la sección en la que aparece el artículo"
@@ -31,6 +35,11 @@ msgstr "Tipo de noticia"
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "News importance"
 msgstr "Importancia de la noticia"
+
+#: ./profiles/default/types/collective.nitf.content.xml
+#: ./templates/organize.pt:78
+msgid "Organize"
+msgstr "Organizar"
 
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Section"

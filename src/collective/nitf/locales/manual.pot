@@ -18,17 +18,9 @@ msgstr ""
 "Domain: collective.nitf\n"
 
 #: menuitems in configure.zcml
-msgid "News Article View"
-msgstr ""
+msgid "Related items"
+msgstr "Contenido relacionado"
 
 #: menuitems in configure.zcml
-msgid "Displays news article with image"
-msgstr ""
-
-#: menuitems in configure.zcml
-msgid "Gallery View"
-msgstr ""
-
-#: menuitems in configure.zcml
-msgid "Displays an image gallery stored in the news article"
-msgstr ""
+msgid "Contents"
+msgstr "Contenidos"
