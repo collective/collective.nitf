@@ -16,7 +16,7 @@ jq(function($) {
         var url = $(this).attr("src").replace("_tile", "_preview");
 
         // get handle to element that wraps the image and make it semi-transparent
-        var wrap = $("#gallery-canvas").fadeTo("medium", 0.5);
+        var wrap = $("#mediabox").fadeTo("medium", 0.5);
 
         // the large image from www.flickr.com
         var img = new Image();

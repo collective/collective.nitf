@@ -50,14 +50,23 @@
 
 /******* NEWSITEM/MEDIA VIEWS *****/
 #mediabox {
-    background-color: #222222;
-/*    background: url(/++resource++collective.nitf/images/black.png) no-repeat; */
+    background-color: #ffffff;
+    border: 1px solid #D9D9D9;
     width: 500px;
     height: 500px;
 /*    position: absolute;*/
     display: none;
     margin: 0 auto;
+}
+body.template-view #mediabox {
+    box-shadow: 0 0 3em 0.5em #666666;
+    -moz-box-shadow: 0 0 3em 0.5em #666666;
+    -webkit-box-shadow: 0 0 3em #666666;
     }
+
+body.template-gallery #mediabox {
+    display: table;
+}
 
 .mediaview #mediabox {
     display: block;
@@ -77,7 +86,8 @@
     display: inline-block;
     }
 
-#mediabox #images .items div span {
+#mediabox #images .items div span,
+body.template-gallery #mediabox span {
     display: table-cell;
     vertical-align: middle;
     width: 400px;

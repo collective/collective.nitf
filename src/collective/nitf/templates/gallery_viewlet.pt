@@ -1,4 +1,6 @@
-<div id="gallery-canvas">
-    <img src="static/blank.gif"
-        tal:attributes="src string:${context/absolute_url}/++resource++collective.nift/blank.gif" />
+<div id="mediabox" class="gallery">
+    <span>
+        <img src="static/blank.gif"
+            tal:attributes="src string:${context/absolute_url}/++resource++collective.nift/blank.gif" />
+    </span>
 </div>
