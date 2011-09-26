@@ -1,3 +1,4 @@
+<metal:main define-macro="main">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
@@ -30,7 +31,7 @@
     </tal:content-description>
 </metal:description>
 
-<metal:main fill-slot="content-core">
+<metal:core fill-slot="content-core">
     <tal:content-core metal:define-macro="content-core">
 
         <div class="newsImageContainer" tal:condition="view/image|nothing"
@@ -47,9 +48,9 @@
         </div>
 
         <div class="newsview">
-            <div id="mediabox" metal:use-macro="context/media_view/macros/media-box">
+            <div id="mediabox" metal:use-macro="context/@@display_macros/macros/media-box">
                 <metal:navi fill-slot="navi">
-                    <metal:buttons use-macro="context/media_view/macros/navi" />
+                    <metal:buttons use-macro="context/@@display_macros/macros/navi" />
                 </metal:navi>
             </div>
         </div>
@@ -80,7 +81,8 @@
         </fieldset>
 
     </tal:content-core>
-</metal:main>
+</metal:core>
 
 </body>
 </html>
+</metal:main>

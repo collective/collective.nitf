@@ -84,21 +84,10 @@ class View(dexterity.DisplayForm):
         return links
 
 
-class Media_View(View):
+class Display_Macros(View):
     grok.context(INITF)
-    grok.name('media_view')
-    grok.title(u'Media View')
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
-
-
-class NewsMedia_View(View):
-    grok.context(INITF)
-    grok.implements(IMediaView)
-    grok.layer(INITFBrowserLayer)
-    grok.name('newsmedia_view')
-    grok.require('zope2.View')
-    grok.template('newsmedia_view')
 
 
 class Gallery(View):
@@ -118,7 +107,7 @@ class Folder_Summary_View(grok.View):
 class MediaViewletManager(grok.ViewletManager):
     grok.context(INITF)
     grok.name('collective.nitf.carousel')
-    grok.view(Media_View)
+    grok.view(Display_Macros)
     grok.layer(INITFBrowserLayer)
 
 
@@ -169,7 +158,7 @@ class MediaPreviewViewlet(MediaViewlet):
     grok.context(INITF)
     grok.name('collective.nitf.media.preview')
     grok.viewletmanager(MediaViewletManager)
-    grok.view(Media_View)
+    grok.view(View)
     grok.layer(INITFBrowserLayer)
 
     image_size = 'preview'

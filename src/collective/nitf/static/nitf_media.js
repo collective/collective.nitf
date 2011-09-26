@@ -11,28 +11,20 @@ jq(function($) {
     $(".template-gallery .tiles .thumbnails .items img.media-image").click(function() {
         // see if same thumb is being clicked
         if ($(this).hasClass("active")) { return; }
-
         // calclulate large image's URL based on the thumbnail URL (flickr specific)
         var url = $(this).attr("src").replace("_tile", "_preview");
-
         // get handle to element that wraps the image and make it semi-transparent
         var wrap = $("#mediabox").fadeTo("medium", 0.5);
-
         // the large image from www.flickr.com
         var img = new Image();
-
-
         // call this function after it's loaded
         img.onload = function() {
-
             // make wrapper fully visible
             wrap.fadeTo("fast", 1);
-
             // change the image
             wrap.find("img").attr("src", url);
         };
         img.src = url;
-
         // activate item
         $(".template-gallery .tiles .thumbnails .items img.media-image").removeClass("active");
         $(this).addClass("active");
