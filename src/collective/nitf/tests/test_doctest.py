@@ -7,15 +7,12 @@ from plone.testing import layered
 
 from collective.nitf.testing import FUNCTIONAL_TESTING
 
-optionflags = doctest.REPORT_ONLY_FIRST_FAILURE
-
 
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTests([
         layered(doctest.DocFileSuite('tests/functional.txt',
-                                     package='collective.nitf',
-                                     optionflags=optionflags),
+                                     package='collective.nitf'),
                 layer=FUNCTIONAL_TESTING),
         ])
     return suite
