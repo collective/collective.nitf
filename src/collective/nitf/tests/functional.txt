@@ -40,6 +40,21 @@ Functional test:
     >>> 'Item created' in browser.contents
     True
 
+A news article can contain files:
+
+    >>> browser.getLink('Miracle Cure').click()
+    >>> browser.getLink('File').click()
+    >>> import cStringIO
+    >>> ctrl = browser.getControl(name='file_file')
+    >>> ctrl.add_file(cStringIO.StringIO('File contents'),
+    ...               'text/plain', 'test.txt')
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+A news article can contain links:
+
+    >>> browser.getLink('Miracle Cure').click()
     >>> browser.getLink('Link').click()
     >>> browser.getControl('Title').value = 'An URL'
     >>> browser.getControl('Description').value = 'The description of the URL'
