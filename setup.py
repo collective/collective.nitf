@@ -29,7 +29,7 @@ setup(name='collective.nitf',
       install_requires=[
         'setuptools',
         'collective.transmogrifier',
-        'plone.app.dexterity==1.0.3',
+        'plone.app.dexterity>=1.0.3',
         'plone.app.registry',
         'plone.app.transmogrifier',
         ],
