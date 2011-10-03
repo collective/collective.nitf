@@ -32,14 +32,15 @@ class View(dexterity.DisplayForm):
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
 
+
     def image(self):
         imgs = self.get_media_files(types=('Image',), limit=1)
         if len(imgs):
             return imgs[0]
 
     def update(self):
+        self.context = aq_inner(self.context)
         self.catalog = getToolByName(self.context, 'portal_catalog')
-        self.images()
 
     def get_media_files(self, types=('Image', 'File',), limit=None):
         context_path = '/'.join(self.context.getPhysicalPath())
@@ -61,20 +62,20 @@ class View(dexterity.DisplayForm):
         return media_items
 
     def images(self):
+        self.update()
         return self.get_media_files(types=('Image',))
 
     def files(self):
+        self.update()
         return self.get_media_files(types=('File',))
 
     def links(self):
         """Return a catalog search result of links to show.
         """
+        self.update()
 
-        context = aq_inner(self.context)
-        catalog = getToolByName(context, 'portal_catalog')
-
-        links = catalog(object_provides=IATLink.__identifier__,
-                        path='/'.join(context.getPhysicalPath()),
+        links = self.catalog(object_provides=IATLink.__identifier__,
+                        path='/'.join(self.context.getPhysicalPath()),
                         sort_on='getObjPositionInParent')
 
         links = [brain.getObject() for brain in links]
