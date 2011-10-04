@@ -24,7 +24,7 @@ class InstallTest(unittest.TestCase):
         qi = getattr(self.portal, 'portal_quickinstaller')
         self.failUnless(qi.isProductInstalled(PROJECTNAME))
 
-    def test_layer_installed(self):
+    def test_browserlayer_installed(self):
         layers = [l.getName() for l in registered_layers()]
         self.failUnless('INITFBrowserLayer' in layers)
 

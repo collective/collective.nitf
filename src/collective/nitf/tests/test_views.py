@@ -16,7 +16,7 @@ from collective.nitf.interfaces import INITFBrowserLayer
 from collective.nitf.testing import INTEGRATION_TESTING
 
 
-class ViewTest(unittest.TestCase):
+class BrowserLayerTest(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
