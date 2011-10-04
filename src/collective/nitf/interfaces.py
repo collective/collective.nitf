@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from zope.interface import Interface
-from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+from plone.theme.interfaces import IDefaultPloneLayer
 
 
-class INITFBrowserLayer(IDefaultBrowserLayer):
-    """Default browser layer for NITF content views.
+class INITFBrowserLayer(IDefaultPloneLayer):
+    """A marker interface for the theme layer.
     """
 
 

@@ -7,6 +7,8 @@ from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
 
+from plone.browserlayer.utils import registered_layers
+
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
 
@@ -21,6 +23,10 @@ class InstallTest(unittest.TestCase):
     def test_installed(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
         self.failUnless(qi.isProductInstalled(PROJECTNAME))
+
+    def test_layer_installed(self):
+        layers = [l.getName() for l in registered_layers()]
+        self.failUnless('INITFBrowserLayer' in layers)
 
 
 class UninstallTest(unittest.TestCase):
