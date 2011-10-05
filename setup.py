@@ -30,7 +30,6 @@ setup(name='collective.nitf',
         'setuptools',
         'collective.transmogrifier',
         'plone.app.dexterity>=1.0.3',
-        'plone.app.registry',
         'plone.app.transmogrifier',
         ],
       extras_require={
