@@ -1,0 +1,7 @@
+collective.nitf contributors
+============================
+
+- Héctor Velarde (hector.velarde@gmail.com)
+
+- Joaquín Rosales (globojorro@gmail.com)
+
