@@ -28,6 +28,16 @@ class InstallTest(unittest.TestCase):
         layers = [l.getName() for l in registered_layers()]
         self.failUnless('INITFBrowserLayer' in layers)
 
+    def test_link_workflow_changed(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Link', 'obj')
+        obj = self.portal['obj']
+        workflow_tool = self.portal.portal_workflow
+        chain = workflow_tool.getChainForPortalType(obj.portal_type)
+        self.assertEqual(len(chain), 1)
+        self.assertEqual(chain[0], 'one_state_workflow',
+                         'workflow not changed on Link content type')
+
 
 class UninstallTest(unittest.TestCase):
 
