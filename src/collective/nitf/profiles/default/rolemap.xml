@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <rolemap>
-  <permissions>
-    <permission name="collective.nitf: Add News Article" acquire="True">
-      <role name="Owner"/>
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="Contributor"/>
-    </permission>
-  </permissions>
+ <permissions>
+  <permission name="collective.nitf: Add News Article" acquire="True">
+   <role name="Manager"/>
+   <role name="Site Administrator"/>
+   <role name="Owner"/>
+   <role name="Contributor"/>
+  </permission>
+ </permissions>
 </rolemap>
