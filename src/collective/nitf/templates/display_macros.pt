@@ -11,9 +11,9 @@
     <tal:content-core metal:define-macro="content-core">
         <div class="mediaview">
             <metal:mediamacro define-macro="media-box">
-            <div id="mediabox">
-                <div id="images" tal:condition="images"
+            <div id="mediabox" tal:condition="images"
                      tal:define="images view/images">
+                <div id="images">
                     <div class="items">
                         <tal:lines repeat="item images">
                         <div>
