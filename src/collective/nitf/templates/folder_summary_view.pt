@@ -24,9 +24,10 @@
                     </a>
                     <tal:nitf tal:condition="python: item.portal_type == str('collective.nitf.content')">
                     <a href="#"
-                       tal:attributes="href string:$item_url">
-                       <img class="tileImage" src="" alt="" tal:condition="item_object/objectIds"
-                        tal:attributes="src python: '%s/image_mini' % item_object[item_object.objectIds()[0]].absolute_url();" />
+                        tal:attributes="href string:$item_url"
+                        tal:define="img_view nocall:item_object/@@view">
+                       <img class="tileImage" src="" alt="" tal:condition="python: img_view.images()"
+                        tal:attributes="src python: '%s/image_mini' % img_view.image()['image_url'];" />
                     </a>
                     </tal:nitf>
                     <h2 class="tileHeadline"
