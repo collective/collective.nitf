@@ -1,7 +1,8 @@
 <metadata>
-    <version>1</version>
-    <dependencies>
-        <dependency>profile-plone.app.dexterity:default</dependency>
-        <dependency>profile-plone.app.registry:default</dependency>
-    </dependencies>
+ <version>1</version>
+ <dependencies>
+  <dependency>profile-plone.app.dexterity:default</dependency>
+  <dependency>profile-plone.app.registry:default</dependency>
+  <dependency>profile-collective.js.jqueryui:default</dependency>
+ </dependencies>
 </metadata>

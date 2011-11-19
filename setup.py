@@ -28,6 +28,7 @@ setup(name='collective.nitf',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'collective.js.jqueryui',
         'collective.transmogrifier',
         'plone.app.dexterity>=1.0.3',
         'plone.app.referenceablebehavior',
