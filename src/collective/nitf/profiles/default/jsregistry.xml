@@ -4,4 +4,9 @@
     id="++resource++collective.nitf/jquery.tools.min.js" inline="False" />
   <javascript enabled="True"
     id="++resource++plone.app.jquerytools.plugins.js" />
+
+  <!-- HACK: seems that expression="python:object.meta_type != 'collective.nitf.content'"
+    does not work in Dexterity_based content types -->
+  <javascript id="form_tabbing.js"
+    expression="nocall:object/@@nitf|nothing" />
 </object>
