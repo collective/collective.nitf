@@ -5,3 +5,4 @@ collective.nitf contributors
 
 - Joaquín Rosales (globojorro@gmail.com)
 
+- Érico Andrei (erico@simplesconsultoria.com.br)
