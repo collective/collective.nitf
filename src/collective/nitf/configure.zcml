@@ -4,11 +4,10 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:transmogrifier="http://namespaces.plone.org/transmogrifier"
     i18n_domain="collective.nitf">
 
     <i18n:registerTranslations directory="locales" />
-    
+
     <includeDependencies package="." />
 
     <permission
@@ -52,11 +51,6 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
-    <!-- collective.transmogrifier registrations for importing articles -->
-    <include package="collective.transmogrifier" file="meta.zcml" />
-    <include package="collective.transmogrifier" />
-    <include package="plone.app.transmogrifier" />
-
     <genericsetup:registerProfile
         name="uninstall"
         title="collective.nitf uninstall"
@@ -70,38 +64,6 @@
         title="collective.nitf special import handlers"
         description="Uninstall profile for the collective.nitf package."
         handler="collective.nitf.setuphandlers.setupVarious" />
-        />
-
-    <transmogrifier:registerConfig
-        name="nitfmigrator"
-        title="Converts standard News Items into NITF objects"
-        description="Converts standard News Items into NITF objects"
-        configuration="migrator.cfg"
-        />
-
-    <utility
-        component="collective.nitf.migrator.NewsItemSource"
-        name="collective.nitf.migrator.newsitemsource"
-        />
-
-    <utility
-        component="collective.nitf.migrator.SchemaUpdater"
-        name="collective.nitf.migrator.schemaupdater"
-        />
-
-    <utility
-        component="collective.nitf.migrator.ImageMigrator"
-        name="collective.nitf.migrator.imagemigrator"
-        />
-
-    <utility
-        component="collective.nitf.migrator.ReplaceObject"
-        name="collective.nitf.migrator.replaceobject"
-        />
-
-    <utility
-        component="collective.nitf.migrator.PrettyPrinter"
-        name="collective.nitf.migrator.pprinter"
         />
 
 </configure>
