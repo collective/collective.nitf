@@ -99,10 +99,6 @@ class RegistryUninstallTest(unittest.TestCase):
         # uninstall the package
         self.qi = getattr(self.portal, 'portal_quickinstaller')
         self.qi.uninstallProducts(products=[config.PROJECTNAME])
-        # run manually uninstall step on registry as this is not yet
-        # implemented in the uninstaller
-        setup_tool = getToolByName(self.portal, 'portal_setup')
-        setup_tool.runImportStepFromProfile('profile-collective.nitf:uninstall', 'plone.app.registry')
 
     def test_records_uninstalled(self):
         # Test that the records were removed from the control panel
