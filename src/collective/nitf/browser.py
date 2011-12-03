@@ -25,6 +25,15 @@ IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 grok.templatedir('templates')
 
 
+class AddForm(dexterity.AddForm):
+    """Default view looks like a News Item.
+    """
+    grok.name('collective.nitf.content')
+    grok.layer(INITFBrowserLayer)
+
+    enable_form_tabbing = False
+
+
 class View(dexterity.DisplayForm):
     """Default view looks like a News Item.
     """
