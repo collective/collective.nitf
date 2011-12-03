@@ -34,6 +34,15 @@ class AddForm(dexterity.AddForm):
     enable_form_tabbing = False
 
 
+class EditForm(dexterity.EditForm):
+    """Default view looks like a News Item.
+    """
+    grok.context(INITF)
+    grok.layer(INITFBrowserLayer)
+
+    enable_form_tabbing = False
+
+
 class View(dexterity.DisplayForm):
     """Default view looks like a News Item.
     """
