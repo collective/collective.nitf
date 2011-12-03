@@ -33,11 +33,9 @@ setup(name='collective.nitf',
       install_requires=[
         'setuptools',
         'collective.js.jqueryui',
-        'collective.transmogrifier',
         'plone.app.dexterity>=1.1',
         'plone.app.referenceablebehavior',
         'plone.app.relationfield',
-        'plone.app.transmogrifier',
         ],
       extras_require={
         'test': ['plone.app.testing'],
