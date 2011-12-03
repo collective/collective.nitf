@@ -25,6 +25,7 @@ IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 grok.templatedir('templates')
 
 
+# TODO: enable_form_tabbing must be user selectable
 class AddForm(dexterity.AddForm):
     """Default view looks like a News Item.
     """
@@ -49,7 +50,6 @@ class View(dexterity.DisplayForm):
     grok.context(INITF)
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
-
 
     def image(self):
         imgs = self.get_media_files(types=('Image',), limit=1)
