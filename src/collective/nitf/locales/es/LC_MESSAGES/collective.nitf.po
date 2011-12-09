@@ -2,9 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2011-09-19 18:56+0000\n"
+"POT-Creation-Date: 2011-12-09 06:40+0000\n"
 "PO-Revision-Date: 2011-08-04 17:47+0000\n"
-"Last-Translator: Joaquín Rosales <globojorro@gmail.com>\n"
+"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -16,211 +16,207 @@ msgstr ""
 "Domain: collective.nitf\n"
 "X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
-#: ./profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
 msgstr "Un artículo de noticias"
 
-#: ./templates/media_uploader.pt:48
+#: collective/nitf/templates/media_uploader.pt:43
 msgid "Add files..."
 msgstr "Agregar archivos"
 
-#: ./config.py:12
+#: collective/nitf/config.py:13
 msgid "Analysis"
 msgstr "Análisis"
 
-#: ./config.py:14
+#: collective/nitf/config.py:15
 msgid "Archive-Material"
 msgstr "Material de archivo"
 
-#: ./content.py:45
+#: collective/nitf/content.py:45
 msgid "Author"
 msgstr "Autor"
 
-#: ./controlpanel.py:23
+#: collective/nitf/controlpanel.py:18
 msgid "Available Sections"
 msgstr "Secciones disponibles"
 
-#: ./config.py:16
+#: collective/nitf/config.py:17
 msgid "Background"
 msgstr "Contexto"
 
-#: ./content.py:52
+#: collective/nitf/content.py:52
 msgid "Body text"
 msgstr "Cuerpo del texto"
 
-#: ./templates/media_view.pt:26
-#: ./templates/newsmedia_view.pt:26
-#: ./templates/view.pt:26
+#: collective/nitf/templates/view.pt:27
 msgid "By"
 msgstr "Por"
 
-#: ./templates/media_uploader.pt:57
+#: collective/nitf/templates/media_uploader.pt:52
 msgid "Cancel upload"
 msgstr "Cancelar archivos"
 
-#: ./templates/media_view.pt:82
-#: ./templates/newsmedia_view.pt:46
-#: ./templates/view.pt:67
+#: collective/nitf/templates/display_macros.pt:58
+#: collective/nitf/templates/gallery.pt:24
+#: collective/nitf/templates/view.pt:66
 msgid "Contents"
 msgstr "Contenido"
 
-#: ./config.py:18
+#: collective/nitf/config.py:19
 msgid "Current"
 msgstr "Actualidad"
 
-#: ./controlpanel.py:34
-msgid "Default News Type"
-msgstr "Tipo de noticia por defecto"
+#: collective/nitf/controlpanel.py:29
+msgid "Default Genre"
+msgstr "Género por defecto"
 
-#: ./controlpanel.py:29
+#: collective/nitf/controlpanel.py:24
 msgid "Default Section"
 msgstr "Sección por defecto"
 
-#: ./controlpanel.py:40
+#: collective/nitf/controlpanel.py:35
 msgid "Default Urgency"
 msgstr "Urgencia por defecto"
 
-#: menuitems in configure.zcml
-msgid "Displays an image gallery stored in the news article"
-msgstr "Muestra una galería de las imágenes dentro del artículo de noticias"
-
-#: menuitems in configure.zcml
-msgid "Displays news article with image"
-msgstr "Muestra un artículo de noticias con una imagen"
-
-#: ./templates/organize.pt:79
+#: collective/nitf/templates/organize.pt:70
 msgid "Drag and drop images to change their order on the gallery."
 msgstr "Arrastre y suelte las imágenes para cambiar el orden en el que se muestran."
 
-#: ./config.py:20
+#: collective/nitf/config.py:21
 msgid "Feature"
 msgstr "Crónica"
 
-#: ./config.py:22
+#: collective/nitf/config.py:23
 msgid "Forecast"
 msgstr "Pronóstico"
 
-#: menuitems in configure.zcml
-msgid "Gallery View"
-msgstr "Vista de galería"
+#: collective/nitf/content.py:58
+msgid "Genre"
+msgstr "Género"
 
-#: ./controlpanel.py:52
+#: collective/nitf/controlpanel.py:47
 msgid "Here you can modify the settings for collective.nitf."
 msgstr "Aquí puede modificar la configuración de collective.nitf."
 
-#: ./config.py:48
+#: collective/nitf/config.py:51
 msgid "High"
 msgstr "Alta"
 
-#: ./config.py:24
+#: collective/nitf/config.py:25
 msgid "History"
 msgstr "Historia"
 
-#: ./content.py:82
+#: collective/nitf/config.py:27
+msgid "Interview"
+msgstr "Entrevista"
+
+#: collective/nitf/content.py:86
 msgid "Location"
 msgstr "Localización"
 
-#: ./config.py:50
+#: collective/nitf/config.py:53
 msgid "Low"
 msgstr "Baja"
 
-#: ./controlpanel.py:51
-#: ./profiles/default/controlpanel.xml
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
+msgid "Media Uploader"
+msgstr ""
+
+#: collective/nitf/controlpanel.py:46
+#: collective/nitf/profiles/default/controlpanel.xml
 msgid "NITF Settings"
 msgstr "Configuración de NITF"
 
-#: ./profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "News Article"
 msgstr "Artículo de noticias"
 
-#: menuitems in configure.zcml
-msgid "News Article View"
-msgstr "Vista de artículo de noticias"
-
-#: ./content.py:58
-msgid "News Type"
-msgstr "Tipo de noticia"
-
-#: ./config.py:49
+#: collective/nitf/config.py:52
 msgid "Normal"
 msgstr "Normal"
 
-#: ./config.py:26
+#: collective/nitf/config.py:29
 msgid "Obituary"
 msgstr "Obituario"
 
-#: ./config.py:28
+#: collective/nitf/config.py:31
 msgid "Opinion"
 msgstr "Opinión"
 
-#: ./templates/organize.pt:78
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/templates/organize.pt:69
 msgid "Organize"
 msgstr "Organizar"
 
-#: ./config.py:30
+#: collective/nitf/config.py:33
 msgid "Polls-Surveys"
 msgstr "Encuestas/Sondeos"
 
-#: ./config.py:32
+#: collective/nitf/config.py:35
 msgid "Profile"
 msgstr "Perfil"
 
-#: ./templates/media_view.pt:77
-#: ./templates/newsmedia_view.pt:41
-#: ./templates/view.pt:62
+#: collective/nitf/templates/display_macros.pt:53
+#: collective/nitf/templates/gallery.pt:19
+#: collective/nitf/templates/view.pt:61
 msgid "Related items"
 msgstr "Contenido relacionado"
 
-#: ./config.py:34
+#: collective/nitf/config.py:37
 msgid "Results-Listings-Tables"
 msgstr "Resultados-Listados-Tablas"
 
-#: ./content.py:64
-#: ./controlpanel.py:26
+#: collective/nitf/content.py:68
+#: collective/nitf/controlpanel.py:21
 msgid "Section"
 msgstr "Sección"
 
-#: ./config.py:36
+#: collective/nitf/config.py:39
 msgid "Sidebar-Supporting-Info"
 msgstr "Material de apoyo"
 
-#: ./templates/media_uploader.pt:53
+#: collective/nitf/templates/media_uploader.pt:48
 msgid "Start upload"
 msgstr "Comenzar a subir"
 
-#: ./content.py:33
+#: collective/nitf/content.py:33
 msgid "Subtitle"
 msgstr "Subtítulo"
 
-#: ./config.py:38
+#: collective/nitf/config.py:41
 msgid "Summary"
 msgstr "Resumen"
 
-#: ./config.py:40
+#: collective/nitf/config.py:43
 msgid "Transcript-Verbatim"
 msgstr "Transcripción literal"
 
-#: ./content.py:73
+#: collective/nitf/content.py:77
 msgid "Urgency"
 msgstr "Urgencia"
 
+#. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
+#: collective/nitf/content.py:59
+msgid "help_genre"
+msgstr "Describe la naturaleza, característica periodística o intelectual de una noticia, no específicamente su contenido."
+
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: ./content.py:83
+#: collective/nitf/content.py:87
 msgid "help_location"
 msgstr "El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la historia)."
 
 #. Default: "Named section where the article will appear."
-#: ./content.py:65
+#: collective/nitf/content.py:69
 msgid "help_section"
 msgstr "Nombre de la sección en la que aparecerá el artículo."
 
 #. Default: "A subordinate headline for the article."
-#: ./content.py:34
+#: collective/nitf/content.py:34
 msgid "help_subtitle"
 msgstr "Un titular subordinado para el artículo."
 
 #. Default: "News importance."
-#: ./content.py:74
+#: collective/nitf/content.py:78
 msgid "help_urgency"
 msgstr "Importancia de la noticia."
 

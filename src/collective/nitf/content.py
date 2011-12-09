@@ -55,8 +55,12 @@ class INITF(form.Schema):
 
     kind = schema.Choice(
             # nitf/head/tobject/tobject.property/@tobject.property.type
-            title=_(u'News Type'),
-            vocabulary=config.NEWS_TYPES,
+            title=_(u'Genre'),
+            description=_(u'help_genre',
+                          default=u'Describes the nature, journalistic or '
+                                   'intellectual characteristic of a news '
+                                   'object, not specifically its content.'),
+            vocabulary=config.GENRES,
         )
 
     section = schema.Choice(

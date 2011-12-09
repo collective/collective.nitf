@@ -71,7 +71,7 @@ class RegistryTest(unittest.TestCase):
             'collective.nitf.controlpanel.INITFSettings.default_kind']
         self.failUnless('default_kind' in INITFSettings)
         self.assertEquals(record_default_kind.value,
-                          config.DEFAULT_NEWS_TYPE)
+                          config.DEFAULT_GENRE)
 
     def test_record_default_urgency(self):
         # Test that the default_urgency record is in the control panel

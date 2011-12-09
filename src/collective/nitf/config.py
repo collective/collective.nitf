@@ -7,7 +7,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 from collective.nitf import _
 
-NEWS_TYPES = SimpleVocabulary([
+# this cames from http://cv.iptc.org/newscodes/genre/
+GENRES = SimpleVocabulary([
     SimpleTerm(value=u'Analysis',
                title=_(u'Analysis')),
     SimpleTerm(value=u'Archive-Material',
@@ -22,6 +23,8 @@ NEWS_TYPES = SimpleVocabulary([
                title=_(u'Forecast')),
     SimpleTerm(value=u'History',
                title=_(u'History')),
+    SimpleTerm(value=u'Interview',
+               title=_(u'Interview')),
     SimpleTerm(value=u'Obituary',
                title=_(u'Obituary')),
     SimpleTerm(value=u'Opinion',
@@ -51,5 +54,5 @@ URGENCIES = SimpleVocabulary([
     ])
 
 # defaults
-DEFAULT_NEWS_TYPE = u'Current'
+DEFAULT_GENRE = u'Current'
 DEFAULT_URGENCY = NORMAL
