@@ -3,13 +3,8 @@
 from zope import schema
 from zope.interface import Interface
 
+from z3c.form.browser.textlines import TextLinesFieldWidget
 from plone.app.registry.browser import controlpanel
-
-try:
-    # only in z3c.form 2.0
-    from z3c.form.browser.textlines import TextLinesFieldWidget
-except ImportError:
-    from plone.z3cform.textlines import TextLinesFieldWidget
 
 from collective.nitf import _
 from collective.nitf import config
@@ -31,10 +26,10 @@ class INITFSettings(Interface):
             required=False,)
 
     default_kind = schema.Choice(
-            title=_(u'Default News Type'),
-            vocabulary=config.NEWS_TYPES,
+            title=_(u'Default Genre'),
+            vocabulary=config.GENRES,
             required=False,
-            default=config.DEFAULT_NEWS_TYPE,)
+            default=config.DEFAULT_GENRE,)
 
     default_urgency = schema.Choice(
             title=_(u'Default Urgency'),
