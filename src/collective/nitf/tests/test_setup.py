@@ -22,11 +22,12 @@ class InstallTest(unittest.TestCase):
 
     def test_installed(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
-        self.failUnless(qi.isProductInstalled(PROJECTNAME))
+        self.assertTrue(qi.isProductInstalled(PROJECTNAME))
 
     def test_browserlayer_installed(self):
         layers = [l.getName() for l in registered_layers()]
-        self.failUnless('INITFBrowserLayer' in layers)
+        self.assertTrue('INITFBrowserLayer' in layers,
+                        'browser layer not installed')
 
     def test_link_workflow_changed(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
@@ -51,7 +52,12 @@ class UninstallTest(unittest.TestCase):
     def test_uninstalled(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
         qi.uninstallProducts(products=[PROJECTNAME])
-        self.failIf(qi.isProductInstalled(PROJECTNAME))
+        self.assertTrue(qi.isProductInstalled(PROJECTNAME))
+
+    def test_browserlayer_installed(self):
+        layers = [l.getName() for l in registered_layers()]
+        self.assertTrue('INITFBrowserLayer' in layers,
+                        'browser layer not removed')
 
 
 def test_suite():
