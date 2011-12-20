@@ -9,8 +9,8 @@ class HiddenProfiles(grok.GlobalUtility):
 
     grok.implements(INonInstallable)
     grok.provides(INonInstallable)
-    grok.name('collective.newsflash')
+    grok.name('collective.nitf')
 
     def getNonInstallableProfiles(self):
-        profiles = ['collective.newsflash:uninstall', ]
+        profiles = ['collective.nitf:uninstall', ]
         return profiles
