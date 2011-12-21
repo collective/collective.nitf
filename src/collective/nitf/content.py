@@ -145,7 +145,6 @@ def language_default_value(data):
         if site_properties is not None:
             if site_properties.hasProperty('default_language'):
                 return site_properties.getProperty('default_language')
-    return 'en'
 
 
 @indexer(INITF)
