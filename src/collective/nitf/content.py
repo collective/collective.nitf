@@ -9,11 +9,14 @@ from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
+from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.directives import form
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
+
+from Products.CMFCore.utils import getToolByName
 
 from collective.nitf import _
 from collective.nitf import config
@@ -53,6 +56,7 @@ class INITF(form.Schema):
             required=False,
         )
 
+    form.order_before(kind='subjects')
     kind = schema.Choice(
             # nitf/head/tobject/tobject.property/@tobject.property.type
             title=_(u'Genre'),
@@ -129,6 +133,19 @@ def urgency_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
     return settings.default_urgency
+
+
+@form.default_value(field=IDublinCore['language'])
+def language_default_value(data):
+    """Returns portal's default language or English.
+    """
+    portal_properties = getToolByName(data, "portal_properties", None)
+    if portal_properties is not None:
+        site_properties = getattr(portal_properties, 'site_properties', None)
+        if site_properties is not None:
+            if site_properties.hasProperty('default_language'):
+                return site_properties.getProperty('default_language')
+    return 'en'
 
 
 @indexer(INITF)
