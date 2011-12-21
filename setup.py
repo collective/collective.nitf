@@ -8,7 +8,7 @@ version = '1.0dev'
 setup(name='collective.nitf',
       version=version,
       description="A Dexterity-based content type inspired on the News Industry Text Format specification.",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
