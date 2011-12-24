@@ -7,8 +7,11 @@ from zope.component import queryUtility
 
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+
+from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.textfield.value import RichTextValue
 from plone.dexterity.interfaces import IDexterityFTI
+from plone.uuid.interfaces import IAttributeUUID
 
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
@@ -44,6 +47,12 @@ class IntegrationTest(unittest.TestCase):
         factory = fti.factory
         new_object = createObject(factory)
         self.failUnless(INITF.providedBy(new_object))
+
+    def test_is_referenceable(self):
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        n1 = self.folder['n1']
+        self.assertTrue(IReferenceable.providedBy(n1))
+        self.assertTrue(IAttributeUUID.providedBy(n1))
 
     def test_subtitle_indexed(self):
         self.folder.invokeFactory('collective.nitf.content', 'n1')
