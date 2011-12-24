@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-12-09 06:40+0000\n"
+"POT-Creation-Date: 2011-12-24 15:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Archive-Material"
 msgstr ""
 
-#: collective/nitf/content.py:45
+#: collective/nitf/content.py:48
 msgid "Author"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: collective/nitf/content.py:52
+#: collective/nitf/content.py:55
 msgid "Body text"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Forecast"
 msgstr ""
 
-#: collective/nitf/content.py:58
+#: collective/nitf/content.py:62
 msgid "Genre"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Interview"
 msgstr ""
 
-#: collective/nitf/content.py:86
+#: collective/nitf/content.py:90
 msgid "Location"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Results-Listings-Tables"
 msgstr ""
 
-#: collective/nitf/content.py:68
+#: collective/nitf/content.py:72
 #: collective/nitf/controlpanel.py:21
 msgid "Section"
 msgstr ""
@@ -180,7 +180,7 @@ msgstr ""
 msgid "Start upload"
 msgstr ""
 
-#: collective/nitf/content.py:33
+#: collective/nitf/content.py:36
 msgid "Subtitle"
 msgstr ""
 
@@ -192,32 +192,32 @@ msgstr ""
 msgid "Transcript-Verbatim"
 msgstr ""
 
-#: collective/nitf/content.py:77
+#: collective/nitf/content.py:81
 msgid "Urgency"
 msgstr ""
 
 #. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
-#: collective/nitf/content.py:59
+#: collective/nitf/content.py:63
 msgid "help_genre"
 msgstr ""
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:87
+#: collective/nitf/content.py:91
 msgid "help_location"
 msgstr ""
 
 #. Default: "Named section where the article will appear."
-#: collective/nitf/content.py:69
+#: collective/nitf/content.py:73
 msgid "help_section"
 msgstr ""
 
 #. Default: "A subordinate headline for the article."
-#: collective/nitf/content.py:34
+#: collective/nitf/content.py:37
 msgid "help_subtitle"
 msgstr ""
 
 #. Default: "News importance."
-#: collective/nitf/content.py:78
+#: collective/nitf/content.py:82
 msgid "help_urgency"
 msgstr ""
 

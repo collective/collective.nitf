@@ -2,10 +2,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2011-12-09 06:40+0000\n"
+"POT-Creation-Date: 2011-12-24 15:48+0000\n"
 "PO-Revision-Date: 2011-08-04 17:47+0000\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Spanish <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +32,7 @@ msgstr "Análisis"
 msgid "Archive-Material"
 msgstr "Material de archivo"
 
-#: collective/nitf/content.py:45
+#: collective/nitf/content.py:48
 msgid "Author"
 msgstr "Autor"
 
@@ -44,7 +44,7 @@ msgstr "Secciones disponibles"
 msgid "Background"
 msgstr "Contexto"
 
-#: collective/nitf/content.py:52
+#: collective/nitf/content.py:55
 msgid "Body text"
 msgstr "Cuerpo del texto"
 
@@ -90,7 +90,7 @@ msgstr "Crónica"
 msgid "Forecast"
 msgstr "Pronóstico"
 
-#: collective/nitf/content.py:58
+#: collective/nitf/content.py:62
 msgid "Genre"
 msgstr "Género"
 
@@ -110,7 +110,7 @@ msgstr "Historia"
 msgid "Interview"
 msgstr "Entrevista"
 
-#: collective/nitf/content.py:86
+#: collective/nitf/content.py:90
 msgid "Location"
 msgstr "Localización"
 
@@ -166,7 +166,7 @@ msgstr "Contenido relacionado"
 msgid "Results-Listings-Tables"
 msgstr "Resultados-Listados-Tablas"
 
-#: collective/nitf/content.py:68
+#: collective/nitf/content.py:72
 #: collective/nitf/controlpanel.py:21
 msgid "Section"
 msgstr "Sección"
@@ -179,7 +179,7 @@ msgstr "Material de apoyo"
 msgid "Start upload"
 msgstr "Comenzar a subir"
 
-#: collective/nitf/content.py:33
+#: collective/nitf/content.py:36
 msgid "Subtitle"
 msgstr "Subtítulo"
 
@@ -191,32 +191,32 @@ msgstr "Resumen"
 msgid "Transcript-Verbatim"
 msgstr "Transcripción literal"
 
-#: collective/nitf/content.py:77
+#: collective/nitf/content.py:81
 msgid "Urgency"
 msgstr "Urgencia"
 
 #. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
-#: collective/nitf/content.py:59
+#: collective/nitf/content.py:63
 msgid "help_genre"
 msgstr "Describe la naturaleza, característica periodística o intelectual de una noticia, no específicamente su contenido."
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:87
+#: collective/nitf/content.py:91
 msgid "help_location"
 msgstr "El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la historia)."
 
 #. Default: "Named section where the article will appear."
-#: collective/nitf/content.py:69
+#: collective/nitf/content.py:73
 msgid "help_section"
 msgstr "Nombre de la sección en la que aparecerá el artículo."
 
 #. Default: "A subordinate headline for the article."
-#: collective/nitf/content.py:34
+#: collective/nitf/content.py:37
 msgid "help_subtitle"
 msgstr "Un titular subordinado para el artículo."
 
 #. Default: "News importance."
-#: collective/nitf/content.py:78
+#: collective/nitf/content.py:82
 msgid "help_urgency"
 msgstr "Importancia de la noticia."
 
