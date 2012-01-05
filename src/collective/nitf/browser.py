@@ -2,6 +2,7 @@
 
 import json
 import math
+from inspect import ismethod
 
 from Acquisition import aq_inner
 
@@ -10,6 +11,7 @@ from zope.container.interfaces import INameChooser
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 
+from Products.Archetypes.utils import shasattr
 from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFPlone.utils import getToolByName
 
@@ -282,14 +284,23 @@ class JSON_View(grok.View):
         context_name = context_state.object_title()
         context_url = context_state.object_url()
         del_url = context_url
+        context_size = 0
+        if shasattr(context, 'size'):
+            if ismethod(context.size):
+                context_size = context.size()
+            else:
+                context_size = context.size
+
         info = {'name': context_name,
                 'url':  context_url,
-                'size': context.size(),
+                'size': context_size,
                 'delete_url':  del_url,
                 'delete_type': 'DELETE',
                 }
+
         if context.Type() == 'Image':
             info['thumbnail_url'] = context_url + '/image_thumb'
+
         return info
 
     def getContainerInfo(self):
