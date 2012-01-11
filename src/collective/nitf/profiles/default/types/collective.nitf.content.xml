@@ -31,6 +31,7 @@
      <element value="plone.app.dexterity.behaviors.metadata.IDublinCore" />
      <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
      <element value="plone.app.relationfield.behavior.IRelatedItems" />
+     <element value="collective.upload.behaviors.IMultipleUpload" />     
  </property>
 
  <!-- View information -->
