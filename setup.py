@@ -36,6 +36,7 @@ setup(name='collective.nitf',
         'plone.app.dexterity>=1.1',
         'plone.app.referenceablebehavior',
         'plone.app.relationfield',
+        'collective.upload'
         ],
       extras_require={
         'test': ['plone.app.testing'],
