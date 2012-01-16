@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
- <layers>
-  <layer name="collective.nitf.layer"
-         interface="collective.nitf.interfaces.INITFBrowserLayer"
-         remove="true" />
- </layers>
+<layers>
+ <layer name="collective.nitf.layer"
+    interface="collective.nitf.interfaces.INITFBrowserLayer"
+    remove="True" />
+</layers>
