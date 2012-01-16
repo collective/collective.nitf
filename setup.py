@@ -9,9 +9,9 @@ setup(name='collective.nitf',
       version=version,
       description="A Dexterity-based content type inspired on the News Industry Text Format specification.",
       long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "INSTALL.txt")).read() + "\n" +
+                       open(os.path.join("docs", "CREDITS.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from
-      # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Development Status :: 3 - Alpha",
         "Framework :: Plone :: 4.1",
@@ -19,6 +19,8 @@ setup(name='collective.nitf',
         "Operating System :: OS Independent",
         "Programming Language :: JavaScript",
         "Programming Language :: Python",
+        "Topic :: Office/Business :: News/Diary",
+        "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='plone dexterity nitf',
       author='Héctor Velarde',
