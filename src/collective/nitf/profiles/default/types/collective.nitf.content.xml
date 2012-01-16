@@ -27,11 +27,10 @@
 
  <!-- enabled behaviors -->
  <property name="behaviors">
-     <element value="plone.app.content.interfaces.INameFromTitle" />
-     <element value="plone.app.dexterity.behaviors.metadata.IDublinCore" />
-     <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
-     <element value="plone.app.relationfield.behavior.IRelatedItems" />
-     <element value="collective.upload.behaviors.IMultipleUpload" />     
+  <element value="plone.app.content.interfaces.INameFromTitle" />
+  <element value="plone.app.dexterity.behaviors.metadata.IDublinCore" />
+  <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
+  <element value="plone.app.relationfield.behavior.IRelatedItems" />
  </property>
 
  <!-- View information -->
