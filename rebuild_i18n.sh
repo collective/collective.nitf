@@ -13,5 +13,5 @@ for po in ${BASE_DIRECTORY}/locales/*/LC_MESSAGES/${I18NDOMAIN}.po; do
     bin/i18ndude sync --pot ${BASE_DIRECTORY}/locales/${I18NDOMAIN}.pot $po
 done
 
-# Report of suspect untranslated messages
+# Report of errors and suspect untranslated messages
 bin/i18ndude find-untranslated -s ${BASE_DIRECTORY}
