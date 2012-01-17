@@ -46,17 +46,6 @@ class ActionsTest(unittest.TestCase):
         logout()
         self.assertRaises(Unauthorized, self.n1.restrictedTraverse, name)
 
-    def test_media_uploader(self):
-        name = '@@media_uploader'
-        try:
-            self.n1.unrestrictedTraverse(name)
-        except AttributeError:
-            self.fail('%s has no view %s' % (self.n1, name))
-
-        # action can not be accessed by anonymous users
-        logout()
-        self.assertRaises(Unauthorized, self.n1.restrictedTraverse, name)
-
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
