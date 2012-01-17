@@ -13,7 +13,7 @@ setup(name='collective.nitf',
                        open(os.path.join("docs", "CREDITS.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Framework :: Plone :: 4.1",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
