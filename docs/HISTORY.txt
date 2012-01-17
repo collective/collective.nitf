@@ -1,18 +1,7 @@
 Changelog
-=========
+---------
 
 1.0dev (unreleased)
--------------------
+^^^^^^^^^^^^^^^^^^^
 
-- added migration from News Items using collective.transmogrifier
-  [hvelarde]
-- added support to upload multiple in batchs using jQuery File Upload
-- added support to organize images using jQuery UI Sortable
-  [saibatizoku]
-- updated testing infrastructure to use plone.app.testing
-- added i18n and Spanish translation
-- added control panel using plone.app.registry
-- added default value methods
-- added vocabulary for sections
-- added tests for registry
-  [hvelarde]
+- Initial release.

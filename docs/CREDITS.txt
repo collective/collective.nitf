@@ -1,8 +1,10 @@
-collective.nitf contributors
-============================
+Contributors
+------------
 
-- Héctor Velarde (hector.velarde@gmail.com)
+* Héctor Velarde (hector.velarde@gmail.com)
 
-- Joaquín Rosales (globojorro@gmail.com)
+* Joaquín Rosales (globojorro@gmail.com)
 
-- Érico Andrei (erico@simplesconsultoria.com.br)
+* Érico Andrei (erico@simplesconsultoria.com.br)
+
+Development sponsored by Open Multimedia.

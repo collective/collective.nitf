@@ -1,5 +1,22 @@
+****************
+collective.polls
+****************
+
+.. contents:: Table of Contents
+
+Overview
+--------
+
+A content type inspired on the News Industry Text Format specification.
+
+Requirements
+------------
+
+* Plone >= 4.1.x (http://plone.org/products/plone)
+* Dexterity >= 1.1 (http://pypi.python.org/pypi/plone.app.dexterity)
+
 Introduction
-============
+------------
 
 News articles in Plone are instances of the 'News Item' content type: they can
 contain a title, a description, a body text, an image and some basic metadata.
