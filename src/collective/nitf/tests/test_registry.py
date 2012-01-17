@@ -65,12 +65,12 @@ class RegistryTest(unittest.TestCase):
         self.failUnless('default_section' in INITFSettings)
         self.assertEquals(record_default_section.value, None)
 
-    def test_record_default_kind(self):
-        # Test that the default_kind record is in the control panel
-        record_default_kind = self.registry.records[
-            'collective.nitf.controlpanel.INITFSettings.default_kind']
-        self.failUnless('default_kind' in INITFSettings)
-        self.assertEquals(record_default_kind.value,
+    def test_record_default_genre(self):
+        # Test that the default_genre record is in the control panel
+        record_default_genre = self.registry.records[
+            'collective.nitf.controlpanel.INITFSettings.default_genre']
+        self.failUnless('default_genre' in INITFSettings)
+        self.assertEquals(record_default_genre.value,
                           config.DEFAULT_GENRE)
 
     def test_record_default_urgency(self):
@@ -105,7 +105,7 @@ class RegistryUninstallTest(unittest.TestCase):
         records = [
             'collective.nitf.controlpanel.INITFSettings.sections',
             'collective.nitf.controlpanel.INITFSettings.default_section',
-            'collective.nitf.controlpanel.INITFSettings.default_kind',
+            'collective.nitf.controlpanel.INITFSettings.default_genre',
             'collective.nitf.controlpanel.INITFSettings.default_urgency',
             ]
         for r in records:

@@ -11,8 +11,8 @@
         <extra name="index_type" value="Okapi BM25 Rank"/>
         <extra name="lexicon_id" value="plone_lexicon"/>
     </index>
-    <index name="kind" meta_type="FieldIndex">
-        <indexed_attr value="kind"/>
+    <index name="genre" meta_type="FieldIndex">
+        <indexed_attr value="genre"/>
     </index>
     <index name="section" meta_type="FieldIndex">
         <indexed_attr value="section"/>
@@ -32,7 +32,7 @@
     </index>
     <column value="subtitle"/>
     <column value="byline"/>
-    <column value="kind"/>
+    <column value="genre"/>
     <column value="section"/>
     <column value="urgency"/>
     <column value="location"/>

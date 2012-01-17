@@ -25,7 +25,7 @@ class INITFSettings(Interface):
             vocabulary=u'collective.nitf.Sections',
             required=False,)
 
-    default_kind = schema.Choice(
+    default_genre = schema.Choice(
             title=_(u'Default Genre'),
             vocabulary=config.GENRES,
             required=False,

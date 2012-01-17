@@ -72,12 +72,12 @@ class IntegrationTest(unittest.TestCase):
         self.assertEquals(1, len(result))
         self.assertEquals(result[0].getURL(), n1.absolute_url())
 
-    def test_kind_indexed(self):
+    def test_genre_indexed(self):
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         n1 = self.folder['n1']
-        n1.kind = 'News Type'
+        n1.genre = 'News Type'
         n1.reindexObject()
-        result = self.portal.portal_catalog(kind='News Type')
+        result = self.portal.portal_catalog(genre='News Type')
         self.assertEquals(1, len(result))
         self.assertEquals(result[0].getURL(), n1.absolute_url())
 

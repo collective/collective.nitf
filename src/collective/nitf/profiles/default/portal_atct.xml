@@ -11,7 +11,7 @@
      i18n:attributes="description;friendlyName">
    <criteria>ATSimpleStringCriterion</criteria>
   </index>
-  <index name="kind" description=""
+  <index name="genre" description=""
      enabled="True" friendlyName="News Type"
      i18n:attributes="description;friendlyName">
    <criteria>ATListCriterion</criteria>
@@ -43,7 +43,7 @@
      description="" enabled="True"
      friendlyName="Author"
      i18n:attributes="description;friendlyName" />
-  <metadata name="kind"
+  <metadata name="genre"
      description="" enabled="True"
      friendlyName="News Type"
      i18n:attributes="description;friendlyName" />

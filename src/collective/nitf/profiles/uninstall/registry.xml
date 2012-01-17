@@ -2,6 +2,6 @@
 <registry>
     <record name="collective.nitf.controlpanel.INITFSettings.sections" delete="true" />
     <record name="collective.nitf.controlpanel.INITFSettings.default_section" delete="true" />
-    <record name="collective.nitf.controlpanel.INITFSettings.default_kind" delete="true" />
+    <record name="collective.nitf.controlpanel.INITFSettings.default_genre" delete="true" />
     <record name="collective.nitf.controlpanel.INITFSettings.default_urgency" delete="true" />
 </registry>

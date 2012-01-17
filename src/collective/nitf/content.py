@@ -56,8 +56,8 @@ class INITF(form.Schema):
             required=False,
         )
 
-    form.order_before(kind='subjects')
-    kind = schema.Choice(
+    form.order_before(genre='subjects')
+    genre = schema.Choice(
             # nitf/head/tobject/tobject.property/@tobject.property.type
             title=_(u'Genre'),
             description=_(u'help_genre',
@@ -96,11 +96,11 @@ class INITF(form.Schema):
         )
 
 
-@form.default_value(field=INITF['kind'])
-def kind_default_value(data):
+@form.default_value(field=INITF['genre'])
+def genre_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
-    return settings.default_kind
+    return settings.default_genre
 
 
 class SectionsVocabulary(object):
