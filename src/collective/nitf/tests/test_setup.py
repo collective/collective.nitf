@@ -24,7 +24,7 @@ class InstallTest(unittest.TestCase):
         qi = getattr(self.portal, 'portal_quickinstaller')
         self.assertTrue(qi.isProductInstalled(PROJECTNAME))
 
-    def test_browserlayer_installed(self):
+    def test_browserlayer(self):
         layers = [l.getName() for l in registered_layers()]
         self.assertTrue('INITFBrowserLayer' in layers,
                         'browser layer not installed')
@@ -52,12 +52,13 @@ class UninstallTest(unittest.TestCase):
     def test_uninstalled(self):
         qi = getattr(self.portal, 'portal_quickinstaller')
         qi.uninstallProducts(products=[PROJECTNAME])
-        self.assertTrue(not qi.isProductInstalled(PROJECTNAME))
+        self.assertFalse(qi.isProductInstalled(PROJECTNAME))
 
-    def test_browserlayer_uninstalled(self):
+    def test_browserlayer_removed(self):
+        # XXX: removal is implemented until plone.browserlayer 2.1.1
         layers = [l.getName() for l in registered_layers()]
-        self.assertTrue('INITFBrowserLayer' not in layers,
-                        'browser layer not removed')
+        self.assertFalse('INITFBrowserLayer' in layers,
+                         'browser layer not removed')
 
 
 def test_suite():
