@@ -14,4 +14,4 @@ for po in ${BASE_DIRECTORY}/locales/*/LC_MESSAGES/${I18NDOMAIN}.po; do
 done
 
 # Report of errors and suspect untranslated messages
-bin/i18ndude find-untranslated -s ${BASE_DIRECTORY}
+bin/i18ndude find-untranslated ${BASE_DIRECTORY}
