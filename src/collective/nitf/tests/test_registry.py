@@ -81,6 +81,11 @@ class RegistryTest(unittest.TestCase):
         self.assertEquals(record_default_urgency.value,
                           config.DEFAULT_URGENCY)
 
+    def test_javascript_registry_configured(self):
+        portal = self.layer['portal']
+        jsRegistry = getToolByName(portal, 'portal_javascripts')
+        self.assertTrue("++resource++collective.nitf/nitf_fixes.js"
+            in jsRegistry.getResourceIds())
 
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
@@ -99,6 +104,12 @@ class RegistryUninstallTest(unittest.TestCase):
         # uninstall the package
         self.qi = getattr(self.portal, 'portal_quickinstaller')
         self.qi.uninstallProducts(products=[config.PROJECTNAME])
+
+    def test_javascript_registry_configured(self):
+        portal = self.layer['portal']
+        jsRegistry = getToolByName(portal, 'portal_javascripts')
+        self.assertTrue("++resource++collective.nitf/nitf_fixes.js"
+            not in jsRegistry.getResourceIds())
 
     def test_records_uninstalled(self):
         # Test that the records were removed from the control panel
