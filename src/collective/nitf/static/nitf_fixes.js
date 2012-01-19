@@ -1,7 +1,7 @@
 function collapseSections() {
   //we are in edit or add nitf content
-  if($("body").hasClass("template-collective.nitf.content") || 
-    $("body").hasClass("portaltype-collective-nitf-content")) {
+  if($("body").hasClass("template-collective.nitf.content")  || 
+    $("body").hasClass("portaltype-collective-nitf-content") && $("body").hasClass("template-edit")) {
     $("fieldset legend").click(function() {
       //add a tab-collapser tab that wraps all the fields
       if($(".tab-collapser",$(this).parent()).length === 0) {
