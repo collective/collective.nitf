@@ -1,0 +1,9 @@
+#content legend.collapsible {
+    background: url("++resource++collective.nitf/images/arrows.png") no-repeat scroll 1px 11px transparent;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+#content legend.collapsible.collapsed {
+    background: url("++resource++collective.nitf/images/arrows.png") no-repeat scroll 1px -28px transparent;
+}

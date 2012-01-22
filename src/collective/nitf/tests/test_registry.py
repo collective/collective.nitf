@@ -86,6 +86,14 @@ class RegistryTest(unittest.TestCase):
         jsRegistry = getToolByName(portal, 'portal_javascripts')
         self.assertTrue("++resource++collective.nitf/nitf_fixes.js"
             in jsRegistry.getResourceIds())
+        self.assertTrue("++resource++collective.nitf/jquery.collapsible-v.2.1.3.js"
+            in jsRegistry.getResourceIds())
+    
+    def test_css_registry_configured(self):
+        portal = self.layer['portal']
+        cssRegistry = getToolByName(portal, 'portal_css')
+        self.assertTrue("++resource++collective.nitf/collapsible.css"
+            in cssRegistry.getResourceIds())
 
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
@@ -110,6 +118,14 @@ class RegistryUninstallTest(unittest.TestCase):
         jsRegistry = getToolByName(portal, 'portal_javascripts')
         self.assertTrue("++resource++collective.nitf/nitf_fixes.js"
             not in jsRegistry.getResourceIds())
+        self.assertTrue("++resource++collective.nitf/jquery.collapsible-v.2.1.3.js"
+            not in jsRegistry.getResourceIds())
+
+    def test_css_registry_configured(self):
+        portal = self.layer['portal']
+        cssRegistry = getToolByName(portal, 'portal_css')
+        self.assertTrue("++resource++collective.nitf/collapsible.css"
+            not in cssRegistry.getResourceIds())
 
     def test_records_uninstalled(self):
         # Test that the records were removed from the control panel
