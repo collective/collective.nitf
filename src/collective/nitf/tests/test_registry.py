@@ -97,6 +97,8 @@ class RegistryUninstallTest(unittest.TestCase):
         qi.uninstallProducts(products=[config.PROJECTNAME])
 
     def test_records_removed(self):
+        """Test that the NITF records were removed from the registry.
+        """
         records = [
             BASE_REGISTRY % 'sections',
             BASE_REGISTRY % 'default_section',
