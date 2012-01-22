@@ -40,14 +40,24 @@ Functional test:
     >>> 'Item created' in browser.contents
     True
 
+A news article can contain images:
+
+    >>> browser.getLink('Miracle Cure').click()
+    >>> browser.getLink('Image').click()
+    >>> from cStringIO import StringIO
+    >>> from zope.app.file.tests.test_image import zptlogo
+    >>> ctrl = browser.getControl(name='image_file')
+    >>> ctrl.add_file(StringIO(zptlogo), 'image/gif', 'zpt.gif')
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
 A news article can contain files:
 
     >>> browser.getLink('Miracle Cure').click()
     >>> browser.getLink('File').click()
-    >>> import cStringIO
     >>> ctrl = browser.getControl(name='file_file')
-    >>> ctrl.add_file(cStringIO.StringIO('File contents'),
-    ...               'text/plain', 'test.txt')
+    >>> ctrl.add_file(StringIO('File contents'), 'text/plain', 'test.txt')
     >>> browser.getControl('Save').click()
     >>> 'Changes saved' in browser.contents
     True
@@ -63,7 +73,15 @@ A news article can contain links:
     >>> 'Changes saved' in browser.contents
     True
 
-    >>> browser.getLink('Miracle Cure').click()
+Test views:
 
-    >>> open('/tmp/test.html', 'w').write(browser.contents)
+    >>> browser.open(portalURL + '/miracle-cure')
+    >>> 'Miracle Cure' in browser.contents
+    True
+    >>> browser.open(portalURL + '/miracle-cure/@@gallery')
+    >>> 'Miracle Cure' in browser.contents
+    True
+    >>> browser.open(portalURL + '/miracle-cure/@@nitf')
+    >>> 'Miracle Cure' in browser.contents
+    True
 
