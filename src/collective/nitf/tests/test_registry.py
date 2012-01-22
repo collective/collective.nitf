@@ -21,26 +21,29 @@ BASE_REGISTRY = 'collective.nitf.controlpanel.INITFSettings.%s'
 
 
 class RegistryTest(unittest.TestCase):
+    """Ensure the NITF registry is properly installed.
+    """
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        # Set up the NITF settings registry
         self.registry = Registry()
         self.registry.registerInterface(INITFSettings)
 
     def test_nitf_controlpanel_view(self):
-        # Test the NITF setting control panel view
+        """The NITF setting control panel must have view.
+        """
         view = getMultiAdapter((self.portal, self.portal.REQUEST),
                                name=config.CONTROLPANEL_ID)
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_nitf_controlpanel_view_protected(self):
-        # Test that the NITF setting control panel view can not be accessed
-        # by anonymous users
+        """The NITF setting control panel view can not be accessed by
+        anonymous users.
+        """
         from AccessControl import Unauthorized
         logout()
         self.assertRaises(Unauthorized,
@@ -48,27 +51,31 @@ class RegistryTest(unittest.TestCase):
                          '@@nitf-settings')
 
     def test_nitf_in_controlpanel(self):
-        # Check that there is an NITF entry in the control panel
+        """There must be an NITF entry in the control panel.
+        """
         self.controlpanel = getToolByName(self.portal, 'portal_controlpanel')
         self.assertTrue('nitf' in [a.getAction(self)['id']
                             for a in self.controlpanel.listActions()])
 
     def test_record_sections(self):
-        # Test that the sections record is in the control panel
+        """The sections record must be in the control panel.
+        """
         record_sections = self.registry.records[
             BASE_REGISTRY % 'sections']
         self.assertTrue('sections' in INITFSettings)
         self.assertEquals(record_sections.value, set([]))
 
     def test_record_default_section(self):
-        # Test that the default_section record is in the control panel
+        """The default section record must be in the control panel.
+        """
         record_default_section = self.registry.records[
             BASE_REGISTRY % 'default_section']
         self.assertTrue('default_section' in INITFSettings)
         self.assertEquals(record_default_section.value, None)
 
     def test_record_default_genre(self):
-        # Test that the default_genre record is in the control panel
+        """The default genre record must be in the control panel.
+        """
         record_default_genre = self.registry.records[
             BASE_REGISTRY % 'default_genre']
         self.assertTrue('default_genre' in INITFSettings)
@@ -76,7 +83,8 @@ class RegistryTest(unittest.TestCase):
                           config.DEFAULT_GENRE)
 
     def test_record_default_urgency(self):
-        # Test that the default_urgency record is in the control panel
+        """The default urgency record must be in the control panel.
+        """
         record_default_urgency = self.registry.records[
             BASE_REGISTRY % 'default_urgency']
         self.assertTrue('default_urgency' in INITFSettings)
@@ -85,7 +93,8 @@ class RegistryTest(unittest.TestCase):
 
 
 class RegistryUninstallTest(unittest.TestCase):
-    """Ensure registry is properly uninstalled"""
+    """Ensure the NITF registry is properly uninstalled.
+    """
 
     layer = INTEGRATION_TESTING
 
@@ -97,7 +106,7 @@ class RegistryUninstallTest(unittest.TestCase):
         qi.uninstallProducts(products=[config.PROJECTNAME])
 
     def test_records_removed(self):
-        """Test that the NITF records were removed from the registry.
+        """The NITF records must be removed from the registry.
         """
         records = [
             BASE_REGISTRY % 'sections',

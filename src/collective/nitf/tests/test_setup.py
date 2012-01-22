@@ -12,6 +12,8 @@ from collective.nitf.testing import INTEGRATION_TESTING
 
 
 class InstallTest(unittest.TestCase):
+    """Ensure the NITF package is properly installed.
+    """
 
     layer = INTEGRATION_TESTING
 
@@ -29,6 +31,8 @@ class InstallTest(unittest.TestCase):
         self.assertEqual(roles, ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
 
     def test_browserlayer(self):
+        """Browser layers are properly registered at install time.
+        """
         layers = [l.getName() for l in registered_layers()]
         self.assertTrue('INITFBrowserLayer' in layers,
                         'browser layer not installed')
@@ -44,6 +48,8 @@ class InstallTest(unittest.TestCase):
                          'workflow not changed on Link content type')
 
     def test_javascript_registry(self):
+        """JavaScripts are properly registered at install time.
+        """
         portal_javascripts = self.portal.portal_javascripts
         self.assertTrue('++resource++collective.nitf/nitf_fixes.js'
             in portal_javascripts.getResourceIds())
@@ -63,11 +69,15 @@ class UninstallTest(unittest.TestCase):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
     def test_browserlayer_removed(self):
+        """Browser layers are properly removed at uninstall time.
+        """
         layers = [l.getName() for l in registered_layers()]
         self.assertFalse('INITFBrowserLayer' in layers,
                          'browser layer not removed')
 
     def test_javascript_registry_removed(self):
+        """JavaScripts are properly removed at uninstall time.
+        """
         portal_javascripts = self.portal.portal_javascripts
         self.assertTrue('++resource++collective.nitf/nitf_fixes.js'
             not in portal_javascripts.getResourceIds())
