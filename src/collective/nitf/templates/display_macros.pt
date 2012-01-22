@@ -11,18 +11,15 @@
     <tal:content-core metal:define-macro="content-core">
         <div class="mediaview">
             <metal:mediamacro define-macro="media-box">
-            <div id="mediabox" tal:condition="images"
-                     tal:define="images view/images">
+            <div id="mediabox" tal:define="images view/get_images" tal:condition="images">
                 <div id="images">
                     <div class="items">
                         <tal:lines repeat="item images">
-                        <div>
+                        <div tal:define="item_obj item/getObject">
                             <span>
-                                <img class="media-image" src="" alt=""
-                                     tal:attributes="src string:${item/image_url}/image_preview;
-                                                     alt string:${item/title}" />
-                                <div class="info" tal:condition="item/description|nothing">
-                                    <p tal:content="item/description">Image Caption</p>
+                                <img tal:replace="structure python: item_obj.getImage().tag(scale='preview', css_class='media-image')" src="" alt="" />
+                                <div class="info" tal:condition="item_obj/description|nothing">
+                                    <p tal:content="item_obj/description">Image Caption</p>
                                 </div>
                             </span>
                         </div>

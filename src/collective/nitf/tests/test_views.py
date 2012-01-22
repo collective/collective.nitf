@@ -51,21 +51,76 @@ class BrowserLayerTest(unittest.TestCase):
             self.fail('%s has no view %s' % (self.n1, name))
 
         view = self.n1.restrictedTraverse(name)
-        view.update()
-        self.assertEquals(view.image(), None)
+        self.assertEquals(len(view.get_images()), 0)
+        self.assertEquals(len(view.get_files()), 0)
+        self.assertEquals(len(view.get_links()), 0)
+        self.assertEquals(len(view.get_media()), 0)
+        self.assertEquals(view.getImage(), None)
 
-        images = view.images()
-        self.assertEquals(len(images), 0)
-        files = view.files()
-        self.assertEquals(len(files), 0)
-        links = view.links()
-        self.assertEquals(len(links), 0)
-
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
-        self.assertEquals(view.image()['id'], 'foo')
-        images = view.images()
+    def test_get_images(self):
+        self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))
+        view = self.n1.restrictedTraverse('@@view')
+        images = view.get_images()
         self.assertEquals(len(images), 1)
-        # TODO: add file and link tests
+        self.assertEquals(images[0].getObject().id, 'foo')
+        self.assertEquals(images[0].getObject().title, 'Foo')
+        self.assertEquals(images[0].getObject().description, '')
+
+    def test_get_files(self):
+        self.n1.invokeFactory('File', 'bar', title='Bar', file=StringIO(zptlogo))
+        view = self.n1.restrictedTraverse('@@view')
+        files = view.get_files()
+        self.assertEquals(len(files), 1)
+        self.assertEquals(files[0].getObject().id, 'bar')
+        self.assertEquals(files[0].getObject().title, 'Bar')
+        self.assertEquals(files[0].getObject().description, '')
+
+    def test_get_links(self):
+        self.n1.invokeFactory('Link', 'baz', title='Baz', url='http://baz/')
+        view = self.n1.restrictedTraverse('@@view')
+        links = view.get_links()
+        self.assertEquals(len(links), 1)
+        self.assertEquals(links[0].getObject().id, 'baz')
+        self.assertEquals(links[0].getObject().title, 'Baz')
+        self.assertEquals(links[0].getObject().description, '')
+
+    def test_get_media(self):
+        self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))
+        self.n1.invokeFactory('File', 'bar', title='Bar', file=StringIO(zptlogo))
+        self.n1.invokeFactory('Link', 'baz', title='Baz', url='http://baz/')
+        view = self.n1.restrictedTraverse('@@view')
+        media = view.get_media()
+        self.assertEquals(len(media), 3)
+        self.assertEquals(media[0].getObject().id, 'foo')
+        self.assertEquals(media[1].getObject().id, 'bar')
+        self.assertEquals(media[2].getObject().id, 'baz')
+
+    def test_getImage(self):
+        self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))
+        view = self.n1.restrictedTraverse('@@view')
+        image = view.getImage()
+        self.assertEquals(image.id, 'foo')
+        self.assertEquals(image.title, 'Foo')
+        self.assertEquals(image.description, '')
+
+    def test_tag(self):
+        self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))
+        view = self.n1.restrictedTraverse('@@view')
+        tag = view.tag
+        self.assertEquals(tag(),
+            '<img src="http://nohost/plone/test-folder/n1/foo/image" '
+            'alt="Foo" title="Foo" height="16" width="16" />')
+        self.assertEquals(tag(scale='preview'),
+            '<img src="http://nohost/plone/test-folder/n1/foo/image_preview" '
+            'alt="Foo" title="Foo" height="16" width="16" />')
+        self.assertEquals(tag(css_class='myClass'),
+            '<img src="http://nohost/plone/test-folder/n1/foo/image" '
+            'alt="Foo" title="Foo" height="16" width="16" class="myClass" />')
+
+    def test_imageCaption(self):
+        self.n1.invokeFactory('Image', 'foo', description='Caption', image=StringIO(zptlogo))
+        view = self.n1.restrictedTraverse('@@view')
+        self.assertEquals(view.imageCaption(), 'Caption')
 
     def test_gallery(self):
         name = '@@gallery'
@@ -90,8 +145,7 @@ class BrowserLayerTest(unittest.TestCase):
             self.fail('%s has no view %s' % (self.n1, name))
 
     def test_viewlets_registered(self):
-        # TODO: implement test
-        pass
+        NotImplemented
 
 
 def test_suite():

@@ -7,6 +7,8 @@ from Acquisition import aq_inner
 from five import grok
 from zope.interface import Interface
 
+from Products.ATContentTypes.interfaces import IATImage
+from Products.ATContentTypes.interfaces import IATFile
 from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFPlone.utils import getToolByName
 
@@ -16,8 +18,6 @@ from plone.directives import dexterity
 
 from collective.nitf.content import INITF
 from collective.nitf.interfaces import INITFBrowserLayer, IMediaView
-
-IMAGE_MIMETYPES = ['image/jpeg', 'image/gif', 'image/png']
 
 grok.templatedir('templates')
 
@@ -48,56 +48,62 @@ class View(dexterity.DisplayForm):
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
 
-    def image(self):
-        imgs = self.get_media_files(types=('Image',), limit=1)
-        if len(imgs):
-            return imgs[0]
-
     def update(self):
         self.context = aq_inner(self.context)
         self.catalog = getToolByName(self.context, 'portal_catalog')
 
-    def get_media_files(self, types=('Image', 'File',), limit=None):
-        context_path = '/'.join(self.context.getPhysicalPath())
-        media_brains = self.catalog.searchResults(
-                        {'Type': types,
-                         'path': {'query': context_path,
-                                  'depth': 1},
-                         },
-                        sort_on="getObjPositionInParent",
-                        limit=limit)
-        media_items = []
-        for brain in media_brains:
-            ibrain = {'id': brain.id,
-                      'title': brain.Title,
-                      'description': brain.Description,
-                      'image_url': brain.getURL(),
-                      }
-            media_items.append(ibrain)
-        return media_items
-
-    def images(self):
-        self.update()
-        return self.get_media_files(types=('Image',))
-
-    def files(self):
-        self.update()
-        return self.get_media_files(types=('File',))
-
-    def links(self):
-        """Return a catalog search result of links to show.
+    def _get_brains(self, object_provides=None):
+        """Return a list of brains inside the NITF object.
         """
         self.update()
+        path = '/'.join(self.context.getPhysicalPath())
+        brains = self.catalog(object_provides=object_provides,
+                              path=path,
+                              sort_on='getObjPositionInParent')
 
-        links = self.catalog(object_provides=IATLink.__identifier__,
-                        path='/'.join(self.context.getPhysicalPath()),
-                        sort_on='getObjPositionInParent')
+        return brains
 
-        links = [brain.getObject() for brain in links]
-        links = [{'title': obj.Title(),
-                  'url': obj.remoteUrl,
-                  'description': obj.Description()} for obj in links]
-        return links
+    def get_images(self):
+        """Return a list of image brains inside the NITF object.
+        """
+        return self._get_brains(IATImage.__identifier__)
+
+    def get_files(self):
+        """Return a list of file brains inside the NITF object.
+        """
+        return self._get_brains(IATFile.__identifier__)
+
+    def get_links(self):
+        """Return a list of link brains inside the NITF object.
+        """
+        return self._get_brains(IATLink.__identifier__)
+
+    def get_media(self):
+        """Return a list of object brains inside the NITF object.
+        """
+        media_interfaces = [IATImage.__identifier__,
+                            IATFile.__identifier__,
+                            IATLink.__identifier__]
+
+        return self._get_brains(media_interfaces)
+
+    # XXX: is this waking up the object more than once when calling
+    # imageCaption() and tag()?
+    def getImage(self):
+        images = self.get_images()
+        if len(images) > 0:
+            return images[0].getObject()
+        return None
+
+    def imageCaption(self):
+        image = self.getImage()
+        if image is not None:
+            return image.Description()
+
+    def tag(self, **kwargs):
+        image = self.getImage()
+        if image is not None:
+            return image.tag(**kwargs)
 
 
 class Display_Macros(View):
