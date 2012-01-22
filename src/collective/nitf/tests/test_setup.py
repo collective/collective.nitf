@@ -43,6 +43,11 @@ class InstallTest(unittest.TestCase):
         self.assertEqual(chain[0], 'one_state_workflow',
                          'workflow not changed on Link content type')
 
+    def test_javascript_registry(self):
+        portal_javascripts = self.portal.portal_javascripts
+        self.assertTrue('++resource++collective.nitf/nitf_fixes.js'
+            in portal_javascripts.getResourceIds())
+
 
 class UninstallTest(unittest.TestCase):
 
@@ -61,6 +66,11 @@ class UninstallTest(unittest.TestCase):
         layers = [l.getName() for l in registered_layers()]
         self.assertFalse('INITFBrowserLayer' in layers,
                          'browser layer not removed')
+
+    def test_javascript_registry_removed(self):
+        portal_javascripts = self.portal.portal_javascripts
+        self.assertTrue('++resource++collective.nitf/nitf_fixes.js'
+            not in portal_javascripts.getResourceIds())
 
 
 def test_suite():
