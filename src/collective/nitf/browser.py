@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import json
 import math
-from inspect import ismethod
 
 from Acquisition import aq_inner
 
 from five import grok
-from zope.container.interfaces import INameChooser
-from zope.component import queryMultiAdapter
 from zope.interface import Interface
 
-from Products.Archetypes.utils import shasattr
 from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFPlone.utils import getToolByName
 
