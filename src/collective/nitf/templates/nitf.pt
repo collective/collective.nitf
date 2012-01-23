@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<nitf xmlns="http://iptc.org/std/NITF/2006-10-18/" version="-//IPTC//DTD NITF 3.5//EN"
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.iptc.org/std/NITF/3.5/specification/nitf-3-5.dtd">
+<nitf change.date="September 11, 2009" change.time="12:26" version="-//IPTC//DTD NITF 3.5//EN"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal">
 <head>
@@ -10,39 +11,29 @@
     </tobject>
     <!-- this article is an update of a previous release -->
     <docdata management-status="usable">
-
         <!-- the document id, which should be unique per publisher -->
         <doc-id id-string=""
                 tal:attributes="id-string context/getId" />
-
         <!-- event location: where events in this document took place -->
         <evloc city="" state-prov="" iso-cc=""
                tal:content="context/location"/>
-
         <urgency ed-urg=""
                  tal:attributes="ed-urg context/urgency" />
-
-        <!-- date.issue: when the document was sent to a receiver -->
-        <date.issue norm=""/>
-
+        <!-- TODO: date.issue: when the document was sent to a receiver -->
+        <date.issue norm="" />
         <!-- date.release: when the receiver may publish that content.
 		     used in conjunction with management-status attribute of docdata -->
         <date.release norm=""
                       tal:attributes="norm context/effective" />
-
         <!-- date.expire: when the publisher no longer wants the receiver to publish the article -->
         <date.expire norm=""
                      tal:attributes="norm context/expires" />
-
         <doc.copyright holder=""
-                     tal:attributes="holder context/Rights" />
-
+                       tal:attributes="holder context/Rights" />
         <doc.rights tal:content="context/Rights" />
-
         <key-list tal:repeat="subject context/subject">
             <keyword key="" tal:attributes="key subject" />
         </key-list>
-
         <identified-content />
     </docdata>
     <pubdata type="web" name="" position.section="" ex-ref=""
@@ -55,24 +46,20 @@
             <hl1 tal:content="context/title" />
             <hl2 tal:content="context/subtitle" />
         </hedline>
-        <note />
         <byline tal:content="context/byline" />
         <distributor />
         <dateline>
             <location />
         </dateline>
-        <abstract tal:content="context/description" />
+        <abstract>
+            <p tal:content="context/description" />
+        </abstract>
     </body.head>
     <body.content>
-        <tal:media >
-        <media media-type="">
-            <media-reference mime-type="" source="" alternate-text="" height="" width="" />
-            <media-caption tal:content="string:The caption" />
-        </media>
+        <tal:media repeat="media view/get_media">
+        <media tal:replace="structure media" />
         </tal:media>
-
-        <div tal:replace="structure context/text/output">The body</div>
-
+        <p tal:content="structure context/text/output|nothing">The text</p>
     </body.content>
     <body.end>
         <tagline>

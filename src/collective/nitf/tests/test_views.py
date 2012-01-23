@@ -58,22 +58,24 @@ class BrowserLayerTest(unittest.TestCase):
         self.assertEquals(view.getImage(), None)
 
     def test_get_images(self):
-        self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))
+        self.n1.invokeFactory('Image', 'foo', title='Foo', description='FOO',
+                              image=StringIO(zptlogo), filename='zpt.gif')
         view = self.n1.restrictedTraverse('@@view')
         images = view.get_images()
         self.assertEquals(len(images), 1)
         self.assertEquals(images[0].getObject().id, 'foo')
-        self.assertEquals(images[0].getObject().title, 'Foo')
-        self.assertEquals(images[0].getObject().description, '')
+        self.assertEquals(images[0].getObject().Title(), 'Foo')
+        self.assertEquals(images[0].getObject().Description(), 'FOO')
 
     def test_get_files(self):
-        self.n1.invokeFactory('File', 'bar', title='Bar', file=StringIO(zptlogo))
+        self.n1.invokeFactory('File', 'bar', title='Bar', description='BAR',
+                              image=StringIO(zptlogo), filename='zpt.gif')
         view = self.n1.restrictedTraverse('@@view')
         files = view.get_files()
         self.assertEquals(len(files), 1)
         self.assertEquals(files[0].getObject().id, 'bar')
-        self.assertEquals(files[0].getObject().title, 'Bar')
-        self.assertEquals(files[0].getObject().description, '')
+        self.assertEquals(files[0].getObject().Title(), 'Bar')
+        self.assertEquals(files[0].getObject().Description(), 'BAR')
 
     def test_get_links(self):
         self.n1.invokeFactory('Link', 'baz', title='Baz', url='http://baz/')
@@ -96,15 +98,17 @@ class BrowserLayerTest(unittest.TestCase):
         self.assertEquals(media[2].getObject().id, 'baz')
 
     def test_getImage(self):
-        self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))
+        self.n1.invokeFactory('Image', 'foo', title='Foo', description='FOO',
+                              image=StringIO(zptlogo), filename='zpt.gif')
         view = self.n1.restrictedTraverse('@@view')
         image = view.getImage()
         self.assertEquals(image.id, 'foo')
-        self.assertEquals(image.title, 'Foo')
-        self.assertEquals(image.description, '')
+        self.assertEquals(image.Title(), 'Foo')
+        self.assertEquals(image.Description(), 'FOO')
 
     def test_tag(self):
-        self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))
+        self.n1.invokeFactory('Image', 'foo', title='Foo', description='FOO',
+                              image=StringIO(zptlogo), filename='zpt.gif')
         view = self.n1.restrictedTraverse('@@view')
         tag = view.tag
         self.assertEquals(tag(),
@@ -118,9 +122,10 @@ class BrowserLayerTest(unittest.TestCase):
             'alt="Foo" title="Foo" height="16" width="16" class="myClass" />')
 
     def test_imageCaption(self):
-        self.n1.invokeFactory('Image', 'foo', description='Caption', image=StringIO(zptlogo))
+        self.n1.invokeFactory('Image', 'foo', title='Foo', description='FOO',
+                              image=StringIO(zptlogo), filename='zpt.gif')
         view = self.n1.restrictedTraverse('@@view')
-        self.assertEquals(view.imageCaption(), 'Caption')
+        self.assertEquals(view.imageCaption(), 'FOO')
 
     def test_gallery(self):
         name = '@@gallery'
@@ -136,6 +141,27 @@ class BrowserLayerTest(unittest.TestCase):
         except AttributeError:
             self.fail('%s has no view %s' % (self.n1, name))
 
+    def test_viewlets_registered(self):
+        NotImplemented
+
+
+class NITFViewTest(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        directlyProvides(self.request, INITFBrowserLayer)
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
     def test_nitf(self):
         # this view is available but not registered
         name = '@@nitf'
@@ -144,8 +170,23 @@ class BrowserLayerTest(unittest.TestCase):
         except AttributeError:
             self.fail('%s has no view %s' % (self.n1, name))
 
-    def test_viewlets_registered(self):
-        NotImplemented
+    def test_get_mediatype(self):
+        view = self.n1.restrictedTraverse('@@nitf')
+        _get_mediatype = view._get_mediatype
+        self.assertEquals(_get_mediatype('application/pdf'), 'application')
+        self.assertEquals(_get_mediatype('audio/mpeg3'), 'audio')
+        self.assertEquals(_get_mediatype('image/jpeg'), 'image')
+        self.assertEquals(_get_mediatype('image/png'), 'image')
+        self.assertEquals(_get_mediatype('multipart/signed'), 'other')
+        self.assertEquals(_get_mediatype('text/plain'), 'text')
+        self.assertEquals(_get_mediatype('video/avi'), 'video')
+
+    def test_get_media(self):
+        self.n1.invokeFactory('Image', 'foo', title='Foo', description='FOO',
+                              image=StringIO(zptlogo), filename='zpt.gif')
+        view = self.n1.restrictedTraverse('@@nitf')
+        media = view.get_media()
+        self.assertEquals(len(media), 1)
 
 
 def test_suite():
