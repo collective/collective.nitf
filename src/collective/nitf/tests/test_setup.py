@@ -10,6 +10,15 @@ from plone.browserlayer.utils import registered_layers
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
 
+JS = [
+    '++resource++collective.nitf/nitf_fixes.js',
+    '++resource++collective.nitf/jquery.collapsible-v.2.1.3.js'
+    ]
+
+CSS = [
+    '++resource++collective.nitf/collapsible.css',
+    ]
+
 
 class InstallTest(unittest.TestCase):
     """Ensure the NITF package is properly installed.
@@ -48,11 +57,16 @@ class InstallTest(unittest.TestCase):
                          'workflow not changed on Link content type')
 
     def test_javascript_registry(self):
-        """JavaScripts are properly registered at install time.
+        """JS are properly registered at install time.
         """
         portal_javascripts = self.portal.portal_javascripts
-        self.assertTrue('++resource++collective.nitf/nitf_fixes.js'
-            in portal_javascripts.getResourceIds())
+        for js in JS:
+            self.assertTrue(js in portal_javascripts.getResourceIds())
+
+    def test_css_registry(self):
+        portal_css = self.portal.portal_css
+        for css in CSS:
+            self.assertTrue(css in portal_css.getResourceIds())
 
 
 class UninstallTest(unittest.TestCase):
@@ -76,11 +90,18 @@ class UninstallTest(unittest.TestCase):
                          'browser layer not removed')
 
     def test_javascript_registry_removed(self):
-        """JavaScripts are properly removed at uninstall time.
+        """JS are properly removed at uninstall time.
         """
         portal_javascripts = self.portal.portal_javascripts
-        self.assertTrue('++resource++collective.nitf/nitf_fixes.js'
-            not in portal_javascripts.getResourceIds())
+        for js in JS:
+            self.assertTrue(js not in portal_javascripts.getResourceIds())
+
+    def test_css_registry_removed(self):
+        """CS are properly removed at uninstall time.
+        """
+        portal_css = self.portal.portal_css
+        for css in CSS:
+            self.assertTrue(css not in portal_css.getResourceIds())
 
 
 def test_suite():

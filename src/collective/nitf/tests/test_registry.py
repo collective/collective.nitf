@@ -115,7 +115,7 @@ class RegistryUninstallTest(unittest.TestCase):
             BASE_REGISTRY % 'default_urgency',
             ]
         for r in records:
-            self.assertFalse(r in self.registry)
+            self.assertTrue(r not in self.registry)
 
 
 def test_suite():
