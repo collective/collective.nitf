@@ -153,12 +153,24 @@ def textIndexer(obj):
     text as plain text.
     """
     transformer = ITransformer(obj)
-    text = transformer(obj.text, 'text/plain')
-    return '%s %s %s %s %s %s %s' % (obj.id,
-                                     obj.Title(),
-                                     obj.subtitle,
-                                     obj.Description(),
-                                     obj.byline,
-                                     text,
-                                     obj.location)
+    
+    result = '%s %s' % (obj.id,obj.Title())
+
+    if obj.subtitle:
+        result += obj.subtitle
+
+    if obj.Description():
+        result += obj.Description()
+
+    if obj.byline:
+        result += obj.byline
+
+    if obj.text:
+        result += transformer(obj.text, 'text/plain')
+
+    if obj.location:
+        result += obj.location
+        
+    return result
+    
 grok.global_adapter(textIndexer, name='SearchableText')
