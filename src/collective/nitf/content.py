@@ -157,19 +157,19 @@ def textIndexer(obj):
     result = '%s %s' % (obj.id,obj.Title())
 
     if obj.subtitle:
-        result += obj.subtitle
+        result += ' %s'%obj.subtitle
 
     if obj.Description():
-        result += obj.Description()
+        result += ' %s'%obj.Description()
 
     if obj.byline:
-        result += obj.byline
+        result += ' %s'%obj.byline
 
     if obj.text:
-        result += transformer(obj.text, 'text/plain')
+        result += ' %s'%transformer(obj.text, 'text/plain')
 
     if obj.location:
-        result += obj.location
+        result += ' %s'%obj.location
         
     return result
     

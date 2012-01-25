@@ -10,3 +10,5 @@ downloads/
 eggs/
 parts/
 var/
+include/
+lib/
