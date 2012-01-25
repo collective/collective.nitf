@@ -1,11 +1,11 @@
 jq(function($) {
-    $(".tiles .thumbnails").scrollable({size: 3,});
-    $(".previews .thumbnails").scrollable({size: 1, circular: true,});
-    $("#mediabox #images").scrollable({size: 1, circular: true,});
+    $(".tiles .thumbnails").scrollable({size: 3});
+    $(".previews .thumbnails").scrollable({size: 1, circular: true});
+    $("#mediabox #images").scrollable({size: 1, circular: true});
     $(".template-newsmedia_view .tiles .thumbnails .items img[src].media-image").prepOverlay({
         subtype:'image',
         urlmatch: '/image_.+$',
-        urlreplace: '/image_large',
+        urlreplace: '/image_large'
     });
 
     $(".template-gallery .tiles .thumbnails .items img.media-image").click(function() {
@@ -33,7 +33,7 @@ jq(function($) {
     $("#mediabox #images").scrollable();
     $(".newsImageContainer a").prepOverlay({
         subtype:'inline',
-        target: '#mediabox',
+        target: '#mediabox'
         /*
             */
     });
@@ -58,7 +58,7 @@ jq(function($) {
             $("#mediabox #images").data("scrollable").seekTo(0, 0);
         }
     });
-    
+
     $(".previews #images img").tooltip({
         position: 'bottom center',
         offset: [-85, -30],
@@ -69,29 +69,4 @@ jq(function($) {
         relative: true
     });
     */
-    flowplayer("a.media-video", "./++resource++collective.nitf/flowplayer/flowplayer.swf", {
-        // change the default controlbar to modern
-        plugins: {
-            controls: {
-                url: "/%2B%2Bresource%2B%2Bcollective.nitf/flowplayer/flowplayer.controls.swf",
-
-                buttonColor: 'rgba(0, 0, 0, 0.9)',
-                buttonOverColor: '#000000',
-                backgroundColor: '#D7D7D7',
-                backgroundGradient: 'medium',
-                sliderColor: '#FFFFFF',
-
-                sliderBorder: '1px solid #808080',
-                volumeSliderColor: '#FFFFFF',
-                volumeBorder: '1px solid #808080',
-
-                timeColor: '#000000',
-                durationColor: '#535353'
-            }
-        },
-        clip: {
-            autoBuffering: true,
-            autoPlay: false
-        }
-    });
 });
