@@ -78,7 +78,7 @@ Test views:
     >>> browser.open(portalURL + '/miracle-cure')
     >>> 'Miracle Cure' in browser.contents
     True
-    >>> browser.open(portalURL + '/miracle-cure/@@gallery')
+    >>> browser.open(portalURL + '/miracle-cure/@@scrollable')
     >>> 'Miracle Cure' in browser.contents
     True
     >>> browser.open(portalURL + '/miracle-cure/@@nitf')

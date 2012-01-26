@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import math
 import mimetypes
 
 from Acquisition import aq_inner
@@ -13,12 +12,10 @@ from Products.ATContentTypes.interfaces import IATFile
 from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFPlone.utils import getToolByName
 
-from plone.app.layout.viewlets.interfaces import IAboveContentBody
-from plone.app.layout.viewlets.interfaces import IHtmlHeadLinks
 from plone.directives import dexterity
 
 from collective.nitf.content import INITF
-from collective.nitf.interfaces import INITFBrowserLayer, IMediaView
+from collective.nitf.interfaces import INITFBrowserLayer
 
 grok.templatedir('templates')
 
@@ -88,8 +85,7 @@ class View(dexterity.DisplayForm):
 
         return self._get_brains(media_interfaces)
 
-    # XXX: is this waking up the object more than once when calling
-    # imageCaption() and tag()?
+    # The purpose of these methods is to emulate those on News Item
     def getImage(self):
         images = self.get_images()
         if len(images) > 0:
@@ -106,16 +102,36 @@ class View(dexterity.DisplayForm):
         if image is not None:
             return image.tag(**kwargs)
 
+    # These methods are used in scrollable gallery for creating batches
+    def _chunks(self, l, n):
+        """ Yield successive n-sized chunks from l.
+        """
+        for i in xrange(0, len(l), n):
+            yield l[i:i + n]
 
+    TAG = '<img src="%s/image_%s" alt="%s" title="%s" />'
+
+    def get_images_in_groups(self, n=5, size='tile'):
+        """ Return a list containing groups of n image tags.
+        """
+
+        images = [i.getObject() for i in self.get_images()]
+        images = [self.TAG % (i.absolute_url(), size,
+                              i.Title(),
+                              i.Description()) for i in images]
+
+        return self._chunks(images, n)
+
+
+# TODO: get rid of this class
 class Display_Macros(View):
     grok.context(INITF)
     grok.require('zope2.View')
     grok.layer(INITFBrowserLayer)
 
 
-class Gallery(View):
+class Scrollable(View):
     grok.context(INITF)
-    grok.implements(IMediaView)
     grok.layer(INITFBrowserLayer)
     grok.require('zope2.View')
 
@@ -126,73 +142,6 @@ class Folder_Summary_View(grok.View):
     grok.name("folder_summary_view")
     grok.require('zope2.View')
 
-
-class MediaViewletManager(grok.ViewletManager):
-    grok.context(INITF)
-    grok.name('collective.nitf.carousel')
-    grok.view(Display_Macros)
-    grok.layer(INITFBrowserLayer)
-
-
-class MediaViewlet(grok.Viewlet):
-    grok.context(INITF)
-    grok.name('collective.nitf.media.tile')
-    grok.viewletmanager(IAboveContentBody)
-    grok.view(IMediaView)
-    grok.template('media_viewlet')
-    grok.require('zope2.View')
-    grok.layer(INITFBrowserLayer)
-
-    image_size = 'tile'
-
-    def update(self, image_size=None):
-        if image_size is not None:
-            self.image_size = image_size
-        self.media_name = "media-%s" % self.image_size
-
-    def mediaRows(self, keys, cols='5'):
-        rows = []
-        if not cols or not keys:
-            return rows
-        rows_number = int(math.ceil(float(len(keys)) / float(cols)))
-        for row in range(rows_number):
-            this_row = []
-            start = row * int(cols)
-            end = start + int(cols)
-            for key in keys[start:end]:
-                this_row.append(key)
-            rows.append(this_row)
-        return rows
-
-
-class MediaGalleryViewlet(MediaViewlet):
-    grok.context(INITF)
-    grok.layer(INITFBrowserLayer)
-    grok.name('collective.nitf.media.gallery')
-    grok.order(0)
-    grok.template('gallery_viewlet')
-    grok.view(Gallery)
-    grok.viewletmanager(IAboveContentBody)
-
-    image_size = 'tile'
-
-
-class MediaPreviewViewlet(MediaViewlet):
-    grok.context(INITF)
-    grok.name('collective.nitf.media.preview')
-    grok.viewletmanager(MediaViewletManager)
-    grok.view(View)
-    grok.layer(INITFBrowserLayer)
-
-    image_size = 'preview'
-
-
-class MediaLinksViewlet(grok.Viewlet):
-    grok.context(INITF)
-    grok.name('collective.nitf.links.media')
-    grok.template('media_links')
-    grok.viewletmanager(IHtmlHeadLinks)
-    grok.layer(INITFBrowserLayer)
 
 MEDIA = """
 <media id="media:%s" media-type="%s">

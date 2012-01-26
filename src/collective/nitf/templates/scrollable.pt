@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.nitf">
+
+<!-- this example was taken from http://flowplayer.org/tools/demos/scrollable/gallery.htm -->
+
+<head>
+    <metal:block fill-slot="style_slot"
+                 tal:define="navroot context/@@plone_portal_state/navigation_root_url">
+    <link rel="stylesheet" type="text/css"
+          tal:attributes="href string:${navroot}/++resource++collective.nitf/scrollable/horizontal.css" />
+    <link rel="stylesheet" type="text/css"
+          tal:attributes="href string:${navroot}/++resource++collective.nitf/scrollable/buttons.css" />
+	<style>
+	#image_wrap {
+		width:677px;
+		margin:15px 0 15px 40px;
+		padding:15px 0;
+		text-align:center;
+		background-color:#efefef;
+		border:2px solid #fff;
+		outline:1px solid #ddd;
+
+		-moz-ouline-radius:4px;
+	}
+	</style>
+    </metal:block>
+</head>
+
+<body>
+<metal:title fill-slot="content-title">
+    <tal:content-title metal:define-macro="content-title">
+    <h1 class="documentFirstHeading" tal:content="context/title" />
+    </tal:content-title>
+</metal:title>
+
+<metal:description fill-slot="content-description">
+    <tal:content-description metal:define-macro="content-description">
+    <div class="documentDescription" tal:content="context/description" />
+    </tal:content-description>
+</metal:description>
+
+<metal:main fill-slot="content-core">
+    <tal:content-core metal:define-macro="content-core">
+    <div id="image_wrap">
+	    <img src="" width="500" height="375"
+             tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+             tal:attributes="src string:${navroot}/++resource++collective.nitf/scrollable/blank.gif" />
+    </div>
+
+    <a class="prev browse left"></a>
+
+    <div class="scrollable">
+        <div class="items">
+          <div tal:repeat="group view/get_images_in_groups">
+             <img src="" alt="" title="" tal:repeat="image group"
+                  tal:replace="structure image" />
+          </div>
+        </div>
+    </div>
+
+    <a class="next browse right"></a>
+
+    <script type="text/javascript">
+    jq(function($) {
+        $(".scrollable").scrollable();
+        $(".items img").click(function() {
+	        if ($(this).hasClass("active")) { return; }
+	        var url = $(this).attr("src").replace("_tile", "_preview");
+	        var wrap = $("#image_wrap").fadeTo("medium", 0.5);
+	        var img = new Image();
+	        img.onload = function() {
+		        wrap.fadeTo("fast", 1);
+		        wrap.find("img").attr("src", url);
+	        };
+	        img.src = url;
+	        $(".items img").removeClass("active");
+	        $(this).addClass("active");
+        }).filter(":first").click();
+    });
+    </script>
+
+    <div class="visualClear"><!-- --></div>
+
+    <p class="nitfByline" tal:condition="context/byline|nothing">
+        <span i18n:translate="">By</span>
+        <span tal:content="context/byline" />
+    </p>
+
+    <div tal:content="structure context/text/output|nothing">The text</div>
+
+    <fieldset id="related-items" tal:condition="exists:context/relatedItems">
+        <legend i18n:translate="">Related items</legend>
+        <tal:relateditems tal:content="structure view/w/IRelatedItems.relatedItems/render" />
+    </fieldset>
+
+    <fieldset id="folder-listing">
+        <legend i18n:translate="">Contents</legend>
+        <tal:block define="listing_macro context/folder_listing/macros/listing;
+                           contentFilter python:{'portal_type': ['File', 'Link']}">
+            <metal:use_macro use-macro="listing_macro">
+                <metal:nocontent fill-slot="no_items_in_listing">
+                    <p class="discreet"
+                        tal:condition="not: folderContents"
+                        i18n:domain="plone" i18n:translate="description_no_items_in_folder">
+                        There are currently no items in this folder.
+                    </p>
+                </metal:nocontent>
+            </metal:use_macro>
+        </tal:block>
+    </fieldset>
+    </tal:content-core>
+</metal:main>
+</body>
+</html>

@@ -36,9 +36,9 @@
             />
 
         <browser:menuItem
-            title="Gallery View"
-            action="gallery"
-            description="Displays an image gallery stored in the news article"
+            title="Scrollable Gallery View"
+            action="scrollable"
+            description="Displays a scrollable gallery in the news article"
             />
     </browser:menuItems>
 

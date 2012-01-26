@@ -34,7 +34,7 @@ class BrowserLayerTest(unittest.TestCase):
         self.n1 = self.folder['n1']
 
     def test_views_registered(self):
-        views = ['view', 'gallery', 'folder_summary_view']
+        views = ['view', 'scrollable', 'folder_summary_view']
         registered = [v.name for v in registration.getViews(INITFBrowserLayer)]
         # empty set only if all 'views' are 'registered'
         self.assertEquals(set(views) - set(registered), set([]))
@@ -127,8 +127,29 @@ class BrowserLayerTest(unittest.TestCase):
         view = self.n1.restrictedTraverse('@@view')
         self.assertEquals(view.imageCaption(), 'FOO')
 
-    def test_gallery(self):
-        name = '@@gallery'
+    def test_chunks(self):
+        """ Test is chunks are created from a list.
+        """
+        view = self.n1.restrictedTraverse('@@view')
+        chunks = view._chunks
+        # create chunks of 3 elements
+        data = chunks([1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4], 3)
+        # generator elements are accessed calling next()
+        self.assertEquals(data.next(), [1, 1, 1])
+        self.assertEquals(data.next(), [2, 2, 2])
+        self.assertEquals(data.next(), [3, 3, 3])
+        self.assertEquals(data.next(), [4, 4])
+
+    def test_get_images_in_groups(self):
+        self.n1.invokeFactory('Image', 'foo', title='Foo', description='FOO',
+                              image=StringIO(zptlogo), filename='zpt.gif')
+        view = self.n1.restrictedTraverse('@@view')
+        groups = len([i for i in view.get_images_in_groups()])
+        # we only have one image, so we only have one group
+        self.assertEquals(groups, 1)
+
+    def test_scrollable(self):
+        name = '@@scrollable'
         try:
             self.n1.unrestrictedTraverse(name)
         except AttributeError:
