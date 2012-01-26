@@ -39,7 +39,7 @@ class INITFSettings(Interface):
             required=False,
             default=config.DEFAULT_GENRE,)
 
-    posible_genres = schema.List(title=_(u'posible genres'),
+    possible_genres = schema.List(title=_(u'possible genres'),
             description=_(u"Choose genres to use in the site"),
                             required=False,
                              value_type = schema.Choice(vocabulary=config.GENRES,),
@@ -80,6 +80,11 @@ def availableGenres(context):
     terms = []
     if registry is not None:
         settings = registry.forInterface(INITFSettings)
-        for genre in settings.posible_genres:
-            terms.append(SimpleVocabulary.createTerm(genre, genre.encode('utf-8'), genre))
+        if settings.possible_genres:
+            for genre in settings.possible_genres:
+                terms.append(SimpleVocabulary.createTerm(genre,
+                    genre.encode('utf-8'), genre))
+
+    if not terms:
+        return config.GENRES
     return SimpleVocabulary(terms)
