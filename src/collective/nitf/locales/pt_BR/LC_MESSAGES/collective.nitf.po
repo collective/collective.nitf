@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-01-22 05:02+0000\n"
+"POT-Creation-Date: 2012-01-26 21:19+0000\n"
 "PO-Revision-Date: 2012-01-06 21:56-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:18
+#: collective/nitf/controlpanel.py:26
 msgid "Available Sections"
 msgstr ""
 
@@ -59,13 +59,18 @@ msgstr ""
 msgid "Body text"
 msgstr ""
 
+#: collective/nitf/templates/scrollable.pt:90
 #: collective/nitf/templates/view.pt:27
 msgid "By"
 msgstr ""
 
-#: collective/nitf/templates/display_macros.pt:58
-#: collective/nitf/templates/gallery.pt:24
-#: collective/nitf/templates/view.pt:66
+#: collective/nitf/controlpanel.py:43
+msgid "Choose genres to use in the site"
+msgstr ""
+
+#: collective/nitf/templates/display_macros.pt:55
+#: collective/nitf/templates/scrollable.pt:102
+#: collective/nitf/templates/view.pt:62
 msgid "Contents"
 msgstr ""
 
@@ -81,15 +86,15 @@ msgstr ""
 msgid "Daybook"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:29
+#: collective/nitf/controlpanel.py:37
 msgid "Default Genre"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:24
+#: collective/nitf/controlpanel.py:32
 msgid "Default Section"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:35
+#: collective/nitf/controlpanel.py:49
 msgid "Default Urgency"
 msgstr ""
 
@@ -121,7 +126,7 @@ msgstr ""
 msgid "Genre"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:47
+#: collective/nitf/controlpanel.py:61
 msgid "Here you can modify the settings for collective.nitf."
 msgstr ""
 
@@ -153,7 +158,7 @@ msgstr ""
 msgid "Music"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:46
+#: collective/nitf/controlpanel.py:60
 #: collective/nitf/profiles/default/controlpanel.xml
 msgid "NITF Settings"
 msgstr ""
@@ -211,9 +216,9 @@ msgstr ""
 msgid "Raw Sound"
 msgstr ""
 
-#: collective/nitf/templates/display_macros.pt:53
-#: collective/nitf/templates/gallery.pt:19
-#: collective/nitf/templates/view.pt:61
+#: collective/nitf/templates/display_macros.pt:50
+#: collective/nitf/templates/scrollable.pt:97
+#: collective/nitf/templates/view.pt:57
 msgid "Related items"
 msgstr ""
 
@@ -238,7 +243,7 @@ msgid "Scener"
 msgstr ""
 
 #: collective/nitf/content.py:72
-#: collective/nitf/controlpanel.py:21
+#: collective/nitf/controlpanel.py:29
 msgid "Section"
 msgstr ""
 
@@ -313,5 +318,9 @@ msgstr ""
 #. Default: "News importance."
 #: collective/nitf/content.py:82
 msgid "help_urgency"
+msgstr ""
+
+#: collective/nitf/controlpanel.py:42
+msgid "possible genres"
 msgstr ""
 
