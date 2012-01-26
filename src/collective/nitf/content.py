@@ -20,7 +20,7 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.nitf import _
 from collective.nitf import config
-from collective.nitf.controlpanel import INITFSettings
+from collective.nitf.controlpanel import INITFSettings, availableGenres
 
 
 class INITF(form.Schema):
@@ -64,7 +64,7 @@ class INITF(form.Schema):
                           default=u'Describes the nature, journalistic or '
                                    'intellectual characteristic of a news '
                                    'object, not specifically its content.'),
-            vocabulary=config.GENRES,
+            source=availableGenres,
         )
 
     section = schema.Choice(
@@ -153,7 +153,7 @@ def textIndexer(obj):
     text as plain text.
     """
     transformer = ITransformer(obj)
-    
+
     result = '%s %s' % (obj.id,obj.Title())
 
     if obj.subtitle:
@@ -170,7 +170,7 @@ def textIndexer(obj):
 
     if obj.location:
         result += ' %s'%obj.location
-        
+
     return result
-    
+
 grok.global_adapter(textIndexer, name='SearchableText')
