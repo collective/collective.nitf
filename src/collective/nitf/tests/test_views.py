@@ -67,6 +67,13 @@ class BrowserLayerTest(unittest.TestCase):
         self.assertEquals(images[0].getObject().Title(), 'Foo')
         self.assertEquals(images[0].getObject().Description(), 'FOO')
 
+    def test_has_images(self):
+        view = self.n1.restrictedTraverse('@@view')
+        self.assertEquals(view.has_images(), 0)
+        self.n1.invokeFactory('Image', 'foo', title='Foo', description='FOO',
+                              image=StringIO(zptlogo), filename='zpt.gif')
+        self.assertEquals(view.has_images(), 1)
+
     def test_get_files(self):
         self.n1.invokeFactory('File', 'bar', title='Bar', description='BAR',
                               image=StringIO(zptlogo), filename='zpt.gif')
@@ -77,6 +84,13 @@ class BrowserLayerTest(unittest.TestCase):
         self.assertEquals(files[0].getObject().Title(), 'Bar')
         self.assertEquals(files[0].getObject().Description(), 'BAR')
 
+    def test_has_files(self):
+        view = self.n1.restrictedTraverse('@@view')
+        self.assertEquals(view.has_files(), 0)
+        self.n1.invokeFactory('File', 'bar', title='Bar', description='BAR',
+                              image=StringIO(zptlogo), filename='zpt.gif')
+        self.assertEquals(view.has_files(), 1)
+
     def test_get_links(self):
         self.n1.invokeFactory('Link', 'baz', title='Baz', url='http://baz/')
         view = self.n1.restrictedTraverse('@@view')
@@ -85,6 +99,12 @@ class BrowserLayerTest(unittest.TestCase):
         self.assertEquals(links[0].getObject().id, 'baz')
         self.assertEquals(links[0].getObject().title, 'Baz')
         self.assertEquals(links[0].getObject().description, '')
+
+    def test_has_links(self):
+        view = self.n1.restrictedTraverse('@@view')
+        self.assertEquals(view.has_links(), 0)
+        self.n1.invokeFactory('Link', 'baz', title='Baz', url='http://baz/')
+        self.assertEquals(view.has_links(), 1)
 
     def test_get_media(self):
         self.n1.invokeFactory('Image', 'foo', title='Foo', image=StringIO(zptlogo))

@@ -66,15 +66,30 @@ class View(dexterity.DisplayForm):
         """
         return self._get_brains(IATImage.__identifier__)
 
+    def has_images(self):
+        """ Return the number of images inside the NITF object.
+        """
+        return len(self.get_images())
+
     def get_files(self):
         """Return a list of file brains inside the NITF object.
         """
         return self._get_brains(IATFile.__identifier__)
 
+    def has_files(self):
+        """ Return the number of files inside the NITF object.
+        """
+        return len(self.get_files())
+
     def get_links(self):
         """Return a list of link brains inside the NITF object.
         """
         return self._get_brains(IATLink.__identifier__)
+
+    def has_links(self):
+        """ Return the number of links inside the NITF object.
+        """
+        return len(self.get_links())
 
     def get_media(self):
         """Return a list of object brains inside the NITF object.
@@ -84,6 +99,11 @@ class View(dexterity.DisplayForm):
                             IATLink.__identifier__]
 
         return self._get_brains(media_interfaces)
+
+    def has_media(self):
+        """ Return the number of media inside the NITF object.
+        """
+        return len(self.get_media())
 
     # The purpose of these methods is to emulate those on News Item
     def getImage(self):
