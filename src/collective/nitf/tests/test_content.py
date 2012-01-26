@@ -143,6 +143,100 @@ class IntegrationTest(unittest.TestCase):
         self.assertEquals(1, len(result))
         self.assertEquals(result[0].getURL(), n1.absolute_url())
 
+    def test_searchable_text_missing_fields(self):
+        """
+        Adding an nitf with only its title, should be enough to get the
+        SearchableText index indexed.
+        """
 
+        self.folder.invokeFactory('collective.nitf.content', 'nitf')
+        nitf = self.folder['nitf']
+        nitf.title = 'title'
+        nitf.reindexObject()
+        result = self.portal.portal_catalog(SearchableText='nitf')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+        result = self.portal.portal_catalog(SearchableText='title')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+        
+        # Now let's start adding the remaining fields one by one, first
+        # testing that no results are found, and then they are
+        result = self.portal.portal_catalog(SearchableText='subtitle')
+        self.assertEquals(0, len(result))
+        
+        nitf.subtitle = 'subtitle'
+        nitf.reindexObject()
+        result = self.portal.portal_catalog(SearchableText='subtitle')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='abstract')
+        self.assertEquals(0, len(result))
+
+        nitf.description = 'abstract'
+        nitf.reindexObject()
+        result = self.portal.portal_catalog(SearchableText='abstract')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='author')
+        self.assertEquals(0, len(result))
+
+        nitf.byline = 'author'
+        nitf.reindexObject()
+        result = self.portal.portal_catalog(SearchableText='author')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='text')
+        self.assertEquals(0, len(result))
+
+        nitf.text = RichTextValue('Body text', 'text/plain', 'text/html')
+        nitf.reindexObject()
+        result = self.portal.portal_catalog(SearchableText='text')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='Mexico City')
+        self.assertEquals(0, len(result))
+
+        nitf.location = 'Mexico City'
+        nitf.reindexObject()
+        result = self.portal.portal_catalog(SearchableText='Mexico City')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        # Finally, let's do some searches to make sure nothing was
+        # "de-categorized"
+
+        result = self.portal.portal_catalog(SearchableText='nitf')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+        
+        result = self.portal.portal_catalog(SearchableText='title')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='subtitle')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='abstract')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='author')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='text')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+        result = self.portal.portal_catalog(SearchableText='Mexico City')
+        self.assertEquals(1, len(result))
+        self.assertEquals(result[0].getURL(), nitf.absolute_url())
+        
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
