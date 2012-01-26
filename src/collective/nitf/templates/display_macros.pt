@@ -16,12 +16,12 @@
                     <div class="items">
                         <tal:lines repeat="item images">
                         <div tal:define="item_obj item/getObject">
-                            <span>
+                            <div>
                                 <img tal:replace="structure python: item_obj.getImage().tag(scale='preview', css_class='media-image')" src="" alt="" />
                                 <div class="info" tal:condition="item_obj/description|nothing">
                                     <p tal:content="item_obj/description">Image Caption</p>
                                 </div>
-                            </span>
+                            </div>
                         </div>
                         </tal:lines>
                     </div>
