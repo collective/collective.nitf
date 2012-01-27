@@ -14,7 +14,7 @@ from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 
 from collective.nitf import config
-from collective.nitf.controlpanel import INITFSettings, availableGenres
+from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.testing import INTEGRATION_TESTING
 
 BASE_REGISTRY = 'collective.nitf.controlpanel.INITFSettings.%s'
@@ -98,9 +98,6 @@ class RegistryTest(unittest.TestCase):
         self.assertTrue('default_urgency' in INITFSettings)
         self.assertEquals(record_default_urgency.value,
                           config.DEFAULT_URGENCY)
-
-    def test_available_genres(self):
-        self.assertTrue(availableGenres(None) == config.GENRES)
 
 class RegistryUninstallTest(unittest.TestCase):
     """Ensure the NITF registry is properly uninstalled.

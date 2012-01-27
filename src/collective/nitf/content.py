@@ -20,7 +20,7 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.nitf import _
 from collective.nitf import config
-from collective.nitf.controlpanel import INITFSettings, availableGenres
+from collective.nitf.controlpanel import INITFSettings
 
 
 class INITF(form.Schema):
@@ -64,7 +64,7 @@ class INITF(form.Schema):
                           default=u'Describes the nature, journalistic or '
                                    'intellectual characteristic of a news '
                                    'object, not specifically its content.'),
-            source=availableGenres,
+            source=u'collective.nitf.AvailableGenres',
         )
 
     section = schema.Choice(
@@ -101,6 +101,25 @@ def genre_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
     return settings.default_genre
+
+class AvailableGenresVocabulary(object):
+    """Creates a vocabulary with the available genres stored in the registry; the
+    vocabulary is normalized to allow the use of non-ascii characters.
+    """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(INITFSettings)
+        items = []
+        if settings.possible_genres:
+            for genre in settings.possible_genres:
+                token = unicodedata.normalize('NFKD', genre).encode('ascii', 'ignore').lower()
+                items.append(SimpleVocabulary.createTerm(genre, token, _(genre)))
+        return SimpleVocabulary(items)
+
+grok.global_utility(AvailableGenresVocabulary, name=u'collective.nitf.AvailableGenres')
+
 
 
 class SectionsVocabulary(object):
