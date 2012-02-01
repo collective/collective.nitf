@@ -59,7 +59,7 @@
         <tal:media repeat="media view/get_media">
         <media tal:replace="structure media" />
         </tal:media>
-        <p tal:content="structure context/text/output|nothing">The text</p>
+        <p tal:content="structure context/text/output|nothing" />
     </body.content>
     <body.end>
         <tagline>

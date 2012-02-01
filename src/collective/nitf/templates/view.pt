@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div tal:content="structure context/text/output|nothing">The text</div>
+        <div tal:content="structure context/text/output|nothing" />
 
         <fieldset id="related-items" tal:condition="exists:context/relatedItems">
             <legend i18n:translate="">Related items</legend>
