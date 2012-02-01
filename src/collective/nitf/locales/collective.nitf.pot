@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-01-26 21:19+0000\n"
+"POT-Creation-Date: 2012-01-31 20:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:26
+#: collective/nitf/controlpanel.py:25
 msgid "Available Sections"
 msgstr ""
 
@@ -66,7 +66,7 @@ msgstr ""
 msgid "By"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:43
+#: collective/nitf/controlpanel.py:36
 msgid "Choose genres to use in the site"
 msgstr ""
 
@@ -88,20 +88,24 @@ msgstr ""
 msgid "Daybook"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:37
+#: collective/nitf/controlpanel.py:41
 msgid "Default Genre"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:32
+#: collective/nitf/controlpanel.py:31
 msgid "Default Section"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:49
+#: collective/nitf/controlpanel.py:47
 msgid "Default Urgency"
 msgstr ""
 
 #: collective/nitf/templates/organize.pt:70
 msgid "Drag and drop images to change their order on the gallery."
+msgstr ""
+
+#: collective/nitf/controlpanel.py:35
+msgid "Elegible Genres"
 msgstr ""
 
 #: collective/nitf/config.py:43
@@ -128,7 +132,7 @@ msgstr ""
 msgid "Genre"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:61
+#: collective/nitf/controlpanel.py:59
 msgid "Here you can modify the settings for collective.nitf."
 msgstr ""
 
@@ -160,7 +164,7 @@ msgstr ""
 msgid "Music"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:60
+#: collective/nitf/controlpanel.py:58
 #: collective/nitf/profiles/default/controlpanel.xml
 msgid "NITF Settings"
 msgstr ""
@@ -245,7 +249,7 @@ msgid "Scener"
 msgstr ""
 
 #: collective/nitf/content.py:72
-#: collective/nitf/controlpanel.py:29
+#: collective/nitf/controlpanel.py:28
 msgid "Section"
 msgstr ""
 
@@ -320,9 +324,5 @@ msgstr ""
 #. Default: "News importance."
 #: collective/nitf/content.py:82
 msgid "help_urgency"
-msgstr ""
-
-#: collective/nitf/controlpanel.py:42
-msgid "possible genres"
 msgstr ""
 
