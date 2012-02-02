@@ -88,11 +88,11 @@
             <metal:pic_sorter_macro define-macro="pic_sorter"
                                     tal:define="imgs python:context.getFolderContents({'portal_type':'Image'});">
 
-            <h1 class="documentFirstHeading" i18n:translate="">Organize</h1>
+            <h1 class="documentFirstHeading" i18n:translate="">Media</h1>
             <p i18n:translate="">Drag and drop images to change their order on the gallery.</p>
 
             <tal:sortable tal:condition="imgs">
-            <ul id="sortable">
+            <ul id="sortable" class="sortable-media">
                 <tal:items tal:repeat="item imgs">
                 <li class="ui-state-default"
                        tal:define="item_id item/getId|item/id;

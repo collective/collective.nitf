@@ -168,13 +168,13 @@ body.template-gallery #mediabox span {
     }
 
 /* used in media_sorter.pt */
-#sortable {
+.sortable-media {
     list-style-type: none !important;
     margin: 0 !important;
     padding: 0;
     }
 
-#sortable li {
+.sortable-media li {
     border: 1px solid silver;
     float: left;
     height: 128px;
@@ -183,10 +183,10 @@ body.template-gallery #mediabox span {
     width: 128px;
     background-color:#FFF;
     }
-#sortable li:hover .btn{
+.sortable-media li:hover .btn{
     visibility:visible;
 }
-#sortable .draggable-item {
+.sortable-media .draggable-item {
     cursor: move;
     height: 90px;
     overflow: hidden;
@@ -194,14 +194,15 @@ body.template-gallery #mediabox span {
     border:medium none;
     }
 
-#sortable .btn, #sortable .btn:hover {
+.sortable-media .btn,
+.sortable-media .btn:hover {
     color:#FFF !important;
     padding:3px 10px;
     border:1px solid #75AD0A;
     float:right;
     }
     
-#sortable .btn {
+.sortable-media .btn {
     visibility:hidden;
 }
 .btn {
