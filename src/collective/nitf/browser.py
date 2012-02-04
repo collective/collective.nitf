@@ -221,6 +221,6 @@ class NITF(View):
         return media
 
 
-class Organize(dexterity.DisplayForm):
+class Media(dexterity.DisplayForm):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')

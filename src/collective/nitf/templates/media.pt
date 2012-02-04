@@ -8,10 +8,32 @@
 
 <head tal:define="portal_state context/@@plone_portal_state;
                   portal_url portal_state/portal_url;">
+
+    <metal:block fill-slot="style_slot" tal:define="navroot context/@@plone_portal_state/navigation_root_url">
+        <link rel="stylesheet" type="text/css" 
+              tal:attributes="href string:${navroot}/++resource++collective.nitf/styles.css" />                  
+    </metal:block>
+
     <metal:javascriptslot fill-slot="javascript_head_slot">
-	    <script type="text/javascript">
+	    <script type="text/javascript">	    
 	    $(function() {
+
+            $('#sortable a.draggable-item').prepOverlay({
+                    subtype: 'ajax',
+                    filter: '#portal-column-content > div',
+                    noform:'close'
+            });
+
+            $('#sortable a.btn').prepOverlay({
+                    subtype: 'ajax',
+                    filter: '#portal-column-content > div',
+                    formselector: 'form',
+                    noform:'close'
+            });
+
+	    
             $("#sortable").sortable({
+                placeholder: "ui-state-highlight",
                 update: function(event, ui){
                     var id_cleaner = function(ids) {
                         var cleaned = new Array();
@@ -51,7 +73,7 @@
                     $.post(move_url, { delta: delta, item_id: a_id});
                     $("#sortable").sortable("refresh");
                 }
-            });
+            });            
 	    });
 	    </script>
     </metal:javascriptslot>
@@ -66,27 +88,30 @@
             <metal:pic_sorter_macro define-macro="pic_sorter"
                                     tal:define="imgs python:context.getFolderContents({'portal_type':'Image'});">
 
-            <h1 class="documentFirstHeading" i18n:translate="">Organize</h1>
+            <h1 class="documentFirstHeading" i18n:translate="">Media</h1>
             <p i18n:translate="">Drag and drop images to change their order on the gallery.</p>
 
             <tal:sortable tal:condition="imgs">
-            <ul id="sortable">
+            <ul id="sortable" class="sortable-media">
                 <tal:items tal:repeat="item imgs">
                 <li class="ui-state-default"
-                       tal:define="item_id item/getId|item/id;"
+                       tal:define="item_id item/getId|item/id;
+                                   item_url item/getURL|item/absolute_url;"
                                    tal:attributes="id string:sortable-${item_id};
                                    class string:sort-${repeat/item/index}">
 	                <a href=""
-                       tal:define="item_url item/getURL|item/absolute_url;
-                                   item_title_or_id item/pretty_title_or_id;
+                       tal:define="item_title_or_id item/pretty_title_or_id;
                                    item_description item/Description;"
                        tal:attributes="href string:${item_url}/view;
-                                       id string:folder-contents-item-${item_id};">
+                                       id string:folder-contents-item-${item_id};"
+                       class="draggable-item">
                         <img src="" alt="" title=""
                              tal:attributes="src string:${item_url}/image_thumb;
                                              alt item_title_or_id;
                                              title item_description;" />
                     </a>
+                    <a class="btn success" 
+                       tal:attributes="href string:${item_url}/edit">Editar</a>
                 </li>
                 </tal:items>
             </ul>

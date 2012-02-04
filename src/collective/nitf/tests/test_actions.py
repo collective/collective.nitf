@@ -35,8 +35,8 @@ class ActionsTest(unittest.TestCase):
         # TODO: implement test
         pass
 
-    def test_organize(self):
-        name = '@@organize'
+    def test_media(self):
+        name = '@@media'
         try:
             self.n1.unrestrictedTraverse(name)
         except AttributeError:
