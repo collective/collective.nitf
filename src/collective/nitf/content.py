@@ -102,6 +102,7 @@ def genre_default_value(data):
     settings = registry.forInterface(INITFSettings)
     return settings.default_genre
 
+
 class AvailableGenresVocabulary(object):
     """Creates a vocabulary with the available genres stored in the registry; the
     vocabulary is normalized to allow the use of non-ascii characters.
@@ -119,7 +120,6 @@ class AvailableGenresVocabulary(object):
         return SimpleVocabulary(items)
 
 grok.global_utility(AvailableGenresVocabulary, name=u'collective.nitf.AvailableGenres')
-
 
 
 class SectionsVocabulary(object):
@@ -173,22 +173,22 @@ def textIndexer(obj):
     """
     transformer = ITransformer(obj)
 
-    result = '%s %s' % (obj.id,obj.Title())
+    result = u'%s %s' % (obj.id, obj.Title())
 
     if obj.subtitle:
-        result += ' %s'%obj.subtitle
+        result += u' %s' % obj.subtitle
 
     if obj.Description():
-        result += ' %s'%obj.Description()
+        result += u' %s' % obj.Description()
 
     if obj.byline:
-        result += ' %s'%obj.byline
+        result += u' %s' % obj.byline
 
     if obj.text:
-        result += ' %s'%transformer(obj.text, 'text/plain')
+        result += u' %s' % transformer(obj.text, 'text/plain')
 
     if obj.location:
-        result += ' %s'%obj.location
+        result += u' %s' % obj.location
 
     return result
 
