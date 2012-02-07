@@ -3,7 +3,7 @@
 <nitf change.date="September 11, 2009" change.time="12:26" version="-//IPTC//DTD NITF 3.5//EN"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal">
-<metal:block tal:define="dummy python:request.RESPONSE.setHeader('Content-Type','text/html;;charset=utf-8')" />
+<metal:block tal:define="dummy python:request.RESPONSE.setHeader('Content-Type','text/xml;;charset=utf-8')" />
 <head>
     <title tal:content="context/title" />
     <tobject tobject.type="news">
