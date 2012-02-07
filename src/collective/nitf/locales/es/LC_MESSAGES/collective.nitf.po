@@ -1,32 +1,49 @@
-# Héctor Velarde <hector.velarde@gmail.com>, 2011.
+# Héctor Velarde <hector.velarde@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-01-31 20:53+0000\n"
-"PO-Revision-Date: 2012-01-31 15:19-0400\n"
-"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
-"Language-Team: Spanish <https://github.com/collective>\n"
+"POT-Creation-Date: 2012-02-07 07:01+0000\n"
+"PO-Revision-Date: 2012-02-07 04:05-0300\n"
+"Last-Translator: Franco Pellegrini\n"
+"Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "Language-Code: es\n"
 "Language-Name: Español\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.nitf\n"
-"X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
+"X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv "
+"es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
+"Language: es\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
 msgstr "Un artículo de noticias"
 
+#: collective/nitf/profiles/default/portlets.xml
+msgid ""
+"A portlet which shows the latest NITF created and can be filtered by section."
+msgstr ""
+"Un portlet para mostrar los ultimos NITFs que puede ser filtrado por sección."
+
 #: collective/nitf/config.py:13
 msgid "Actuality"
 msgstr "Actualidad"
 
+#: collective/nitf/portlets/latest_sectionable_nitf.py:175
+msgid "Add latest NITF Portlet"
+msgstr "Agregar portlet de NITF recientes"
+
 #: collective/nitf/config.py:16
 msgid "Advice"
 msgstr "Consejo"
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:166
+msgid "All"
+msgstr "Todas"
 
 #: collective/nitf/config.py:19
 msgid "Almanac"
@@ -99,9 +116,10 @@ msgstr "Sección por defecto"
 msgid "Default Urgency"
 msgstr "Urgencia por defecto"
 
-#: collective/nitf/templates/organize.pt:70
+#: collective/nitf/templates/media.pt:92
 msgid "Drag and drop images to change their order on the gallery."
-msgstr "Arrastre y suelte las imágenes para cambiar el orden en el que se muestran."
+msgstr ""
+"Arrastre y suelte las imágenes para cambiar el orden en el que se muestran."
 
 #: collective/nitf/controlpanel.py:35
 msgid "Elegible Genres"
@@ -131,6 +149,10 @@ msgstr ""
 msgid "Genre"
 msgstr "Género"
 
+#: collective/nitf/portlets/latest_sectionable_nitf.py:89
+msgid "Header"
+msgstr "Cabecera"
+
 #: collective/nitf/controlpanel.py:59
 msgid "Here you can modify the settings for collective.nitf."
 msgstr "Aquí puede modificar la configuración de collective.nitf."
@@ -151,6 +173,15 @@ msgstr "Horóscopo"
 msgid "Interview"
 msgstr "Entrevista"
 
+#: collective/nitf/portlets/latest_sectionable_nitf.py:136
+#: collective/nitf/profiles/default/portlets.xml
+msgid "Latest Sectionable NITF"
+msgstr "NITFs Recientes Seccionados"
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:95
+msgid "Limit"
+msgstr "Límite"
+
 #: collective/nitf/content.py:90
 msgid "Location"
 msgstr "Localización"
@@ -158,6 +189,11 @@ msgstr "Localización"
 #: collective/nitf/config.py:153
 msgid "Low"
 msgstr "Baja"
+
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
+#: collective/nitf/templates/media.pt:91
+msgid "Media"
+msgstr ""
 
 #: collective/nitf/config.py:67
 msgid "Music"
@@ -184,11 +220,6 @@ msgstr "Obituario"
 msgid "Opinion"
 msgstr "Opinión"
 
-#: collective/nitf/profiles/default/types/collective.nitf.content.xml
-#: collective/nitf/templates/organize.pt:69
-msgid "Organize"
-msgstr "Organizar"
-
 #: collective/nitf/config.py:76
 msgid "Polls and Surveys"
 msgstr "Encuestas y sondeos"
@@ -200,6 +231,10 @@ msgstr "Nota de prensa"
 #: collective/nitf/config.py:82
 msgid "Press-Digest"
 msgstr ""
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:103
+msgid "Pretty dates"
+msgstr "Fechas mejoradas"
 
 #: collective/nitf/config.py:85
 msgid "Profile"
@@ -252,6 +287,10 @@ msgstr ""
 msgid "Section"
 msgstr "Sección"
 
+#: collective/nitf/portlets/latest_sectionable_nitf.py:104
+msgid "Show dates in a pretty format (ie. '4 hours ago')."
+msgstr "Mostrar fechas en un formato mejorado (ej. 'hace 4 horas')."
+
 #: collective/nitf/config.py:115
 msgid "Side bar and supporting information"
 msgstr ""
@@ -259,6 +298,14 @@ msgstr ""
 #: collective/nitf/config.py:118
 msgid "Special Report"
 msgstr ""
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:96
+msgid ""
+"Specify the maximum number of items to show in the portlet. Leave this blank "
+"to show all items."
+msgstr ""
+"Especificar el número máximo de resultados para mostrar. Dejar vacío para "
+"todos"
 
 #: collective/nitf/content.py:36
 msgid "Subtitle"
@@ -275,6 +322,18 @@ msgstr "Sinopsis"
 #: collective/nitf/config.py:127
 msgid "Text only"
 msgstr "Sólo texto"
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:90
+msgid "The header for the portlet. Leave empty for none."
+msgstr "La cabecera del portlet. Dejar vacío para ninguna."
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:176
+msgid ""
+"This portlet display a list of latest NITF created. It allows to filter NITF "
+"from different sections."
+msgstr ""
+"Este portlet muestra una lista de los últimos NITF creados. Permite "
+"filtrarlos de acuerdo a la sección."
 
 #: collective/nitf/config.py:130
 msgid "Transcript and Verbatim"
@@ -303,12 +362,16 @@ msgstr ""
 #. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
 #: collective/nitf/content.py:63
 msgid "help_genre"
-msgstr "Describe la naturaleza, característica periodística o intelectual de una noticia, no específicamente su contenido."
+msgstr ""
+"Describe la naturaleza, característica periodística o intelectual de una "
+"noticia, no específicamente su contenido."
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
 #: collective/nitf/content.py:91
 msgid "help_location"
-msgstr "El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la historia)."
+msgstr ""
+"El lugar donde el evento tuvo lugar (diferente del lugar donde se escribió la "
+"historia)."
 
 #. Default: "Named section where the article will appear."
 #: collective/nitf/content.py:73
@@ -324,4 +387,5 @@ msgstr "Un titular subordinado para el artículo."
 #: collective/nitf/content.py:82
 msgid "help_urgency"
 msgstr "Importancia de la noticia."
+
 
