@@ -1,0 +1,40 @@
+<tal:master define="results options/results;
+                    pretty_date options/pretty_date;
+                    plone_view context/@@plone;
+                    getIcon nocall:plone_view/getIcon;
+                    toLocalizedTime nocall:plone_view/toLocalizedTime;">
+                    
+    <tal:item repeat="nitf results">
+        <dd class="portletItem"
+            tal:define="oddrow     repeat/nitf/odd;
+                        itemUrl    nitf/getURL;
+                        item_icon  python:getIcon(nitf);"
+            tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
+
+            <span tal:replace="nitf/section">
+            Section
+            </span>
+            <br/>
+            <a href="#"
+            class="tile"
+            tal:attributes="href itemUrl;
+                            title nitf/Description">
+                <img tal:replace="structure item_icon/html_tag" />
+                <span tal:replace="nitf/pretty_title_or_id">
+                Title
+                </span>
+                <span class="portletItemDetails"
+                    tal:content="python:toLocalizedTime(nitf.Date)"
+                    tal:condition="not:pretty_date">
+                    Date
+                </span>
+                <span class="portletItemDetails"
+                    tal:content="python:view.getPrettyDate(nitf.Date)"
+                    tal:condition="pretty_date">
+                    Date
+                </span>
+            </a>
+        </dd>
+    </tal:item>
+
+</tal:master>

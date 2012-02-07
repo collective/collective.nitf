@@ -11,6 +11,8 @@
     <i18n:registerTranslations directory="locales" />
     <includeDependencies package="." />
 
+    <include package=".portlets" />
+    
     <permission
         id="collective.nitf.AddNewsArticle"
         title="collective.nitf: Add News Article"
