@@ -2,6 +2,8 @@
 
 from five import grok
 
+from AccessControl.unauthorized import Unauthorized
+
 from zope.interface import implements
 from zope.component import getMultiAdapter, getUtility
 
@@ -16,6 +18,7 @@ from zope.formlib import form
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from zope.schema.interfaces import IVocabularyFactory
+from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 
 from collective.prettydate.interfaces import IPrettyDate
 from zope.interface import Interface
@@ -33,20 +36,48 @@ class NitfFilterList(grok.View):
     template = ViewPageTemplateFile('nitf_filter_list.pt')
 
     def __call__(self):
-        section = self.request.get('section', None)
-        if section:
-            result = self.render(section)
-        else:
-            result = self.render()
+        section = self.request.get('nitf-section-filter', None)
+        collection_uid = self.request.get('nitf-filter-collection-uuid', None)
+        if not section:
+            section = None
+        if not collection_uid:
+            collection_uid = None
+            
+        result = self.render(section=section, uid=collection_uid)
 
         return result
 
-    def render(self, section=None, limit=10, pretty_date=True):
+    def getResults(self, section=None, limit=10, uid=None):
+        uc = getToolByName(self.context, 'uid_catalog')
         pc = getToolByName(self.context, 'portal_catalog')
-        query = {'portal_type': 'collective.nitf.content',
-                 'sort_on': 'created',
-                 'sort_order': 'reverse',
-                 'sort_limit': limit}
+
+        collection = None
+        query = {}
+        if uid:
+            try:
+                collection = uc(UID=uid)[0].getObject()
+                query = collection.buildQuery()
+            except IndexError:
+                pass
+            
+        # Let's force the portal_type to be collective.nitf.content
+        query['Type'] = ('News Article',)
+
+        # Now, let's try and load default values if not defined in the
+        # collection
+        if 'sort_on' not in query:
+            query['sort_on'] = 'created'
+
+            if 'sort_order' not in query:
+                query['sort_order'] = 'reverse'
+
+        if 'sort_limit' not in query:
+            query['sort_limit'] = limit
+            
+        # Now, let's remove any trace of a section (this should be filtered
+        # from portlet selection)
+        if 'section' in query:
+            del query['section']
 
         if section and section != 'all':
             vocab = getUtility(IVocabularyFactory,
@@ -56,6 +87,10 @@ class NitfFilterList(grok.View):
 
         results = pc(**query)[:limit]
 
+        return results
+
+    def render(self, pretty_date=True, **kw):
+        results = self.getResults(**kw)
         return self.template(results=results, pretty_date=pretty_date)
 
     def getPrettyDate(self, date):
@@ -90,6 +125,14 @@ class ILatestSectionableNITFPortlet(IPortletDataProvider):
         default=True,
         required=False)
 
+    filter_collection = schema.Choice(
+        title=_(u"Filter collection"),
+        description=_(u"Use the criteria from this collection to modify the "
+                       "search results and order."),
+        required=False,
+        source=SearchableTextSourceBinder(
+            {'portal_type': 'Topic'},
+            default_query='path:'))
 
 class Assignment(base.Assignment):
     """
@@ -103,15 +146,18 @@ class Assignment(base.Assignment):
     header = u""
     limit = 10
     pretty_date = True
+    filter_collection = None
 
     def __init__(self,
                  header=u"",
                  limit=10,
-                 pretty_date=True):
+                 pretty_date=True,
+                 filter_collection=None):
 
         self.header = header
         self.limit = limit
         self.pretty_date = pretty_date
+        self.filter_collection = filter_collection
 
     @property
     def title(self):
@@ -135,9 +181,14 @@ class Renderer(base.Renderer):
         view = getMultiAdapter((self.context, self.request),
                                name="nitf-filter-list")
 
-        results = view.render(section,
-                              self.data.limit,
-                              self.data.pretty_date)
+        uid = None
+        if self.data.filter_collection:
+            uid = self.getCollectionUID()
+        
+        results = view.render(section=section,
+                              limit=self.data.limit,
+                              pretty_date=self.data.pretty_date,
+                              uid=uid)
 
         return results
 
@@ -152,6 +203,20 @@ class Renderer(base.Renderer):
 
         return values
 
+    def getCollectionUID(self):
+        portal = self.context.portal_url.getPortalObject()
+        context = portal
+
+        for i in self.data.filter_collection.split('/')[1:]:
+            try:
+                context = context.restrictedTraverse(i)
+            except Unauthorized:
+                return ''
+
+        if context is not portal and context.portal_type == 'Topic':
+            return context.UID()
+        else:
+            return ''
 
 class AddForm(base.AddForm):
 

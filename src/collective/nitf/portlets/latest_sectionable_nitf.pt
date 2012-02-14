@@ -18,12 +18,14 @@
 
         $("#nitf-section-filter").change(function(event) {
                         var $value = $(this).val();
+                        var c_uuid = $("#nitf-filter-collection-uuid").val();
                         showNitfFilterSpinner();
                         $("#nitf-section-filter-results").load("@@nitf-filter-list",
-                                                            {'section':$value},
+                                                            {'nitf-section-filter':$value,
+                                                             'nitf-filter-collection-uuid':c_uuid},
                                                             hideNitfFilterSpinner);
             });
-            $("#submit-nitf-filter").remove();
+        $("#submit-nitf-filter").remove();
 
     });
     </script>
@@ -46,6 +48,12 @@
                     tal:content="option/value" />
         </select>
 
+        <input id="nitf-filter-collection-uuid"
+               name="nitf-filter-collection-uuid"
+               type="hidden"
+               tal:attributes="value view/getCollectionUID"
+               tal:condition="view/data/filter_collection"/>
+               
         <input id="submit-nitf-filter" type="submit" value="Submit" i18n:attributes="value" />
 
     </form>
