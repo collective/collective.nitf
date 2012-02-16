@@ -37,6 +37,7 @@ setup(name='collective.nitf',
         'collective.js.jqueryui',
         'plone.app.dexterity>=1.1',
         'plone.app.referenceablebehavior',
+        'plone.app.lockingbehavior',
         'plone.app.relationfield',
         'collective.prettydate'
         ],
