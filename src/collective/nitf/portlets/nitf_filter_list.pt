@@ -3,7 +3,7 @@
                     plone_view context/@@plone;
                     getIcon nocall:plone_view/getIcon;
                     toLocalizedTime nocall:plone_view/toLocalizedTime;">
-                    
+
     <tal:item repeat="nitf results">
         <dd class="portletItem"
             tal:define="oddrow     repeat/nitf/odd;

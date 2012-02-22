@@ -42,7 +42,7 @@ class NitfFilterList(grok.View):
             section = None
         if not collection_uid:
             collection_uid = None
-            
+
         result = self.render(section=section, uid=collection_uid)
 
         return result
@@ -59,7 +59,7 @@ class NitfFilterList(grok.View):
                 query = collection.buildQuery()
             except IndexError:
                 pass
-            
+
         # Let's force the portal_type to be collective.nitf.content
         query['Type'] = ('News Article',)
 
@@ -73,7 +73,7 @@ class NitfFilterList(grok.View):
 
         if 'sort_limit' not in query:
             query['sort_limit'] = limit
-            
+
         # Now, let's remove any trace of a section (this should be filtered
         # from portlet selection)
         if 'section' in query:
@@ -134,6 +134,7 @@ class ILatestSectionableNITFPortlet(IPortletDataProvider):
             {'portal_type': 'Topic'},
             default_query='path:'))
 
+
 class Assignment(base.Assignment):
     """
     Portlet assignment.
@@ -184,7 +185,7 @@ class Renderer(base.Renderer):
         uid = None
         if self.data.filter_collection:
             uid = self.getCollectionUID()
-        
+
         results = view.render(section=section,
                               limit=self.data.limit,
                               pretty_date=self.data.pretty_date,
@@ -217,6 +218,7 @@ class Renderer(base.Renderer):
             return context.UID()
         else:
             return ''
+
 
 class AddForm(base.AddForm):
 
