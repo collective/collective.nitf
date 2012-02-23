@@ -1,0 +1,57 @@
+# Héctor Velarde <hector.velarde@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.nitf\n"
+"POT-Creation-Date: 2012-02-23 18:12+0000\n"
+"PO-Revision-Date: 2011-12-24 10:32-0600\n"
+"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
+"Language-Team: Portuguese <https://github.com/collective>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#: collective/nitf/profiles/default/portlets.xml
+msgid "A portlet which shows the latest NITF created and can be filtered by section."
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "Author"
+msgstr ""
+
+#: collective/nitf/profiles/default/portlets.xml
+msgid "Latest Sectionable NITF"
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "Named section where the article appears"
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "News Type"
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "News importance"
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "Section"
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "Subordinate headline of the article"
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "Subtitle"
+msgstr ""
+
+#: collective/nitf/profiles/default/portal_atct.xml
+msgid "Urgency"
+msgstr ""
+

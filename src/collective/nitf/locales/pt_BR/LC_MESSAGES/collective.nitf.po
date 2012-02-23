@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-02-07 07:01+0000\n"
+"POT-Creation-Date: 2012-02-23 18:12+0000\n"
 "PO-Revision-Date: 2012-01-06 21:56-0600\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -15,19 +15,19 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.nitf\n"
 
-#: collective/nitf/profiles/default/types/collective.nitf.content.xml
-msgid "A news article"
+#: configure.zcml
+msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
 msgstr ""
 
-#: collective/nitf/profiles/default/portlets.xml
-msgid "A portlet which shows the latest NITF created and can be filtered by section."
+#: collective/nitf/profiles/default/types/collective.nitf.content.xml
+msgid "A news article"
 msgstr ""
 
 #: collective/nitf/config.py:13
 msgid "Actuality"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:175
+#: collective/nitf/portlets/latest_sectionable_nitf.py:227
 msgid "Add latest NITF Portlet"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Advice"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:166
+#: collective/nitf/portlets/latest_sectionable_nitf.py:200
 msgid "All"
 msgstr ""
 
@@ -110,6 +110,14 @@ msgstr ""
 msgid "Default Urgency"
 msgstr ""
 
+#: configure.zcml
+msgid "Displays a scrollable gallery in the news article"
+msgstr ""
+
+#: configure.zcml
+msgid "Displays news article with image"
+msgstr ""
+
 #: collective/nitf/templates/media.pt:92
 msgid "Drag and drop images to change their order on the gallery."
 msgstr ""
@@ -124,6 +132,10 @@ msgstr ""
 
 #: collective/nitf/config.py:46
 msgid "Feature"
+msgstr ""
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:129
+msgid "Filter collection"
 msgstr ""
 
 #: collective/nitf/config.py:49
@@ -142,7 +154,7 @@ msgstr ""
 msgid "Genre"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:89
+#: collective/nitf/portlets/latest_sectionable_nitf.py:111
 msgid "Header"
 msgstr ""
 
@@ -166,12 +178,11 @@ msgstr ""
 msgid "Interview"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:136
-#: collective/nitf/profiles/default/portlets.xml
+#: collective/nitf/portlets/latest_sectionable_nitf.py:168
 msgid "Latest Sectionable NITF"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:95
+#: collective/nitf/portlets/latest_sectionable_nitf.py:116
 msgid "Limit"
 msgstr ""
 
@@ -201,6 +212,10 @@ msgstr ""
 msgid "News Article"
 msgstr ""
 
+#: configure.zcml
+msgid "News Article View"
+msgstr ""
+
 #: collective/nitf/config.py:152
 msgid "Normal"
 msgstr ""
@@ -225,7 +240,7 @@ msgstr ""
 msgid "Press-Digest"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:103
+#: collective/nitf/portlets/latest_sectionable_nitf.py:123
 msgid "Pretty dates"
 msgstr ""
 
@@ -275,12 +290,16 @@ msgstr ""
 msgid "Scener"
 msgstr ""
 
+#: configure.zcml
+msgid "Scrollable Gallery View"
+msgstr ""
+
 #: collective/nitf/content.py:72
 #: collective/nitf/controlpanel.py:28
 msgid "Section"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:104
+#: collective/nitf/portlets/latest_sectionable_nitf.py:124
 msgid "Show dates in a pretty format (ie. '4 hours ago')."
 msgstr ""
 
@@ -292,7 +311,7 @@ msgstr ""
 msgid "Special Report"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:96
+#: collective/nitf/portlets/latest_sectionable_nitf.py:117
 msgid "Specify the maximum number of items to show in the portlet. Leave this blank to show all items."
 msgstr ""
 
@@ -312,16 +331,20 @@ msgstr ""
 msgid "Text only"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:90
+#: collective/nitf/portlets/latest_sectionable_nitf.py:112
 msgid "The header for the portlet. Leave empty for none."
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:176
+#: collective/nitf/portlets/latest_sectionable_nitf.py:228
 msgid "This portlet display a list of latest NITF created. It allows to filter NITF from different sections."
 msgstr ""
 
 #: collective/nitf/config.py:130
 msgid "Transcript and Verbatim"
+msgstr ""
+
+#: configure.zcml
+msgid "Uninstall profile for the collective.nitf package."
 msgstr ""
 
 #: collective/nitf/config.py:133
@@ -330,6 +353,10 @@ msgstr ""
 
 #: collective/nitf/content.py:81
 msgid "Urgency"
+msgstr ""
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:130
+msgid "Use the criteria from this collection to modify the search results and order."
 msgstr ""
 
 #: collective/nitf/config.py:136
