@@ -131,7 +131,7 @@ class View(dexterity.DisplayForm):
 
     TAG = '<img src="%s/image_%s" alt="%s" title="%s" />'
 
-    def get_images_in_groups(self, n=5, size='tile'):
+    def get_images_in_groups(self, n=5, size='thumb'):
         """ Return a list containing groups of n image tags.
         """
 

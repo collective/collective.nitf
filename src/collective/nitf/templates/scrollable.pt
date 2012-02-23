@@ -70,7 +70,7 @@
         $(".scrollable").scrollable();
         $(".items img").click(function() {
 	        if ($(this).hasClass("active")) { return; }
-	        var url = $(this).attr("src").replace("_tile", "_preview");
+	        var url = $(this).attr("src").replace("_thumb", "_preview");
 	        var wrap = $("#image_wrap").fadeTo("medium", 0.5);
 	        var img = new Image();
 	        img.onload = function() {
