@@ -1,5 +1,5 @@
 <dl class="portlet portletCollection portlet-latest-nitf"
-    i18n:domain="telesur.portlets"
+    i18n:domain="collective.nitf"
     tal:define="section context/request/nitf-section-filter | nothing;
                 portal_state context/@@plone_portal_state;
                 portal_url portal_state/portal_url;">

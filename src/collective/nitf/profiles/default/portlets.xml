@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
-<portlets
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="collective.nitf">
-
+<portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plone">
  <portlet title="Latest Sectionable NITF"
     addview="collective.nitf.LatestSectionableNITFPortlet"
     description="A portlet which shows the latest NITF created and can be filtered by section."
@@ -10,5 +8,4 @@
   <for interface="plone.app.portlets.interfaces.IColumn" />
   <for interface="plone.app.portlets.interfaces.IDashboard" />
  </portlet>
-
 </portlets>

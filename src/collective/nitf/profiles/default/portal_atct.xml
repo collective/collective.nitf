@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<atcttool xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+<atcttool xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plone">
  <topic_indexes>
   <index name="subtitle" description="Subordinate headline of the article"
      enabled="False" friendlyName="Subtitle"
