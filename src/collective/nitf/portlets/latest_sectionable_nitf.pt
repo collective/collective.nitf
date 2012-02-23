@@ -1,3 +1,7 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
 <dl class="portlet portletCollection portlet-latest-nitf"
     i18n:domain="collective.nitf"
     tal:define="section context/request/nitf-section-filter | nothing;
@@ -41,7 +45,7 @@
 
         <select id="nitf-section-filter" name="nitf-section-filter"
                  tal:define="options view/getAvailableSections">
-                 
+
             <option tal:repeat="option options"
                     tal:attributes="value option/token;
                                     selected python: option.token == section and True or None"
@@ -53,7 +57,7 @@
                type="hidden"
                tal:attributes="value view/getCollectionUID"
                tal:condition="view/data/filter_collection"/>
-               
+
         <input id="submit-nitf-filter" type="submit" value="Submit" i18n:attributes="value" />
 
     </form>
@@ -65,14 +69,15 @@
                     id="nitf-section-filter-spinner"
                     style="display:none"/>
     </div>
-    
+
     <div id="nitf-section-filter-results">
         <tal:contents replace="structure python:view.getResults(section)" />
     </div>
-    
+
     <dd class="portletFooter">
         <span class="portletBottomLeft"></span>
         <span class="portletBottomRight"></span>
     </dd>
 
 </dl>
+</html>

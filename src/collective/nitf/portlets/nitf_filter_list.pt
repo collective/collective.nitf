@@ -1,3 +1,6 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag="">
 <tal:master define="results options/results;
                     pretty_date options/pretty_date;
                     plone_view context/@@plone;
@@ -38,3 +41,4 @@
     </tal:item>
 
 </tal:master>
+</html>
