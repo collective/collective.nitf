@@ -2,9 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-01-17 01:40+0000\n"
-"PO-Revision-Date: 2011-09-11 18:59+0000\n"
-"Last-Translator: Joaquín Rosales <globojorro@gmail.com>\n"
+"POT-Creation-Date: 2012-02-23 18:12+0000\n"
+"PO-Revision-Date: 2012-02-23 16:27-0300\n"
+"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -15,320 +15,43 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
-#: collective/nitf/config.py:13
-msgid "Actuality"
-msgstr ""
+#: collective/nitf/profiles/default/portlets.xml
+msgid "A portlet which shows the latest NITF created and can be filtered by section."
+msgstr "Un portlet que muestra los últimos artículos de noticias y que puede filtrar los resultados por sección."
 
-#: collective/nitf/config.py:16
-msgid "Advice"
-msgstr ""
-
-#: collective/nitf/config.py:19
-msgid "Almanac"
-msgstr ""
-
-#: collective/nitf/config.py:22
-msgid "Analysis"
-msgstr ""
-
-#: collective/nitf/config.py:25
-msgid "Anniversary"
-msgstr ""
-
-#: collective/nitf/config.py:28
-msgid "Archive material"
-msgstr ""
-
-#: collective/nitf/content.py:48
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Author"
 msgstr "Autor"
 
-#: collective/nitf/controlpanel.py:18
-msgid "Available Sections"
-msgstr ""
-
-#: collective/nitf/config.py:31
-msgid "Background"
-msgstr ""
-
-#: collective/nitf/content.py:55
-msgid "Body text"
-msgstr ""
-
-#: collective/nitf/config.py:34
-msgid "Current"
-msgstr ""
-
-#: collective/nitf/config.py:37
-msgid "Curtain Raiser"
-msgstr ""
-
-#: collective/nitf/config.py:40
-msgid "Daybook"
-msgstr ""
-
-#: collective/nitf/controlpanel.py:29
-msgid "Default Genre"
-msgstr ""
-
-#: collective/nitf/controlpanel.py:24
-msgid "Default Section"
-msgstr ""
-
-#: collective/nitf/controlpanel.py:35
-msgid "Default Urgency"
-msgstr ""
-
-#: collective/nitf/config.py:43
-msgid "Exclusive"
-msgstr ""
-
-#: collective/nitf/config.py:46
-msgid "Feature"
-msgstr ""
-
-#: collective/nitf/config.py:49
-msgid "Fixture"
-msgstr ""
-
-#: collective/nitf/config.py:52
-msgid "Forecast"
-msgstr ""
-
-#: collective/nitf/config.py:55
-msgid "From the Scene"
-msgstr ""
-
-#: collective/nitf/content.py:62
-msgid "Genre"
-msgstr ""
-
-#: collective/nitf/controlpanel.py:47
-msgid "Here you can modify the settings for collective.nitf."
-msgstr ""
-
-#: collective/nitf/config.py:151
-msgid "High"
-msgstr ""
-
-#: collective/nitf/config.py:58
-msgid "History"
-msgstr ""
-
-#: collective/nitf/config.py:61
-msgid "Horoscope"
-msgstr ""
-
-#: collective/nitf/config.py:64
-msgid "Interview"
-msgstr ""
-
-#: collective/nitf/content.py:90
-msgid "Location"
-msgstr ""
-
-#: collective/nitf/config.py:153
-msgid "Low"
-msgstr ""
-
-#: collective/nitf/config.py:67
-msgid "Music"
-msgstr ""
-
-#: collective/nitf/controlpanel.py:46
-msgid "NITF Settings"
+#: collective/nitf/profiles/default/portlets.xml
+msgid "Latest Sectionable NITF"
 msgstr ""
 
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Named section where the article appears"
-msgstr ""
+msgstr "Nombre de la sección en la que aparece el artículo"
 
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "News Type"
-msgstr ""
+msgstr "Tipo de noticia"
 
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "News importance"
-msgstr ""
+msgstr "Importancia de la noticia"
 
-#: collective/nitf/config.py:152
-msgid "Normal"
-msgstr ""
-
-#: collective/nitf/config.py:70
-msgid "Obituary"
-msgstr ""
-
-#: collective/nitf/config.py:73
-msgid "Opinion"
-msgstr ""
-
-#: collective/nitf/config.py:76
-msgid "Polls and Surveys"
-msgstr ""
-
-#: collective/nitf/config.py:79
-msgid "Press Release"
-msgstr ""
-
-#: collective/nitf/config.py:82
-msgid "Press-Digest"
-msgstr ""
-
-#: collective/nitf/config.py:85
-msgid "Profile"
-msgstr ""
-
-#: collective/nitf/config.py:88
-msgid "Program"
-msgstr ""
-
-#: collective/nitf/config.py:91
-msgid "Question and Answer Session"
-msgstr ""
-
-#: collective/nitf/config.py:94
-msgid "Quote"
-msgstr ""
-
-#: collective/nitf/config.py:97
-msgid "Raw Sound"
-msgstr ""
-
-#: collective/nitf/config.py:100
-msgid "Response to a Question"
-msgstr ""
-
-#: collective/nitf/config.py:103
-msgid "Results Listings and Statistics"
-msgstr ""
-
-#: collective/nitf/config.py:106
-msgid "Retrospective"
-msgstr ""
-
-#: collective/nitf/config.py:109
-msgid "Review"
-msgstr ""
-
-#: collective/nitf/config.py:112
-msgid "Scener"
-msgstr ""
-
-#: collective/nitf/content.py:72
-#: collective/nitf/controlpanel.py:21
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Section"
 msgstr "Sección"
 
-#: collective/nitf/config.py:115
-msgid "Side bar and supporting information"
-msgstr ""
-
-#: collective/nitf/config.py:118
-msgid "Special Report"
-msgstr ""
-
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Subordinate headline of the article"
-msgstr ""
+msgstr "Un titular subordinado del artículo"
 
-#: collective/nitf/content.py:36
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Subtitle"
 msgstr "Subtítulo"
 
-#: collective/nitf/config.py:121
-msgid "Summary"
-msgstr ""
-
-#: collective/nitf/config.py:124
-msgid "Synopsis"
-msgstr ""
-
-#: collective/nitf/config.py:127
-msgid "Text only"
-msgstr ""
-
-#: collective/nitf/config.py:130
-msgid "Transcript and Verbatim"
-msgstr ""
-
-#: collective/nitf/config.py:133
-msgid "Update"
-msgstr ""
-
-#: collective/nitf/content.py:81
 #: collective/nitf/profiles/default/portal_atct.xml
 msgid "Urgency"
 msgstr "Urgencia"
-
-#: collective/nitf/config.py:136
-msgid "Voicer"
-msgstr ""
-
-#: collective/nitf/config.py:139
-msgid "Wrap"
-msgstr ""
-
-#: collective/nitf/config.py:142
-msgid "Wrapup"
-msgstr ""
-
-#. Default: "last modified"
-#: collective/nitf/templates/folder_summary_view.pt:90
-msgid "box_last_modified"
-msgstr ""
-
-#. Default: "There are currently no items in this folder."
-#: collective/nitf/templates/gallery.pt:29
-#: collective/nitf/templates/view.pt:71
-msgid "description_no_items_in_folder"
-msgstr ""
-
-#. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
-#: collective/nitf/content.py:63
-msgid "help_genre"
-msgstr ""
-
-#. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:91
-msgid "help_location"
-msgstr ""
-
-#. Default: "Named section where the article will appear."
-#: collective/nitf/content.py:73
-msgid "help_section"
-msgstr ""
-
-#. Default: "A subordinate headline for the article."
-#: collective/nitf/content.py:37
-msgid "help_subtitle"
-msgstr ""
-
-#. Default: "News importance."
-#: collective/nitf/content.py:82
-msgid "help_urgency"
-msgstr ""
-
-#. Default: "by ${author}"
-#: collective/nitf/templates/folder_summary_view.pt:79
-msgid "label_by_author"
-msgstr ""
-
-#. Default: "(${location}, from ${start} to ${end})"
-#: collective/nitf/templates/folder_summary_view.pt:56
-msgid "label_event_byline_with_location"
-msgstr ""
-
-#. Default: "(from ${start} to ${end})"
-#: collective/nitf/templates/folder_summary_view.pt:68
-msgid "label_event_byline_without_location"
-msgstr ""
-
-#. Default: "Read More…"
-#: collective/nitf/templates/folder_summary_view.pt:107
-msgid "read_more"
-msgstr ""
 

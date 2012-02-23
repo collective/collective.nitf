@@ -13,10 +13,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Domain: collective.nitf\n"
 
-#: menuitems in configure.zcml
-msgid "Related items"
-msgstr "Contenido relacionado"
+#: configure.zcml
+msgid "News Article View"
+msgstr ""
 
-#: menuitems in configure.zcml
-msgid "Contents"
-msgstr "Contenidos"
+#: configure.zcml
+msgid "Displays news article with image"
+msgstr ""
+
+#: configure.zcml
+msgid "Scrollable Gallery View"
+msgstr ""
+
+#: configure.zcml
+msgid "Displays a scrollable gallery in the news article"
+msgstr ""
+
+#: configure.zcml
+msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
+msgstr ""
+
+#: configure.zcml
+msgid "Uninstall profile for the collective.nitf package."
+msgstr ""
+
