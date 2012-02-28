@@ -7,30 +7,25 @@
 <head>
     <title tal:content="context/title" />
     <tobject tobject.type="news">
-        <tobject.property tobject.property.type="feature"
-                          tal:attributes="tobject.property.type context/genre" />
+        <tobject.property tobject.property.type=""
+           tal:attributes="tobject.property.type context/genre" />
     </tobject>
     <!-- this article is an update of a previous release -->
     <docdata management-status="usable">
         <!-- the document id, which should be unique per publisher -->
-        <doc-id id-string=""
-                tal:attributes="id-string context/getId" />
-        <!-- event location: where events in this document took place -->
+        <doc-id id-string="" tal:attributes="id-string context/getId" />
+        <!-- XXX: event location: where events in this document took place -->
         <evloc city="" state-prov="" iso-cc=""
-               tal:content="context/location"/>
-        <urgency ed-urg=""
-                 tal:attributes="ed-urg context/urgency" />
+           tal:content="context/location"/>
+        <urgency ed-urg="" tal:attributes="ed-urg context/urgency" />
         <!-- TODO: date.issue: when the document was sent to a receiver -->
         <date.issue norm="" />
-        <!-- date.release: when the receiver may publish that content.
-		     used in conjunction with management-status attribute of docdata -->
-        <date.release norm=""
-                      tal:attributes="norm context/effective" />
-        <!-- date.expire: when the publisher no longer wants the receiver to publish the article -->
-        <date.expire norm=""
-                     tal:attributes="norm context/expires" />
+        <date.release tal:condition="python:context.EffectiveDate() != 'None'"
+           norm="" tal:attributes="norm context/EffectiveDate" />
+        <date.expire tal:condition="python:context.ExpirationDate() != 'None'"
+           norm="" tal:attributes="norm context/ExpirationDate" />
         <doc.copyright holder=""
-                       tal:attributes="holder context/Rights" />
+           tal:attributes="holder context/Rights" />
         <doc.rights tal:content="context/Rights" />
         <key-list tal:repeat="subject context/subject">
             <keyword key="" tal:attributes="key subject" />
@@ -38,16 +33,18 @@
         <identified-content />
     </docdata>
     <pubdata type="web" name="" position.section="" ex-ref=""
-             tal:attributes="position.section context/section" />
+       tal:attributes="position.section context/section" />
     <revision-history />
 </head>
 <body>
     <body.head>
         <hedline>
             <hl1 tal:content="context/title" />
-            <hl2 tal:content="context/subtitle" />
+            <hl2 tal:condition="context/subtitle"
+               tal:content="context/subtitle" />
         </hedline>
-        <byline tal:content="context/byline" />
+        <byline tal:condition="context/byline"
+           tal:content="context/byline" />
         <distributor />
         <dateline>
             <location />
@@ -60,9 +57,9 @@
         <tal:media repeat="media view/get_media">
         <media tal:replace="structure media" />
         </tal:media>
-        <p tal:content="structure context/text/output|nothing" />
+        <block tal:content="structure context/text/output|nothing" />
     </body.content>
-    <body.end>
+    <body.end tal:condition="context/Rights">
         <tagline>
             <copyrite tal:content="context/Rights" />
         </tagline>
