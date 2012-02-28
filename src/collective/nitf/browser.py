@@ -221,6 +221,48 @@ class NITF(View):
         return media
 
 
+class NewsML(View):
+    """ Shows news article in NewsML XML format.
+    """
+    grok.context(INITF)
+    grok.layer(INITFBrowserLayer)
+    grok.name('newsml')
+    grok.require('zope2.View')
+
+    def version(self):
+        """ Returns news article revision number.
+        """
+        # TODO: get revision number
+        return 1
+
+    def nitf_size(self):
+        """ Returns size of the news article in NITF format.
+        """
+        # TODO: calcultate size
+        return 1000
+
+    ITEM_REF = """
+            <itemRef href="%s/@@nitf" size="%s"
+               contenttype="application/nitf+xml" format="fmt:nitf">
+                <title>%s</title>
+            </itemRef>
+    """
+
+    def get_related_items(self):
+        """ Returns an itemRef tag for each related item (only News Articles).
+        """
+        items = getattr(self.context, 'relatedItems', None)
+        if items is not None:
+            related_items = []
+            for i in items:
+                href = i.to_object.absolute_url()
+                size = 1000  # TODO: calcultate size
+                title = i.to_object.Title()
+                item_ref = self.ITEM_REF % (href, size, title)
+                related_items.append(item_ref)
+            return related_items
+
+
 class Media(dexterity.DisplayForm):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
