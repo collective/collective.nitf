@@ -57,7 +57,7 @@
             <tal:media repeat="media view/get_media">
             <media tal:replace="structure media" />
             </tal:media>
-            <block tal:content="structure context/text/output|nothing" />
+            <block tal:replace="structure context/text/output|nothing" />
         </body.content>
         <body.end tal:condition="context/Rights">
             <tagline>
