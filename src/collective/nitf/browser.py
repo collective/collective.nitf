@@ -13,6 +13,7 @@ from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFPlone.utils import getToolByName
 
 from plone.directives import dexterity
+from plone.uuid.interfaces import IUUID
 
 from collective.nitf.content import INITF
 from collective.nitf.interfaces import INITFBrowserLayer
@@ -178,6 +179,10 @@ class NITF(View):
     grok.layer(INITFBrowserLayer)
     grok.name('nitf')
     grok.require('zope2.View')
+
+    def update(self):
+        self.context = aq_inner(self.context)
+        self.uuid = IUUID(self.context)
 
     def _get_mediatype(self, mimetype):
         """Return one of the possible values of the media-type controlled
