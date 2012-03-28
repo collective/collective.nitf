@@ -14,9 +14,6 @@
         <docdata management-status="usable">
             <!-- the document id, which should be unique per publisher -->
             <doc-id id-string="" tal:attributes="id-string context/getId" />
-            <!-- XXX: event location: where events in this document took place -->
-            <evloc city="" state-prov="" iso-cc=""
-               tal:content="context/location"/>
             <urgency ed-urg="" tal:attributes="ed-urg context/urgency" />
             <!-- TODO: date.issue: when the document was sent to a receiver -->
             <date.issue norm="" />
@@ -47,7 +44,7 @@
                tal:content="context/byline" />
             <distributor />
             <dateline>
-                <location />
+                <location tal:content="context/location" />
             </dateline>
             <abstract>
                 <p tal:content="context/description" />
