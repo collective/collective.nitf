@@ -7,6 +7,7 @@ from plone.app.testing import setRoles
 
 from plone.app.textfield.value import RichTextValue
 
+from collective.nitf.config import PROJECTNAME
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 
@@ -206,6 +207,22 @@ class CatalogTestCase(unittest.TestCase):
         result = self.catalog(SearchableText='Mexico City')
         self.assertEquals(1, len(result))
         self.assertEquals(result[0].getURL(), nitf.absolute_url())
+
+    def test_catalog_not_lost_on_package_reinstall(self):
+        """ Catalog information should not be lost on package reinstall.
+
+        Reported in https://github.com/collective/collective.nitf/issues/33
+
+        See http://maurits.vanrees.org/weblog/archive/2009/12/catalog to find
+        out how to fix it.
+        """
+        self.n1.byline = 'author'
+        self.n1.reindexObject()
+        qi = self.portal['portal_quickinstaller']
+        qi.reinstallProducts(products=[PROJECTNAME])
+        result = self.catalog(SearchableText='author')
+        self.assertEqual(1, len(result))
+        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
 
 
 def test_suite():
