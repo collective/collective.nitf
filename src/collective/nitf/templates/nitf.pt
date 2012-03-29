@@ -10,7 +10,6 @@
             <tobject.property tobject.property.type=""
                tal:attributes="tobject.property.type context/genre" />
         </tobject>
-        <!-- this article is an update of a previous release -->
         <docdata management-status="usable">
             <doc-id id-string="" tal:attributes="id-string view/uuid" />
             <urgency ed-urg="" tal:attributes="ed-urg context/urgency" />
