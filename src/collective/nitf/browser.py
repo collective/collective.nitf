@@ -167,6 +167,7 @@ class Folder_Summary_View(grok.View):
 MEDIA = """
 <media id="media:%s" media-type="%s">
     <media-reference mime-type="%s" source="%s" alternate-text="%s"%s%s />
+    <media-caption>%s</media-caption>
 </media>
 """
 
@@ -212,13 +213,15 @@ class NITF(View):
             mimetype = mimetype and mimetype or ''
             mediatype = self._get_mediatype(mimetype)
             alternate_text = obj.title_or_id()
+            caption = obj.Description()
             # we only include height and/or width if we have a value for them
             height = obj.getHeight()
             height = height and ' height="%s"' % obj.getHeight() or ''
             width = obj.getWidth()
             width = width and ' width="%s"' % obj.getWidth() or ''
             m = MEDIA % (id, mediatype,
-                         mimetype, source, alternate_text, height, width)
+                         mimetype, source, alternate_text, height, width,
+                         caption)
             media.append(m)
 
         return media
