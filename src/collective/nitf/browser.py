@@ -49,16 +49,14 @@ class View(dexterity.DisplayForm):
 
     def update(self):
         self.context = aq_inner(self.context)
-        self.catalog = getToolByName(self.context, 'portal_catalog')
 
     def _get_brains(self, object_provides=None):
         """ Return a list of brains inside the NITF object.
         """
-        self.update()
+        catalog = getToolByName(self.context, 'portal_catalog')
         path = '/'.join(self.context.getPhysicalPath())
-        brains = self.catalog(object_provides=object_provides,
-                              path=path,
-                              sort_on='getObjPositionInParent')
+        brains = catalog(object_provides=object_provides, path=path,
+                         sort_on='getObjPositionInParent')
 
         return brains
 
@@ -119,6 +117,8 @@ class View(dexterity.DisplayForm):
             return image.Description()
 
     def tag(self, **kwargs):
+        # tag original implementation returns object title in both, alt and
+        # title attributes
         image = self.getImage()
         if image is not None:
             return image.tag(**kwargs)
@@ -135,7 +135,7 @@ class View(dexterity.DisplayForm):
     def get_images_in_groups(self, n=5, size='thumb'):
         """ Return a list containing groups of n image tags.
         """
-
+        # TODO: check for a valid size
         images = [i.getObject() for i in self.get_images()]
         images = [self.TAG % (i.absolute_url(), size,
                               i.Title(),
@@ -163,13 +163,6 @@ class Folder_Summary_View(grok.View):
     grok.name("folder_summary_view")
     grok.require('zope2.View')
 
-MEDIA = """
-<media media-type="%s">
-    <media-reference mime-type="%s" source="%s" alternate-text="%s"%s%s />
-    <media-caption>%s</media-caption>
-</media>
-"""
-
 
 class NITF(View):
     """ Shows news article in NITF XML format.
@@ -196,6 +189,12 @@ class NITF(View):
 
         return 'other'
 
+    MEDIA = """
+<media media-type="%s">
+    <media-reference mime-type="%s" source="%s" alternate-text="%s"%s%s />
+    <media-caption>%s</media-caption>
+</media>"""
+
     def get_media(self):
         """ Return a list of object brains inside the NITF object.
         """
@@ -210,14 +209,14 @@ class NITF(View):
             # if no mime type is detected, result is None; we must change it
             mimetype = mimetype and mimetype or ''
             mediatype = self._get_mediatype(mimetype)
-            alternate_text = obj.title_or_id()
+            alternate_text = obj.Title()
             caption = obj.Description()
             # we only include height and/or width if we have a value for them
             height = obj.getHeight()
             height = height and ' height="%s"' % obj.getHeight() or ''
             width = obj.getWidth()
             width = width and ' width="%s"' % obj.getWidth() or ''
-            m = MEDIA % (mediatype,
+            m = self.MEDIA % (mediatype,
                          mimetype, source, alternate_text, height, width,
                          caption)
             media.append(m)
@@ -242,15 +241,14 @@ class NewsML(View):
     def nitf_size(self):
         """ Returns size of the news article in NITF format.
         """
-        # TODO: calcultate size
+        # TODO: calculate size
         return 1000
 
     ITEM_REF = """
-            <itemRef href="%s/@@nitf" size="%s"
-               contenttype="application/nitf+xml" format="fmt:nitf">
-                <title>%s</title>
-            </itemRef>
-    """
+<itemRef href="%s/@@nitf" size="%s"
+   contenttype="application/nitf+xml" format="fmt:nitf">
+    <title>%s</title>
+</itemRef>"""
 
     def get_related_items(self):
         """ Returns an itemRef tag for each related item (only News Articles).
@@ -260,7 +258,7 @@ class NewsML(View):
             related_items = []
             for i in items:
                 href = i.to_object.absolute_url()
-                size = 1000  # TODO: calcultate size
+                size = self.nitf_size()
                 title = i.to_object.Title()
                 item_ref = self.ITEM_REF % (href, size, title)
                 related_items.append(item_ref)
