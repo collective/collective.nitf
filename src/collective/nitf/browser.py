@@ -163,9 +163,8 @@ class Folder_Summary_View(grok.View):
     grok.name("folder_summary_view")
     grok.require('zope2.View')
 
-
 MEDIA = """
-<media id="media:%s" media-type="%s">
+<media media-type="%s">
     <media-reference mime-type="%s" source="%s" alternate-text="%s"%s%s />
     <media-caption>%s</media-caption>
 </media>
@@ -206,7 +205,6 @@ class NITF(View):
         results = self.get_images() + self.get_files()
         for r in results:
             obj = r.getObject()
-            id = obj.UID()
             source = obj.absolute_url()
             (mimetype, encoding) = mimetypes.guess_type(source)
             # if no mime type is detected, result is None; we must change it
@@ -219,7 +217,7 @@ class NITF(View):
             height = height and ' height="%s"' % obj.getHeight() or ''
             width = obj.getWidth()
             width = width and ' width="%s"' % obj.getWidth() or ''
-            m = MEDIA % (id, mediatype,
+            m = MEDIA % (mediatype,
                          mimetype, source, alternate_text, height, width,
                          caption)
             media.append(m)
