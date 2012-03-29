@@ -1,4 +1,3 @@
-<metal:main define-macro="main">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
@@ -7,7 +6,6 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.nitf">
 <body>
-
 <metal:title fill-slot="content-title">
     <tal:content-title metal:define-macro="content-title">
 
@@ -31,7 +29,7 @@
     </tal:content-description>
 </metal:description>
 
-<metal:core fill-slot="content-core">
+<metal:main fill-slot="content-core">
     <tal:content-core metal:define-macro="content-core">
         <div class="newsImageContainer" tal:define="image view/getImage" tal:condition="image">
             <a href="#mediabox" id="parent-fieldname-image">
@@ -41,14 +39,6 @@
                tal:content="view/imageCaption">
               Image Caption
             </p>
-        </div>
-
-        <div class="newsview">
-            <div id="mediabox" metal:use-macro="context/@@display_macros/macros/media-box">
-                <metal:navi fill-slot="navi">
-                    <metal:buttons use-macro="context/@@display_macros/macros/navi" />
-                </metal:navi>
-            </div>
         </div>
 
         <div tal:content="structure context/text/output|nothing" />
@@ -74,9 +64,15 @@
             </tal:block>
         </fieldset>
 
-    </tal:content-core>
-</metal:core>
+        <div class="newsview">
+            <div id="mediabox" metal:use-macro="context/@@display_macros/macros/media-box">
+                <metal:navi fill-slot="navi">
+                    <metal:buttons use-macro="context/@@display_macros/macros/navi" />
+                </metal:navi>
+            </div>
+        </div>
 
+    </tal:content-core>
+</metal:main>
 </body>
 </html>
-</metal:main>
