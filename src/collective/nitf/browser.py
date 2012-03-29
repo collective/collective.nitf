@@ -23,7 +23,7 @@ grok.templatedir('templates')
 
 # TODO: enable_form_tabbing must be user selectable
 class AddForm(dexterity.AddForm):
-    """Default view looks like a News Item.
+    """ Default view looks like a News Item.
     """
     grok.name('collective.nitf.content')
     grok.layer(INITFBrowserLayer)
@@ -32,7 +32,7 @@ class AddForm(dexterity.AddForm):
 
 
 class EditForm(dexterity.EditForm):
-    """Default view looks like a News Item.
+    """ Default view looks like a News Item.
     """
     grok.context(INITF)
     grok.layer(INITFBrowserLayer)
@@ -41,7 +41,7 @@ class EditForm(dexterity.EditForm):
 
 
 class View(dexterity.DisplayForm):
-    """Default view looks like a News Item.
+    """ Default view looks like a News Item.
     """
     grok.context(INITF)
     grok.require('zope2.View')
@@ -52,7 +52,7 @@ class View(dexterity.DisplayForm):
         self.catalog = getToolByName(self.context, 'portal_catalog')
 
     def _get_brains(self, object_provides=None):
-        """Return a list of brains inside the NITF object.
+        """ Return a list of brains inside the NITF object.
         """
         self.update()
         path = '/'.join(self.context.getPhysicalPath())
@@ -63,7 +63,7 @@ class View(dexterity.DisplayForm):
         return brains
 
     def get_images(self):
-        """Return a list of image brains inside the NITF object.
+        """ Return a list of image brains inside the NITF object.
         """
         return self._get_brains(IATImage.__identifier__)
 
@@ -73,7 +73,7 @@ class View(dexterity.DisplayForm):
         return len(self.get_images())
 
     def get_files(self):
-        """Return a list of file brains inside the NITF object.
+        """ Return a list of file brains inside the NITF object.
         """
         return self._get_brains(IATFile.__identifier__)
 
@@ -83,7 +83,7 @@ class View(dexterity.DisplayForm):
         return len(self.get_files())
 
     def get_links(self):
-        """Return a list of link brains inside the NITF object.
+        """ Return a list of link brains inside the NITF object.
         """
         return self._get_brains(IATLink.__identifier__)
 
@@ -93,7 +93,7 @@ class View(dexterity.DisplayForm):
         return len(self.get_links())
 
     def get_media(self):
-        """Return a list of object brains inside the NITF object.
+        """ Return a list of object brains inside the NITF object.
         """
         media_interfaces = [IATImage.__identifier__,
                             IATFile.__identifier__,
@@ -172,7 +172,7 @@ MEDIA = """
 
 
 class NITF(View):
-    """Shows news article in NITF XML format.
+    """ Shows news article in NITF XML format.
     """
     grok.context(INITF)
     grok.layer(INITFBrowserLayer)
@@ -184,7 +184,7 @@ class NITF(View):
         self.uuid = IUUID(self.context)
 
     def _get_mediatype(self, mimetype):
-        """Return one of the possible values of the media-type controlled
+        """ Return one of the possible values of the media-type controlled
         vocabulary.
         """
         # 'data' and 'other' are also part of the controlled vocabulary; we
@@ -197,7 +197,7 @@ class NITF(View):
         return 'other'
 
     def get_media(self):
-        """Return a list of object brains inside the NITF object.
+        """ Return a list of object brains inside the NITF object.
         """
         media = []
         # XXX: we could honor original order calling the get_media() method in
