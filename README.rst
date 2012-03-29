@@ -28,7 +28,7 @@ Requirements
 ------------
 
 * Plone >= 4.1
-* Dexterity_ >= 1.1
+* Dexterity_ >= 1.2.1
 
 Usage
 -----
