@@ -23,9 +23,10 @@ class PermissionsTest(unittest.TestCase):
 
     def test_add_permissions(self):
         permission = 'collective.nitf: Add News Article'
+        expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
-        self.assertEqual(roles, ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+        self.assertListEqual(roles, expected)
 
     # TODO: find a better way to test this
     def test_owner_permissions(self):
