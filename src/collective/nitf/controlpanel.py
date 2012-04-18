@@ -1,24 +1,18 @@
 # -*- coding: utf-8 -*-
-from five import grok
 
 from zope import schema
-from zope.interface import Interface
-from zope.schema.vocabulary import SimpleVocabulary
 
 from z3c.form.browser.textlines import TextLinesFieldWidget
+from zope.interface import Interface
 
 from plone.app.registry.browser import controlpanel
-from plone.registry.interfaces import IRegistry
-
-from zope.component import getUtility
-from zope.schema.interfaces import IContextSourceBinder
 
 from collective.nitf import _
 from collective.nitf import config
 
 
 class INITFSettings(Interface):
-    """Interface for the form on the control panel.
+    """ Interface for the control panel form.
     """
 
     sections = schema.Set(
@@ -35,7 +29,7 @@ class INITFSettings(Interface):
     possible_genres = schema.List(title=_(u'Elegible Genres'),
             description=_(u"Choose genres to use in the site"),
             required=False,
-            value_type = schema.Choice(vocabulary=config.GENRES),)
+            value_type=schema.Choice(vocabulary=config.GENRES),)
 
     default_genre = schema.Choice(
             title=_(u'Default Genre'),
@@ -51,9 +45,6 @@ class INITFSettings(Interface):
 
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
-    """
-    """
-
     schema = INITFSettings
     label = _(u'NITF Settings')
     description = _(u'Here you can modify the settings for collective.nitf.')
