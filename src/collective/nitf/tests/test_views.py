@@ -5,8 +5,7 @@ import unittest2 as unittest
 from StringIO import StringIO
 
 from zope.app.file.tests.test_image import zptlogo
-from zope.component import getMultiAdapter
-from zope.component import queryMultiAdapter
+from zope.component import getMultiAdapter, queryMultiAdapter
 from zope.interface import directlyProvides
 
 from plone.app.customerize import registration
@@ -28,10 +27,14 @@ class DefaultViewTestCase(unittest.TestCase):
         directlyProvides(self.request, INITFBrowserLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.portal['n1']
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
 
-    def test_default_view_registered(self):
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_default_view_is_registered(self):
         pt = self.portal['portal_types']
         self.assertEqual(pt['collective.nitf.content'].default_view, 'view')
 
@@ -127,13 +130,13 @@ class DefaultViewTestCase(unittest.TestCase):
         # tag original implementation returns object title in both, alt and
         # title attributes
         self.assertEqual(tag(),
-            '<img src="http://nohost/plone/n1/foo/image" '
+            '<img src="http://nohost/plone/test-folder/n1/foo/image" '
             'alt="bar" title="bar" height="16" width="16" />')
         self.assertEqual(tag(scale='preview'),
-            '<img src="http://nohost/plone/n1/foo/image_preview" '
+            '<img src="http://nohost/plone/test-folder/n1/foo/image_preview" '
             'alt="bar" title="bar" height="16" width="16" />')
         self.assertEqual(tag(css_class='myClass'),
-            '<img src="http://nohost/plone/n1/foo/image" '
+            '<img src="http://nohost/plone/test-folder/n1/foo/image" '
             'alt="bar" title="bar" height="16" width="16" class="myClass" />')
 
     def test_imageCaption(self):
@@ -177,10 +180,14 @@ class ScrollableViewTestCase(unittest.TestCase):
         directlyProvides(self.request, INITFBrowserLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.portal['n1']
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
 
-    def test_scrollable_view_registered(self):
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_scrollable_view_is_registered(self):
         registered = [v.name for v in registration.getViews(INITFBrowserLayer)]
         self.assertTrue('scrollable' in registered)
 
@@ -198,32 +205,35 @@ class NITFViewTestCase(unittest.TestCase):
         directlyProvides(self.request, INITFBrowserLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.portal['n1']
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
 
-    def test_scrollable_view_registered(self):
-        # this view is available but not registered
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_scrollable_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='nitf')
         self.assertTrue(view is not None)
 
     def test_get_mediatype(self):
         view = getMultiAdapter((self.n1, self.request), name='nitf')
         _get_mediatype = view._get_mediatype
-        self.assertEquals(_get_mediatype('application/pdf'), 'application')
-        self.assertEquals(_get_mediatype('audio/mpeg3'), 'audio')
-        self.assertEquals(_get_mediatype('image/jpeg'), 'image')
-        self.assertEquals(_get_mediatype('image/png'), 'image')
-        self.assertEquals(_get_mediatype('multipart/signed'), 'other')
-        self.assertEquals(_get_mediatype('text/plain'), 'text')
-        self.assertEquals(_get_mediatype('video/avi'), 'video')
+        self.assertEqual(_get_mediatype('application/pdf'), 'application')
+        self.assertEqual(_get_mediatype('audio/mpeg3'), 'audio')
+        self.assertEqual(_get_mediatype('image/jpeg'), 'image')
+        self.assertEqual(_get_mediatype('image/png'), 'image')
+        self.assertEqual(_get_mediatype('multipart/signed'), 'other')
+        self.assertEqual(_get_mediatype('text/plain'), 'text')
+        self.assertEqual(_get_mediatype('video/avi'), 'video')
 
     def test_get_media(self):
         view = getMultiAdapter((self.n1, self.request), name='nitf')
         get_media = view.get_media
-        self.assertEquals(len(get_media()), 0)
+        self.assertEqual(len(get_media()), 0)
 
         self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
-        self.assertEquals(len(get_media()), 1)
+        self.assertEqual(len(get_media()), 1)
 
 
 class NewsMLViewTestCase(unittest.TestCase):
@@ -236,11 +246,14 @@ class NewsMLViewTestCase(unittest.TestCase):
         directlyProvides(self.request, INITFBrowserLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.portal['n1']
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
 
-    def test_newsml_view_registered(self):
-        # this view is available but not registered
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_newsml_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='newsml')
         self.assertTrue(view is not None)
 

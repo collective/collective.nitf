@@ -25,17 +25,13 @@ class ControlPanelTestCase(unittest.TestCase):
         self.controlpanel = self.portal['portal_controlpanel']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
-    def test_controlpanel_view(self):
-        """ Control panel must have view.
-        """
+    def test_controlpanel_has_view(self):
         view = getMultiAdapter((self.portal, self.portal.REQUEST),
                                name='nitf-settings')
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
-    def test_nitf_controlpanel_view_protected(self):
-        """ Control panel view can not be accessed by anonymous users.
-        """
+    def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
         logout()
         self.assertRaises(Unauthorized,
@@ -45,14 +41,16 @@ class ControlPanelTestCase(unittest.TestCase):
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
-        self.assertTrue('nitf' in actions)
+        self.assertTrue('nitf' in actions,
+                        'control panel was not installed')
 
     def test_controlpanel_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
         qi.uninstallProducts(products=[PROJECTNAME])
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
-        self.assertTrue('nitf' not in actions)
+        self.assertTrue('nitf' not in actions,
+                        'control panel was not removed')
 
 
 class RegistryTestCase(unittest.TestCase):
@@ -65,38 +63,28 @@ class RegistryTestCase(unittest.TestCase):
         self.settings = self.registry.forInterface(INITFSettings)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
-    def test_record_sections(self):
-        """ The sections record must be in the registry.
-        """
+    def test_sections_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'sections'))
         self.assertEqual(self.settings.sections, set([]))
 
-    def test_record_default_section(self):
-        """ The default section record must be in the registry.
-        """
+    def test_default_section_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_section'))
         self.assertEqual(self.settings.default_section, None)
 
-    def test_record_default_genre(self):
-        """ The default genre record must be in the registry.
-        """
+    def test_default_genre_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_genre'))
         self.assertEqual(self.settings.default_genre, DEFAULT_GENRE)
 
-    def test_possible_genres(self):
-        """ The genres record must be in the registry.
-        """
+    def test_possible_genres_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'possible_genres'))
         self.assertEqual(self.settings.possible_genres, None)
 
-    def test_record_default_urgency(self):
-        """ The default urgency record must be in the registry.
-        """
+    def test_default_urgency_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_urgency'))
         self.assertEqual(self.settings.default_urgency, DEFAULT_URGENCY)
 
     def get_record(self, record):
-        """ Helper function; it raises KeyError if the record is not on the
+        """ Helper function; it raises KeyError if the record is not in the
         registry.
         """
         prefix = 'collective.nitf.controlpanel.INITFSettings.'

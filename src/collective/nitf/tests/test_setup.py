@@ -20,9 +20,7 @@ CSS = [
     ]
 
 
-class InstallTest(unittest.TestCase):
-    """Ensure the NITF package is properly installed.
-    """
+class InstallTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
@@ -37,14 +35,13 @@ class InstallTest(unittest.TestCase):
         permission = 'collective.nitf: Add News Article'
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
-        self.assertEqual(roles, ['Contributor', 'Manager', 'Owner', 'Site Administrator'])
+        expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
+        self.assertListEqual(roles, expected)
 
-    def test_browserlayer(self):
-        """Browser layers are properly registered at install time.
-        """
+    def test_browserlayer_installed(self):
         layers = [l.getName() for l in registered_layers()]
         self.assertTrue('INITFBrowserLayer' in layers,
-                        'browser layer not installed')
+                        'browser layer was not installed')
 
     def test_link_workflow_changed(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
@@ -54,11 +51,9 @@ class InstallTest(unittest.TestCase):
         chain = workflow_tool.getChainForPortalType(obj.portal_type)
         self.assertEqual(len(chain), 1)
         self.assertEqual(chain[0], 'one_state_workflow',
-                         'workflow not changed on Link content type')
+                         'workflow was not changed for Link content type')
 
     def test_javascript_registry(self):
-        """JS are properly registered at install time.
-        """
         portal_javascripts = self.portal.portal_javascripts
         for js in JS:
             self.assertTrue(js in portal_javascripts.getResourceIds())
@@ -83,22 +78,16 @@ class UninstallTest(unittest.TestCase):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
     def test_browserlayer_removed(self):
-        """Browser layers are properly removed at uninstall time.
-        """
         layers = [l.getName() for l in registered_layers()]
         self.assertFalse('INITFBrowserLayer' in layers,
-                         'browser layer not removed')
+                         'browser layer was not removed')
 
     def test_javascript_registry_removed(self):
-        """JS are properly removed at uninstall time.
-        """
         portal_javascripts = self.portal.portal_javascripts
         for js in JS:
             self.assertTrue(js not in portal_javascripts.getResourceIds())
 
     def test_css_registry_removed(self):
-        """CS are properly removed at uninstall time.
-        """
         portal_css = self.portal.portal_css
         for css in CSS:
             self.assertTrue(css not in portal_css.getResourceIds())
