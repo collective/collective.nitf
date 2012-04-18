@@ -14,18 +14,20 @@ class PermissionsTest(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         folder = self.portal['test-folder']
+
         folder.invokeFactory('collective.nitf.content', 'n1')
         self.n1 = folder['n1']
 
     def test_add_permissions(self):
         permission = 'collective.nitf: Add News Article'
-        expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
+        expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
         self.assertListEqual(roles, expected)
 
     # TODO: find a better way to test this

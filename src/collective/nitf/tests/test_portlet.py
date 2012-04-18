@@ -2,11 +2,14 @@
 
 import unittest2 as unittest
 
+from DateTime import DateTime
+
 from zope.component import getUtility, getMultiAdapter
-from Products.CMFCore.utils import getToolByName
 
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+
+from plone.app.portlets.storage import PortletAssignmentMapping
 
 from plone.portlets.interfaces import IPortletType
 from plone.portlets.interfaces import IPortletManager
@@ -16,13 +19,9 @@ from plone.portlets.interfaces import IPortletRenderer
 
 from plone.registry.interfaces import IRegistry
 
-from plone.app.portlets.storage import PortletAssignmentMapping
-
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.portlets import latest_sectionable_nitf
 from collective.nitf.testing import INTEGRATION_TESTING
-
-from DateTime import DateTime
 
 
 class PortletTest(unittest.TestCase):
@@ -35,32 +34,25 @@ class PortletTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def test_portlet_type_registered(self):
-        latest_sectionable = getUtility(
-            IPortletType,
-            name='collective.nitf.LatestSectionableNITFPortlet')
-
-        self.assertEqual(latest_sectionable.addview,
-                         'collective.nitf.LatestSectionableNITFPortlet')
+        name = 'collective.nitf.LatestSectionableNITFPortlet'
+        latest_sectionable = getUtility(IPortletType, name=name)
+        self.assertEqual(latest_sectionable.addview, name)
 
     def test_interfaces(self):
         latest_sectionable = latest_sectionable_nitf.Assignment()
-
         self.assertTrue(IPortletAssignment.providedBy(latest_sectionable))
         self.assertTrue(IPortletDataProvider.providedBy(latest_sectionable.data))
 
     def test_invoke_add_view(self):
-        latest_sectionable = getUtility(
-                        IPortletType,
-                        name='collective.nitf.LatestSectionableNITFPortlet')
+        name = 'collective.nitf.LatestSectionableNITFPortlet'
+        latest_sectionable = getUtility(IPortletType, name=name)
 
-        mapping = self.portal.restrictedTraverse(
-            '++contextportlets++plone.leftcolumn')
+        mapping = self.portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
 
         for m in mapping.keys():
             del mapping[m]
 
         addview = mapping.restrictedTraverse('+/' + latest_sectionable.addview)
-
         addview.createAndAdd(data={})
 
         self.assertEqual(len(mapping), 1)
@@ -103,12 +95,12 @@ class RenderTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.catalog = self.portal.portal_catalog
+        self.wf = self.portal.portal_workflow
 
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
         self.folder = self.portal['test-folder']
-        self.pc = getToolByName(self.portal, 'portal_catalog')
-        self.wf = getToolByName(self.portal, "portal_workflow")
 
         self.set_default_workflow()
         # Let's create 3 sections in the registry
@@ -201,7 +193,7 @@ class RenderTest(unittest.TestCase):
         self.assertEqual(len(results), 10)
         query = self.default_query
 
-        catalog_results = self.pc(**query)[:10]
+        catalog_results = self.catalog(**query)[:10]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
@@ -213,7 +205,7 @@ class RenderTest(unittest.TestCase):
         query = self.default_query
         query['sort_limit'] = 45
 
-        catalog_results = self.pc(**query)[:45]
+        catalog_results = self.catalog(**query)[:45]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
@@ -238,7 +230,7 @@ class RenderTest(unittest.TestCase):
             query['sort_limit'] = 45
             query['section'] = section[1]
 
-            catalog_results = self.pc(**query)[:45]
+            catalog_results = self.catalog(**query)[:45]
 
             self.assertEqual([i.id for i in results],
                              [i.id for i in catalog_results])
@@ -268,7 +260,7 @@ class RenderTest(unittest.TestCase):
         query = self.default_query
         query['sort_limit'] = 45
 
-        catalog_results = self.pc(**query)[:45]
+        catalog_results = self.catalog(**query)[:45]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
@@ -283,7 +275,7 @@ class RenderTest(unittest.TestCase):
         self.assertEqual(len(results), 45)
         query = self.default_query
 
-        catalog_results = self.pc(**query)[:45]
+        catalog_results = self.catalog(**query)[:45]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
@@ -299,7 +291,7 @@ class RenderTest(unittest.TestCase):
         query = self.default_query
         query['review_state'] = 'published'
 
-        catalog_results = self.pc(**query)[:45]
+        catalog_results = self.catalog(**query)[:45]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
@@ -315,7 +307,7 @@ class RenderTest(unittest.TestCase):
         query = self.default_query
         query['sort_on'] = 'section'
 
-        catalog_results = self.pc(**query)[:45]
+        catalog_results = self.catalog(**query)[:45]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
@@ -330,7 +322,7 @@ class RenderTest(unittest.TestCase):
         query = self.default_query
         del query['sort_order']
 
-        catalog_results = self.pc(**query)[:45]
+        catalog_results = self.catalog(**query)[:45]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
@@ -343,7 +335,7 @@ class RenderTest(unittest.TestCase):
         query = self.default_query
         query['section'] = "Section 1"
 
-        catalog_results = self.pc(**query)[:45]
+        catalog_results = self.catalog(**query)[:45]
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
