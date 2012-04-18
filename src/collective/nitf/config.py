@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 PROJECTNAME = 'collective.nitf'
-CONTROLPANEL_ID = 'nitf-settings'
 
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
