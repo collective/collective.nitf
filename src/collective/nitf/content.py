@@ -86,7 +86,7 @@ class INITF(form.Schema):
 
     form.order_after(location='IRelatedItems.relatedItems')
     location = schema.TextLine(
-            # nitf/head/docdata/evloc
+            # nitf/body/body.head/dateline/location
             title=_(u'Location'),
             description=_(u'help_location',
                           default=u'Event location. Where an event took '
