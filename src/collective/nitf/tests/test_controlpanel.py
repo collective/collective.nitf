@@ -98,7 +98,3 @@ class RegistryTestCase(unittest.TestCase):
         self.assertRaises(KeyError, self.get_record, 'default_section')
         self.assertRaises(KeyError, self.get_record, 'default_genre')
         self.assertRaises(KeyError, self.get_record, 'default_urgency')
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

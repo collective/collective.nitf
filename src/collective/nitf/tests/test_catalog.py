@@ -224,7 +224,3 @@ class CatalogTestCase(unittest.TestCase):
         result = self.catalog(SearchableText='author')
         self.assertEqual(1, len(result))
         self.assertEqual(result[0].getURL(), self.n1.absolute_url())
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

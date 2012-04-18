@@ -256,7 +256,3 @@ class NewsMLViewTestCase(unittest.TestCase):
     def test_newsml_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='newsml')
         self.assertTrue(view is not None)
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

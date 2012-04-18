@@ -84,7 +84,3 @@ class ActionsTestCase(unittest.TestCase):
         from AccessControl import Unauthorized
         logout()
         self.assertRaises(Unauthorized, self.n1.restrictedTraverse, '@@media')
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

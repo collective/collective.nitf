@@ -91,7 +91,3 @@ class UninstallTest(unittest.TestCase):
         portal_css = self.portal.portal_css
         for css in CSS:
             self.assertTrue(css not in portal_css.getResourceIds())
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

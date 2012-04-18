@@ -37,7 +37,3 @@ class PermissionsTest(unittest.TestCase):
         self.assertTrue('ATContentTypes: Add Image' in permissions)
         self.assertTrue('ATContentTypes: Add File' in permissions)
         self.assertTrue('ATContentTypes: Add Link' in permissions)
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

@@ -347,7 +347,3 @@ class RenderTest(unittest.TestCase):
 
         self.assertEqual([i.id for i in results],
                          [i.id for i in catalog_results])
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)
