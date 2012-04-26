@@ -33,6 +33,7 @@
 
 	    
             $("#sortable").sortable({
+                helper : 'clone',            
                 placeholder: "ui-state-highlight",
                 update: function(event, ui){
                     var id_cleaner = function(ids) {
