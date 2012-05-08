@@ -47,6 +47,7 @@ setup(name='collective.nitf',
         'plone.app.lockingbehavior',
         'plone.app.referenceablebehavior',
         'plone.app.relationfield',
+        'collective.z3cform.widgets',
         ],
       extras_require={
         'test': ['plone.app.testing'],
