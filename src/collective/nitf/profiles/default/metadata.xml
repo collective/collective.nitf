@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <metadata>
  <version>1</version>
  <dependencies>
@@ -5,6 +6,6 @@
   <dependency>profile-plone.app.registry:default</dependency>
   <dependency>profile-collective.js.jqueryui:default</dependency>
   <dependency>profile-collective.prettydate:default</dependency>
-    <dependency>profile-collective.z3cform.widgets:default</dependency>
+  <dependency>profile-collective.z3cform.widgets:default</dependency>
  </dependencies>
 </metadata>
