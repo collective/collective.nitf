@@ -1,10 +1,13 @@
 Contributors
 ------------
 
-* Héctor Velarde (hector.velarde@gmail.com)
-
-* Joaquín Rosales (globojorro@gmail.com)
-
-* Érico Andrei (erico@simplesconsultoria.com.br)
+- Héctor Velarde
+- Joaquín Rosales
+- Érico Andrei
+- Juan Díaz
+- Silvestre Huens
+- Gonzalo Almeida
+- Franco Pellegrini
 
 Development sponsored by Open Multimedia.
+
