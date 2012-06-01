@@ -4,6 +4,9 @@ Changelog
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Indexes are now installed in an alternate way so catalog information is not
+  lost on package reinstall (fixes #33). [hvelarde]
+
 - Spanish translation of News Codes was updated. [hvelarde]
 
 
