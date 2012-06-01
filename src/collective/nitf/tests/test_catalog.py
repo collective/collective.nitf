@@ -211,11 +211,7 @@ class CatalogTestCase(unittest.TestCase):
 
     def test_catalog_not_lost_on_package_reinstall(self):
         """ Catalog information should not be lost on package reinstall.
-
-        Reported in https://github.com/collective/collective.nitf/issues/33
-
-        See http://maurits.vanrees.org/weblog/archive/2009/12/catalog to find
-        out how to fix it.
+        https://github.com/collective/collective.nitf/issues/33
         """
         self.n1.byline = 'author'
         self.n1.reindexObject()
