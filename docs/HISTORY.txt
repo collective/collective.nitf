@@ -4,11 +4,11 @@ Changelog
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Spanish translation of News Codes was updated. [hvelarde]
 
 
 1.0a1 (2012-05-21)
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 - Initial release.
 

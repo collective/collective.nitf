@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
 "POT-Creation-Date: 2012-02-23 18:12+0000\n"
-"PO-Revision-Date: 2012-02-23 16:25-0300\n"
+"PO-Revision-Date: 2012-06-01 16:49-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <>\n"
 "MIME-Version: 1.0\n"
@@ -44,19 +44,19 @@ msgstr "Todas"
 
 #: collective/nitf/config.py:19
 msgid "Almanac"
-msgstr "Almanaque"
+msgstr "Efemérides"
 
 #: collective/nitf/config.py:22
 msgid "Analysis"
-msgstr "Análisis"
+msgstr "Artículo"
 
 #: collective/nitf/config.py:25
 msgid "Anniversary"
-msgstr "Aniversario"
+msgstr "Crónica histórica"
 
 #: collective/nitf/config.py:28
 msgid "Archive material"
-msgstr "Material de archivo"
+msgstr "Revisión documental"
 
 #: collective/nitf/content.py:48
 msgid "Author"
@@ -91,7 +91,7 @@ msgstr "Contenido"
 
 #: collective/nitf/config.py:34
 msgid "Current"
-msgstr "Actualidad"
+msgstr "Noticia"
 
 #: collective/nitf/config.py:37
 msgid "Curtain Raiser"
@@ -99,7 +99,7 @@ msgstr ""
 
 #: collective/nitf/config.py:40
 msgid "Daybook"
-msgstr ""
+msgstr "Agenda"
 
 #: collective/nitf/controlpanel.py:41
 msgid "Default Genre"
@@ -143,7 +143,7 @@ msgstr ""
 
 #: collective/nitf/config.py:49
 msgid "Fixture"
-msgstr ""
+msgstr "Previa"
 
 #: collective/nitf/config.py:52
 msgid "Forecast"
@@ -151,7 +151,7 @@ msgstr "Pronóstico"
 
 #: collective/nitf/config.py:55
 msgid "From the Scene"
-msgstr ""
+msgstr "Crónica"
 
 #: collective/nitf/content.py:62
 msgid "Genre"
@@ -171,7 +171,7 @@ msgstr "Alta"
 
 #: collective/nitf/config.py:58
 msgid "History"
-msgstr "Historia"
+msgstr "Adelanto con contexto"
 
 #: collective/nitf/config.py:61
 msgid "Horoscope"
@@ -229,7 +229,7 @@ msgstr "Obituario"
 
 #: collective/nitf/config.py:73
 msgid "Opinion"
-msgstr "Opinión"
+msgstr "Artículo de opinión"
 
 #: collective/nitf/config.py:76
 msgid "Polls and Surveys"
@@ -237,11 +237,11 @@ msgstr "Encuestas y sondeos"
 
 #: collective/nitf/config.py:79
 msgid "Press Release"
-msgstr "Nota de prensa"
+msgstr "Boletín"
 
 #: collective/nitf/config.py:82
 msgid "Press-Digest"
-msgstr ""
+msgstr "Dossier"
 
 #: collective/nitf/portlets/latest_sectionable_nitf.py:123
 msgid "Pretty dates"
@@ -253,7 +253,7 @@ msgstr "Perfil"
 
 #: collective/nitf/config.py:88
 msgid "Program"
-msgstr "Programa"
+msgstr "Presupuesto informativo"
 
 #: collective/nitf/config.py:91
 msgid "Question and Answer Session"
@@ -265,7 +265,7 @@ msgstr "Cita"
 
 #: collective/nitf/config.py:97
 msgid "Raw Sound"
-msgstr ""
+msgstr "Sonido sin edición"
 
 #: collective/nitf/templates/display_macros.pt:50
 #: collective/nitf/templates/scrollable.pt:97
@@ -291,7 +291,7 @@ msgstr "Reseña"
 
 #: collective/nitf/config.py:112
 msgid "Scener"
-msgstr ""
+msgstr "Crónica de contexto"
 
 #: configure.zcml
 msgid "Scrollable Gallery View"
@@ -308,11 +308,11 @@ msgstr "Mostrar fechas en un formato mejorado (ej. 'hace 4 horas')."
 
 #: collective/nitf/config.py:115
 msgid "Side bar and supporting information"
-msgstr ""
+msgstr "Recuadro"
 
 #: collective/nitf/config.py:118
 msgid "Special Report"
-msgstr "Reporte especial"
+msgstr "Reportaje especial"
 
 #: collective/nitf/portlets/latest_sectionable_nitf.py:117
 msgid "Specify the maximum number of items to show in the portlet. Leave this blank to show all items."
@@ -324,15 +324,15 @@ msgstr "Subtítulo"
 
 #: collective/nitf/config.py:121
 msgid "Summary"
-msgstr "Resumen"
+msgstr "Sumario"
 
 #: collective/nitf/config.py:124
 msgid "Synopsis"
-msgstr "Sinopsis"
+msgstr "Resumen"
 
 #: collective/nitf/config.py:127
 msgid "Text only"
-msgstr "Sólo texto"
+msgstr "Transcripción de texto"
 
 #: collective/nitf/portlets/latest_sectionable_nitf.py:112
 msgid "The header for the portlet. Leave empty for none."
@@ -368,11 +368,11 @@ msgstr ""
 
 #: collective/nitf/config.py:139
 msgid "Wrap"
-msgstr ""
+msgstr "Sumario completo de una cobertura"
 
 #: collective/nitf/config.py:142
 msgid "Wrapup"
-msgstr ""
+msgstr "Recapitulación"
 
 #. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
 #: collective/nitf/content.py:63
