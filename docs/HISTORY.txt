@@ -1,5 +1,5 @@
-Changelog
----------
+Know Where Your Towel Is
+------------------------
 
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^

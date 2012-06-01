@@ -1,10 +1,13 @@
-Contributors
-------------
+Share and Enjoy
+---------------
+
+collective.nitf would not have been possible without the contribution of the
+following people:
 
 - Héctor Velarde
 - Joaquín Rosales
 - Érico Andrei
-- Juan Díaz
+- Juan A. Díaz
 - Silvestre Huens
 - Gonzalo Almeida
 - Franco Pellegrini

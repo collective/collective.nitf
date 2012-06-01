@@ -4,8 +4,8 @@ collective.nitf
 
 .. contents:: Table of Contents
 
-Overview
---------
+Life, the Universe, and Everything
+----------------------------------
 
 News articles in Plone are instances of the 'News Item' content type: they can
 contain a title, a description, a body text, an image and some basic metadata.
@@ -25,10 +25,10 @@ characteristics.
 NITF is intended to structure independent news articles and this package aims
 to implement a content type inspired by the specification.
 
-Don't panic
+Don't Panic
 -----------
 
-TBA
+TBA.
 
 Helper views
 ^^^^^^^^^^^^
@@ -45,6 +45,11 @@ like `XML validation`_.
 You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML
 Ruby Module`_ associated with it.
 
+Mostly Harmless
+---------------
+
+Have an idea? Found a bug? Let us know by `opening a support ticket`_.
+
 .. _`Dexterity`: http://pypi.python.org/pypi/plone.app.dexterity
 .. _`IPTC`: http://www.iptc.org/
 .. _`NewsCodes`: http://www.iptc.org/NewsCodes/
@@ -53,4 +58,5 @@ Ruby Module`_ associated with it.
 .. _`NITF Document Type Definition`: http://www.iptc.org/std/NITF/3.5/specification/nitf-3-5.dtd
 .. _`XHTML Ruby Module`: http://www.iptc.org/std/NITF/3.5/specification/xhtml-ruby-1.mod
 .. _`XML validation`: http://www.xmlvalidation.com/
+.. _`opening a support ticket`: https://github.com/collective/collective.nitf/issues
 
