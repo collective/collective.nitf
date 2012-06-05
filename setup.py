@@ -4,6 +4,8 @@ from setuptools import setup, find_packages
 import os
 
 version = '1.0a2.dev0'
+description = "A content type inspired on the IPTC's News Industry Text \
+Format specification."
 long_description = open("README.txt").read() + "\n" + \
                    open(os.path.join("docs", "INSTALL.txt")).read() + "\n" + \
                    open(os.path.join("docs", "CREDITS.txt")).read() + "\n" + \
@@ -11,7 +13,7 @@ long_description = open("README.txt").read() + "\n" + \
 
 setup(name='collective.nitf',
       version=version,
-      description="A content type inspired on the News Industry Text Format specification.",
+      description=description,
       long_description=long_description,
       classifiers=[
         "Development Status :: 3 - Alpha",
@@ -43,7 +45,7 @@ setup(name='collective.nitf',
       install_requires=[
         'setuptools',
         'collective.js.jqueryui',
-        'collective.prettydate',
+        'collective.prettydate>=1.1',
         'plone.app.dexterity>=1.2.1',
         'plone.app.lockingbehavior',
         'plone.app.referenceablebehavior',

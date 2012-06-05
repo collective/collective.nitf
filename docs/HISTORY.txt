@@ -4,8 +4,11 @@ Know Where Your Towel Is
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Dependency package collective.prettydate no longer has a GS profile.
+  [hvelarde]
+
 - Indexes are now installed in an alternate way so catalog information is not
-  lost on package reinstall (fixes #33). [hvelarde]
+  lost on package reinstall (fixes `#33`_). [hvelarde]
 
 - Spanish translation of News Codes was updated. [hvelarde]
 
@@ -14,4 +17,6 @@ Know Where Your Towel Is
 ^^^^^^^^^^^^^^^^^^
 
 - Initial release.
+
+.. _`#33`: https://github.com/collective/collective.nitf/issues/33
 
