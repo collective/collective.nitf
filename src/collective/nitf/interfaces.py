@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from plone.theme.interfaces import IDefaultPloneLayer
+from zope.interface import Interface
 
 
-class INITFBrowserLayer(IDefaultPloneLayer):
-    """A marker interface for the theme layer.
+class INITFBrowserLayer(Interface):
+    """ A layer specific for this add-on product.
     """
