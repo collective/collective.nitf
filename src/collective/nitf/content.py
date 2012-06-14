@@ -56,7 +56,6 @@ class INITF(form.Schema):
             required=False,
         )
 
-    form.order_before(genre='subjects')
     genre = schema.Choice(
             # nitf/head/tobject/tobject.property/@tobject.property.type
             title=_(u'Genre'),
@@ -94,8 +93,11 @@ class INITF(form.Schema):
                                    'written).'),
             required=False,
         )
-
-
+    form.fieldset(
+            'categorization',
+            label=_(u'Categorization'),
+            fields=['section', 'urgency' , 'genre','subjects', 'language'],
+            )
 @form.default_value(field=INITF['genre'])
 def genre_default_value(data):
     registry = getUtility(IRegistry)
