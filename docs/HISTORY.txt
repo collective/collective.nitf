@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0a2 (unreleased)
+1.0a2 (2012-06-18)
 ^^^^^^^^^^^^^^^^^^
 
 - Dependency package collective.prettydate no longer has a GS profile.
