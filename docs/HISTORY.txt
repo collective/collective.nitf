@@ -1,5 +1,7 @@
-Know Where Your Towel Is
-------------------------
+Changelog
+---------
+
+Because you have to know where your towel is.
 
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
