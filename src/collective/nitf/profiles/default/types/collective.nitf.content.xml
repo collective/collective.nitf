@@ -20,7 +20,7 @@
  <property name="schema">collective.nitf.content.INITF</property>
 
  <!-- class used for content items -->
- <property name="klass">plone.dexterity.content.Container</property>
+ <property name="klass">collective.nitf.content.NITF</property>
 
  <!-- add permission -->
  <property name="add_permission">collective.nitf.AddNewsArticle</property>
