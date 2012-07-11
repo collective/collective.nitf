@@ -14,6 +14,8 @@ from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 
+from Products.CMFPlone.interfaces import INonStructuralFolder
+
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 
@@ -57,6 +59,9 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_locking_behavior(self):
         self.assertTrue(ILocking.providedBy(self.n1))
+
+    def test_is_non_structural_folder(self):
+        self.assertTrue(INonStructuralFolder.providedBy(self.n1))
 
 
 class ActionsTestCase(unittest.TestCase):

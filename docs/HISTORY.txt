@@ -3,10 +3,17 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0a3 (unreleased)
+1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
 - Nothing changed yet.
+
+
+1.0a3 (2012-07-06)
+^^^^^^^^^^^^^^^^^^
+
+- Make the NITF object to provide the INonStructuralFolder interface so
+  comments can be added to them [frapell]
 
 
 1.0a2 (2012-06-18)

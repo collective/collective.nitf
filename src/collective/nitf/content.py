@@ -13,10 +13,14 @@ from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.directives import form
+
+from plone.dexterity.content import Container
+
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import INonStructuralFolder
 
 from collective.nitf import _
 from collective.nitf import config
@@ -98,6 +102,12 @@ class INITF(form.Schema):
             label=_(u'Categorization'),
             fields=['section', 'urgency' , 'genre','subjects', 'language'],
             )
+
+
+class NITF(Container):
+    grok.implements(INITF, INonStructuralFolder)
+
+
 @form.default_value(field=INITF['genre'])
 def genre_default_value(data):
     registry = getUtility(IRegistry)
