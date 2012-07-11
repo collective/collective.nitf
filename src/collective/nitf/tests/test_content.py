@@ -9,6 +9,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 
+from plone.app.lockingbehavior.behaviors import ILocking
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
@@ -53,6 +54,9 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.n1))
         self.assertTrue(IAttributeUUID.providedBy(self.n1))
+
+    def test_locking_behavior(self):
+        self.assertTrue(ILocking.providedBy(self.n1))
 
 
 class ActionsTestCase(unittest.TestCase):
