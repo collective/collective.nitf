@@ -13,7 +13,7 @@ from plone.app.customerize import registration
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
-from collective.nitf.interfaces import INITFBrowserLayer
+from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
 
 
@@ -24,7 +24,7 @@ class DefaultViewTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        directlyProvides(self.request, INITFBrowserLayer)
+        directlyProvides(self.request, INITFLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
@@ -38,7 +38,7 @@ class DefaultViewTestCase(unittest.TestCase):
         pt = self.portal['portal_types']
         self.assertEqual(pt['collective.nitf.content'].default_view, 'view')
 
-        registered = [v.name for v in registration.getViews(INITFBrowserLayer)]
+        registered = [v.name for v in registration.getViews(INITFLayer)]
         self.assertTrue('view' in registered)
 
     def test_get_images(self):
@@ -177,7 +177,7 @@ class ScrollableViewTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        directlyProvides(self.request, INITFBrowserLayer)
+        directlyProvides(self.request, INITFLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
@@ -188,7 +188,7 @@ class ScrollableViewTestCase(unittest.TestCase):
         self.n1 = self.folder['n1']
 
     def test_scrollable_view_is_registered(self):
-        registered = [v.name for v in registration.getViews(INITFBrowserLayer)]
+        registered = [v.name for v in registration.getViews(INITFLayer)]
         self.assertTrue('scrollable' in registered)
 
         view = queryMultiAdapter((self.n1, self.request), name='scrollable')
@@ -202,7 +202,7 @@ class NITFViewTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        directlyProvides(self.request, INITFBrowserLayer)
+        directlyProvides(self.request, INITFLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
@@ -243,7 +243,7 @@ class NewsMLViewTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        directlyProvides(self.request, INITFBrowserLayer)
+        directlyProvides(self.request, INITFLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')

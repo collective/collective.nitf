@@ -16,7 +16,7 @@ from plone.directives import dexterity
 from plone.uuid.interfaces import IUUID
 
 from collective.nitf.content import INITF
-from collective.nitf.interfaces import INITFBrowserLayer
+from collective.nitf.interfaces import INITFLayer
 
 grok.templatedir('templates')
 
@@ -26,7 +26,7 @@ class AddForm(dexterity.AddForm):
     """ Default view looks like a News Item.
     """
     grok.name('collective.nitf.content')
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
 
     enable_form_tabbing = False
 
@@ -35,7 +35,7 @@ class EditForm(dexterity.EditForm):
     """ Default view looks like a News Item.
     """
     grok.context(INITF)
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
 
     enable_form_tabbing = False
 
@@ -45,7 +45,7 @@ class View(dexterity.DisplayForm):
     """
     grok.context(INITF)
     grok.require('zope2.View')
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
 
     def update(self):
         self.context = aq_inner(self.context)
@@ -148,18 +148,18 @@ class View(dexterity.DisplayForm):
 class Display_Macros(View):
     grok.context(INITF)
     grok.require('zope2.View')
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
 
 
 class Scrollable(View):
     grok.context(INITF)
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
     grok.require('zope2.View')
 
 
 class Folder_Summary_View(grok.View):
     grok.context(Interface)
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
     grok.name("folder_summary_view")
     grok.require('zope2.View')
 
@@ -168,7 +168,7 @@ class NITF(View):
     """ Shows news article in NITF XML format.
     """
     grok.context(INITF)
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
     grok.name('nitf')
     grok.require('zope2.View')
 
@@ -228,7 +228,7 @@ class NewsML(View):
     """ Shows news article in NewsML XML format.
     """
     grok.context(INITF)
-    grok.layer(INITFBrowserLayer)
+    grok.layer(INITFLayer)
     grok.name('newsml')
     grok.require('zope2.View')
 

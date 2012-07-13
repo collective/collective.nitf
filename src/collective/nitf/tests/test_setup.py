@@ -29,10 +29,10 @@ class InstallTestCase(unittest.TestCase):
         expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
         self.assertListEqual(roles, expected)
 
-    def test_browserlayer_installed(self):
+    def test_addon_layer(self):
         layers = [l.getName() for l in registered_layers()]
-        self.assertTrue('INITFBrowserLayer' in layers,
-                        'browser layer was not installed')
+        self.assertTrue('INITFLayer' in layers,
+                        'add-on layer was not installed')
 
     def test_link_workflow_changed(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
@@ -69,10 +69,10 @@ class UninstallTest(unittest.TestCase):
     def test_uninstalled(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
-    def test_browserlayer_removed(self):
+    def test_addon_layer_removed(self):
         layers = [l.getName() for l in registered_layers()]
-        self.assertFalse('INITFBrowserLayer' in layers,
-                         'browser layer was not removed')
+        self.assertFalse('INITFLayer' in layers,
+                         'add-on layer was not removed')
 
     def test_javascript_registry_removed(self):
         portal_javascripts = self.portal.portal_javascripts
