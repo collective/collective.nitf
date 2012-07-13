@@ -82,6 +82,11 @@ class RegistryTestCase(unittest.TestCase):
     def test_default_urgency_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_urgency'))
         self.assertEqual(self.settings.default_urgency, DEFAULT_URGENCY)
+    
+    def test_default_related_contents_in_registry(self):
+        self.assertTrue(hasattr(self.settings, 'related_contents'))
+        self.assertEqual(self.settings.related_contents, 
+            [u'collective.nitf.content'])
 
     def get_record(self, record):
         """ Helper function; it raises KeyError if the record is not in the

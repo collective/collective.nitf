@@ -174,7 +174,10 @@ class ContentsVocabulary(object):
 
     def __call__(self, context):
         portal = getSite()
-        types = portal.getPortalTypes()
+        if hasattr(portal, 'getPortalTypes'):
+            types = portal.getPortalTypes()
+        else:
+            types = []
         terms = []
         for ct in types:
             terms.append(SimpleTerm(value=ct,
