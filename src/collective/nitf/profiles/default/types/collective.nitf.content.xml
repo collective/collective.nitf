@@ -30,7 +30,6 @@
   <element value="plone.app.content.interfaces.INameFromTitle" />
   <element value="plone.app.dexterity.behaviors.metadata.IDublinCore" />
   <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
-  <element value="plone.app.relationfield.behavior.IRelatedItems" />
  </property>
 
  <!-- View information -->
@@ -56,7 +55,7 @@
     url_expr="string:${object_url}/edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
- <action title="Media" action_id="media" category="folder" condition_expr=""
+ <action title="Media" action_id="media" category="object" condition_expr=""
     url_expr="string:${object_url}/@@media" visible="True"
     i18n:attributes="title">
   <permission value="Modify portal content"/>

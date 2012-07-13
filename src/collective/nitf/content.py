@@ -7,7 +7,11 @@ from five import grok
 from zope import schema
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.app.component.hooks import getSite
+
+from z3c.relationfield.schema import RelationChoice, RelationList
+from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
@@ -21,6 +25,8 @@ from plone.registry.interfaces import IRegistry
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import INonStructuralFolder
+
+from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
 
 from collective.nitf import _
 from collective.nitf import config
@@ -97,12 +103,22 @@ class INITF(form.Schema):
                                    'written).'),
             required=False,
         )
+
+    relatedItems = RelationList(
+        title=_(u'label_related_items', default=u'Related Items'),
+        default=[],
+        value_type=RelationChoice(title=u"Related",
+                      source=ObjPathSourceBinder(portal_type=['collective.nitf.content'])),
+        required=False,
+        )
+    form.widget(relatedItems=MultiContentSearchFieldWidget)
+
     form.fieldset(
             'categorization',
             label=_(u'Categorization'),
-            fields=['section', 'urgency' , 'genre','subjects', 'language'],
+            fields=['relatedItems','section', 'urgency' , 'genre','subjects', 
+                'language'],
             )
-
 
 class NITF(Container):
     grok.implements(INITF, INonStructuralFolder)
@@ -151,6 +167,21 @@ class SectionsVocabulary(object):
 
 grok.global_utility(SectionsVocabulary, name=u'collective.nitf.Sections')
 
+class ContentsVocabulary(object):
+    """List of content types.
+    """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        portal = getSite()
+        types = portal.getPortalTypes()
+        terms = []
+        for ct in types:
+            terms.append(SimpleTerm(value=ct,
+                       title=ct))
+        return SimpleVocabulary(terms)
+
+grok.global_utility(ContentsVocabulary, name=u'collective.nitf.Contents')
 
 @form.default_value(field=INITF['section'])
 def section_default_value(data):

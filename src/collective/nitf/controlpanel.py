@@ -42,6 +42,13 @@ class INITFSettings(Interface):
             vocabulary=config.URGENCIES,
             required=False,
             default=config.DEFAULT_URGENCY,)
+ 
+    related_contents = schema.List(title=_(u'Related Content Types'),
+            description=_(u"Elegible Contet types to relate to"),
+            required=False,
+            default=[u'collective.nitf.content'],
+            value_type=schema.Choice(vocabulary=u'collective.nitf.Contents'),)   
+
 
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):

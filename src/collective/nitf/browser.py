@@ -5,18 +5,22 @@ import mimetypes
 from Acquisition import aq_inner
 
 from five import grok
+
 from zope.interface import Interface
+from zope.component import getUtility
+
+from plone.directives import dexterity
+from plone.uuid.interfaces import IUUID
+from plone.registry.interfaces import IRegistry
 
 from Products.ATContentTypes.interfaces import IATImage
 from Products.ATContentTypes.interfaces import IATFile
 from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFPlone.utils import getToolByName
 
-from plone.directives import dexterity
-from plone.uuid.interfaces import IUUID
-
 from collective.nitf.content import INITF
 from collective.nitf.interfaces import INITFBrowserLayer
+from collective.nitf.controlpanel import INITFSettings
 
 grok.templatedir('templates')
 
@@ -27,8 +31,23 @@ class AddForm(dexterity.AddForm):
     """
     grok.name('collective.nitf.content')
     grok.layer(INITFBrowserLayer)
-
+    grok.context(INITF)
+    schema = INITF
     enable_form_tabbing = False
+    
+    def update(self):
+        super(AddForm, self).update()
+        #iterate over the fieldsets
+        for group in self.groups:
+            #check the fieldset that has our fieldname 
+            #to change the widget property
+            if 'relatedItems' in group.widgets.keys():
+                registry = getUtility(IRegistry)
+                settings = registry.forInterface(INITFSettings)
+                contents = settings.related_contents
+                widget = group.widgets['relatedItems']
+                criteria= widget.source.selectable_filter.criteria
+                criteria['portal_type'] = contents
 
 
 class EditForm(dexterity.EditForm):
@@ -36,8 +55,22 @@ class EditForm(dexterity.EditForm):
     """
     grok.context(INITF)
     grok.layer(INITFBrowserLayer)
-
+    schema = INITF
     enable_form_tabbing = False
+    
+    def update(self):
+        super(EditForm, self).update()
+        #iterate over the fieldsets
+        for group in self.groups:
+            #check the fieldset that has our fieldname 
+            #to change the widget property
+            if 'relatedItems' in group.widgets.keys():
+                registry = getUtility(IRegistry)
+                settings = registry.forInterface(INITFSettings)
+                contents = settings.related_contents
+                widget = group.widgets['relatedItems']
+                criteria= widget.source.selectable_filter.criteria
+                criteria['portal_type'] = contents
 
 
 class View(dexterity.DisplayForm):

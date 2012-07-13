@@ -6,9 +6,11 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.nitf">
 <body>
+  
+<div tal:replace="structure provider:plone.abovecontenttitle" />
 <metal:title fill-slot="content-title">
     <tal:content-title metal:define-macro="content-title">
-
+        <div> HEEEEY</div>
         <h1 class="documentFirstHeading" tal:content="context/title" />
 
         <h2 class="nitfSubtitle" tal:content="context/subtitle" />
