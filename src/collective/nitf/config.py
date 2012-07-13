@@ -2,7 +2,7 @@
 
 PROJECTNAME = 'collective.nitf'
 
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm 
 
 from collective.nitf import _
 
@@ -155,3 +155,4 @@ URGENCIES = SimpleVocabulary([
 # defaults
 DEFAULT_GENRE = u'Current'
 DEFAULT_URGENCY = NORMAL
+        
