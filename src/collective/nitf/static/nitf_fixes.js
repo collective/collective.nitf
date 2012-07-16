@@ -15,5 +15,4 @@ function collapseSections() {
 
 $(document).ready(function() {
   collapseSections();
-  console.log("noo");
 });
