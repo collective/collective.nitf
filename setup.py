@@ -49,7 +49,6 @@ setup(name='collective.nitf',
         'plone.app.dexterity>=1.2.1',
         'plone.app.lockingbehavior',
         'plone.app.referenceablebehavior',
-        'plone.app.relationfield',
         'collective.z3cform.widgets',
         ],
       extras_require={
