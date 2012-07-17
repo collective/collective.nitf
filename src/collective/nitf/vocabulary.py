@@ -10,6 +10,7 @@ from five import grok
 
 from plone.registry.interfaces import IRegistry
 
+from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
 
 
