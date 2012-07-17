@@ -23,8 +23,8 @@ class AvailableGenresVocabulary(object):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
         items = []
-        if settings.possible_genres:
-            for genre in settings.possible_genres:
+        if settings.available_genres:
+            for genre in settings.available_genres:
                 token = unicodedata.normalize('NFKD', genre).encode('ascii', 'ignore').lower()
                 items.append(SimpleVocabulary.createTerm(genre, token, _(genre)))
         return SimpleVocabulary(items)
@@ -42,9 +42,9 @@ class SectionsVocabulary(object):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
         items = []
-        for section in settings.sections:
+        for section in settings.available_sections:
             token = unicodedata.normalize('NFKD', section).encode('ascii', 'ignore').lower()
             items.append(SimpleVocabulary.createTerm(section, token, section))
         return SimpleVocabulary(items)
 
-grok.global_utility(SectionsVocabulary, name=u'collective.nitf.Sections')
+grok.global_utility(SectionsVocabulary, name=u'collective.nitf.AvailableSections')

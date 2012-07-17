@@ -64,17 +64,17 @@ class RegistryTestCase(unittest.TestCase):
         self.settings = self.registry.forInterface(INITFSettings)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
-    def test_sections_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'sections'))
-        self.assertEqual(self.settings.sections, set([]))
+    def test_available_sections_record_in_registry(self):
+        self.assertTrue(hasattr(self.settings, 'available_sections'))
+        self.assertEqual(self.settings.available_sections, set([]))
 
     def test_default_section_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_section'))
         self.assertEqual(self.settings.default_section, None)
 
-    def test_possible_genres_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'possible_genres'))
-        self.assertEqual(self.settings.possible_genres, None)
+    def test_available_genres_record_in_registry(self):
+        self.assertTrue(hasattr(self.settings, 'available_genres'))
+        self.assertEqual(self.settings.available_genres, None)
 
     def test_default_genre_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_genre'))
@@ -100,9 +100,9 @@ class RegistryTestCase(unittest.TestCase):
         # XXX: I haven't found a better way to test this; anyone?
         qi = self.portal['portal_quickinstaller']
         qi.uninstallProducts(products=[PROJECTNAME])
-        self.assertRaises(KeyError, self.get_record, 'sections')
+        self.assertRaises(KeyError, self.get_record, 'available_sections')
         self.assertRaises(KeyError, self.get_record, 'default_section')
-        self.assertRaises(KeyError, self.get_record, 'possible_genres')
+        self.assertRaises(KeyError, self.get_record, 'available_genres')
         self.assertRaises(KeyError, self.get_record, 'default_genre')
         self.assertRaises(KeyError, self.get_record, 'default_urgency')
         self.assertRaises(KeyError, self.get_record, 'relatable_content_types')

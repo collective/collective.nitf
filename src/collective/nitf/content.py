@@ -37,55 +37,55 @@ class INITF(form.Schema):
 
     form.order_after(subtitle='IDublinCore.title')
     subtitle = schema.TextLine(
-            # nitf/body/body.head/hedline/hl2
-            title=_(u'Subtitle'),
-            description=_(u'help_subtitle',
-                          default=u'A subordinate headline for the article.'),
-            required=False,
-            default=u'',
+        # nitf/body/body.head/hedline/hl2
+        title=_(u'Subtitle'),
+        description=_(u'help_subtitle',
+                      default=u'A subordinate headline for the article.'),
+        required=False,
+        default=u'',
         )
 
     #description = schema.Text()
         # nitf/body/body.head/abstract
 
     byline = schema.TextLine(
-            # nitf/body/body.head/byline/person
-            title=_(u'Author'),
-            required=False,
-            default=u'',
+        # nitf/body/body.head/byline/person
+        title=_(u'Author'),
+        required=False,
+        default=u'',
         )
 
     text = RichText(
-            # nitf/body/body.content
-            title=_(u'Body text'),
-            required=False,
+        # nitf/body/body.content
+        title=_(u'Body text'),
+        required=False,
         )
 
     genre = schema.Choice(
-            # nitf/head/tobject/tobject.property/@tobject.property.type
-            title=_(u'Genre'),
-            description=_(u'help_genre',
-                          default=u'Describes the nature, journalistic or '
-                                   'intellectual characteristic of a news '
-                                   'object, not specifically its content.'),
-            source=u'collective.nitf.AvailableGenres',
+        # nitf/head/tobject/tobject.property/@tobject.property.type
+        title=_(u'Genre'),
+        description=_(u'help_genre',
+                      default=u'Describes the nature, journalistic or '
+                               'intellectual characteristic of a news '
+                               'object, not specifically its content.'),
+        source=u'collective.nitf.AvailableGenres',
         )
 
     section = schema.Choice(
-            # nitf/head/pubdata/@position.section
-            title=_(u'Section'),
-            description=_(u'help_section',
-                          default=u'Named section where the article will '
-                                   'appear.'),
-            vocabulary=u'collective.nitf.Sections',
+        # nitf/head/pubdata/@position.section
+        title=_(u'Section'),
+        description=_(u'help_section',
+                      default=u'Named section where the article will '
+                               'appear.'),
+        vocabulary=u'collective.nitf.AvailableSections',
         )
 
     urgency = schema.Choice(
-            # nitf/head/docdata/urgency/@ed-urg
-            title=_(u'Urgency'),
-            description=_(u'help_urgency',
-                          default=u'News importance.'),
-            vocabulary=config.URGENCIES,
+        # nitf/head/docdata/urgency/@ed-urg
+        title=_(u'Urgency'),
+        description=_(u'help_urgency',
+                      default=u'News importance.'),
+        vocabulary=config.URGENCIES,
         )
 
     # XXX: this field uses a special widget that access the most recent items
@@ -101,21 +101,21 @@ class INITF(form.Schema):
     form.widget(relatedItems=MultiContentSearchFieldWidget)
 
     location = schema.TextLine(
-            # nitf/body/body.head/dateline/location
-            title=_(u'Location'),
-            description=_(u'help_location',
-                          default=u'Event location. Where an event took '
-                                   'place (as opposed to where the story was '
-                                   'written).'),
-            required=False,
+        # nitf/body/body.head/dateline/location
+        title=_(u'Location'),
+        description=_(u'help_location',
+                      default=u'Event location. Where an event took '
+                               'place (as opposed to where the story was '
+                               'written).'),
+        required=False,
         )
 
     form.fieldset(
-            'categorization',
-            label=_(u'Categorization'),
-            fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
-                    'language'],
-            )
+        'categorization',
+        label=_(u'Categorization'),
+        fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
+                'language'],
+        )
 
 
 class NITF(Container):
@@ -143,9 +143,10 @@ def urgency_default_value(data):
     return settings.default_urgency
 
 
+# TODO: move this to Dexterity's core
 @form.default_value(field=IDublinCore['language'])
 def language_default_value(data):
-    """Returns portal's default language or English.
+    """ Returns portal's default language or None.
     """
     portal_properties = getToolByName(data, "portal_properties", None)
     if portal_properties is not None:

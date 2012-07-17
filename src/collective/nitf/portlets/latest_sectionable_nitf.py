@@ -81,7 +81,7 @@ class NitfFilterList(grok.View):
 
         if section and section != 'all':
             vocab = getUtility(IVocabularyFactory,
-                           name=u'collective.nitf.Sections')(self.context)
+                           name=u'collective.nitf.AvailableSections')(self.context)
 
             query.update({'section': vocab.getTermByToken(section).value})
 

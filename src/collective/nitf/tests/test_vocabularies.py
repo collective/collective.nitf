@@ -26,7 +26,7 @@ class VocabulariesTestCase(unittest.TestCase):
         #self.assertTrue(u'Current' in available_genres)
 
     def test_sections_vocabulary(self):
-        name = 'collective.nitf.Sections'
+        name = 'collective.nitf.AvailableSections'
         util = queryUtility(IVocabularyFactory, name)
         self.assertTrue(util is not None)
         sections = util(self.portal)

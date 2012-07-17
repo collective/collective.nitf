@@ -106,7 +106,7 @@ class RenderTest(unittest.TestCase):
         # Let's create 3 sections in the registry
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
-        settings.sections = set([u"Section 1", u"Section 2", u"Section 3"])
+        settings.available_sections = set([u"Section 1", u"Section 2", u"Section 3"])
 
         # Let's create 15 nitf's for each of 3 different sections
         for index in range(1, 16):
