@@ -37,17 +37,16 @@ class AddForm(dexterity.AddForm):
 
     def update(self):
         super(AddForm, self).update()
-        #iterate over the fieldsets
+        # iterate over fieldsets
         for group in self.groups:
-            #check the fieldset that has our fieldname
-            #to change the widget property
+            # HACK: we need to update criteria of the ObjPathSourceBinder here
+            # as we want to list only relatable content types
             if 'relatedItems' in group.widgets.keys():
                 registry = getUtility(IRegistry)
                 settings = registry.forInterface(INITFSettings)
-                contents = settings.related_contents
                 widget = group.widgets['relatedItems']
                 criteria = widget.source.selectable_filter.criteria
-                criteria['portal_type'] = contents
+                criteria['portal_type'] = settings.relatable_content_types
 
 
 class EditForm(dexterity.EditForm):
@@ -60,17 +59,16 @@ class EditForm(dexterity.EditForm):
 
     def update(self):
         super(EditForm, self).update()
-        #iterate over the fieldsets
+        # iterate over fieldsets
         for group in self.groups:
-            #check the fieldset that has our fieldname
-            #to change the widget property
+            # HACK: we need to update criteria of the ObjPathSourceBinder here
+            # as we want to list only relatable content types
             if 'relatedItems' in group.widgets.keys():
                 registry = getUtility(IRegistry)
                 settings = registry.forInterface(INITFSettings)
-                contents = settings.related_contents
                 widget = group.widgets['relatedItems']
                 criteria = widget.source.selectable_filter.criteria
-                criteria['portal_type'] = contents
+                criteria['portal_type'] = settings.relatable_content_types
 
 
 class View(dexterity.DisplayForm):
