@@ -12,6 +12,7 @@ from plone.registry.interfaces import IRegistry
 
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.config import DEFAULT_GENRE, DEFAULT_URGENCY
+from collective.nitf.config import DEFAULT_RELATABLE_CONTENT_TYPES
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.testing import INTEGRATION_TESTING
 
@@ -71,22 +72,22 @@ class RegistryTestCase(unittest.TestCase):
         self.assertTrue(hasattr(self.settings, 'default_section'))
         self.assertEqual(self.settings.default_section, None)
 
-    def test_default_genre_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'default_genre'))
-        self.assertEqual(self.settings.default_genre, DEFAULT_GENRE)
-
     def test_possible_genres_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'possible_genres'))
         self.assertEqual(self.settings.possible_genres, None)
 
+    def test_default_genre_record_in_registry(self):
+        self.assertTrue(hasattr(self.settings, 'default_genre'))
+        self.assertEqual(self.settings.default_genre, DEFAULT_GENRE)
+
     def test_default_urgency_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_urgency'))
         self.assertEqual(self.settings.default_urgency, DEFAULT_URGENCY)
-    
-    def test_default_related_contents_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'related_contents'))
-        self.assertEqual(self.settings.related_contents, 
-            [u'collective.nitf.content'])
+
+    def test_relatable_content_types_in_registry(self):
+        self.assertTrue(hasattr(self.settings, 'relatable_content_types'))
+        self.assertEqual(self.settings.relatable_content_types,
+                         DEFAULT_RELATABLE_CONTENT_TYPES)
 
     def get_record(self, record):
         """ Helper function; it raises KeyError if the record is not in the
@@ -101,5 +102,7 @@ class RegistryTestCase(unittest.TestCase):
         qi.uninstallProducts(products=[PROJECTNAME])
         self.assertRaises(KeyError, self.get_record, 'sections')
         self.assertRaises(KeyError, self.get_record, 'default_section')
+        self.assertRaises(KeyError, self.get_record, 'possible_genres')
         self.assertRaises(KeyError, self.get_record, 'default_genre')
         self.assertRaises(KeyError, self.get_record, 'default_urgency')
+        self.assertRaises(KeyError, self.get_record, 'relatable_content_types')

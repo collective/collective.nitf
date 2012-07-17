@@ -155,4 +155,4 @@ URGENCIES = SimpleVocabulary([
 # defaults
 DEFAULT_GENRE = u'Current'
 DEFAULT_URGENCY = NORMAL
-        
+DEFAULT_RELATABLE_CONTENT_TYPES = [u'collective.nitf.content']

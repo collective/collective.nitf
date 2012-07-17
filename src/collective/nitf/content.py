@@ -88,7 +88,18 @@ class INITF(form.Schema):
             vocabulary=config.URGENCIES,
         )
 
-    form.order_after(location='IRelatedItems.relatedItems')
+    # XXX: this field uses a special widget that access the most recent items
+    # of content types defined in the control panel; see browser.py and
+    # controlpanel.py for more information
+    relatedItems = RelationList(
+        title=_(u'label_related_items', default=u'Related Items'),
+        default=[],
+        value_type=RelationChoice(title=u"Related",
+                                  source=ObjPathSourceBinder()),
+        required=False,
+        )
+    form.widget(relatedItems=MultiContentSearchFieldWidget)
+
     location = schema.TextLine(
             # nitf/body/body.head/dateline/location
             title=_(u'Location'),
@@ -99,21 +110,13 @@ class INITF(form.Schema):
             required=False,
         )
 
-    relatedItems = RelationList(
-        title=_(u'label_related_items', default=u'Related Items'),
-        default=[],
-        value_type=RelationChoice(title=u"Related",
-                      source=ObjPathSourceBinder(portal_type=['collective.nitf.content'])),
-        required=False,
-        )
-    form.widget(relatedItems=MultiContentSearchFieldWidget)
-
     form.fieldset(
             'categorization',
             label=_(u'Categorization'),
-            fields=['relatedItems','section', 'urgency' , 'genre','subjects', 
-                'language'],
+            fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
+                    'language'],
             )
+
 
 class NITF(Container):
     grok.implements(INITF, INonStructuralFolder)

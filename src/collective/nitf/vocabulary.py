@@ -4,9 +4,7 @@ import unicodedata
 
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-
-from zope.app.component.hooks import getSite
+from zope.schema.vocabulary import SimpleVocabulary
 
 from five import grok
 
@@ -50,23 +48,3 @@ class SectionsVocabulary(object):
         return SimpleVocabulary(items)
 
 grok.global_utility(SectionsVocabulary, name=u'collective.nitf.Sections')
-
-
-class ContentsVocabulary(object):
-    """List of content types.
-    """
-    grok.implements(IVocabularyFactory)
-
-    def __call__(self, context):
-        portal = getSite()
-        if hasattr(portal, 'getPortalTypes'):
-            types = portal.getPortalTypes()
-        else:
-            types = []
-        terms = []
-        for ct in types:
-            terms.append(SimpleTerm(value=ct,
-                       title=ct))
-        return SimpleVocabulary(terms)
-
-grok.global_utility(ContentsVocabulary, name=u'collective.nitf.Contents')

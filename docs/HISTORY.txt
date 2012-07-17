@@ -6,6 +6,9 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Added a field to the control panel to set the relatable content types; tests
+  were updated. [hvelarde]
+
 - Add-on layer was renamed to INITFLayer. [hvelarde]
 
 - Change relatedItem widget to use MultiContentSearchFieldWidget. [flecox]

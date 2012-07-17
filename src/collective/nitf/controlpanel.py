@@ -19,36 +19,43 @@ class INITFSettings(Interface):
             title=_(u'Available Sections'),
             required=True,
             default=set(),
-            value_type=schema.TextLine(title=_(u'Section')),)
+            value_type=schema.TextLine(title=_(u'Section')),
+            )
 
     default_section = schema.Choice(
             title=_(u'Default Section'),
             vocabulary=u'collective.nitf.Sections',
-            required=False,)
+            required=False,
+            )
 
     possible_genres = schema.List(title=_(u'Elegible Genres'),
             description=_(u"Choose genres to use in the site"),
             required=False,
-            value_type=schema.Choice(vocabulary=config.GENRES),)
+            value_type=schema.Choice(vocabulary=config.GENRES),
+            )
 
     default_genre = schema.Choice(
             title=_(u'Default Genre'),
             vocabulary=config.GENRES,
             required=False,
-            default=config.DEFAULT_GENRE,)
+            default=config.DEFAULT_GENRE,
+            )
 
     default_urgency = schema.Choice(
             title=_(u'Default Urgency'),
             vocabulary=config.URGENCIES,
             required=False,
-            default=config.DEFAULT_URGENCY,)
- 
-    related_contents = schema.List(title=_(u'Related Content Types'),
-            description=_(u"Elegible Contet types to relate to"),
-            required=False,
-            default=[u'collective.nitf.content'],
-            value_type=schema.Choice(vocabulary=u'collective.nitf.Contents'),)   
+            default=config.DEFAULT_URGENCY,
+            )
 
+    relatable_content_types = schema.List(title=_(u'Relatable Content Types'),
+            description=_(u"Only objects of these content types will be "
+                          u"listed in the related items widget."),
+            required=False,
+            default=config.DEFAULT_RELATABLE_CONTENT_TYPES,
+            # we are going to list only the main content types in the widget
+            value_type=schema.Choice(vocabulary=u'plone.app.vocabularies.UserFriendlyTypes'),
+            )
 
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
