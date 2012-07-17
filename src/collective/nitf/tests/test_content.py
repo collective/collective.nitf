@@ -9,7 +9,6 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 
-from plone.app.lockingbehavior.behaviors import ILocking
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
@@ -57,8 +56,12 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IReferenceable.providedBy(self.n1))
         self.assertTrue(IAttributeUUID.providedBy(self.n1))
 
-    def test_locking_behavior(self):
-        self.assertTrue(ILocking.providedBy(self.n1))
+    def test_locking_behavior_available(self):
+        # ILocking is not applied by default, but must be available if needed
+        try:
+            from plone.app.lockingbehavior.behaviors import ILocking
+        except ImportError:
+            self.fail('ILocking behavior not available')
 
     def test_is_non_structural_folder(self):
         self.assertTrue(INonStructuralFolder.providedBy(self.n1))
