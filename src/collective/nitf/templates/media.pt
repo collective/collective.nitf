@@ -20,13 +20,13 @@
 
             $('#sortable a.draggable-item').prepOverlay({
                     subtype: 'ajax',
-                    filter: '#portal-column-content > div',
+                    filter: '#content',
                     noform:'close'
             });
 
             $('#sortable a.btn').prepOverlay({
                     subtype: 'ajax',
-                    filter: '#portal-column-content > div',
+                    filter: '#content',
                     formselector: 'form',
                     noform:'close'
             });
