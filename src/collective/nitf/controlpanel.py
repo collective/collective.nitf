@@ -59,7 +59,7 @@ class INITFSettings(Interface):
         required=False,
         default=config.DEFAULT_RELATABLE_CONTENT_TYPES,
         # we are going to list only the main content types in the widget
-        value_type=schema.Choice(vocabulary=u'plone.app.vocabularies.UserFriendlyTypes'),
+        value_type=schema.Choice(vocabulary=u'plone.app.vocabularies.ReallyUserFriendlyTypes'),
         )
 
 
