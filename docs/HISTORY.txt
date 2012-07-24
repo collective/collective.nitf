@@ -13,6 +13,9 @@ Because you have to know where your towel is.
 
 - Change relatedItem widget to use MultiContentSearchFieldWidget. [flecox]
 
+- [bugfix] Replaced the UserFriendlyTypes vocabulary in favor of 
+  ReallyUserFriendlyTypes. [frapell]
+
 
 1.0a3 (2012-07-06)
 ^^^^^^^^^^^^^^^^^^
