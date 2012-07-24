@@ -94,7 +94,7 @@ class View(dexterity.DisplayForm):
     def get_images(self):
         """ Return a list of image brains inside the NITF object.
         """
-        return self._get_brains(IATImage.__identifier__)
+        return self._get_brains('Image')
 
     def has_images(self):
         """ Return the number of images inside the NITF object.
@@ -104,7 +104,7 @@ class View(dexterity.DisplayForm):
     def get_files(self):
         """ Return a list of file brains inside the NITF object.
         """
-        return self._get_brains(IATFile.__identifier__)
+        return self._get_brains('File')
 
     def has_files(self):
         """ Return the number of files inside the NITF object.
@@ -114,7 +114,7 @@ class View(dexterity.DisplayForm):
     def get_links(self):
         """ Return a list of link brains inside the NITF object.
         """
-        return self._get_brains(IATLink.__identifier__)
+        return self._get_brains('Link')
 
     def has_links(self):
         """ Return the number of links inside the NITF object.
