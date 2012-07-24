@@ -87,14 +87,14 @@
 
         <metal:main_macro define-macro="main">
             <metal:pic_sorter_macro define-macro="pic_sorter"
-                                    tal:define="imgs python:context.getFolderContents({'portal_type':'Image'});">
+                                    tal:define="media python:view.get_media();">
 
             <h1 class="documentFirstHeading" i18n:translate="">Media</h1>
             <p i18n:translate="">Drag and drop images to change their order on the gallery.</p>
 
-            <tal:sortable tal:condition="imgs">
+            <tal:sortable tal:condition="media">
             <ul id="sortable" class="sortable-media">
-                <tal:items tal:repeat="item imgs">
+                <tal:items tal:repeat="item media">
                 <li class="ui-state-default"
                        tal:define="item_id item/getId|item/id;
                                    item_url item/getURL|item/absolute_url;"
@@ -121,7 +121,7 @@
             <p class="discreet"
                i18n:domain="atcontenttypes"
                i18n:translate="text_no_albums_uploaded"
-               tal:condition="python:not imgs">
+               tal:condition="python:not media">
                 No images uploaded yet.
             </p>
 

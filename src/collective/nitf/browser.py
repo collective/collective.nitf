@@ -81,12 +81,12 @@ class View(dexterity.DisplayForm):
     def update(self):
         self.context = aq_inner(self.context)
 
-    def _get_brains(self, object_provides=None):
+    def _get_brains(self, object_name=None):
         """ Return a list of brains inside the NITF object.
         """
         catalog = getToolByName(self.context, 'portal_catalog')
         path = '/'.join(self.context.getPhysicalPath())
-        brains = catalog(object_provides=object_provides, path=path,
+        brains = catalog(Type=object_name, path=path,
                          sort_on='getObjPositionInParent')
 
         return brains
@@ -124,11 +124,9 @@ class View(dexterity.DisplayForm):
     def get_media(self):
         """ Return a list of object brains inside the NITF object.
         """
-        media_interfaces = [IATImage.__identifier__,
-                            IATFile.__identifier__,
-                            IATLink.__identifier__]
+        media_ct = [x.title for x in self.context.allowedContentTypes()]
 
-        return self._get_brains(media_interfaces)
+        return self._get_brains(media_ct)
 
     def has_media(self):
         """ Return the number of media inside the NITF object.
@@ -296,6 +294,6 @@ class NewsML(View):
             return related_items
 
 
-class Media(dexterity.DisplayForm):
+class Media(View):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
