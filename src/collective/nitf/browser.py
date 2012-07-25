@@ -45,6 +45,13 @@ class AddForm(dexterity.AddForm):
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
 
+    def updateWidgets(self):
+        super(AddForm, self).updateWidgets()
+        # XXX why we need to do this?
+        self.widgets['subtitle'].style = u'width: 100%;'
+        self.widgets['IDublinCore.description'].rows = 3
+        self.widgets['IDublinCore.description'].style = u'width: 100%;'
+
 
 class EditForm(dexterity.EditForm):
     """ Default view looks like a News Item.
@@ -66,6 +73,13 @@ class EditForm(dexterity.EditForm):
                 widget = group.widgets['relatedItems']
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
+
+    def updateWidgets(self):
+        super(AddForm, self).updateWidgets()
+        # XXX why we need to do this?
+        self.widgets['subtitle'].style = u'width: 100%;'
+        self.widgets['IDublinCore.description'].rows = 3
+        self.widgets['IDublinCore.description'].style = u'width: 100%;'
 
 
 class View(dexterity.DisplayForm):
