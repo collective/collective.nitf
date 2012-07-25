@@ -107,9 +107,10 @@
                                        id string:folder-contents-item-${item_id};"
                        class="draggable-item">
                         <img src="" alt="" title=""
-                             tal:attributes="src string:${item_url}/image_thumb;
-                                             alt item_title_or_id;
-                                             title item_description;" />
+                            tal:define="obj python:item.getObject();
+                                        scale obj/@@images"
+                            tal:replace="structure python:scale.scale('image',
+                  scale='thumb').tag()"/>
                     </a>
                     <a class="btn success" 
                        tal:attributes="href string:${item_url}/edit">Editar</a>
