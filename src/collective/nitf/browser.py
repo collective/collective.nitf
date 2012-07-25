@@ -13,9 +13,6 @@ from plone.directives import dexterity
 from plone.uuid.interfaces import IUUID
 from plone.registry.interfaces import IRegistry
 
-from Products.ATContentTypes.interfaces import IATImage
-from Products.ATContentTypes.interfaces import IATFile
-from Products.ATContentTypes.interfaces import IATLink
 from Products.CMFPlone.utils import getToolByName
 
 from collective.nitf.content import INITF
