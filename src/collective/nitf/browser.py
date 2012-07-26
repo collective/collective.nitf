@@ -75,7 +75,7 @@ class EditForm(dexterity.EditForm):
                 criteria['portal_type'] = settings.relatable_content_types
 
     def updateWidgets(self):
-        super(AddForm, self).updateWidgets()
+        super(EditForm, self).updateWidgets()
         # XXX why we need to do this?
         self.widgets['subtitle'].style = u'width: 100%;'
         self.widgets['IDublinCore.description'].rows = 3
