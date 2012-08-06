@@ -23,6 +23,12 @@ from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.portlets import latest_sectionable_nitf
 from collective.nitf.testing import INTEGRATION_TESTING
 
+PLONE42 = True
+try:
+    import plone.app.collection
+except ImportError:
+    PLONE42 = False
+
 
 class PortletTest(unittest.TestCase):
 
@@ -235,6 +241,7 @@ class RenderTest(unittest.TestCase):
             self.assertEqual([i.id for i in results],
                              [i.id for i in catalog_results])
 
+    @unittest.skipIf(PLONE42, "Topics are disabled by default on Plone 4.2")
     def test_modifying_query_through_collection(self):
 
         assgmnt1 = latest_sectionable_nitf.Assignment()
