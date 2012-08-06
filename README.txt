@@ -48,6 +48,8 @@ Ruby Module`_ associated with it.
 Mostly Harmless
 ---------------
 
+.. image:: https://secure.travis-ci.org/collective/collective.nitf.png
+
 Have an idea? Found a bug? Let us know by `opening a support ticket`_.
 
 .. _`Dexterity`: http://pypi.python.org/pypi/plone.app.dexterity
