@@ -135,7 +135,7 @@
                     <a class="button delete" 
                        tal:attributes="href string:${context/absolute_url}/delete_media?id=${item_id}"><span class="icon"></span></a>
                     <img src="" alt="icon" title=""
-                               tal:attributes="src python:obj.icon" />
+                               tal:attributes="src python:obj.getIcon()" />
                 </li>
                 </tal:items>
             </ul>
