@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import mimetypes
+import json
 
 from Acquisition import aq_inner
 
@@ -256,9 +257,8 @@ class NITF(View):
             height = height and ' height="%s"' % obj.getHeight() or ''
             width = obj.getWidth()
             width = width and ' width="%s"' % obj.getWidth() or ''
-            m = self.MEDIA % (mediatype,
-                         mimetype, source, alternate_text, height, width,
-                         caption)
+            m = self.MEDIA % (mediatype, mimetype, source, alternate_text,
+                              height, width, caption)
             media.append(m)
 
         return media
@@ -308,3 +308,22 @@ class NewsML(View):
 class Media(View):
     grok.context(INITF)
     grok.require('cmf.ModifyPortalContent')
+
+
+class DeleteMedia(View):
+    grok.context(INITF)
+    grok.name('delete_media')
+    grok.require('cmf.ModifyPortalContent')
+
+    def __call__(self):
+        delete_id = self.request['id'] if 'id' in self.request else None
+
+        status = {'status': 'error'}
+        if delete_id:
+            self.context.manage_delObjects([delete_id])
+            status['status'] = 'success'
+
+        return json.dumps(status)
+
+    def render(self):
+        pass
