@@ -137,8 +137,6 @@ class View(dexterity.DisplayForm):
         """ Return a list of object brains inside the NITF object.
         """
         media_ct = [x.title for x in self.context.allowedContentTypes()]
-        import pdb; pdb.set_trace()
-
         return self._get_brains(media_ct)
 
     def has_media(self):
