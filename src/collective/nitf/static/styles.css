@@ -2,16 +2,16 @@
 
 .newsImage.nitf {
     cursor: pointer;
-    }
+}
 
 #media-bar {
     margin: 0 auto;
     width: 500px;
-    }
+}
 
 #media-bar .thumbnails {
     margin-bottom: 20px;
-    }
+}
 
 /* TODO: fix background URL property */
 /* next/prev buttons */
@@ -21,32 +21,32 @@
     height: 30px;
     float: left;
     margin: 40px 5px;
-    }
+}
 
 .navi:hover {
     background-position: -30px 0;
-    }
+}
 
 .navi:active {
     background-position: -60px 0;
-    }
+}
 
 .next {
     background-position: 0 -30px;
     clear: right;
-    }
+}
 
 .next:hover {
     background-position: -30px -30px;
-    }
+}
 
 .next:active {
     background-position: -60px -30px;
-    }
+}
 
 .navi.disabled {
     visibility: hidden;
-    }
+}
 
 /******* NEWSITEM/MEDIA VIEWS *****/
 #mediabox {
@@ -62,7 +62,7 @@ body.template-view #mediabox {
     box-shadow: 0 0 3em 0.5em #666666;
     -moz-box-shadow: 0 0 3em 0.5em #666666;
     -webkit-box-shadow: 0 0 3em #666666;
-    }
+}
 
 body.template-gallery #mediabox {
     display: table;
@@ -71,7 +71,7 @@ body.template-gallery #mediabox {
 .mediaview #mediabox {
     display: block;
     margin-bottom: 1em;
-    }
+}
 
 #mediabox #images {
     position: absolute;
@@ -79,12 +79,12 @@ body.template-gallery #mediabox {
     margin: 50px;
     width: 400px;
     height: 400px;
-    }
+}
 
 #mediabox #images .items div {
 /* float:left; */
     display: inline-block;
-    }
+}
 
 #mediabox #images .items div span,
 body.template-gallery #mediabox span {
@@ -93,11 +93,11 @@ body.template-gallery #mediabox span {
     width: 400px;
     height: 400px;
     text-align: center;
-    }
+}
 
 #mediabox #images .items img:hover {
     cursor: pointer;
-    }
+}
 
 /* next/prev buttons */
 #mediabox .navi {
@@ -113,11 +113,11 @@ body.template-gallery #mediabox span {
     bottom: 33px;
     left: 50px;
 */
-    }
+}
 
 #mediabox .next {
     right: 0px;
-    }
+}
 
 #mediabox #images .items .info {
     float: none;
@@ -129,23 +129,23 @@ body.template-gallery #mediabox span {
     padding: 5px 0px;
     height: 125px;
     width: 400px;
-    }
+}
 
 #mediabox #images .items .info h3 {
     color: #cde;
     margin-top: 10px;
-    }
+}
 
 #mediabox #images .items .info p {
     text-align: justify;
     font-size: 11px;
-    }
+}
 
 .navibuttons {
     display: block;
     bottom: -460px;
     position: relative;
-    }
+}
 
 /* next/prev buttons */
 #mediabox .navibuttons .navi {
@@ -161,18 +161,18 @@ body.template-gallery #mediabox span {
     bottom: 33px;
     left: 50px;
 */
-    }
+}
 
 #mediabox .navibuttons .next {
     float: right;
-    }
+}
 
 /* used in media_sorter.pt */
 .sortable-media {
     list-style-type: none !important;
     margin: 0 !important;
     padding: 0;
-    }
+}
 
 .sortable-media li {
     border: 1px solid silver;
@@ -182,8 +182,9 @@ body.template-gallery #mediabox span {
     padding: 4px;
     width: 128px;
     background-color:#FFF;
-    }
-.sortable-media li:hover .btn{
+    position:relative;
+}
+.sortable-media li:hover .button{
     visibility:visible;
 }
 .sortable-media .draggable-item {
@@ -194,61 +195,41 @@ body.template-gallery #mediabox span {
     border:medium none;
     }
 
-.sortable-media .btn,
-.sortable-media .btn:hover {
+.sortable-media .button,
+.sortable-media .button:hover {
     color:#FFF !important;
-    padding:3px 10px;
-    border:1px solid #75AD0A;
+    padding:3px 10px 3px 5px;
     float:right;
-    }
+    margin-top:6px;
+    background-color:#999;
+}
     
-.sortable-media .btn {
+.sortable-media .button{
     visibility:hidden;
 }
-.btn {
-    cursor: pointer;
-    display: inline-block;
-    background-color: #E6E6E6;
-    background-repeat: no-repeat;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
-    background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
-    background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
-    background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
-    background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
-    padding: 5px 14px 6px;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    color: #333;
-    font-size: 13px;
-    line-height: normal;
-    border: 1px solid #CCC;
-    border-bottom-color: #BBB;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
-    -webkit-transition: 0.1s linear all;
-    -moz-transition: 0.1s linear all;
-    -ms-transition: 0.1s linear all;
-    -o-transition: 0.1s linear all;
-    transition: 0.1s linear all;
-    margin-top:10px;
+.button .icon {
+    height: 15px;
+    width:13px;
+    float:left;
+
 }
-.btn.success {
+.button.edit {
     background-color: #75AD0A;
-    background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#62c462), to(#75AD0A));
-    background-image: -moz-linear-gradient(top, #62c462, #75AD0A);
-    background-image: -ms-linear-gradient(top, #62c462, #75AD0A);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #62c462), color-stop(100%, #75AD0A));
-    background-image: -webkit-linear-gradient(top, #62c462, #75AD0A);
-    background-image: -o-linear-gradient(top, #62c462, #75AD0A);
-    background-image: linear-gradient(top, #62c462, #75AD0A);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#75AD0A', GradientType=0);
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    border-color: #75AD0A #75AD0A #3D773D;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.button.edit .icon{
+    background: url("/++resource++collective.nitf/images/icons-media.png") no-repeat scroll 0px top transparent;
+    line-height: 50px;
+    margin-right: 5px;
+    margin-top: 4px;
+}
+.button.delete {
+    position:absolute;
+    top:0px;
+    right:0px;
+    background-color: #C43C35;
+}
+.button.delete .icon{
+    background: url("/++resource++collective.nitf/images/icons-media.png") no-repeat scroll -15px top transparent;
+    line-height: 50px;
+    margin-right: 5px;
 }
