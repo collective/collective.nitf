@@ -2,6 +2,7 @@
 
 import unittest2 as unittest
 
+from AccessControl import Unauthorized
 from StringIO import StringIO
 
 from zope.app.file.tests.test_image import zptlogo
@@ -9,9 +10,7 @@ from zope.component import getMultiAdapter, queryMultiAdapter
 from zope.interface import directlyProvides
 
 from plone.app.customerize import registration
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID, logout, setRoles
 
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
@@ -256,3 +255,29 @@ class NewsMLViewTestCase(unittest.TestCase):
     def test_newsml_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='newsml')
         self.assertTrue(view is not None)
+
+
+class MediaViewTestCase(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        directlyProvides(self.request, INITFLayer)
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_media_view_is_registered(self):
+        view = queryMultiAdapter((self.n1, self.request), name='media')
+        self.assertTrue(view is not None)
+
+    def test_media_view_is_protected(self):
+        logout()
+        self.assertRaises(Unauthorized, self.n1.restrictedTraverse, '@@media')

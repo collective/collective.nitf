@@ -3,10 +3,9 @@
 import unittest2 as unittest
 
 from zope.component import createObject
-from zope.component import queryMultiAdapter, queryUtility
+from zope.component import queryUtility
 
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing import logout
 from plone.app.testing import setRoles
 
 from plone.app.referenceablebehavior.referenceable import IReferenceable
@@ -66,33 +65,7 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_is_non_structural_folder(self):
         self.assertTrue(INonStructuralFolder.providedBy(self.n1))
 
-
-class ActionsTestCase(unittest.TestCase):
-
-    layer = INTEGRATION_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
-
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
-
     def test_action_is_registered(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
         actions = [a.id for a in fti.listActions()]
         self.assertTrue('media' in actions)
-
-    def test_media_view_is_registered(self):
-        view = queryMultiAdapter((self.n1, self.request), name='media')
-        self.assertTrue(view is not None)
-
-    def test_media_view_is_protected(self):
-        from AccessControl import Unauthorized
-        logout()
-        self.assertRaises(Unauthorized, self.n1.restrictedTraverse, '@@media')
