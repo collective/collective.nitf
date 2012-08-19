@@ -35,6 +35,7 @@ class INITFSettings(Interface):
                        "Genres indicate a nature, journalistic or "
                        "intellectual characteristic of items."),
         required=False,
+        default=[],
         value_type=schema.Choice(vocabulary=config.GENRES),
         )
 

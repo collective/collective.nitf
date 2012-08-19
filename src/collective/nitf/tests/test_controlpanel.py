@@ -74,7 +74,7 @@ class RegistryTestCase(unittest.TestCase):
 
     def test_available_genres_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'available_genres'))
-        self.assertEqual(self.settings.available_genres, None)
+        self.assertEqual(self.settings.available_genres, [])
 
     def test_default_genre_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_genre'))

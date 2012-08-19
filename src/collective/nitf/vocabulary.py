@@ -23,11 +23,13 @@ class AvailableGenresVocabulary(object):
     def __call__(self, context):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
+        available_genres = list(settings.available_genres)
+        # sort by translated genre
+        available_genres.sort(lambda a, b: cmp(_(a), _(b)))
         items = []
-        if settings.available_genres:
-            for genre in settings.available_genres:
-                token = unicodedata.normalize('NFKD', genre).encode('ascii', 'ignore').lower()
-                items.append(SimpleVocabulary.createTerm(genre, token, _(genre)))
+        for genre in available_genres:
+            token = unicodedata.normalize('NFKD', genre).encode('ascii', 'ignore').lower()
+            items.append(SimpleVocabulary.createTerm(genre, token, _(genre)))
         return SimpleVocabulary(items)
 
 grok.global_utility(AvailableGenresVocabulary, name=u'collective.nitf.AvailableGenres')
@@ -42,8 +44,10 @@ class SectionsVocabulary(object):
     def __call__(self, context):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
+        available_sections = list(settings.available_sections)
+        available_sections.sort()
         items = []
-        for section in settings.available_sections:
+        for section in available_sections:
             token = unicodedata.normalize('NFKD', section).encode('ascii', 'ignore').lower()
             items.append(SimpleVocabulary.createTerm(section, token, section))
         return SimpleVocabulary(items)
