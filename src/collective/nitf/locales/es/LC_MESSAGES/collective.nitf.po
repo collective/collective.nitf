@@ -48,7 +48,7 @@ msgstr "Efemérides"
 
 #: collective/nitf/config.py:21
 msgid "Analysis"
-msgstr "Artículo"
+msgstr "Análisis"
 
 #: collective/nitf/config.py:24
 msgid "Anniversary"
@@ -143,7 +143,7 @@ msgstr "Exclusiva"
 
 #: collective/nitf/config.py:45
 msgid "Feature"
-msgstr "Crónica"
+msgstr ""
 
 #: collective/nitf/portlets/latest_sectionable_nitf.py:129
 msgid "Filter collection"
@@ -303,7 +303,7 @@ msgstr "Reseña"
 
 #: collective/nitf/config.py:111
 msgid "Scener"
-msgstr "Crónica de contexto"
+msgstr ""
 
 #: configure.zcml
 msgid "Scrollable Gallery View"
