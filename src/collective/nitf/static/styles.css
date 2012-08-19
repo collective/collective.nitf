@@ -206,6 +206,7 @@ body.template-gallery #mediabox span {
     
 .sortable-media .button{
     visibility:hidden;
+    right: 0px;
 }
 .button .icon {
     height: 15px;
@@ -214,7 +215,7 @@ body.template-gallery #mediabox span {
 
 }
 .button.edit {
-    background-color: #75AD0A;
+    background: none repeat scroll 0 0 #75AD0A;
 }
 .button.edit .icon{
     background: url("/++resource++collective.nitf/images/icons-media.png") no-repeat scroll 0px top transparent;
