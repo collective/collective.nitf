@@ -15,8 +15,8 @@ from collective.nitf.controlpanel import INITFSettings
 
 
 class AvailableGenresVocabulary(object):
-    """Creates a vocabulary with the available genres stored in the registry; the
-    vocabulary is normalized to allow the use of non-ascii characters.
+    """ Creates a vocabulary with the available genres stored in the registry;
+    the vocabulary is normalized to allow the use of non-ASCII characters.
     """
     grok.implements(IVocabularyFactory)
 
@@ -36,8 +36,9 @@ grok.global_utility(AvailableGenresVocabulary, name=u'collective.nitf.AvailableG
 
 
 class SectionsVocabulary(object):
-    """Creates a vocabulary with the sections stored in the registry; the
-    vocabulary is normalized to allow the use of non-ascii characters.
+    """ Creates a vocabulary with the available sections stored in the
+    registry; the vocabulary is normalized to allow the use of non-ASCII
+    characters.
     """
     grok.implements(IVocabularyFactory)
 
