@@ -123,7 +123,7 @@
                        tal:attributes="href string:${item_url}/view;
                                        id string:folder-contents-item-${item_id};"
                        class="draggable-item">
-                        <tal:block tal:define="photo nocall:obj/image;
+                        <tal:block tal:define="photo nocall:obj/image | nothing;
                                                scale obj/@@images">
                           <img src="" alt="" title=""
                                tal:condition="nocall:photo"
