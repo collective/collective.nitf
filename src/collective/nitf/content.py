@@ -85,7 +85,7 @@ class INITF(form.Schema):
         title=_(u'Urgency'),
         description=_(u'help_urgency',
                       default=u'News importance.'),
-        vocabulary=config.URGENCIES,
+        vocabulary=u'collective.nitf.Urgencies',
         )
 
     # XXX: this field uses a special widget that access the most recent items

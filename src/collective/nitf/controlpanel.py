@@ -36,19 +36,19 @@ class INITFSettings(Interface):
                        "intellectual characteristic of items."),
         required=False,
         default=[],
-        value_type=schema.Choice(vocabulary=config.GENRES),
+        value_type=schema.Choice(vocabulary=u'collective.nitf.Genres'),
         )
 
     default_genre = schema.Choice(
         title=_(u"Default Genre"),
-        vocabulary=config.GENRES,
+        vocabulary=u'collective.nitf.Genres',
         required=False,
         default=config.DEFAULT_GENRE,
         )
 
     default_urgency = schema.Choice(
         title=_(u"Default Urgency"),
-        vocabulary=config.URGENCIES,
+        vocabulary=u'collective.nitf.Urgencies',
         required=False,
         default=config.DEFAULT_URGENCY,
         )

@@ -11,6 +11,8 @@ from five import grok
 from plone.registry.interfaces import IRegistry
 
 from collective.nitf import _
+from collective.nitf.config import GENRES
+from collective.nitf.config import URGENCIES
 from collective.nitf.controlpanel import INITFSettings
 
 
@@ -54,3 +56,25 @@ class SectionsVocabulary(object):
         return SimpleVocabulary(items)
 
 grok.global_utility(SectionsVocabulary, name=u'collective.nitf.AvailableSections')
+
+
+class GenresVocabulary(object):
+    """ Creates a vocabulary to expose Genres
+    """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return GENRES
+
+grok.global_utility(GenresVocabulary, name=u'collective.nitf.Genres')
+
+
+class UrgenciesVocabulary(object):
+    """ Creates a vocabulary to expose Urgencies
+    """
+    grok.implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        return URGENCIES
+
+grok.global_utility(UrgenciesVocabulary, name=u'collective.nitf.Urgencies')
