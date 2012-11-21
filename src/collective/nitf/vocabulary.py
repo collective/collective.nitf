@@ -12,10 +12,10 @@ from zope.schema.vocabulary import SimpleVocabulary
 import unicodedata
 
 
-from collective.nitf import _
-from collective.nitf.config import GENRES
-from collective.nitf.config import URGENCIES
-from collective.nitf.controlpanel import INITFSettings
+def _normalize_token(token):
+    ''' Normalize a token using ascii as encoding '''
+    normalize = unicodedata.normalize
+    return normalize('NFKD', token).encode('ascii', 'ignore').lower()
 
 
 class AvailableGenresVocabulary(object):
@@ -32,7 +32,7 @@ class AvailableGenresVocabulary(object):
         available_genres.sort(lambda a, b: cmp(_(a), _(b)))
         items = []
         for genre in available_genres:
-            token = unicodedata.normalize('NFKD', genre).encode('ascii', 'ignore').lower()
+            token = _normalize_token(genre)
             items.append(SimpleVocabulary.createTerm(genre, token, _(genre)))
         return SimpleVocabulary(items)
 
@@ -53,7 +53,7 @@ class SectionsVocabulary(object):
         available_sections.sort()
         items = []
         for section in available_sections:
-            token = unicodedata.normalize('NFKD', section).encode('ascii', 'ignore').lower()
+            token = _normalize_token(section)
             items.append(SimpleVocabulary.createTerm(section, token, section))
         return SimpleVocabulary(items)
 
