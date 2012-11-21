@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
-
-import unicodedata
-
+from collective.nitf import _
+from collective.nitf.config import GENRES
+from collective.nitf.config import URGENCIES
+from collective.nitf.controlpanel import INITFSettings
+from five import grok
+from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
-from five import grok
+import unicodedata
 
-from plone.registry.interfaces import IRegistry
 
 from collective.nitf import _
 from collective.nitf.config import GENRES
