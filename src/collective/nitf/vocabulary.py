@@ -36,7 +36,8 @@ class AvailableGenresVocabulary(object):
             items.append(SimpleVocabulary.createTerm(genre, token, _(genre)))
         return SimpleVocabulary(items)
 
-grok.global_utility(AvailableGenresVocabulary, name=u'collective.nitf.AvailableGenres')
+grok.global_utility(AvailableGenresVocabulary,
+                    name=u'collective.nitf.AvailableGenres')
 
 
 class SectionsVocabulary(object):
@@ -57,7 +58,8 @@ class SectionsVocabulary(object):
             items.append(SimpleVocabulary.createTerm(section, token, section))
         return SimpleVocabulary(items)
 
-grok.global_utility(SectionsVocabulary, name=u'collective.nitf.AvailableSections')
+grok.global_utility(SectionsVocabulary,
+                    name=u'collective.nitf.AvailableSections')
 
 
 class GenresVocabulary(object):
