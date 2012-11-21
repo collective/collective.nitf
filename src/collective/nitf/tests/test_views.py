@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-
 from AccessControl import Unauthorized
+from collective.nitf.interfaces import INITFLayer
+from collective.nitf.testing import INTEGRATION_TESTING
+from plone.app.customerize import registration
+from plone.app.testing import TEST_USER_ID, logout, setRoles
 from StringIO import StringIO
-
 from zope.app.file.tests.test_image import zptlogo
 from zope.component import getMultiAdapter, queryMultiAdapter
 from zope.interface import directlyProvides
 
-from plone.app.customerize import registration
-from plone.app.testing import TEST_USER_ID, logout, setRoles
-
-from collective.nitf.interfaces import INITFLayer
-from collective.nitf.testing import INTEGRATION_TESTING
+import unittest2 as unittest
 
 
 class DefaultViewTestCase(unittest.TestCase):

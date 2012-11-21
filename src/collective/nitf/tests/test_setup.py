@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-
-from plone.browserlayer.utils import registered_layers
-
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.browserlayer.utils import registered_layers
+
+import unittest2 as unittest
 
 
 class InstallTestCase(unittest.TestCase):

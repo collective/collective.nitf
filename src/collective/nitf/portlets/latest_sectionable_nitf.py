@@ -1,31 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from five import grok
-
 from AccessControl.unauthorized import Unauthorized
-
-from zope.interface import implements
-from zope.component import getMultiAdapter, getUtility
-
-from Products.CMFCore.utils import getToolByName
-
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-
-from zope import schema
-from zope.formlib import form
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from zope.schema.interfaces import IVocabularyFactory
-from plone.app.vocabularies.catalog import SearchableTextSourceBinder
-
-from collective.prettydate.interfaces import IPrettyDate
-from zope.interface import Interface
-
-from zope.schema.vocabulary import SimpleVocabulary
-
 from collective.nitf import _
+from collective.prettydate.interfaces import IPrettyDate
+from five import grok
+from plone.app.portlets.portlets import base
+from plone.app.vocabularies.catalog import SearchableTextSourceBinder
+from plone.portlets.interfaces import IPortletDataProvider
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope import schema
+from zope.component import getMultiAdapter, getUtility
+from zope.formlib import form
+from zope.interface import implements
+from zope.interface import Interface
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 class NitfFilterList(grok.View):

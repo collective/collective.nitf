@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-
+from collective.nitf.controlpanel import INITFSettings
+from collective.nitf.testing import INTEGRATION_TESTING
+from plone.registry.interfaces import IRegistry
 from zope.component import getUtility, queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
-from plone.registry.interfaces import IRegistry
-
-from collective.nitf.controlpanel import INITFSettings
-from collective.nitf.testing import INTEGRATION_TESTING
+import unittest2 as unittest
 
 
 class VocabulariesTestCase(unittest.TestCase):

@@ -1,27 +1,20 @@
 # -*- coding: utf-8 -*-
-
-import unittest2 as unittest
-
-from DateTime import DateTime
-
-from zope.component import getUtility, getMultiAdapter
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-
-from plone.app.portlets.storage import PortletAssignmentMapping
-
-from plone.portlets.interfaces import IPortletType
-from plone.portlets.interfaces import IPortletManager
-from plone.portlets.interfaces import IPortletAssignment
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.portlets.interfaces import IPortletRenderer
-
-from plone.registry.interfaces import IRegistry
-
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.portlets import latest_sectionable_nitf
 from collective.nitf.testing import INTEGRATION_TESTING
+from DateTime import DateTime
+from plone.app.portlets.storage import PortletAssignmentMapping
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.portlets.interfaces import IPortletAssignment
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletRenderer
+from plone.portlets.interfaces import IPortletType
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility, getMultiAdapter
+
+import unittest2 as unittest
 
 PLONE42 = True
 try:

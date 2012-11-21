@@ -1,21 +1,17 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-
+from collective.nitf.content import INITF
+from collective.nitf.testing import INTEGRATION_TESTING
+from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.uuid.interfaces import IAttributeUUID
+from Products.CMFPlone.interfaces import INonStructuralFolder
 from zope.component import createObject
 from zope.component import queryUtility
 
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-
-from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.uuid.interfaces import IAttributeUUID
-
-from Products.CMFPlone.interfaces import INonStructuralFolder
-
-from collective.nitf.content import INITF
-from collective.nitf.testing import INTEGRATION_TESTING
+import unittest2 as unittest
 
 
 class ContentTypeTestCase(unittest.TestCase):

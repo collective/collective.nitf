@@ -1,24 +1,18 @@
 # -*- coding: utf-8 -*-
-
-import mimetypes
-import json
-
 from Acquisition import aq_inner
-
-from five import grok
-
-from zope.interface import Interface
-from zope.component import getUtility
-
-from plone.directives import dexterity
-from plone.uuid.interfaces import IUUID
-from plone.registry.interfaces import IRegistry
-
-from Products.CMFPlone.utils import getToolByName
-
 from collective.nitf.content import INITF
-from collective.nitf.interfaces import INITFLayer
 from collective.nitf.controlpanel import INITFSettings
+from collective.nitf.interfaces import INITFLayer
+from five import grok
+from plone.directives import dexterity
+from plone.registry.interfaces import IRegistry
+from plone.uuid.interfaces import IUUID
+from Products.CMFPlone.utils import getToolByName
+from zope.component import getUtility
+from zope.interface import Interface
+
+import json
+import mimetypes
 
 grok.templatedir('templates')
 

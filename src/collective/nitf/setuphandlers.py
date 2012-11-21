@@ -1,13 +1,11 @@
 # -*- coding:utf-8 -*-
 
-import logging
-
+from collective.nitf.config import PROJECTNAME
 from five import grok
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import INonInstallable
 
-from collective.nitf.config import PROJECTNAME
+import logging
 
 
 class HiddenProfiles(grok.GlobalUtility):

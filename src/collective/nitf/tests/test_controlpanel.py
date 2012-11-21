@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-
+from collective.nitf.config import DEFAULT_GENRE, DEFAULT_URGENCY
+from collective.nitf.config import DEFAULT_RELATABLE_CONTENT_TYPES
+from collective.nitf.config import PROJECTNAME
+from collective.nitf.controlpanel import INITFSettings
+from collective.nitf.testing import INTEGRATION_TESTING
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.registry.interfaces import IRegistry
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import logout
-from plone.app.testing import setRoles
-from plone.registry.interfaces import IRegistry
-
-from collective.nitf.config import PROJECTNAME
-from collective.nitf.config import DEFAULT_GENRE, DEFAULT_URGENCY
-from collective.nitf.config import DEFAULT_RELATABLE_CONTENT_TYPES
-from collective.nitf.controlpanel import INITFSettings
-from collective.nitf.testing import INTEGRATION_TESTING
+import unittest2 as unittest
 
 
 class ControlPanelTestCase(unittest.TestCase):

@@ -1,31 +1,21 @@
 # -*- coding: utf-8 -*-
-
+from collective.nitf import _
+from collective.nitf.controlpanel import INITFSettings
+from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
 from five import grok
-
-from zope import schema
-from zope.component import getUtility
-
-from z3c.relationfield.schema import RelationChoice, RelationList
-from plone.formwidget.contenttree import ObjPathSourceBinder
-
 from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
-from plone.directives import form
-
 from plone.dexterity.content import Container
-
+from plone.directives import form
+from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import INonStructuralFolder
-
-from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
-
-from collective.nitf import _
-from collective.nitf import config
-from collective.nitf.controlpanel import INITFSettings
+from z3c.relationfield.schema import RelationChoice, RelationList
+from zope import schema
+from zope.component import getUtility
 
 
 class INITF(form.Schema):
