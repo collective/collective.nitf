@@ -6,6 +6,10 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- PEP8 fixes [ericof]
+
+- Create named vocabularies for Genres and Urgencies [ericof]
+
 - Vocabularies terms are now shown sorted; tests added. [hvelarde]
 
 - Replaced the UserFriendlyTypes vocabulary in favor of
