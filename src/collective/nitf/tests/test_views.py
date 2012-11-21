@@ -135,7 +135,7 @@ class DefaultViewTestCase(unittest.TestCase):
         self.assertEqual(tag(scale='preview'), expected)
 
         expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
-                   'image" alt="bar" title="bar" height="16" width="16" ' + \
+                   'image" alt="bar" title="bar" height="16" width="16"  ' + \
                    'class="myClass" />'
 
         self.assertEqual(tag(css_class='myClass'), expected)
