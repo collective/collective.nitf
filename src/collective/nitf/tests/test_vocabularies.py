@@ -20,6 +20,13 @@ class VocabulariesTestCase(unittest.TestCase):
         registry = getUtility(IRegistry)
         self.settings = registry.forInterface(INITFSettings)
 
+    def test_genres_vocabulary(self):
+        name = 'collective.nitf.Genres'
+        util = queryUtility(IVocabularyFactory, name)
+        self.assertTrue(util is not None)
+        genres = util(self.portal)
+        self.assertEqual(len(genres), 44)
+
     def test_available_genres_vocabulary(self):
         name = 'collective.nitf.AvailableGenres'
         util = queryUtility(IVocabularyFactory, name)
@@ -53,3 +60,10 @@ class VocabulariesTestCase(unittest.TestCase):
         sections = util(self.portal)
         sections = [i.title for i in sections]
         self.assertListEqual(sections, [u"1", u"2", u"3", u"4", u"5"])
+
+    def test_urgencies_vocabulary(self):
+        name = 'collective.nitf.Urgencies'
+        util = queryUtility(IVocabularyFactory, name)
+        self.assertTrue(util is not None)
+        urgencies = util(self.portal)
+        self.assertEqual(len(urgencies), 3)
