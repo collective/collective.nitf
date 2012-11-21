@@ -38,15 +38,15 @@ class PortletTest(unittest.TestCase):
         self.assertEqual(latest_sectionable.addview, name)
 
     def test_interfaces(self):
-        latest_sectionable = latest_sectionable_nitf.Assignment()
-        self.assertTrue(IPortletAssignment.providedBy(latest_sectionable))
-        self.assertTrue(IPortletDataProvider.providedBy(latest_sectionable.data))
+        lat_sectionable = latest_sectionable_nitf.Assignment()
+        self.assertTrue(IPortletAssignment.providedBy(lat_sectionable))
+        self.assertTrue(IPortletDataProvider.providedBy(lat_sectionable.data))
 
     def test_invoke_add_view(self):
         name = 'collective.nitf.LatestSectionableNITFPortlet'
         latest_sectionable = getUtility(IPortletType, name=name)
-
-        mapping = self.portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        path = '++contextportlets++plone.leftcolumn'
+        mapping = self.portal.restrictedTraverse(path)
 
         for m in mapping.keys():
             del mapping[m]
@@ -64,7 +64,8 @@ class PortletTest(unittest.TestCase):
 
         mapping['latest_nitf'] = latest_sectionable_nitf.Assignment()
 
-        editview = getMultiAdapter((mapping['latest_nitf'], request), name='edit')
+        editview = getMultiAdapter((mapping['latest_nitf'], request),
+                                   name='edit')
         self.assertTrue(isinstance(editview, latest_sectionable_nitf.EditForm))
 
     def test_obtain_renderer(self):
@@ -79,7 +80,8 @@ class PortletTest(unittest.TestCase):
         renderer1 = getMultiAdapter(
             (context, request, view, manager, assgmnt1), IPortletRenderer)
 
-        self.assertTrue(isinstance(renderer1, latest_sectionable_nitf.Renderer))
+        self.assertTrue(isinstance(renderer1,
+                                   latest_sectionable_nitf.Renderer))
 
 
 class RenderTest(unittest.TestCase):
@@ -105,7 +107,9 @@ class RenderTest(unittest.TestCase):
         # Let's create 3 sections in the registry
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
-        settings.available_sections = set([u"Section 1", u"Section 2", u"Section 3"])
+        settings.available_sections = set([u"Section 1",
+                                           u"Section 2",
+                                           u"Section 3"])
 
         # Let's create 15 nitf's for each of 3 different sections
         for index in range(1, 16):
@@ -116,8 +120,8 @@ class RenderTest(unittest.TestCase):
             n.section = "Section 1"
             n.genre = "Genre %s" % index
             n.created = DateTime("%(year)s/1/%(index)s %(index)s:00:00" %
-                                {'year': DateTime().year(),
-                                 'index': index})
+                                 {'year': DateTime().year(),
+                                  'index': index})
             n.reindexObject()
             # After 5 indexes, publish
             if index % 5 == 0:
@@ -130,8 +134,8 @@ class RenderTest(unittest.TestCase):
             n.section = "Section 2"
             n.genre = "Genre %s" % index
             n.created = DateTime("%(year)s/2/%(index)s %(index)s:00:00" %
-                                {'year': DateTime().year(),
-                                 'index': index})
+                                 {'year': DateTime().year(),
+                                  'index': index})
             n.reindexObject()
             # After 5 indexes, publish
             if index % 5 == 0:
@@ -144,8 +148,8 @@ class RenderTest(unittest.TestCase):
             n.section = "Section 3"
             n.genre = "Genre %s" % index
             n.created = DateTime("%(year)s/3/%(index)s %(index)s:00:00" %
-                                {'year': DateTime().year(),
-                                 'index': index})
+                                 {'year': DateTime().year(),
+                                  'index': index})
 
             n.reindexObject()
             # After 5 indexes, publish
@@ -173,7 +177,7 @@ class RenderTest(unittest.TestCase):
         assgmnt1 = latest_sectionable_nitf.Assignment()
 
         r1 = self.renderer(context=self.portal,
-                          assignment=assgmnt1)
+                           assignment=assgmnt1)
 
         r1 = r1.__of__(self.portal)
         r1.update()
@@ -182,7 +186,7 @@ class RenderTest(unittest.TestCase):
         assgmnt1 = latest_sectionable_nitf.Assignment()
 
         r1 = self.renderer(context=self.portal,
-                          assignment=assgmnt1)
+                           assignment=assgmnt1)
 
         r1 = r1.__of__(self.portal)
 
@@ -213,7 +217,7 @@ class RenderTest(unittest.TestCase):
         assgmnt1 = latest_sectionable_nitf.Assignment()
 
         r1 = self.renderer(context=self.portal,
-                          assignment=assgmnt1)
+                           assignment=assgmnt1)
 
         r1 = r1.__of__(self.portal)
 
@@ -240,7 +244,7 @@ class RenderTest(unittest.TestCase):
         assgmnt1 = latest_sectionable_nitf.Assignment()
 
         r1 = self.renderer(context=self.portal,
-                          assignment=assgmnt1)
+                           assignment=assgmnt1)
 
         r1 = r1.__of__(self.portal)
 
@@ -281,7 +285,8 @@ class RenderTest(unittest.TestCase):
                          [i.id for i in catalog_results])
 
         # Now, let's just filter published content, we only get 9 results
-        state_crit = topic.addCriterion('review_state', 'ATSimpleStringCriterion')
+        state_crit = topic.addCriterion('review_state',
+                                        'ATSimpleStringCriterion')
         state_crit.setValue('published')
         topic.reindexObject()
 

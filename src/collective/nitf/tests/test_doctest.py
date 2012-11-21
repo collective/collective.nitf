@@ -17,5 +17,5 @@ def test_suite():
                                      optionflags=optionflags,
                                      package='collective.nitf'),
                 layer=FUNCTIONAL_TESTING),
-        ])
+    ])
     return suite

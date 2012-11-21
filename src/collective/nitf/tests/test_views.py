@@ -125,15 +125,20 @@ class DefaultViewTestCase(unittest.TestCase):
                               image=StringIO(zptlogo))
         # tag original implementation returns object title in both, alt and
         # title attributes
-        self.assertEqual(tag(),
-            '<img src="http://nohost/plone/test-folder/n1/foo/image" '
-            'alt="bar" title="bar" height="16" width="16" />')
-        self.assertEqual(tag(scale='preview'),
-            '<img src="http://nohost/plone/test-folder/n1/foo/image_preview" '
-            'alt="bar" title="bar" height="16" width="16" />')
-        self.assertEqual(tag(css_class='myClass'),
-            '<img src="http://nohost/plone/test-folder/n1/foo/image" '
-            'alt="bar" title="bar" height="16" width="16" class="myClass" />')
+        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
+                   'image" alt="bar" title="bar" height="16" width="16" />'
+        self.assertEqual(tag(), expected)
+
+        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
+                   'image_preview" alt="bar" title="bar" height="16" ' + \
+                   'width="16" />'
+        self.assertEqual(tag(scale='preview'), expected)
+
+        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
+                   'image" alt="bar" title="bar" height="16" width="16" ' + \
+                   'class="myClass" />'
+
+        self.assertEqual(tag(css_class='myClass'), expected)
 
     def test_imageCaption(self):
         # TODO: test before adding image

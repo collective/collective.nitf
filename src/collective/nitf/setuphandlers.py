@@ -28,7 +28,8 @@ def add_catalog_indexes(context, logger=None):
     http://maurits.vanrees.org/weblog/archive/2009/12/catalog for more
     information.
     """
-    def extras(title, index_type='Okapi BM25 Rank', lexicon_id='plone_lexicon'):
+    def extras(title, index_type='Okapi BM25 Rank',
+               lexicon_id='plone_lexicon'):
         # See http://old.zope.org/Members/dedalu/ZCTextIndex_python
         extras = Empty()
         extras.doc_attr = title
@@ -55,7 +56,7 @@ def add_catalog_indexes(context, logger=None):
         ('urgency', 'FieldIndex'),
         ('location', 'ZCTextIndex'),
         ('SearchableText', 'ZCTextIndex'),
-        )
+    )
 
     indexables = []
     for name, meta_type in wanted:

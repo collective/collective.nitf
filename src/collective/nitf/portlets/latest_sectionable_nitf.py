@@ -70,8 +70,9 @@ class NitfFilterList(grok.View):
             del query['section']
 
         if section and section != 'all':
-            vocab = getUtility(IVocabularyFactory,
-                           name=u'collective.nitf.AvailableSections')(self.context)
+            util = getUtility(IVocabularyFactory,
+                              name=u'collective.nitf.AvailableSections')
+            vocab = util(self.context)
 
             query.update({'section': vocab.getTermByToken(section).value})
 
@@ -118,7 +119,7 @@ class ILatestSectionableNITFPortlet(IPortletDataProvider):
     filter_collection = schema.Choice(
         title=_(u"Filter collection"),
         description=_(u"Use the criteria from this collection to modify the "
-                       "search results and order."),
+                      u"search results and order."),
         required=False,
         source=SearchableTextSourceBinder(
             {'portal_type': 'Topic'},
@@ -190,7 +191,7 @@ class Renderer(base.Renderer):
         values = SimpleVocabulary([SimpleVocabulary.createTerm(_(u"All"),
                                                                "all",
                                                                _(u"All"))] +
-                                   vocab._terms)
+                                  vocab._terms)
 
         return values
 

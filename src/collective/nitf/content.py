@@ -33,7 +33,7 @@ class INITF(form.Schema):
                       default=u'A subordinate headline for the article.'),
         required=False,
         default=u'',
-        )
+    )
 
     #description = schema.Text()
         # nitf/body/body.head/abstract
@@ -43,32 +43,32 @@ class INITF(form.Schema):
         title=_(u'Author'),
         required=False,
         default=u'',
-        )
+    )
 
     text = RichText(
         # nitf/body/body.content
         title=_(u'Body text'),
         required=False,
-        )
+    )
 
     genre = schema.Choice(
         # nitf/head/tobject/tobject.property/@tobject.property.type
         title=_(u'Genre'),
         description=_(u'help_genre',
                       default=u'Describes the nature, journalistic or '
-                               'intellectual characteristic of a news '
-                               'object, not specifically its content.'),
+                              u'intellectual characteristic of a news '
+                              u'object, not specifically its content.'),
         source=u'collective.nitf.AvailableGenres',
-        )
+    )
 
     section = schema.Choice(
         # nitf/head/pubdata/@position.section
         title=_(u'Section'),
         description=_(u'help_section',
                       default=u'Named section where the article will '
-                               'appear.'),
+                              u'appear.'),
         vocabulary=u'collective.nitf.AvailableSections',
-        )
+    )
 
     urgency = schema.Choice(
         # nitf/head/docdata/urgency/@ed-urg
@@ -76,7 +76,7 @@ class INITF(form.Schema):
         description=_(u'help_urgency',
                       default=u'News importance.'),
         vocabulary=u'collective.nitf.Urgencies',
-        )
+    )
 
     # XXX: this field uses a special widget that access the most recent items
     # of content types defined in the control panel; see browser.py and
@@ -87,7 +87,7 @@ class INITF(form.Schema):
         value_type=RelationChoice(title=u"Related",
                                   source=ObjPathSourceBinder()),
         required=False,
-        )
+    )
     form.widget(relatedItems=MultiContentSearchFieldWidget)
 
     location = schema.TextLine(
@@ -95,17 +95,17 @@ class INITF(form.Schema):
         title=_(u'Location'),
         description=_(u'help_location',
                       default=u'Event location. Where an event took '
-                               'place (as opposed to where the story was '
-                               'written).'),
+                              u'place (as opposed to where the story was '
+                              u'written).'),
         required=False,
-        )
+    )
 
     form.fieldset(
         'categorization',
         label=_(u'Categorization'),
         fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
                 'language'],
-        )
+    )
 
 
 class NITF(Container):

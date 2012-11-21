@@ -35,7 +35,7 @@ class ControlPanelTestCase(unittest.TestCase):
         logout()
         self.assertRaises(Unauthorized,
                           self.portal.restrictedTraverse,
-                         '@@nitf-settings')
+                          '@@nitf-settings')
 
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']
