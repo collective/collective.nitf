@@ -122,7 +122,7 @@ class ILatestSectionableNITFPortlet(IPortletDataProvider):
                       u"search results and order."),
         required=False,
         source=SearchableTextSourceBinder(
-            {'portal_type': 'Topic'},
+            {'portal_type': ('Topic', 'Collection')},
             default_query='path:'))
 
 
@@ -205,7 +205,7 @@ class Renderer(base.Renderer):
             except Unauthorized:
                 return ''
 
-        if context is not portal and context.portal_type == 'Topic':
+        if context is not portal and context.portal_type in ('Topic', 'Collection'):
             return context.UID()
         else:
             return ''
