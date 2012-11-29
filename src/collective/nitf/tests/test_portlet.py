@@ -38,9 +38,9 @@ class PortletTest(unittest.TestCase):
         self.assertEqual(latest_sectionable.addview, name)
 
     def test_interfaces(self):
-        lat_sectionable = latest_sectionable_nitf.Assignment()
-        self.assertTrue(IPortletAssignment.providedBy(lat_sectionable))
-        self.assertTrue(IPortletDataProvider.providedBy(lat_sectionable.data))
+        last_sectionable = latest_sectionable_nitf.Assignment()
+        self.assertTrue(IPortletAssignment.providedBy(last_sectionable))
+        self.assertTrue(IPortletDataProvider.providedBy(last_sectionable.data))
 
     def test_invoke_add_view(self):
         name = 'collective.nitf.LatestSectionableNITFPortlet'
