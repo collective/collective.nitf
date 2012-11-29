@@ -14,23 +14,31 @@
     <catalogRef href="http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_16.xml" />
     <itemMeta>
         <itemClass qcode="ninat:composite" />
-        <!-- TODO: set provider's name in the registry -->
+        <tal:comment replace="nothing">
+            <!-- TODO: set provider's name in the registry -->
+        </tal:comment>
         <provider literal="IPTC" />
         <versionCreated tal:content="context/ModificationDate" />
         <pubStatus qcode="stat:usable" />
     </itemMeta>
     <contentMeta>
         <contentCreated tal:content="context/CreationDate" />
-        <!-- TODO: fix provider's location -->
+        <tal:comment replace="nothing">
+            <!-- TODO: fix provider's location -->
+        </tal:comment>
         <located literal="Roma">
             <name>Rome</name>
         </located>
-        <!-- TODO: fix creator -->
+        <tal:comment replace="nothing">
+            <!-- TODO: fix creator -->
+        </tal:comment>
         <creator literal="JDoe">
             <name>John Doe</name>
         </creator>
         <language tag="en" />
-        <!-- XXX: are subjects optional? -->
+        <tal:comment replace="nothing">
+            <!-- XXX: are subjects optional? -->
+        </tal:comment>
         <subject type="cpnat:abstract" qcode="subj:01000000" />
         <subject type="cpnat:abstract" qcode="subj:01026000" />
         <subject type="cpnat:abstract" qcode="subj:01026002">
@@ -52,13 +60,14 @@
                                size view/nitf_size">
                 <title tal:content="context/title" />
             </itemRef>
-            <!-- TODO: we must include here references to multimedia content
-                       inside the news article
-            <itemRef href="" size=""
-               contenttype="" format="fmt:XXX">
-                <title tal:content="XXX" />
-            </itemRef>
-            -->
+            <tal:comment replace="nothing">
+                <!-- TODO: we must include here references to multimedia
+                           content inside the news article.
+                           <itemRef href="" size="" contenttype="" format="fmt:XXX">
+                             <title tal:content="XXX" />
+                           </itemRef>
+                -->
+            </tal:comment>
         </group>
         <group id="SIDEBAR" role="group:sidebar">
             <tal:itemRefs repeat="item view/get_related_items">

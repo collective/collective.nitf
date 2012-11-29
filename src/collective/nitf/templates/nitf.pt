@@ -13,7 +13,9 @@
         <docdata management-status="usable">
             <doc-id id-string="" tal:attributes="id-string view/uuid" />
             <urgency ed-urg="" tal:attributes="ed-urg context/urgency" />
-            <!-- TODO: date.issue: when the document was sent to a receiver -->
+            <tal:comment replace="nothing">
+                <!-- TODO: date.issue: when the document was sent to a receiver -->
+            </tal:comment>
             <date.issue norm="" />
             <date.release tal:condition="python:context.EffectiveDate() != 'None'"
                norm="" tal:attributes="norm context/EffectiveDate" />
