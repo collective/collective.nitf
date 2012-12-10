@@ -308,6 +308,8 @@ class DeleteMedia(View):
     grok.name('delete_media')
     grok.require('cmf.ModifyPortalContent')
 
+    # XXX: This is here, because under certain situations, grok will get the
+    # template of 'View' superclass and raise an exception.
     template = None
 
     def __call__(self):
