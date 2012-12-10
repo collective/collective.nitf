@@ -55,6 +55,7 @@ class ContentTypeTestCase(unittest.TestCase):
         # ILocking is not applied by default, but must be available if needed
         try:
             from plone.app.lockingbehavior.behaviors import ILocking
+            assert ILocking  # Pyflakes
         except ImportError:
             self.fail('ILocking behavior not available')
 

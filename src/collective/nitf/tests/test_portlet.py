@@ -19,6 +19,7 @@ import unittest2 as unittest
 PLONE42 = True
 try:
     import plone.app.collection
+    assert plone.app.collection  # Pyflakes
 except ImportError:
     PLONE42 = False
 
