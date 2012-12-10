@@ -308,6 +308,8 @@ class DeleteMedia(View):
     grok.name('delete_media')
     grok.require('cmf.ModifyPortalContent')
 
+    template = None
+
     def __call__(self):
         delete_id = self.request['id'] if 'id' in self.request else None
 
