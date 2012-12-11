@@ -59,8 +59,15 @@ class ContentTypeTestCase(unittest.TestCase):
         except ImportError:
             self.fail('ILocking behavior not available')
 
-    def test_is_non_structural_folder(self):
-        self.assertTrue(INonStructuralFolder.providedBy(self.n1))
+#    def test_is_non_structural_folder(self):
+#        self.assertTrue(INonStructuralFolder.providedBy(self.n1))
+
+    def test_is_not_non_structural_folder(self):
+        """
+        NITF CT doesn't implement INonStructuralFolder any longer
+        to allow folder factories menu
+        """
+        self.assertFalse(INonStructuralFolder.providedBy(self.n1))
 
     def test_action_is_registered(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
