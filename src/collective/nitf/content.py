@@ -109,7 +109,7 @@ class INITF(form.Schema):
 
 
 class NITF(Container):
-    grok.implements(INITF, INonStructuralFolder)
+    grok.implements(INITF)
 
 
 @form.default_value(field=INITF['genre'])
