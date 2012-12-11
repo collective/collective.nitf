@@ -12,7 +12,6 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.interfaces import INonStructuralFolder
 from z3c.relationfield.schema import RelationChoice, RelationList
 from zope import schema
 from zope.component import getUtility
