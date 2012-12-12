@@ -6,6 +6,9 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- NITF CT doesn't implement INonStructuralFolder any longer 
+  to allow folder factories menu [jpgimenez]
+
 - PEP8 fixes [ericof]
 
 - Create named vocabularies for Genres and Urgencies [ericof]
