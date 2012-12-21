@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from collective.nitf import _
+
 from Acquisition import aq_inner
 from collective.nitf.content import INITF
 from collective.nitf.controlpanel import INITFSettings
@@ -324,3 +326,43 @@ class DeleteMedia(View):
 
     def render(self):
         pass
+
+
+class CharactersCount(grok.View):
+    grok.context(Interface)
+    grok.name('characters-count.js')
+    grok.require('zope2.View')
+
+    def render(self):
+
+        response = self.request.response
+        response.setHeader('content-type', 'text/javascript;;charset=utf-8')
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(INITFSettings)
+
+        count_title = settings.show_title_counter
+        count_description = settings.show_description_counter
+
+        counter_text = _(u'Characters left: ')
+
+        config_title = {
+            'allowed': settings.title_max_chars,
+            'optimal': settings.title_optimal_chars,
+            'counterText': counter_text
+        }
+        config_description = {
+            'allowed': settings.description_max_chars,
+            'optimal': settings.description_optimal_chars
+        }
+
+        title = ''
+        description = ''
+
+        if count_title:
+            title = '$("#form-widgets-IDublinCore-title").charCount(%s);' % json.dumps(config_title)
+
+        if count_description:
+            description = '$("#form-widgets-IDublinCore-description").charCount(%s);' % json.dumps(config_description)
+
+        script = '$(document).ready(function() {%s %s});' % (title, description)
+        return script
