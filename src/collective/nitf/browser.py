@@ -352,7 +352,8 @@ class CharactersCount(grok.View):
         }
         config_description = {
             'allowed': settings.description_max_chars,
-            'optimal': settings.description_optimal_chars
+            'optimal': settings.description_optimal_chars,
+            'counterText': counter_text
         }
 
         title = ''
