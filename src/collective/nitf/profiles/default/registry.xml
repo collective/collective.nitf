@@ -1,4 +1,31 @@
 <?xml version="1.0"?>
-<registry>
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="plone">
     <records interface="collective.nitf.controlpanel.INITFSettings" />
+
+     <records  condition="installed plone.app.collection" interface="plone.app.querystring.interfaces.IQueryField"
+          prefix="plone.app.querystring.field.genre">
+      <value key="title" i18n:translate="">Genre</value>
+      <value key="description" i18n:translate="">An NITF genre field</value>
+      <value key="enabled">True</value>
+      <value key="sortable">True</value>
+      <value key="operations">
+          <element>plone.app.querystring.operation.selection.is</element>
+      </value>
+      <value key="vocabulary">collective.nitf.AvailableGenres</value>
+      <value key="group" i18n:translate="">NITF</value>
+  </records>
+
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+          prefix="plone.app.querystring.field.section">
+      <value key="title" i18n:translate="">Section</value>
+      <value key="description" i18n:translate="">An NITF section field</value>
+      <value key="enabled">True</value>
+      <value key="sortable">True</value>
+      <value key="operations">
+          <element>plone.app.querystring.operation.selection.is</element>
+      </value>
+      <value key="vocabulary">collective.nitf.AvailableSections</value>
+      <value key="group" i18n:translate="">NITF</value>
+  </records>
 </registry>
