@@ -12,6 +12,7 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
 from z3c.relationfield.schema import RelationChoice, RelationList
 from zope import schema
 from zope.component import getUtility
@@ -48,6 +49,8 @@ class INITF(form.Schema):
         # nitf/body/body.content
         title=_(u'Body text'),
         required=False,
+        # XXX: add default value to avoid
+        # AttributeError: "'NoneType' object has no attribute 'mimeType'"
     )
 
     genre = schema.Choice(
@@ -58,6 +61,7 @@ class INITF(form.Schema):
                               u'intellectual characteristic of a news '
                               u'object, not specifically its content.'),
         source=u'collective.nitf.AvailableGenres',
+        # XXX: add default value?
     )
 
     section = schema.Choice(
@@ -67,6 +71,7 @@ class INITF(form.Schema):
                       default=u'Named section where the article will '
                               u'appear.'),
         vocabulary=u'collective.nitf.AvailableSections',
+        # XXX: add default value?
     )
 
     urgency = schema.Choice(
@@ -75,6 +80,7 @@ class INITF(form.Schema):
         description=_(u'help_urgency',
                       default=u'News importance.'),
         vocabulary=u'collective.nitf.Urgencies',
+        # XXX: add default value?
     )
 
     # XXX: this field uses a special widget that access the most recent items
@@ -92,6 +98,7 @@ class INITF(form.Schema):
     location = schema.TextLine(
         # nitf/body/body.head/dateline/location
         title=_(u'Location'),
+        default=u'',
         description=_(u'help_location',
                       default=u'Event location. Where an event took '
                               u'place (as opposed to where the story was '
@@ -104,6 +111,7 @@ class INITF(form.Schema):
         label=_(u'Categorization'),
         fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
                 'language'],
+        # XXX: add default value?
     )
 
 
@@ -151,24 +159,19 @@ def textIndexer(obj):
     text as plain text.
     """
     transformer = ITransformer(obj)
+    # XXX: this can be avoided giving 'text' a default value above
+    text = transformer(obj.text, 'text/plain') if obj.text else ""
 
-    result = u'%s %s' % (obj.id, obj.Title())
+    searchable_text = [safe_unicode(entry) for entry in (
+        obj.id,
+        obj.Title(),
+        obj.subtitle,
+        obj.Description(),
+        obj.byline,
+        text,
+        obj.location,
+    )]
 
-    if obj.subtitle:
-        result += u' %s' % obj.subtitle
-
-    if obj.Description():
-        result += u' %s' % obj.Description()
-
-    if obj.byline:
-        result += u' %s' % obj.byline
-
-    if obj.text:
-        result += u' %s' % transformer(obj.text, 'text/plain')
-
-    if obj.location:
-        result += u' %s' % obj.location
-
-    return result
+    return u" ".join(searchable_text)
 
 grok.global_adapter(textIndexer, name='SearchableText')
