@@ -45,6 +45,7 @@ setup(name='collective.nitf',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'Pillow',
         'Products.CMFPlone>=4.2',
         'collective.js.jqueryui',
         'collective.prettydate>=1.1',
