@@ -61,60 +61,6 @@ class INITFSettings(Interface):
         value_type=schema.Choice(vocabulary=PORTALTYPES),
     )
 
-    show_title_counter = schema.Bool(
-        title=_(u"label_show_title_counter",
-                default=u"Show Title characters counter"),
-        description=_(u"help_show_title_counter",
-                      default=u"If selected, the title is going to provide a character counter"),
-        required=False,
-        default=False,
-    )
-
-    title_max_chars = schema.Int(
-        title=_(u"label_title_max_chars",
-                default=u"Max number of characters acepted by the title"),
-        description=_(u"help_title_max_chars",
-                      default=u"This limit is just visual, does not enforce validation"),
-        default=140,
-        required=False,
-    )
-
-    title_optimal_chars = schema.Int(
-        title=_(u"label_title_optimal_chars",
-                default=u"Optimal number of characters for the nitf title"),
-        description=_(u"help_title_max_chars",
-                      default=u"The optimal value is going to be the range between this value and the max"),
-        default=140,
-        required=False,
-    )
-
-    show_description_counter = schema.Bool(
-        title=_(u"label_show_description_counter",
-                default=u"Show Description characters counter"),
-        description=_(u"help_show_description_counter",
-                      default=u"If selected, the description is going to provide a character counter"),
-        required=False,
-        default=False,
-    )
-
-    description_max_chars = schema.Int(
-        title=_(u"label_description_max_chars",
-                default=u"Max number of characters acepted by the description"),
-        description=_(u"help_description_max_chars",
-                      default=u"This limit is just visual, does not enforce validation"),
-        default=140,
-        required=False,
-    )
-
-    description_optimal_chars = schema.Int(
-        title=_(u"label_description_optimal_chars",
-                default=u"Optimal number of characters for the nitf description"),
-        description=_(u"help_description_max_chars",
-                      default=u"The optimal value is going to be the range between this value and the max"),
-        default=140,
-        required=False,
-    )
-
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
     schema = INITFSettings
