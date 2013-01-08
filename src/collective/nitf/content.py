@@ -162,7 +162,8 @@ def textIndexer(obj):
     # XXX: this can be avoided giving 'text' a default value above
     text = transformer(obj.text, 'text/plain') if obj.text else ""
 
-    searchable_text = [safe_unicode(entry) for entry in (
+    searchable_text = [safe_unicode(entry) if entry is not None else u""
+         for entry in (
         obj.id,
         obj.Title(),
         obj.subtitle,

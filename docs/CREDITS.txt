@@ -11,6 +11,7 @@ following people:
 - Silvestre Huens
 - Gonzalo Almeida
 - Franco Pellegrini
+- João S. O. Bueno
 
 Development sponsored by Open Multimedia.
 
