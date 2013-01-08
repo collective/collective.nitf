@@ -45,12 +45,14 @@ setup(name='collective.nitf',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'Pillow',
+        'Products.CMFPlone>=4.2',
         'collective.js.jqueryui',
         'collective.prettydate>=1.1',
-        'plone.app.dexterity>=1.2.1',
+        'collective.z3cform.widgets',
+        'plone.app.dexterity[grok]',
         'plone.app.lockingbehavior',
         'plone.app.referenceablebehavior',
-        'collective.z3cform.widgets',
         ],
       extras_require={
         'test': [
