@@ -49,8 +49,7 @@ class INITF(form.Schema):
         # nitf/body/body.content
         title=_(u'Body text'),
         required=False,
-        # XXX: add default value to avoid
-        # AttributeError: "'NoneType' object has no attribute 'mimeType'"
+        default=u'',
     )
 
     genre = schema.Choice(
@@ -61,7 +60,6 @@ class INITF(form.Schema):
                               u'intellectual characteristic of a news '
                               u'object, not specifically its content.'),
         source=u'collective.nitf.AvailableGenres',
-        # XXX: add default value?
     )
 
     section = schema.Choice(
@@ -71,7 +69,6 @@ class INITF(form.Schema):
                       default=u'Named section where the article will '
                               u'appear.'),
         vocabulary=u'collective.nitf.AvailableSections',
-        # XXX: add default value?
     )
 
     urgency = schema.Choice(
@@ -80,7 +77,6 @@ class INITF(form.Schema):
         description=_(u'help_urgency',
                       default=u'News importance.'),
         vocabulary=u'collective.nitf.Urgencies',
-        # XXX: add default value?
     )
 
     # XXX: this field uses a special widget that access the most recent items
@@ -111,7 +107,6 @@ class INITF(form.Schema):
         label=_(u'Categorization'),
         fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
                 'language'],
-        # XXX: add default value?
     )
 
 
