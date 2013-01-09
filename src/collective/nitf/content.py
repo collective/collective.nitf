@@ -167,7 +167,8 @@ def textIndexer(obj):
     transformer = ITransformer(obj)
     text = transformer(obj.text, 'text/plain')
 
-    searchable_text = [safe_unicode(entry) for entry in (
+    searchable_text = [safe_unicode(entry) if entry is not None else u""
+         for entry in (
         obj.id,
         obj.Title(),
         obj.subtitle,
