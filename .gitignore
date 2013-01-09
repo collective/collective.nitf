@@ -13,3 +13,9 @@ parts/
 var/
 include/
 lib/
+.project
+.pydevproject
+.settings
+local.cfg
+src/collective.*
+src/plone.formwidget.autocomplete
