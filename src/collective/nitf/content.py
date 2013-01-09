@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
-from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
+from collective.z3cform.widgets.multicontent_search_widget import (
+    MultiContentSearchFieldWidget,
+)
 from five import grok
 from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
+from plone.app.textfield.value import RichTextValue
 from plone.dexterity.content import Container
 from plone.directives import form
 from plone.formwidget.contenttree import ObjPathSourceBinder
@@ -13,7 +16,10 @@ from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from z3c.relationfield.schema import RelationChoice, RelationList
+from z3c.relationfield.schema import (
+    RelationChoice,
+    RelationList,
+)
 from zope import schema
 from zope.component import getUtility
 
@@ -31,8 +37,9 @@ class INITF(form.Schema):
         title=_(u'Subtitle'),
         description=_(u'help_subtitle',
                       default=u'A subordinate headline for the article.'),
-        required=False,
         default=u'',
+        missing_value=u'',
+        required=False,
     )
 
     #description = schema.Text()
@@ -41,15 +48,17 @@ class INITF(form.Schema):
     byline = schema.TextLine(
         # nitf/body/body.head/byline/person
         title=_(u'Author'),
-        required=False,
         default=u'',
+        missing_value=u'',
+        required=False,
     )
 
     text = RichText(
         # nitf/body/body.content
         title=_(u'Body text'),
+        default=RichTextValue(u''),
+        missing_value=RichTextValue(u''),
         required=False,
-        default=u'',
     )
 
     genre = schema.Choice(
@@ -85,6 +94,7 @@ class INITF(form.Schema):
     relatedItems = RelationList(
         title=_(u'label_related_items', default=u'Related Items'),
         default=[],
+        missing_value=[],
         value_type=RelationChoice(title=u"Related",
                                   source=ObjPathSourceBinder()),
         required=False,
@@ -94,11 +104,12 @@ class INITF(form.Schema):
     location = schema.TextLine(
         # nitf/body/body.head/dateline/location
         title=_(u'Location'),
-        default=u'',
         description=_(u'help_location',
                       default=u'Event location. Where an event took '
                               u'place (as opposed to where the story was '
                               u'written).'),
+        default=u'',
+        missing_value=u'',
         required=False,
     )
 
@@ -154,8 +165,7 @@ def textIndexer(obj):
     text as plain text.
     """
     transformer = ITransformer(obj)
-    # XXX: this can be avoided giving 'text' a default value above
-    text = transformer(obj.text, 'text/plain') if obj.text else ""
+    text = transformer(obj.text, 'text/plain')
 
     searchable_text = [safe_unicode(entry) for entry in (
         obj.id,
