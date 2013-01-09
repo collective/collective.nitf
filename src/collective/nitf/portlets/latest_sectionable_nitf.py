@@ -186,7 +186,7 @@ class Renderer(base.Renderer):
 
     def getAvailableSections(self):
         vocab = getUtility(IVocabularyFactory,
-                           name=u'collective.nitf.Sections')(self.context)
+                           name=u'collective.nitf.AvailableSections')(self.context)
 
         values = SimpleVocabulary([SimpleVocabulary.createTerm(_(u"All"),
                                                                "all",
