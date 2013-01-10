@@ -6,6 +6,9 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- NITF content type does not implement INonStructuralFolder any longer to
+  allow folder factories menu. [jpgimenez]
+
 - Add Pillow as a dependency of the package. [hvelarde]
 
 - PEP8 fixes. [ericof]
