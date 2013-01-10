@@ -5,75 +5,84 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.nitf">
+
+<head>
+    <metal:block fill-slot="style_slot">
+        <style>
+            .newsview { display: none; }
+            #mediabox { height: 500px; width: 500px; }</style>
+    </metal:block>
+</head>
+
 <body>
-  
-<div tal:replace="structure provider:plone.abovecontenttitle" />
-<metal:title fill-slot="content-title">
-    <tal:content-title metal:define-macro="content-title">
-        <h1 class="documentFirstHeading" tal:content="context/title" />
 
-        <h2 class="nitfSubtitle" tal:content="context/subtitle" />
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-    </tal:content-title>
-</metal:title>
+    <metal:title fill-slot="content-title">
+        <tal:content-title metal:define-macro="content-title">
+            <h1 class="documentFirstHeading" tal:content="context/title" />
+            <h2 class="nitfSubtitle" tal:content="context/subtitle" />
+        </tal:content-title>
+    </metal:title>
 
-<metal:description fill-slot="content-description">
-    <tal:content-description metal:define-macro="content-description">
-
-        <div class="documentDescription" tal:content="context/description" />
-
-        <p class="nitfByline" tal:condition="context/byline|nothing">
-            <span i18n:translate="">By</span>
-            <span tal:content="context/byline" />
-        </p>
-
-    </tal:content-description>
-</metal:description>
-
-<metal:main fill-slot="content-core">
-    <tal:content-core metal:define-macro="content-core">
-        <div class="newsImageContainer" tal:define="image view/getImage" tal:condition="image">
-            <a href="#mediabox" id="parent-fieldname-image">
-               <img tal:replace="structure python: image.tag(scale='mini', css_class='newsImage nitf')" src="" alt="" />
-            </a>
-            <p class="discreet" tal:condition="view/imageCaption|nothing"
-               tal:content="view/imageCaption">
-              Image Caption
+    <metal:description fill-slot="content-description">
+        <tal:content-description metal:define-macro="content-description">
+            <div class="documentDescription" tal:content="context/description" />
+            <p class="nitfByline" tal:condition="context/byline|nothing">
+                <span i18n:translate="">By</span>
+                <span tal:content="context/byline" />
             </p>
-        </div>
+        </tal:content-description>
+    </metal:description>
 
-        <div tal:content="structure context/text/output|nothing" />
-
-        <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
-            <legend i18n:translate="">Related items</legend>
-            <tal:relateditems tal:content="structure view/w/relatedItems/render" />
-        </fieldset>
-
-        <fieldset id="folder-listing">
-            <legend i18n:translate="">Contents</legend>
-            <tal:block define="listing_macro context/folder_listing/macros/listing;
-                               contentFilter python:{'portal_type': ['File', 'Link']}">
-                <metal:use_macro use-macro="listing_macro">
-                    <metal:nocontent fill-slot="no_items_in_listing">
-                        <p class="discreet"
-                            tal:condition="not: folderContents"
-                            i18n:domain="plone" i18n:translate="description_no_items_in_folder">
-                            There are currently no items in this folder.
-                        </p>
-                    </metal:nocontent>
-                </metal:use_macro>
-            </tal:block>
-        </fieldset>
-
-        <div class="newsview">
-            <div id="mediabox" metal:use-macro="context/@@display_macros/macros/media-box">
-                <metal:navi fill-slot="navi">
-                    <metal:buttons use-macro="context/@@display_macros/macros/navi" />
-                </metal:navi>
+    <metal:main fill-slot="content-core">
+        <tal:content-core metal:define-macro="content-core">
+            <div class="newsImageContainer"
+                tal:define="image view/getImage"
+                tal:condition="image">
+                <a href="#mediabox" id="parent-fieldname-image">
+                   <img src="" alt=""
+                       tal:replace="structure python: image.tag(scale='mini', css_class='newsImage nitf')" /></a>
+                <p class="discreet"
+                    tal:condition="view/imageCaption|nothing"
+                    tal:content="view/imageCaption">
+                    Image Caption
+                </p>
             </div>
-        </div>
 
-    </tal:content-core>
-</metal:main>
+            <div tal:content="structure context/text/output|nothing" />
+
+            <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
+                <legend i18n:translate="">Related items</legend>
+                <tal:relateditems tal:content="structure view/w/relatedItems/render" />
+            </fieldset>
+
+            <fieldset id="folder-listing">
+                <legend i18n:translate="">Contents</legend>
+                <tal:block define="listing_macro context/folder_listing/macros/listing;
+                                   contentFilter python:{'portal_type': ['File', 'Link']}">
+                    <metal:use_macro use-macro="listing_macro">
+                        <metal:nocontent fill-slot="no_items_in_listing">
+                            <p class="discreet"
+                                tal:condition="not: folderContents"
+                                i18n:domain="plone"
+                                i18n:translate="description_no_items_in_folder">
+                                There are currently no items in this folder.
+                            </p>
+                        </metal:nocontent>
+                    </metal:use_macro>
+                </tal:block>
+            </fieldset>
+
+            <div class="newsview">
+                <div id="mediabox"
+                    metal:use-macro="context/@@display_macros/macros/media-box" />
+            </div>
+
+        </tal:content-core>
+
+    </metal:main>
+
 </body>
+
 </html>
