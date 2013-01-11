@@ -53,6 +53,7 @@ setup(name='collective.nitf',
         'plone.app.dexterity[grok]',
         'plone.app.lockingbehavior',
         'plone.app.referenceablebehavior',
+        'collective.syndication',
         ],
       extras_require={
         'test': [
