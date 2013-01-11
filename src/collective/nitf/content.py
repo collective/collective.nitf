@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+from zope.component import adapts
+from zope.interface import implements
+
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
 from collective.z3cform.widgets.multicontent_search_widget import (
@@ -22,6 +26,16 @@ from z3c.relationfield.schema import (
 )
 from zope import schema
 from zope.component import getUtility
+
+try:
+    from collective.syndication.adapters import BaseNewsMLItem
+    
+    from collective.syndication.interfaces import INewsMLSyndicatable
+    from collective.syndication.interfaces import INewsMLFeed
+    from zope.cachedescriptors.property import Lazy as lazy_property
+    HAS_NEWSML = True
+except:
+    HAS_NEWSML = False
 
 
 class INITF(form.Schema):
@@ -253,3 +267,21 @@ def textIndexer(obj):
     return u" ".join(searchable_text)
 
 grok.global_adapter(textIndexer, name='SearchableText')
+
+
+if HAS_NEWSML:
+    class NITFNewsMLItem(BaseNewsMLItem):
+        implements(INewsMLSyndicatable)
+        adapts(INITF, INewsMLFeed)
+
+        @property
+        def image_url(self):
+            if self.has_image:
+                img = self.context.getImage()
+                # Support up to 768px max size
+                url = "%s/image_large" % img.absolute_url()
+                return url
+
+        @lazy_property
+        def author(self):
+            return self.context.byline
