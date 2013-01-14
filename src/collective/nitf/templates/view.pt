@@ -9,8 +9,15 @@
 <head>
     <metal:block fill-slot="style_slot">
         <style>
-            .newsview { display: none; }
-            #mediabox { height: 500px; width: 500px; }</style>
+            #mediabox {
+			    /* must be initially hidden */
+			    display:none;
+			 
+			    /* place overlay on top of other elements */
+			    z-index:10000;
+			    height: 500px; width: 500px;
+			}
+		</style>
     </metal:block>
 </head>
 
@@ -40,7 +47,7 @@
             <div class="newsImageContainer"
                 tal:define="image view/getImage"
                 tal:condition="image">
-                <a href="#mediabox" id="parent-fieldname-image">
+                <a rel="#mediabox" id="parent-fieldname-image">
                    <img src="" alt=""
                        tal:replace="structure python: image.tag(scale='mini', css_class='newsImage nitf')" /></a>
                 <p class="discreet"
