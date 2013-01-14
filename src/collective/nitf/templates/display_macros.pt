@@ -31,14 +31,10 @@
                 Galleria.loadTheme("++resource++collective.galleria.classic.js");
                 Galleria.configure({lightbox: true, wait: true});
                 Galleria.run("#mediabox");
-                $(".newsview").hide();
                 (function($) {
                     "use strict";
                     $(document).ready(function() {
-                        $("#parent-fieldname-image").click(function(e) {
-                            $("#mediabox").overlay();
-                            e.preventDefault();
-                        });
+                        $("#parent-fieldname-image").overlay();
                     });
                 })(jQuery);
             </script>
