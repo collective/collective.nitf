@@ -17,5 +17,8 @@ def test_suite():
                                      optionflags=optionflags,
                                      package='collective.nitf'),
                 layer=FUNCTIONAL_TESTING),
+        layered(doctest.DocFileSuite('tests/collection.txt',
+                                     package='collective.nitf'),
+                layer=FUNCTIONAL_TESTING)
     ])
     return suite
