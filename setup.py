@@ -53,14 +53,17 @@ setup(name='collective.nitf',
         'plone.app.dexterity[grok]',
         'plone.app.lockingbehavior',
         'plone.app.referenceablebehavior',
-        'collective.syndication',
         ],
       extras_require={
         'test': [
           'plone.app.testing',
           'robotsuite',
           'robotframework-selenium2library',
+          'collective.syndication>1.0a1',
           ],
+        'newsml':[
+          'collective.syndication>1.0a1',
+        ]
         },
       entry_points="""
       [z3c.autoinclude.plugin]
