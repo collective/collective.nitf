@@ -14,9 +14,12 @@ class Fixture(PloneSandboxLayer):
         # Load ZCML
         import collective.nitf
         self.loadZCML(package=collective.nitf)
+        import collective.syndication
+        self.loadZCML(package=collective.syndication)
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
+        self.applyProfile(portal, 'collective.syndication:default')
         self.applyProfile(portal, 'collective.nitf:default')
 
 
