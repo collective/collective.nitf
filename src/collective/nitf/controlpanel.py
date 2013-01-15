@@ -2,17 +2,21 @@
 from collective.nitf import _
 from collective.nitf import config
 from plone.app.registry.browser import controlpanel
-from z3c.form.browser.textlines import TextLinesFieldWidget
+from z3c.form import field
+from z3c.form import group
 from zope import schema
-from zope.interface import Interface
+from zope.component import getUtility
+from zope.interface import alsoProvides
+from plone.registry.interfaces import IRegistry
+from plone.directives import form
 
 PORTALTYPES = 'plone.app.vocabularies.ReallyUserFriendlyTypes'
 
 
-class INITFSettings(Interface):
+class INITFSettings(form.Schema):
     """ Interface for the control panel form.
     """
-
+    form.widget(available_sections="z3c.form.browser.textlines.TextLinesFieldWidget")
     available_sections = schema.Set(
         title=_(u'Available Sections'),
         description=_(u"List of available sections in the site."),
@@ -62,20 +66,141 @@ class INITFSettings(Interface):
     )
 
 
+class INITFCharCountSettings(form.Schema):
+
+    show_title_counter = schema.Bool(
+        title=_(u"label_show_title_counter",
+                default=u"Show Title characters counter"),
+        description=_(u"help_show_title_counter",
+                      default=u"If selected, the title is going to provide a character counter"),
+        required=False,
+        default=False,
+    )
+
+    title_max_chars = schema.Int(
+        title=_(u"label_title_max_chars",
+                default=u"Max number of characters acepted by the title"),
+        description=_(u"help_title_max_chars",
+                      default=u"This limit is just visual, does not enforce validation"),
+        default=140,
+        required=False,
+    )
+
+    title_optimal_chars = schema.Int(
+        title=_(u"label_title_optimal_chars",
+                default=u"Optimal number of characters for the nitf title"),
+        description=_(u"help_title_max_chars",
+                      default=u"The optimal value is going to be the range between this value and the max"),
+        default=140,
+        required=False,
+    )
+
+    show_description_counter = schema.Bool(
+        title=_(u"label_show_description_counter",
+                default=u"Show Description characters counter"),
+        description=_(u"help_show_description_counter",
+                      default=u"If selected, the description is going to provide a character counter"),
+        required=False,
+        default=False,
+    )
+
+    description_max_chars = schema.Int(
+        title=_(u"label_description_max_chars",
+                default=u"Max number of characters acepted by the description"),
+        description=_(u"help_description_max_chars",
+                      default=u"This limit is just visual, does not enforce validation"),
+        default=140,
+        required=False,
+    )
+
+    description_optimal_chars = schema.Int(
+        title=_(u"label_description_optimal_chars",
+                default=u"Optimal number of characters for the nitf description"),
+        description=_(u"help_description_max_chars",
+                      default=u"The optimal value is going to be the range between this value and the max"),
+        default=140,
+        required=False,
+    )
+
+
+class NITFGroup(group.Group):
+    label = _(u"NITF Default")
+    description = _("""Default Configuration""")
+    fields = field.Fields(INITFSettings)
+
+
+class NITFChartCountGroup(group.Group):
+    label = _(u"NITF Char Count")
+    description = _("""Char Count""")
+    fields = field.Fields(INITFCharCountSettings)
+
+
+class INITFSchema(INITFSettings, INITFCharCountSettings):
+    """
+    """
+
+
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
-    schema = INITFSettings
+    schema = INITFSchema
     label = _(u"NITF Settings")
     description = _(u"Here you can modify the settings for collective.nitf.")
 
-    def updateFields(self):
-        super(NITFSettingsEditForm, self).updateFields()
-        self.fields['available_sections'].widgetFactory = TextLinesFieldWidget
+    fields = INITFSettings
+    groups = (NITFChartCountGroup,)
 
-    def updateWidgets(self):
-        super(NITFSettingsEditForm, self).updateWidgets()
-        self.widgets['available_sections'].rows = 8
-        self.widgets['available_sections'].style = u'width: 30%;'
+    def getContent(self):
+        return AbstractRecordsProxy(self.schema)
+    # def updateFields(self):
+    #     super(NITFSettingsEditForm, self).updateFields()
+    #     self.fields['available_sections'].widgetFactory = TextLinesFieldWidget
+
+    # def updateWidgets(self):
+    #     super(NITFSettingsEditForm, self).updateWidgets()
+    #     self.widgets['available_sections'].rows = 8
+    #     self.widgets['available_sections'].style = u'width: 30%;'
 
 
 class NITFSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     form = NITFSettingsEditForm
+
+
+class AbstractRecordsProxy(object):
+    """Multiple registry schema proxy.
+
+    This class supports schemas that contain derived fields. The
+    settings will be stored with respect to the individual field
+    interfaces.
+    """
+
+    def __init__(self, schema):
+        state = self.__dict__
+        state["__registry__"] = getUtility(IRegistry)
+        state["__proxies__"] = {}
+        state["__schema__"] = schema
+        alsoProvides(self, schema)
+
+    def __getattr__(self, name):
+        try:
+            field = self.__schema__[name]
+        except KeyError:
+            raise AttributeError(name)
+        else:
+            proxy = self._get_proxy(field.interface)
+            return getattr(proxy, name)
+
+    def __setattr__(self, name, value):
+        try:
+            field = self.__schema__[name]
+        except KeyError:
+            self.__dict__[name] = value
+        else:
+            proxy = self._get_proxy(field.interface)
+            return setattr(proxy, name, value)
+
+    def __repr__(self):
+        return "<AbstractRecordsProxy for %s>" % self.__schema__.__identifier__
+
+    def _get_proxy(self, interface):
+        proxies = self.__proxies__
+        return proxies.get(interface) or proxies.setdefault(interface,
+                                                            self.__registry__.forInterface(interface))
