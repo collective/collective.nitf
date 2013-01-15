@@ -3,11 +3,14 @@
 from AccessControl import Unauthorized
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.controlpanel import INITFCharCountSettings
 from plone.app.customerize import registration
 from plone.app.testing import TEST_USER_ID, logout, setRoles
+from plone.registry.interfaces import IRegistry
 from StringIO import StringIO
 from zope.app.file.tests.test_image import zptlogo
-from zope.component import getMultiAdapter, queryMultiAdapter
+from zope.component import getMultiAdapter, queryMultiAdapter, getUtility
+
 from zope.interface import directlyProvides
 
 import unittest2 as unittest
@@ -283,3 +286,34 @@ class MediaViewTestCase(unittest.TestCase):
     def test_media_view_is_protected(self):
         logout()
         self.assertRaises(Unauthorized, self.n1.restrictedTraverse, '@@media')
+
+
+class CharacterCountJSTestCase(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_config_empty(self):
+        view = getMultiAdapter((self.folder, self.request), name='characters-count.js')
+        render = view.render()
+        self.assertEqual(render, '$(document).ready(function() { });')
+
+    def test_config_nitf(self):
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(INITFCharCountSettings)
+        settings.show_title_counter = True
+        settings.show_description_counter = True
+        view = getMultiAdapter((self.n1.restrictedTraverse('edit'), self.request), name='characters-count.js')
+        render = view.render()
+        self.assertEqual(render, '$(document).ready(function() {$("#form-widgets-IDublinCore-title").charCount({"optimal": 140, "counterText": "Characters left: ", "allowed": 140}); $("#form-widgets-IDublinCore-description").charCount({"optimal": 140, "counterText": "Characters left: ", "allowed": 140});});')
