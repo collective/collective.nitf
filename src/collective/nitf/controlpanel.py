@@ -82,7 +82,7 @@ class INITFCharCountSettings(form.Schema):
                 default=u"Max number of characters acepted by the title"),
         description=_(u"help_title_max_chars",
                       default=u"This limit is just visual, does not enforce validation"),
-        default=140,
+        default=100,
         required=False,
     )
 
@@ -91,7 +91,7 @@ class INITFCharCountSettings(form.Schema):
                 default=u"Optimal number of characters for the nitf title"),
         description=_(u"help_title_max_chars",
                       default=u"The optimal value is going to be the range between this value and the max"),
-        default=140,
+        default=100,
         required=False,
     )
 
@@ -109,7 +109,7 @@ class INITFCharCountSettings(form.Schema):
                 default=u"Max number of characters acepted by the description"),
         description=_(u"help_description_max_chars",
                       default=u"This limit is just visual, does not enforce validation"),
-        default=140,
+        default=200,
         required=False,
     )
 
@@ -118,7 +118,7 @@ class INITFCharCountSettings(form.Schema):
                 default=u"Optimal number of characters for the nitf description"),
         description=_(u"help_description_max_chars",
                       default=u"The optimal value is going to be the range between this value and the max"),
-        default=140,
+        default=200,
         required=False,
     )
 
