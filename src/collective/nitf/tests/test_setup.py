@@ -55,8 +55,11 @@ class InstallTestCase(unittest.TestCase):
         qi = self.portal.portal_quickinstaller
         setup = self.portal.portal_setup
         portal_javascripts.manage_removeScript('++resource++collective.galleria.js')
+        resources = portal_javascripts.getResourceIds()
+        self.assertFalse('++resource++collective.galleria.js' in resources)
         setup.setLastVersionForProfile(u'collective.nitf:default', '1001')
         qi.upgradeProduct('collective.nitf')
+        resources = portal_javascripts.getResourceIds()
         self.assertTrue('++resource++collective.galleria.js' in resources)
 
     def test_css_registry(self):
