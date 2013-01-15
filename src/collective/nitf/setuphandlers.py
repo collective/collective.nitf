@@ -83,3 +83,15 @@ def import_various(context):
     logger = context.getLogger(PROJECTNAME)
     site = context.getSite()
     add_catalog_indexes(site, logger)
+
+
+def add_galleria_js(context, logger=None):
+    """
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    profile = 'profile-collective.js.galleria:default'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(profile)
