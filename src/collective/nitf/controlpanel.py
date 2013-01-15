@@ -150,14 +150,6 @@ class NITFSettingsEditForm(controlpanel.RegistryEditForm):
 
     def getContent(self):
         return AbstractRecordsProxy(self.schema)
-    # def updateFields(self):
-    #     super(NITFSettingsEditForm, self).updateFields()
-    #     self.fields['available_sections'].widgetFactory = TextLinesFieldWidget
-
-    # def updateWidgets(self):
-    #     super(NITFSettingsEditForm, self).updateWidgets()
-    #     self.widgets['available_sections'].rows = 8
-    #     self.widgets['available_sections'].style = u'width: 30%;'
 
 
 class NITFSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
