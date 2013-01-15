@@ -32,4 +32,12 @@
       handler="collective.nitf.setuphandlers.add_catalog_indexes"
       profile="collective.nitf:default" />
 
+  <genericsetup:upgradeStep
+      title="Add galleria js"
+      description=""
+      source="*"
+      destination="1002"
+      handler="collective.nitf.setuphandlers.add_galleria_js"
+      profile="collective.nitf:default" />
+
 </configure>
