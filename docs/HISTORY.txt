@@ -33,6 +33,8 @@ Because you have to know where your towel is.
 
 - Adds support to new-style Collections. [davilima6]
 
+- Added charcount functionality for title and description [quimera]
+
 
 1.0a3 (2012-07-06)
 ^^^^^^^^^^^^^^^^^^
