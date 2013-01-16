@@ -11,7 +11,6 @@
         <style>
             #mediabox {
 			    /* must be initially hidden */
-			    display:none;
 			 
 			    /* place overlay on top of other elements */
 			    z-index:10000;
@@ -47,7 +46,7 @@
             <div class="newsImageContainer"
                 tal:define="image view/getImage"
                 tal:condition="image">
-                <a rel="#mediabox" id="parent-fieldname-image">
+                <a src="@@nitf_galleria" id="parent-fieldname-image">
                    <img src="" alt=""
                        tal:replace="structure python: image.tag(scale='mini', css_class='newsImage nitf')" /></a>
                 <p class="discreet"
@@ -82,8 +81,27 @@
             </fieldset>
 
             <div class="newsview">
-                <div id="mediabox"
-                    metal:use-macro="context/@@display_macros/macros/media-box" />
+	            <link rel="stylesheet" type="text/css"
+	                tal:attributes="href string:${context/@@plone_portal_state/portal_url}/++resource++collective.galleria.classic.css" />
+	            <script type="text/javascript">
+	                (function($) {
+	                    "use strict";
+	                    $(document).ready(function() {
+	                        $("#parent-fieldname-image").prepOverlay({
+							    subtype: 'ajax',
+							    filter: '#content-core > *',
+							    width: '524px',
+							    config: {
+							        onLoad : function (e) {
+						                Galleria.loadTheme("++resource++collective.galleria.classic.js");
+						                Galleria.configure({lightbox: true, wait: true});
+						                Galleria.run(".pb-ajax #mediabox");
+						                }
+						        }
+	        				});
+	                    });
+	                })(jQuery);
+	            </script>
             </div>
 
         </tal:content-core>
