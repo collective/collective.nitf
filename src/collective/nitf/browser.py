@@ -324,3 +324,10 @@ class DeleteMedia(View):
 
     def render(self):
         pass
+
+
+class Nitf_Galleria(View):
+    grok.context(INITF)
+    grok.layer(INITFLayer)
+    grok.require('zope2.View')
+    grok.name('nitf_galleria')
