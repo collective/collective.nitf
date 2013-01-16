@@ -25,19 +25,6 @@
                 </tal:items>
                 <div class="visualClear"><!-- --></div>
             </div>
-            <link rel="stylesheet" type="text/css"
-                tal:attributes="href string:${context/@@plone_portal_state/portal_url}/++resource++collective.galleria.classic.css" />
-            <script type="text/javascript">
-                Galleria.loadTheme("++resource++collective.galleria.classic.js");
-                Galleria.configure({lightbox: true, wait: true});
-                Galleria.run("#mediabox");
-                (function($) {
-                    "use strict";
-                    $(document).ready(function() {
-                        $("#parent-fieldname-image").overlay();
-                    });
-                })(jQuery);
-            </script>
             </metal:mediamacro>
         </div>
 
