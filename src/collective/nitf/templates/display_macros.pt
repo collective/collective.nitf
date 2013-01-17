@@ -8,36 +8,22 @@
 <body>
 
 <metal:main fill-slot="content-core">
+
     <tal:content-core metal:define-macro="content-core">
+
         <div class="mediaview">
             <metal:mediamacro define-macro="media-box">
-            <div id="mediabox" tal:define="images view/get_images" tal:condition="images">
-                <div id="images">
-                    <div class="items">
-                        <tal:lines repeat="item images">
-                        <div tal:define="item_obj item/getObject">
-                            <div>
-                                <img tal:replace="structure python: item_obj.getImage().tag(scale='preview', css_class='media-image')" src="" alt="" />
-                                <div class="info" tal:condition="item_obj/Description|nothing">
-                                    <p tal:content="item_obj/Description">Image Caption</p>
-                                </div>
-                            </div>
-                        </div>
-                        </tal:lines>
-                    </div>
-                </div>
-
-                <!-- prev/next buttons -->
-                <div class="navibuttons" metal:define-slot="navi">
-                    <metal:navi define-macro="navi">
-                        <div class="navi prev"></div>
-                        <div class="navi next"></div>
-                    </metal:navi>
-                </div>
-                <div class="close" href="#"> &nbsp; &nbsp; &nbsp; </div>
-
+            <div id="mediabox"
+                tal:define="images view/get_images"
+                tal:condition="images">
+                <tal:items repeat="item images">
+                    <a tal:define="item_obj item/getObject;
+                                   item_data python:{'data-title': item.Title, 'data-description': item.Description}"
+                        tal:attributes="href python:item_obj.getImage().absolute_url() + '/image_large'">
+                        <img tal:replace="structure python:item_obj.getImage().tag(scale='thumb', css_class='media-image', **item_data)" />
+                    </a>
+                </tal:items>
                 <div class="visualClear"><!-- --></div>
-
             </div>
             </metal:mediamacro>
         </div>
@@ -60,6 +46,7 @@
         </fieldset>
 
     </tal:content-core>
+
 </metal:main>
 
 </body>
