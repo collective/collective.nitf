@@ -10,12 +10,6 @@
 
     <metal:main fill-slot="content-core">
         <tal:content-core metal:define-macro="content-core">
-            <script type="text/javascript">
-                Galleria.loadTheme("++resource++collective.galleria.classic.js");
-                Galleria.configure({lightbox: true, wait: true});
-                Galleria.run("#mediabox");
-            </script>
-
             <div class="newsview">
                 <div id="mediabox"
                     metal:use-macro="context/@@display_macros/macros/media-box" />
