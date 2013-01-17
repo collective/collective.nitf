@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.testing import setRoles
