@@ -59,11 +59,7 @@ setup(name='collective.nitf',
           'plone.app.testing',
           'robotsuite',
           'robotframework-selenium2library',
-          'collective.syndication>1.0a1',
           ],
-        'newsml':[
-          'collective.syndication>1.0a1',
-        ]
         },
       entry_points="""
       [z3c.autoinclude.plugin]
