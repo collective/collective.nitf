@@ -367,3 +367,10 @@ class CharactersCount(grok.View):
 
         script = '$(document).ready(function() {%s %s});' % (title, description)
         return script
+
+
+class Nitf_Galleria(View):
+    grok.context(INITF)
+    grok.layer(INITFLayer)
+    grok.require('zope2.View')
+    grok.name('nitf_galleria')
