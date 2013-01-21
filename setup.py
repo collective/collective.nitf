@@ -45,6 +45,7 @@ setup(name='collective.nitf',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'beautifulsoup4',
         'Pillow',
         'Products.CMFPlone>=4.2',
         'collective.js.jqueryui',
