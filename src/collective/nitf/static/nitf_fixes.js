@@ -66,6 +66,8 @@ function collapseSections() {
    } 
 }
 
+/*
 $(document).ready(function() {
   collapseSections();
 });
+*/

@@ -95,3 +95,16 @@ def add_galleria_js(context, logger=None):
     profile = 'profile-collective.js.galleria:default'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)
+
+
+def remove_collapsible_js(context, logger=None):
+    """
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    portal_js = getToolByName(context, 'portal_javascripts')
+    portal_css = getToolByName(context, 'portal_css')
+    portal_js.manage_removeScript("++resource++collective.nitf/jquery.collapsible-v.2.1.3.js")
+    portal_css.manage_removeStylesheet("++resource++collective.nitf/collapsible.css")
