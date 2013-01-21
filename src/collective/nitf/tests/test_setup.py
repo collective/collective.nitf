@@ -45,7 +45,8 @@ class InstallTestCase(unittest.TestCase):
     def test_javascript_registry(self):
         portal_javascripts = self.portal.portal_javascripts
         resources = portal_javascripts.getResourceIds()
-        self.assertTrue('++resource++collective.nitf/jquery.collapsible-v.2.1.3.js' in resources)
+        # moved to sc.collapsible.edit
+        self.assertFalse('++resource++collective.nitf/jquery.collapsible-v.2.1.3.js' in resources)
         self.assertTrue('++resource++collective.nitf/nitf_fixes.js' in resources)
 
     def test_upgrade_javascript_registry(self):
@@ -65,7 +66,8 @@ class InstallTestCase(unittest.TestCase):
     def test_css_registry(self):
         portal_css = self.portal.portal_css
         resources = portal_css.getResourceIds()
-        self.assertTrue('++resource++collective.nitf/collapsible.css' in resources)
+        # moved to sc.collapsible.edit
+        self.assertFalse('++resource++collective.nitf/collapsible.css' in resources)
 
 
 class UninstallTest(unittest.TestCase):
