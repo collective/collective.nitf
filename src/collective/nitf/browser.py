@@ -27,7 +27,6 @@ class AddForm(dexterity.AddForm):
     grok.layer(INITFLayer)
     grok.context(INITF)
     schema = INITF
-    enable_form_tabbing = False
 
     def update(self):
         super(AddForm, self).update()
@@ -56,7 +55,6 @@ class EditForm(dexterity.EditForm):
     grok.context(INITF)
     grok.layer(INITFLayer)
     schema = INITF
-    enable_form_tabbing = False
 
     def update(self):
         super(EditForm, self).update()

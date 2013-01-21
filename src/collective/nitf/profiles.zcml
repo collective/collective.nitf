@@ -40,4 +40,12 @@
       handler="collective.nitf.setuphandlers.add_galleria_js"
       profile="collective.nitf:default" />
 
+  <genericsetup:upgradeStep
+      title="Remove collapsible js"
+      description=""
+      source="*"
+      destination="1003"
+      handler="collective.nitf.setuphandlers.remove_collapsible_js"
+      profile="collective.nitf:default" />
+
 </configure>
