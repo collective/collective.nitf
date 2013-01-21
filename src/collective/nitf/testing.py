@@ -29,7 +29,7 @@ class Fixture(PloneSandboxLayer):
             # No collective.syndication
             pass
         self.applyProfile(portal, 'collective.nitf:default')
-        
+
         wf = getattr(portal, 'portal_workflow')
         types = ('collective.nitf.content', )
         wf.setChainForPortalTypes(types, 'simple_publication_workflow')

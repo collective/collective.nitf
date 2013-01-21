@@ -42,15 +42,15 @@ from zope.cachedescriptors.property import Lazy as lazy_property
 try:
     # We have collective.syndication
     from collective.syndication.adapters import BaseNewsMLItem
-    
+
     from collective.syndication.interfaces import INewsMLSyndicatable
     from collective.syndication.interfaces import INewsMLFeed
     HAS_C_SYNDICATION = True
 except:
     # We don't have collective.syndication
-    from collective.nitf.interfaces import INewsMLFeed
-    from collective.nitf.interfaces import INewsMLSyndicatable
-    from collective.nitf.utils import cleanup_body_html
+    from collective.nitf.interfaces import INewsMLFeed  # NOQA
+    from collective.nitf.interfaces import INewsMLSyndicatable  # NOQA
+    from collective.nitf.utils import cleanup_body_html  # NOQA
     HAS_C_SYNDICATION = False
 
 
@@ -204,7 +204,7 @@ class NITF(Container):
         """ Return the number of media inside the NITF object.
         """
         return len(self.get_media())
-    
+
     def getText(self):
         return self.text.output
 
@@ -309,7 +309,7 @@ else:
         def __init__(self, context, feed):
             self.context = context
             self.feed = feed
-            
+
         @property
         def title(self):
             return self.context.Title()
@@ -317,14 +317,14 @@ else:
         @property
         def description(self):
             return self.context.Description()
-        
+
         @property
         def uid(self):
             uuid = IUUID(self.context, None)
             if uuid is None and hasattr(self.context, 'UID'):
                 return self.context.UID()
             return uuid
-        
+
         @property
         def published(self):
             date = self.context.EffectiveDate()
@@ -336,7 +336,7 @@ else:
             date = self.context.ModificationDate()
             if date:
                 return DateTime(date)
-            
+
         @property
         def image_url(self):
             if self.has_image:
@@ -348,13 +348,13 @@ else:
         @lazy_property
         def author(self):
             return self.context.byline
-            
+
         # TODO: This method will use lxml instead of BeautifulSoup to clean
         #       the HTML, leaving it here for the future.
         #@property
         #def body(self):
             #body = self.context.getText()
-            
+
             #if body:
                 #html = fromstring(body)
                 #cleanup_body_html(html)
@@ -364,9 +364,9 @@ else:
                     #result = ''.join([tostring(i).strip() for i in html])
                 #else:
                     #result = tostring(html)
-                    
+
                 #return result
-        
+
         @property
         def body(self):
             body = self.context.getText()
@@ -437,7 +437,7 @@ else:
         def duid(self, value):
             uid = uuid3(NAMESPACE_OID, self.uid + str(value))
             return uid.hex
-            
+
         @property
         def created(self):
             return self.context.created()

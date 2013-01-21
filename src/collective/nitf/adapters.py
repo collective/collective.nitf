@@ -28,7 +28,7 @@ class NewsMLFeed(object):
     @lazy_property
     def site_url(self):
         return self.site.absolute_url()
-    
+
     @property
     def logo(self):
         return '%s/logo.png' % self.site.absolute_url()
