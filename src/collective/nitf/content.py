@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from bs4 import BeautifulSoup
+
+from uuid import uuid3
+from uuid import NAMESPACE_OID
+
+from DateTime import DateTime
+
 from zope.component import adapts
 from zope.interface import implements
 
@@ -18,6 +25,9 @@ from plone.directives import form
 from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
+
+from plone.uuid.interfaces import IUUID
+
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from z3c.relationfield.schema import (
@@ -27,15 +37,21 @@ from z3c.relationfield.schema import (
 from zope import schema
 from zope.component import getUtility
 
+from zope.cachedescriptors.property import Lazy as lazy_property
+
 try:
+    # We have collective.syndication
     from collective.syndication.adapters import BaseNewsMLItem
     
     from collective.syndication.interfaces import INewsMLSyndicatable
     from collective.syndication.interfaces import INewsMLFeed
-    from zope.cachedescriptors.property import Lazy as lazy_property
-    HAS_NEWSML = True
+    HAS_C_SYNDICATION = True
 except:
-    HAS_NEWSML = False
+    # We don't have collective.syndication
+    from collective.nitf.interfaces import INewsMLFeed
+    from collective.nitf.interfaces import INewsMLSyndicatable
+    from collective.nitf.utils import cleanup_body_html
+    HAS_C_SYNDICATION = False
 
 
 class INITF(form.Schema):
@@ -269,7 +285,7 @@ def textIndexer(obj):
 grok.global_adapter(textIndexer, name='SearchableText')
 
 
-if HAS_NEWSML:
+if HAS_C_SYNDICATION:
     class NITFNewsMLItem(BaseNewsMLItem):
         implements(INewsMLSyndicatable)
         adapts(INITF, INewsMLFeed)
@@ -285,3 +301,143 @@ if HAS_NEWSML:
         @lazy_property
         def author(self):
             return self.context.byline
+else:
+    class NITFNewsMLItem(object):
+        implements(INewsMLSyndicatable)
+        adapts(INITF, INewsMLFeed)
+
+        def __init__(self, context, feed):
+            self.context = context
+            self.feed = feed
+            
+        @property
+        def title(self):
+            return self.context.Title()
+
+        @property
+        def description(self):
+            return self.context.Description()
+        
+        @property
+        def uid(self):
+            uuid = IUUID(self.context, None)
+            if uuid is None and hasattr(self.context, 'UID'):
+                return self.context.UID()
+            return uuid
+        
+        @property
+        def published(self):
+            date = self.context.EffectiveDate()
+            if date and date != 'None':
+                return DateTime(date)
+
+        @property
+        def modified(self):
+            date = self.context.ModificationDate()
+            if date:
+                return DateTime(date)
+            
+        @property
+        def image_url(self):
+            if self.has_image:
+                img = self.context.getImage()
+                # Support up to 768px max size
+                url = "%s/image_large" % img.absolute_url()
+                return url
+
+        @lazy_property
+        def author(self):
+            return self.context.byline
+            
+        # TODO: This method will use lxml instead of BeautifulSoup to clean
+        #       the HTML, leaving it here for the future.
+        #@property
+        #def body(self):
+            #body = self.context.getText()
+            
+            #if body:
+                #html = fromstring(body)
+                #cleanup_body_html(html)
+
+                ## lxml puts everything inside a <div>. Workaround that here
+                #if html.tag == 'div':
+                    #result = ''.join([tostring(i).strip() for i in html])
+                #else:
+                    #result = tostring(html)
+                    
+                #return result
+        
+        @property
+        def body(self):
+            body = self.context.getText()
+            result = ""
+
+            if body:
+                # valid_tags = ['p', 'ul', 'hedline', 'hl1', 'media']
+
+                soup = BeautifulSoup(body)
+
+                for tag in soup.findAll(True):
+                    attrs = dict()
+                    # Remove all attributes, except hrefs
+                    if 'href' in tag.attrs:
+                        attrs['href'] = tag.attrs['href']
+
+                    tag.attrs = attrs
+
+                    # Now replace some common tags
+                    if tag.name == 'h2':
+                        tag.name = 'p'
+                    elif tag.name == 'span':
+                        tag.unwrap()
+                    elif tag.name == 'ol':
+                        tag.name = 'ul'
+
+                if soup.find('body'):
+                    result = soup.body.renderContents()
+                else:
+                    result = str(soup)
+
+                # Remove some whitespace
+                result = result.replace('\n', '')
+                result.strip()
+
+            return result
+
+        @lazy_property
+        def site_url(self):
+            return self.feed.site_url
+
+        @property
+        def image_mime_type(self):
+            if self.has_image:
+                img = self.context.getImage()
+                return img.content_type
+
+        @property
+        def image_title(self):
+            result = ''
+            if self.has_image:
+                caption = getattr(self.context, 'imageCaption', None)
+                if caption and caption != '':
+                    result = caption
+                else:
+                    result = self.title
+            return result
+
+        @property
+        def has_image(self):
+            result = False
+            img = getattr(self.context, 'getImage', None)
+            if img:
+                img_contents = img()
+                result = img_contents and img_contents != ''
+            return result
+
+        def duid(self, value):
+            uid = uuid3(NAMESPACE_OID, self.uid + str(value))
+            return uid.hex
+            
+        @property
+        def created(self):
+            return self.context.created()

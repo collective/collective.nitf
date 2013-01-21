@@ -46,20 +46,48 @@
     </browser:menuItems>
 
     <include file="profiles.zcml" />
-    
+
     <configure
         zcml:condition="not-have plone-43">
+        <configure
+            zcml:condition="not-installed collective.syndication">
+            
+            <class class="collective.nitf.content.NITF">
+                <implements interface="collective.nitf.interfaces.INewsMLSyndicatable" />
+            </class>
+            
+            <browser:page
+                for="OFS.interfaces.IFolder"
+                class=".views.NewsMLFeedView"
+                name="newsml.xml"
+                permission="zope2.View"
+                template="templates/newsml.xml.pt"
+                />
+                
+            <adapter factory=".adapters.NewsMLFeed"
+                for="collective.nitf.content.INITF"
+                provides="collective.nitf.interfaces.INewsMLFeed" />
+                
+            <adapter factory=".content.NITFNewsMLItem"
+                for="collective.nitf.content.INITF
+                     collective.nitf.interfaces.INewsMLFeed"
+                provides="collective.nitf.interfaces.INewsMLSyndicatable" />
         
-        <configure zcml:condition="installed collective.syndication">
+        </configure>
+        <configure
+            zcml:condition="installed collective.syndication">
+            
             <class class="collective.nitf.content.NITF">
                 <implements interface="collective.syndication.interfaces.INewsMLSyndicatable" />
             </class>
-        
+
             <adapter factory=".content.NITFNewsMLItem"
                 for="collective.nitf.content.INITF
-                    collective.syndication.interfaces.INewsMLFeed"
+                     collective.syndication.interfaces.INewsMLFeed"
                 provides="collective.syndication.interfaces.INewsMLSyndicatable" />
+        
         </configure>
+        
     </configure>
 
 </configure>
