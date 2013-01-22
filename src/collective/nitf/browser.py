@@ -1,20 +1,30 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_inner
-from collective.nitf.content import INITF
-from collective.nitf.controlpanel import INITFSettings, INITFCharCountSettings
-from collective.nitf.interfaces import INITFLayer
-from five import grok
-from plone.directives import dexterity
-from plone.registry.interfaces import IRegistry
-from plone.uuid.interfaces import IUUID
-from Products.CMFPlone.utils import getToolByName
-from zope.component import getUtility
-from zope.interface import Interface
-
-from collective.nitf import _
 
 import json
 import mimetypes
+
+from Acquisition import aq_inner
+from warnings import warn
+from five import grok
+
+from zope.component import getUtility
+from zope.interface import Interface
+
+from Products.CMFPlone.utils import getToolByName
+
+from plone.directives import dexterity
+from plone.registry.interfaces import IRegistry
+from plone.uuid.interfaces import IUUID
+
+from collective.nitf import _
+
+from collective.nitf.content import INITF
+
+from collective.nitf.controlpanel import INITFSettings
+from collective.nitf.controlpanel import INITFCharCountSettings
+
+from collective.nitf.interfaces import INITFLayer
+
 
 grok.templatedir('templates')
 
