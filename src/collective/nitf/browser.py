@@ -10,8 +10,6 @@ from five import grok
 from zope.component import getUtility
 from zope.interface import Interface
 
-from Products.CMFPlone.utils import getToolByName
-
 from plone.directives import dexterity
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
