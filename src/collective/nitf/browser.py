@@ -97,76 +97,6 @@ class View(dexterity.DisplayForm):
     def update(self):
         self.context = aq_inner(self.context)
 
-    def _get_brains(self, object_name=None):
-        """ Return a list of brains inside the NITF object.
-        """
-        catalog = getToolByName(self.context, 'portal_catalog')
-        path = '/'.join(self.context.getPhysicalPath())
-        brains = catalog(Type=object_name, path=path,
-                         sort_on='getObjPositionInParent')
-
-        return brains
-
-    def get_images(self):
-        """ Return a list of image brains inside the NITF object.
-        """
-        return self._get_brains('Image')
-
-    def has_images(self):
-        """ Return the number of images inside the NITF object.
-        """
-        return len(self.get_images())
-
-    def get_files(self):
-        """ Return a list of file brains inside the NITF object.
-        """
-        return self._get_brains('File')
-
-    def has_files(self):
-        """ Return the number of files inside the NITF object.
-        """
-        return len(self.get_files())
-
-    def get_links(self):
-        """ Return a list of link brains inside the NITF object.
-        """
-        return self._get_brains('Link')
-
-    def has_links(self):
-        """ Return the number of links inside the NITF object.
-        """
-        return len(self.get_links())
-
-    def get_media(self):
-        """ Return a list of object brains inside the NITF object.
-        """
-        media_ct = [x.title for x in self.context.allowedContentTypes()]
-        return self._get_brains(media_ct)
-
-    def has_media(self):
-        """ Return the number of media inside the NITF object.
-        """
-        return len(self.get_media())
-
-    # The purpose of these methods is to emulate those on News Item
-    def getImage(self):
-        images = self.get_images()
-        if len(images) > 0:
-            return images[0].getObject()
-        return None
-
-    def imageCaption(self):
-        image = self.getImage()
-        if image is not None:
-            return image.Description()
-
-    def tag(self, **kwargs):
-        # tag original implementation returns object title in both, alt and
-        # title attributes
-        image = self.getImage()
-        if image is not None:
-            return image.tag(**kwargs)
-
     # These methods are used in scrollable gallery for creating batches
     def _chunks(self, l, n):
         """ Yield successive n-sized chunks from l.
@@ -180,12 +110,89 @@ class View(dexterity.DisplayForm):
         """ Return a list containing groups of n image tags.
         """
         # TODO: check for a valid size
-        images = [i.getObject() for i in self.get_images()]
+        images = [i.getObject() for i in self.context.get_images()]
         images = [self.TAG % (i.absolute_url(), size,
                               i.Title(),
                               i.Description()) for i in images]
 
         return self._chunks(images, n)
+
+    def get_images(self):
+        """ Return a list of image brains inside the NITF object.
+        """
+        warn("Calling get_images on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.get_images()
+
+    def has_images(self):
+        """ Return the number of images inside the NITF object.
+        """
+        warn("Calling has_images on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.has_images()
+
+    def get_files(self):
+        """ Return a list of file brains inside the NITF object.
+        """
+        warn("Calling get_files on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.get_files()
+
+    def has_files(self):
+        """ Return the number of files inside the NITF object.
+        """
+        warn("Calling has_files on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.has_files()
+
+    def get_links(self):
+        """ Return a list of link brains inside the NITF object.
+        """
+        warn("Calling get_links on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.get_links()
+
+    def has_links(self):
+        """ Return the number of links inside the NITF object.
+        """
+        warn("Calling has_links on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.has_links()
+
+    def get_media(self):
+        """ Return a list of object brains inside the NITF object.
+        """
+        warn("Calling get_media on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.get_media()
+
+    def has_media(self):
+        """ Return the number of media inside the NITF object.
+        """
+        warn("Calling has_media on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.has_media()
+
+    def getText(self):
+        warn("Calling getText on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.getText()
+
+    # The purpose of these methods is to emulate those on News Item
+    def getImage(self):
+        warn("Calling getImage on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.getImage()
+
+    def imageCaption(self):
+        warn("Calling imageCaption on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.imageCaption()
+
+    def tag(self, **kwargs):
+        warn("Calling tag on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.tag(**kwargs)
 
 
 # TODO: get rid of this class
@@ -245,7 +252,7 @@ class NITF(View):
         media = []
         # XXX: we could honor original order calling the get_media() method in
         # View; how can we do that?
-        results = self.get_images() + self.get_files()
+        results = self.context.get_images() + self.context.get_files()
         for r in results:
             obj = r.getObject()
             source = obj.absolute_url()
