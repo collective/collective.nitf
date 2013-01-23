@@ -28,4 +28,53 @@
       <value key="vocabulary">collective.nitf.AvailableSections</value>
       <value key="group" i18n:translate="">NITF</value>
   </records>
-</registry>
+  
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+          prefix="plone.app.querystring.field.subtitle">
+      <value key="title" i18n:translate="">Subtitle</value>
+      <value key="description" i18n:translate="">A subordinate headline for the article.</value>
+      <value key="enabled">True</value>
+      <value key="sortable">True</value>
+      <value key="operations">
+          <element>plone.app.querystring.operation.string.contains</element>
+      </value>
+      <value key="group" i18n:translate="">NITF</value>
+  </records>
+  
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+          prefix="plone.app.querystring.field.byline">
+      <value key="title" i18n:translate="">Author</value>
+      <value key="enabled">True</value>
+      <value key="sortable">True</value>
+      <value key="operations">
+          <element>plone.app.querystring.operation.string.contains</element>
+      </value>
+      <value key="group" i18n:translate="">NITF</value>
+  </records>
+
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+          prefix="plone.app.querystring.field.urgency">
+      <value key="title" i18n:translate="">Urgency</value>
+      <value key="description" i18n:translate="">News importance.</value>
+      <value key="enabled">True</value>
+      <value key="sortable">True</value>
+      <value key="operations">
+          <element>plone.app.querystring.operation.selection.is</element>
+      </value>
+      <value key="vocabulary">collective.nitf.Urgencies</value>
+      <value key="group" i18n:translate="">NITF</value>
+  </records>
+  
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+          prefix="plone.app.querystring.field.location">
+      <value key="title" i18n:translate="">Location</value>
+      <value key="enabled">True</value>
+      <value key="sortable">True</value>
+      <value key="description" i18n:translate="">Event location. Where an event took place (as opposed to where the story was written).</value>
+      <value key="operations">
+          <element>plone.app.querystring.operation.string.contains</element>
+      </value>
+      <value key="group" i18n:translate="">NITF</value>
+  </records>
+
+  </registry>
