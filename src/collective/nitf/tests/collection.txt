@@ -37,3 +37,11 @@ Now, let's create an object:
     True
     >>> 'Section' in browser.contents
     True
+    >>> 'Subtitle' in browser.contents
+    True
+    >>> 'Author' in browser.contents
+    True
+    >>> 'Urgency' in browser.contents
+    True
+    >>> 'Location' in browser.contents
+    True
