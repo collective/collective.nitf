@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
+
 from Acquisition import aq_inner
+from collective.nitf import _
 from collective.nitf.content import INITF
-from collective.nitf.controlpanel import INITFSettings, INITFCharCountSettings
+from collective.nitf.controlpanel import INITFCharCountSettings
+from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.interfaces import INITFLayer
 from five import grok
 from plone.directives import dexterity
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
 from Products.CMFPlone.utils import getToolByName
+from warnings import warn
 from zope.component import getUtility
 from zope.interface import Interface
 
-from collective.nitf import _
-
 import json
 import mimetypes
+
 
 grok.templatedir('templates')
 
@@ -138,24 +141,26 @@ class View(dexterity.DisplayForm):
         """
         return len(self.get_media())
 
+    def getText(self):
+        warn("Calling getText is deprecated. Use self.text.output instead.",
+             DeprecationWarning)
+        return self.text.output
+
     # The purpose of these methods is to emulate those on News Item
     def getImage(self):
-        images = self.get_images()
-        if len(images) > 0:
-            return images[0].getObject()
-        return None
+        warn("Calling getImage on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.getImage()
 
     def imageCaption(self):
-        image = self.getImage()
-        if image is not None:
-            return image.Description()
+        warn("Calling imageCaption on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.imageCaption()
 
     def tag(self, **kwargs):
-        # tag original implementation returns object title in both, alt and
-        # title attributes
-        image = self.getImage()
-        if image is not None:
-            return image.tag(**kwargs)
+        warn("Calling tag on the view is deprecated. Call it on the object.",
+             DeprecationWarning)
+        return self.context.tag(**kwargs)
 
     # These methods are used in scrollable gallery for creating batches
     def _chunks(self, l, n):

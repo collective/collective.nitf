@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
+
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
-from collective.z3cform.widgets.multicontent_search_widget import (
-    MultiContentSearchFieldWidget,
-)
+from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
 from five import grok
 from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
@@ -16,10 +15,8 @@ from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from z3c.relationfield.schema import (
-    RelationChoice,
-    RelationList,
-)
+from z3c.relationfield.schema import RelationChoice
+from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import getUtility
 
@@ -123,6 +120,26 @@ class INITF(form.Schema):
 
 class NITF(Container):
     grok.implements(INITF)
+
+    # The purpose of these methods is to emulate those on News Item
+    def getImage(self):
+        """Return the first Image inside the News Article.
+        """
+        content_filter = {'portal_type': 'Image'}
+        images = self.listFolderContents(content_filter)
+        return images[0] if len(images) > 0 else None
+
+    def imageCaption(self):
+        image = self.getImage()
+        if image is not None:
+            return image.Description()
+
+    def tag(self, **kwargs):
+        # tag original implementation returns object title in both, alt and
+        # title attributes
+        image = self.getImage()
+        if image is not None:
+            return image.tag(**kwargs)
 
 
 @form.default_value(field=INITF['genre'])
