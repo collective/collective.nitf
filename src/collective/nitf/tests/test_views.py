@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import Unauthorized
+from collective.nitf.controlpanel import INITFCharCountSettings
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.controlpanel import INITFCharCountSettings
 from plone.app.customerize import registration
 from plone.app.testing import TEST_USER_ID, logout, setRoles
 from plone.registry.interfaces import IRegistry
 from StringIO import StringIO
 from zope.app.file.tests.test_image import zptlogo
 from zope.component import getMultiAdapter, queryMultiAdapter, getUtility
-
 from zope.interface import directlyProvides
 
 import unittest2 as unittest
@@ -38,7 +37,7 @@ class DefaultViewTestCase(unittest.TestCase):
         self.assertEqual(pt['collective.nitf.content'].default_view, 'view')
 
         registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertTrue('view' in registered)
+        self.assertIn('view', registered)
 
     def test_get_images(self):
         view = getMultiAdapter((self.n1, self.request), name='view')
@@ -109,47 +108,6 @@ class DefaultViewTestCase(unittest.TestCase):
         self.assertEqual(media[1].getObject().id, 'bar')
         self.assertEqual(media[2].getObject().id, 'baz')
 
-    def test_getImage(self):
-        view = getMultiAdapter((self.n1, self.request), name='view')
-        self.assertEqual(view.getImage(), None)
-
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        image = view.getImage()
-        self.assertEqual(image.id, 'foo')
-        self.assertEqual(image.Title(), 'bar')
-        self.assertEqual(image.Description(), 'baz')
-
-    def test_tag(self):
-        # TODO: test before adding image
-        view = getMultiAdapter((self.n1, self.request), name='view')
-        tag = view.tag
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        # tag original implementation returns object title in both, alt and
-        # title attributes
-        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
-                   'image" alt="bar" title="bar" height="16" width="16" />'
-        self.assertEqual(tag(), expected)
-
-        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
-                   'image_preview" alt="bar" title="bar" height="16" ' + \
-                   'width="16" />'
-        self.assertEqual(tag(scale='preview'), expected)
-
-        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
-                   'image" alt="bar" title="bar" height="16" width="16" ' + \
-                   'class="myClass" />'
-
-        self.assertEqual(tag(css_class='myClass'), expected)
-
-    def test_imageCaption(self):
-        # TODO: test before adding image
-        view = getMultiAdapter((self.n1, self.request), name='view')
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        self.assertEqual(view.imageCaption(), 'baz')
-
     def test_chunks(self):
         """ Test is chunks are created from a list.
         """
@@ -193,10 +151,10 @@ class ScrollableViewTestCase(unittest.TestCase):
 
     def test_scrollable_view_is_registered(self):
         registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertTrue('scrollable' in registered)
+        self.assertIn('scrollable', registered)
 
         view = queryMultiAdapter((self.n1, self.request), name='scrollable')
-        self.assertTrue(view is not None)
+        self.assertIsNotNone(view)
 
 
 class NITFViewTestCase(unittest.TestCase):
@@ -218,7 +176,7 @@ class NITFViewTestCase(unittest.TestCase):
 
     def test_scrollable_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='nitf')
-        self.assertTrue(view is not None)
+        self.assertIsNotNone(view)
 
     def test_get_mediatype(self):
         view = getMultiAdapter((self.n1, self.request), name='nitf')
@@ -259,7 +217,7 @@ class NewsMLViewTestCase(unittest.TestCase):
 
     def test_newsml_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='newsml')
-        self.assertTrue(view is not None)
+        self.assertIsNotNone(view)
 
 
 class MediaViewTestCase(unittest.TestCase):
@@ -281,7 +239,7 @@ class MediaViewTestCase(unittest.TestCase):
 
     def test_media_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='media')
-        self.assertTrue(view is not None)
+        self.assertIsNotNone(view)
 
     def test_media_view_is_protected(self):
         logout()

@@ -44,14 +44,14 @@
     <metal:main fill-slot="content-core">
         <tal:content-core metal:define-macro="content-core">
             <div class="newsImageContainer"
-                tal:define="image view/getImage"
+                tal:define="image context/getImage"
                 tal:condition="image">
                 <a src="@@nitf_galleria" id="parent-fieldname-image">
                    <img src="" alt=""
                        tal:replace="structure python: image.tag(scale='mini', css_class='newsImage nitf')" /></a>
                 <p class="discreet"
-                    tal:condition="view/imageCaption|nothing"
-                    tal:content="view/imageCaption">
+                    tal:condition="context/imageCaption"
+                    tal:content="context/imageCaption">
                     Image Caption
                 </p>
             </div>
