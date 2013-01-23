@@ -1,26 +1,19 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
+from collective.nitf.content import INITF
+from collective.nitf.testing import INTEGRATION_TESTING
+from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.dexterity.interfaces import IDexterityFTI
+from plone.uuid.interfaces import IAttributeUUID
+from Products.CMFPlone.interfaces import INonStructuralFolder
 from StringIO import StringIO
-
 from zope.app.file.tests.test_image import zptlogo
-
 from zope.component import createObject
 from zope.component import queryUtility
 
-from Products.CMFPlone.interfaces import INonStructuralFolder
-
-from plone.app.referenceablebehavior.referenceable import IReferenceable
-
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-
-from plone.dexterity.interfaces import IDexterityFTI
-
-from plone.uuid.interfaces import IAttributeUUID
-
-from collective.nitf.content import INITF
-from collective.nitf.testing import INTEGRATION_TESTING
+import unittest2 as unittest
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -43,7 +36,7 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
-        self.assertNotEqual(None, fti)
+        self.assertIsNotNone(fti)
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
@@ -63,18 +56,17 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_locking_behavior_available(self):
         # ILocking is not applied by default, but must be available if needed
         try:
-            from plone.app.lockingbehavior.behaviors import ILocking
-            assert ILocking  # Pyflakes
+            from plone.app.lockingbehavior.behaviors import ILocking  # NOQA
         except ImportError:
             self.fail('ILocking behavior not available')
 
     def test_action_is_registered(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
         actions = [a.id for a in fti.listActions()]
-        self.assertTrue('media' in actions)
+        self.assertIn('media', actions)
 
     def test_getImage(self):
-        self.assertEqual(self.n1.getImage(), None)
+        self.assertIsNone(self.n1.getImage())
 
         self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
                               image=StringIO(zptlogo))
@@ -83,31 +75,30 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertEqual(image.Title(), 'bar')
         self.assertEqual(image.Description(), 'baz')
 
-    def test_tag(self):
-        tag = self.n1.tag
-        self.assertEqual(tag(), None)
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        # tag original implementation returns object title in both, alt and
-        # title attributes
-        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
-                   'image" alt="bar" title="bar" height="16" width="16" />'
-        self.assertEqual(tag(), expected)
-
-        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
-                   'image_preview" alt="bar" title="bar" height="16" ' + \
-                   'width="16" />'
-        self.assertEqual(tag(scale='preview'), expected)
-
-        expected = '<img src="http://nohost/plone/test-folder/n1/foo/' + \
-                   'image" alt="bar" title="bar" height="16" width="16" ' + \
-                   'class="myClass" />'
-
-        self.assertEqual(tag(css_class='myClass'), expected)
-
     def test_imageCaption(self):
         imageCaption = self.n1.imageCaption
-        self.assertEqual(imageCaption(), None)
+        self.assertIsNone(imageCaption())
         self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
                               image=StringIO(zptlogo))
         self.assertEqual(imageCaption(), 'baz')
+
+    def test_tag(self):
+        tag = self.n1.tag
+
+        # no images in news article, so no tag must be present
+        self.assertIsNone(tag())
+
+        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
+                              image=StringIO(zptlogo))
+
+        # image title must be in both, alt and title attributes
+        self.assertIn('alt="bar" title="bar"', tag())
+
+        # image size
+        self.assertIn('height="16" width="16', tag())
+
+        # image scale
+        self.assertIn('foo/image_preview', tag(scale='preview'))
+
+        # image class
+        self.assertIn('class="myClass"', tag(css_class='myClass'))
