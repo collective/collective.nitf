@@ -98,7 +98,8 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertIn('height="16" width="16', tag())
 
         # image scale
-        self.assertIn('foo/image_preview', tag(scale='preview'))
+        self.assertIn('src="http://nohost/plone/test-folder/n1/foo/image_preview"',
+                      tag(scale='preview'))
 
         # image class
         self.assertIn('class="myClass"', tag(css_class='myClass'))
