@@ -13,6 +13,7 @@ from zope.interface import Interface
 from plone.directives import dexterity
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
+from Products.CMFPlone.utils import getToolByName
 
 from collective.nitf import _
 
@@ -95,86 +96,61 @@ class View(dexterity.DisplayForm):
     def update(self):
         self.context = aq_inner(self.context)
 
-    # These methods are used in scrollable gallery for creating batches
-    def _chunks(self, l, n):
-        """ Yield successive n-sized chunks from l.
+    def _get_brains(self, object_name=None):
+        """ Return a list of brains inside the NITF object.
         """
-        for i in xrange(0, len(l), n):
-            yield l[i:i + n]
+        catalog = getToolByName(self.context, 'portal_catalog')
+        path = '/'.join(self.context.getPhysicalPath())
+        brains = catalog(Type=object_name, path=path,
+                         sort_on='getObjPositionInParent')
 
-    TAG = '<img src="%s/image_%s" alt="%s" title="%s" />'
-
-    def get_images_in_groups(self, n=5, size='thumb'):
-        """ Return a list containing groups of n image tags.
-        """
-        # TODO: check for a valid size
-        images = [i.getObject() for i in self.context.get_images()]
-        images = [self.TAG % (i.absolute_url(), size,
-                              i.Title(),
-                              i.Description()) for i in images]
-
-        return self._chunks(images, n)
+        return brains
 
     def get_images(self):
         """ Return a list of image brains inside the NITF object.
         """
-        warn("Calling get_images on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.get_images()
+        return self._get_brains('Image')
 
     def has_images(self):
         """ Return the number of images inside the NITF object.
         """
-        warn("Calling has_images on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.has_images()
+        return len(self.get_images())
 
     def get_files(self):
         """ Return a list of file brains inside the NITF object.
         """
-        warn("Calling get_files on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.get_files()
+        return self._get_brains('File')
 
     def has_files(self):
         """ Return the number of files inside the NITF object.
         """
-        warn("Calling has_files on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.has_files()
+        return len(self.get_files())
 
     def get_links(self):
         """ Return a list of link brains inside the NITF object.
         """
-        warn("Calling get_links on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.get_links()
+        return self._get_brains('Link')
 
     def has_links(self):
         """ Return the number of links inside the NITF object.
         """
-        warn("Calling has_links on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.has_links()
+        return len(self.get_links())
 
     def get_media(self):
         """ Return a list of object brains inside the NITF object.
         """
-        warn("Calling get_media on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.get_media()
+        media_ct = [x.title for x in self.context.allowedContentTypes()]
+        return self._get_brains(media_ct)
 
     def has_media(self):
         """ Return the number of media inside the NITF object.
         """
-        warn("Calling has_media on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.has_media()
+        return len(self.get_media())
 
     def getText(self):
-        warn("Calling getText on the view is deprecated. Call it on the object.",
+        warn("Calling getText is deprecated. Use self.text.output instead.",
              DeprecationWarning)
-        return self.context.getText()
+        return self.text.output
 
     # The purpose of these methods is to emulate those on News Item
     def getImage(self):
@@ -191,6 +167,26 @@ class View(dexterity.DisplayForm):
         warn("Calling tag on the view is deprecated. Call it on the object.",
              DeprecationWarning)
         return self.context.tag(**kwargs)
+
+    # These methods are used in scrollable gallery for creating batches
+    def _chunks(self, l, n):
+        """ Yield successive n-sized chunks from l.
+        """
+        for i in xrange(0, len(l), n):
+            yield l[i:i + n]
+
+    TAG = '<img src="%s/image_%s" alt="%s" title="%s" />'
+
+    def get_images_in_groups(self, n=5, size='thumb'):
+        """ Return a list containing groups of n image tags.
+        """
+        # TODO: check for a valid size
+        images = [i.getObject() for i in self.get_images()]
+        images = [self.TAG % (i.absolute_url(), size,
+                              i.Title(),
+                              i.Description()) for i in images]
+
+        return self._chunks(images, n)
 
 
 # TODO: get rid of this class
@@ -250,7 +246,7 @@ class NITF(View):
         media = []
         # XXX: we could honor original order calling the get_media() method in
         # View; how can we do that?
-        results = self.context.get_images() + self.context.get_files()
+        results = self.get_images() + self.get_files()
         for r in results:
             obj = r.getObject()
             source = obj.absolute_url()

@@ -103,7 +103,7 @@
 
         <metal:main_macro define-macro="main">
             <metal:pic_sorter_macro define-macro="pic_sorter"
-                                    tal:define="media view/context/get_media;">
+                                    tal:define="media view/get_media;">
 
             <h1 class="documentFirstHeading" i18n:translate="">Media</h1>
             <p i18n:translate="">Drag and drop images to change their order on the gallery.</p>

@@ -93,68 +93,6 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertEqual(image.Title(), 'bar')
         self.assertEqual(image.Description(), 'baz')
 
-    def test_get_files(self):
-        self.assertEqual(len(self.n1.get_files()), 0)
-
-        self.n1.invokeFactory('File', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        files = self.n1.get_files()
-        self.assertEqual(len(files), 1)
-        self.assertEqual(files[0].getObject().id, 'foo')
-        self.assertEqual(files[0].getObject().Title(), 'bar')
-        self.assertEqual(files[0].getObject().Description(), 'baz')
-
-    def test_get_images(self):
-        self.assertEqual(len(self.n1.get_images()), 0)
-
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        images = self.n1.get_images()
-        self.assertEqual(len(images), 1)
-        self.assertEqual(images[0].getObject().id, 'foo')
-        self.assertEqual(images[0].getObject().Title(), 'bar')
-        self.assertEqual(images[0].getObject().Description(), 'baz')
-
-    def test_get_links(self):
-        self.assertEqual(len(self.n1.get_links()), 0)
-
-        self.n1.invokeFactory('Link', 'foo', remoteUrl='http://foo/')
-        links = self.n1.get_links()
-        self.assertEqual(len(links), 1)
-        self.assertEqual(links[0].getObject().id, 'foo')
-        self.assertEqual(links[0].getObject().remoteUrl, 'http://foo/')
-
-    def test_get_media(self):
-        self.assertEqual(len(self.n1.get_media()), 0)
-
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
-        self.n1.invokeFactory('File', 'bar', file=StringIO(zptlogo))
-        self.n1.invokeFactory('Link', 'baz', remoteUrl='http://baz/')
-        media = self.n1.get_media()
-        self.assertEqual(len(media), 3)
-        self.assertEqual(media[0].getObject().id, 'foo')
-        self.assertEqual(media[1].getObject().id, 'bar')
-        self.assertEqual(media[2].getObject().id, 'baz')
-
-    def test_has_images(self):
-        has_images = self.n1.has_images
-        self.assertEqual(has_images(), 0)
-
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
-        self.assertEqual(has_images(), 1)
-
-    def test_has_files(self):
-        self.assertEqual(self.n1.has_files(), 0)
-
-        self.n1.invokeFactory('File', 'foo', image=StringIO(zptlogo))
-        self.assertEqual(self.n1.has_files(), 1)
-
-    def test_has_links(self):
-        self.assertEqual(self.n1.has_links(), 0)
-
-        self.n1.invokeFactory('Link', 'foo', remoteUrl='http://foo/')
-        self.assertEqual(self.n1.has_links(), 1)
-
     def test_tag(self):
         tag = self.n1.tag
         self.assertEqual(tag(), None)
