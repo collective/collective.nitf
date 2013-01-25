@@ -54,6 +54,7 @@ setup(name='collective.nitf',
         'plone.app.dexterity[grok]',
         'plone.app.lockingbehavior',
         'plone.app.referenceablebehavior',
+        'archetypes.querywidget>=1.0.7',  # XXX: see http://dev.plone.org/ticket/13421
         ],
       extras_require={
         'test': [
