@@ -76,12 +76,6 @@ setup(name='collective.nitf',
         'setuptools',
         'z3c.form',
         'z3c.relationfield',
-        'zope.browserpage',
-        'zope.component',
-        'zope.formlib',
-        'zope.i18nmessageid',
-        'zope.interface',
-        'zope.schema',
         ],
       extras_require={
         'test': [
