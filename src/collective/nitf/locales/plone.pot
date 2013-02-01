@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-07-13 16:40+0000\n"
+"POT-Creation-Date: 2013-02-01 14:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,55 @@ msgstr ""
 msgid "A portlet which shows the latest NITF created and can be filtered by section."
 msgstr ""
 
+#: collective/nitf/profiles/default/registry.xml
+msgid "A subordinate headline for the article."
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "An NITF genre field"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "An NITF section field"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Author"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Event location. Where an event took place (as opposed to where the story was written)."
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Genre"
+msgstr ""
+
 #: collective/nitf/profiles/default/portlets.xml
 msgid "Latest Sectionable NITF"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Location"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "NITF"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "News importance."
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Section"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Subtitle"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Urgency"
 msgstr ""
 

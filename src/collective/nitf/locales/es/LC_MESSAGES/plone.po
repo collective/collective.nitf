@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-07-13 16:40+0000\n"
-"PO-Revision-Date: 2012-02-23 16:27-0300\n"
+"POT-Creation-Date: 2013-02-01 14:49+0000\n"
+"PO-Revision-Date: 2013-02-01 13:32-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,55 @@ msgstr ""
 msgid "A portlet which shows the latest NITF created and can be filtered by section."
 msgstr "Un portlet que muestra los últimos artículos de noticias y que puede filtrar los resultados por sección."
 
+#: collective/nitf/profiles/default/registry.xml
+msgid "A subordinate headline for the article."
+msgstr "Un encabezado subordinado para el artículo."
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "An NITF genre field"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "An NITF section field"
+msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Author"
+msgstr "Autor"
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Event location. Where an event took place (as opposed to where the story was written)."
+msgstr "Ubicación del evento. El lugar donde el evento tuvo lugar (no es lo mismo que el lugar donde la historia fue escrita)."
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Genre"
+msgstr "Género"
+
 #: collective/nitf/profiles/default/portlets.xml
 msgid "Latest Sectionable NITF"
 msgstr ""
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Location"
+msgstr "Localización"
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "NITF"
+msgstr "NITF"
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "News importance."
+msgstr "Importancia de la noticia."
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Section"
+msgstr "Sección"
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Subtitle"
+msgstr "Subtítulo"
+
+#: collective/nitf/profiles/default/registry.xml
+msgid "Urgency"
+msgstr "Urgencia"
 

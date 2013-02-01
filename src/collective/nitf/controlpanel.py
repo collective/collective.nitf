@@ -69,69 +69,73 @@ class INITFSettings(form.Schema):
 class INITFCharCountSettings(form.Schema):
 
     show_title_counter = schema.Bool(
-        title=_(u"label_show_title_counter",
-                default=u"Show Title characters counter"),
-        description=_(u"help_show_title_counter",
-                      default=u"If selected, the title is going to provide a character counter"),
+        title=_(u'label_show_title_counter',
+            default=u"Show a counter for the title?"),
+        description=_(u'help_show_title_counter',
+            default=u"If selected, a character counter will show the lenght "
+                    u"of the field."),
         required=False,
         default=False,
     )
 
     title_max_chars = schema.Int(
-        title=_(u"label_title_max_chars",
-                default=u"Max number of characters acepted by the title"),
-        description=_(u"help_title_max_chars",
-                      default=u"This limit is just visual, does not enforce validation"),
+        title=_(u'label_title_max_chars',
+            default=u"Maximum title length"),
+        description=_(u'help_title_max_chars',
+            default=u"The limit is just visual; validation is not enforced."),
         default=100,
         required=False,
     )
 
     title_optimal_chars = schema.Int(
-        title=_(u"label_title_optimal_chars",
-                default=u"Optimal number of characters for the nitf title"),
-        description=_(u"help_title_max_chars",
-                      default=u"The optimal value is going to be the range between this value and the max"),
+        title=_(u'label_title_optimal_chars',
+            default=u"Optimal title length"),
+        description=_(u"help_title_optimal_chars",
+            default=u"The optimal length will be between this number and the "
+                    u"maximum length of the field."),
         default=100,
         required=False,
     )
 
     show_description_counter = schema.Bool(
-        title=_(u"label_show_description_counter",
-                default=u"Show Description characters counter"),
-        description=_(u"help_show_description_counter",
-                      default=u"If selected, the description is going to provide a character counter"),
+        title=_(u'label_show_description_counter',
+            default=u"Show a character counter in the description?"),
+        description=_(u'help_show_description_counter',
+            default=u"If selected, a character counter will show the lenght "
+                    u"of the field."),
         required=False,
         default=False,
     )
 
     description_max_chars = schema.Int(
-        title=_(u"label_description_max_chars",
-                default=u"Max number of characters acepted by the description"),
-        description=_(u"help_description_max_chars",
-                      default=u"This limit is just visual, does not enforce validation"),
+        title=_(u'label_description_max_chars',
+            default=u"Maximum description length"),
+        description=_(u'help_description_max_chars',
+            default=u"The limit is just visual; validation is not enforced."),
         default=200,
         required=False,
     )
 
     description_optimal_chars = schema.Int(
-        title=_(u"label_description_optimal_chars",
-                default=u"Optimal number of characters for the nitf description"),
-        description=_(u"help_description_max_chars",
-                      default=u"The optimal value is going to be the range between this value and the max"),
+        title=_(u'label_description_optimal_chars',
+            default=u"Optimal description length"),
+        description=_(u"help_description_optimal_chars",
+            default=u"The optimal length will be between this number and the "
+                    u"maximum length of the field."),
         default=200,
         required=False,
     )
 
 
 class NITFGroup(group.Group):
-    label = _(u"NITF Default")
-    description = _("""Default Configuration""")
+    label = _(u"Default")
+    description = _("Default Configuration")
     fields = field.Fields(INITFSettings)
 
 
 class NITFChartCountGroup(group.Group):
-    label = _(u"NITF Char Count")
-    description = _("""Char Count""")
+    label = _(u"Character Counter")
+    description = _("Character Counter Configuration")
     fields = field.Fields(INITFCharCountSettings)
 
 
