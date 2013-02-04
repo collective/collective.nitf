@@ -53,7 +53,7 @@
       source="*"
       destination="1004"
       description="Add the chartcount options in the nitf configlet"
-      handler=".upgrades.charcount_control_panel_update"
+      handler="collective.nitf.setuphandlers.charcount_control_panel_update"
       profile="collective.nitf:default" />
 
 </configure>
