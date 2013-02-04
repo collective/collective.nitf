@@ -46,5 +46,4 @@
     </browser:menuItems>
 
     <include file="profiles.zcml" />
-    <include file="upgrades.zcml" />
 </configure>
