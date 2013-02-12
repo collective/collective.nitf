@@ -47,15 +47,7 @@
 
     <include file="profiles.zcml" />
 
-	<configure zcml:condition="installed collective.cover">	
-		<adapter
-			for=".content.INITF"
-			provides="collective.cover.interfaces.ICoverUIDsProvider"
-			factory=".content.CoverUIDsProvider"
-			/>
-	</configure>
-
-	<!-- Image scale support for tile images -->
+	!-- Image scale support for tile images -->
   	<browser:page
       	name="images"
       	for=".content.INITF"
