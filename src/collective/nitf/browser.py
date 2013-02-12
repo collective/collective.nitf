@@ -384,5 +384,5 @@ class ImageScaling(BaseImageScaling):
     """ view used for generating (and storing) image scales """
 
     def __init__(self, context, request):
-        self.context = context.getImage() and context.getImage() or context 
+        self.context = context.getImage() and context.getImage() or context
         self.request = request
