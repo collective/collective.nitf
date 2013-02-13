@@ -275,3 +275,28 @@ class CharacterCountJSTestCase(unittest.TestCase):
         view = getMultiAdapter((self.n1.restrictedTraverse('edit'), self.request), name='characters-count.js')
         render = view.render()
         self.assertEqual(render, '$(document).ready(function() {$("#form-widgets-IDublinCore-title").charCount({"optimal": 100, "counterText": "Characters left: ", "allowed": 100}); $("#form-widgets-IDublinCore-description").charCount({"optimal": 200, "counterText": "Characters left: ", "allowed": 200});});')
+
+
+class TraversalViewTestCase(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_images_traversal(self):
+        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
+                              image=StringIO(zptlogo))
+        view = getMultiAdapter((self.n1, self.request), name='images')
+
+        image = view.scale('image')
+        self.assertEqual(image.data, zptlogo)
