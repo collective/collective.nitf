@@ -46,4 +46,13 @@
     </browser:menuItems>
 
     <include file="profiles.zcml" />
+
+	<!-- Image scale support for tile images -->
+  	<browser:page
+      	name="images"
+      	for=".content.INITF"
+      	class=".browser.ImageScaling"
+      	permission="zope2.View"
+      	/>
+
 </configure>

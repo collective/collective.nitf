@@ -14,6 +14,7 @@ from Products.CMFPlone.utils import getToolByName
 from warnings import warn
 from zope.component import getUtility
 from zope.interface import Interface
+from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 
 import json
 import mimetypes
@@ -377,3 +378,11 @@ class Nitf_Galleria(View):
     grok.layer(INITFLayer)
     grok.require('zope2.View')
     grok.name('nitf_galleria')
+
+
+class ImageScaling(BaseImageScaling):
+    """ view used for generating (and storing) image scales """
+
+    def __init__(self, context, request):
+        self.context = context.getImage() and context.getImage() or context
+        self.request = request
