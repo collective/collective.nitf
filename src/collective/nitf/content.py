@@ -19,6 +19,7 @@ from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import getUtility
+from plone.uuid.interfaces import IUUID
 
 
 class INITF(form.Schema):
@@ -197,3 +198,14 @@ def textIndexer(obj):
     return u" ".join(searchable_text)
 
 grok.global_adapter(textIndexer, name='SearchableText')
+
+
+class CoverUIDsProvider(object):
+
+    def __init__(self, context):
+        self.context = context
+
+    def getUIDs(self):
+        """ Return a list of UIDs of collection objects.
+        """
+        return [IUUID(self.context)]
