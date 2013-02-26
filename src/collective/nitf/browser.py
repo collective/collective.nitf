@@ -386,3 +386,9 @@ class ImageScaling(BaseImageScaling):
     def __init__(self, context, request):
         self.context = context.getImage() and context.getImage() or context
         self.request = request
+
+    def scale(self, fieldname=None, scale=None, height=None, width=None,
+              **parameters):
+        if not self.context.getImage():
+            return None
+        return super(ImageScaling, self).scale(fieldname, scale, height, width)

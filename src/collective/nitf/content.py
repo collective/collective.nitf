@@ -129,6 +129,8 @@ class NITF(Container):
         images = self.listFolderContents(content_filter)
         return images[0] if len(images) > 0 else None
 
+    image = getImage  # XXX: a hack to support summary_view
+
     def imageCaption(self):
         image = self.getImage()
         if image is not None:
