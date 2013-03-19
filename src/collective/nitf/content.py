@@ -192,7 +192,7 @@ def textIndexer(obj):
         obj.byline,
         text,
         obj.location,
-    )]
+    ) if entry]
 
     return u" ".join(searchable_text)
 
