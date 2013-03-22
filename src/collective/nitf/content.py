@@ -121,6 +121,12 @@ class INITF(form.Schema):
 class NITF(Container):
     grok.implements(INITF)
 
+    def is_empty(self):
+        """Return True if the container has no files nor links inside.
+        """
+        content_filter = {'portal_type': ['File', 'Link']}
+        return not self.listFolderContents(content_filter)
+
     # The purpose of these methods is to emulate those on News Item
     def getImage(self):
         """Return the first Image inside the News Article.

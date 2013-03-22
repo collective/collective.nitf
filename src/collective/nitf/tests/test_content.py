@@ -64,6 +64,22 @@ class ContentTypeTestCase(unittest.TestCase):
         actions = [a.id for a in fti.listActions()]
         self.assertIn('media', actions)
 
+    def test_is_empty(self):
+        # the new article has no content inside
+        self.assertTrue(self.n1.is_empty())
+
+        # Image doesn't count, so it should be still empty
+        self.n1.invokeFactory('Image', 'foo')
+        self.assertTrue(self.n1.is_empty())
+
+        # File and Link count
+        self.n1.invokeFactory('File', 'bar')
+        self.assertFalse(self.n1.is_empty())
+        self.n1.manage_delObjects('bar')
+
+        self.n1.invokeFactory('Link', 'baz')
+        self.assertFalse(self.n1.is_empty())
+
     def test_getImage(self):
         self.assertIsNone(self.n1.getImage())
 
