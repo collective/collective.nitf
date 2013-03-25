@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<atcttool xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <!-- there's a bug here on when having i18n:domain="plone" above; anyway, we
+      need to added it before we run i18ndude to update the translations
+      https://bugs.launchpad.net/zope-cmf/+bug/939741 -->
+ <topic_indexes>
+  <index name="pin" description="NITF Pin field."
+     enabled="True" friendlyName="Pin"
+     i18n:attributes="description;friendlyName">
+   <criteria>ATBooleanCriterion</criteria>
+  </index>
+ </topic_indexes>
+</atcttool>

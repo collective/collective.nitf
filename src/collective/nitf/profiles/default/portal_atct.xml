@@ -36,6 +36,11 @@
    <criteria>ATSelectionCriterion</criteria>
    <criteria>ATSimpleStringCriterion</criteria>
   </index>
+  <index name="pin" description="NITF Pin field"
+     enabled="False" friendlyName="Pin"
+     i18n:attributes="description;friendlyName">
+   <criteria>ATBooleanCriterion</criteria>
+  </index>
  </topic_indexes>
  <topic_metadata>
   <metadata name="subtitle"
