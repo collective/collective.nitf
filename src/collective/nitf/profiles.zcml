@@ -64,4 +64,22 @@
       handler="collective.nitf.setuphandlers.default_values_update"
       profile="collective.nitf:default" />
 
+  <genericsetup:registerProfile
+      name="upgrade_1004_1005"
+      title="Upgrade profile for collective.nitf from 1.0b4 to 1.0b5"
+      directory="profiles/upgrade_1004_1005"
+      description="Configuration changes for the upgrade from 1.0b4 to 1.0b5."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade profile for collective.nitf to 1.0b5"
+      source="*"
+      destination="1005"
+      description="Configuration changes for the upgrade to 1.0b5."
+      handler="collective.nitf.setuphandlers.upgrade_to_1005"
+      profile="collective.nitf:default"
+      />
+
+
 </configure>

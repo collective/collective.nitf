@@ -58,6 +58,7 @@ def add_catalog_indexes(context, logger=None):
         ('urgency', 'FieldIndex'),
         ('location', 'ZCTextIndex'),
         ('SearchableText', 'ZCTextIndex'),
+        ('pin', 'FieldIndex'),
     )
 
     indexables = []
@@ -133,3 +134,10 @@ def default_values_update(context, logger=None):
                     obj.Description(), obj.byline, obj.text,
                     obj.location):
             obj.reindexObject(idxs=['SearchableText'])
+
+
+def upgrade_to_1005(context, logger=None):
+    profile = 'profile-collective.nitf:upgrade_1004_1005'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(profile)
+    add_catalog_indexes(context, logger)
