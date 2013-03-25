@@ -58,6 +58,7 @@ def add_catalog_indexes(context, logger=None):
         ('urgency', 'FieldIndex'),
         ('location', 'ZCTextIndex'),
         ('SearchableText', 'ZCTextIndex'),
+        ('pin', 'FieldIndex'),
     )
 
     indexables = []
@@ -117,6 +118,17 @@ def charcount_control_panel_update(context):
     setup.runImportStepFromProfile(PROFILE_ID, 'plone.app.registry')
     context.runImportStepFromProfile(PROFILE_ID, 'jsregistry')
     context.runImportStepFromProfile(PROFILE_ID, 'cssregistry')
+
+
+def upgrade_to_1005(context, logger=None):
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    profile = 'profile-collective.nitf:upgrade_1004_1005'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(profile)
+    add_catalog_indexes(context, logger)
 
 
 def default_values_update(context, logger=None):
