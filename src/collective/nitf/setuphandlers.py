@@ -58,6 +58,7 @@ def add_catalog_indexes(context, logger=None):
         ('urgency', 'FieldIndex'),
         ('location', 'ZCTextIndex'),
         ('SearchableText', 'ZCTextIndex'),
+        ('pin', 'FieldIndex'),
     )
 
     indexables = []
@@ -119,9 +120,7 @@ def charcount_control_panel_update(context):
     context.runImportStepFromProfile(PROFILE_ID, 'cssregistry')
 
 
-def default_values_update(context, logger=None):
-    """
-    """
+def upgrade_to_1005(context, logger=None):
     if logger is None:
         # Called as upgrade step: define our own logger
         logger = logging.getLogger(PROJECTNAME)
@@ -133,3 +132,7 @@ def default_values_update(context, logger=None):
                     obj.Description(), obj.byline, obj.text,
                     obj.location):
             obj.reindexObject(idxs=['SearchableText'])
+    profile = 'profile-collective.nitf:upgrade_1004_1005'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(profile)
+    add_catalog_indexes(context, logger)
