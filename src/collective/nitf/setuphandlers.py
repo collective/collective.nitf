@@ -129,7 +129,6 @@ def upgrade_to_1005(context, logger=None):
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)
     add_catalog_indexes(context, logger)
-<<<<<<< HEAD
 
 
 def default_values_update(context, logger=None):
@@ -170,5 +169,3 @@ def upgrade_to_1007(context, logger=None):
     profile = 'profile-collective.nitf:upgrade_to_1007'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)
-=======
->>>>>>> behavior to pin nitf content.
