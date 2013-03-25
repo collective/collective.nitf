@@ -56,6 +56,7 @@
       handler="collective.nitf.setuphandlers.charcount_control_panel_update"
       profile="collective.nitf:default" />
 
+<<<<<<< HEAD
   <genericsetup:upgradeStep
       title="Fix default values"
       source="*"
@@ -72,6 +73,8 @@
       handler="collective.nitf.setuphandlers.upgrade_z3cformwidgets"
       profile="collective.nitf:default" />
 
+=======
+>>>>>>> behavior to pin nitf content.
   <genericsetup:registerProfile
       name="upgrade_1004_1005"
       title="Upgrade profile for collective.nitf from 1.0b4 to 1.0b5"
@@ -89,6 +92,7 @@
       profile="collective.nitf:default"
       />
 
+<<<<<<< HEAD
   <genericsetup:registerProfile
       name="upgrade_to_1007"
       title="collective.nitf upgrade to version 1007"
@@ -103,5 +107,7 @@
       description="collective.nitf add displayPublicationDateInByline property."
       handler="collective.nitf.setuphandlers.upgrade_to_1007"
       profile="collective.nitf:default" />
+=======
+>>>>>>> behavior to pin nitf content.
 
 </configure>

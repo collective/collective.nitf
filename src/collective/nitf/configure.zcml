@@ -56,6 +56,7 @@
       	permission="zope2.View"
       	/>
 
+<<<<<<< HEAD
   	<browser:resourceDirectory
       	name="collective.nitf"
       	directory="static"
@@ -80,6 +81,8 @@
         permission="zope2.View"
 		/>
 
+=======
+>>>>>>> behavior to pin nitf content.
     <plone:behavior
         title="nitf pin behavior"
         description="Dexterity behavior to pin nitf content."

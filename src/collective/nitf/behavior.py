@@ -6,7 +6,10 @@ from zope import schema
 from plone.directives import form
 from collective.nitf import _
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> behavior to pin nitf content.
 class IPin(Interface):
     """
     """

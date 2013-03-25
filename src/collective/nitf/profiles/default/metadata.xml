@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <metadata>
+<<<<<<< HEAD
  <version>1007</version>
+=======
+ <version>1005</version>
+>>>>>>> behavior to pin nitf content.
  <dependencies>
   <dependency>profile-plone.app.dexterity:default</dependency>
   <dependency>profile-plone.app.registry:default</dependency>
