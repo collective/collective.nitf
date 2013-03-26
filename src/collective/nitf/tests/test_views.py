@@ -4,11 +4,11 @@ from AccessControl import Unauthorized
 from collective.nitf.controlpanel import INITFCharCountSettings
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.tests.test_content import zptlogo
 from plone.app.customerize import registration
 from plone.app.testing import TEST_USER_ID, logout, setRoles
 from plone.registry.interfaces import IRegistry
 from StringIO import StringIO
-from zope.app.file.tests.test_image import zptlogo
 from zope.component import getMultiAdapter, queryMultiAdapter, getUtility
 from zope.interface import directlyProvides
 

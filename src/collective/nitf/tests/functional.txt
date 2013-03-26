@@ -50,7 +50,7 @@ A news article can contain images:
     >>> browser.getLink('Miracle Cure').click()
     >>> browser.getLink('Image').click()
     >>> from cStringIO import StringIO
-    >>> from zope.app.file.tests.test_image import zptlogo
+    >>> from collective.nitf.tests.test_content import zptlogo
     >>> ctrl = browser.getControl(name='image_file')
     >>> ctrl.add_file(StringIO(zptlogo), 'image/gif', 'zpt.gif')
     >>> browser.getControl('Save').click()
