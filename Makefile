@@ -17,31 +17,33 @@ max_complexity = 12
 css_ignores = ! -name jquery\*
 js_ignores = ! -name jquery\*
 
-ack-install:
-	sudo apt-get install ack-grep
+install-qa:
+	npm install csslint -g
+	npm install jshint -g
 
-python-validation:
+qa: install-qa
+# QA runs only if an environment variable named QA is present
+	@echo Quality Assurance
+ifneq "$(QA)" ""
 	@echo Validating Python files
 	bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
 
-css-validation: ack-install
 	@echo Validating CSS files
-	npm install csslint -g
-	find $(src) -type f -name *.css $(css_ignores) | xargs csslint | ack-grep --passthru error
+	find $(src) -type f -name *.css $(css_ignores) | xargs csslint
 
-js-validation: ack-install
 	@echo Validating JavaScript files
-	npm install jshint -g
-	find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';' | ack-grep --passthru error
+	find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';'
 
-quality-assurance: python-validation css-validation js-validation
-	@echo Quality assurance
+	@echo Validating minimun test coverage
 	bin/coverage.sh $(minimum_coverage)
+else
+	@echo No QA environment variable present; skipping
+endif
 
 install:
 	mkdir -p buildout-cache/downloads
-	python bootstrap.py -c travis.cfg
-	bin/buildout -c travis.cfg $(options)
+	python bootstrap.py -c travis-multiversion.cfg
+	bin/buildout -c travis-multiversion.cfg $(options)
 
 tests:
 	bin/test
