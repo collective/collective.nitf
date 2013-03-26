@@ -17,28 +17,20 @@ max_complexity = 12
 css_ignores = ! -name jquery\*
 js_ignores = ! -name jquery\*
 
-.install-qa:
+qa:
+# QA runs only if an environment variable named QA is present
 ifneq "$(QA)" ""
-	npm install csslint -g
-	npm install jshint -g
-endif
-
-.python-validation:
 	@echo Validating Python files
 	bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
 
-qa: .python-validation tests .install-qa
-# QA runs only if an environment variable named QA is present
-	@echo Quality Assurance
-ifneq "$(QA)" ""
+	@echo Validating minimun test coverage
+	bin/coverage.sh $(minimum_coverage)
+
 	@echo Validating CSS files
 	find $(src) -type f -name *.css $(css_ignores) | xargs csslint
 
 	@echo Validating JavaScript files
 	find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';'
-
-	@echo Validating minimun test coverage
-	bin/coverage.sh $(minimum_coverage)
 else
 	@echo 'No QA environment variable present; skipping'
 endif
