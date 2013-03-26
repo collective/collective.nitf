@@ -20,25 +20,27 @@ js_ignores = ! -name jquery\*
 qa:
 # QA runs only if an environment variable named QA is present
 ifneq "$(QA)" ""
-	@echo Validating Python files
-	bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
+    @echo Validating Python files
+    bin/flake8 --ignore=$(pep8_ignores) --max-complexity=$(max_complexity) $(src)
 
-	@echo Validating minimun test coverage
-	bin/coverage.sh $(minimum_coverage)
+    @echo Validating minimun test coverage
+    bin/coverage.sh $(minimum_coverage)
 
-	@echo Validating CSS files
-	find $(src) -type f -name *.css $(css_ignores) | xargs csslint
+    @echo Validating CSS files
+    npm install csslint -g 2>/dev/null
+    find $(src) -type f -name *.css $(css_ignores) | xargs csslint
 
-	@echo Validating JavaScript files
-	find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';'
+    @echo Validating JavaScript files
+    npm install jshint -g 2>/dev/null
+    find $(src) -type f -name *.js $(js_ignores) -exec jshint {} ';'
 else
-	@echo 'No QA environment variable present; skipping'
+    @echo 'No QA environment variable present; skipping'
 endif
 
 install:
-	mkdir -p buildout-cache/downloads
-	python bootstrap.py -c travis.cfg
-	bin/buildout -c travis.cfg $(options)
+    mkdir -p buildout-cache/downloads
+    python bootstrap.py -c travis.cfg
+    bin/buildout -c travis.cfg $(options)
 
 tests:
-	bin/test
+    bin/test
