@@ -42,8 +42,8 @@ endif
 
 install:
 	mkdir -p buildout-cache/downloads
-	python bootstrap.py -c travis-multiversion.cfg
-	bin/buildout -c travis-multiversion.cfg $(options)
+	python bootstrap.py -c travis.cfg
+	bin/buildout -c travis.cfg $(options)
 
 tests:
 	bin/test
