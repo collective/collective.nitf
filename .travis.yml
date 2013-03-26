@@ -7,7 +7,7 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 install:
-  - sed 's/travis-4.x.cfg/travis-$PLONE_VERSION.x.cfg/' travis.cfg
+  - sed -ie "s#travis-4.x.cfg#travis-$PLONE_VERSION.x.cfg#" travis.cfg
   - make install
 script: make tests
 after_success: make qa
