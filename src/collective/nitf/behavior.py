@@ -6,6 +6,7 @@ from zope import schema
 from plone.directives import form
 from collective.nitf import _
 
+
 class IPin(Interface):
     """
     """
