@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 import os
 
 version = '1.0a4.dev0'
@@ -54,7 +56,7 @@ setup(name='collective.nitf',
         'five.grok',
         'Pillow',
         'plone.app.dexterity[grok]',
-        'plone.app.layout',
+        'plone.app.imaging',
         'plone.app.lockingbehavior',
         'plone.app.portlets',
         'plone.app.referenceablebehavior',
@@ -65,7 +67,6 @@ setup(name='collective.nitf',
         'plone.dexterity',
         'plone.directives.dexterity',
         'plone.directives.form',
-        'plone.formwidget.autocomplete',
         'plone.formwidget.contenttree',
         'plone.indexer',
         'plone.portlets',
@@ -73,13 +74,22 @@ setup(name='collective.nitf',
         'plone.uuid',
         'Products.CMFCore',
         'Products.CMFPlone>=4.2',
+        'Products.GenericSetup',
         'setuptools',
         'z3c.form',
         'z3c.relationfield',
+        'zope.browserpage',
+        'zope.component',
+        'zope.formlib',
+        #'zope.i18n',  # XXX: https://github.com/collective/collective.z3cform.widgets/issues/28
+        'zope.i18nmessageid',
+        'zope.interface',
+        'zope.schema',
         ],
       extras_require={
         'test': [
           'plone.app.collection',
+          'plone.app.customerize',
           'plone.app.testing',
           'plone.browserlayer',
           'plone.testing',
