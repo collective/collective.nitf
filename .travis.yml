@@ -13,9 +13,3 @@ script: make tests
 after_success: make qa
 notifications:
   irc: irc.freenode.org#simplesconsultoria
-
-# TODO: fix 4.3 compatibility
-matrix:
-  allow_failures:
-    env:
-      - PLONE_VERSION=4.3
