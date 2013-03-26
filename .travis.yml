@@ -2,8 +2,11 @@ language: python
 python: 2.7
 env:
   - PLONE_VERSION=4.2 QA=true
-# XXX: skip for now as it is failing anyway
-#  - PLONE_VERSION=4.3
+  - PLONE_VERSION=4.3
+matrix:
+  allow_failures:
+    - python: 2.7
+      env: PLONE_VERSION=4.3
 before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
