@@ -80,8 +80,8 @@ setup(name='collective.nitf',
         'z3c.relationfield',
         'zope.browserpage',
         'zope.component',
-        'zope.formlib',
-        #'zope.i18n',  # XXX: https://github.com/collective/collective.z3cform.widgets/issues/28
+        #'zope.formlib',  # XXX: https://github.com/collective/collective.z3cform.widgets/issues/28
+        #'zope.i18n',
         'zope.i18nmessageid',
         'zope.interface',
         'zope.schema',
