@@ -1,0 +1,3 @@
+<object meta_type="Plone Types Tool" name="portal_types">
+ <object meta_type="Dexterity FTI" name="collective.nitf.content" />
+</object>
