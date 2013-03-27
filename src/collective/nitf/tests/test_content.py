@@ -11,6 +11,7 @@ from plone.uuid.interfaces import IAttributeUUID
 from StringIO import StringIO
 from zope.component import createObject
 from zope.component import queryUtility
+from collective.nitf.behavior import IPin
 
 import unittest2 as unittest
 
@@ -271,3 +272,11 @@ class DexterityImageTestCase(unittest.TestCase):
 
         # image class
         self.assertIn('class="myClass"', tag(css_class='myClass'))
+
+    def test_pin_behavior(self):
+        self.assertTrue(IPin.providedBy(self.n1))
+        self.assertIn('pin', self.portal.portal_catalog.indexes())
+        self.assertFalse(self.portal.portal_catalog(pin=True))
+        self.n1.pin = True
+        self.n1.reindexObject()
+        self.assertTrue(self.portal.portal_catalog(pin=True))
