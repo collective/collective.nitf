@@ -1,8 +1,8 @@
 Share and Enjoy
 ---------------
 
-collective.nitf would not have been possible without the contribution of the
-following people:
+``collective.nitf`` would not have been possible without the contribution of
+the following people:
 
 - Héctor Velarde
 - Joaquín Rosales
@@ -12,5 +12,8 @@ following people:
 - Gonzalo Almeida
 - Franco Pellegrini
 
+You can find an updated list of package contributors on `GitHub`_.
+
 Development sponsored by Open Multimedia.
 
+.. _`GitHub`: https://github.com/collective/collective.nitf/contributors
