@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add pin behavior to have a way mark NITF content [jpgimenez]
+
 - Do not show the folder listing if there are no files or links inside the
   News Article. [hvelarde]
 
@@ -40,8 +42,6 @@ Because you have to know where your towel is.
 
 - Added charcount functionality for title and description [quimera]
 
-- Add pin behavior to have a way mark nitf content [jpgimenez]
-
 
 1.0a3 (2012-07-06)
 ^^^^^^^^^^^^^^^^^^
@@ -68,4 +68,3 @@ Because you have to know where your towel is.
 - Initial release.
 
 .. _`#33`: https://github.com/collective/collective.nitf/issues/33
-
