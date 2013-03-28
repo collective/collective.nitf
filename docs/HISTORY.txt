@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Package is no longer compatible with Plone 4.1. [hvelarde]
+
 - Do not show the folder listing if there are no files or links inside the
   News Article. [hvelarde]
 
