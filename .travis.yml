@@ -24,6 +24,7 @@ install:
   - test "$PLONE_VERSION" = "4.1" && cat travis-4.1.x.cfg > travis.cfg || true
   - mkdir -p buildout-cache/downloads
   - python bootstrap.py -c travis.cfg
+  - test "$PLONE_VERSION" = "4.1" && bin/buildout -c travis.cfg -N -q -t 3 annotate || true
   - bin/buildout -c travis.cfg -N -q -t 3
 before_script:
   - export DISPLAY=:99.0
