@@ -56,4 +56,12 @@
       handler="collective.nitf.setuphandlers.charcount_control_panel_update"
       profile="collective.nitf:default" />
 
+  <genericsetup:upgradeStep
+      title="Fix default values"
+      source="*"
+      destination="1005"
+      description="Fix textIndexer for content with wrong default values"
+      handler="collective.nitf.setuphandlers.default_values_update"
+      profile="collective.nitf:default" />
+
 </configure>

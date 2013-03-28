@@ -117,3 +117,19 @@ def charcount_control_panel_update(context):
     setup.runImportStepFromProfile(PROFILE_ID, 'plone.app.registry')
     context.runImportStepFromProfile(PROFILE_ID, 'jsregistry')
     context.runImportStepFromProfile(PROFILE_ID, 'cssregistry')
+
+
+def default_values_update(context, logger=None):
+    """
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    catalog = getToolByName(context, 'portal_catalog')
+    for item in catalog(portal_type='collective.nitf.content'):
+        obj = item.getObject()
+        if None in (obj.id, obj.Title(), obj.subtitle,
+                    obj.Description(), obj.byline, obj.text,
+                    obj.location):
+            obj.reindexObject(idxs=['SearchableText'])
