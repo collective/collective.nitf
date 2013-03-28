@@ -4,7 +4,7 @@
 *~
 .installed.cfg
 .mr.developer.cfg
-Makefile.local
+Makefile
 bin/
 coverage/
 develop-eggs/
