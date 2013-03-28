@@ -42,6 +42,8 @@ Because you have to know where your towel is.
 
 - Added charcount functionality for title and description [quimera]
 
+- Add pin behavior to have a way mark nitf content [jpgimenez]
+
 
 1.0a3 (2012-07-06)
 ^^^^^^^^^^^^^^^^^^
