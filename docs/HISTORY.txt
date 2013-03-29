@@ -6,6 +6,18 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Upgrade step to fix content created before the setting of widgets default values. [jpgimenez]
+
+- Fix for summary_view with nitf content inside. [jpgimenez]
+
+- Remove old js code to collapse edit form. [jpgimenez]
+
+- Support image traversal. [jpgimenez]
+
+- Use galleria.io for image galleries with a custom theme. [jpgimenez]
+
+- Move the gallery to an overlay and load the images with ajax. [jpgimenez]
+
 - Package is no longer compatible with Plone 4.1. [hvelarde]
 
 - Do not show the folder listing if there are no files or links inside the
