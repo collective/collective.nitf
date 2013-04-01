@@ -214,3 +214,11 @@
     background-image: url(++resource++collective.galleria/classic-map.png);
     background-repeat: no-repeat;
 }
+
+#mediabox {
+	/* must be initially hidden */
+	
+	/* place overlay on top of other elements */
+	z-index:10000;
+	height: 500px; width: 500px;
+}
