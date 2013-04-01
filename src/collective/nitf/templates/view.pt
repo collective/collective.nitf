@@ -6,20 +6,6 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.nitf">
 
-<head>
-    <metal:block fill-slot="style_slot">
-        <style>
-            #mediabox {
-			    /* must be initially hidden */
-			 
-			    /* place overlay on top of other elements */
-			    z-index:10000;
-			    height: 500px; width: 500px;
-			}
-		</style>
-    </metal:block>
-</head>
-
 <body>
 
     <div tal:replace="structure provider:plone.abovecontenttitle" />
@@ -47,7 +33,10 @@
             <div class="newsImageContainer"
                 tal:define="image context/getImage"
                 tal:condition="image">
-                <a src="@@nitf_galleria" id="parent-fieldname-image">
+                <a href="@@nitf_galleria"
+                   id="parent-fieldname-image"
+                   class="parent-nitf-image"
+                   tal:attributes="href string:${context/absolute_url}/@@nitf_galleria">
                    <img src="" alt=""
                        tal:replace="structure python: image.tag(scale='mini', css_class='newsImage nitf')" /></a>
                 <p class="discreet"
@@ -79,7 +68,7 @@
 	                (function($) {
 	                    "use strict";
 	                    $(document).ready(function() {
-	                        $("#parent-fieldname-image").prepOverlay({
+	                        $(".parent-nitf-image").prepOverlay({
 							    subtype: 'ajax',
 							    filter: '#content-core > *',
 							    width: '524px',

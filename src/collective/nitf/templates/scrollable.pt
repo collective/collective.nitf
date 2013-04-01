@@ -95,7 +95,7 @@
 
     <fieldset id="related-items" tal:condition="exists:context/relatedItems">
         <legend i18n:translate="">Related items</legend>
-        <tal:relateditems tal:content="structure view/w/IRelatedItems.relatedItems/render" />
+        <tal:relateditems tal:content="structure view/w/IRelatedItems.relatedItems/render|nothing" />
     </fieldset>
 
     <fieldset id="folder-listing">
