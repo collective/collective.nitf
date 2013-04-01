@@ -21,7 +21,7 @@ from zope import schema
 from zope.component import getUtility
 
 
-class INITF(form.Schema):
+class INITF(IDublinCore):
     """A news item based on the News Industry Text Format specification.
     """
 
