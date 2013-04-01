@@ -96,6 +96,7 @@ class INITF(IDublinCore):
                                   source=ObjPathSourceBinder()),
         required=False,
     )
+    # XXX: MultiContentSearchFieldWidget is broken in plone4.3
     form.widget(relatedItems=MultiContentSearchFieldWidget)
 
     location = schema.TextLine(
