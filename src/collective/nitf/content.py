@@ -28,7 +28,7 @@ class INITF(IDublinCore):
     #title = schema.TextLine()
         # nitf/head/title and nitf/body/body.head/hedline/hl1
 
-    form.order_after(subtitle='IDublinCore.title')
+    form.order_after(subtitle='title')
     subtitle = schema.TextLine(
         # nitf/body/body.head/hedline/hl2
         title=_(u'Subtitle'),
@@ -173,7 +173,7 @@ def urgency_default_value(data):
 
 
 # TODO: move this to Dexterity's core
-@form.default_value(field=IDublinCore['language'])
+@form.default_value(field=INITF['language'])
 def language_default_value(data):
     """ Returns portal's default language or None.
     """
