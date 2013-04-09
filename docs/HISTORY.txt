@@ -6,6 +6,10 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove needless registration of TokenInputFieldWidget now made at
+  installation time of collective.z3cform.widgets in new release 1.0b6.
+  [hvelarde]
+
 - Upgrade step to fix content created before the setting of widgets default values. [jpgimenez]
 
 - Fix for summary_view with nitf content inside. [jpgimenez]
