@@ -133,3 +133,15 @@ def default_values_update(context, logger=None):
                     obj.Description(), obj.byline, obj.text,
                     obj.location):
             obj.reindexObject(idxs=['SearchableText'])
+
+
+def upgrade_z3cformwidgets(context, logger=None):
+    """
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    profile = 'profile-collective.z3cform.widgets:1_to_2'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(profile)
