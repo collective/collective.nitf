@@ -6,7 +6,7 @@ from collective.z3cform.widgets.multicontent_search_widget import MultiContentSe
 from five import grok
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
-from plone.app.textfield.value import RichTextValue
+#from plone.app.textfield.value import RichTextValue
 from plone.dexterity.content import Container
 from plone.directives import form
 from plone.formwidget.contenttree import ObjPathSourceBinder
@@ -52,8 +52,9 @@ class INITF(form.Schema):
     text = RichText(
         # nitf/body/body.content
         title=_(u'Body text'),
-        default=RichTextValue(u''),
-        missing_value=RichTextValue(u''),
+        # XXX: breaks the widget in Plone 4.3
+#        default=RichTextValue(u''),
+#        missing_value=RichTextValue(u''),
         required=False,
     )
 
@@ -194,7 +195,9 @@ def textIndexer(obj):
     text as plain text.
     """
     transformer = ITransformer(obj)
-    text = transformer(obj.text, 'text/plain')
+    text = obj.text
+    if text:
+        text = transformer(obj.text, 'text/plain')
 
     searchable_text = [safe_unicode(entry) for entry in (
         obj.id,
