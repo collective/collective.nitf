@@ -8,6 +8,7 @@ from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 #from plone.app.textfield.value import RichTextValue
 from plone.dexterity.content import Container
+from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.directives import form
 from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
@@ -110,16 +111,10 @@ class INITF(form.Schema):
         required=False,
     )
 
-    # XXX: hack to makes plone.supermodel.fieldsets happy.
-    subjects = schema.TextLine()
-    language = schema.TextLine()
-    form.omitted('subjects', 'language')
-
     form.fieldset(
         'categorization',
         label=_(u'Categorization'),
-        fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
-                'language'],
+        fields=['relatedItems', 'section', 'urgency', 'genre'],
     )
 
 
@@ -177,7 +172,7 @@ def urgency_default_value(data):
 
 
 # TODO: move this to Dexterity's core
-@form.default_value(field=INITF['language'])
+@form.default_value(field=IDublinCore['language'])
 def language_default_value(data):
     """ Returns portal's default language or None.
     """

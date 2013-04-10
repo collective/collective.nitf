@@ -6,6 +6,10 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove default and missing_value attributes from text field, this is
+  causing problems with the RichText widget in Plone 4.3, now that is
+  handled in the indexer. [jpgimenez]
+
 - Package is now Dexterity 2.0 and Plone 4.3 compatible (closes `#52`_).
   [jpgimenez, hvelarde]
 
