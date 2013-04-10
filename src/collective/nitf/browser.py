@@ -49,8 +49,8 @@ class AddForm(dexterity.AddForm):
         super(AddForm, self).updateWidgets()
         # XXX why we need to do this?
         self.widgets['subtitle'].style = u'width: 100%;'
-        self.widgets['description'].rows = 3
-        self.widgets['description'].style = u'width: 100%;'
+        self.widgets['IDublinCore.description'].rows = 3
+        self.widgets['IDublinCore.description'].style = u'width: 100%;'
 
 
 class EditForm(dexterity.EditForm):
@@ -77,8 +77,8 @@ class EditForm(dexterity.EditForm):
         super(EditForm, self).updateWidgets()
         # XXX why we need to do this?
         self.widgets['subtitle'].style = u'width: 100%;'
-        self.widgets['description'].rows = 3
-        self.widgets['description'].style = u'width: 100%;'
+        self.widgets['IDublinCore.description'].rows = 3
+        self.widgets['IDublinCore.description'].style = u'width: 100%;'
 
 
 class View(dexterity.DisplayForm):

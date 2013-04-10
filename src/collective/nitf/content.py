@@ -4,7 +4,6 @@ from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
 from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
 from five import grok
-from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.app.textfield.value import RichTextValue
@@ -21,14 +20,14 @@ from zope import schema
 from zope.component import getUtility
 
 
-class INITF(IDublinCore):
+class INITF(form.Schema):
     """A news item based on the News Industry Text Format specification.
     """
 
     #title = schema.TextLine()
         # nitf/head/title and nitf/body/body.head/hedline/hl1
 
-    form.order_after(subtitle='title')
+    form.order_after(subtitle='IDublinCore.title')
     subtitle = schema.TextLine(
         # nitf/body/body.head/hedline/hl2
         title=_(u'Subtitle'),
@@ -110,6 +109,11 @@ class INITF(IDublinCore):
         missing_value=u'',
         required=False,
     )
+
+    # XXX: hack to makes plone.supermodel.fieldsets happy.
+    subjects = schema.TextLine()
+    language = schema.TextLine()
+    form.omitted('subjects', 'language')
 
     form.fieldset(
         'categorization',
