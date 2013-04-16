@@ -78,7 +78,6 @@ msgstr "Contexto"
 msgid "Body text"
 msgstr "Cuerpo del texto"
 
-#: collective/nitf/templates/scrollable.pt:90
 #: collective/nitf/templates/view.pt:39
 msgid "By"
 msgstr "Por"
@@ -100,7 +99,6 @@ msgid "Characters left: "
 msgstr "Caracteres restantes: "
 
 #: collective/nitf/templates/display_macros.pt:41
-#: collective/nitf/templates/scrollable.pt:102
 #: collective/nitf/templates/view.pt:68
 msgid "Contents"
 msgstr "Contenido"
@@ -138,7 +136,7 @@ msgid "Default Urgency"
 msgstr "Urgencia por defecto"
 
 #: configure.zcml
-msgid "Displays a scrollable gallery in the news article"
+msgid "Displays a gallery in the news article"
 msgstr "Muestra una galería de fotos en el artículo de noticias"
 
 #: configure.zcml
@@ -300,7 +298,6 @@ msgid "Relatable Content Types"
 msgstr "Tipos de contenido relacionables"
 
 #: collective/nitf/templates/display_macros.pt:36
-#: collective/nitf/templates/scrollable.pt:97
 #: collective/nitf/templates/view.pt:63
 msgid "Related items"
 msgstr "Contenido relacionado"
@@ -326,7 +323,7 @@ msgid "Scener"
 msgstr ""
 
 #: configure.zcml
-msgid "Scrollable Gallery View"
+msgid "Gallery View"
 msgstr "Vista de galería de fotos"
 
 #: collective/nitf/content.py:73

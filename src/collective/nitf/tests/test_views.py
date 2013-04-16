@@ -108,54 +108,6 @@ class DefaultViewTestCase(unittest.TestCase):
         self.assertEqual(media[1].getObject().id, 'bar')
         self.assertEqual(media[2].getObject().id, 'baz')
 
-    def test_chunks(self):
-        """ Test is chunks are created from a list.
-        """
-        view = getMultiAdapter((self.n1, self.request), name='view')
-        chunks = view._chunks
-        # create chunks of 3 elements
-        data = chunks([1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4], 3)
-        # generator elements are accessed calling next()
-        self.assertEqual(data.next(), [1, 1, 1])
-        self.assertEqual(data.next(), [2, 2, 2])
-        self.assertEqual(data.next(), [3, 3, 3])
-        self.assertEqual(data.next(), [4, 4])
-
-    def test_get_images_in_groups(self):
-        view = getMultiAdapter((self.n1, self.request), name='view')
-        groups = len([i for i in view.get_images_in_groups()])
-        self.assertEqual(groups, 0)
-
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
-        groups = len([i for i in view.get_images_in_groups()])
-        # we only have one image, so we only have one group
-        self.assertEqual(groups, 1)
-
-
-class ScrollableViewTestCase(unittest.TestCase):
-
-    layer = INTEGRATION_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
-        directlyProvides(self.request, INITFLayer)
-
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
-
-    def test_scrollable_view_is_registered(self):
-        registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertIn('scrollable', registered)
-
-        view = queryMultiAdapter((self.n1, self.request), name='scrollable')
-        self.assertIsNotNone(view)
-
 
 class NITFViewTestCase(unittest.TestCase):
 
@@ -173,10 +125,6 @@ class NITFViewTestCase(unittest.TestCase):
 
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         self.n1 = self.folder['n1']
-
-    def test_scrollable_view_is_registered(self):
-        view = queryMultiAdapter((self.n1, self.request), name='nitf')
-        self.assertIsNotNone(view)
 
     def test_get_mediatype(self):
         view = getMultiAdapter((self.n1, self.request), name='nitf')
@@ -217,6 +165,30 @@ class NewsMLViewTestCase(unittest.TestCase):
 
     def test_newsml_view_is_registered(self):
         view = queryMultiAdapter((self.n1, self.request), name='newsml')
+        self.assertIsNotNone(view)
+
+
+class GalleriaViewTestCase(unittest.TestCase):
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        directlyProvides(self.request, INITFLayer)
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_nitf_galleria_view_is_registered(self):
+        registered = [v.name for v in registration.getViews(INITFLayer)]
+        self.assertIn('nitf_galleria', registered)
+
+        view = queryMultiAdapter((self.n1, self.request), name='nitf_galleria')
         self.assertIsNotNone(view)
 
 
