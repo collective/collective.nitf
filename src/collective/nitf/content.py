@@ -149,6 +149,14 @@ class NITF(Container):
         if image is not None:
             return image.tag(**kwargs)
 
+    # XXX: deal with images in folder_summary_view
+    #      check later with @ericof and @jpgimenez
+    def image_thumb(self):
+        """Return a thumbnail."""
+        if image is not None:
+            view = self.unrestrictedTraverse('@@images')
+            return view.scale(fieldname='image', scale='thumb').index_html()
+
 
 @form.default_value(field=INITF['genre'])
 def genre_default_value(data):
