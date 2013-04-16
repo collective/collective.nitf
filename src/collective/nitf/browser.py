@@ -163,38 +163,12 @@ class View(dexterity.DisplayForm):
              DeprecationWarning)
         return self.context.tag(**kwargs)
 
-    # These methods are used in scrollable gallery for creating batches
-    def _chunks(self, l, n):
-        """ Yield successive n-sized chunks from l.
-        """
-        for i in xrange(0, len(l), n):
-            yield l[i:i + n]
-
-    TAG = '<img src="%s/image_%s" alt="%s" title="%s" />'
-
-    def get_images_in_groups(self, n=5, size='thumb'):
-        """ Return a list containing groups of n image tags.
-        """
-        # TODO: check for a valid size
-        images = [i.getObject() for i in self.get_images()]
-        images = [self.TAG % (i.absolute_url(), size,
-                              i.Title(),
-                              i.Description()) for i in images]
-
-        return self._chunks(images, n)
-
 
 # TODO: get rid of this class
 class Display_Macros(View):
     grok.context(INITF)
     grok.require('zope2.View')
     grok.layer(INITFLayer)
-
-
-class Scrollable(View):
-    grok.context(INITF)
-    grok.layer(INITFLayer)
-    grok.require('zope2.View')
 
 
 class Folder_Summary_View(grok.View):
@@ -378,6 +352,23 @@ class Nitf_Galleria(View):
     grok.layer(INITFLayer)
     grok.require('zope2.View')
     grok.name('nitf_galleria')
+
+    def imagesJson(self):
+        """ """
+        try:
+            img_brains = self.get_images()
+        except IndexError:
+            img_brains = None
+        import pdb; pdb.set_trace()
+        if img_brains:
+            data = [{'image': str(brain.getPath() + '/image_preview'),
+                     'title': brain.Title,
+                     'description': brain.Description, 'right': brain.Rights(),
+                     'link': brain.getURL()} for brain in img_brains]
+        else:
+            data = []
+
+        return json.dumps(data)
 
 
 class ImageScaling(BaseImageScaling):
