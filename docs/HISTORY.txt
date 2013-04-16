@@ -54,6 +54,8 @@ Because you have to know where your towel is.
 
 - Added charcount functionality for title and description [quimera]
 
+- fix alternative view for news articles. [cleberjsantos]
+
 
 1.0a3 (2012-07-06)
 ^^^^^^^^^^^^^^^^^^

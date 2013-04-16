@@ -11,6 +11,7 @@ the following people:
 - Silvestre Huens
 - Gonzalo Almeida
 - Franco Pellegrini
+- Cleber J Santos
 
 You can find an updated list of package contributors on `GitHub`_.
 
