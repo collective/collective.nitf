@@ -5,7 +5,7 @@ env:
   - PLONE_VERSION=4.3
 matrix:
   allow_failures:
-    - PLONE_VERSION=4.3
+    - env: PLONE_VERSION=4.3
 install:
   - sed -ie "s#travis-4.x.cfg#travis-$PLONE_VERSION.x.cfg#" travis.cfg
   - mkdir -p buildout-cache/downloads
