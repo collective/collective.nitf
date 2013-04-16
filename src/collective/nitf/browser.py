@@ -359,7 +359,6 @@ class Nitf_Galleria(View):
             img_brains = self.get_images()
         except IndexError:
             img_brains = None
-        import pdb; pdb.set_trace()
         if img_brains:
             data = [{'image': str(brain.getPath() + '/image_preview'),
                      'title': brain.Title,
