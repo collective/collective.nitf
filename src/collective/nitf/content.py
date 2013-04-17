@@ -153,7 +153,7 @@ class NITF(Container):
     #      check later with @ericof and @jpgimenez
     def image_thumb(self):
         """Return a thumbnail."""
-        if image is not None:
+        if self.image is not None:
             view = self.unrestrictedTraverse('@@images')
             return view.scale(fieldname='image', scale='thumb').index_html()
 
