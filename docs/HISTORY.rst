@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- News Article now support plone.app.contenttypes [ericof]
+
 - Remove default and missing_value attributes from text field, this is
   causing problems with the RichText widget in Plone 4.3, now that is
   handled in the indexer. [jpgimenez]
