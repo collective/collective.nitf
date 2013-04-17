@@ -147,7 +147,14 @@ class NITF(Container):
         # title attributes
         image = self.getImage()
         if image is not None:
-            return image.tag(**kwargs)
+            scales = image.restrictedTraverse('@@images')
+            if 'scale' in kwargs:
+                scale_id = kwargs.get('scale')
+                del kwargs['scale']
+            else:
+                scale_id = 'thumb'
+            scale = scales.scale(fieldname='image', scale=scale_id)
+            return scale.tag(**kwargs)
 
     # XXX: deal with images in folder_summary_view
     #      check later with @ericof and @jpgimenez

@@ -140,8 +140,8 @@ class ContentTypeTestCase(unittest.TestCase):
         # image size
         self.assertIn('height="16" width="16', tag())
 
-        # image scale
-        self.assertIn('src="http://nohost/plone/test-folder/n1/foo/image_preview"',
+        # image scale using @@images
+        self.assertIn('src="http://nohost/plone/test-folder/n1/foo/@@images/',
                       tag(scale='preview'))
 
         # image class
