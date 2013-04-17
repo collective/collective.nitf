@@ -153,9 +153,11 @@ class NITF(Container):
     #      check later with @ericof and @jpgimenez
     def image_thumb(self):
         """Return a thumbnail."""
-        if self.image is not None:
-            view = self.unrestrictedTraverse('@@images')
-            return view.scale(fieldname='image', scale='thumb').index_html()
+        image = self.image()
+        if image is not None:
+            view = image.unrestrictedTraverse('@@images')
+            # Return the data
+            return view.scale(fieldname='image', scale='thumb').data
 
 
 @form.default_value(field=INITF['genre'])
