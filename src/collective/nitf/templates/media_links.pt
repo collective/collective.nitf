@@ -1,9 +1,0 @@
-<link rel="stylesheet" type="text/css" media="screen" href=""
-      tal:attributes="href string:${context/absolute_url}/++resource++collective.nitf/styles.css" />
-<link rel="stylesheet" type="text/css" media="screen" href=""
-      tal:attributes="href string:${context/absolute_url}/++resource++collective.nitf/scrollable-horizontal.css" />
-<link rel="stylesheet" type="text/css" media="screen" href=""
-      tal:attributes="href string:${context/absolute_url}/++resource++collective.nitf/scrollable-button.css" />
-
-<script type="text/javascript" src=""
-        tal:attributes="src string:${context/absolute_url}/++resource++collective.nitf/nitf_media.js"></script>

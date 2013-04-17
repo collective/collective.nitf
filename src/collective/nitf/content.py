@@ -160,7 +160,7 @@ class NITF(Container):
     #      check later with @ericof and @jpgimenez
     def image_thumb(self):
         """Return a thumbnail."""
-        image = self.image()
+        image = self.getImage()
         if image is not None:
             view = image.unrestrictedTraverse('@@images')
             # Return the data

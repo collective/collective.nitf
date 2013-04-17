@@ -77,7 +77,6 @@ msgstr ""
 msgid "Body text"
 msgstr ""
 
-#: collective/nitf/templates/scrollable.pt:90
 #: collective/nitf/templates/view.pt:39
 msgid "By"
 msgstr ""
@@ -99,7 +98,6 @@ msgid "Characters left: "
 msgstr ""
 
 #: collective/nitf/templates/display_macros.pt:41
-#: collective/nitf/templates/scrollable.pt:102
 #: collective/nitf/templates/view.pt:68
 msgid "Contents"
 msgstr ""
@@ -137,7 +135,7 @@ msgid "Default Urgency"
 msgstr ""
 
 #: configure.zcml
-msgid "Displays a scrollable gallery in the news article"
+msgid "Displays a gallery in the news article"
 msgstr ""
 
 #: configure.zcml
@@ -299,7 +297,6 @@ msgid "Relatable Content Types"
 msgstr ""
 
 #: collective/nitf/templates/display_macros.pt:36
-#: collective/nitf/templates/scrollable.pt:97
 #: collective/nitf/templates/view.pt:63
 msgid "Related items"
 msgstr ""
@@ -325,7 +322,7 @@ msgid "Scener"
 msgstr ""
 
 #: configure.zcml
-msgid "Scrollable Gallery View"
+msgid "Gallery View"
 msgstr ""
 
 #: collective/nitf/content.py:73
