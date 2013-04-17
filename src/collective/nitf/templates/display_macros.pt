@@ -18,9 +18,10 @@
                 tal:condition="images">
                 <tal:items repeat="item images">
                     <a tal:define="item_obj item/getObject;
-                                   item_data python:{'title': '', 'data-description': item.Description}"
-                        tal:attributes="href python:item_obj.getImage().absolute_url() + '/image_large'">
-                        <img tal:replace="structure python:item_obj.getImage().tag(scale='thumb', css_class='media-image', **item_data)" />
+                                   item_data python:{'title': '', 'data-description': item.Description};
+                                   scales item_obj/@@images"
+                        tal:attributes="href python:scales.scale(fieldname='image', scale='preview').absolute_url()">
+                        <img tal:replace="structure python:scales.tag(scale='thumb', css_class='media-image', **item_data)" />
                     </a>
                 </tal:items>
                 <div class="visualClear"><!-- --></div>

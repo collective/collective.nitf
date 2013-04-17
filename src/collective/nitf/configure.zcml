@@ -55,4 +55,9 @@
       	permission="zope2.View"
       	/>
 
+  	<browser:resourceDirectory
+      	name="collective.nitf"
+      	directory="static"
+      	/>
+
 </configure>

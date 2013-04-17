@@ -4,11 +4,11 @@ from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
 from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
 from five import grok
-from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
-from plone.app.textfield.value import RichTextValue
+#from plone.app.textfield.value import RichTextValue
 from plone.dexterity.content import Container
+from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.directives import form
 from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
@@ -53,8 +53,9 @@ class INITF(form.Schema):
     text = RichText(
         # nitf/body/body.content
         title=_(u'Body text'),
-        default=RichTextValue(u''),
-        missing_value=RichTextValue(u''),
+        # XXX: breaks the widget in Plone 4.3
+#        default=RichTextValue(u''),
+#        missing_value=RichTextValue(u''),
         required=False,
     )
 
@@ -113,8 +114,7 @@ class INITF(form.Schema):
     form.fieldset(
         'categorization',
         label=_(u'Categorization'),
-        fields=['relatedItems', 'section', 'urgency', 'genre', 'subjects',
-                'language'],
+        fields=['relatedItems', 'section', 'urgency', 'genre'],
     )
 
 
@@ -147,7 +147,14 @@ class NITF(Container):
         # title attributes
         image = self.getImage()
         if image is not None:
-            return image.tag(**kwargs)
+            scales = image.restrictedTraverse('@@images')
+            if 'scale' in kwargs:
+                scale_id = kwargs.get('scale')
+                del kwargs['scale']
+            else:
+                scale_id = 'thumb'
+            scale = scales.scale(fieldname='image', scale=scale_id)
+            return scale.tag(**kwargs)
 
     # XXX: deal with images in folder_summary_view
     #      check later with @ericof and @jpgimenez
@@ -155,8 +162,9 @@ class NITF(Container):
         """Return a thumbnail."""
         image = self.getImage()
         if image is not None:
-            view = self.unrestrictedTraverse('@@images')
-            return view.scale(fieldname='image', scale='thumb').index_html()
+            view = image.unrestrictedTraverse('@@images')
+            # Return the data
+            return view.scale(fieldname='image', scale='thumb').data
 
 
 @form.default_value(field=INITF['genre'])
@@ -199,7 +207,9 @@ def textIndexer(obj):
     text as plain text.
     """
     transformer = ITransformer(obj)
-    text = transformer(obj.text, 'text/plain')
+    text = obj.text
+    if text:
+        text = transformer(obj.text, 'text/plain')
 
     searchable_text = [safe_unicode(entry) for entry in (
         obj.id,
