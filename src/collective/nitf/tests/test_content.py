@@ -115,6 +115,16 @@ class ContentTypeTestCase(unittest.TestCase):
                               image=StringIO(zptlogo))
         self.assertEqual(imageCaption(), 'baz')
 
+    def test_image_thumb(self):
+        thumb = self.n1.image_thumb
+
+        # no images in news article, so no thumb must be present
+        self.assertIsNone(thumb())
+
+        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
+                              image=StringIO(zptlogo))
+        self.assertIsNotNone(thumb())
+
     def test_tag(self):
         tag = self.n1.tag
 
