@@ -8,10 +8,12 @@ import os
 version = '1.0a4.dev0'
 description = "A content type inspired on the IPTC's News Industry Text \
 Format specification."
-long_description = open("README.txt").read() + "\n" + \
-                   open(os.path.join("docs", "INSTALL.txt")).read() + "\n" + \
-                   open(os.path.join("docs", "CREDITS.txt")).read() + "\n" + \
-                   open(os.path.join("docs", "HISTORY.txt")).read()
+long_description = (
+    open("README.rst").read() + "\n" +
+    open(os.path.join("docs", "INSTALL.rst")).read() + "\n" +
+    open(os.path.join("docs", "CREDITS.rst")).read() + "\n" +
+    open(os.path.join("docs", "HISTORY.rst")).read()
+)
 
 setup(name='collective.nitf',
       version=version,
@@ -51,10 +53,10 @@ setup(name='collective.nitf',
         'collective.js.galleria',
         'collective.js.jqueryui',
         'collective.prettydate>=1.1',
-        'collective.z3cform.widgets',
+        'collective.z3cform.widgets>=1.0b6',
         'five.grok',
         'Pillow',
-        'plone.app.dexterity[grok]',
+        'plone.app.dexterity [grok, relations]',
         'plone.app.imaging',
         'plone.app.lockingbehavior',
         'plone.app.portlets',

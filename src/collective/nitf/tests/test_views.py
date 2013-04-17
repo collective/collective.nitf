@@ -246,7 +246,7 @@ class CharacterCountJSTestCase(unittest.TestCase):
         settings.show_description_counter = True
         view = getMultiAdapter((self.n1.restrictedTraverse('edit'), self.request), name='characters-count.js')
         render = view.render()
-        self.assertEqual(render, '$(document).ready(function() {$("#form-widgets-IDublinCore-title").charCount({"optimal": 100, "counterText": "Characters left: ", "allowed": 100}); $("#form-widgets-IDublinCore-description").charCount({"optimal": 200, "counterText": "Characters left: ", "allowed": 200});});')
+        self.assertEqual(render, '$(document).ready(function() {$("#form-widgets-title").charCount({"optimal": 100, "counterText": "Characters left: ", "allowed": 100}); $("#form-widgets-description").charCount({"optimal": 200, "counterText": "Characters left: ", "allowed": 200});});')
 
 
 class TraversalViewTestCase(unittest.TestCase):

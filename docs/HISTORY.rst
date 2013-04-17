@@ -6,9 +6,23 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Upgrade step to fix content created before the setting of widgets default values. [jpgimenez]
+- News Article now support plone.app.contenttypes [ericof]
 
-- Fix for summary_view with nitf content inside. [jpgimenez]
+- Remove default and missing_value attributes from text field, this is
+  causing problems with the RichText widget in Plone 4.3, now that is
+  handled in the indexer. [jpgimenez]
+
+- Package is now Dexterity 2.0 and Plone 4.3 compatible (closes `#52`_).
+  [jpgimenez, hvelarde]
+
+- Remove needless registration of TokenInputFieldWidget now made at
+  installation time of collective.z3cform.widgets in new release 1.0b6.
+  [hvelarde]
+
+- Upgrade step to fix content created before the setting of widgets default
+  values (closes `#49`_). [jpgimenez]
+
+- Fix for summary_view with NITF content inside. [jpgimenez]
 
 - Remove old js code to collapse edit form. [jpgimenez]
 
@@ -82,4 +96,5 @@ Because you have to know where your towel is.
 - Initial release.
 
 .. _`#33`: https://github.com/collective/collective.nitf/issues/33
-
+.. _`#49`: https://github.com/collective/collective.nitf/issues/49
+.. _`#52`: https://github.com/collective/collective.nitf/issues/52
