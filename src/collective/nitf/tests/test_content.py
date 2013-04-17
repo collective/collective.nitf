@@ -5,6 +5,7 @@ from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.dexterity.fti import DexterityFTI
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 from StringIO import StringIO
@@ -133,6 +134,110 @@ class ContentTypeTestCase(unittest.TestCase):
 
         self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
                               image=StringIO(zptlogo))
+
+        # image title must be in both, alt and title attributes
+        self.assertIn('alt="bar" title="bar"', tag())
+
+        # image size
+        self.assertIn('height="16" width="16', tag())
+
+        # image scale using @@images
+        self.assertIn('src="http://nohost/plone/test-folder/n1/foo/@@images/',
+                      tag(scale='preview'))
+
+        # image class
+        self.assertIn('class="myClass"', tag(css_class='myClass'))
+
+
+IMAGE_SCHEMA = '''<model xmlns="http://namespaces.plone.org/supermodel/schema"
+       xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
+       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+       i18n:domain="plone">
+  <schema>
+    <field name="title" type="zope.schema.TextLine">
+      <description />
+      <required>False</required>
+      <title>Title</title>
+    </field>
+    <field name="description" type="zope.schema.Text">
+      <description />
+      <required>False</required>
+      <title>Description</title>
+    </field>
+    <field name="image" type="plone.namedfile.field.NamedBlobImage"
+        marshal:primary="true">
+      <description />
+      <title i18n:translate="Image">Image</title>
+    </field>
+  </schema>
+</model>'''
+
+
+def dummy_image(data):
+    from plone.namedfile.file import NamedBlobImage
+    return NamedBlobImage(
+        data=data,
+        filename=u'zptlogo.gif')
+
+
+class DexterityImageTestCase(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUpImageType(self):
+        portal = self.portal
+        tt = portal.portal_types
+        del tt['Image']
+        fti = DexterityFTI('Image')
+        portal.portal_types._setObject('Image', fti)
+        fti.model_source = IMAGE_SCHEMA
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.setUpImageType()
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_getImage(self):
+        self.assertIsNone(self.n1.getImage())
+
+        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
+                              image=dummy_image(zptlogo))
+        image = self.n1.getImage()
+        self.assertEqual(image.id, 'foo')
+        self.assertEqual(image.Title(), 'bar')
+        self.assertEqual(image.Description(), 'baz')
+
+    def test_imageCaption(self):
+        imageCaption = self.n1.imageCaption
+        self.assertIsNone(imageCaption())
+        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
+                              image=dummy_image(zptlogo))
+        self.assertEqual(imageCaption(), 'baz')
+
+    def test_image_thumb(self):
+        thumb = self.n1.image_thumb
+
+        # no images in news article, so no thumb must be present
+        self.assertIsNone(thumb())
+
+        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
+                              image=dummy_image(zptlogo))
+        self.assertIsNotNone(thumb())
+
+    def test_tag(self):
+        tag = self.n1.tag
+
+        # no images in news article, so no tag must be present
+        self.assertIsNone(tag())
+
+        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
+                              image=dummy_image(zptlogo))
 
         # image title must be in both, alt and title attributes
         self.assertIn('alt="bar" title="bar"', tag())
