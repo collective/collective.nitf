@@ -5,7 +5,7 @@ from setuptools import setup
 
 import os
 
-version = '1.0a4.dev0'
+version = '1.0b1'
 description = "A content type inspired on the IPTC's News Industry Text \
 Format specification."
 long_description = (

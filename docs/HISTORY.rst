@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0a4 (unreleased)
+1.0b1 (2013-04-17)
 ^^^^^^^^^^^^^^^^^^
 
 - News Article now support plone.app.contenttypes [ericof]
