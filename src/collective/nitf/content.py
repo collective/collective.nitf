@@ -6,7 +6,6 @@ from collective.z3cform.widgets.multicontent_search_widget import MultiContentSe
 from five import grok
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
-#from plone.app.textfield.value import RichTextValue
 from plone.dexterity.content import Container
 from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.directives import form
@@ -53,9 +52,6 @@ class INITF(form.Schema):
     text = RichText(
         # nitf/body/body.content
         title=_(u'Body text'),
-        # XXX: breaks the widget in Plone 4.3
-#        default=RichTextValue(u''),
-#        missing_value=RichTextValue(u''),
         required=False,
     )
 
@@ -156,8 +152,6 @@ class NITF(Container):
             scale = scales.scale(fieldname='image', scale=scale_id)
             return scale.tag(**kwargs)
 
-    # XXX: deal with images in folder_summary_view
-    #      check later with @ericof and @jpgimenez
     def image_thumb(self):
         """Return a thumbnail."""
         image = self.getImage()
