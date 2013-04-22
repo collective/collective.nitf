@@ -338,10 +338,10 @@ class CharactersCount(grok.View):
         description = ''
 
         if count_title:
-            title = '$("#form-widgets-title").charCount(%s);' % json.dumps(config_title)
+            title = '$("#form-widgets-IDublinCore-title").charCount(%s);' % json.dumps(config_title)
 
         if count_description:
-            description = '$("#form-widgets-description").charCount(%s);' % json.dumps(config_description)
+            description = '$("#form-widgets-IDublinCore-description").charCount(%s);' % json.dumps(config_description)
 
         script = '$(document).ready(function() {%s %s});' % (title, description)
         return script
