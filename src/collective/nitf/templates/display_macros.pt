@@ -17,9 +17,14 @@
                 tal:define="images view/get_images"
                 tal:condition="images">
                 <tal:items repeat="item images">
-                    <a tal:define="item_obj item/getObject;
-                                   item_data python:{'title': '', 'data-description': item.Description};
-                                   scales item_obj/@@images"
+                    <a 
+                    tal:define="item_obj item/getObject;
+                                desc python:(item.Description or item.Title);
+                                item_data python:{
+                                  'title': item.Title,
+                                  'description': desc,
+                                  'alt': desc};
+                                scales item_obj/@@images"
                         tal:attributes="href python:scales.scale(fieldname='image', scale='preview').absolute_url()">
                         <img tal:replace="structure python:scales.tag(scale='thumb', css_class='media-image', **item_data)" />
                     </a>

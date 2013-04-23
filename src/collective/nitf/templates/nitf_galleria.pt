@@ -35,18 +35,17 @@
             <div id="mediabox" metal:use-macro="context/@@display_macros/macros/media-box" />
          </div>
 
-            <script type="text/javascript">
-                (function($) {
-                    "use strict";
-                    $(document).ready(function() {
-                        Galleria.loadTheme("++resource++collective.nitf/galleria-theme/galleria.nitf_theme.js");
-                        Galleria.configure({ autoplay: true, debug: true, thumbnails: true, _toggleInfo:true});
-                        Galleria.run('.newsview #mediabox', {keepSource: true});
-                    });
-                })(jQuery);
-            </script>
+        <script type="text/javascript">
+            (function($) {
+                "use strict";
+                $(document).ready(function() {
+                    Galleria.loadTheme("++resource++collective.nitf/galleria-theme/galleria.nitf_theme.js");
+                    Galleria.configure({ autoplay: true, debug: true, thumbnails: true, _toggleInfo:true});
+                    Galleria.run('.newsview #mediabox', {keepSource: true});
+                });
+            })(jQuery);
+        </script>
 
-            <div tal:content="structure context/text/output|nothing" />
 
             <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
                 <legend i18n:translate="">Related items</legend>
