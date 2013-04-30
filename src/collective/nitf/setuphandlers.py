@@ -142,6 +142,6 @@ def upgrade_z3cformwidgets(context, logger=None):
         # Called as upgrade step: define our own logger
         logger = logging.getLogger(PROJECTNAME)
 
-    profile = 'profile-collective.z3cform.widgets:1_to_2'
+    profile = 'profile-collective.z3cform.widgets:upgrade_1_to_2'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)
