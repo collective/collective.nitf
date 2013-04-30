@@ -6,6 +6,8 @@ Because you have to know where your towel is.
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Fix image scaling of Dexterity Images [ericof]
+
 - Fix character counter selector. [cleberjsantos]
 
 
