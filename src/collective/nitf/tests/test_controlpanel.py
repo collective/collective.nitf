@@ -12,7 +12,7 @@ from plone.registry.interfaces import IRegistry
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
-import unittest2 as unittest
+import unittest
 
 
 class ControlPanelTestCase(unittest.TestCase):
@@ -25,31 +25,28 @@ class ControlPanelTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def test_controlpanel_has_view(self):
-        view = getMultiAdapter((self.portal, self.portal.REQUEST),
-                               name='nitf-settings')
+        view = getMultiAdapter(
+            (self.portal, self.portal.REQUEST), name='nitf-settings')
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
         logout()
-        self.assertRaises(Unauthorized,
-                          self.portal.restrictedTraverse,
-                          '@@nitf-settings')
+        self.assertRaises(
+            Unauthorized, self.portal.restrictedTraverse, '@@nitf-settings')
 
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
-        self.assertTrue('nitf' in actions,
-                        'control panel was not installed')
+        self.assertIn('nitf', actions, 'control panel not installed')
 
     def test_controlpanel_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
         qi.uninstallProducts(products=[PROJECTNAME])
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
-        self.assertTrue('nitf' not in actions,
-                        'control panel was not removed')
+        self.assertNotIn('nitf', actions, 'control panel not removed')
 
 
 class RegistryTestCase(unittest.TestCase):
@@ -60,7 +57,6 @@ class RegistryTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
         self.registry = getUtility(IRegistry)
         self.settings = self.registry.forInterface(INITFSettings)
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def test_available_sections_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'available_sections'))
@@ -84,23 +80,25 @@ class RegistryTestCase(unittest.TestCase):
 
     def test_relatable_content_types_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'relatable_content_types'))
-        self.assertEqual(self.settings.relatable_content_types,
-                         DEFAULT_RELATABLE_CONTENT_TYPES)
-
-    def get_record(self, record):
-        """ Helper function; it raises KeyError if the record is not in the
-        registry.
-        """
-        prefix = 'collective.nitf.controlpanel.INITFSettings.'
-        return self.registry[prefix + record]
+        self.assertEqual(
+            self.settings.relatable_content_types,
+            DEFAULT_RELATABLE_CONTENT_TYPES,
+        )
 
     def test_records_removed_on_uninstall(self):
-        # XXX: I haven't found a better way to test this; anyone?
         qi = self.portal['portal_quickinstaller']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         qi.uninstallProducts(products=[PROJECTNAME])
-        self.assertRaises(KeyError, self.get_record, 'available_sections')
-        self.assertRaises(KeyError, self.get_record, 'default_section')
-        self.assertRaises(KeyError, self.get_record, 'available_genres')
-        self.assertRaises(KeyError, self.get_record, 'default_genre')
-        self.assertRaises(KeyError, self.get_record, 'default_urgency')
-        self.assertRaises(KeyError, self.get_record, 'relatable_content_types')
+
+        BASE_REGISTRY = 'collective.nitf.controlpanel.INITFSettings.%s'
+        records = [
+            BASE_REGISTRY % 'available_sections',
+            BASE_REGISTRY % 'default_section',
+            BASE_REGISTRY % 'available_genres',
+            BASE_REGISTRY % 'default_genre',
+            BASE_REGISTRY % 'default_urgency',
+            BASE_REGISTRY % 'relatable_content_types',
+        ]
+
+        for r in records:
+            self.assertNotIn(r, self.registry)
