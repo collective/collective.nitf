@@ -374,11 +374,13 @@ class ImageScaling(BaseImageScaling):
     """ view used for generating (and storing) image scales """
 
     def __init__(self, context, request):
-        self.context = context.getImage() and context.getImage() or context
+        self.image = context.getImage()
+        self.context = self.image or context
         self.request = request
 
     def scale(self, fieldname=None, scale=None, height=None, width=None,
               **parameters):
-        if not self.context.getImage():
+        if not self.image:
             return None
-        return super(ImageScaling, self).scale(fieldname, scale, height, width)
+        view = self.image.restrictedTraverse('@@images')
+        return view.scale(fieldname, scale, height, width)
