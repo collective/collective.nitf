@@ -1,6 +1,12 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
+1.0b3 (unreleased)
+^^^^^^^^^^^^^^^^^^
+
+- Nothing changed yet.
+
+
 1.0b2 (2013-05-02)
 ^^^^^^^^^^^^^^^^^^
 
