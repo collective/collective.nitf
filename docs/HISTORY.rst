@@ -8,6 +8,8 @@ There's a frood who really knows where his towel is
 
 - Fix image scaling of Dexterity images. [ericof]
 
+- Cleanup Galleria code; add title and description (when available). [ericof]
+
 - Fix character counter selector. [cleberjsantos]
 
 
