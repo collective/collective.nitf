@@ -2,9 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2012-07-13 16:40+0000\n"
-"PO-Revision-Date: 2013-02-11 17:22-0300\n"
-"Last-Translator: Andre Nogueira <andre@simplesconsultoria.com.br>\n"
+"POT-Creation-Date: 2013-05-02 14:26+0000\n"
+"PO-Revision-Date: 2013-05-02 11:38-0300\n"
+"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,30 +16,26 @@ msgstr ""
 "Domain: collective.nitf\n"
 
 #: configure.zcml
-msgid ""
-"A Dexterity-based content type inspired on the News Industry Text Format "
-"specification."
-msgstr ""
-"Tipod e conteúdo baseado em Dexterity e inspirado na especificação  NITF "
-"(News Industry Text Format)"
+msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
+msgstr "Tipod e conteúdo baseado em Dexterity e inspirado na especificação  NITF (News Industry Text Format)"
 
 #: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
 msgstr "Artigo"
 
-#: collective/nitf/config.py:12
+#: collective/nitf/config.py:11
 msgid "Actuality"
 msgstr "Adicionar portlet de Últimos Artigos"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:227
+#: collective/nitf/portlets/latest_sectionable_nitf.py:218
 msgid "Add latest NITF Portlet"
 msgstr "Adiciona portlet de últimos artigos"
 
-#: collective/nitf/config.py:15
+#: collective/nitf/config.py:14
 msgid "Advice"
-msgstr ""
+msgstr "Conselho"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:200
+#: collective/nitf/portlets/latest_sectionable_nitf.py:191
 msgid "All"
 msgstr "Todos"
 
@@ -47,72 +43,94 @@ msgstr "Todos"
 msgid "Almanac"
 msgstr "Almanaque"
 
-#: collective/nitf/config.py:21
+#: collective/nitf/config.py:22
 msgid "Analysis"
 msgstr "Análise"
 
-#: collective/nitf/config.py:24
+#: collective/nitf/config.py:26
 msgid "Anniversary"
 msgstr "Aniversário"
 
-#: collective/nitf/config.py:27
+#: collective/nitf/config.py:31
 msgid "Archive material"
 msgstr "Arquivo"
 
-#: collective/nitf/content.py:58
+#: collective/nitf/content.py:46
 msgid "Author"
 msgstr "Autor"
 
-#: collective/nitf/controlpanel.py:19
+#: collective/nitf/controlpanel.py:35
+msgid "Available Genres"
+msgstr "Gêneros disponíveis"
+
+#: collective/nitf/controlpanel.py:21
 msgid "Available Sections"
 msgstr "Seções disponíveis"
 
-#: collective/nitf/config.py:30
+#: collective/nitf/config.py:35
 msgid "Background"
 msgstr ""
 
-#: collective/nitf/content.py:65
+#: collective/nitf/content.py:54
 msgid "Body text"
 msgstr "Corpo do Texto"
 
-#: collective/nitf/templates/view.pt:26
+#: collective/nitf/templates/nitf_galleria.pt:25
+#: collective/nitf/templates/view.pt:25
 msgid "By"
 msgstr "Por"
 
-#: collective/nitf/content.py:118
+#: collective/nitf/content.py:112
 msgid "Categorization"
 msgstr "Categorização"
 
-#: collective/nitf/controlpanel.py:30
-msgid "Choose genres to use in the site"
-msgstr "Escolha os gêneros de artigos  que serão utilizados no site"
+#: collective/nitf/controlpanel.py:137
+msgid "Character Counter"
+msgstr "Contador de caracteres"
 
-#: collective/nitf/templates/display_macros.pt:55
-#: collective/nitf/templates/view.pt:53
+#: collective/nitf/controlpanel.py:138
+msgid "Character Counter Configuration"
+msgstr "Configuração do contador de caracteres"
+
+#: collective/nitf/browser.py:324
+msgid "Characters left: "
+msgstr "Carateres restantes"
+
+#: collective/nitf/templates/display_macros.pt:47
+#: collective/nitf/templates/nitf_galleria.pt:56
+#: collective/nitf/templates/view.pt:57
 msgid "Contents"
 msgstr "Conteúdo"
 
-#: collective/nitf/config.py:33
+#: collective/nitf/config.py:39
 msgid "Current"
 msgstr "Atual"
 
-#: collective/nitf/config.py:36
+#: collective/nitf/config.py:43
 msgid "Curtain Raiser"
 msgstr ""
 
-#: collective/nitf/config.py:39
+#: collective/nitf/config.py:47
 msgid "Daybook"
 msgstr ""
 
-#: collective/nitf/controlpanel.py:35
+#: collective/nitf/controlpanel.py:131
+msgid "Default"
+msgstr "Padrão"
+
+#: collective/nitf/controlpanel.py:132
+msgid "Default Configuration"
+msgstr "Configuração padrão"
+
+#: collective/nitf/controlpanel.py:45
 msgid "Default Genre"
 msgstr "Gênero padrão"
 
-#: collective/nitf/controlpanel.py:25
+#: collective/nitf/controlpanel.py:29
 msgid "Default Section"
 msgstr "Seção padrão"
 
-#: collective/nitf/controlpanel.py:41
+#: collective/nitf/controlpanel.py:52
 msgid "Default Urgency"
 msgstr "Urgência padrão"
 
@@ -124,96 +142,96 @@ msgstr "Exibe uma galeria de imagens no Artigo"
 msgid "Displays news article with image"
 msgstr "Exibe o Artigo com imagens"
 
-#: collective/nitf/templates/media.pt:93
+#: collective/nitf/templates/media.pt:109
 msgid "Drag and drop images to change their order on the gallery."
 msgstr "Arraste as imagens para alterar a ordem da galeria"
 
-#: collective/nitf/controlpanel.py:47
-msgid "Elegible Contet types to relate to"
-msgstr "Tipos de conteúdo disponíveis para serem relacionados"
-
-#: collective/nitf/controlpanel.py:29
-msgid "Elegible Genres"
-msgstr "Gêneros disponíveis"
-
-#: collective/nitf/config.py:42
+#: collective/nitf/config.py:52
 msgid "Exclusive"
 msgstr "Exclusivo"
 
-#: collective/nitf/config.py:45
+#: collective/nitf/config.py:56
 msgid "Feature"
 msgstr "Funcionalidade"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:129
+#: collective/nitf/portlets/latest_sectionable_nitf.py:120
 msgid "Filter collection"
 msgstr "Filtrar coleção"
 
-#: collective/nitf/config.py:48
+#: collective/nitf/config.py:60
 msgid "Fixture"
 msgstr ""
 
-#: collective/nitf/config.py:51
+#: collective/nitf/config.py:63
 msgid "Forecast"
-msgstr ""
+msgstr "Previsão"
 
-#: collective/nitf/config.py:54
+#: collective/nitf/config.py:67
 msgid "From the Scene"
 msgstr "Crônica"
 
-#: collective/nitf/content.py:71
+#: configure.zcml
+msgid "Gallery View"
+msgstr "Visão de Galeria animada"
+
+#: collective/nitf/content.py:60
 msgid "Genre"
 msgstr "Gênero"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:111
+#: collective/nitf/portlets/latest_sectionable_nitf.py:102
 msgid "Header"
 msgstr "Cabeçalho"
 
-#: collective/nitf/controlpanel.py:57
+#: collective/nitf/controlpanel.py:150
 msgid "Here you can modify the settings for collective.nitf."
 msgstr "Aqui você pode modificar as configurações do collective.nitf"
 
-#: collective/nitf/config.py:150
+#: collective/nitf/config.py:187
 msgid "High"
 msgstr "Alta"
 
-#: collective/nitf/config.py:57
+#: collective/nitf/config.py:70
 msgid "History"
 msgstr "História"
 
-#: collective/nitf/config.py:60
+#: collective/nitf/config.py:74
 msgid "Horoscope"
 msgstr "Horóscopo"
 
-#: collective/nitf/config.py:63
+#: collective/nitf/config.py:77
 msgid "Interview"
 msgstr "Entrevista"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:168
+#: collective/nitf/portlets/latest_sectionable_nitf.py:159
 msgid "Latest Sectionable NITF"
 msgstr "Últimos artigos por seção"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:116
+#: collective/nitf/portlets/latest_sectionable_nitf.py:107
 msgid "Limit"
 msgstr "Limite"
 
-#: collective/nitf/content.py:99
+#: collective/nitf/controlpanel.py:22
+msgid "List of available sections in the site."
+msgstr "Lista de seções disponíveis no site."
+
+#: collective/nitf/content.py:100
 msgid "Location"
 msgstr "Localização"
 
-#: collective/nitf/config.py:152
+#: collective/nitf/config.py:189
 msgid "Low"
 msgstr "Baixa"
 
 #: collective/nitf/profiles/default/types/collective.nitf.content.xml
-#: collective/nitf/templates/media.pt:92
+#: collective/nitf/templates/media.pt:108
 msgid "Media"
 msgstr "Mídia"
 
-#: collective/nitf/config.py:66
+#: collective/nitf/config.py:81
 msgid "Music"
 msgstr "Música"
 
-#: collective/nitf/controlpanel.py:56
+#: collective/nitf/controlpanel.py:149
 #: collective/nitf/profiles/default/controlpanel.xml
 msgid "NITF Settings"
 msgstr "Configurações NITF"
@@ -226,144 +244,142 @@ msgstr "Artigo"
 msgid "News Article View"
 msgstr "Visão de Artigo"
 
-#: collective/nitf/config.py:151
+#: collective/nitf/config.py:188
 msgid "Normal"
 msgstr "Normal"
 
-#: collective/nitf/config.py:69
+#: collective/nitf/config.py:84
 msgid "Obituary"
 msgstr "Obituário"
 
-#: collective/nitf/config.py:72
+#: collective/nitf/controlpanel.py:60
+msgid "Only objects of these content types will be listed in the related items widget."
+msgstr "Somente os objetos desses tipos de conteúdo serão listados no widget de itens relacionados."
+
+#: collective/nitf/config.py:88
 msgid "Opinion"
 msgstr "Opinião"
 
-#: collective/nitf/config.py:75
+#: collective/nitf/config.py:92
 msgid "Polls and Surveys"
 msgstr "Pesquisas"
 
-#: collective/nitf/config.py:78
+#: collective/nitf/config.py:96
 msgid "Press Release"
 msgstr "Release"
 
-#: collective/nitf/config.py:81
+#: collective/nitf/config.py:100
 msgid "Press-Digest"
 msgstr ""
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:123
+#: collective/nitf/portlets/latest_sectionable_nitf.py:114
 msgid "Pretty dates"
 msgstr "Datas amigáveis"
 
-#: collective/nitf/config.py:84
+#: collective/nitf/config.py:104
 msgid "Profile"
 msgstr "Perfil"
 
-#: collective/nitf/config.py:87
+#: collective/nitf/config.py:108
 msgid "Program"
 msgstr "Programa"
 
-#: collective/nitf/config.py:90
+#: collective/nitf/config.py:113
 msgid "Question and Answer Session"
 msgstr "Perguntas e Respostas"
 
-#: collective/nitf/config.py:93
+#: collective/nitf/config.py:117
 msgid "Quote"
 msgstr "Citação"
 
-#: collective/nitf/config.py:96
+#: collective/nitf/config.py:121
 msgid "Raw Sound"
 msgstr "Áudio original"
 
-#: collective/nitf/controlpanel.py:46
-msgid "Related Content Types"
-msgstr "Tipos de conteúdo relacionados"
+#: collective/nitf/controlpanel.py:59
+msgid "Relatable Content Types"
+msgstr "Tipos de conteúdo relacionáveis."
 
-#: collective/nitf/templates/display_macros.pt:50
-#: collective/nitf/templates/view.pt:48
+#: collective/nitf/templates/display_macros.pt:42
+#: collective/nitf/templates/nitf_galleria.pt:51
+#: collective/nitf/templates/view.pt:52
 msgid "Related items"
 msgstr "Itens relacionados"
 
-#: collective/nitf/config.py:99
+#: collective/nitf/config.py:124
 msgid "Response to a Question"
 msgstr "Respostas"
 
-#: collective/nitf/config.py:102
+#: collective/nitf/config.py:127
 msgid "Results Listings and Statistics"
 msgstr "Estatísticas"
 
-#: collective/nitf/config.py:105
+#: collective/nitf/config.py:131
 msgid "Retrospective"
 msgstr "Retrospectiva"
 
-#: collective/nitf/config.py:108
+#: collective/nitf/config.py:136
 msgid "Review"
 msgstr "Resenha"
 
-#: collective/nitf/config.py:111
+#: collective/nitf/config.py:140
 msgid "Scener"
 msgstr ""
 
-#: configure.zcml
-msgid "Gallery View"
-msgstr "Visão de Galeria animada"
-
-#: collective/nitf/content.py:81 collective/nitf/controlpanel.py:22
+#: collective/nitf/content.py:70
+#: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr "Seção"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:124
+#: collective/nitf/controlpanel.py:36
+msgid "Select the list of available genres in the site. Genres indicate a nature, journalistic or intellectual characteristic of items."
+msgstr "Selecione a lista de gêneros disponíveis no site. Os gêneros indicam a índole,  jornalística ou intelectual, que  carateriza os itens."
+
+#: collective/nitf/portlets/latest_sectionable_nitf.py:115
 msgid "Show dates in a pretty format (ie. '4 hours ago')."
 msgstr "Exibir datas em um formato amigável (ex. '4 horas')."
 
-#: collective/nitf/config.py:114
+#: collective/nitf/config.py:143
 msgid "Side bar and supporting information"
 msgstr "Barra lateral e informações de apoio"
 
-#: collective/nitf/config.py:117
+#: collective/nitf/config.py:147
 msgid "Special Report"
 msgstr "Reportagem especial"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:117
-msgid ""
-"Specify the maximum number of items to show in the portlet. Leave this blank "
-"to show all items."
-msgstr ""
-"Defina o número máximo de itens para exibir no portlet. Deixe em branco para "
-"exibir todos os itens."
+#: collective/nitf/portlets/latest_sectionable_nitf.py:108
+msgid "Specify the maximum number of items to show in the portlet. Leave this blank to show all items."
+msgstr "Defina o número máximo de itens para exibir no portlet. Deixe em branco para exibir todos os itens."
 
 #: collective/nitf/portlets/latest_sectionable_nitf.pt:61
 msgid "Submit"
 msgstr "Enviar"
 
-#: collective/nitf/content.py:46
+#: collective/nitf/content.py:33
 msgid "Subtitle"
 msgstr "Subtítulo"
 
-#: collective/nitf/config.py:120
+#: collective/nitf/config.py:152
 msgid "Summary"
 msgstr "Sumário"
 
-#: collective/nitf/config.py:123
+#: collective/nitf/config.py:156
 msgid "Synopsis"
 msgstr "Sinopse"
 
-#: collective/nitf/config.py:126
+#: collective/nitf/config.py:160
 msgid "Text only"
 msgstr "Apenas texto"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:112
+#: collective/nitf/portlets/latest_sectionable_nitf.py:103
 msgid "The header for the portlet. Leave empty for none."
 msgstr "Cabeçalho do Portlet. Deixe em branco para não exibir nada."
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:228
-msgid ""
-"This portlet display a list of latest NITF created. It allows to filter NITF "
-"from different sections."
-msgstr ""
-"Este portlet exibe os últimos Artigos criados. Permite filtrar Artigos por "
-"diferentes seções."
+#: collective/nitf/portlets/latest_sectionable_nitf.py:219
+msgid "This portlet display a list of latest NITF created. It allows to filter NITF from different sections."
+msgstr "Este portlet exibe os últimos Artigos criados. Permite filtrar Artigos por diferentes seções."
 
-#: collective/nitf/config.py:129
+#: collective/nitf/config.py:163
 msgid "Transcript and Verbatim"
 msgstr "Transcrição"
 
@@ -371,62 +387,117 @@ msgstr "Transcrição"
 msgid "Uninstall profile for the collective.nitf package."
 msgstr "Desinstalar o perfil do pacote collective.nitf."
 
-#: collective/nitf/config.py:132
+#: collective/nitf/config.py:167
 msgid "Update"
 msgstr "Atualização"
 
-#: collective/nitf/content.py:90
+#: collective/nitf/content.py:79
 msgid "Urgency"
 msgstr "Urgência"
 
-#: collective/nitf/portlets/latest_sectionable_nitf.py:130
-msgid ""
-"Use the criteria from this collection to modify the search results and order."
-msgstr ""
-"Use os critérios desta coleção para modificar o resultado da busca e "
-"ordenação."
+#: collective/nitf/portlets/latest_sectionable_nitf.py:121
+msgid "Use the criteria from this collection to modify the search results and order."
+msgstr "Use os critérios desta coleção para modificar o resultado da busca e ordenação."
 
-#: collective/nitf/config.py:135
+#: collective/nitf/config.py:171
 msgid "Voicer"
 msgstr ""
 
-#: collective/nitf/config.py:138
+#: collective/nitf/config.py:174
 msgid "Wrap"
 msgstr "Reportagem"
 
-#: collective/nitf/config.py:141
+#: collective/nitf/config.py:177
 msgid "Wrapup"
 msgstr "Suíte"
 
+#. Default: "The limit is just visual; validation is not enforced."
+#: collective/nitf/controlpanel.py:113
+msgid "help_description_max_chars"
+msgstr "O limite é apenas visual; validação não é aplicada."
+
+#. Default: "The optimal length will be between this number and the maximum length of the field."
+#: collective/nitf/controlpanel.py:122
+msgid "help_description_optimal_chars"
+msgstr "O comprimento óptimo será entre esse número e o comprimento máximo do campo."
+
 #. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
-#: collective/nitf/content.py:72
+#: collective/nitf/content.py:61
 msgid "help_genre"
-msgstr ""
-"Descreve a natureza, característica jornalística ou intelectual de um "
-"Artigo, não especificamente o seu conteúdo,"
+msgstr "Descreve a natureza, característica jornalística ou intelectual de um Artigo, não especificamente o seu conteúdo,"
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:100
+#: collective/nitf/content.py:101
 msgid "help_location"
-msgstr ""
-"Local do evento. Onde um evento aconteceu (não onde a história foi escrita)"
+msgstr "Local do evento. Onde um evento aconteceu (não onde a história foi escrita)"
 
 #. Default: "Named section where the article will appear."
-#: collective/nitf/content.py:82
+#: collective/nitf/content.py:71
 msgid "help_section"
 msgstr "Seção onde o Artigo irá aparecer"
 
+#. Default: "If selected, a character counter will show the lenght of the field."
+#: collective/nitf/controlpanel.py:103
+msgid "help_show_description_counter"
+msgstr "Se for selecionado, um contador de caracteres irá mostrar o comprimento do campo."
+
+#. Default: "If selected, a character counter will show the lenght of the field."
+#: collective/nitf/controlpanel.py:74
+msgid "help_show_title_counter"
+msgstr "Se for selecionado, um contador de caracteres irá mostrar o comprimento do campo."
+
 #. Default: "A subordinate headline for the article."
-#: collective/nitf/content.py:47
+#: collective/nitf/content.py:34
 msgid "help_subtitle"
 msgstr "Um título secundário do Artigo"
 
+#. Default: "The limit is just visual; validation is not enforced."
+#: collective/nitf/controlpanel.py:84
+msgid "help_title_max_chars"
+msgstr "O limite é apenas visual; validação não é aplicada."
+
+#. Default: "The optimal length will be between this number and the maximum length of the field."
+#: collective/nitf/controlpanel.py:93
+msgid "help_title_optimal_chars"
+msgstr "O comprimento óptimo será entre esse número e o comprimento máximo do campo."
+
 #. Default: "News importance."
-#: collective/nitf/content.py:91
+#: collective/nitf/content.py:80
 msgid "help_urgency"
 msgstr "Importância do Artigo"
 
+#. Default: "Maximum description length"
+#: collective/nitf/controlpanel.py:111
+msgid "label_description_max_chars"
+msgstr "Comprimento máximo da descrição"
+
+#. Default: "Optimal description length"
+#: collective/nitf/controlpanel.py:120
+msgid "label_description_optimal_chars"
+msgstr "O comprimento ideal da descrição"
+
 #. Default: "Related Items"
-#: collective/nitf/content.py:108
+#: collective/nitf/content.py:89
 msgid "label_related_items"
 msgstr "Itens relacionados"
+
+#. Default: "Show a character counter in the description?"
+#: collective/nitf/controlpanel.py:101
+msgid "label_show_description_counter"
+msgstr "Mostrar um contador de caracteres na descrição?"
+
+#. Default: "Show a counter for the title?"
+#: collective/nitf/controlpanel.py:72
+msgid "label_show_title_counter"
+msgstr "Mostrar um contador de caracteres no título?"
+
+#. Default: "Maximum title length"
+#: collective/nitf/controlpanel.py:82
+msgid "label_title_max_chars"
+msgstr "Comprimento máximo do título"
+
+#. Default: "Optimal title length"
+#: collective/nitf/controlpanel.py:91
+msgid "label_title_optimal_chars"
+msgstr "O comprimento ideal do título"
+

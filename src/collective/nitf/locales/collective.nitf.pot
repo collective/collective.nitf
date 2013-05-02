@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-02-01 14:49+0000\n"
+"POT-Creation-Date: 2013-05-02 14:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Archive material"
 msgstr ""
 
-#: collective/nitf/content.py:47
+#: collective/nitf/content.py:46
 msgid "Author"
 msgstr ""
 
@@ -73,15 +73,16 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: collective/nitf/content.py:55
+#: collective/nitf/content.py:54
 msgid "Body text"
 msgstr ""
 
-#: collective/nitf/templates/view.pt:39
+#: collective/nitf/templates/nitf_galleria.pt:25
+#: collective/nitf/templates/view.pt:25
 msgid "By"
 msgstr ""
 
-#: collective/nitf/content.py:115
+#: collective/nitf/content.py:112
 msgid "Categorization"
 msgstr ""
 
@@ -93,12 +94,13 @@ msgstr ""
 msgid "Character Counter Configuration"
 msgstr ""
 
-#: collective/nitf/browser.py:349
+#: collective/nitf/browser.py:324
 msgid "Characters left: "
 msgstr ""
 
-#: collective/nitf/templates/display_macros.pt:41
-#: collective/nitf/templates/view.pt:68
+#: collective/nitf/templates/display_macros.pt:47
+#: collective/nitf/templates/nitf_galleria.pt:56
+#: collective/nitf/templates/view.pt:57
 msgid "Contents"
 msgstr ""
 
@@ -170,7 +172,11 @@ msgstr ""
 msgid "From the Scene"
 msgstr ""
 
-#: collective/nitf/content.py:63
+#: configure.zcml
+msgid "Gallery View"
+msgstr ""
+
+#: collective/nitf/content.py:60
 msgid "Genre"
 msgstr ""
 
@@ -210,7 +216,7 @@ msgstr ""
 msgid "List of available sections in the site."
 msgstr ""
 
-#: collective/nitf/content.py:103
+#: collective/nitf/content.py:100
 msgid "Location"
 msgstr ""
 
@@ -296,8 +302,9 @@ msgstr ""
 msgid "Relatable Content Types"
 msgstr ""
 
-#: collective/nitf/templates/display_macros.pt:36
-#: collective/nitf/templates/view.pt:63
+#: collective/nitf/templates/display_macros.pt:42
+#: collective/nitf/templates/nitf_galleria.pt:51
+#: collective/nitf/templates/view.pt:52
 msgid "Related items"
 msgstr ""
 
@@ -321,11 +328,7 @@ msgstr ""
 msgid "Scener"
 msgstr ""
 
-#: configure.zcml
-msgid "Gallery View"
-msgstr ""
-
-#: collective/nitf/content.py:73
+#: collective/nitf/content.py:70
 #: collective/nitf/controlpanel.py:25
 msgid "Section"
 msgstr ""
@@ -354,7 +357,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: collective/nitf/content.py:34
+#: collective/nitf/content.py:33
 msgid "Subtitle"
 msgstr ""
 
@@ -390,7 +393,7 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: collective/nitf/content.py:82
+#: collective/nitf/content.py:79
 msgid "Urgency"
 msgstr ""
 
@@ -421,17 +424,17 @@ msgid "help_description_optimal_chars"
 msgstr ""
 
 #. Default: "Describes the nature, journalistic or intellectual characteristic of a news object, not specifically its content."
-#: collective/nitf/content.py:64
+#: collective/nitf/content.py:61
 msgid "help_genre"
 msgstr ""
 
 #. Default: "Event location. Where an event took place (as opposed to where the story was written)."
-#: collective/nitf/content.py:104
+#: collective/nitf/content.py:101
 msgid "help_location"
 msgstr ""
 
 #. Default: "Named section where the article will appear."
-#: collective/nitf/content.py:74
+#: collective/nitf/content.py:71
 msgid "help_section"
 msgstr ""
 
@@ -446,7 +449,7 @@ msgid "help_show_title_counter"
 msgstr ""
 
 #. Default: "A subordinate headline for the article."
-#: collective/nitf/content.py:35
+#: collective/nitf/content.py:34
 msgid "help_subtitle"
 msgstr ""
 
@@ -461,7 +464,7 @@ msgid "help_title_optimal_chars"
 msgstr ""
 
 #. Default: "News importance."
-#: collective/nitf/content.py:83
+#: collective/nitf/content.py:80
 msgid "help_urgency"
 msgstr ""
 
@@ -476,7 +479,7 @@ msgid "label_description_optimal_chars"
 msgstr ""
 
 #. Default: "Related Items"
-#: collective/nitf/content.py:92
+#: collective/nitf/content.py:89
 msgid "label_related_items"
 msgstr ""
 

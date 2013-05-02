@@ -1,12 +1,12 @@
-Changelog
----------
-
-Because you have to know where your towel is.
+There's a frood who really knows where his towel is
+---------------------------------------------------
 
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Fix image scaling of Dexterity Images [ericof]
+- Update Brazilian Portuguese translation. [hvelarde]
+
+- Fix image scaling of Dexterity images. [ericof]
 
 - Fix character counter selector. [cleberjsantos]
 
