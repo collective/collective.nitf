@@ -25,7 +25,7 @@
                                   'description': desc,
                                   'alt': desc};
                                 scales item_obj/@@images"
-                        tal:attributes="href python:scales.scale(fieldname='image', scale='preview').absolute_url()">
+                        tal:attributes="href python:scales.scale(fieldname='image', scale='large').absolute_url()">
                         <img tal:replace="structure python:scales.tag(scale='thumb', css_class='media-image', **item_data)" />
                     </a>
                 </tal:items>
