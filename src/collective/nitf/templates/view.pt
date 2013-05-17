@@ -75,7 +75,7 @@
 							    config: {
 							        onLoad : function (e) {
 						                Galleria.loadTheme("++resource++collective.nitf/galleria-theme/galleria.nitf_theme.js");
-						                Galleria.configure({debug: true});
+						                Galleria.configure({debug: false});
 						                Galleria.run(".pb-ajax #mediabox");
 						                }
 						        }
