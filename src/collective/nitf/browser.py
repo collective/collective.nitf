@@ -383,4 +383,4 @@ class ImageScaling(BaseImageScaling):
         if not self.image:
             return None
         view = self.image.restrictedTraverse('@@images')
-        return view.scale(fieldname, scale, height, width)
+        return view.scale(fieldname, scale, height, width, **parameters)
