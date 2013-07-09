@@ -149,6 +149,8 @@ class NITF(Container):
                 del kwargs['scale']
             else:
                 scale_id = 'thumb'
+            kwargs['alt'] = image.Description()
+            kwargs['title'] = image.Title()
             scale = scales.scale(fieldname='image', scale=scale_id)
             return scale.tag(**kwargs)
 
