@@ -146,7 +146,7 @@ class ContentTypeTestCase(unittest.TestCase):
                               image=StringIO(zptlogo))
 
         # image title must be in both, alt and title attributes
-        self.assertIn('alt="bar" title="bar"', tag())
+        self.assertIn('alt="baz" title="bar"', tag())
 
         # image size
         self.assertIn('height="16" width="16', tag())
@@ -260,7 +260,7 @@ class DexterityImageTestCase(unittest.TestCase):
                               image=dummy_image(zptlogo))
 
         # image title must be in both, alt and title attributes
-        self.assertIn('alt="bar" title="bar"', tag())
+        self.assertIn('alt="baz" title="bar"', tag())
 
         # image size
         self.assertIn('height="16" width="16', tag())
