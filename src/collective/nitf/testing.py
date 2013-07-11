@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
 from StringIO import StringIO
-from PIL import Image, ImageChops
+from PIL import Image
 
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
