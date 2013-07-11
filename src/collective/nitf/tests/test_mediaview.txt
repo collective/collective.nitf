@@ -1,0 +1,29 @@
+*** Settings ***
+
+Library  Selenium2Library  timeout=5 seconds  implicit_wait=3 seconds
+Resource  keywords.txt
+Variables  plone/app/testing/interfaces.py
+
+Suite Setup  Start Browser and Log In
+Suite Teardown  Close Browser
+
+*** Variables ***
+
+${img1_selector}  .ui-sortable #sortable-img1
+${img2_selector}  .ui-sortable #sortable-img2
+${img3_selector}  .ui-sortable #sortable-img3
+
+*** Test cases ***
+
+Test reorder
+    Click Link  link=n1
+    Click Link  link=Media
+
+	Page Should Contain Element  css=#sortable-img1.sort-0
+
+    Drag And Drop  css=${img3_selector}  css=.ui-sortable li:nth-of-type(1)
+
+    Click Link  link=Media
+
+# XXX: fix sortable D&D test, http://stackoverflow.com/questions/4195352/how-to-test-a-jquery-ui-sortable-widget-using-selenium
+#	Page Should Contain Element  css=#sortable-img3.sort-0
