@@ -32,9 +32,11 @@ Test reorder
 	Page Should Contain Element  css=#sortable-img1.sort-1
 	Page Should Contain Element  css=#sortable-img2.sort-2
 
-    Drag And Drop  css=${img2_selector}  css=.ui-sortable li:nth-of-type(3)
-	Execute JavaScript 	window.update_sortable($('#sortable-img3'), 1)
+    Drag And Drop  css=${img1_selector}  css=.ui-sortable li:nth-of-type(3)
+	Execute JavaScript 	window.update_sortable($('#sortable-img1'), 1)
 
     Click Link  link=Media
 
-	Page Should Contain Element  css=#sortable-img3.sort-1
+	Page Should Contain Element  css=#sortable-img3.sort-0
+	Page Should Contain Element  css=#sortable-img2.sort-1
+	Page Should Contain Element  css=#sortable-img1.sort-2
