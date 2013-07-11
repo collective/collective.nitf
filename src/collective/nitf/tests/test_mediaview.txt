@@ -37,6 +37,4 @@ Test reorder
 
     Click Link  link=Media
 
-	Page Should Contain Element  css=#sortable-img1.sort-0
 	Page Should Contain Element  css=#sortable-img3.sort-1
-	Page Should Contain Element  css=#sortable-img2.sort-2
