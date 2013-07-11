@@ -15,7 +15,44 @@
     </metal:block>
 
     <metal:javascriptslot fill-slot="javascript_head_slot">
-	    <script type="text/javascript">	    
+	    <script type="text/javascript">
+		function update_sortable(item, delta=undefined) {
+            var id_cleaner = function(ids) {
+                var cleaned = new Array();
+                for (i=0;i<ids.length;i++) {
+                   cleaned[i] = ids[i].replace('sortable-', "");
+                   }
+               return cleaned;
+            };
+            var items= $("#sortable").sortable("toArray");
+            var prev = item.prev();
+            var prev_pos = undefined;
+            var a_id = item.attr("id").replace('sortable-', "");
+            var pos = item.index();
+            var msg = "Position " + pos;
+            var msg2 = "\nId " + a_id;
+            var base = $("base").attr("href");
+            var move_url = base + "folder_moveitem";
+            var query = {delta: "1", id: a_id};
+            var ids = id_cleaner($("#sortable").sortable("toArray"));
+            var prev_msg = "\nPrev pos: ";
+
+			prev_pos = item.attr("class").replace('sort-', "");
+
+			if(delta == undefined) {
+				delta = pos - prev_pos;	
+			}
+
+            prev_msg += prev_pos;
+            msg2 += "\nDelta: " + delta;
+            msg2 += "\n" + move_url;
+            msg2 += "\n" + query;
+            msg2 += "\n" + ids;
+            msg2 += "\n" + prev_msg;
+            $.post(move_url, { delta: delta, item_id: a_id});
+            $("#sortable").sortable("refresh");
+		};
+	    
 	    $(function() {
 
             $('#sortable a.draggable-item').prepOverlay({
@@ -46,49 +83,12 @@
                     }
                 });
             });
-
-	    
+			
             $("#sortable").sortable({
                 helper : 'clone',            
                 placeholder: "ui-state-highlight",
                 update: function(event, ui){
-                    var id_cleaner = function(ids) {
-                        var cleaned = new Array();
-                        for (i=0;i<ids.length;i++) {
-                           cleaned[i] = ids[i].replace('sortable-', "");
-                           }
-                       return cleaned;
-                    };
-                    var item = $("#sortable").data("sortable").currentItem;
-                    var items= $("#sortable").sortable("toArray");
-                    var prev = $("#sortable").data("sortable").domPosition.prev;
-                    var prev_pos = undefined;
-                    var a_id = item.attr("id").replace('sortable-', "");
-                    var pos = item.index();
-                    var msg = "Position " + pos;
-                    var msg2 = "\nId " + a_id;
-                    var base = $("base").attr("href");
-                    var move_url = base + "folder_moveitem";
-                    var query = {delta: "1", id: a_id};
-                    var ids = id_cleaner($("#sortable").sortable("toArray"));
-                    var prev_msg = "\nPrev pos: ";
-
-                    if (typeof prev === "undefined") {
-                        prev_pos = 0;
-                    } else {
-                        prev_pos = items.indexOf(prev.id);
-                    }
-
-                    var delta = pos - prev_pos;
-
-                    prev_msg += prev_pos;
-                    msg2 += "\nDelta: " + delta;
-                    msg2 += "\n" + move_url;
-                    msg2 += "\n" + query;
-                    msg2 += "\n" + ids;
-                    msg2 += "\n" + prev_msg;
-                    $.post(move_url, { delta: delta, item_id: a_id});
-                    $("#sortable").sortable("refresh");
+                	update_sortable(ui.item);
                 }
             });            
 	    });
