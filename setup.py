@@ -6,13 +6,12 @@ from setuptools import setup
 import os
 
 version = '1.0b3.dev0'
-description = "A content type inspired on the IPTC's News Industry Text \
-Format specification."
+description = "A content type inspired on the IPTC's News Industry Text "
+"Format specification."
 long_description = (
     open("README.rst").read() + "\n" +
-    open(os.path.join("docs", "INSTALL.rst")).read() + "\n" +
     open(os.path.join("docs", "CREDITS.rst")).read() + "\n" +
-    open(os.path.join("docs", "HISTORY.rst")).read()
+    open(os.path.join("docs", "CHANGES.rst")).read()
 )
 
 setup(name='collective.nitf',

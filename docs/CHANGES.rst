@@ -6,11 +6,11 @@ There's a frood who really knows where his towel is
 
 - Remove unused gallery_viewlet template. [hvelarde]
 
-- Fix galleria view with large image. [cleberjsantos]
+- Fix @@images view to proper use all the params it receives [ericof]
 
 - Changes galleria debug to off mode. [cleberjsantos]
 
-- Fix @@images view to proper use all the params it receives [ericof]
+- Fix galleria view with large image. [cleberjsantos]
 
 
 1.0b2 (2013-05-02)
