@@ -25,10 +25,41 @@ characteristics.
 NITF is intended to structure independent news articles and this package aims
 to implement a content type inspired by the specification.
 
+Mostly Harmless
+---------------
+
+.. image:: https://secure.travis-ci.org/collective/collective.nitf.png
+    :target: http://travis-ci.org/collective/collective.nitf
+
+Got an idea? Found a bug? Let us know by `opening a support ticket`_.
+
 Don't Panic
 -----------
 
-TBA.
+Installation
+^^^^^^^^^^^^
+
+To enable this product in a buildout-based installation:
+
+1. Edit your buildout.cfg and add ``collective.nitf`` to the list of eggs to
+   install::
+
+    [buildout]
+    ...
+    eggs =
+        collective.nitf
+
+After updating the configuration you need to run ''bin/buildout'', which will
+take care of updating your system.
+
+Go to the 'Site Setup' page in a Plone site and click on the 'Add-ons' link.
+
+Check the box next to ``collective.nitf`` and click the 'Activate' button.
+
+.. Note:
+
+	You may have to empty your browser cache and save your resource registries
+	in order to see the effects of the product installation.
 
 Helper views
 ^^^^^^^^^^^^
@@ -45,14 +76,6 @@ like `XML validation`_.
 You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML
 Ruby Module`_ associated with it.
 
-Mostly Harmless
----------------
-
-.. image:: https://secure.travis-ci.org/collective/collective.nitf.png
-    :target: http://travis-ci.org/collective/collective.nitf
-
-Got an idea? Found a bug? Let us know by `opening a support ticket`_.
-
 .. _`Dexterity`: http://pypi.python.org/pypi/plone.app.dexterity
 .. _`IPTC`: http://www.iptc.org/
 .. _`NewsCodes`: http://www.iptc.org/NewsCodes/
@@ -62,4 +85,3 @@ Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 .. _`XHTML Ruby Module`: http://www.iptc.org/std/NITF/3.5/specification/xhtml-ruby-1.mod
 .. _`XML validation`: http://www.xmlvalidation.com/
 .. _`opening a support ticket`: https://github.com/collective/collective.nitf/issues
-
