@@ -14,8 +14,6 @@
 
     <meta name="generator" content="Plone - http://plone.org" />
 
-<!--    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"> -->
-
     <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
 
     <div tal:replace="structure provider:plone.htmlhead" />
