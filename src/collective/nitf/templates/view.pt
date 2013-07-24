@@ -68,8 +68,12 @@
 	                (function($) {
 	                    "use strict";
 	                    $(document).ready(function() {
-	                        $(".parent-nitf-image").prepOverlay({
-							    subtype: 'ajax',
+                                var link = $(".parent-nitf-image");
+                                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) { 
+                                    link.attr('href', link.attr('href').replace('@@nitf_galleria' , '@@nitf_full_galleria'));
+                                } else {
+  	                            link.prepOverlay({
+				    			    subtype: 'ajax',
 							    filter: '#content-core > *',
 							    width: '524px',
 							    config: {
@@ -80,6 +84,7 @@
 						                }
 						        }
 	        				});
+                                }
 	                    });
 	                })(jQuery);
 	            </script>

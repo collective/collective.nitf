@@ -369,6 +369,12 @@ class Nitf_Galleria(View):
 
         return json.dumps(data)
 
+class Nitf_Full_Galleria(Nitf_Galleria):
+#    grok.context(INITF)
+#    grok.layer(INITFLayer)
+#    grok.require('zope2.View')
+    grok.name('nitf_full_galleria')
+
 
 class ImageScaling(BaseImageScaling):
     """ view used for generating (and storing) image scales """
