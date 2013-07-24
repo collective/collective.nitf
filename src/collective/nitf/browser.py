@@ -369,6 +369,7 @@ class Nitf_Galleria(View):
 
         return json.dumps(data)
 
+
 class Nitf_Full_Galleria(Nitf_Galleria):
     grok.name('nitf_full_galleria')
 
