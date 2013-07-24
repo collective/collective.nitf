@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Changes image link behavior in view.pt for mobile devices 
+  (closes `#62`_) [marcosfromero]
 
 
 1.0b3 (2013-07-23)
@@ -17,9 +18,6 @@ There's a frood who really knows where his towel is
 - Changes galleria debug to off mode. [cleberjsantos]
 
 - Fix galleria view with large image. [cleberjsantos]
-
-- Changes image link behavior in view.pt for mobile devices 
-  (closes `#62`_) [marcosfromero]
 
 
 1.0b2 (2013-05-02)
