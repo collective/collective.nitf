@@ -7,7 +7,7 @@
 .portaltype-collective-nitf-content .newsImageContainer {position:relative;}
 
 .portaltype-collective-nitf-content .newsImageContainer  #lupa {
-background:red url(/++resource++collective.nitf/images/search-ico.png) no-repeat;
+background:transparent url(/++resource++collective.nitf/images/search-ico.png) no-repeat;
 display:block;
 height:13px;
 width:13px;
