@@ -72,7 +72,7 @@
        i18n:translate="text_contributors">
     Contributors:
     <span i18n:name="name"
-          tal:omit-tag=""
+       	  property="rnews:contributor"
           tal:content="python: ', '.join(contributors)">
       Mary
     </span>
@@ -80,9 +80,10 @@
 
   <tal:rights tal:define="rights context/Rights"
               tal:condition="rights">
-    <div tal:replace="rights">
+    <span tal:content="rights"
+         property="rnews:copyrightHolder">
       Copyleft NiceCorp Inc.
-    </div>
+    </span>
   </tal:rights>
 
 </div>
