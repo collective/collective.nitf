@@ -4,6 +4,20 @@
     cursor: pointer;
 }
 
+.portaltype-collective-nitf-content .newsImageContainer {position:relative;}
+
+.portaltype-collective-nitf-content .newsImageContainer  #lupa {
+background:red url(/++resource++collective.nitf/images/search-ico.png) no-repeat;
+display:block;
+height:13px;
+width:13px;
+position:absolute;
+top:0;
+right:0;
+} 
+
+
+
 #media-bar {
     margin: 0 auto;
     width: 500px;

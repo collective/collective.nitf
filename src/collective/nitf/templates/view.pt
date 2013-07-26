@@ -44,12 +44,14 @@
                     tal:content="context/imageCaption">
                     Image Caption
                 </p>
+				<span id="lupa"></span>
             </div>
 
             <div tal:content="structure context/text/output|nothing" />
 
             <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
                 <legend i18n:translate="">Related items</legend>
+                <tal:relateditems tal:content="structure view/w/relatedItems/render" />
                 <tal:relateditems tal:content="structure view/w/relatedItems/render" />
             </fieldset>
 
