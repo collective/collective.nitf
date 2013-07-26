@@ -1,0 +1,11 @@
+<div i18n:domain="plone"
+     id="rnews_keywords"
+     style="display: none"
+     tal:define="categories context/Subject|nothing;
+                 url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
+     tal:condition="categories">
+  <tal:filedunder i18n:translate="label_filed_under">Filed under:</tal:filedunder>
+  <span tal:repeat="category categories">
+       <span tal:content="category" property="rnews:keywords">Category</span>
+  </span>
+</div>
