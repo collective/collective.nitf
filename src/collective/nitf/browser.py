@@ -18,6 +18,8 @@ from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 
 import json
 import mimetypes
+from plone.app.layout.viewlets.content import DocumentBylineViewlet
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
 grok.templatedir('templates')
@@ -388,3 +390,8 @@ class ImageScaling(BaseImageScaling):
             return None
         view = self.image.restrictedTraverse('@@images')
         return view.scale(fieldname, scale, height, width, **parameters)
+
+
+class NITFBylineViewlet(DocumentBylineViewlet):
+
+    index = ViewPageTemplateFile("templates/nitf_byline.pt")

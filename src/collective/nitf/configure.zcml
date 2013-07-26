@@ -60,4 +60,23 @@
       	directory="static"
       	/>
 
+    <!-- Render the document byline -->
+    <browser:viewlet
+    	for="collective.nitf.content.INITF"
+        name="plone.belowcontenttitle.documentbyline"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+        class=".browser.NITFBylineViewlet"
+        permission="zope2.View"
+        />
+
+    <!-- Render the keywords -->
+    <browser:viewlet
+    	for="collective.nitf.content.INITF"
+        name="plone.belowcontenttitle.keywords"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        view="plone.app.layout.globals.interfaces.IViewView"
+        template="templates/keywords.pt"
+        permission="zope2.View"
+        />
+
 </configure>
