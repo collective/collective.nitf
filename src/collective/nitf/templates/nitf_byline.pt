@@ -19,7 +19,7 @@
          tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/author/${creator_id}"
          tal:content="view/authorname"
          tal:omit-tag="python:view.author() is None"
-         property="rnews:author"
+         property="rnews:creator"
          i18n:name="author">Roland Barthes</a>
       </tal:i18n>
          —
@@ -34,7 +34,7 @@
     <span i18n:translate="box_published">
       published
     </span>
-    <span tal:replace="python:view.toLocalizedTime(published,long_format=1)"
+    <span tal:content="python:view.toLocalizedTime(published,long_format=1)"
           property="rnews:datePublished">
       August 16, 2001 at 23:35:59
     </span><tal:sep condition="modified">,</tal:sep>
@@ -45,7 +45,7 @@
     <span i18n:translate="box_last_modified">
       last modified
     </span>
-    <span tal:replace="python:view.toLocalizedTime(modified,long_format=1)"
+    <span tal:content="python:view.toLocalizedTime(modified,long_format=1)"
           property="rnews:dateModified">
       August 16, 2001 at 23:35:59
     </span>
@@ -66,6 +66,9 @@
        i18n:translate="label_history">History</a>
   </span>
 
+  <span style="display: none" tal:content="context/location" property="rnews:location">NITF Location</span>
+  <span style="display: none" tal:content="context/genre" property="rnews:genre">NITF Genre</span>
+  <span style="display: none" tal:content="context/byline" property="rnews:author">NITF Author</span>
   <div class="documentContributors"
        tal:define="contributors context/Contributors"
        tal:condition="contributors"
