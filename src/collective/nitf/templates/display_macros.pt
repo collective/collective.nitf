@@ -22,7 +22,7 @@
                                 desc python:(item.Description or item.Title);
                                 item_data python:{
                                   'title': item.Title,
-                                  'description': desc,
+                                  'data-description': desc,
                                   'alt': desc};
                                 scales item_obj/@@images"
                         tal:attributes="href python:scales.scale(fieldname='image', scale='large').absolute_url()">
