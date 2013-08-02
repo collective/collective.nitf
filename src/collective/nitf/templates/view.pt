@@ -9,17 +9,12 @@
 <head>
   <metal:styleslot fill-slot="style_slot">
     <link rel="stylesheet" type="text/css"
+        media="all"
         tal:attributes="href string:${context/@@plone_portal_state/portal_url}/++resource++collective.nitf/galleria-theme/galleria.nitf_theme.css" />
   </metal:styleslot>
 </head>
 
 <body>
-    <metal:styleslot fill-slot="style_slot">    	
-        <link rel="stylesheet" type="text/css"
-        	media="all"
-            tal:attributes="href string:${context/@@plone_portal_state/portal_url}/++resource++collective.nitf/galleria-theme/galleria.nitf_theme.css" />
-    </metal:styleslot>
-
     <metal:bodytext fill-slot="main">
     <article vocab="http://schema.org/" typeof="Article"
           prefix="rnews: http://iptc.org/std/rNews/2011-10-07#">
