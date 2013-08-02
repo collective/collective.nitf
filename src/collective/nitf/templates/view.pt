@@ -34,8 +34,6 @@
 
     <div class="documentDescription" tal:content="context/description" property="rnews:description"/>
 
-    <metal:main fill-slot="content-core">
-        <tal:content-core metal:define-macro="content-core">
             <div class="newsImageContainer"
                 tal:define="image context/getImage"
                 tal:condition="image">
