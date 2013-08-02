@@ -24,8 +24,9 @@
     <p class="section" tal:content="context/section" property="rnews:articleSection"/>
     <h1 class="documentFirstHeading" tal:content="context/title" property="rnews:name"/>
     <h2 class="nitfSubtitle" tal:content="context/subtitle" property="rnews:alternativeHeadline"/>
-	<div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
-		tal:condition="not:ajax_load" />
+	  <div id="viewlet-below-content-title"
+         tal:content="structure provider:plone.belowcontenttitle"
+		     tal:condition="not:ajax_load" />
 
     <div class="documentDescription" tal:content="context/description" property="rnews:description"/>
 
@@ -60,13 +61,13 @@
                 <tal:relateditems tal:content="structure view/w/relatedItems/render" />
             </fieldset>
 
-    <fieldset id="folder-listing" tal:condition="not:context/is_empty">
-        <legend i18n:translate="">Contents</legend>
-        <tal:block define="listing_macro context/folder_listing/macros/listing;
-                           contentFilter python:{'portal_type': ['File', 'Link']}">
-            <metal:use_macro use-macro="listing_macro" />
-        </tal:block>
-    </fieldset>
+            <fieldset id="folder-listing" tal:condition="not:context/is_empty">
+                <legend i18n:translate="">Contents</legend>
+                <tal:block define="listing_macro context/folder_listing/macros/listing;
+                                   contentFilter python:{'portal_type': ['File', 'Link']}">
+                    <metal:use_macro use-macro="listing_macro" />
+                </tal:block>
+            </fieldset>
 
             <div class="newsview">
 	            <script type="text/javascript">
