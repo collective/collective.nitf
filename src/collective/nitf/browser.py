@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
 from Acquisition import aq_inner
 from collective.nitf import _
 from collective.nitf.content import INITF
@@ -20,6 +21,11 @@ import json
 import mimetypes
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+try:
+    from plone.app.upgrade import v43  # noqa
+    HAS_PLONE43 = True
+except ImportError:
+    HAS_PLONE43 = False
 
 
 grok.templatedir('templates')
@@ -391,3 +397,27 @@ class ImageScaling(BaseImageScaling):
 class NITFBylineViewlet(DocumentBylineViewlet):
 
     index = ViewPageTemplateFile("templates/nitf_byline.pt")
+
+    def pub_date(self):
+        """Return object effective date.
+
+        Return None if publication date is switched off in global site settings
+        or if Effective Date is not set on object.
+        """
+        if HAS_PLONE43:
+            # if it's Plone >= 4.3 use the parent's method
+            return super(NITFBylineViewlet, self).pub_date()
+        # compatibility for Plone < 4.3
+        # check if we are allowed to display publication date
+        properties = getToolByName(self.context, 'portal_properties')
+        site_properties = getattr(properties, 'site_properties')
+        if not site_properties.getProperty('displayPublicationDateInByline',
+           False):
+            return None
+
+        # check if we have Effective Date set
+        date = self.context.EffectiveDate()
+        if not date or date == 'None':
+            return None
+
+        return DateTime(date)
