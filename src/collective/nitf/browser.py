@@ -395,6 +395,24 @@ class NITFBylineViewlet(DocumentBylineViewlet):
 
     index = ViewPageTemplateFile("templates/nitf_byline.pt")
 
+    def getMemberInfoByName(self, fullname):
+        membership = getToolByName(self.context, 'portal_membership')
+        members = membership.searchForMembers(name=fullname)
+        if members:
+            member = members[0].getUserId()  # we care only about the first
+            return membership.getMemberInfo(member)
+
+    def byline(self):
+        member = self.getMemberInfoByName(self.context.byline)
+        if member:
+            return member['username']
+
+    def author(self):
+        return self.getMemberInfoByName(self.context.byline)
+
+    def authorname(self):
+        return self.context.byline
+
     def pub_date(self):
         """Return object effective date.
 

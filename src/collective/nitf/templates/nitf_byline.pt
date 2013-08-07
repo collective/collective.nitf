@@ -1,31 +1,32 @@
 <div class="documentByLine"
      id="plone-document-byline"
-     i18n:domain="plone">
+     i18n:domain="plone"
+     tal:condition="view/show">
   <span id="lock-icon"
         tal:define="lock_icon view/locked_icon"
         tal:condition="python:lock_icon">
       <img tal:replace="structure lock_icon" />
   </span>
 
-  <tal:creator tal:define="creator_short_form view/creator;"
-               tal:condition="creator_short_form">
-  <tal:name tal:define="creator_long_form string:?author=${creator_short_form};
-                        creator_is_openid python:'/' in creator_short_form;
-                        creator_id python:(creator_short_form, creator_long_form)[creator_is_openid];">
+  <tal:author tal:define="author_short_form view/byline;"
+              tal:condition="author_short_form">
+  <tal:name tal:define="author_long_form string:?author=${author_short_form};
+                        author_is_openid python:'/' in author_short_form;
+                        author_id python:(author_short_form, author_long_form)[author_is_openid];">
     <span class="documentAuthor">
       <tal:i18n i18n:translate="label_by_author">
       by
       <a href="#"
-         tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/author/${creator_id}"
+         property="rnews:author"
+         tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/author/${author_id}"
          tal:content="view/authorname"
          tal:omit-tag="python:view.author() is None"
-         property="rnews:creator"
          i18n:name="author">Roland Barthes</a>
       </tal:i18n>
          —
     </span>
   </tal:name>
-  </tal:creator>
+  </tal:author>
 
   <tal:dates define="published view/pub_date;
                      modified context/ModificationDate">
@@ -66,16 +67,13 @@
        i18n:translate="label_history">History</a>
   </span>
 
-  <span style="display: none" tal:content="context/location" property="rnews:location">NITF Location</span>
-  <span style="display: none" tal:content="context/genre" property="rnews:genre">NITF Genre</span>
-  <span style="display: none" tal:content="context/byline" property="rnews:author">NITF Author</span>
   <div class="documentContributors"
        tal:define="contributors context/Contributors"
        tal:condition="contributors"
        i18n:translate="text_contributors">
     Contributors:
     <span i18n:name="name"
-       	  property="rnews:contributor"
+          property="rnews:contributor"
           tal:content="python: ', '.join(contributors)">
       Mary
     </span>
@@ -83,10 +81,10 @@
 
   <tal:rights tal:define="rights context/Rights"
               tal:condition="rights">
-    <span tal:content="rights"
+    <div tal:content="rights"
          property="rnews:copyrightHolder">
       Copyleft NiceCorp Inc.
-    </span>
+    </div>
   </tal:rights>
 
 </div>
