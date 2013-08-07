@@ -24,6 +24,9 @@ class Fixture(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
         self.applyProfile(portal, 'collective.nitf:default')
+        portal_workflow = portal['portal_workflow']
+        portal_workflow.setChainForPortalTypes(
+            ('collective.nitf.content',), 'simple_publication_workflow')
 
 
 def generate_jpeg(width, height):

@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import Unauthorized
-from collective.nitf.browser import NITFBylineViewlet
 from collective.nitf.controlpanel import INITFCharCountSettings
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.tests.test_content import zptlogo
 from plone.app.customerize import registration
-from plone.app.testing import TEST_USER_ID, logout, setRoles
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.registry.interfaces import IRegistry
 from StringIO import StringIO
-from zope.component import getMultiAdapter, queryMultiAdapter, getUtility
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.component import queryMultiAdapter
 from zope.interface import directlyProvides
 
 import unittest2 as unittest
@@ -280,37 +283,3 @@ class TraversalViewTestCase(unittest.TestCase):
 
         image = view.scale('image')
         self.assertEqual(image.data, zptlogo)
-
-class NITFBylineViewletTestCase(unittest.TestCase):
-
-    layer = INTEGRATION_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
-
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
-        self.sheet = self.portal.portal_properties.site_properties
-        self.sheet.manage_changeProperties(displayPublicationDateInByline='True')
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
-
-    def viewlet(self, context=None):
-        context = context or self.portal
-        viewlet = NITFBylineViewlet(context, self.request, None, None)
-        viewlet.update()
-        return viewlet
-
-    def test_pub_date_globally_allowed(self):
-        viewlet = self.viewlet()
-        # falta verificar se está publicado ou não
-        self.assertEqual(viewlet.pub_date(), DateTime(viewlet.context.EffectiveDate())) # <= teria uma forma melhor de fazer isso?
-
-    def test_pub_date_not_globally_allowed(self):
-        self.sheet.manage_changeProperties(displayPublicationDateInByline='False')
-        viewlet = self.viewlet()
-        self.assertFalse(viewlet.pub_date())
