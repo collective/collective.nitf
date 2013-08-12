@@ -93,6 +93,8 @@ class NITFBylineViewletTestCase(unittest.TestCase):
 
     def test_pub_date_globally_allowed(self):
         site_properties = self.portal['portal_properties'].site_properties
+        if not site_properties.hasProperty('displayPublicationDateInByline'):
+            site_properties.manage_addProperty('displayPublicationDateInByline', True, 'boolean')
         site_properties.manage_changeProperties(displayPublicationDateInByline='True')
         viewlet = self.viewlet(self.n1)
         # method must return None as news article has not been published yet
