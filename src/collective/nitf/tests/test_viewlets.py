@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
 from collective.nitf.browser import NITFBylineViewlet
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.testing import TEST_USER_ID
@@ -38,16 +39,17 @@ class NITFBylineViewletTestCase(unittest.TestCase):
         if not site_properties.hasProperty('displayPublicationDateInByline'):
             site_properties.manage_addProperty('displayPublicationDateInByline', True, 'boolean')
         site_properties.manage_changeProperties(displayPublicationDateInByline='True')
-        viewlet = self.viewlet()
+        viewlet = self.viewlet(self.n1)
         # method must return None as news article has not been published yet
         self.assertIsNone(viewlet.pub_date())
 
         # we publish the news article and now the method must return a Date
         self.workflow_tool.doActionFor(self.n1, 'publish')
+        self.n1.setEffectiveDate(DateTime())
         self.assertIsNotNone(viewlet.pub_date())
 
     def test_pub_date_not_globally_allowed(self):
-        viewlet = self.viewlet()
+        viewlet = self.viewlet(self.n1)
         # method must return None as is not globally allowed
         self.assertIsNone(viewlet.pub_date())
 
