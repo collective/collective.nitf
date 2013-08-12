@@ -72,4 +72,19 @@
       handler="collective.nitf.setuphandlers.upgrade_z3cformwidgets"
       profile="collective.nitf:default" />
 
+  <genericsetup:registerProfile
+      name="upgrade_to_1007"
+      title="collective.nitf upgrade to version 1007"
+      directory="profiles/upgrade_to_1007"
+      description="collective.nitf add displayPublicationDateInByline property."
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:upgradeStep
+      title="collective.nitf upgrade to version 1007"
+      source="*"
+      destination="1007"
+      description="collective.nitf add displayPublicationDateInByline property."
+      handler="collective.nitf.setuphandlers.upgrade_to_1007"
+      profile="collective.nitf:default" />
+
 </configure>
