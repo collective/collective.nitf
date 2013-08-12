@@ -28,8 +28,11 @@ to implement a content type inspired by the specification.
 Mostly Harmless
 ---------------
 
-.. image:: https://secure.travis-ci.org/collective/collective.nitf.png
+.. image:: https://secure.travis-ci.org/collective/collective.nitf.png?branch=master
     :target: http://travis-ci.org/collective/collective.nitf
+
+.. image:: https://coveralls.io/repos/collective/collective.cover/badge.png?branch=master
+    :target: https://coveralls.io/r/collective/collective.cover
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
