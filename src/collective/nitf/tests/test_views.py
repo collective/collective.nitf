@@ -6,10 +6,14 @@ from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.tests.test_content import zptlogo
 from plone.app.customerize import registration
-from plone.app.testing import TEST_USER_ID, logout, setRoles
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.registry.interfaces import IRegistry
 from StringIO import StringIO
-from zope.component import getMultiAdapter, queryMultiAdapter, getUtility
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.component import queryMultiAdapter
 from zope.interface import directlyProvides
 
 import unittest2 as unittest
