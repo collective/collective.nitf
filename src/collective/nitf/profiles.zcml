@@ -72,14 +72,6 @@
       handler="collective.nitf.setuphandlers.upgrade_z3cformwidgets"
       profile="collective.nitf:default" />
 
-  <genericsetup:registerProfile
-      name="upgrade_1004_1005"
-      title="Upgrade profile for collective.nitf from 1.0b4 to 1.0b5"
-      directory="profiles/upgrade_1004_1005"
-      description="Configuration changes for the upgrade from 1.0b4 to 1.0b5."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-
   <genericsetup:upgradeStep
       title="Fix default values"
       source="*"
