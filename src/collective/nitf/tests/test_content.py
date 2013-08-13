@@ -100,16 +100,6 @@ class ContentTypeTestCase(unittest.TestCase):
         self.n1.invokeFactory('Link', 'baz')
         self.assertFalse(self.n1.is_empty())
 
-    def test_image_scale(self):
-        self.assertIsNone(self.n1.getImage())
-
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        view = self.n1.restrictedTraverse('@@images')
-        scale = view.scale('image', 'thumb')
-        self.assertEqual(scale.height, 16)
-        self.assertEqual(scale.width, 16)
-
     def test_getImage(self):
         self.assertIsNone(self.n1.getImage())
 
