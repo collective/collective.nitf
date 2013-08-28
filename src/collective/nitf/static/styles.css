@@ -64,7 +64,7 @@ right:0;
 
 /******* NEWSITEM/MEDIA VIEWS *****/
 #mediabox {
-    background-color: #ffffff;
+    background-color: #fff;
     border: 1px solid #D9D9D9;
     width: 500px;
     height: 500px;
@@ -73,9 +73,9 @@ right:0;
     margin: 0 auto;
 }
 body.template-view #mediabox {
-    box-shadow: 0 0 3em 0.5em #666666;
-    -moz-box-shadow: 0 0 3em 0.5em #666666;
-    -webkit-box-shadow: 0 0 3em #666666;
+    -moz-box-shadow: 0 0 3em 0.5em #666;
+    -webkit-box-shadow: 0 0 3em #666;
+    box-shadow: 0 0 3em 0.5em #666;
 }
 
 body.template-gallery #mediabox {
@@ -130,7 +130,7 @@ body.template-gallery #mediabox span {
 }
 
 #mediabox .next {
-    right: 0px;
+    right: 0;
 }
 
 #mediabox #images .items .info {
@@ -140,7 +140,7 @@ body.template-gallery #mediabox span {
     color: #fff;
     font-size: 13px;
     margin: -50px 0 0 30px;
-    padding: 5px 0px;
+    padding: 5px 0;
     height: 125px;
     width: 400px;
 }
@@ -220,7 +220,7 @@ body.template-gallery #mediabox span {
     
 .sortable-media .button{
     visibility:hidden;
-    right: 0px;
+    right: 0;
 }
 .button .icon {
     height: 15px;
@@ -232,15 +232,15 @@ body.template-gallery #mediabox span {
     background: none repeat scroll 0 0 #75AD0A;
 }
 .button.edit .icon{
-    background: url("/++resource++collective.nitf/images/icons-media.png") no-repeat scroll 0px top transparent;
+    background: url("/++resource++collective.nitf/images/icons-media.png") no-repeat scroll 0 top transparent;
     line-height: 50px;
     margin-right: 5px;
     margin-top: 4px;
 }
 .button.delete {
     position:absolute;
-    top:0px;
-    right:0px;
+    top:0;
+    right:0;
     background-color: #C43C35;
 }
 .button.delete .icon{

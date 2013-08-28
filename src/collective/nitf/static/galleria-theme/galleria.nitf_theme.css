@@ -1,6 +1,6 @@
 /* Galleria Classic Theme 2012-08-07 | https://raw.github.com/aino/galleria/master/LICENSE | (c) Aino */
 
-#galleria-loader{height:1px!important}
+#galleria-loader{height:1px !important}
 
 .galleria-container {
     position: relative;
@@ -9,6 +9,7 @@
 }
 .galleria-container img {
     -moz-user-select: none;
+    -ms-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
 }
