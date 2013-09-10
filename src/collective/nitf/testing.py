@@ -10,6 +10,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.testing.z2 import ZSERVER_FIXTURE
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 
 
 class Fixture(PloneSandboxLayer):
@@ -87,6 +88,6 @@ FUNCTIONAL_TESTING = FunctionalTesting(
 )
 SELENIUM_FIXTURE = SeleniumFixture()
 SELENIUM_TESTING = FunctionalTesting(
-    bases=(SELENIUM_FIXTURE, ZSERVER_FIXTURE),
+    bases=(SELENIUM_FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, ZSERVER_FIXTURE),
     name='collective.nitf:Selenium',
 )

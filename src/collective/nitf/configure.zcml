@@ -97,11 +97,19 @@
 
     <browser:page
         for="collective.nitf.content.INITF"
-        name="view"
-        class=".browser.View"
-        template="templates/view.pt"
+        name="edit"
+        class=".browser.EditView"
+        permission="cmf.ModifyPortalContent"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="collective.nitf.content.INITF"
+        name="nitf_galleria"
+        class=".browser.NitfGalleria"
+        template="templates/nitf_galleria.pt"
         permission="zope2.View"
-        layer="collective.nitf.interfaces.INITFLayer"        
+        layer="collective.nitf.interfaces.INITFLayer"
         />
 
 </configure>

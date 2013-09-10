@@ -20,6 +20,9 @@ from zope.component import getUtility
 from zope.interface import Interface
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.edit import DefaultEditForm
+from plone.z3cform import layout
+from Products.Five.browser import BrowserView
 
 import json
 import mimetypes
@@ -64,11 +67,9 @@ class AddView(DefaultAddView):
     form = AddForm
 
 
-class EditForm(dexterity.EditForm):
+class EditForm(DefaultEditForm):
     """ Default view looks like a News Item.
     """
-    grok.context(INITF)
-    grok.layer(INITFLayer)
     schema = INITF
 
     def update(self):
@@ -90,6 +91,9 @@ class EditForm(dexterity.EditForm):
         self.widgets['subtitle'].style = u'width: 100%;'
         self.widgets['IDublinCore.description'].rows = 3
         self.widgets['IDublinCore.description'].style = u'width: 100%;'
+
+
+EditView = layout.wrap_form(EditForm)
 
 
 class View(dexterity.DisplayForm):
@@ -351,11 +355,7 @@ class CharactersCount(grok.View):
         return script
 
 
-class Nitf_Galleria(View):
-    grok.context(INITF)
-    grok.layer(INITFLayer)
-    grok.require('zope2.View')
-    grok.name('nitf_galleria')
+class NitfGalleria(BrowserView):
 
     def imagesJson(self):
         """ """
