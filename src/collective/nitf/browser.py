@@ -21,6 +21,7 @@ from zope.interface import Interface
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
+from plone.dexterity.browser.view import DefaultView
 from plone.z3cform import layout
 from Products.Five.browser import BrowserView
 
@@ -96,12 +97,12 @@ class EditForm(DefaultEditForm):
 EditView = layout.wrap_form(EditForm)
 
 
-class View(dexterity.DisplayForm):
+class View(DefaultView):
     """ Default view looks like a News Item.
     """
-    grok.context(INITF)
-    grok.require('zope2.View')
-    grok.layer(INITFLayer)
+    # grok.context(INITF)
+    # grok.require('zope2.View')
+    # grok.layer(INITFLayer)
 
     def update(self):
         self.context = aq_inner(self.context)
@@ -179,20 +180,13 @@ class View(dexterity.DisplayForm):
         return self.context.tag(**kwargs)
 
 
-# TODO: get rid of this class
-class Display_Macros(View):
-    grok.context(INITF)
-    grok.require('zope2.View')
-    grok.layer(INITFLayer)
-
-
 class NITF(View):
     """ Shows news article in NITF XML format.
     """
-    grok.context(INITF)
-    grok.layer(INITFLayer)
-    grok.name('nitf')
-    grok.require('zope2.View')
+    # grok.context(INITF)
+    # grok.layer(INITFLayer)
+    # grok.name('nitf')
+    # grok.require('zope2.View')
 
     def update(self):
         self.context = aq_inner(self.context)
@@ -248,10 +242,10 @@ class NITF(View):
 class NewsML(View):
     """ Shows news article in NewsML XML format.
     """
-    grok.context(INITF)
-    grok.layer(INITFLayer)
-    grok.name('newsml')
-    grok.require('zope2.View')
+    # grok.context(INITF)
+    # grok.layer(INITFLayer)
+    # grok.name('newsml')
+    # grok.require('zope2.View')
 
     def version(self):
         """ Returns news article revision number.
@@ -286,15 +280,15 @@ class NewsML(View):
             return related_items
 
 
-class Media(View):
-    grok.context(INITF)
-    grok.require('cmf.ModifyPortalContent')
+# class Media(View):
+#     grok.context(INITF)
+#     grok.require('cmf.ModifyPortalContent')
 
 
 class DeleteMedia(View):
-    grok.context(INITF)
-    grok.name('delete_media')
-    grok.require('cmf.ModifyPortalContent')
+    # grok.context(INITF)
+    # grok.name('delete_media')
+    # grok.require('cmf.ModifyPortalContent')
 
     # XXX: This is here, because under certain situations, grok will get the
     # template of 'View' superclass and raise an exception.
@@ -314,12 +308,12 @@ class DeleteMedia(View):
         pass
 
 
-class CharactersCount(grok.View):
-    grok.context(Interface)
-    grok.name('characters-count.js')
-    grok.require('zope2.View')
+class CharactersCount(BrowserView):
+    # grok.context(Interface)
+    # grok.name('characters-count.js')
+    # grok.require('zope2.View')
 
-    def render(self):
+    def __call__(self):
 
         response = self.request.response
         response.setHeader('content-type', 'text/javascript;;charset=utf-8')

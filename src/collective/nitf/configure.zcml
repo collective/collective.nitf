@@ -105,6 +105,66 @@
 
     <browser:page
         for="collective.nitf.content.INITF"
+        name="view"
+        class=".browser.View"
+        template="templates/view.pt"
+        permission="zope2.View"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="collective.nitf.content.INITF"
+        name="display_macros"
+        template="templates/display_macros.pt"
+        permission="zope2.View"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="collective.nitf.content.INITF"
+        name="nitf"
+        class=".browser.NITF"
+        template="templates/nitf.pt"
+        permission="zope2.View"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="collective.nitf.content.INITF"
+        name="newsml"
+        class=".browser.NewsML"
+        template="templates/newsml.pt"
+        permission="zope2.View"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="collective.nitf.content.INITF"
+        name="media"
+        class=".browser.View"
+        template="templates/media.pt"
+        permission="cmf.ModifyPortalContent"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="collective.nitf.content.INITF"
+        name="delete_media"
+        class=".browser.DeleteMedia"
+        permission="cmf.ModifyPortalContent"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="*"
+        name="characters-count.js"
+        class=".browser.CharactersCount"
+        permission="zope2.View"
+        layer="collective.nitf.interfaces.INITFLayer"
+        />
+
+    <browser:page
+        for="collective.nitf.content.INITF"
         name="nitf_galleria"
         class=".browser.NitfGalleria"
         template="templates/nitf_galleria.pt"
