@@ -18,6 +18,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from warnings import warn
 from zope.component import getUtility
 from zope.interface import Interface
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
 
 import json
 import mimetypes
@@ -29,12 +31,12 @@ grok.templatedir('templates')
 
 
 # TODO: enable_form_tabbing must be user selectable
-class AddForm(dexterity.AddForm):
+class AddForm(DefaultAddForm):
     """ Default view looks like a News Item.
     """
-    grok.name('collective.nitf.content')
-    grok.layer(INITFLayer)
-    grok.context(INITF)
+    # grok.name('collective.nitf.content')
+    # grok.layer(INITFLayer)
+    # grok.context(INITF)
     schema = INITF
 
     def update(self):
@@ -56,6 +58,10 @@ class AddForm(dexterity.AddForm):
         self.widgets['subtitle'].style = u'width: 100%;'
         self.widgets['IDublinCore.description'].rows = 3
         self.widgets['IDublinCore.description'].style = u'width: 100%;'
+
+
+class AddView(DefaultAddView):
+    form = AddForm
 
 
 class EditForm(dexterity.EditForm):
