@@ -17,31 +17,31 @@
 </head>
 
 <body>
+    <metal:bodytext fill-slot="main">
+    <article vocab="http://schema.org/" typeof="Article"
+          prefix="rnews: http://iptc.org/std/rNews/2011-10-07#">
 
-    <div tal:replace="structure provider:plone.abovecontenttitle" />
+    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle"
+         tal:condition="not:ajax_load" />
 
-    <metal:title fill-slot="content-title">
-        <tal:content-title metal:define-macro="content-title"
-                           condition="not: ajax_load">
-            <p class="section" tal:content="context/section" />
-            <h1 class="documentFirstHeading" tal:content="context/title" />
-            <h2 class="nitfSubtitle" tal:content="context/subtitle" />
-        </tal:content-title>
-    </metal:title>
+    <tal:content-title condition="not: ajax_load">
+        <p class="section" tal:content="context/section" property="rnews:articleSection"/>
+        <h1 class="documentFirstHeading" tal:content="context/title" property="rnews:name"/>
+        <h2 class="nitfSubtitle" tal:content="context/subtitle"  property="rnews:alternativeHeadline"/>
+    </tal:content-title>
 
-    <metal:description fill-slot="content-description">
-        <tal:content-description metal:define-macro="content-description"
-                                 condition="not: ajax_load">
-            <div class="documentDescription" tal:content="context/description" />
-            <p class="nitfByline" tal:condition="context/byline|nothing">
-                <span i18n:translate="">By</span>
-                <span tal:content="context/byline" />
-            </p>
-        </tal:content-description>
-    </metal:description>
+    <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
+         tal:condition="not:ajax_load" />
 
-    <metal:main fill-slot="content-core">
-        <tal:content-core metal:define-macro="content-core">
+    <tal:content-description metal:define-macro="content-description"
+                             condition="not: ajax_load">
+        <div class="documentDescription" tal:content="context/description"  property="rnews:description"/>
+        <p class="nitfByline" tal:condition="context/byline|nothing">
+            <span i18n:translate="">By</span>
+            <span tal:content="context/byline" />
+        </p>
+    </tal:content-description>
+
         <div class="newsview">
             <div id="mediabox" metal:use-macro="context/@@display_macros/macros/media-box" />
          </div>
@@ -104,9 +104,8 @@
         </fieldset>
 
 
-        </tal:content-core>
-
-    </metal:main>
+    </article>
+    </metal:bodytext>
 
 </body>
 
