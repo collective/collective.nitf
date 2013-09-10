@@ -11,15 +11,15 @@
     <five:registerPackage package="." />
     <i18n:registerTranslations directory="locales" />
     <includeDependencies package="." />
+    <grok:grok package="." />
 
     <include package=".portlets" />
+    <include file="vocabulary.zcml" />
 
     <permission
         id="collective.nitf.AddNewsArticle"
         title="collective.nitf: Add News Article"
         />
-
-    <grok:grok package="." />
 
     <browser:page
         name="nitf-settings"
@@ -58,6 +58,7 @@
   	<browser:resourceDirectory
       	name="collective.nitf"
       	directory="static"
+        layer="collective.nitf.interfaces.INITFLayer"
       	/>
 
     <!-- Render the document byline -->

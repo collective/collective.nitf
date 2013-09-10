@@ -2,6 +2,8 @@
 
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.testing import FUNCTIONAL_TESTING
+from plone.testing.z2 import Browser
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.browserlayer.utils import registered_layers
@@ -98,3 +100,21 @@ class UninstallTest(unittest.TestCase):
         portal_css = self.portal.portal_css
         resources = portal_css.getResourceIds()
         self.assertFalse('++resource++collective.nitf/collapsible.css' in resources)
+
+
+class StaticResourceTestCase(unittest.TestCase):
+
+    layer = FUNCTIONAL_TESTING
+
+    def test_static_resource(self):
+        """We don't use grok to register automatically the static resources anymore
+           should be registered via zcml.
+        """
+        portal = self.layer['portal']
+        app = self.layer['app']
+
+        browser = Browser(app)
+        portal_url = portal.absolute_url()
+
+        browser.open('%s/++resource++collective.nitf' % portal_url)
+        self.assertEqual(browser.headers['status'], '200 Ok')

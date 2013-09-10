@@ -3,27 +3,22 @@
 from AccessControl.unauthorized import Unauthorized
 from collective.nitf import _
 from collective.prettydate.interfaces import IPrettyDate
-from five import grok
 from plone.app.portlets.portlets import base
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
 from zope import schema
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
-from zope.component import getMultiAdapter, getUtility
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.formlib import form
 from zope.interface import implements
-from zope.interface import Interface
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-class NitfFilterList(grok.View):
-    grok.context(Interface)
-    grok.name("nitf-filter-list")
-    grok.require("zope2.View")
-
-    template = ViewPageTemplateFile('nitf_filter_list.pt')
+class NitfFilterList(BrowserView):
 
     def __call__(self):
         section = self.request.get('nitf-section-filter', None)
