@@ -2,16 +2,18 @@
 
 Library  Selenium2Library  timeout=5 seconds  implicit_wait=3 seconds
 Resource  keywords.txt
+Resource  plone/app/robotframework/selenium.robot
 Variables  plone/app/testing/interfaces.py
 
-Suite Setup  Start Browser and Log In
-Suite Teardown  Close Browser
+Suite Setup  Suite Setup
+Suite Teardown  Suite Teardown
 
 *** Variables ***
 
 *** Test cases ***
 
 Test Change views
+    Log in as site owner
     Click Link  link=n1
     Page Should Not Contain Element  id=mediabox
     Go To  ${PLONE_URL}/n1/select_default_view
