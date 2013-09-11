@@ -4,6 +4,10 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Semantic markup in galleria template. [marcosfromero]
+
+- Test for changes in default view. [marcosfromero]
+
 - Needless override on folder_summary_view that was causing ``AttributeError:
   'View' object has no attribute 'images'`` was removed. [hvelarde]
 
