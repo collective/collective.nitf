@@ -4,6 +4,9 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Needless override on folder_summary_view that was causing ``AttributeError:
+  'View' object has no attribute 'images'`` was removed. [hvelarde]
+
 - Reimplement keywords and document_byline viewlets with semantic markup and
   support for news article byline for INITF interface.
   [jpgimenez, hvelarde, cleberjsantos]

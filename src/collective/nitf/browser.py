@@ -176,13 +176,6 @@ class Display_Macros(View):
     grok.layer(INITFLayer)
 
 
-class Folder_Summary_View(grok.View):
-    grok.context(Interface)
-    grok.layer(INITFLayer)
-    grok.name("folder_summary_view")
-    grok.require('zope2.View')
-
-
 class NITF(View):
     """ Shows news article in NITF XML format.
     """
