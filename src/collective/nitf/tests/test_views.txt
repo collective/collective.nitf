@@ -1,0 +1,26 @@
+*** Settings ***
+
+Library  Selenium2Library  timeout=5 seconds  implicit_wait=3 seconds
+Resource  keywords.txt
+Variables  plone/app/testing/interfaces.py
+
+Suite Setup  Start Browser and Log In
+Suite Teardown  Close Browser
+
+*** Variables ***
+
+*** Test cases ***
+
+Test Change views
+    Click Link  link=n1
+    Page Should Not Contain Element  id=mediabox
+    Go To  ${PLONE_URL}/n1/select_default_view
+    Select Radio Button  templateId  nitf_galleria
+    Click Button  Save
+    Page Should Contain  View changed.
+    Page Should Contain Element  id=mediabox
+    Go To  ${PLONE_URL}/n1/select_default_view
+    Select Radio Button  templateId  view
+    Click Button  Save
+    Page Should Contain  View changed.
+    Page Should Not Contain Element  id=mediabox
