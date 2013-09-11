@@ -87,10 +87,4 @@
       handler="collective.nitf.setuphandlers.upgrade_to_1007"
       profile="collective.nitf:default" />
 
-  <utility
-    factory=".setuphandlers.HiddenProfiles"
-    name="collective.nitf"
-    provides="Products.CMFPlone.interfaces.INonInstallable"
-    />
-
 </configure>

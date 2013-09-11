@@ -1,21 +1,11 @@
 # -*- coding:utf-8 -*-
 
-from zope.interface import implements
 from collective.nitf.config import PROJECTNAME
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.interfaces import INonInstallable
 
 import logging
 
 PROFILE_ID = 'profile-collective.nitf:default'
-
-
-class HiddenProfiles(object):
-    implements(INonInstallable)
-
-    def getNonInstallableProfiles(self):
-        profiles = ['collective.nitf:uninstall', ]
-        return profiles
 
 
 class Empty:

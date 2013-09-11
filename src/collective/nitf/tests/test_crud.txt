@@ -1,0 +1,93 @@
+Functional test:
+
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> request = layer['request']
+
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> portalURL = portal.absolute_url()
+
+    >>> from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+    >>> browser.open(portalURL + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+    >>> browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+    >>> 'You are now logged in' in browser.contents
+    True
+
+Set up the registry:
+
+    >>> from zope.component import getUtility
+    >>> from plone.registry.interfaces import IRegistry
+    >>> from collective.nitf.controlpanel import INITFSettings
+    >>> registry = getUtility(IRegistry)
+    >>> settings = registry.forInterface(INITFSettings)
+    >>> settings.available_sections = set([u'Tommy'])
+    >>> settings.available_genres = [u'Current']
+
+Now, let's create an object:
+
+    >>> browser.getLink('Home').click()
+    >>> browser.getLink('News Article').click()
+    >>> browser.getControl('Title').value = 'Miracle Cure'
+    >>> browser.getControl('Subtitle').value = 'Extra! Extra! Read all about it'
+    >>> browser.getControl('Description').value = 'The Pinball Wizard in a miracle cure!'
+    >>> browser.getControl('Author').value = 'Newsboy'
+    >>> browser.getControl(name='form.widgets.text').value = "<p>I'm free<br />I'm free<br />And freedom tastes of reality</p>"
+    >>> open('/tmp/test.html', 'w').write(browser.contents)
+    >>> browser.getControl('Genre').getControl('Current').selected = True
+    >>> browser.getControl('Section').getControl('Tommy').selected = True
+    >>> browser.getControl('Urgency').getControl('Normal').selected = True
+    >>> browser.getControl('Location').value = ''
+    >>> browser.getControl('Save').click()
+    >>> 'Item created' in browser.contents
+    True
+
+A news article can contain images:
+
+    >>> browser.getLink('Miracle Cure').click()
+    >>> browser.getLink('Image').click()
+    >>> from cStringIO import StringIO
+    >>> from collective.nitf.tests.test_content import zptlogo
+    >>> ctrl = browser.getControl(name='image_file')
+    >>> ctrl.add_file(StringIO(zptlogo), 'image/gif', 'zpt.gif')
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+A news article can contain files:
+
+    >>> browser.getLink('Miracle Cure').click()
+    >>> browser.getLink('File').click()
+    >>> ctrl = browser.getControl(name='file_file')
+    >>> ctrl.add_file(StringIO('File contents'), 'text/plain', 'test.txt')
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+A news article can contain links:
+
+    >>> browser.getLink('Miracle Cure').click()
+    >>> browser.getLink('Link').click()
+    >>> browser.getControl('Title').value = 'An URL'
+    >>> browser.getControl('Description').value = 'The description of the URL'
+    >>> browser.getControl('URL').value = 'http://foo.bar'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+Test views:
+
+    >>> browser.open(portalURL + '/miracle-cure')
+    >>> 'Miracle Cure' in browser.contents
+    True
+    >>> browser.open(portalURL + '/miracle-cure/@@nitf_galleria')
+    >>> 'Miracle Cure' in browser.contents
+    True
+    >>> browser.open(portalURL + '/miracle-cure/@@nitf')
+    >>> 'Miracle Cure' in browser.contents
+    True
+
+TODO: test the control panel
