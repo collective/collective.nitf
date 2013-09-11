@@ -172,4 +172,6 @@
         layer="collective.nitf.interfaces.INITFLayer"
         />
 
+    <adapter name="SearchableText" factory=".content.textIndexer" />
+
 </configure>
