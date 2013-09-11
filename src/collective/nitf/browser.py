@@ -47,13 +47,6 @@ class AddForm(DefaultAddForm):
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
 
-    def updateWidgets(self):
-        super(AddForm, self).updateWidgets()
-        # XXX why we need to do this?
-        self.widgets['subtitle'].style = u'width: 100%;'
-        self.widgets['IDublinCore.description'].rows = 3
-        self.widgets['IDublinCore.description'].style = u'width: 100%;'
-
 
 class AddView(DefaultAddView):
     form = AddForm
@@ -76,13 +69,6 @@ class EditForm(DefaultEditForm):
                 widget = group.widgets['relatedItems']
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
-
-    def updateWidgets(self):
-        super(EditForm, self).updateWidgets()
-        # XXX why we need to do this?
-        self.widgets['subtitle'].style = u'width: 100%;'
-        self.widgets['IDublinCore.description'].rows = 3
-        self.widgets['IDublinCore.description'].style = u'width: 100%;'
 
 
 EditView = layout.wrap_form(EditForm)
