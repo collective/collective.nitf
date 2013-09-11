@@ -4,6 +4,9 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove five.grok dependency, will easy the mainteinance and the 
+  extendibility of the package. [jpgimenez]
+
 - Needless override on folder_summary_view that was causing ``AttributeError:
   'View' object has no attribute 'images'`` was removed. [hvelarde]
 
