@@ -303,8 +303,8 @@ class RegisteredViewsTestCase(unittest.TestCase):
 
     def test_registered_views(self):
         registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertItemsEqual(registered,
-                              ['edit', 'nitf', 'display_macros',
-                               u'l10n.datepicker', 'characters-count.js',
-                               'newsml', 'media', 'nitf_galleria',
-                               'view', 'delete_media'])
+        for view in ('edit', 'nitf', 'display_macros',
+                     u'l10n.datepicker', 'characters-count.js',
+                     'newsml', 'media', 'nitf_galleria',
+                     'view', 'delete_media'):
+            self.assertTrue(view in registered)
