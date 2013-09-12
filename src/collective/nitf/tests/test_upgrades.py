@@ -31,5 +31,5 @@ class Upgradeto1008TestCase(unittest.TestCase):
         # run the upgrade step and test resources are installed
         upgrade_to_1008(self.portal)
         for dependency in dependencies:
-            self.assertTrue(qi.isProductInstalled(dependency))
+            self.assertTrue(qi.isProductInstalled(dependency), msg='{0} not installed'.format(dependency))
         self.assertIsNotNone(queryUtility(IIntIds))
