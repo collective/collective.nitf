@@ -4,6 +4,7 @@
  <dependencies>
   <dependency>profile-plone.app.dexterity:default</dependency>
   <dependency>profile-plone.app.registry:default</dependency>
+  <dependency>profile-plone.app.relationfield:default</dependency>
   <dependency>profile-collective.js.jqueryui:default</dependency>
   <dependency>profile-collective.js.galleria:default</dependency>
   <dependency>profile-collective.z3cform.widgets:default</dependency>

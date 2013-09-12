@@ -157,3 +157,21 @@ def upgrade_to_1007(context, logger=None):
     profile = 'profile-collective.nitf:upgrade_to_1007'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)
+
+
+def upgrade_to_1008(context, logger=None):
+    """
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    dependency = 'plone.app.relationfield'
+    profile = 'profile-{0}:default'.format(dependency)
+    qi = getToolByName(context, 'portal_quickinstaller')
+    if not qi.isProductInstalled(dependency):
+        setup = getToolByName(context, 'portal_setup')
+        setup.runAllImportStepsFromProfile(profile)
+        logger.info("{0} was installed.".format(dependency))
+    else:
+        logger.info("{0} already installed; nothing to do.".format(dependency))
