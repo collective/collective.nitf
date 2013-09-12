@@ -168,11 +168,9 @@ def upgrade_to_1008(context, logger=None):
 
     dependencies = ('plone.app.relationfield', 'plone.app.intid')
     for dependency in dependencies:
-        profile = 'profile-{0}:default'.format(dependency)
         qi = getToolByName(context, 'portal_quickinstaller')
         if not qi.isProductInstalled(dependency):
-            setup = getToolByName(context, 'portal_setup')
-            setup.runAllImportStepsFromProfile(profile)
+            qi.installProduct(dependency)
             logger.info("{0} was installed.".format(dependency))
         else:
             logger.info("{0} already installed; nothing to do.".format(dependency))
