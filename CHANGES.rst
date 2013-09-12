@@ -4,6 +4,10 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add plone.app.relationfield as a dependency, this is needed for dexterity
+  to proper handle relations installing plone.app.intid as a dependency too.
+  (closes `#71`_). [jpgimenez]
+
 - Semantic markup in galleria template. [marcosfromero]
 
 - Test for changes in default view. [marcosfromero]
@@ -143,3 +147,4 @@ There's a frood who really knows where his towel is
 .. _`#49`: https://github.com/collective/collective.nitf/issues/49
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
+.. _`#71`: https://github.com/collective/collective.nitf/issues/71
