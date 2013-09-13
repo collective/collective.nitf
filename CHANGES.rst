@@ -4,6 +4,15 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove HiddenProfiles utility; that's most likely the job of a policy
+  package. [hvelarde]
+
+- Remove updateWidgets method on Add and Edit forms as they were used only to
+  style them; we should implement this on CSS if needed. [hvelarde]
+
+- Remove five.grok dependency, will easy the mainteinance and the
+  extendibility of the package. [jpgimenez]
+
 - Semantic markup in galleria template. [marcosfromero]
 
 - Test for changes in default view. [marcosfromero]

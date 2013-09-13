@@ -3,7 +3,6 @@
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
 from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
-from five import grok
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
@@ -18,6 +17,7 @@ from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import getUtility
+from zope.interface import implements
 
 
 class INITF(form.Schema):
@@ -115,7 +115,7 @@ class INITF(form.Schema):
 
 
 class NITF(Container):
-    grok.implements(INITF)
+    implements(INITF)
 
     def is_empty(self):
         """Return True if the container has no files nor links inside.
@@ -218,5 +218,3 @@ def textIndexer(obj):
     ) if entry]
 
     return u" ".join(searchable_text)
-
-grok.global_adapter(textIndexer, name='SearchableText')
