@@ -14,7 +14,8 @@
         <div class="mediaview">
             <metal:mediamacro define-macro="media-box">
             <div id="mediabox"
-                tal:define="images view/get_images"
+                tal:define="view nocall:context/@@view;
+                            images view/get_images"
                 tal:condition="images">
                 <tal:items repeat="item images">
                     <a 
