@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import os
 import random
+import string
 from StringIO import StringIO
 from PIL import Image
 
+from collective.nitf.controlpanel import INITFSettings
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
@@ -11,6 +14,8 @@ from plone.testing.z2 import ZSERVER_FIXTURE
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 
 
 class Fixture(PloneSandboxLayer):
@@ -62,6 +67,11 @@ def generate_jpeg(width, height):
     return output.getvalue()
 
 
+def generate_text(size):
+    chars = string.letters + string.digits
+    return ''.join(random.choice(chars) for x in range(size))
+
+
 class SeleniumFixture(Fixture):
 
     def setUpPloneSite(self, portal):
@@ -75,6 +85,16 @@ class SeleniumFixture(Fixture):
         portal.n1.img1.setImage(generate_jpeg(50, 50))
         portal.n1.img2.setImage(generate_jpeg(50, 50))
         portal.n1.img3.setImage(generate_jpeg(50, 50))
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(INITFSettings)
+        settings.available_sections = set([u'Tommy'])
+        settings.available_genres = [u'Current']
+        open('/tmp/img1.jpg', 'w').write(generate_jpeg(50, 50))
+        open('/tmp/txt1.txt', 'w').write(generate_text(256))
+
+    def tearDownPloneSite(self, portal):
+        os.remove('/tmp/img1.jpg')
+        os.remove('/tmp/txt1.txt')
 
 
 FIXTURE = Fixture()
