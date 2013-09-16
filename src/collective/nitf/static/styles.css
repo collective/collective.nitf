@@ -7,7 +7,7 @@
 .portaltype-collective-nitf-content .newsImageContainer {position:relative;}
 
 .portaltype-collective-nitf-content .newsImageContainer  #lupa {
-background:transparent url(/++resource++collective.nitf/images/search-ico.png) no-repeat;
+background:transparent url(images/search-ico.png) no-repeat;
 display:block;
 height:13px;
 width:13px;
@@ -30,7 +30,7 @@ right:0;
 /* TODO: fix background URL property */
 /* next/prev buttons */
 .navi {
-    background: url(/++resource++collective.nitf/images/hori_large.png) no-repeat;
+    background: url(images/hori_large.png) no-repeat;
     width: 30px;
     height: 30px;
     float: left;
@@ -232,7 +232,7 @@ body.template-gallery #mediabox span {
     background: none repeat scroll 0 0 #75AD0A;
 }
 .button.edit .icon{
-    background: url("/++resource++collective.nitf/images/icons-media.png") no-repeat scroll 0 top transparent;
+    background: url(images/icons-media.png) no-repeat scroll 0 top transparent;
     line-height: 50px;
     margin-right: 5px;
     margin-top: 4px;
@@ -244,7 +244,7 @@ body.template-gallery #mediabox span {
     background-color: #C43C35;
 }
 .button.delete .icon{
-    background: url("/++resource++collective.nitf/images/icons-media.png") no-repeat scroll -15px top transparent;
+    background: url(images/icons-media.png) no-repeat scroll -15px top transparent;
     line-height: 50px;
     margin-right: 5px;
 }
