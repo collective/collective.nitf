@@ -13,6 +13,7 @@ the following people:
 - Franco Pellegrini
 - Cleber J Santos
 - Marcos F. Romero
+- Juan Pablo Giménez
 
 You can find an updated list of package contributors on `GitHub`_.
 

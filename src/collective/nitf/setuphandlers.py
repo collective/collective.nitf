@@ -1,24 +1,11 @@
 # -*- coding:utf-8 -*-
 
 from collective.nitf.config import PROJECTNAME
-from five import grok
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.interfaces import INonInstallable
 
 import logging
 
 PROFILE_ID = 'profile-collective.nitf:default'
-
-
-class HiddenProfiles(grok.GlobalUtility):
-
-    grok.implements(INonInstallable)
-    grok.provides(INonInstallable)
-    grok.name('collective.nitf')
-
-    def getNonInstallableProfiles(self):
-        profiles = ['collective.nitf:uninstall', ]
-        return profiles
 
 
 class Empty:

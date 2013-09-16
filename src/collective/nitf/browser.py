@@ -5,19 +5,21 @@ from collective.nitf import _
 from collective.nitf.content import INITF
 from collective.nitf.controlpanel import INITFCharCountSettings
 from collective.nitf.controlpanel import INITFSettings
-from collective.nitf.interfaces import INITFLayer
 from DateTime import DateTime
-from five import grok
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
-from plone.directives import dexterity
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
 from Products.CMFPlone.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from warnings import warn
 from zope.component import getUtility
-from zope.interface import Interface
+from plone.dexterity.browser.add import DefaultAddForm
+from plone.dexterity.browser.add import DefaultAddView
+from plone.dexterity.browser.edit import DefaultEditForm
+from plone.dexterity.browser.view import DefaultView
+from plone.z3cform import layout
+from Products.Five.browser import BrowserView
 
 import json
 import mimetypes
@@ -25,16 +27,11 @@ import pkg_resources
 
 PLONE_VERSION = pkg_resources.require("Plone")[0].version
 
-grok.templatedir('templates')
-
 
 # TODO: enable_form_tabbing must be user selectable
-class AddForm(dexterity.AddForm):
+class AddForm(DefaultAddForm):
     """ Default view looks like a News Item.
     """
-    grok.name('collective.nitf.content')
-    grok.layer(INITFLayer)
-    grok.context(INITF)
     schema = INITF
 
     def update(self):
@@ -50,19 +47,14 @@ class AddForm(dexterity.AddForm):
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
 
-    def updateWidgets(self):
-        super(AddForm, self).updateWidgets()
-        # XXX why we need to do this?
-        self.widgets['subtitle'].style = u'width: 100%;'
-        self.widgets['IDublinCore.description'].rows = 3
-        self.widgets['IDublinCore.description'].style = u'width: 100%;'
+
+class AddView(DefaultAddView):
+    form = AddForm
 
 
-class EditForm(dexterity.EditForm):
+class EditForm(DefaultEditForm):
     """ Default view looks like a News Item.
     """
-    grok.context(INITF)
-    grok.layer(INITFLayer)
     schema = INITF
 
     def update(self):
@@ -78,20 +70,13 @@ class EditForm(dexterity.EditForm):
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
 
-    def updateWidgets(self):
-        super(EditForm, self).updateWidgets()
-        # XXX why we need to do this?
-        self.widgets['subtitle'].style = u'width: 100%;'
-        self.widgets['IDublinCore.description'].rows = 3
-        self.widgets['IDublinCore.description'].style = u'width: 100%;'
+
+EditView = layout.wrap_form(EditForm)
 
 
-class View(dexterity.DisplayForm):
+class View(DefaultView):
     """ Default view looks like a News Item.
     """
-    grok.context(INITF)
-    grok.require('zope2.View')
-    grok.layer(INITFLayer)
 
     def update(self):
         self.context = aq_inner(self.context)
@@ -169,20 +154,9 @@ class View(dexterity.DisplayForm):
         return self.context.tag(**kwargs)
 
 
-# TODO: get rid of this class
-class Display_Macros(View):
-    grok.context(INITF)
-    grok.require('zope2.View')
-    grok.layer(INITFLayer)
-
-
 class NITF(View):
     """ Shows news article in NITF XML format.
     """
-    grok.context(INITF)
-    grok.layer(INITFLayer)
-    grok.name('nitf')
-    grok.require('zope2.View')
 
     def update(self):
         self.context = aq_inner(self.context)
@@ -238,10 +212,6 @@ class NITF(View):
 class NewsML(View):
     """ Shows news article in NewsML XML format.
     """
-    grok.context(INITF)
-    grok.layer(INITFLayer)
-    grok.name('newsml')
-    grok.require('zope2.View')
 
     def version(self):
         """ Returns news article revision number.
@@ -276,15 +246,7 @@ class NewsML(View):
             return related_items
 
 
-class Media(View):
-    grok.context(INITF)
-    grok.require('cmf.ModifyPortalContent')
-
-
 class DeleteMedia(View):
-    grok.context(INITF)
-    grok.name('delete_media')
-    grok.require('cmf.ModifyPortalContent')
 
     # XXX: This is here, because under certain situations, grok will get the
     # template of 'View' superclass and raise an exception.
@@ -304,12 +266,9 @@ class DeleteMedia(View):
         pass
 
 
-class CharactersCount(grok.View):
-    grok.context(Interface)
-    grok.name('characters-count.js')
-    grok.require('zope2.View')
+class CharactersCount(BrowserView):
 
-    def render(self):
+    def __call__(self):
 
         response = self.request.response
         response.setHeader('content-type', 'text/javascript;;charset=utf-8')
@@ -345,11 +304,7 @@ class CharactersCount(grok.View):
         return script
 
 
-class Nitf_Galleria(View):
-    grok.context(INITF)
-    grok.layer(INITFLayer)
-    grok.require('zope2.View')
-    grok.name('nitf_galleria')
+class NitfGalleria(BrowserView):
 
     def imagesJson(self):
         """ """

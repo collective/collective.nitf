@@ -1,17 +1,26 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.nitf">
 
-     <plone:portlet
-         name="collective.nitf.LatestSectionableNITFPortlet"
-         interface=".latest_sectionable_nitf.ILatestSectionableNITFPortlet"
-         assignment=".latest_sectionable_nitf.Assignment"
-         edit_permission="cmf.ManagePortal"
-         renderer=".latest_sectionable_nitf.Renderer"
-         addview=".latest_sectionable_nitf.AddForm"
-         editview=".latest_sectionable_nitf.EditForm"
-         />
+    <plone:portlet
+        name="collective.nitf.LatestSectionableNITFPortlet"
+        interface=".latest_sectionable_nitf.ILatestSectionableNITFPortlet"
+        assignment=".latest_sectionable_nitf.Assignment"
+        edit_permission="cmf.ManagePortal"
+        renderer=".latest_sectionable_nitf.Renderer"
+        addview=".latest_sectionable_nitf.AddForm"
+        editview=".latest_sectionable_nitf.EditForm"
+        />
         
+    <browser:page
+        for="*"
+        name="nitf-filter-list"
+        class=".latest_sectionable_nitf.NitfFilterList"
+        template="nitf_filter_list.pt"
+        permission="zope2.View"
+        />
+
 </configure>

@@ -229,6 +229,7 @@ class CharacterCountJSTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
+        directlyProvides(self.request, INITFLayer)
 
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'test-folder')
@@ -240,8 +241,7 @@ class CharacterCountJSTestCase(unittest.TestCase):
 
     def test_config_empty(self):
         view = getMultiAdapter((self.folder, self.request), name='characters-count.js')
-        render = view.render()
-        self.assertEqual(render, '$(document).ready(function() { });')
+        self.assertEqual(view(), '$(document).ready(function() { });')
 
     def test_config_nitf(self):
         registry = getUtility(IRegistry)
@@ -249,9 +249,8 @@ class CharacterCountJSTestCase(unittest.TestCase):
         settings.show_title_counter = True
         settings.show_description_counter = True
         view = getMultiAdapter((self.n1.restrictedTraverse('edit'), self.request), name='characters-count.js')
-        render = view.render()
         self.assertEqual(
-            render,
+            view(),
             '$(document).ready(function() {\
 $("#form-widgets-IDublinCore-title").charCount({"optimal": 100, \
 "counterText": "Characters left: ", "allowed": 100}); \
@@ -283,3 +282,29 @@ class TraversalViewTestCase(unittest.TestCase):
 
         image = view.scale('image')
         self.assertEqual(image.data, zptlogo)
+
+
+class RegisteredViewsTestCase(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        directlyProvides(self.request, INITFLayer)
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('Folder', 'test-folder')
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        self.folder = self.portal['test-folder']
+
+        self.folder.invokeFactory('collective.nitf.content', 'n1')
+        self.n1 = self.folder['n1']
+
+    def test_registered_views(self):
+        registered = [v.name for v in registration.getViews(INITFLayer)]
+        for view in ('edit', 'nitf', 'display_macros',
+                     u'l10n.datepicker', 'characters-count.js',
+                     'newsml', 'media', 'nitf_galleria',
+                     'view', 'delete_media'):
+            self.assertTrue(view in registered)

@@ -8,6 +8,15 @@ There's a frood who really knows where his towel is
   to proper handle relations installing plone.app.intid as a dependency too.
   (closes `#71`_). [jpgimenez]
 
+- Remove HiddenProfiles utility; that's most likely the job of a policy
+  package. [hvelarde]
+
+- Remove updateWidgets method on Add and Edit forms as they were used only to
+  style them; we should implement this on CSS if needed. [hvelarde]
+
+- Remove five.grok dependency, will easy the mainteinance and the
+  extendibility of the package. [jpgimenez]
+
 - Semantic markup in galleria template. [marcosfromero]
 
 - Test for changes in default view. [marcosfromero]
@@ -147,4 +156,3 @@ There's a frood who really knows where his towel is
 .. _`#49`: https://github.com/collective/collective.nitf/issues/49
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
-.. _`#71`: https://github.com/collective/collective.nitf/issues/71

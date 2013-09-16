@@ -16,7 +16,7 @@
 
     <metal:javascriptslot fill-slot="javascript_head_slot">
 	    <script type="text/javascript">
-		function update_sortable(item, delta=undefined) {
+		function update_sortable(item, delta) {
             var id_cleaner = function(ids) {
                 var cleaned = new Array();
                 for (i=0;i<ids.length;i++) {
