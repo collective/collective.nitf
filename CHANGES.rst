@@ -4,6 +4,10 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add plone.app.relationfield as a dependency, this is needed for dexterity
+  to proper handle relations installing plone.app.intid as a dependency too.
+  (closes `#71`_). [jpgimenez]
+
 - Remove HiddenProfiles utility; that's most likely the job of a policy
   package. [hvelarde]
 

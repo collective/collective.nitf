@@ -87,4 +87,19 @@
       handler="collective.nitf.setuphandlers.upgrade_to_1007"
       profile="collective.nitf:default" />
 
+  <genericsetup:registerProfile
+      name="upgrade_to_1008"
+      title="collective.nitf upgrade to version 1008"
+      directory="profiles/upgrade_to_1008"
+      description="collective.nitf fix issue with related items."
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:upgradeStep
+      title="collective.nitf upgrade to version 1008"
+      source="*"
+      destination="1008"
+      description="collective.nitf fix issue with related items."
+      handler="collective.nitf.setuphandlers.upgrade_to_1008"
+      profile="collective.nitf:default" />
+
 </configure>
