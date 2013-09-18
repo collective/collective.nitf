@@ -3,7 +3,6 @@
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.portlets import latest_sectionable_nitf
 from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.testing import PLONE_VERSION
 from DateTime import DateTime
 from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import setRoles
