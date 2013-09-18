@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.portlets import latest_sectionable_nitf
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.testing import PLONE_VERSION
 from DateTime import DateTime
 from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import setRoles
@@ -14,14 +16,7 @@ from plone.portlets.interfaces import IPortletType
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility, getMultiAdapter
 
-import unittest2 as unittest
-
-PLONE42 = True
-try:
-    import plone.app.collection
-    assert plone.app.collection  # Pyflakes
-except ImportError:
-    PLONE42 = False
+import unittest
 
 
 class PortletTest(unittest.TestCase):
@@ -239,7 +234,8 @@ class RenderTest(unittest.TestCase):
             self.assertEqual([i.id for i in results],
                              [i.id for i in catalog_results])
 
-    @unittest.skipIf(PLONE42, "Topics are disabled by default on Plone 4.2")
+    @unittest.skipIf(
+        PLONE_VERSION >= '4.3', "Topics are disabled by default on Plone 4.3")
     def test_modifying_query_through_collection(self):
 
         assgmnt1 = latest_sectionable_nitf.Assignment()

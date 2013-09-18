@@ -6,10 +6,7 @@ from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
-import pkg_resources
-import unittest2 as unittest
-
-PLONE_VERSION = pkg_resources.require("Plone")[0].version
+import unittest
 
 
 class NITFBylineViewletTestCase(unittest.TestCase):

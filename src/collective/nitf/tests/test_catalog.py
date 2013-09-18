@@ -7,7 +7,7 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.textfield.value import RichTextValue
 
-import unittest2 as unittest
+import unittest
 
 
 class CatalogTestCase(unittest.TestCase):

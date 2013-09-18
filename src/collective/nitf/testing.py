@@ -17,6 +17,10 @@ from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
+import pkg_resources
+
+PLONE_VERSION = pkg_resources.require("Plone")[0].version
+
 
 class Fixture(PloneSandboxLayer):
 

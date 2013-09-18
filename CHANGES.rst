@@ -4,6 +4,9 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove dependency on unittest2; this means tests are not going to run on
+  Python < 2.7. [hvelarde]
+
 - Add plone.app.relationfield as a dependency, this is needed for dexterity
   to proper handle relations installing plone.app.intid as a dependency too.
   (closes `#71`_). [jpgimenez]

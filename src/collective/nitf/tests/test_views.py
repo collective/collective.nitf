@@ -16,7 +16,7 @@ from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.interface import directlyProvides
 
-import unittest2 as unittest
+import unittest
 
 
 class DefaultViewTestCase(unittest.TestCase):
