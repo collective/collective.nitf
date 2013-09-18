@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from collective.nitf.browser import AddForm
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.browser import AddForm
-from z3c.form import field
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -11,6 +10,7 @@ from plone.dexterity.fti import DexterityFTI
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 from StringIO import StringIO
+from z3c.form import field
 from zope.component import createObject
 from zope.component import queryUtility
 

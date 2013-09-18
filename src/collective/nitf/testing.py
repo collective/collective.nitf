@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-import os
-import random
-import string
-from StringIO import StringIO
-from PIL import Image
 
 from collective.nitf.controlpanel import INITFSettings
+from PIL import Image
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.registry.interfaces import IRegistry
+from plone.testing import z2
+from StringIO import StringIO
 from zope.component import getUtility
 
+import os
 import pkg_resources
+import random
+import string
 
 PLONE_VERSION = pkg_resources.require("Plone")[0].version
 

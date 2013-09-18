@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from collective.nitf.config import DEFAULT_GENRE, DEFAULT_URGENCY
+from collective.nitf.config import DEFAULT_GENRE
 from collective.nitf.config import DEFAULT_RELATABLE_CONTENT_TYPES
+from collective.nitf.config import DEFAULT_URGENCY
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.testing import INTEGRATION_TESTING

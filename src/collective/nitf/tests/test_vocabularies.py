@@ -3,7 +3,8 @@
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone.registry.interfaces import IRegistry
-from zope.component import getUtility, queryUtility
+from zope.component import getUtility
+from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 import unittest

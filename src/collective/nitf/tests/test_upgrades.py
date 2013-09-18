@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from collective.nitf.setuphandlers import upgrade_to_1008
+from collective.nitf.testing import INTEGRATION_TESTING
 from zope.component import queryUtility
 from zope.intid.interfaces import IIntIds
-from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.setuphandlers import upgrade_to_1008
 
 import unittest
 

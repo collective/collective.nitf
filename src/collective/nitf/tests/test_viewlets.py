@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
 from collective.nitf.browser import NITFBylineViewlet
 from collective.nitf.testing import INTEGRATION_TESTING
-from plone.app.testing import TEST_USER_ID
+from DateTime import DateTime
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 
 import unittest
 

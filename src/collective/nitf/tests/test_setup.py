@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from collective.nitf.config import PROJECTNAME
-from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.testing import FUNCTIONAL_TESTING
-from plone.testing.z2 import Browser
+from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.browserlayer.utils import registered_layers
+from plone.testing.z2 import Browser
 
 import unittest
 

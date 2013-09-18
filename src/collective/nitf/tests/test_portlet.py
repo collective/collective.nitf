@@ -13,7 +13,8 @@ from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
 from plone.registry.interfaces import IRegistry
-from zope.component import getUtility, getMultiAdapter
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 
 import unittest
 
