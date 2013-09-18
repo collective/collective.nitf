@@ -1,21 +1,17 @@
 *** Settings ***
 
-Library  Selenium2Library  timeout=5 seconds  implicit_wait=3 seconds
-Resource  keywords.txt
-Resource  plone/app/robotframework/selenium.robot
-Variables  plone/app/testing/interfaces.py
+Resource  plone/app/robotframework/keywords.robot
+Library  Remote  ${PLONE_URL}/RobotRemote
 
-Suite Setup  Suite Setup
-Suite Teardown  Suite Teardown
-
-*** Variables ***
+Suite Setup  Open Test Browser
+Suite Teardown  Close all browsers
 
 *** Test cases ***
 
-Create new NITF, subobjects and test views
+Create News Article, subobjects and test views
+    Enable Autologin as  Site Administrator
+    Go to Homepage
 
-    Log in as site owner
-    Go To  ${PLONE_URL}
     Open Add New Menu
     Click Link  css=a#collective-nitf-content
     Page Should Contain  Add News Article
@@ -23,8 +19,11 @@ Create new NITF, subobjects and test views
     Input Text  css=#form-widgets-subtitle  Extra! Extra! Read all about it 
     Input Text  css=#form-widgets-IDublinCore-description  The Pinball Wizard in a miracle cure!
     Input Text  css=#form-widgets-byline  Newsboy
-    Wait For Condition  return tinyMCE.activeEditor != null
-    Execute Javascript  tinyMCE.activeEditor.setContent("<p>I'm free<br />I'm free<br />And freedom tastes of reality</p>");
+
+    # FIXME: populate body field without JS
+    #Wait For Condition  return tinyMCE.activeEditor != null
+    #Execute Javascript  tinyMCE.activeEditor.setContent("<p>I'm free<br />I'm free<br />And freedom tastes of reality</p>");
+
     Click Link  link=Categorization
     Select From List  css=#form-widgets-section  Tommy
     Select From List  css=#form-widgets-genre  Current

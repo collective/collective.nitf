@@ -10,7 +10,7 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing.z2 import ZSERVER_FIXTURE
+from plone.testing import z2
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
@@ -72,7 +72,8 @@ def generate_text(size):
     return ''.join(random.choice(chars) for x in range(size))
 
 
-class SeleniumFixture(Fixture):
+# TODO: simplify this using a testfixture profile
+class RobotFixture(Fixture):
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
@@ -87,6 +88,7 @@ class SeleniumFixture(Fixture):
         portal.n1.img3.setImage(generate_jpeg(50, 50))
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
+        # FIXME: this needs to be available by default
         settings.available_sections = set([u'Tommy'])
         settings.available_genres = [u'Current']
         open('/tmp/img1.jpg', 'w').write(generate_jpeg(50, 50))
@@ -102,12 +104,13 @@ INTEGRATION_TESTING = IntegrationTesting(
     bases=(FIXTURE,),
     name='collective.nitf:Integration',
 )
+
 FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FIXTURE,),
     name='collective.nitf:Functional',
 )
-SELENIUM_FIXTURE = SeleniumFixture()
-SELENIUM_TESTING = FunctionalTesting(
-    bases=(SELENIUM_FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, ZSERVER_FIXTURE),
-    name='collective.nitf:Selenium',
-)
+
+ROBOT_FIXTURE = RobotFixture()
+ROBOT_TESTING = FunctionalTesting(
+    bases=(ROBOT_FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
+    name="collective.nitf:Robot")
