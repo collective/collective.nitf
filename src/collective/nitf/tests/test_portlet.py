@@ -234,8 +234,7 @@ class RenderTest(unittest.TestCase):
             self.assertEqual([i.id for i in results],
                              [i.id for i in catalog_results])
 
-    @unittest.skipIf(
-        PLONE_VERSION >= '4.3', "Topics are disabled by default on Plone 4.3")
+    @unittest.skip("FIXME: use Collection instead of Topic")
     def test_modifying_query_through_collection(self):
 
         assgmnt1 = latest_sectionable_nitf.Assignment()
