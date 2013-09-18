@@ -99,6 +99,10 @@ class ContentTypeTestCase(unittest.TestCase):
         except ImportError:
             self.fail('ILocking behavior not available')
 
+    def test_is_selectable_as_folder_default_view(self):
+        self.folder.setDefaultPage('n1')
+        self.assertEqual(self.folder.default_page, 'n1')
+
     def test_action_is_registered(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
         actions = [a.id for a in fti.listActions()]
