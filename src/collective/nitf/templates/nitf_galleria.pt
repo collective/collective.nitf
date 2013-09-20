@@ -27,7 +27,8 @@
 
     <tal:content-title condition="not: ajax_load">
         <p class="section" tal:content="context/section" property="rnews:articleSection"/>
-        <h1 class="documentFirstHeading" tal:content="context/title" property="rnews:name"/>
+        <h1 property="rnews:headline" class="documentFirstHeading"
+            tal:content="context/title"></h1>
         <h2 class="nitfSubtitle" tal:content="context/subtitle"  property="rnews:alternativeHeadline"/>
     </tal:content-title>
 
