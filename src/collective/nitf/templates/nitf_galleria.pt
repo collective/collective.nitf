@@ -95,8 +95,10 @@
             This item does not have any body text, click the edit tab to change it.
         </p>
 
-        <div property="rnews:articleBody" tal:condition="text"
-             tal:content="structure text">The body</div>
+        <div id="parent-fieldname-text" class=""
+             tal:condition="text">
+          <div property="rnews:articleBody" tal:content="structure text">The body</div>
+        </div>
 
         <fieldset id="related-items"
                   tal:condition="python:not ajax_load and context.relatedItems">
