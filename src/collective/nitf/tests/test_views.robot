@@ -24,6 +24,8 @@ Test Change views
     Click Button  Save
     Page Should Contain  View changed.
     Page Should Not Contain Element  id=mediabox
+    Click Link  id=parent-fieldname-image
+    Wait Until Page Contains Element  css=.pb-ajax .galleria-image img
 
 Test Media View Reorder
     # FIXME
