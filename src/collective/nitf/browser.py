@@ -304,7 +304,7 @@ class CharactersCount(BrowserView):
         return script
 
 
-class NitfGalleria(BrowserView):
+class NitfGalleria(DefaultView):
 
     def imagesJson(self):
         """ """
