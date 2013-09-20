@@ -79,7 +79,7 @@
                                 } else {
                                 link.prepOverlay({
         		    			    subtype: 'ajax',
-        					    filter: '#content-core > *',
+        					    filter: '#content > *',
         					    width: ($(document).width()*0.95) + 'px',
         					    config: {
                                                         top: 'center',
