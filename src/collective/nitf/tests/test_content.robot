@@ -60,7 +60,12 @@ Create News Article, subobjects and test views
     # Test views
     Go To  ${PLONE_URL}/miracle-cure
     Page Should Contain  Miracle Cure
+
+    Go To  ${PLONE_URL}/miracle-cure/@@media
+    page should Contain  Drag and drop images to change their order on the gallery
+
     Go To  ${PLONE_URL}/miracle-cure/@@nitf_galleria
     Page Should Contain  Miracle Cure
+
     Go To  ${PLONE_URL}/miracle-cure/@@nitf
     Page Should Contain  Miracle Cure
