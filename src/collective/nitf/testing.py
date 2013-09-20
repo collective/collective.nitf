@@ -12,7 +12,9 @@ from plone.app.testing import TEST_USER_ID
 from plone.registry.interfaces import IRegistry
 from plone.testing import z2
 from StringIO import StringIO
+from z3c.relationfield import RelationValue
 from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
 
 import os
 import pkg_resources
@@ -83,6 +85,7 @@ class RobotFixture(Fixture):
         # Install into Plone site using portal_setup
         self.applyProfile(portal, 'collective.nitf:default')
         setRoles(portal, TEST_USER_ID, ['Manager'])
+        portal.invokeFactory('collective.nitf.content', 'related')
         portal.invokeFactory('collective.nitf.content', 'n1')
         portal.n1.invokeFactory('Image', 'img1')
         portal.n1.invokeFactory('Image', 'img2')
@@ -90,6 +93,9 @@ class RobotFixture(Fixture):
         portal.n1.img1.setImage(generate_jpeg(50, 50))
         portal.n1.img2.setImage(generate_jpeg(50, 50))
         portal.n1.img3.setImage(generate_jpeg(50, 50))
+        intids = getUtility(IIntIds)
+        to_id = intids.getId(portal.related)
+        portal.n1.relatedItems = [RelationValue(to_id), ]
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
         # FIXME: this needs to be available by default
