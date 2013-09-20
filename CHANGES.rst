@@ -20,7 +20,7 @@ There's a frood who really knows where his towel is
 - Remove five.grok dependency, will easy the mainteinance and the
   extendibility of the package. [jpgimenez]
 
-- Semantic markup in galleria template. [marcosfromero]
+- Semantic markup in galleria template. [marcosfromero, hvelarde]
 
 - Test for changes in default view. [marcosfromero]
 
@@ -159,3 +159,4 @@ There's a frood who really knows where his towel is
 .. _`#49`: https://github.com/collective/collective.nitf/issues/49
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
+.. _`#71`: https://github.com/collective/collective.nitf/issues/71

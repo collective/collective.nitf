@@ -17,7 +17,8 @@
 <body>
     <metal:bodytext fill-slot="main">
     <article vocab="http://schema.org/" typeof="Article"
-          prefix="rnews: http://iptc.org/std/rNews/2011-10-07#">
+        prefix="rnews: http://iptc.org/std/rNews/2011-10-07#"
+        tal:define="text context/text/output|nothing">
 
     <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle"
         tal:condition="not:ajax_load" />
@@ -54,7 +55,18 @@
 				        <span id="lupa"></span>
             </div>
 
-            <div tal:content="structure context/text/output|nothing" property="rnews:articleBody" />
+            <p tal:define="is_editable context/@@plone_context_state/is_editable"
+               tal:condition="python:not text and is_editable"
+               i18n:translate="no_body_text"
+               class="discreet">
+                This item does not have any body text, click the edit tab to change it.
+            </p>
+
+        <div id="parent-fieldname-text" class=""
+             tal:condition="text">
+            <div property="rnews:articleBody" tal:content="structure text">The body</div>
+        </div>
+
             <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
                 <legend i18n:translate="">Related items</legend>
                 <tal:relateditems tal:content="structure view/w/relatedItems/render" />
