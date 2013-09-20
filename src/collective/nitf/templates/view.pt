@@ -15,103 +15,107 @@
 </head>
 
 <body>
-    <metal:bodytext fill-slot="main">
-    <article vocab="http://schema.org/" typeof="Article"
-        prefix="rnews: http://iptc.org/std/rNews/2011-10-07#"
-        tal:define="text context/text/output|nothing">
+  <metal:bodytext fill-slot="main">
+    <metal:main define-macro="main">
+      <article vocab="http://schema.org/" typeof="Article"
+          prefix="rnews: http://iptc.org/std/rNews/2011-10-07#"
+          tal:define="text context/text/output|nothing">
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+        <!-- content-title -->
+        <p property="rnews:articleSection" class="section"
+           tal:content="context/section" />
+        <h1 property="rnews:headline" class="documentFirstHeading"
+            tal:content="context/title"></h1>
+        <h2 property="rnews:alternativeHeadline" class="nitfSubtitle"
+            tal:content="context/subtitle" />
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle"
-        tal:condition="not:ajax_load" />
-    <p class="section" tal:content="context/section" property="rnews:articleSection"/>
-    <h1 property="rnews:headline" class="documentFirstHeading"
-        tal:content="context/title"></h1>
-    <h2 class="nitfSubtitle" tal:content="context/subtitle" property="rnews:alternativeHeadline"/>
-	  <div id="viewlet-below-content-title"
-         tal:content="structure provider:plone.belowcontenttitle"
-		     tal:condition="not:ajax_load" />
+        <!-- content-description -->
+        <div property="rnews:description" class="documentDescription"
+             tal:content="context/description" />
 
-    <div class="documentDescription" tal:content="context/description" property="rnews:description"/>
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+        <div id="content-core">
+          <div class="newsImageContainer"
+              tal:define="image context/getImage"
+              tal:condition="image">
+              <a href="@@nitf_galleria"
+                 id="parent-fieldname-image"
+                 class="parent-nitf-image"
+                 tal:attributes="href string:${context/absolute_url}/@@nitf_galleria">
+               <img tal:define="scales image/@@images;
+                                thumbnail python: scales.scale('image', scale='mini');"
+                    tal:condition="thumbnail"
+                    tal:attributes="src thumbnail/url;
+                                    width thumbnail/width;
+                                    height thumbnail/height;
+                                    alt context/imageCaption|nothing;"
+                    property="rnews:thumbnailUrl" />
+              </a>
+              <p class="discreet"
+                  tal:condition="context/imageCaption"
+                  tal:content="context/imageCaption">
+                  Image Caption
+              </p>
+              <span id="lupa"></span>
+          </div>
 
-            <div class="newsImageContainer"
-                tal:define="image context/getImage"
-                tal:condition="image">
-                <a href="@@nitf_galleria"
-                   id="parent-fieldname-image"
-                   class="parent-nitf-image"
-                   tal:attributes="href string:${context/absolute_url}/@@nitf_galleria">
-                 <img tal:define="scales image/@@images;
-                                  thumbnail python: scales.scale('image', scale='mini');"
-                      tal:condition="thumbnail"
-                      tal:attributes="src thumbnail/url;
-                                      width thumbnail/width;
-                                      height thumbnail/height;
-                                      alt context/imageCaption|nothing;"
-                      property="rnews:thumbnailUrl" />
-                </a>
-                <p class="discreet"
-                    tal:condition="context/imageCaption"
-                    tal:content="context/imageCaption">
-                    Image Caption
-                </p>
-				        <span id="lupa"></span>
-            </div>
+          <p tal:define="is_editable context/@@plone_context_state/is_editable"
+             tal:condition="python:not text and is_editable"
+             i18n:translate="no_body_text"
+             class="discreet">
+              This item does not have any body text, click the edit tab to change it.
+          </p>
 
-            <p tal:define="is_editable context/@@plone_context_state/is_editable"
-               tal:condition="python:not text and is_editable"
-               i18n:translate="no_body_text"
-               class="discreet">
-                This item does not have any body text, click the edit tab to change it.
-            </p>
-
-        <div id="parent-fieldname-text" class=""
-             tal:condition="text">
-            <div property="rnews:articleBody" tal:content="structure text">The body</div>
+          <div id="parent-fieldname-text" class=""
+               tal:condition="text">
+              <div property="rnews:articleBody" tal:content="structure text">The body</div>
+          </div>
         </div>
 
-            <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
-                <legend i18n:translate="">Related items</legend>
-                <tal:relateditems tal:content="structure view/w/relatedItems/render" />
-            </fieldset>
+        <fieldset id="related-items" tal:condition="context/relatedItems|nothing">
+            <legend i18n:translate="">Related items</legend>
+            <tal:relateditems tal:content="structure view/w/relatedItems/render" />
+        </fieldset>
 
-            <fieldset id="folder-listing" tal:condition="not:context/is_empty">
-                <legend i18n:translate="">Contents</legend>
-                <tal:block define="listing_macro context/folder_listing/macros/listing;
-                                   contentFilter python:{'portal_type': ['File', 'Link']}">
-                    <metal:use_macro use-macro="listing_macro" />
-                </tal:block>
-            </fieldset>
+        <fieldset id="folder-listing" tal:condition="not:context/is_empty">
+            <legend i18n:translate="">Contents</legend>
+            <tal:block define="listing_macro context/folder_listing/macros/listing;
+                               contentFilter python:{'portal_type': ['File', 'Link']}">
+                <metal:use_macro use-macro="listing_macro" />
+            </tal:block>
+        </fieldset>
 
-            <div class="newsview">
-	            <script type="text/javascript">
-	                (function($) {
-	                    "use strict";
-	                    $(document).ready(function() {
-                                var link = $(".parent-nitf-image");
-                                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-                                    link.attr('href', link.attr('href').replace('@@nitf_galleria' , '@@nitf_galleria?ajax_include_head=1&ajax_load=1'));
-                                } else {
-                                link.prepOverlay({
-        		    			    subtype: 'ajax',
-        					    filter: '#content > *',
-        					    width: ($(document).width()*0.95) + 'px',
-        					    config: {
-                                                        top: 'center',
-        					        onLoad : function (e) {
-        				                  Galleria.loadTheme("++resource++collective.nitf/galleria-theme/galleria.nitf_theme.js");
-        				                  Galleria.configure({debug: false});
-        				                  Galleria.run(".pb-ajax #mediabox");
-        				                }
-        				        }
-            				});
-                                }
-                        });
-                    })(jQuery);
-                </script>
-            </div>
-
-    </article>
-    </metal:bodytext>
-
+        <div class="newsview">
+          <script type="text/javascript">
+          (function($) {
+              "use strict";
+              $(document).ready(function() {
+                  var link = $(".parent-nitf-image");
+                  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                      link.attr('href', link.attr('href').replace('@@nitf_galleria' , '@@nitf_galleria?ajax_include_head=1&amp;ajax_load=1'));
+                  } else {
+                      link.prepOverlay({
+                          subtype: 'ajax',
+                          filter: '#content > *',
+                          width: ($(document).width()*0.95) + 'px',
+                          config: {
+                              top: 'center',
+                              onLoad : function (e) {
+                                  Galleria.loadTheme("++resource++collective.nitf/galleria-theme/galleria.nitf_theme.js");
+                                  Galleria.configure({debug: false});
+                                  Galleria.run(".pb-ajax #mediabox");
+                              }
+                          }
+                      });
+                  }
+              });
+          })(jQuery);
+          </script>
+        </div>
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+      </article>
+    </metal:main>
+  </metal:bodytext>
 </body>
-
 </html>
