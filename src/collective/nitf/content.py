@@ -2,19 +2,15 @@
 
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
-from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
 from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.directives import form
-from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from z3c.relationfield.schema import RelationChoice
-from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import getUtility
 from zope.interface import implements
@@ -85,15 +81,15 @@ class INITF(form.Schema):
     # XXX: this field uses a special widget that access the most recent items
     # of content types defined in the control panel; see browser.py and
     # controlpanel.py for more information
-    relatedItems = RelationList(
-        title=_(u'label_related_items', default=u'Related Items'),
-        default=[],
-        missing_value=[],
-        value_type=RelationChoice(title=u"Related",
-                                  source=ObjPathSourceBinder()),
-        required=False,
-    )
-    form.widget(relatedItems=MultiContentSearchFieldWidget)
+#    relatedItems = RelationList(
+#        title=_(u'label_related_items', default=u'Related Items'),
+#        default=[],
+#        missing_value=[],
+#        value_type=RelationChoice(title=u"Related",
+#                                  source=ObjPathSourceBinder()),
+#        required=False,
+#    )
+#    form.widget(relatedItems=MultiContentSearchFieldWidget)
 
     location = schema.TextLine(
         # nitf/body/body.head/dateline/location
@@ -110,7 +106,7 @@ class INITF(form.Schema):
     form.fieldset(
         'categorization',
         label=_(u'Categorization'),
-        fields=['relatedItems', 'section', 'urgency', 'genre'],
+        fields=['section', 'urgency', 'genre'],
     )
 
 
