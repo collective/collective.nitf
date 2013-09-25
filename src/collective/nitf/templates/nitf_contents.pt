@@ -1,3 +1,6 @@
+<tal:comment replace="nothing">
+    TODO: Fix format; see: plone/app/layout/viewlets/document_relateditems.pt
+</tal:comment>
 <fieldset i18n:domain="plone" id="folder-listing" 
     tal:define="context nocall:view/context" tal:condition="not:context/is_empty">
     <legend i18n:translate="">Contents</legend>
@@ -6,4 +9,3 @@
         <metal:use_macro use-macro="listing_macro" />
     </tal:block>
 </fieldset>
-
