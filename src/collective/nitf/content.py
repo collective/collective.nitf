@@ -6,11 +6,9 @@ from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
-from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.directives import form
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from zope import schema
 from zope.component import getUtility
@@ -168,19 +166,6 @@ def urgency_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
     return settings.default_urgency
-
-
-# TODO: move this to Dexterity's core
-@form.default_value(field=IDublinCore['language'])
-def language_default_value(data):
-    """ Returns portal's default language or None.
-    """
-    portal_properties = getToolByName(data, "portal_properties", None)
-    if portal_properties is not None:
-        site_properties = getattr(portal_properties, 'site_properties', None)
-        if site_properties is not None:
-            if site_properties.hasProperty('default_language'):
-                return site_properties.getProperty('default_language')
 
 
 @indexer(INITF)
