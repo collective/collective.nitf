@@ -72,27 +72,6 @@
               <div property="rnews:articleBody" tal:content="structure text">The body</div>
           </div>
         </div>
-        <tal:comment replace="nothing">
-            When Nitf starts using plone.app.relationfield.behavior.IRelatedItems 
-            the following div.relatedItems box should
-            be removed since belowbodycontent viewlet will display related items.
-        </tal:comment>
-        <div class="relatedItems">
-            <div class="visualClear" id="clear-space-before-relatedItemBox"><!-- --></div>
-            <dl id="relatedItemBox">
-                <dt i18n:translate="">Related content</dt>
-                <dd>
-                    <tal:relateditems tal:content="structure view/w/relatedItems/render" />
-                </dd>
-            </dl>
-        </div>
-        <fieldset id="folder-listing" tal:condition="not:context/is_empty">
-            <legend i18n:translate="">Contents</legend>
-            <tal:block define="listing_macro context/folder_listing/macros/listing;
-                               contentFilter python:{'portal_type': ['File', 'Link']}">
-                <metal:use_macro use-macro="listing_macro" />
-            </tal:block>
-        </fieldset>
 
         <div class="newsview">
           <script type="text/javascript">

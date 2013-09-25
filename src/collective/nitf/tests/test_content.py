@@ -67,7 +67,7 @@ class ContentTypeTestCase(unittest.TestCase):
         addform = AddForm(self.portal, self.layer['request'])
         addform.fields = field.Fields(self.n1.getTypeInfo().lookupSchema())
         addform.portal_type = 'collective.nitf.content'
-        data = {'section': u'general', 'IRelatedItems.relatedItems': [self.portal['test-folder']],
+        data = {'section': u'general', 'IRelatedItems.relatedItems': [self.n1],
                 'IDublinCore.title': u'nitf2', 'genre': u'Actuality'}
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         nitf = addform.createAndAdd(data)
