@@ -106,7 +106,7 @@
       name="upgrade_to_1009"
       title="collective.nitf upgrade to version 1009"
       description="collective.nitf change relatedItems widget."
-      directory="profiles/upgrade_to_1008"
+      directory="profiles/upgrade_to_1009"
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
   <genericsetup:upgradeStep
