@@ -3,9 +3,6 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
    i18n:domain="collective.nitf">
 
- <!-- class used for content items -->
- <property name="klass">collective.nitf.content.NITF</property>
-
  <!-- enabled behaviors -->
  <property name="behaviors" purge="False">
   <element value="plone.app.relationfield.behavior.IRelatedItems" />
