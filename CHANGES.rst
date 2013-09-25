@@ -4,10 +4,24 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Fields were reordered to enhance user experience on adding/editing content:
+  'location' field is now above 'body text' and 'urgency' is below 'genre'.
+  [hvelarde]
+
+- Reimplement keywords and document_byline viewlets with semantic markup and
+  support for news article byline for INITF interface.
+  [jpgimenez, hvelarde, cleberjsantos]
+
+- Refactor templates to implement semantic markup to annotate news-specific
+  metadata using rNews, schema.org and RDFa (closes `#47`_).
+  [jpgimenez, marcosfromero, hvelarde]
+
+- Functional testing coverage was enhanced. [marcosfromero]
+
 - Remove dependency on unittest2; this means tests are not going to run on
   Python < 2.7. [hvelarde]
 
-- Add plone.app.relationfield as a dependency, this is needed for dexterity
+- Add plone.app.relationfield as a dependency; this is needed for dexterity
   to proper handle relations installing plone.app.intid as a dependency too.
   (closes `#71`_). [jpgimenez]
 
@@ -20,19 +34,8 @@ There's a frood who really knows where his towel is
 - Remove five.grok dependency, will easy the mainteinance and the
   extendibility of the package. [jpgimenez]
 
-- Semantic markup in galleria template. [marcosfromero, hvelarde]
-
-- Test for changes in default view. [marcosfromero]
-
 - Needless override on folder_summary_view that was causing ``AttributeError:
   'View' object has no attribute 'images'`` was removed. [hvelarde]
-
-- Reimplement keywords and document_byline viewlets with semantic markup and
-  support for news article byline for INITF interface.
-  [jpgimenez, hvelarde, cleberjsantos]
-
-- Implement semantic markup to annotate news-specific metadata using
-  schema.org and RDFa (closes `#47`_). [jpgimenez, hvelarde]
 
 - Changes image link behavior in view.pt for mobile devices 
   (closes `#62`_). [marcosfromero]

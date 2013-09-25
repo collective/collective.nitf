@@ -102,4 +102,19 @@
       handler="collective.nitf.setuphandlers.upgrade_to_1008"
       profile="collective.nitf:default" />
 
+  <genericsetup:registerProfile
+      name="upgrade_to_1009"
+      title="collective.nitf upgrade to version 1009"
+      description="collective.nitf change relatedItems widget."
+      directory="profiles/upgrade_to_1009"
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:upgradeStep
+      title="collective.nitf upgrade to version 1009"
+      source="*"
+      destination="1009"
+      description="collective.nitf change relatedItems widget."
+      handler="collective.nitf.setuphandlers.upgrade_to_1009"
+      profile="collective.nitf:default" />
+
 </configure>

@@ -4,16 +4,16 @@ Share and Enjoy
 ``collective.nitf`` would not have been possible without the contribution of
 the following people:
 
+- Cleber J. Santos
+- Franco Pellegrini
+- Gonzalo Almeida
 - Héctor Velarde
 - Joaquín Rosales
-- Érico Andrei
 - Juan A. Díaz
-- Silvestre Huens
-- Gonzalo Almeida
-- Franco Pellegrini
-- Cleber J Santos
-- Marcos F. Romero
 - Juan Pablo Giménez
+- Marcos F. Romero
+- Silvestre Huens
+- Érico Andrei
 
 You can find an updated list of package contributors on `GitHub`_.
 

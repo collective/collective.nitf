@@ -72,9 +72,19 @@
     <browser:viewlet
     	for="collective.nitf.content.INITF"
         name="plone.belowcontenttitle.keywords"
-        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContent"
         view="plone.app.layout.globals.interfaces.IViewView"
         template="templates/keywords.pt"
+        permission="zope2.View"
+        />
+
+    <!-- Render the contents -->
+    <browser:viewlet
+        for="collective.nitf.content.INITF"
+        name="plone.belowcontenttitle.contents"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        view="plone.app.layout.globals.interfaces.IViewView"
+        template="templates/nitf_contents.pt"
         permission="zope2.View"
         />
 

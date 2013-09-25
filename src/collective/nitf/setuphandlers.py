@@ -161,3 +161,15 @@ def upgrade_to_1008(context, logger=None):
             logger.info("{0} was installed.".format(dependency))
         else:
             logger.info("{0} already installed; nothing to do.".format(dependency))
+
+
+def upgrade_to_1009(context, logger=None):
+    """
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    profile = 'profile-collective.nitf:upgrade_to_1009'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(profile)

@@ -51,7 +51,7 @@ Create News Article, subobjects and test views
     Click Link  link=Miracle Cure
     Open Add New Menu
     Click Link  css=a#link
-    Input Text  css=#title  An URL
+    Input Text  css=input[name=title]  An URL
     Input Text  css=#description  The description of the URL
     Input Text  css=#remoteUrl  http://foo.bar
     Click Button  Save

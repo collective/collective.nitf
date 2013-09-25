@@ -40,10 +40,10 @@ class AddForm(DefaultAddForm):
         for group in self.groups:
             # HACK: we need to update criteria of the ObjPathSourceBinder here
             # as we want to list only relatable content types
-            if 'relatedItems' in group.widgets.keys():
+            if 'IRelatedItems.relatedItems' in group.widgets.keys():
                 registry = getUtility(IRegistry)
                 settings = registry.forInterface(INITFSettings)
-                widget = group.widgets['relatedItems']
+                widget = group.widgets['IRelatedItems.relatedItems']
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
 
@@ -63,10 +63,10 @@ class EditForm(DefaultEditForm):
         for group in self.groups:
             # HACK: we need to update criteria of the ObjPathSourceBinder here
             # as we want to list only relatable content types
-            if 'relatedItems' in group.widgets.keys():
+            if 'IRelatedItems.relatedItems' in group.widgets.keys():
                 registry = getUtility(IRegistry)
                 settings = registry.forInterface(INITFSettings)
-                widget = group.widgets['relatedItems']
+                widget = group.widgets['IRelatedItems.relatedItems']
                 criteria = widget.source.selectable_filter.criteria
                 criteria['portal_type'] = settings.relatable_content_types
 
