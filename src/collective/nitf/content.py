@@ -2,6 +2,7 @@
 
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
+from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
@@ -42,29 +43,52 @@ class INITF(form.Schema):
         required=False,
     )
 
+    location = schema.TextLine(
+        # nitf/body/body.head/dateline/location
+        title=_(u'Location'),
+        description=_(
+            u'help_location',
+            default=u'Event location. Where an event took place '
+                    u'(as opposed to where the story was written).',
+        ),
+        default=u'',
+        missing_value=u'',
+        required=False,
+    )
+
     text = RichText(
         # nitf/body/body.content
         title=_(u'Body text'),
         required=False,
     )
 
-    genre = schema.Choice(
-        # nitf/head/tobject/tobject.property/@tobject.property.type
-        title=_(u'Genre'),
-        description=_(u'help_genre',
-                      default=u'Describes the nature, journalistic or '
-                              u'intellectual characteristic of a news '
-                              u'object, not specifically its content.'),
-        source=u'collective.nitf.AvailableGenres',
+    form.fieldset(
+        'categorization',
+        label=_PMF(u'label_schema_categorization', default=u'Categorization'),
+        fields=['section', 'genre', 'urgency'],
     )
 
+    form.order_before(section='subjects')
     section = schema.Choice(
         # nitf/head/pubdata/@position.section
         title=_(u'Section'),
-        description=_(u'help_section',
-                      default=u'Named section where the article will '
-                              u'appear.'),
+        description=_(
+            u'help_section',
+            default=u'Named section where the article will appear.',
+        ),
         vocabulary=u'collective.nitf.AvailableSections',
+    )
+
+    genre = schema.Choice(
+        # nitf/head/tobject/tobject.property/@tobject.property.type
+        title=_(u'Genre'),
+        description=_(
+            u'help_genre',
+            default=u'Describes the nature, journalistic or '
+                    u'intellectual characteristic of a news '
+                    u'object, not specifically its content.',
+        ),
+        vocabulary=u'collective.nitf.AvailableGenres',
     )
 
     urgency = schema.Choice(
@@ -73,24 +97,6 @@ class INITF(form.Schema):
         description=_(u'help_urgency',
                       default=u'News importance.'),
         vocabulary=u'collective.nitf.Urgencies',
-    )
-
-    location = schema.TextLine(
-        # nitf/body/body.head/dateline/location
-        title=_(u'Location'),
-        description=_(u'help_location',
-                      default=u'Event location. Where an event took '
-                              u'place (as opposed to where the story was '
-                              u'written).'),
-        default=u'',
-        missing_value=u'',
-        required=False,
-    )
-
-    form.fieldset(
-        'categorization',
-        label=_(u'Categorization'),
-        fields=['section', 'urgency', 'genre'],
     )
 
 
