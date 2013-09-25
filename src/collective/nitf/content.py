@@ -2,19 +2,14 @@
 
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
-from collective.z3cform.widgets.multicontent_search_widget import MultiContentSearchFieldWidget
+from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
-from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.directives import form
-from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from z3c.relationfield.schema import RelationChoice
-from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import getUtility
 from zope.interface import implements
@@ -38,12 +33,22 @@ class INITF(form.Schema):
         required=False,
     )
 
-    #description = schema.Text()
-        # nitf/body/body.head/abstract
-
     byline = schema.TextLine(
         # nitf/body/body.head/byline/person
         title=_(u'Author'),
+        default=u'',
+        missing_value=u'',
+        required=False,
+    )
+
+    location = schema.TextLine(
+        # nitf/body/body.head/dateline/location
+        title=_(u'Location'),
+        description=_(
+            u'help_location',
+            default=u'Event location. Where an event took place '
+                    u'(as opposed to where the story was written).',
+        ),
         default=u'',
         missing_value=u'',
         required=False,
@@ -55,23 +60,33 @@ class INITF(form.Schema):
         required=False,
     )
 
-    genre = schema.Choice(
-        # nitf/head/tobject/tobject.property/@tobject.property.type
-        title=_(u'Genre'),
-        description=_(u'help_genre',
-                      default=u'Describes the nature, journalistic or '
-                              u'intellectual characteristic of a news '
-                              u'object, not specifically its content.'),
-        source=u'collective.nitf.AvailableGenres',
+    form.fieldset(
+        'categorization',
+        label=_PMF(u'label_schema_categorization', default=u'Categorization'),
+        fields=['section', 'genre', 'urgency'],
     )
 
+    form.order_before(section='subjects')
     section = schema.Choice(
         # nitf/head/pubdata/@position.section
         title=_(u'Section'),
-        description=_(u'help_section',
-                      default=u'Named section where the article will '
-                              u'appear.'),
+        description=_(
+            u'help_section',
+            default=u'Named section where the article will appear.',
+        ),
         vocabulary=u'collective.nitf.AvailableSections',
+    )
+
+    genre = schema.Choice(
+        # nitf/head/tobject/tobject.property/@tobject.property.type
+        title=_(u'Genre'),
+        description=_(
+            u'help_genre',
+            default=u'Describes the nature, journalistic or '
+                    u'intellectual characteristic of a news '
+                    u'object, not specifically its content.',
+        ),
+        vocabulary=u'collective.nitf.AvailableGenres',
     )
 
     urgency = schema.Choice(
@@ -80,37 +95,6 @@ class INITF(form.Schema):
         description=_(u'help_urgency',
                       default=u'News importance.'),
         vocabulary=u'collective.nitf.Urgencies',
-    )
-
-    # XXX: this field uses a special widget that access the most recent items
-    # of content types defined in the control panel; see browser.py and
-    # controlpanel.py for more information
-    relatedItems = RelationList(
-        title=_(u'label_related_items', default=u'Related Items'),
-        default=[],
-        missing_value=[],
-        value_type=RelationChoice(title=u"Related",
-                                  source=ObjPathSourceBinder()),
-        required=False,
-    )
-    form.widget(relatedItems=MultiContentSearchFieldWidget)
-
-    location = schema.TextLine(
-        # nitf/body/body.head/dateline/location
-        title=_(u'Location'),
-        description=_(u'help_location',
-                      default=u'Event location. Where an event took '
-                              u'place (as opposed to where the story was '
-                              u'written).'),
-        default=u'',
-        missing_value=u'',
-        required=False,
-    )
-
-    form.fieldset(
-        'categorization',
-        label=_(u'Categorization'),
-        fields=['relatedItems', 'section', 'urgency', 'genre'],
     )
 
 
@@ -182,19 +166,6 @@ def urgency_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
     return settings.default_urgency
-
-
-# TODO: move this to Dexterity's core
-@form.default_value(field=IDublinCore['language'])
-def language_default_value(data):
-    """ Returns portal's default language or None.
-    """
-    portal_properties = getToolByName(data, "portal_properties", None)
-    if portal_properties is not None:
-        site_properties = getattr(portal_properties, 'site_properties', None)
-        if site_properties is not None:
-            if site_properties.hasProperty('default_language'):
-                return site_properties.getProperty('default_language')
 
 
 @indexer(INITF)
