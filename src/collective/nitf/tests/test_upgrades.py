@@ -6,7 +6,6 @@ from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.relationfield.behavior import IRelatedItems
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 from zope.intid.interfaces import IIntIds
 
@@ -36,7 +35,9 @@ class Upgradeto1008TestCase(unittest.TestCase):
         # run the upgrade step and test resources are installed
         upgrade_to_1008(self.portal)
         for dependency in dependencies:
-            self.assertTrue(qi.isProductInstalled(dependency), msg='{0} not installed'.format(dependency))
+            self.assertTrue(
+                qi.isProductInstalled(dependency),
+                msg='{0} not installed'.format(dependency))
         self.assertIsNotNone(queryUtility(IIntIds))
 
 
@@ -54,9 +55,10 @@ class Upgradeto1009TestCase(unittest.TestCase):
         """
 
         # IRelatedItems is installed by default
-        ttool = getToolByName(self.portal, 'portal_types')
+        ttool = self.portal['portal_types']
         fti = ttool['collective.nitf.content']
-        self.assertTrue('plone.app.relationfield.behavior.IRelatedItems' in fti.behaviors)
+        self.assertIn(
+            'plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)
 
         # Remove behavior to simulate previous profile
         behaviors = list(fti.behaviors)
@@ -72,4 +74,5 @@ class Upgradeto1009TestCase(unittest.TestCase):
         # run the upgrade step and verify everything works as expected
         upgrade_to_1009(self.portal)
         self.assertTrue(IRelatedItems.providedBy(n1))
-        self.assertTrue('plone.app.relationfield.behavior.IRelatedItems' in fti.behaviors)
+        self.assertIn(
+            'plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)

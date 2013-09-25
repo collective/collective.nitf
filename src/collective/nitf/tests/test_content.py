@@ -58,18 +58,23 @@ class ContentTypeTestCase(unittest.TestCase):
         addform = AddForm(self.portal, self.layer['request'])
         addform.fields = field.Fields(self.n1.getTypeInfo().lookupSchema())
         addform.portal_type = 'collective.nitf.content'
-        data = {'section': u'general', 'IDublinCore.title': u'nitf2', 'genre': u'Actuality'}
+        data = {'section': u'general',
+                'IDublinCore.title': u'nitf2',
+                'genre': u'Actuality'}
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         nitf = addform.createAndAdd(data)
         self.assertIsNotNone(nitf)
 
+    # FIXME
     @unittest.expectedFailure
     def test_related_items(self):
         addform = AddForm(self.portal, self.layer['request'])
         addform.fields = field.Fields(self.n1.getTypeInfo().lookupSchema())
         addform.portal_type = 'collective.nitf.content'
-        data = {'section': u'general', 'IRelatedItems.relatedItems': [self.n1],
-                'IDublinCore.title': u'nitf2', 'genre': u'Actuality'}
+        data = {'section': u'general',
+                'IRelatedItems.relatedItems': [self.n1],
+                'IDublinCore.title': u'nitf2',
+                'genre': u'Actuality'}
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         nitf = addform.createAndAdd(data)
         self.assertTrue(len(nitf.relatedItems))
@@ -92,13 +97,6 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.n1))
         self.assertTrue(IAttributeUUID.providedBy(self.n1))
-
-    def test_locking_behavior_available(self):
-        # ILocking is not applied by default, but must be available if needed
-        try:
-            from plone.app.lockingbehavior.behaviors import ILocking  # NOQA
-        except ImportError:
-            self.fail('ILocking behavior not available')
 
     def test_is_selectable_as_folder_default_view(self):
         self.folder.setDefaultPage('n1')
