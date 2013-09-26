@@ -93,6 +93,9 @@
             });            
 	    });
 	    </script>
+            <script type="text/javascript" charset="iso-8859-1" src="widgets/js/keywordmultiselect.js"
+             tal:attributes="src string:${portal_url}/widgets/js/keywordmultiselect.js">
+            </script>
     </metal:javascriptslot>
 </head>
 
