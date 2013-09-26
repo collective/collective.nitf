@@ -44,13 +44,25 @@ Installation
 
 To enable this product in a buildout-based installation:
 
-1. Edit your buildout.cfg and add ``collective.nitf`` to the list of eggs to
+#. Edit your buildout.cfg and add ``collective.nitf`` to the list of eggs to
    install::
 
     [buildout]
     ...
     eggs =
         collective.nitf
+
+#. If you are using Plone 4.3.x you need to add the following also::
+
+    [versions]
+    ...
+    plone.app.layout = 2.3.9
+
+#. If you are using Plone 4.2.x you need to add the following also::
+
+    [versions]
+    ...
+    plone.app.layout = 2.2.11
 
 After updating the configuration you need to run ''bin/buildout'', which will
 take care of updating your system.
