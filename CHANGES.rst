@@ -4,6 +4,9 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add required script library in media.pt to prevent image not loading
+  when editing in overlay (closes `#84`_). [marcosfromero]
+
 - Fields were reordered to enhance user experience on adding/editing content:
   'location' field is now above 'body text' and 'urgency' is below 'genre'.
   [hvelarde]
@@ -163,3 +166,4 @@ There's a frood who really knows where his towel is
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
 .. _`#71`: https://github.com/collective/collective.nitf/issues/71
+.. _`#84`: https://github.com/collective/collective.nitf/issues/84

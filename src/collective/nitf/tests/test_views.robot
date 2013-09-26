@@ -8,6 +8,20 @@ Suite Teardown  Close all browsers
 
 *** Test cases ***
 
+Test Edit image from Media
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
+    Click Link  link=n1
+    Click Link  link=Media
+
+    [Documentation]  Click on edit and wait until overlay is open
+    Log Source
+    Mouse Over  css=li.sort-0
+    Click Link  css=li.sort-0 a.edit
+    Wait Until Page Contains Element  css=.pb-ajax form[name=edit_form]
+    Click Button  Save
+
 Test Change views
     Enable Autologin as  Site Administrator
     Go to Homepage
