@@ -246,26 +246,6 @@ class NewsML(View):
             return related_items
 
 
-class DeleteMedia(View):
-
-    # XXX: This is here, because under certain situations, grok will get the
-    # template of 'View' superclass and raise an exception.
-    template = None
-
-    def __call__(self):
-        delete_id = self.request['id'] if 'id' in self.request else None
-
-        status = {'status': 'error'}
-        if delete_id:
-            self.context.manage_delObjects([delete_id])
-            status['status'] = 'success'
-
-        return json.dumps(status)
-
-    def render(self):
-        pass
-
-
 class CharactersCount(BrowserView):
 
     def __call__(self):

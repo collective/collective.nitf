@@ -4,6 +4,9 @@ There's a frood who really knows where his towel is
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add confirmation overlay before removing an image in media.pt 
+  (closes `85`_). [marcosfromero]
+
 - Add required script library in media.pt to prevent image not loading
   when editing in overlay (closes `#84`_). [marcosfromero]
 
@@ -167,3 +170,4 @@ There's a frood who really knows where his towel is
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
 .. _`#71`: https://github.com/collective/collective.nitf/issues/71
 .. _`#84`: https://github.com/collective/collective.nitf/issues/84
+.. _`#85`: https://github.com/collective/collective.nitf/issues/85
