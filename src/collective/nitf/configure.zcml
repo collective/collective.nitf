@@ -156,14 +156,6 @@
         />
 
     <browser:page
-        for="collective.nitf.content.INITF"
-        name="delete_media"
-        class=".browser.DeleteMedia"
-        permission="cmf.ModifyPortalContent"
-        layer="collective.nitf.interfaces.INITFLayer"
-        />
-
-    <browser:page
         for="*"
         name="characters-count.js"
         class=".browser.CharactersCount"
