@@ -17,10 +17,40 @@ Test Edit image from Media
 
     [Documentation]  Click on edit and wait until overlay is open
     Log Source
-    Mouse Over  css=li.sort-0
-    Click Link  css=li.sort-0 a.edit
+    Mouse Over  css=li#sortable-img1
+    Click Link  css=li#sortable-img1 a.edit
     Wait Until Page Contains Element  css=.pb-ajax form[name=edit_form]
     Click Button  Save
+
+
+Test Delete image from Media
+    # FIXME
+    [Tags]  Expected Failure
+
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
+    Click Link  link=n1
+    Click Link  link=Media
+
+    [Documentation]  Click on trash icon and cancel
+    Mouse Over  css=li#sortable-img1
+    Click Link  css=li#sortable-img1 a.delete
+    Wait Until Page Contains  Do you really want to delete this item?
+    Click Button  Cancel
+    Click Link  link=Media
+    Page Should Contain Element  css=li#sortable-img1
+
+    [Documentation]  Click on trash icon and delete
+    Mouse Over  css=li#sortable-img1
+    Click Link  css=li#sortable-img1 a.delete
+    Wait Until Page Contains  Do you really want to delete this item?
+    Click Element  css=.pb-ajax input[value=Delete]
+    #Wait For Condition  return $('li#sortable-img1').length === 0;
+    #Page Should Not Contain Element  css=li#sortable-img1
+    Click Link  link=Media
+    Page Should Not Contain Element  css=li#sortable-img1
+
 
 Test Change views
     Enable Autologin as  Site Administrator
