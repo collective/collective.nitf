@@ -27,9 +27,8 @@ There's a frood who really knows where his towel is
 - Remove dependency on unittest2; this means tests are not going to run on
   Python < 2.7. [hvelarde]
 
-- Add plone.app.relationfield as a dependency; this is needed for dexterity
-  to proper handle relations installing plone.app.intid as a dependency too.
-  (closes `#71`_). [jpgimenez]
+- Add plone.app.relationfield as a dependency; this is needed for Dexterity
+  to proper handle relations (closes `#71`_). [jpgimenez]
 
 - Remove HiddenProfiles utility; that's most likely the job of a policy
   package. [hvelarde]

@@ -20,24 +20,20 @@ class Upgradeto1008TestCase(unittest.TestCase):
         self.portal = self.layer['portal']
 
     def test_update_dependencies(self):
-        """Test plone.app.relationfield & IIntIds utility were installed.
+        """Test plone.app.relationfield was installed.
         """
         qi = self.portal.portal_quickinstaller
-        dependencies = ('plone.app.relationfield', 'plone.app.intid')
+        dependency = 'plone.app.relationfield'
 
         # manually uninstall resources to simulate previous profile
-        for dependency in dependencies:
-            if qi.isProductInstalled(dependency):
-                qi.uninstallProducts([dependency])
-            self.assertFalse(qi.isProductInstalled(dependency))
-        self.assertIsNone(queryUtility(IIntIds))
+        if qi.isProductInstalled(dependency):
+            qi.uninstallProducts([dependency])
+        self.assertFalse(qi.isProductInstalled(dependency))
 
         # run the upgrade step and test resources are installed
         upgrade_to_1008(self.portal)
-        for dependency in dependencies:
-            self.assertTrue(
-                qi.isProductInstalled(dependency),
-                msg='{0} not installed'.format(dependency))
+        self.assertTrue(qi.isProductInstalled(dependency))
+        # TODO: move this out of the upgrade step test
         self.assertIsNotNone(queryUtility(IIntIds))
 
 

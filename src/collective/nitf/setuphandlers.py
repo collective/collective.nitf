@@ -153,14 +153,11 @@ def upgrade_to_1008(context, logger=None):
         # Called as upgrade step: define our own logger
         logger = logging.getLogger(PROJECTNAME)
 
-    dependencies = ('plone.app.relationfield', 'plone.app.intid')
-    for dependency in dependencies:
-        qi = getToolByName(context, 'portal_quickinstaller')
-        if not qi.isProductInstalled(dependency):
-            qi.installProduct(dependency)
-            logger.info("{0} was installed.".format(dependency))
-        else:
-            logger.info("{0} already installed; nothing to do.".format(dependency))
+    dependency = 'plone.app.relationfield'
+    qi = getToolByName(context, 'portal_quickinstaller')
+    if not qi.isProductInstalled(dependency):
+        qi.installProduct(dependency)
+        logger.info("plone.app.relationfield was installed.")
 
 
 def upgrade_to_1009(context, logger=None):
