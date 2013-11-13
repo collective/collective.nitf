@@ -52,18 +52,12 @@ To enable this product in a buildout-based installation:
     eggs =
         collective.nitf
 
-#. If you are using Plone 4.3.x you need to add the following also::
-
-    [versions]
-    ...
-    plone.app.layout = 2.3.9
-
-#. If you are using Plone 4.2.x you need to add the following also::
+#. If you are using Plone 4.2 you need to add the following also::
 
     [versions]
     ...
     collective.js.jqueryui = 1.8.16.9
-    plone.app.layout = 2.2.11
+    plone.app.layout = 2.2.13
 
 After updating the configuration you need to run ''bin/buildout'', which will
 take care of updating your system.
@@ -73,7 +67,6 @@ Go to the 'Site Setup' page in a Plone site and click on the 'Add-ons' link.
 Check the box next to ``collective.nitf`` and click the 'Activate' button.
 
 .. Note::
-
 	You may have to empty your browser cache and save your resource registries
 	in order to see the effects of the product installation.
 
