@@ -1,11 +1,16 @@
-There's a frood who really knows where his towel is
----------------------------------------------------
+Changelog
+---------
+
+There's a frood who really knows where his towel is.
 
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove Pillow from dependencies as some people may prefer to use PIL.
+  [hvelarde]
+
 - Add confirmation overlay before removing an image in media.pt 
-  (closes `85`_). [marcosfromero]
+  (closes `#85`_). [marcosfromero]
 
 - Add required script library in media.pt to prevent image not loading
   when editing in overlay (closes `#84`_). [marcosfromero]
