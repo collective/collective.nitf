@@ -174,4 +174,10 @@
 
     <adapter name="SearchableText" factory=".content.textIndexer" />
 
+  <utility
+    factory=".setuphandlers.HiddenProfiles"
+    name="collective.nitf"
+    provides="Products.CMFPlone.interfaces.INonInstallable"
+    />
+
 </configure>

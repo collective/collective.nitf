@@ -41,9 +41,6 @@ There's a frood who really knows where his towel is.
 - Add plone.app.relationfield as a dependency; this is needed for Dexterity
   to proper handle relations (closes `#71`_). [jpgimenez]
 
-- Remove HiddenProfiles utility; that's most likely the job of a policy
-  package. [hvelarde]
-
 - Remove updateWidgets method on Add and Edit forms as they were used only to
   style them; we should implement this on CSS if needed. [hvelarde]
 
