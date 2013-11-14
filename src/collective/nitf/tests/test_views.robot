@@ -8,6 +8,14 @@ Suite Teardown  Close all browsers
 
 *** Test cases ***
 
+Test Gallery view with no image
+    # We can wait for 15 seconds to "make sure" Galleria was definitely not run but this
+    # is not a too realiable test. If this bug wasn't fixed Galleria could take 16 secs
+    # to load (which is very unlikely)
+    Go To  ${PLONE_URL}/related/@@nitf_galleria
+    Sleep  15s
+    Page Should Not Contain  Init failed: Galleria could not find the element ".newsview #mediabox"
+
 Test Edit image from Media
     Enable Autologin as  Site Administrator
     Go to Homepage
