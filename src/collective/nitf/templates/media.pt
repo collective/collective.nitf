@@ -15,8 +15,8 @@
     </metal:block>
 
     <metal:javascriptslot fill-slot="javascript_head_slot">
-	    <script type="text/javascript">
-		function update_sortable(item, delta) {
+        <script type="text/javascript">
+        function update_sortable(item, delta) {
             var id_cleaner = function(ids) {
                 var cleaned = new Array();
                 for (i=0;i<ids.length;i++) {
@@ -37,11 +37,11 @@
             var ids = id_cleaner($("#sortable").sortable("toArray"));
             var prev_msg = "\nPrev pos: ";
 
-			prev_pos = item.attr("class").replace('sort-', "");
+            prev_pos = item.attr("class").replace('sort-', "");
 
-			if(delta == undefined) {
-				delta = pos - prev_pos;	
-			}
+            if(delta == undefined) {
+                delta = pos - prev_pos;    
+            }
 
             prev_msg += prev_pos;
             msg2 += "\nDelta: " + delta;
@@ -51,9 +51,9 @@
             msg2 += "\n" + prev_msg;
             $.post(move_url, { delta: delta, item_id: a_id});
             $("#sortable").sortable("refresh");
-		};
-	    
-	    $(function() {
+        };
+        
+        $(function() {
 
             $('#sortable a.draggable-item').prepOverlay({
                     subtype: 'ajax',
@@ -91,11 +91,11 @@
                 helper : 'clone',            
                 placeholder: "ui-state-highlight",
                 update: function(event, ui){
-                	update_sortable(ui.item);
+                    update_sortable(ui.item);
                 }
             });            
-	    });
-	    </script>
+        });
+        </script>
             <script type="text/javascript" charset="iso-8859-1" src="widgets/js/keywordmultiselect.js"
              tal:attributes="src string:${portal_url}/widgets/js/keywordmultiselect.js">
             </script>
@@ -123,7 +123,7 @@
                                    obj python:item.getObject()"
                        tal:attributes="id string:sortable-${item_id};
                                    class string:sort-${repeat/item/index}">
-	                <a href=""
+                    <a href=""
                        tal:define="item_title_or_id item/pretty_title_or_id;
                                    item_description item/Description;"
                        tal:attributes="href string:${item_url}/view;

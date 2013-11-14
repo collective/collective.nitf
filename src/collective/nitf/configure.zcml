@@ -45,23 +45,23 @@
 
     <include file="profiles.zcml" />
 
-	<!-- Image scale support for tile images -->
-  	<browser:page
-      	name="images"
-      	for=".content.INITF"
-      	class=".browser.ImageScaling"
-      	permission="zope2.View"
-      	/>
+    <!-- Image scale support for tile images -->
+    <browser:page
+        name="images"
+        for=".content.INITF"
+        class=".browser.ImageScaling"
+        permission="zope2.View"
+        />
 
-  	<browser:resourceDirectory
-      	name="collective.nitf"
-      	directory="static"
+    <browser:resourceDirectory
+        name="collective.nitf"
+        directory="static"
         layer="collective.nitf.interfaces.INITFLayer"
-      	/>
+        />
 
     <!-- Render the document byline -->
     <browser:viewlet
-    	for="collective.nitf.content.INITF"
+        for="collective.nitf.content.INITF"
         name="plone.belowcontenttitle.documentbyline"
         manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
         class=".browser.NITFBylineViewlet"
@@ -70,7 +70,7 @@
 
     <!-- Render the keywords -->
     <browser:viewlet
-    	for="collective.nitf.content.INITF"
+        for="collective.nitf.content.INITF"
         name="plone.belowcontenttitle.keywords"
         manager="plone.app.layout.viewlets.interfaces.IBelowContent"
         view="plone.app.layout.globals.interfaces.IViewView"
