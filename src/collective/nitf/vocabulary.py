@@ -10,8 +10,9 @@ from zope.schema.vocabulary import SimpleVocabulary
 import unicodedata
 
 
+# TODO: use plone.i18n normalizer
 def _normalize_token(token):
-    ''' Normalize a token using ascii as encoding '''
+    """Normalize a token using ascii as encoding."""
     normalize = unicodedata.normalize
     return normalize('NFKD', token).encode('ascii', 'ignore').lower()
 

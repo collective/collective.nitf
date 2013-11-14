@@ -95,26 +95,26 @@ class ILatestSectionableNITFPortlet(IPortletDataProvider):
 
     header = schema.TextLine(
         title=_(u'Header'),
-        description=_(u"The header for the portlet. Leave empty for none."),
+        description=_(u'The header for the portlet. Leave empty for none.'),
         required=False)
 
     limit = schema.Int(
-        title=_(u"Limit"),
-        description=_(u"Specify the maximum number of items to show in the "
-                      u"portlet. Leave this blank to show all items."),
+        title=_(u'Limit'),
+        description=_(u'Specify the maximum number of items to show in the '
+                      u'portlet. Leave this blank to show all items.'),
         default=10,
         required=False)
 
     pretty_date = schema.Bool(
         title=_(u'Pretty dates'),
-        description=_(u"Show dates in a pretty format (ie. '4 hours ago')."),
+        description=_(u'Show dates in a pretty format (ie. "4 hours ago").'),
         default=True,
         required=False)
 
     filter_collection = schema.Choice(
-        title=_(u"Filter collection"),
-        description=_(u"Use the criteria from this collection to modify the "
-                      u"search results and order."),
+        title=_(u'Filter collection'),
+        description=_(u'Use the criteria from this collection to modify the '
+                      u'search results and order.'),
         required=False,
         source=SearchableTextSourceBinder(
             {'portal_type': ('Topic', 'Collection')},
@@ -130,13 +130,13 @@ class Assignment(base.Assignment):
 
     implements(ILatestSectionableNITFPortlet)
 
-    header = u""
+    header = u''
     limit = 10
     pretty_date = True
     filter_collection = None
 
     def __init__(self,
-                 header=u"",
+                 header=u'',
                  limit=10,
                  pretty_date=True,
                  filter_collection=None):
@@ -151,7 +151,7 @@ class Assignment(base.Assignment):
         """This property is used to give the title of the portlet in the
         "manage portlets" screen. Here, we use the title that the user gave.
         """
-        return _(u"Latest Sectionable NITF")
+        return _(u'Latest Sectionable NITF')
 
 
 class Renderer(base.Renderer):
@@ -166,7 +166,7 @@ class Renderer(base.Renderer):
 
     def getResults(self, section=None):
         view = getMultiAdapter((self.context, self.request),
-                               name="nitf-filter-list")
+                               name='nitf-filter-list')
 
         uid = None
         if self.data.filter_collection:
@@ -183,9 +183,9 @@ class Renderer(base.Renderer):
         vocab = getUtility(IVocabularyFactory,
                            name=u'collective.nitf.AvailableSections')(self.context)
 
-        values = SimpleVocabulary([SimpleVocabulary.createTerm(_(u"All"),
-                                                               "all",
-                                                               _(u"All"))] +
+        values = SimpleVocabulary([SimpleVocabulary.createTerm(_(u'All'),
+                                                               'all',
+                                                               _(u'All'))] +
                                   vocab._terms)
 
         return values
@@ -210,9 +210,9 @@ class AddForm(base.AddForm):
 
     form_fields = form.Fields(ILatestSectionableNITFPortlet)
 
-    label = _(u"Add latest NITF Portlet")
-    description = _(u"This portlet display a list of latest NITF created. "
-                    u"It allows to filter NITF from different sections.")
+    label = _(u'Add latest NITF Portlet')
+    description = _(u'This portlet display a list of latest NITF created. '
+                    u'It allows to filter NITF from different sections.')
 
     def create(self, data):
         return Assignment(**data)
@@ -222,6 +222,6 @@ class EditForm(base.EditForm):
 
     form_fields = form.Fields(ILatestSectionableNITFPortlet)
 
-    label = _(u"Add latest NITF Portlet")
-    description = _(u"This portlet display a list of latest NITF created. "
-                    u"It allows to filter NITF from different sections.")
+    label = _(u'Add latest NITF Portlet')
+    description = _(u'This portlet display a list of latest NITF created. '
+                    u'It allows to filter NITF from different sections.')

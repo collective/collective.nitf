@@ -25,7 +25,7 @@ import json
 import mimetypes
 import pkg_resources
 
-PLONE_VERSION = pkg_resources.require("Plone")[0].version
+PLONE_VERSION = pkg_resources.require('Plone')[0].version
 
 
 # TODO: enable_form_tabbing must be user selectable

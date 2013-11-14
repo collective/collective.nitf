@@ -183,7 +183,7 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertIn('class="myClass"', tag(css_class='myClass'))
 
 
-IMAGE_SCHEMA = '''<model xmlns="http://namespaces.plone.org/supermodel/schema"
+IMAGE_SCHEMA = """<model xmlns="http://namespaces.plone.org/supermodel/schema"
        xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
        i18n:domain="plone">
@@ -204,7 +204,7 @@ IMAGE_SCHEMA = '''<model xmlns="http://namespaces.plone.org/supermodel/schema"
       <title i18n:translate="Image">Image</title>
     </field>
   </schema>
-</model>'''
+</model>"""
 
 
 def dummy_image(data):

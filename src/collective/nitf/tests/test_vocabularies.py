@@ -36,12 +36,12 @@ class VocabulariesTestCase(unittest.TestCase):
         #self.assertTrue(u'Current' in available_genres)
 
     def test_available_genres_vocabulary_is_sorted(self):
-        self.settings.available_genres = [u"Voicer", u"Current", u"Actuality"]
+        self.settings.available_genres = [u'Voicer', u'Current', u'Actuality']
         name = 'collective.nitf.AvailableGenres'
         util = getUtility(IVocabularyFactory, name)
         genres = util(self.portal)
         genres = [i.title for i in genres]
-        self.assertListEqual(genres, [u"Actuality", u"Current", u"Voicer"])
+        self.assertListEqual(genres, [u'Actuality', u'Current', u'Voicer'])
 
     def test_available_sections_vocabulary(self):
         name = 'collective.nitf.AvailableSections'
@@ -53,12 +53,12 @@ class VocabulariesTestCase(unittest.TestCase):
         #self.assertTrue(u'Default' in sections)
 
     def test_available_sections_vocabulary_is_sorted(self):
-        self.settings.available_sections = set([u"5", u"4", u"3", u"2", u"1"])
+        self.settings.available_sections = set([u'5', u'4', u'3', u'2', u'1'])
         name = 'collective.nitf.AvailableSections'
         util = getUtility(IVocabularyFactory, name)
         sections = util(self.portal)
         sections = [i.title for i in sections]
-        self.assertListEqual(sections, [u"1", u"2", u"3", u"4", u"5"])
+        self.assertListEqual(sections, [u'1', u'2', u'3', u'4', u'5'])
 
     def test_urgencies_vocabulary(self):
         name = 'collective.nitf.Urgencies'

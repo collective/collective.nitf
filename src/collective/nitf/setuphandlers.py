@@ -55,10 +55,10 @@ def add_catalog_indexes(context, logger=None):
             else:
                 catalog.addIndex(name, meta_type)
             indexables.append(name)
-            logger.info("Added %s for field %s.", meta_type, name)
+            logger.info('Added %s for field %s.', meta_type, name)
 
     if len(indexables) > 0:
-        logger.info("Indexing new indexes %s.", ', '.join(indexables))
+        logger.info('Indexing new indexes %s.', ', '.join(indexables))
         catalog.manage_reindexIndex(ids=indexables)
 
 
@@ -95,8 +95,8 @@ def remove_collapsible_js(context, logger=None):
 
     portal_js = getToolByName(context, 'portal_javascripts')
     portal_css = getToolByName(context, 'portal_css')
-    portal_js.manage_removeScript("++resource++collective.nitf/jquery.collapsible-v.2.1.3.js")
-    portal_css.manage_removeStylesheet("++resource++collective.nitf/collapsible.css")
+    portal_js.manage_removeScript('++resource++collective.nitf/jquery.collapsible-v.2.1.3.js')
+    portal_css.manage_removeStylesheet('++resource++collective.nitf/collapsible.css')
 
 
 def charcount_control_panel_update(context):
@@ -157,7 +157,7 @@ def upgrade_to_1008(context, logger=None):
     qi = getToolByName(context, 'portal_quickinstaller')
     if not qi.isProductInstalled(dependency):
         qi.installProduct(dependency)
-        logger.info("plone.app.relationfield was installed.")
+        logger.info('plone.app.relationfield was installed.')
 
 
 def upgrade_to_1009(context, logger=None):

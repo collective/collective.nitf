@@ -4,8 +4,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 version = '1.0b4.dev0'
-description = "A content type inspired on the IPTC's News Industry Text "
-"Format specification."
+description = "A content type inspired on the IPTC's News Industry Text Format specification."
 long_description = (
     open('README.rst').read() + '\n' +
     open('CONTRIBUTORS.rst').read() + '\n' +
@@ -17,21 +16,21 @@ setup(name='collective.nitf',
       description=description,
       long_description=long_description,
       classifiers=[
-          "Development Status :: 4 - Beta",
-          "Environment :: Web Environment",
-          "Framework :: Plone",
-          "Framework :: Plone :: 4.2",
-          "Framework :: Plone :: 4.3",
-          "Intended Audience :: End Users/Desktop",
-          "Intended Audience :: System Administrators",
-          "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
-          "Operating System :: OS Independent",
-          "Programming Language :: JavaScript",
-          "Programming Language :: Python",
-          "Programming Language :: Python :: 2.6",
-          "Programming Language :: Python :: 2.7",
-          "Topic :: Office/Business :: News/Diary",
-          "Topic :: Software Development :: Libraries :: Python Modules",
+          'Development Status :: 4 - Beta',
+          'Environment :: Web Environment',
+          'Framework :: Plone',
+          'Framework :: Plone :: 4.2',
+          'Framework :: Plone :: 4.3',
+          'Intended Audience :: End Users/Desktop',
+          'Intended Audience :: System Administrators',
+          'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+          'Operating System :: OS Independent',
+          'Programming Language :: JavaScript',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 2.6',
+          'Programming Language :: Python :: 2.7',
+          'Topic :: Office/Business :: News/Diary',
+          'Topic :: Software Development :: Libraries :: Python Modules',
       ],
       keywords='plone dexterity iptc newsml nitf',
       author='Héctor Velarde',

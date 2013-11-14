@@ -103,54 +103,54 @@ class RenderTest(unittest.TestCase):
         # Let's create 3 sections in the registry
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
-        settings.available_sections = set([u"Section 1",
-                                           u"Section 2",
-                                           u"Section 3"])
+        settings.available_sections = set([u'Section 1',
+                                           u'Section 2',
+                                           u'Section 3'])
 
         # Let's create 15 nitf's for each of 3 different sections
         for index in range(1, 16):
             self.folder.invokeFactory('collective.nitf.content',
                                       'section1-nitf-%s' % index)
             n = self.folder['section1-nitf-%s' % index]
-            n.title = "Section 1 Nitf %s" % index
-            n.section = "Section 1"
-            n.genre = "Genre %s" % index
-            n.created = DateTime("%(year)s/1/%(index)s %(index)s:00:00" %
+            n.title = 'Section 1 Nitf %s' % index
+            n.section = 'Section 1'
+            n.genre = 'Genre %s' % index
+            n.created = DateTime('%(year)s/1/%(index)s %(index)s:00:00' %
                                  {'year': DateTime().year(),
                                   'index': index})
             n.reindexObject()
             # After 5 indexes, publish
             if index % 5 == 0:
-                self.wf.doActionFor(n, "publish")
+                self.wf.doActionFor(n, 'publish')
 
             self.folder.invokeFactory('collective.nitf.content',
                                       'section2-nitf-%s' % index)
             n = self.folder['section2-nitf-%s' % index]
-            n.title = "Section 2 Nitf %s" % index
-            n.section = "Section 2"
-            n.genre = "Genre %s" % index
-            n.created = DateTime("%(year)s/2/%(index)s %(index)s:00:00" %
+            n.title = 'Section 2 Nitf %s' % index
+            n.section = 'Section 2'
+            n.genre = 'Genre %s' % index
+            n.created = DateTime('%(year)s/2/%(index)s %(index)s:00:00' %
                                  {'year': DateTime().year(),
                                   'index': index})
             n.reindexObject()
             # After 5 indexes, publish
             if index % 5 == 0:
-                self.wf.doActionFor(n, "publish")
+                self.wf.doActionFor(n, 'publish')
 
             self.folder.invokeFactory('collective.nitf.content',
                                       'section3-nitf-%s' % index)
             n = self.folder['section3-nitf-%s' % index]
-            n.title = "Section 3 Nitf %s" % index
-            n.section = "Section 3"
-            n.genre = "Genre %s" % index
-            n.created = DateTime("%(year)s/3/%(index)s %(index)s:00:00" %
+            n.title = 'Section 3 Nitf %s' % index
+            n.section = 'Section 3'
+            n.genre = 'Genre %s' % index
+            n.created = DateTime('%(year)s/3/%(index)s %(index)s:00:00' %
                                  {'year': DateTime().year(),
                                   'index': index})
 
             n.reindexObject()
             # After 5 indexes, publish
             if index % 5 == 0:
-                self.wf.doActionFor(n, "publish")
+                self.wf.doActionFor(n, 'publish')
 
         self.default_query = {'Type': ('News Article',),
                               'sort_on': 'created',
@@ -186,7 +186,7 @@ class RenderTest(unittest.TestCase):
 
         r1 = r1.__of__(self.portal)
 
-        view = getMultiAdapter((r1, self.request), name="nitf-filter-list")
+        view = getMultiAdapter((r1, self.request), name='nitf-filter-list')
         results = view.getResults()
 
         self.assertEqual(len(results), 10)
@@ -217,11 +217,11 @@ class RenderTest(unittest.TestCase):
 
         r1 = r1.__of__(self.portal)
 
-        view = getMultiAdapter((r1, self.request), name="nitf-filter-list")
+        view = getMultiAdapter((r1, self.request), name='nitf-filter-list')
 
-        for section in [("section 1", "Section 1"),
-                        ("section 2", "Section 2"),
-                        ("section 3", "Section 3")]:
+        for section in [('section 1', 'Section 1'),
+                        ('section 2', 'Section 2'),
+                        ('section 3', 'Section 3')]:
             results = view.getResults(section=section[0], limit=45)
 
             self.assertEqual(len(results), 15)
@@ -234,7 +234,7 @@ class RenderTest(unittest.TestCase):
             self.assertEqual([i.id for i in results],
                              [i.id for i in catalog_results])
 
-    @unittest.skip("FIXME: use Collection instead of Topic")
+    @unittest.skip('FIXME: use Collection instead of Topic')
     def test_modifying_query_through_collection(self):
 
         assgmnt1 = latest_sectionable_nitf.Assignment()
@@ -244,7 +244,7 @@ class RenderTest(unittest.TestCase):
 
         r1 = r1.__of__(self.portal)
 
-        view = getMultiAdapter((r1, self.request), name="nitf-filter-list")
+        view = getMultiAdapter((r1, self.request), name='nitf-filter-list')
 
         self.folder.invokeFactory('Topic', id='collection')
         topic = self.folder['collection']
@@ -330,11 +330,11 @@ class RenderTest(unittest.TestCase):
 
         # Finally, let's just get results filtered for a particular section
 
-        results = view.getResults(section="section 1", limit=45, uid=uid)
+        results = view.getResults(section='section 1', limit=45, uid=uid)
 
         self.assertEqual(len(results), 3)
         query = self.default_query
-        query['section'] = "Section 1"
+        query['section'] = 'Section 1'
 
         catalog_results = self.catalog(**query)[:45]
 

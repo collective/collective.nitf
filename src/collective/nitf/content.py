@@ -188,4 +188,4 @@ def textIndexer(obj):
         obj.location,
     ) if entry]
 
-    return u" ".join(searchable_text)
+    return u' '.join(searchable_text)
