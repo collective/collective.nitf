@@ -17,11 +17,8 @@ from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
 
 import os
-import pkg_resources
 import random
 import string
-
-PLONE_VERSION = pkg_resources.require('Plone')[0].version
 
 
 class Fixture(PloneSandboxLayer):
