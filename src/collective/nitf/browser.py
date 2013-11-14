@@ -12,7 +12,6 @@ from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
 from Products.CMFPlone.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from warnings import warn
 from zope.component import getUtility
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
@@ -131,27 +130,6 @@ class View(DefaultView):
         """ Return the number of media inside the NITF object.
         """
         return len(self.get_media())
-
-    def getText(self):
-        warn("Calling getText is deprecated. Use self.text.output instead.",
-             DeprecationWarning)
-        return self.text.output
-
-    # The purpose of these methods is to emulate those on News Item
-    def getImage(self):
-        warn("Calling getImage on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.getImage()
-
-    def imageCaption(self):
-        warn("Calling imageCaption on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.imageCaption()
-
-    def tag(self, **kwargs):
-        warn("Calling tag on the view is deprecated. Call it on the object.",
-             DeprecationWarning)
-        return self.context.tag(**kwargs)
 
 
 class NITF(View):
