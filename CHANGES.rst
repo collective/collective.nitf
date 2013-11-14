@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove needless resources kept in package by mistake.
+  [hvelarde]
+
 - Remove Pillow from dependencies as some people may prefer to use PIL.
   [hvelarde]
 
