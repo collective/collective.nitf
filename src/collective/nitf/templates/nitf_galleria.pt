@@ -84,11 +84,11 @@
                   {
                       document.body.style.height = (window.outerHeight + 50) + 'px';
                   }
-             
+
                   setTimeout( function(){ window.scrollTo(0, 1); }, 50 );
               }
             }
-             
+
             window.addEventListener("load", function(){ if(!window.pageYOffset){ hideAddressBar(); } } );
             window.addEventListener("orientationchange", hideAddressBar );
         </script>
@@ -107,7 +107,7 @@
         </div>
         </tal:text>
 
-        <div tal:replace="structure provider:plone.belowcontentbody" 
+        <div tal:replace="structure provider:plone.belowcontentbody"
              tal:condition="not:ajax_load" />
     </article>
     </metal:bodytext>

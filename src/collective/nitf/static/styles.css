@@ -14,9 +14,7 @@ width:13px;
 position:absolute;
 top:0;
 right:0;
-} 
-
-
+}
 
 #media-bar {
     margin: 0 auto;
@@ -217,7 +215,7 @@ body.template-gallery #mediabox span {
     margin-top:6px;
     background-color:#999;
 }
-    
+
 .sortable-media .button{
     visibility:hidden;
     right: 0;

@@ -14,7 +14,7 @@
         addview=".latest_sectionable_nitf.AddForm"
         editview=".latest_sectionable_nitf.EditForm"
         />
-        
+
     <browser:page
         for="*"
         name="nitf-filter-list"

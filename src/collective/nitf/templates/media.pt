@@ -10,8 +10,8 @@
                   portal_url portal_state/portal_url;">
 
     <metal:block fill-slot="style_slot" tal:define="navroot context/@@plone_portal_state/navigation_root_url">
-        <link rel="stylesheet" type="text/css" 
-              tal:attributes="href string:${navroot}/++resource++collective.nitf/styles.css" />                  
+        <link rel="stylesheet" type="text/css"
+              tal:attributes="href string:${navroot}/++resource++collective.nitf/styles.css" />
     </metal:block>
 
     <metal:javascriptslot fill-slot="javascript_head_slot">
@@ -40,7 +40,7 @@
             prev_pos = item.attr("class").replace('sort-', "");
 
             if(delta == undefined) {
-                delta = pos - prev_pos;    
+                delta = pos - prev_pos;
             }
 
             prev_msg += prev_pos;
@@ -52,7 +52,7 @@
             $.post(move_url, { delta: delta, item_id: a_id});
             $("#sortable").sortable("refresh");
         };
-        
+
         $(function() {
 
             $('#sortable a.draggable-item').prepOverlay({
@@ -88,12 +88,12 @@
                 width:'50%'
             });
             $("#sortable").sortable({
-                helper : 'clone',            
+                helper : 'clone',
                 placeholder: "ui-state-highlight",
                 update: function(event, ui){
                     update_sortable(ui.item);
                 }
-            });            
+            });
         });
         </script>
             <script type="text/javascript" charset="iso-8859-1" src="widgets/js/keywordmultiselect.js"
@@ -136,9 +136,9 @@
                                tal:replace="structure python:scale.scale('image', scale='thumb').tag()" />
                         </tal:block>
                     </a>
-                    <a class="button edit" 
+                    <a class="button edit"
                        tal:attributes="href string:${item_url}/edit"><span class="icon"></span>Editar</a>
-                    <a class="button delete" 
+                    <a class="button delete"
                        tal:attributes="href string:${context/absolute_url}/${item_id}/delete_confirmation"><span class="icon"></span></a>
                     <img src="" alt="icon" title=""
                                tal:attributes="src python:obj.getIcon(True)" />

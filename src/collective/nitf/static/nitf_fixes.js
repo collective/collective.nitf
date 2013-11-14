@@ -1,7 +1,7 @@
 (function($) {
 
   $.fn.charCount = function(options){
-    
+
     // default configuration properties
     var defaults = {
       allowed: 140,
@@ -14,9 +14,9 @@
       cssExceeded: 'exceeded',
       counterText: ''
     };
-      
+
     var options = $.extend(defaults, options);
-    
+
     function calculate(obj){
       var count = $(obj).val().length;
       var available = options.allowed - count;
@@ -37,18 +37,17 @@
       } else {
         $(obj).next().removeClass(options.cssExceeded);
       }
-      
+
       $(obj).next().html(options.counterText + available);
     };
-        
+
     this.each(function() {
       $(this).after('<'+ options.counterElement +' class="' + options.css + '">'+ options.counterText +'</'+ options.counterElement +'>');
       calculate(this);
       $(this).keyup(function(){calculate(this)});
       $(this).change(function(){calculate(this)});
     });
-    
+
   };
 
 })(jQuery);
-
