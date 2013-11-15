@@ -3,6 +3,7 @@
 from collective.nitf.browser import AddForm
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -43,10 +44,8 @@ class ContentTypeTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
 
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
 
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         self.n1 = self.folder['n1']
@@ -126,18 +125,19 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_image_scale(self):
         self.assertIsNone(self.n1.getImage())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
-        view = self.n1.restrictedTraverse('@@images')
-        scale = view.scale('image', 'thumb')
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
+
+        scales = self.n1.unrestrictedTraverse('@@images')
+        scale = scales.scale('image', 'thumb')
         self.assertEqual(scale.height, 16)
         self.assertEqual(scale.width, 16)
 
     def test_getImage(self):
         self.assertIsNone(self.n1.getImage())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
         image = self.n1.getImage()
         self.assertEqual(image.id, 'foo')
         self.assertEqual(image.Title(), 'bar')
@@ -146,8 +146,8 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_imageCaption(self):
         imageCaption = self.n1.imageCaption
         self.assertIsNone(imageCaption())
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
         self.assertEqual(imageCaption(), 'baz')
 
     def test_image_thumb(self):
@@ -156,8 +156,8 @@ class ContentTypeTestCase(unittest.TestCase):
         # no images in news article, so no thumb must be present
         self.assertIsNone(thumb())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
         self.assertIsNotNone(thumb())
 
     def test_tag(self):
@@ -166,8 +166,8 @@ class ContentTypeTestCase(unittest.TestCase):
         # no images in news article, so no tag must be present
         self.assertIsNone(tag())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=StringIO(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
 
         # image title must be in both, alt and title attributes
         self.assertIn('alt="baz" title="bar"', tag())
@@ -176,8 +176,8 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertIn('height="16" width="16', tag())
 
         # image scale using @@images
-        self.assertIn('src="http://nohost/plone/test-folder/n1/foo/@@images/',
-                      tag(scale='preview'))
+        self.assertIn(
+            'src="http://nohost/plone/folder/n1/foo/@@images/', tag(scale='preview'))
 
         # image class
         self.assertIn('class="myClass"', tag(css_class='myClass'))
@@ -228,20 +228,19 @@ class DexterityImageTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.setUpImageType()
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
+
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
 
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         self.n1 = self.folder['n1']
+        self.setUpImageType()
 
     def test_image_scale(self):
         self.assertIsNone(self.n1.getImage())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=dummy_image(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
         view = self.n1.restrictedTraverse('@@images')
         scale = view.scale('image', 'thumb')
         self.assertEqual(scale.height, 16)
@@ -250,8 +249,8 @@ class DexterityImageTestCase(unittest.TestCase):
     def test_getImage(self):
         self.assertIsNone(self.n1.getImage())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=dummy_image(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
         image = self.n1.getImage()
         self.assertEqual(image.id, 'foo')
         self.assertEqual(image.Title(), 'bar')
@@ -260,8 +259,8 @@ class DexterityImageTestCase(unittest.TestCase):
     def test_imageCaption(self):
         imageCaption = self.n1.imageCaption
         self.assertIsNone(imageCaption())
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=dummy_image(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
         self.assertEqual(imageCaption(), 'baz')
 
     def test_image_thumb(self):
@@ -270,8 +269,8 @@ class DexterityImageTestCase(unittest.TestCase):
         # no images in news article, so no thumb must be present
         self.assertIsNone(thumb())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=dummy_image(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
         self.assertIsNotNone(thumb())
 
     def test_tag(self):
@@ -280,8 +279,8 @@ class DexterityImageTestCase(unittest.TestCase):
         # no images in news article, so no tag must be present
         self.assertIsNone(tag())
 
-        self.n1.invokeFactory('Image', 'foo', title='bar', description='baz',
-                              image=dummy_image(zptlogo))
+        self.n1.invokeFactory(
+            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
 
         # image title must be in both, alt and title attributes
         self.assertIn('alt="baz" title="bar"', tag())
@@ -290,8 +289,8 @@ class DexterityImageTestCase(unittest.TestCase):
         self.assertIn('height="16" width="16', tag())
 
         # image scale using @@images
-        self.assertIn('src="http://nohost/plone/test-folder/n1/foo/@@images/',
-                      tag(scale='preview'))
+        self.assertIn(
+            'src="http://nohost/plone/folder/n1/foo/@@images/', tag(scale='preview'))
 
         # image class
         self.assertIn('class="myClass"', tag(css_class='myClass'))

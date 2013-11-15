@@ -6,11 +6,11 @@ from collective.nitf.config import DEFAULT_URGENCY
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.registry.interfaces import IRegistry
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 import unittest
@@ -26,16 +26,16 @@ class ControlPanelTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def test_controlpanel_has_view(self):
-        view = getMultiAdapter(
-            (self.portal, self.portal.REQUEST), name='nitf-settings')
+        request = self.layer['request']
+        view = api.content.get_view(u'nitf-settings', self.portal, request)
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
         logout()
-        self.assertRaises(
-            Unauthorized, self.portal.restrictedTraverse, '@@nitf-settings')
+        with self.assertRaises(Unauthorized):
+            self.portal.restrictedTraverse('@@nitf-settings')
 
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']
@@ -44,7 +44,10 @@ class ControlPanelTestCase(unittest.TestCase):
 
     def test_controlpanel_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
-        qi.uninstallProducts(products=[PROJECTNAME])
+
+        with api.env.adopt_roles(['Manager']):
+            qi.uninstallProducts(products=[PROJECTNAME])
+
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
         self.assertNotIn('nitf', actions, 'control panel not removed')
@@ -88,8 +91,9 @@ class RegistryTestCase(unittest.TestCase):
 
     def test_records_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        qi.uninstallProducts(products=[PROJECTNAME])
+
+        with api.env.adopt_roles(['Manager']):
+            qi.uninstallProducts(products=[PROJECTNAME])
 
         BASE_REGISTRY = 'collective.nitf.controlpanel.INITFSettings.%s'
         records = [

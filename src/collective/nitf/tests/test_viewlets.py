@@ -3,8 +3,7 @@
 from collective.nitf.browser import NITFBylineViewlet
 from collective.nitf.testing import INTEGRATION_TESTING
 from DateTime import DateTime
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
+from plone import api
 
 import unittest
 
@@ -16,11 +15,9 @@ class NITFBylineViewletTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        self.workflow_tool = self.portal['portal_workflow']
 
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        self.folder = self.portal['test-folder']
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
 
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         self.n1 = self.folder['n1']
@@ -41,7 +38,8 @@ class NITFBylineViewletTestCase(unittest.TestCase):
         self.assertIsNone(viewlet.pub_date())
 
         # we publish the news article and now the method must return a Date
-        self.workflow_tool.doActionFor(self.n1, 'publish')
+        with api.env.adopt_roles(['Manager']):
+            api.content.transition(self.n1, 'publish')
         self.n1.setEffectiveDate(DateTime())
         self.assertIsNotNone(viewlet.pub_date())
 
@@ -51,5 +49,6 @@ class NITFBylineViewletTestCase(unittest.TestCase):
         self.assertIsNone(viewlet.pub_date())
 
         # we publish the news article and the method must return None also
-        self.workflow_tool.doActionFor(self.n1, 'publish')
+        with api.env.adopt_roles(['Manager']):
+            api.content.transition(self.n1, 'publish')
         self.assertIsNone(viewlet.pub_date())

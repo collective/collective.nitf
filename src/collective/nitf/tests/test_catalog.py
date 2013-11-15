@@ -3,8 +3,7 @@
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
+from plone import api
 from plone.app.textfield.value import RichTextValue
 
 import unittest
@@ -18,10 +17,8 @@ class CatalogTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
         self.catalog = self.portal['portal_catalog']
 
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(self.portal, 'Folder', 'folder')
 
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         self.folder.invokeFactory('collective.nitf.content', 'n2')

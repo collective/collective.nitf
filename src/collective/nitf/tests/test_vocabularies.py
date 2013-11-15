@@ -22,14 +22,14 @@ class VocabulariesTestCase(unittest.TestCase):
     def test_genres_vocabulary(self):
         name = 'collective.nitf.Genres'
         util = queryUtility(IVocabularyFactory, name)
-        self.assertTrue(util is not None)
+        self.assertIsNotNone(util, None)
         genres = util(self.portal)
         self.assertEqual(len(genres), 44)
 
     def test_available_genres_vocabulary(self):
         name = 'collective.nitf.AvailableGenres'
         util = queryUtility(IVocabularyFactory, name)
-        self.assertTrue(util is not None)
+        self.assertIsNotNone(util, None)
         available_genres = util(self.portal)
         # FIXME: we need to set up at least one genre
         self.assertEqual(len(available_genres), 0)
@@ -46,7 +46,7 @@ class VocabulariesTestCase(unittest.TestCase):
     def test_available_sections_vocabulary(self):
         name = 'collective.nitf.AvailableSections'
         util = queryUtility(IVocabularyFactory, name)
-        self.assertTrue(util is not None)
+        self.assertIsNotNone(util, None)
         sections = util(self.portal)
         # FIXME: we need to set up at least one section
         self.assertEqual(len(sections), 0)
@@ -63,6 +63,6 @@ class VocabulariesTestCase(unittest.TestCase):
     def test_urgencies_vocabulary(self):
         name = 'collective.nitf.Urgencies'
         util = queryUtility(IVocabularyFactory, name)
-        self.assertTrue(util is not None)
+        self.assertIsNotNone(util, None)
         urgencies = util(self.portal)
         self.assertEqual(len(urgencies), 3)

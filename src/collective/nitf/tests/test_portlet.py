@@ -4,6 +4,7 @@ from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.portlets import latest_sectionable_nitf
 from collective.nitf.testing import INTEGRATION_TESTING
 from DateTime import DateTime
+from plone import api
 from plone.app.portlets.storage import PortletAssignmentMapping
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -186,7 +187,7 @@ class RenderTest(unittest.TestCase):
 
         r1 = r1.__of__(self.portal)
 
-        view = getMultiAdapter((r1, self.request), name='nitf-filter-list')
+        view = api.content.get_view(u'nitf-filter-list', r1, self.request)
         results = view.getResults()
 
         self.assertEqual(len(results), 10)
@@ -217,7 +218,7 @@ class RenderTest(unittest.TestCase):
 
         r1 = r1.__of__(self.portal)
 
-        view = getMultiAdapter((r1, self.request), name='nitf-filter-list')
+        view = api.content.get_view(u'nitf-filter-list', r1, self.request)
 
         for section in [('section 1', 'Section 1'),
                         ('section 2', 'Section 2'),
@@ -244,7 +245,7 @@ class RenderTest(unittest.TestCase):
 
         r1 = r1.__of__(self.portal)
 
-        view = getMultiAdapter((r1, self.request), name='nitf-filter-list')
+        view = api.content.get_view(u'nitf-filter-list', r1, self.request)
 
         self.folder.invokeFactory('Topic', id='collection')
         topic = self.folder['collection']
