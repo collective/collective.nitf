@@ -10,6 +10,21 @@ from plone.testing.z2 import Browser
 
 import unittest
 
+DEPENDENCIES = [
+    'collective.js.jqueryui',
+    'collective.js.galleria',
+    'collective.z3cform.widgets',
+]
+
+JS = [
+    '++resource++collective.nitf/nitf_fixes.js',
+    #'++resource++collective.nitf/charcount.js',  # XXX: fix registration
+]
+
+CSS = [
+    '++resource++collective.nitf/charcount.css',
+]
+
 
 class InstallTestCase(unittest.TestCase):
 
@@ -17,10 +32,15 @@ class InstallTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.qi = self.portal['portal_quickinstaller']
 
     def test_installed(self):
-        qi = getattr(self.portal, 'portal_quickinstaller')
-        self.assertTrue(qi.isProductInstalled(PROJECTNAME))
+        self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
+
+    def test_dependencies_installed(self):
+        for p in DEPENDENCIES:
+            self.assertTrue(
+                self.qi.isProductInstalled(p), '{0} not installed'.format(p))
 
     def test_add_permission(self):
         permission = 'collective.nitf: Add News Article'
@@ -31,8 +51,7 @@ class InstallTestCase(unittest.TestCase):
 
     def test_addon_layer(self):
         layers = [l.getName() for l in registered_layers()]
-        self.assertTrue('INITFLayer' in layers,
-                        'add-on layer was not installed')
+        self.assertIn('INITFLayer', layers)
 
     def test_link_workflow_changed(self):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
@@ -44,32 +63,15 @@ class InstallTestCase(unittest.TestCase):
         self.assertEqual(chain[0], 'one_state_workflow',
                          'workflow was not changed for Link content type')
 
-    def test_javascript_registry(self):
-        portal_javascripts = self.portal.portal_javascripts
-        resources = portal_javascripts.getResourceIds()
-        # moved to sc.collapsible.edit
-        self.assertFalse('++resource++collective.nitf/jquery.collapsible-v.2.1.3.js' in resources)
-        self.assertTrue('++resource++collective.nitf/nitf_fixes.js' in resources)
+    def test_jsregistry(self):
+        resource_ids = self.portal.portal_javascripts.getResourceIds()
+        for id in JS:
+            self.assertIn(id, resource_ids, '{0} not installed'.format(id))
 
-    def test_upgrade_javascript_registry(self):
-        portal_javascripts = self.portal.portal_javascripts
-        resources = portal_javascripts.getResourceIds()
-        self.assertTrue('++resource++collective.galleria.js' in resources)
-        qi = self.portal.portal_quickinstaller
-        setup = self.portal.portal_setup
-        portal_javascripts.manage_removeScript('++resource++collective.galleria.js')
-        resources = portal_javascripts.getResourceIds()
-        self.assertFalse('++resource++collective.galleria.js' in resources)
-        setup.setLastVersionForProfile(u'collective.nitf:default', '1001')
-        qi.upgradeProduct('collective.nitf')
-        resources = portal_javascripts.getResourceIds()
-        self.assertTrue('++resource++collective.galleria.js' in resources)
-
-    def test_css_registry(self):
-        portal_css = self.portal.portal_css
-        resources = portal_css.getResourceIds()
-        # moved to sc.collapsible.edit
-        self.assertFalse('++resource++collective.nitf/collapsible.css' in resources)
+    def test_cssregistry(self):
+        resource_ids = self.portal.portal_css.getResourceIds()
+        for id in CSS:
+            self.assertIn(id, resource_ids, '{0} not installed'.format(id))
 
 
 class UninstallTest(unittest.TestCase):
@@ -78,8 +80,8 @@ class UninstallTest(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.qi = self.portal['portal_quickinstaller']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.qi = getattr(self.portal, 'portal_quickinstaller')
         self.qi.uninstallProducts(products=[PROJECTNAME])
 
     def test_uninstalled(self):
@@ -87,19 +89,17 @@ class UninstallTest(unittest.TestCase):
 
     def test_addon_layer_removed(self):
         layers = [l.getName() for l in registered_layers()]
-        self.assertFalse('INITFLayer' in layers,
-                         'add-on layer was not removed')
+        self.assertNotIn('INITFLayer', layers)
 
-    def test_javascript_registry_removed(self):
-        portal_javascripts = self.portal.portal_javascripts
-        resources = portal_javascripts.getResourceIds()
-        self.assertFalse('++resource++collective.nitf/jquery.collapsible-v.2.1.3.js' in resources)
-        self.assertFalse('++resource++collective.nitf/nitf_fixes.js' in resources)
+    def test_jsregistry_removed(self):
+        resource_ids = self.portal.portal_javascripts.getResourceIds()
+        for id in JS:
+            self.assertNotIn(id, resource_ids, '{0} not removed'.format(id))
 
-    def test_css_registry_removed(self):
-        portal_css = self.portal.portal_css
-        resources = portal_css.getResourceIds()
-        self.assertFalse('++resource++collective.nitf/collapsible.css' in resources)
+    def test_cssregistry_removed(self):
+        resource_ids = self.portal.portal_css.getResourceIds()
+        for id in CSS:
+            self.assertNotIn(id, resource_ids, '{0} not removed'.format(id))
 
 
 class StaticResourceTestCase(unittest.TestCase):
