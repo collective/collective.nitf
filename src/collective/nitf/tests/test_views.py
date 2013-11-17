@@ -217,7 +217,6 @@ class RegisteredViewsTestCase(BaseViewTestCase):
 
     def test_registered_views(self):
         registered = [v.name for v in registration.getViews(INITFLayer)]
-        for view in ('edit', 'nitf', 'display_macros',
-                     u'l10n.datepicker', 'characters-count.js',
+        for view in ('edit', 'nitf', u'l10n.datepicker', 'characters-count.js',
                      'newsml', 'media', 'nitf_galleria', 'view'):
             self.assertTrue(view in registered)

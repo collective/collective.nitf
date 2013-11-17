@@ -122,14 +122,6 @@
 
     <browser:page
         for="collective.nitf.content.INITF"
-        name="display_macros"
-        template="templates/display_macros.pt"
-        permission="zope2.View"
-        layer="collective.nitf.interfaces.INITFLayer"
-        />
-
-    <browser:page
-        for="collective.nitf.content.INITF"
         name="nitf"
         class=".browser.NITF"
         template="templates/nitf.pt"
