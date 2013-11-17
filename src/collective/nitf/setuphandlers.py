@@ -180,3 +180,15 @@ def upgrade_to_1009(context, logger=None):
     profile = 'profile-collective.nitf:upgrade_to_1009'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)
+
+
+def upgrade_to_1010(context, logger=None):
+    """
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    profile = 'profile-collective.nitf:upgrade_to_1010'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(profile)

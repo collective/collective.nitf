@@ -2,6 +2,7 @@
 
 from collective.nitf.setuphandlers import upgrade_to_1008
 from collective.nitf.setuphandlers import upgrade_to_1009
+from collective.nitf.setuphandlers import upgrade_to_1010
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.relationfield.behavior import IRelatedItems
 from plone.app.testing import setRoles
@@ -72,3 +73,27 @@ class Upgradeto1009TestCase(unittest.TestCase):
         self.assertTrue(IRelatedItems.providedBy(n1))
         self.assertIn(
             'plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)
+
+
+class Upgradeto1010TestCase(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+
+    def test_jsregistry(self):
+        """ Test the new JS is correctly added to the registry by default
+            Then removed, to simulate previous profile
+            And is added back once upgraded
+        """
+
+        jstool = self.portal['portal_javascripts']
+        new_js = '++resource++collective.nitf/nitf.js'
+        self.assertIn(new_js, jstool.getResourceIds())
+        jstool.unregisterResource(new_js)
+        self.assertNotIn(new_js, jstool.getResourceIds())
+
+        upgrade_to_1010(self.portal)
+
+        self.assertIn(new_js, jstool.getResourceIds())

@@ -117,4 +117,20 @@
       handler="collective.nitf.setuphandlers.upgrade_to_1009"
       profile="collective.nitf:default" />
 
+  <genericsetup:registerProfile
+      name="upgrade_to_1010"
+      title="collective.nitf upgrade to version 1010"
+      description="Place all JavaScript code in jsregistry"
+      directory="profiles/upgrade_to_1010"
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:upgradeStep
+      title="collective.nitf upgrade to version 1010"
+      source="*"
+      destination="1010"
+      description="Place all JavaScript code in jsregistry"
+      handler="collective.nitf.setuphandlers.upgrade_to_1010"
+      profile="collective.nitf:default" />
+
+
 </configure>
