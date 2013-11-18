@@ -109,13 +109,6 @@ def remove_collapsible_js(context, logger=None):
     portal_css.manage_removeStylesheet('++resource++collective.nitf/collapsible.css')
 
 
-def charcount_control_panel_update(context):
-    setup = getToolByName(context, 'portal_setup')
-    setup.runImportStepFromProfile(PROFILE_ID, 'plone.app.registry')
-    context.runImportStepFromProfile(PROFILE_ID, 'jsregistry')
-    context.runImportStepFromProfile(PROFILE_ID, 'cssregistry')
-
-
 def default_values_update(context, logger=None):
     """
     """

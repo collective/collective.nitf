@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-from collective.nitf import _
 from collective.nitf.content import INITF
-from collective.nitf.controlpanel import INITFCharCountSettings
 from collective.nitf.controlpanel import INITFSettings
 from DateTime import DateTime
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
@@ -18,7 +16,6 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plone.z3cform import layout
-from Products.Five.browser import BrowserView
 
 import json
 import mimetypes
@@ -222,44 +219,6 @@ class NewsML(View):
                 item_ref = self.ITEM_REF % (href, size, title)
                 related_items.append(item_ref)
             return related_items
-
-
-class CharactersCount(BrowserView):
-
-    def __call__(self):
-
-        response = self.request.response
-        response.setHeader('content-type', 'text/javascript;;charset=utf-8')
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(INITFCharCountSettings)
-
-        count_title = settings.show_title_counter
-        count_description = settings.show_description_counter
-
-        counter_text = _(u'Characters left: ')
-
-        config_title = {
-            'allowed': settings.title_max_chars,
-            'optimal': settings.title_optimal_chars,
-            'counterText': counter_text
-        }
-        config_description = {
-            'allowed': settings.description_max_chars,
-            'optimal': settings.description_optimal_chars,
-            'counterText': counter_text
-        }
-
-        title = ''
-        description = ''
-
-        if count_title:
-            title = '$("#form-widgets-IDublinCore-title").charCount(%s);' % json.dumps(config_title)
-
-        if count_description:
-            description = '$("#form-widgets-IDublinCore-description").charCount(%s);' % json.dumps(config_description)
-
-        script = '$(document).ready(function() {%s %s});' % (title, description)
-        return script
 
 
 class NitfGalleria(DefaultView):

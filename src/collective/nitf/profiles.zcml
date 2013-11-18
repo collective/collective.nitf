@@ -49,14 +49,6 @@
       profile="collective.nitf:default" />
 
   <genericsetup:upgradeStep
-      title="Control Panel Update"
-      source="*"
-      destination="1004"
-      description="Add the chartcount options in the nitf configlet"
-      handler="collective.nitf.setuphandlers.charcount_control_panel_update"
-      profile="collective.nitf:default" />
-
-  <genericsetup:upgradeStep
       title="Fix default values"
       source="*"
       destination="1005"
