@@ -41,7 +41,6 @@
               tal:condition="image">
               <a href="@@galleria"
                  id="parent-fieldname-image"
-                 class="parent-nitf-image"
                  tal:attributes="href string:${context/absolute_url}/@@galleria">
                <img tal:define="scales image/@@images;
                                 thumbnail python: scales.scale('image', scale='mini');"

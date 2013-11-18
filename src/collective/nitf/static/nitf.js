@@ -7,7 +7,7 @@
         var nitf_galleria = $('body.portaltype-collective-nitf-content.template-galleria').length > 0;
         if (nitf_with_image) {
             // Turn image link into something special
-            var link = $(".parent-nitf-image");
+            var link = $('#parent-fieldname-image');
             // For mobile devices, link will open galleria
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
                 link.attr('href', link.attr('href').replace('@@galleria', '@@galleria?ajax_include_head=1&amp;ajax_load=1'));

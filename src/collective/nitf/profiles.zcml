@@ -128,7 +128,7 @@
       title="collective.nitf upgrade to version 1010"
       source="*"
       destination="1010"
-      description="Place all JavaScript code in jsregistry"
+      description="Place all JavaScript code in jsregistry and rename galleria layout"
       handler="collective.nitf.setuphandlers.upgrade_to_1010"
       profile="collective.nitf:default" />
 

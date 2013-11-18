@@ -99,6 +99,35 @@ class Upgradeto1010TestCase(unittest.TestCase):
 
         self.assertIn(new_js, jstool.getResourceIds())
 
+    def test_rename_layout(self):
+        """ Test galleria layout is available by default
+            Then renamed with nitf_galleria, to simulate previous profile
+            And is added back once upgraded
+        """
+        ttool = self.portal['portal_types']
+        fti = ttool['collective.nitf.content']
+        self.assertIn(
+            'galleria', fti.view_methods)
+        self.assertNotIn(
+            'nitf_galleria', fti.view_methods)
+
+        # Rename layout to simulate previous profile
+        view_methods = list(fti.view_methods)
+        view_methods.remove('galleria')
+        view_methods.append('nitf_galleria')
+        fti.view_methods = view_methods
+        self.assertNotIn(
+            'galleria', fti.view_methods)
+        self.assertIn(
+            'nitf_galleria', fti.view_methods)
+
+        # run the upgrade step and verify everything works as expected
+        upgrade_to_1010(self.portal)
+        self.assertIn(
+            'galleria', fti.view_methods)
+        self.assertNotIn(
+            'nitf_galleria', fti.view_methods)
+
     def test_update_layout(self):
         """ Test old nitf_galleria layout is properly changed for galleria
         """
