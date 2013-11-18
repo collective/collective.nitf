@@ -14,7 +14,7 @@ Test Gallery view with no image
     # to load (which is very unlikely)
     Go To  ${PLONE_URL}/related/@@galleria
     Sleep  15s
-    Page Should Not Contain  Init failed: Galleria could not find the element ".newsview #mediabox"
+    Page Should Not Contain  Init failed: Galleria could not find the element "#galeria"
 
 Test Edit image from Media
     Enable Autologin as  Site Administrator
@@ -65,17 +65,17 @@ Test Change views
     Go to Homepage
 
     Click Link  link=n1
-    Page Should Not Contain Element  id=mediabox
+    Page Should Not Contain Element  id=galeria
     Go To  ${PLONE_URL}/n1/select_default_view
     Select Radio Button  templateId  galleria
     Click Button  Save
     Page Should Contain  View changed.
-    Page Should Contain Element  id=mediabox
+    Page Should Contain Element  id=galeria
     Go To  ${PLONE_URL}/n1/select_default_view
     Select Radio Button  templateId  view
     Click Button  Save
     Page Should Contain  View changed.
-    Page Should Not Contain Element  id=mediabox
+    Page Should Not Contain Element  id=galeria
     Click Link  id=parent-fieldname-image
     Wait Until Page Contains Element  css=.pb-ajax .galleria-image img
 

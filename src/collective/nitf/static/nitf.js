@@ -22,7 +22,7 @@
                     config: {
                         top: 'center',
                         onBeforeLoad: function(e) {
-                            $('#mediabox').width($(window).width()*0.9).height($(window).height()*0.9);
+                            $('#galleria').width($(window).width()*0.9).height($(window).height()*0.9);
                         },
                         onLoad: function (e) {
                             Galleria.loadTheme("++resource++collective.nitf/galleria-theme/galleria.nitf_theme.js");
@@ -35,16 +35,16 @@
                                 width: $(window).width() * .9,
                                 height: $(window).height() * .9
                             });
-                            Galleria.run(".pb-ajax #mediabox");
+                            Galleria.run(".pb-ajax #galleria");
                         }
                     }
                 });
             }
         } else if (nitf_galleria) {
             // If this is a NITF content in a galleria template WITH images
-            if ($('.newsview #mediabox').length) {
+            if ($('#galleria').length) {
                 // set dimensions of galleria container
-                $('#mediabox').width($('#content').width() * 0.95).height($(window).height() * 0.9);
+                $('#galleria').width($('#content').width() * 0.95).height($(window).height() * 0.9);
                 // and run Galleria
                 Galleria.loadTheme("++resource++collective.nitf/galleria-theme/galleria.nitf_theme.js");
                 Galleria.configure({
@@ -55,7 +55,7 @@
                     width: $('#content').width(),
                     height: $(window).height() * .9
                 });
-                Galleria.run('.newsview #mediabox', {
+                Galleria.run('#galleria', {
                     keepSource: true
                 });
             }
