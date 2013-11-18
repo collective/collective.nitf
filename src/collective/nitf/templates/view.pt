@@ -56,7 +56,6 @@
                   tal:content="context/imageCaption">
                   Image Caption
               </p>
-              <span id="lupa"></span>
           </div>
 
           <p tal:define="is_editable context/@@plone_context_state/is_editable"

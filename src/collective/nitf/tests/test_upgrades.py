@@ -99,6 +99,19 @@ class Upgradeto1010TestCase(unittest.TestCase):
 
         self.assertIn(new_js, jstool.getResourceIds())
 
+    def test_cssregistry(self):
+        """
+        """
+        csstool = self.portal['portal_css']
+        new_css = '++resource++collective.nitf/styles.css'
+        self.assertIn(new_css, csstool.getResourceIds())
+        csstool.unregisterResource(new_css)
+        self.assertNotIn(new_css, csstool.getResourceIds())
+
+        upgrade_to_1010(self.portal)
+
+        self.assertIn(new_css, csstool.getResourceIds())
+
     def test_rename_layout(self):
         """ Test galleria layout is available by default
             Then renamed with nitf_galleria, to simulate previous profile
