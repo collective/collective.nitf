@@ -6,6 +6,8 @@ There's a frood who really knows where his towel is.
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Rename nitf_galleria template with galleria. [marcosfromero]
+
 - Remove display_macros template and update nitf_galleria with former 
   media-box macro code. [marcosfromero]
 

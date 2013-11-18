@@ -2,6 +2,7 @@
 
 from collective.nitf.setuphandlers import upgrade_to_1008
 from collective.nitf.setuphandlers import upgrade_to_1009
+from collective.nitf.setuphandlers import update_galleria_layout
 from collective.nitf.setuphandlers import upgrade_to_1010
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone.app.relationfield.behavior import IRelatedItems
@@ -97,3 +98,17 @@ class Upgradeto1010TestCase(unittest.TestCase):
         upgrade_to_1010(self.portal)
 
         self.assertIn(new_js, jstool.getResourceIds())
+
+    def test_update_layout(self):
+        """ Test old nitf_galleria layout is properly changed for galleria
+        """
+
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal.invokeFactory('collective.nitf.content', 'n1')
+        n1 = self.portal['n1']
+        n1.setLayout('nitf_galleria')
+        self.assertEqual(n1.getLayout(), 'nitf_galleria')
+
+        update_galleria_layout(self.portal)
+
+        self.assertEqual(n1.getLayout(), 'galleria')

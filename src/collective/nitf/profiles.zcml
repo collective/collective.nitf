@@ -132,5 +132,12 @@
       handler="collective.nitf.setuphandlers.upgrade_to_1010"
       profile="collective.nitf:default" />
 
+  <genericsetup:upgradeStep
+      title="Update galleria layout"
+      source="*"
+      destination="1010"
+      description="Update old nitf_galleria layout to galleria"
+      handler="collective.nitf.setuphandlers.update_galleria_layout"
+      profile="collective.nitf:default" />
 
 </configure>

@@ -38,7 +38,7 @@
 
         <browser:menuItem
             title="Gallery View"
-            action="nitf_galleria"
+            action="galleria"
             description="Displays a gallery in the news article"
             />
     </browser:menuItems>
@@ -157,9 +157,9 @@
 
     <browser:page
         for="collective.nitf.content.INITF"
-        name="nitf_galleria"
+        name="galleria"
         class=".browser.NitfGalleria"
-        template="templates/nitf_galleria.pt"
+        template="templates/galleria.pt"
         permission="zope2.View"
         layer="collective.nitf.interfaces.INITFLayer"
         />

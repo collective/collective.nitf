@@ -12,7 +12,7 @@ Test Gallery view with no image
     # We can wait for 15 seconds to "make sure" Galleria was definitely not run but this
     # is not a too realiable test. If this bug wasn't fixed Galleria could take 16 secs
     # to load (which is very unlikely)
-    Go To  ${PLONE_URL}/related/@@nitf_galleria
+    Go To  ${PLONE_URL}/related/@@galleria
     Sleep  15s
     Page Should Not Contain  Init failed: Galleria could not find the element ".newsview #mediabox"
 
@@ -67,7 +67,7 @@ Test Change views
     Click Link  link=n1
     Page Should Not Contain Element  id=mediabox
     Go To  ${PLONE_URL}/n1/select_default_view
-    Select Radio Button  templateId  nitf_galleria
+    Select Radio Button  templateId  galleria
     Click Button  Save
     Page Should Contain  View changed.
     Page Should Contain Element  id=mediabox

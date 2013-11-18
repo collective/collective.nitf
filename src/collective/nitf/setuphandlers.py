@@ -192,3 +192,17 @@ def upgrade_to_1010(context, logger=None):
     profile = 'profile-collective.nitf:upgrade_to_1010'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(profile)
+
+
+def update_galleria_layout(context, logger=None):
+    """ For NITF with nitf_galleria layout, update to galleria
+    """
+    if logger is None:
+        # Called as upgrade step: define our own logger
+        logger = logging.getLogger(PROJECTNAME)
+
+    catalog = getToolByName(context, 'portal_catalog')
+    for item in catalog(portal_type='collective.nitf.content'):
+        obj = item.getObject()
+        if obj.getLayout() == 'nitf_galleria':
+            obj.setLayout('galleria')
