@@ -8,4 +8,8 @@
     enabled="True" expression=""
     id="characters-count.js" inline="False"/>
 
+ <javascript cacheable="True" compression="none" cookable="True"
+    enabled="True" expression=""
+    id="++resource++collective.nitf/nitf.js" inline="False"/>
+
 </object>

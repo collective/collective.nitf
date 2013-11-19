@@ -9,10 +9,6 @@
 <head tal:define="portal_state context/@@plone_portal_state;
                   portal_url portal_state/portal_url;">
 
-    <metal:block fill-slot="style_slot" tal:define="navroot context/@@plone_portal_state/navigation_root_url">
-        <link rel="stylesheet" type="text/css"
-              tal:attributes="href string:${navroot}/++resource++collective.nitf/styles.css" />
-    </metal:block>
 
     <metal:javascriptslot fill-slot="javascript_head_slot">
         <script type="text/javascript">

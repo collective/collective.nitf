@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="collective.nitf.content" meta_type="Dexterity FTI">
+  <property name="view_methods" purge="False">
+    <element value="nitf_galleria" remove="True"/>
+    <element value="galleria"/>
+  </property>
+</object>
