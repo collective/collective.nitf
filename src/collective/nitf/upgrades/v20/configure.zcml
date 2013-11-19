@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.nitf">
+
+  <genericsetup:registerProfile
+      name="to20alpha1"
+      title="Upgrade profile for collective.nitf 1.x to collective.nitf 2.0a1"
+      description=""
+      directory="profiles/to_alpha1"
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:upgradeSteps
+      source="1009"
+      destination="2000"
+      profile="collective.nitf:default">
+
+    <genericsetup:upgradeStep
+        title="Miscellaneous"
+        description=""
+        handler=".setuphandlers.miscellaneous" />
+
+    <genericsetup:upgradeStep
+        title="Update News Articles layouts"
+        description=""
+        handler=".setuphandlers.update_layouts" />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

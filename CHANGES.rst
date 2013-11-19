@@ -10,6 +10,19 @@ There's a frood who really knows where his towel is.
   reimplemented using collective.js.charcount .(closes `#75`_).
   [hvelarde]
 
+- Remove unused newsview div and rename mediabox with galleria div.
+  [marcosfromero]
+
+- Clean and add styles.css in cssregistry. [marcosfromero]
+
+- Rename nitf_galleria template with galleria. [marcosfromero]
+
+- Remove display_macros template and update nitf_galleria with former 
+  media-box macro code. [marcosfromero]
+
+- Remove all javascript from templates, create new nitf.js and use 
+  jsregistry (closes `#94`_). [marcosfromero]
+
 - Remove deprecated methods on default view.
   [hvelarde]
 
@@ -183,3 +196,4 @@ There's a frood who really knows where his towel is.
 .. _`#75`: https://github.com/collective/collective.nitf/issues/75
 .. _`#84`: https://github.com/collective/collective.nitf/issues/84
 .. _`#85`: https://github.com/collective/collective.nitf/issues/85
+.. _`#94`: https://github.com/collective/collective.nitf/issues/94

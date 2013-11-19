@@ -148,12 +148,12 @@ class NewsMLViewTestCase(BaseViewTestCase):
 
 class GalleriaViewTestCase(BaseViewTestCase):
 
-    def test_nitf_galleria_view_is_registered(self):
+    def test_galleria_view_is_registered(self):
         registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertIn('nitf_galleria', registered)
+        self.assertIn('galleria', registered)
 
         # raises InvalidParameterError if the view is not registered
-        api.content.get_view(u'nitf_galleria', self.n1, self.request)
+        api.content.get_view(u'galleria', self.n1, self.request)
 
 
 class MediaViewTestCase(BaseViewTestCase):

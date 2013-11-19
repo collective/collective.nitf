@@ -2,7 +2,7 @@
 <object name="portal_javascripts">
 
  <javascript cacheable="True" compression="none" cookable="True"
-    enabled="True" expression=""
+    enabled="True" expression="" insert-after="characters-count.js"
     id="++resource++collective.nitf/nitf.js" inline="False"/>
 
 </object>
