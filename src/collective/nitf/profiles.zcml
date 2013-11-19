@@ -117,27 +117,4 @@
       handler="collective.nitf.setuphandlers.upgrade_to_1009"
       profile="collective.nitf:default" />
 
-  <genericsetup:registerProfile
-      name="upgrade_to_1010"
-      title="collective.nitf upgrade to version 1010"
-      description="Place all JavaScript code in jsregistry"
-      directory="profiles/upgrade_to_1010"
-      provides="Products.GenericSetup.interfaces.EXTENSION" />
-
-  <genericsetup:upgradeStep
-      title="collective.nitf upgrade to version 1010"
-      source="*"
-      destination="1010"
-      description="Place all JavaScript code in jsregistry and rename galleria layout"
-      handler="collective.nitf.setuphandlers.upgrade_to_1010"
-      profile="collective.nitf:default" />
-
-  <genericsetup:upgradeStep
-      title="Update galleria layout"
-      source="*"
-      destination="1010"
-      description="Update old nitf_galleria layout to galleria"
-      handler="collective.nitf.setuphandlers.update_galleria_layout"
-      profile="collective.nitf:default" />
-
 </configure>
