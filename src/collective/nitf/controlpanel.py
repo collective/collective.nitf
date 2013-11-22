@@ -2,6 +2,7 @@
 
 from collective.nitf import _
 from collective.nitf import config
+from collective.nitf.config import DEFAULT_GENRE
 from plone.app.registry.browser import controlpanel
 from zope import schema
 from plone.directives import form
@@ -32,16 +33,17 @@ class INITFSettings(form.Schema):
         description=_(u'Select the list of available genres in the site. '
                       u'Genres indicate a nature, journalistic or '
                       u'intellectual characteristic of items.'),
-        required=False,
-        default=[],
+        required=True,
+        default=[DEFAULT_GENRE],
         value_type=schema.Choice(vocabulary=u'collective.nitf.Genres'),
     )
 
     default_genre = schema.Choice(
         title=_(u'Default Genre'),
+        description=_(u'Genre to be used as default on new items.'),
+        required=True,
         vocabulary=u'collective.nitf.Genres',
-        required=False,
-        default=config.DEFAULT_GENRE,
+        default=DEFAULT_GENRE,
     )
 
     default_urgency = schema.Choice(

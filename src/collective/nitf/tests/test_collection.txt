@@ -25,7 +25,6 @@ Set up the registry:
     >>> registry = getUtility(IRegistry)
     >>> settings = registry.forInterface(INITFSettings)
     >>> settings.available_sections = set([u'Tommy'])
-    >>> settings.available_genres = [u'Current']
 
 Now, let's create an object:
 

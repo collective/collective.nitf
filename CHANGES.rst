@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Add ``Current`` as default value for available_genres.
+  [hvelarde]
+
 - Character counter code was removed from package; this should be
   reimplemented using collective.js.charcount .(closes `#75`_).
   [hvelarde]

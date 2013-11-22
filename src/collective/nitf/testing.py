@@ -97,7 +97,6 @@ class RobotFixture(Fixture):
         settings = registry.forInterface(INITFSettings)
         # FIXME: this needs to be available by default
         settings.available_sections = set([u'Tommy'])
-        settings.available_genres = [u'Current']
         open('/tmp/img1.jpg', 'w').write(generate_jpeg(50, 50))
         open('/tmp/txt1.txt', 'w').write(generate_text(256))
 

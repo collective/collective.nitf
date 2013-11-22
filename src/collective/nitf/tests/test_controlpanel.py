@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from collective.nitf.config import DEFAULT_GENRE
 from collective.nitf.config import DEFAULT_RELATABLE_CONTENT_TYPES
 from collective.nitf.config import DEFAULT_URGENCY
 from collective.nitf.config import PROJECTNAME
@@ -72,11 +71,11 @@ class RegistryTestCase(unittest.TestCase):
 
     def test_available_genres_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'available_genres'))
-        self.assertEqual(self.settings.available_genres, [])
+        self.assertEqual(self.settings.available_genres, [u'Current'])
 
     def test_default_genre_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_genre'))
-        self.assertEqual(self.settings.default_genre, DEFAULT_GENRE)
+        self.assertEqual(self.settings.default_genre, u'Current')
 
     def test_default_urgency_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_urgency'))

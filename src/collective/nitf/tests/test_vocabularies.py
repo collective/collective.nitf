@@ -31,9 +31,8 @@ class VocabulariesTestCase(unittest.TestCase):
         util = queryUtility(IVocabularyFactory, name)
         self.assertIsNotNone(util, None)
         available_genres = util(self.portal)
-        # FIXME: we need to set up at least one genre
-        self.assertEqual(len(available_genres), 0)
-        #self.assertTrue(u'Current' in available_genres)
+        self.assertEqual(len(available_genres), 1)
+        self.assertIn(u'Current', available_genres)
 
     def test_available_genres_vocabulary_is_sorted(self):
         self.settings.available_genres = [u'Voicer', u'Current', u'Actuality']

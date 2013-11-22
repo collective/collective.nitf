@@ -26,7 +26,6 @@ Create News Article, subobjects and test views
 
     Click Link  link=Categorization
     Select From List  css=#form-widgets-section  Tommy
-    Select From List  css=#form-widgets-genre  Current
     Click Button  Save
     Page Should Contain  Item created
    
