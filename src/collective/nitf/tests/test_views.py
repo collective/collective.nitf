@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import Unauthorized
-from collective.nitf.controlpanel import INITFCharCountSettings
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.tests.test_content import zptlogo
 from plone import api
 from plone.app.customerize import registration
 from plone.app.testing import logout
-from plone.registry.interfaces import IRegistry
 from StringIO import StringIO
-from zope.component import getMultiAdapter
-from zope.component import getUtility
 from zope.interface import directlyProvides
 
 import unittest
@@ -168,28 +164,6 @@ class MediaViewTestCase(BaseViewTestCase):
             self.n1.restrictedTraverse('@@media')
 
 
-class CharacterCountJSTestCase(BaseViewTestCase):
-
-    def test_config_empty(self):
-        view = api.content.get_view(u'characters-count.js', self.n1, self.request)
-        self.assertEqual(view(), '$(document).ready(function() { });')
-
-    def test_config_nitf(self):
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(INITFCharCountSettings)
-        settings.show_title_counter = True
-        settings.show_description_counter = True
-        view = getMultiAdapter((self.n1.restrictedTraverse('edit'), self.request), name='characters-count.js')
-        self.assertEqual(
-            view(),
-            '$(document).ready(function() {\
-$("#form-widgets-IDublinCore-title").charCount({"optimal": 100, \
-"counterText": "Characters left: ", "allowed": 100}); \
-$("#form-widgets-IDublinCore-description").charCount({"optimal": 200, \
-"counterText": "Characters left: ", "allowed": 200});});'
-        )
-
-
 class TraversalViewTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
@@ -211,12 +185,3 @@ class TraversalViewTestCase(unittest.TestCase):
         scales = self.n1.unrestrictedTraverse('@@images')
         image = scales.scale('image')
         self.assertEqual(image.data, zptlogo)
-
-
-class RegisteredViewsTestCase(BaseViewTestCase):
-
-    def test_registered_views(self):
-        registered = [v.name for v in registration.getViews(INITFLayer)]
-        for view in ('edit', 'nitf', u'l10n.datepicker', 'characters-count.js',
-                     'newsml', 'media', 'galleria', 'view'):
-            self.assertTrue(view in registered)

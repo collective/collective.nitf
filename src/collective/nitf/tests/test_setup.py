@@ -11,18 +11,16 @@ from plone.testing.z2 import Browser
 import unittest
 
 DEPENDENCIES = [
-    'collective.js.jqueryui',
+    #'collective.js.charcount',
     'collective.js.galleria',
+    'collective.js.jqueryui',
     'collective.z3cform.widgets',
 ]
 
 JS = [
-    '++resource++collective.nitf/nitf_fixes.js',
-    #'++resource++collective.nitf/charcount.js',  # XXX: fix registration
 ]
 
 CSS = [
-    '++resource++collective.nitf/charcount.css',
 ]
 
 

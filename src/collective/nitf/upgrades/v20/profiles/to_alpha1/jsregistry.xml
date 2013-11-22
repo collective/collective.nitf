@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts">
-
- <javascript cacheable="True" compression="none" cookable="True"
-    enabled="True" expression="" insert-after="characters-count.js"
-    id="++resource++collective.nitf/nitf.js" inline="False"/>
-
+  <javascript id="characters-count.js" remove="True" />
+  <javascript id="++resource++collective.nitf/nitf_fixes.js" remove="True" />
+  <javascript cacheable="True" compression="none" cookable="True"
+      enabled="True" expression=""
+      id="++resource++collective.nitf/nitf.js" inline="False"/>
 </object>

@@ -45,6 +45,7 @@ setup(name='collective.nitf',
       install_requires=[
           'AccessControl',
           'Acquisition',
+          #'collective.js.charcount',
           'collective.js.galleria',
           'collective.js.jqueryui',
           'collective.prettydate >=1.1',

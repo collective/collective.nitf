@@ -6,6 +6,10 @@ There's a frood who really knows where his towel is.
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Character counter code was removed from package; this should be
+  reimplemented using collective.js.charcount .(closes `#75`_).
+  [hvelarde]
+
 - Remove unused newsview div and rename mediabox with galleria div.
   [marcosfromero]
 
@@ -189,6 +193,7 @@ There's a frood who really knows where his towel is.
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
 .. _`#71`: https://github.com/collective/collective.nitf/issues/71
+.. _`#75`: https://github.com/collective/collective.nitf/issues/75
 .. _`#84`: https://github.com/collective/collective.nitf/issues/84
 .. _`#85`: https://github.com/collective/collective.nitf/issues/85
 .. _`#94`: https://github.com/collective/collective.nitf/issues/94

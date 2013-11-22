@@ -7,6 +7,10 @@ from plone import api
 from plone.app.relationfield.behavior import IRelatedItems
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.registry import field
+from plone.registry.interfaces import IRegistry
+from plone.registry.record import Record
+from zope.component import getUtility
 from zope.component import queryUtility
 from zope.intid.interfaces import IIntIds
 
@@ -117,39 +121,100 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertTrue(version >= self.to_version)
         self.assertEqual(self._upgrades_to_do(), 2)
 
-    def test_miscelaneous(self):
+    def test_character_counter_css_resources(self):
+        title = u'Miscellaneous'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        csstool = self.portal['portal_css']
+        old_css = '++resource++collective.nitf/charcount.css'
+        new_css = '++resource++collective.nitf/styles.css'
+
+        # simulate state on previous version
+        csstool.registerResource(old_css)
+        self.assertIn(old_css, csstool.getResourceIds())
+        csstool.unregisterResource(new_css)
+        self.assertNotIn(new_css, csstool.getResourceIds())
+
+        # execute upgrade step and verify changes were applied
+        self._do_upgrade_step(step)
+
+        self.assertIn(new_css, csstool.getResourceIds())
+
+    def test_character_counter_js_resources(self):
+        title = u'Miscellaneous'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        jstool = self.portal['portal_javascripts']
+        old_js = [
+            'characters-count.js',
+            '++resource++collective.nitf/nitf_fixes.js',
+        ]
+        new_js = '++resource++collective.nitf/nitf.js'
+
+        # simulate state on previous version
+        for js in old_js:
+            jstool.registerResource(js)
+            self.assertIn(js, jstool.getResourceIds())
+        jstool.unregisterResource(new_js)
+        self.assertNotIn(new_js, jstool.getResourceIds())
+
+        # execute upgrade step and verify changes were applied
+        self._do_upgrade_step(step)
+
+        for js in old_js:
+            self.assertNotIn(js, jstool.getResourceIds())
+        self.assertIn(new_js, jstool.getResourceIds())
+
+    def test_character_counter_registry_records_removed(self):
+        title = u'Miscellaneous'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        registry = getUtility(IRegistry)
+        BASE_REGISTRY = 'collective.nitf.controlpanel.INITFCharCountSettings.'
+        records = [
+            BASE_REGISTRY + 'description_max_chars',
+            BASE_REGISTRY + 'description_optimal_chars',
+            BASE_REGISTRY + 'show_description_counter',
+            BASE_REGISTRY + 'show_title_counter',
+            BASE_REGISTRY + 'title_max_chars',
+            BASE_REGISTRY + 'title_optimal_chars',
+        ]
+
+        # simulate state on previous version
+        for r in records:
+            registry.records[r] = Record(field.TextLine(title=u'Test'))
+            self.assertIn(r, registry)
+
+        # execute upgrade step and verify changes were applied
+        self._do_upgrade_step(step)
+
+        for r in records:
+            self.assertNotIn(r, registry)
+
+    def test_news_article_registered_views(self):
         title = u'Miscellaneous'
         step = self._get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         ttool = self.portal['portal_types']
         fti = ttool['collective.nitf.content']
-        csstool = self.portal['portal_css']
-        jstool = self.portal['portal_javascripts']
-        new_css = '++resource++collective.nitf/styles.css'
-        new_js = '++resource++collective.nitf/nitf.js'
 
         # simulate state on previous version
         view_methods = list(fti.view_methods)
         view_methods.remove('galleria')
         view_methods.append('nitf_galleria')
         fti.view_methods = tuple(view_methods)
-        self.assertNotIn('galleria', fti.view_methods)
-        self.assertIn('nitf_galleria', fti.view_methods)
-
-        csstool.unregisterResource(new_css)
-        jstool.unregisterResource(new_js)
-        self.assertNotIn(new_css, csstool.getResourceIds())
-        self.assertNotIn(new_js, jstool.getResourceIds())
+        self.assertEqual(len(fti.view_methods), 2)
+        self.assertItemsEqual(fti.view_methods, ['view', 'nitf_galleria'])
 
         # execute upgrade step and verify changes were applied
         self._do_upgrade_step(step)
 
-        self.assertIn('galleria', fti.view_methods)
-        self.assertNotIn('nitf_galleria', fti.view_methods)
-
-        self.assertIn(new_css, csstool.getResourceIds())
-        self.assertIn(new_js, jstool.getResourceIds())
+        self.assertEqual(len(fti.view_methods), 2)
+        self.assertItemsEqual(fti.view_methods, ['view', 'galleria'])
 
     def test_update_news_articles_layouts(self):
         title = u'Update News Articles layouts'
