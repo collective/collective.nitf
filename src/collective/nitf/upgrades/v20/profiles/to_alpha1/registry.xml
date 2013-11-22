@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<registry>
+  <record name="collective.nitf.controlpanel.INITFCharCountSettings.description_max_chars" delete="true" />
+  <record name="collective.nitf.controlpanel.INITFCharCountSettings.description_optimal_chars" delete="true" />
+  <record name="collective.nitf.controlpanel.INITFCharCountSettings.show_description_counter" delete="true" />
+  <record name="collective.nitf.controlpanel.INITFCharCountSettings.show_title_counter" delete="true" />
+  <record name="collective.nitf.controlpanel.INITFCharCountSettings.title_max_chars" delete="true" />
+  <record name="collective.nitf.controlpanel.INITFCharCountSettings.title_optimal_chars" delete="true" />
+</registry>
