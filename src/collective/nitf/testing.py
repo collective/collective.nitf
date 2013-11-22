@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from collective.nitf.controlpanel import INITFSettings
 from PIL import Image
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
@@ -9,7 +8,6 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.registry.interfaces import IRegistry
 from plone.testing import z2
 from StringIO import StringIO
 from z3c.relationfield import RelationValue
@@ -93,10 +91,6 @@ class RobotFixture(Fixture):
         intids = getUtility(IIntIds)
         to_id = intids.getId(portal.related)
         portal.n1.relatedItems = [RelationValue(to_id), ]
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(INITFSettings)
-        # FIXME: this needs to be available by default
-        settings.available_sections = set([u'Tommy'])
         open('/tmp/img1.jpg', 'w').write(generate_jpeg(50, 50))
         open('/tmp/txt1.txt', 'w').write(generate_text(256))
 

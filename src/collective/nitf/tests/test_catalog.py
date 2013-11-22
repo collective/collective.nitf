@@ -53,9 +53,9 @@ class CatalogTestCase(unittest.TestCase):
         self.assertEqual(result[0].getURL(), self.n1.absolute_url())
 
     def test_section_indexed(self):
-        self.n1.section = 'section'
+        self.n1.section = u'General'
         self.n1.reindexObject()
-        result = self.catalog(section='section')
+        result = self.catalog(section=u'General')
         self.assertEqual(1, len(result))
         self.assertEqual(result[0].getURL(), self.n1.absolute_url())
 

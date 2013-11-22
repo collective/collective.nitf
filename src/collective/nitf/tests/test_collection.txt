@@ -17,16 +17,7 @@ Functional test for collections to filter nitf gnere and section:
     >>> 'You are now logged in' in browser.contents
     True
 
-Set up the registry:
-
-    >>> from zope.component import getUtility
-    >>> from plone.registry.interfaces import IRegistry
-    >>> from collective.nitf.controlpanel import INITFSettings
-    >>> registry = getUtility(IRegistry)
-    >>> settings = registry.forInterface(INITFSettings)
-    >>> settings.available_sections = set([u'Tommy'])
-
-Now, let's create an object:
+Let's create a collection and verify our criteria was added:
 
     >>> browser.getLink('Home').click()
     >>> browser.getLink('Collection').click()

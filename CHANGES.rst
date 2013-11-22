@@ -9,7 +9,8 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
-- Add ``Current`` as default value for available_genres.
+- Add ``Current`` as default value for available_genres and ``General`` as
+  default value for available_sections.
   [hvelarde]
 
 - Character counter code was removed from package; this should be

@@ -63,11 +63,11 @@ class RegistryTestCase(unittest.TestCase):
 
     def test_available_sections_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'available_sections'))
-        self.assertEqual(self.settings.available_sections, set([]))
+        self.assertEqual(self.settings.available_sections, set([u'General']))
 
     def test_default_section_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_section'))
-        self.assertEqual(self.settings.default_section, None)
+        self.assertEqual(self.settings.default_section, u'General')
 
     def test_available_genres_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'available_genres'))

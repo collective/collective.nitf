@@ -47,9 +47,8 @@ class VocabulariesTestCase(unittest.TestCase):
         util = queryUtility(IVocabularyFactory, name)
         self.assertIsNotNone(util, None)
         sections = util(self.portal)
-        # FIXME: we need to set up at least one section
-        self.assertEqual(len(sections), 0)
-        #self.assertTrue(u'Default' in sections)
+        self.assertEqual(len(sections), 1)
+        self.assertIn(u'General', sections)
 
     def test_available_sections_vocabulary_is_sorted(self):
         self.settings.available_sections = set([u'5', u'4', u'3', u'2', u'1'])

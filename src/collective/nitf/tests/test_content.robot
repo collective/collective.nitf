@@ -24,11 +24,9 @@ Create News Article, subobjects and test views
     #Wait For Condition  return tinyMCE.activeEditor != null
     #Execute Javascript  tinyMCE.activeEditor.setContent("<p>I'm free<br />I'm free<br />And freedom tastes of reality</p>");
 
-    Click Link  link=Categorization
-    Select From List  css=#form-widgets-section  Tommy
     Click Button  Save
     Page Should Contain  Item created
-   
+
     # A news article can contain images
     Open Add New Menu
     Click Link  css=a#image

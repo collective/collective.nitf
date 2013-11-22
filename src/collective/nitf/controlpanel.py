@@ -3,6 +3,7 @@
 from collective.nitf import _
 from collective.nitf import config
 from collective.nitf.config import DEFAULT_GENRE
+from collective.nitf.config import DEFAULT_SECTION
 from plone.app.registry.browser import controlpanel
 from zope import schema
 from plone.directives import form
@@ -18,14 +19,16 @@ class INITFSettings(form.Schema):
         title=_(u'Available Sections'),
         description=_(u'List of available sections in the site.'),
         required=True,
-        default=set(),
+        default=set([DEFAULT_SECTION]),
         value_type=schema.TextLine(title=_(u'Section')),
     )
 
     default_section = schema.Choice(
         title=_(u'Default Section'),
+        description=_(u'Section to be used as default on new items.'),
+        required=True,
         vocabulary=u'collective.nitf.AvailableSections',
-        required=False,
+        default=DEFAULT_SECTION,
     )
 
     available_genres = schema.List(
