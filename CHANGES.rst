@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Update package i18n and Spanish and Brazilian Portuguese translations.
+  [hvelarde]
+
 - Restore default binding on Link content type at uninstall time.
   [hvelarde]
 
