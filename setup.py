@@ -3,7 +3,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = '1.0b4.dev0'
+version = '2.0a1.dev0'
 description = "A content type inspired on the IPTC's News Industry Text Format specification."
 long_description = (
     open('README.rst').read() + '\n' +

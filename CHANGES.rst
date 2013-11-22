@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.0b4 (unreleased)
+2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
 - Character counter code was removed from package; this should be
