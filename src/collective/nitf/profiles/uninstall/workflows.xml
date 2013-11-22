@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="portal_workflow">
+  <bindings>
+    <type type_id="Link" remove="True" />
+  </bindings>
+</object>

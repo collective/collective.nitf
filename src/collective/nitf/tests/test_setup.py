@@ -54,14 +54,10 @@ class InstallTestCase(unittest.TestCase):
         self.assertIn('INITFLayer', layers)
 
     def test_link_workflow_changed(self):
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Link', 'obj')
-        obj = self.portal['obj']
         workflow_tool = self.portal.portal_workflow
-        chain = workflow_tool.getChainForPortalType(obj.portal_type)
+        chain = workflow_tool.getChainForPortalType('Link')
         self.assertEqual(len(chain), 1)
-        self.assertEqual(chain[0], 'one_state_workflow',
-                         'workflow was not changed for Link content type')
+        self.assertEqual(chain[0], 'one_state_workflow')
 
     def test_jsregistry(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
@@ -100,6 +96,12 @@ class UninstallTest(unittest.TestCase):
         resource_ids = self.portal.portal_css.getResourceIds()
         for id in CSS:
             self.assertNotIn(id, resource_ids, '{0} not removed'.format(id))
+
+    def test_link_workflow_restored(self):
+        workflow_tool = self.portal.portal_workflow
+        chain = workflow_tool.getChainForPortalType('Link')
+        # default binding
+        self.assertEqual(len(chain), 0)
 
 
 class StaticResourceTestCase(unittest.TestCase):
