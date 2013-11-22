@@ -4,18 +4,18 @@ from Acquisition import aq_inner
 from collective.nitf.content import INITF
 from collective.nitf.controlpanel import INITFSettings
 from DateTime import DateTime
+from plone import api
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
-from plone.registry.interfaces import IRegistry
-from plone.uuid.interfaces import IUUID
-from Products.CMFPlone.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.component import getUtility
 from plone.dexterity.browser.add import DefaultAddForm
 from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
+from plone.registry.interfaces import IRegistry
+from plone.uuid.interfaces import IUUID
 from plone.z3cform import layout
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.component import getUtility
 
 import json
 import mimetypes
@@ -80,7 +80,7 @@ class View(DefaultView):
     def _get_brains(self, object_name=None):
         """ Return a list of brains inside the NITF object.
         """
-        catalog = getToolByName(self.context, 'portal_catalog')
+        catalog = api.portal.get_tool('portal_catalog')
         path = '/'.join(self.context.getPhysicalPath())
         brains = catalog(Type=object_name, path=path,
                          sort_on='getObjPositionInParent')
@@ -261,7 +261,7 @@ class NITFBylineViewlet(DocumentBylineViewlet):
     index = ViewPageTemplateFile("templates/nitf_byline.pt")
 
     def getMemberInfoByName(self, fullname):
-        membership = getToolByName(self.context, 'portal_membership')
+        membership = api.portal.get_tool('portal_membership')
         members = membership.searchForMembers(name=fullname)
         if members:
             member = members[0].getUserId()  # we care only about the first
@@ -289,7 +289,7 @@ class NITFBylineViewlet(DocumentBylineViewlet):
 
         # compatibility for Plone < 4.3
         # check if we are allowed to display publication date
-        properties = getToolByName(self.context, 'portal_properties')
+        properties = api.portal.get_tool('portal_properties')
         site_properties = getattr(properties, 'site_properties')
         if not site_properties.getProperty('displayPublicationDateInByline'):
             return None

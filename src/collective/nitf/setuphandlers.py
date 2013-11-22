@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collective.nitf.config import PROJECTNAME
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implements
 
@@ -41,10 +41,10 @@ def add_catalog_indexes(context, logger=None):
         logger = logging.getLogger(PROJECTNAME)
 
     profile = 'profile-collective.nitf:default'
-    setup = getToolByName(context, 'portal_setup')
+    setup = api.portal.get_tool('portal_setup')
     setup.runImportStepFromProfile(profile, 'catalog')
 
-    catalog = getToolByName(context, 'portal_catalog')
+    catalog = api.portal.get_tool('portal_catalog')
     indexes = catalog.indexes()
 
     wanted = (

@@ -3,10 +3,10 @@
 from AccessControl.unauthorized import Unauthorized
 from collective.nitf import _
 from collective.prettydate.interfaces import IPrettyDate
+from plone import api
 from plone.app.portlets.portlets import base
 from plone.app.vocabularies.catalog import SearchableTextSourceBinder
 from plone.portlets.interfaces import IPortletDataProvider
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from zope import schema
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
@@ -33,8 +33,8 @@ class NitfFilterList(BrowserView):
         return result
 
     def getResults(self, section=None, limit=10, uid=None):
-        uc = getToolByName(self.context, 'uid_catalog')
-        pc = getToolByName(self.context, 'portal_catalog')
+        uc = api.portal.get_tool('uid_catalog')
+        pc = api.portal.get_tool('portal_catalog')
 
         collection = None
         query = {}
