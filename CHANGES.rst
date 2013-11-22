@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+.. Warning::
+    Upgrades are supported only from release 1.0b3.
+
 - Character counter code was removed from package; this should be
   reimplemented using collective.js.charcount .(closes `#75`_).
   [hvelarde]
