@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2013-05-02 14:26+0000\n"
-"PO-Revision-Date: 2013-02-01 13:32-0300\n"
+"POT-Creation-Date: 2013-11-22 20:53+0000\n"
+"PO-Revision-Date: 2013-11-22 18:59-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +25,11 @@ msgstr "Un encabezado subordinado para el artículo."
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "An NITF genre field"
-msgstr ""
+msgstr "El campo género de un Artículo de noticias."
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "An NITF section field"
-msgstr ""
+msgstr "El campo género de un Artículo de noticias."
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Author"

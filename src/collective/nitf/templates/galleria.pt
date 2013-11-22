@@ -68,6 +68,7 @@
         <tal:text condition="not:ajax_load">
         <p tal:define="is_editable context/@@plone_context_state/is_editable"
            tal:condition="python:not text and is_editable"
+           i18n:domain="plone"
            i18n:translate="no_body_text"
            class="discreet">
             This item does not have any body text, click the edit tab to change it.

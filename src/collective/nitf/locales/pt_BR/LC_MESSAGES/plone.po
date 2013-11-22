@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2013-05-02 14:26+0000\n"
-"PO-Revision-Date: 2011-12-24 10:32-0600\n"
+"POT-Creation-Date: 2013-11-22 20:53+0000\n"
+"PO-Revision-Date: 2013-11-22 19:23-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
 "MIME-Version: 1.0\n"
@@ -17,57 +17,57 @@ msgstr ""
 
 #: collective/nitf/profiles/default/portlets.xml
 msgid "A portlet which shows the latest NITF created and can be filtered by section."
-msgstr ""
+msgstr "Um portlet que mostra os últimos artigos criados por seção."
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "A subordinate headline for the article."
-msgstr ""
+msgstr "Um título secundário do Artigo"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "An NITF genre field"
-msgstr ""
+msgstr "O campo gênero de um artigo"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "An NITF section field"
-msgstr ""
+msgstr "O campo seção de um artigo"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Event location. Where an event took place (as opposed to where the story was written)."
-msgstr ""
+msgstr "Local do evento. Onde um evento aconteceu (não onde a história foi escrita)."
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Genre"
-msgstr ""
+msgstr "Gênero"
 
 #: collective/nitf/profiles/default/portlets.xml
 msgid "Latest Sectionable NITF"
-msgstr ""
+msgstr "Últimos artigos por seção"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Location"
-msgstr ""
+msgstr "Localização"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "NITF"
-msgstr ""
+msgstr "NITF"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "News importance."
-msgstr ""
+msgstr "Importância do artigo."
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Section"
-msgstr ""
+msgstr "Seção"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Subtitle"
-msgstr ""
+msgstr "Subtítulo"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Urgency"
-msgstr ""
+msgstr "Importância"
 
