@@ -36,8 +36,8 @@ Mostly Harmless
     :target: https://coveralls.io/r/collective/collective.nitf
     :alt: Coveralls badge
 
-.. image:: https://pypip.in/d/collective.cover/badge.png
-    :target: https://pypi.python.org/pypi//collective.cover/
+.. image:: https://pypip.in/d/collective.nitf/badge.png
+    :target: https://pypi.python.org/pypi/collective.nitf/
     :alt: Downloads
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
