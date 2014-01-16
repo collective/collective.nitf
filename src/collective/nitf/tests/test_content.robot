@@ -35,6 +35,12 @@ Create News Article, subobjects and test views
 
     Click Button  Save
     Page Should Contain  Item created
+    # all elements must be visible on the view
+    Page Should Contain  ${title}
+    Page Should Contain  ${subtitle}
+    Page Should Contain  ${description}
+    Page Should Contain  ${byline}
+    Page Should Contain  ${body_html}
 
     # A news article can contain images
     Open Add New Menu
