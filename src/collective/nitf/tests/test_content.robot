@@ -6,23 +6,27 @@ Library  Remote  ${PLONE_URL}/RobotRemote
 Suite Setup  Open Test Browser
 Suite Teardown  Close all browsers
 
+*** Variables ***
+${title} =  Miracle Cure
+${subtitle} =  Extra! Extra! Read all about it
+${description} =  The Pinball Wizard in a miracle cure!
+${byline} =  Newsboy
+${body_html} =  <p>I'm free<br />I'm free<br />And freedom tastes of reality</p>
+
 *** Test cases ***
 
 Create News Article, subobjects and test views
     Enable Autologin as  Site Administrator
     Go to Homepage
 
-    Open Add New Menu
-    Click Link  css=a#collective-nitf-content
-    Page Should Contain  Add News Article
-    Input Text  css=#form-widgets-IDublinCore-title  Miracle Cure
-    Input Text  css=#form-widgets-subtitle  Extra! Extra! Read all about it 
-    Input Text  css=#form-widgets-IDublinCore-description  The Pinball Wizard in a miracle cure!
-    Input Text  css=#form-widgets-byline  Newsboy
+    Click Add News Article
+    Input Text  css=#form-widgets-IDublinCore-title  ${title}
+    Input Text  css=#form-widgets-subtitle  ${subtitle}
+    Input Text  css=#form-widgets-IDublinCore-description  ${description}
+    Input Text  css=#form-widgets-byline  ${byline}
 
-    # FIXME: populate body field without JS
-    #Wait For Condition  return tinyMCE.activeEditor != null
-    #Execute Javascript  tinyMCE.activeEditor.setContent("<p>I'm free<br />I'm free<br />And freedom tastes of reality</p>");
+    Wait For Condition  return tinyMCE.activeEditor != null
+    Execute Javascript  tinyMCE.activeEditor.setContent("${body_html}");
 
     Click Button  Save
     Page Should Contain  Item created
@@ -66,3 +70,10 @@ Create News Article, subobjects and test views
 
     Go To  ${PLONE_URL}/miracle-cure/@@nitf
     Page Should Contain  Miracle Cure
+
+*** Keywords ***
+
+Click Add News Article
+    Open Add New Menu
+    Click Link  css=a#collective-nitf-content
+    Page Should Contain  Add News Article
