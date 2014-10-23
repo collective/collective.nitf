@@ -32,8 +32,8 @@
                                 carousel: true,
                                 thumbnails: true,
                                 _toggleInfo: true,
-                                width: $(window).width() * .9,
-                                height: $(window).height() * .9
+                                width: $(window).width() * 0.9,
+                                height: $(window).height() * 0.9
                             });
                             Galleria.run(".pb-ajax #galleria");
                         }
@@ -53,7 +53,7 @@
                     thumbnails: true,
                     _toggleInfo: true,
                     width: $('#content').width(),
-                    height: $(window).height() * .9
+                    height: $(window).height() * 0.9
                 });
                 Galleria.run('#galleria', {
                     keepSource: true
@@ -73,7 +73,7 @@
                         window.scrollTo(0, 1);
                     }, 50);
                 }
-            }
+            };
 
             window.addEventListener("load", function () {
                 if (!window.pageYOffset) {
