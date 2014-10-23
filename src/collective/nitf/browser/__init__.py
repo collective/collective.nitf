@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from Acquisition import aq_inner
 from collective.nitf.content import INITF
 from collective.nitf.controlpanel import INITFSettings
@@ -12,13 +11,11 @@ from plone.dexterity.browser.add import DefaultAddView
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
 from plone.registry.interfaces import IRegistry
-from plone.uuid.interfaces import IUUID
 from plone.z3cform import layout
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getUtility
 
 import json
-import mimetypes
 import pkg_resources
 
 PLONE_VERSION = pkg_resources.require('Plone')[0].version
@@ -26,8 +23,9 @@ PLONE_VERSION = pkg_resources.require('Plone')[0].version
 
 # TODO: enable_form_tabbing must be user selectable
 class AddForm(DefaultAddForm):
-    """ Default view looks like a News Item.
-    """
+
+    """Default view looks like a News Item."""
+
     schema = INITF
 
     def update(self):
@@ -49,8 +47,9 @@ class AddView(DefaultAddView):
 
 
 class EditForm(DefaultEditForm):
-    """ Default view looks like a News Item.
-    """
+
+    """Default view looks like a News Item."""
+
     schema = INITF
 
     def update(self):
@@ -71,15 +70,14 @@ EditView = layout.wrap_form(EditForm)
 
 
 class View(DefaultView):
-    """ Default view looks like a News Item.
-    """
+
+    """Default view looks like a News Item."""
 
     def update(self):
         self.context = aq_inner(self.context)
 
     def _get_brains(self, object_name=None):
-        """ Return a list of brains inside the NITF object.
-        """
+        """Return a list of brains inside the NITF object."""
         catalog = api.portal.get_tool('portal_catalog')
         path = '/'.join(self.context.getPhysicalPath())
         brains = catalog(Type=object_name, path=path,
@@ -88,137 +86,37 @@ class View(DefaultView):
         return brains
 
     def get_images(self):
-        """ Return a list of image brains inside the NITF object.
-        """
+        """Return a list of image brains inside the NITF object."""
         return self._get_brains('Image')
 
     def has_images(self):
-        """ Return the number of images inside the NITF object.
-        """
+        """Return the number of images inside the NITF object."""
         return len(self.get_images())
 
     def get_files(self):
-        """ Return a list of file brains inside the NITF object.
-        """
+        """Return a list of file brains inside the NITF object."""
         return self._get_brains('File')
 
     def has_files(self):
-        """ Return the number of files inside the NITF object.
-        """
+        """Return the number of files inside the NITF object."""
         return len(self.get_files())
 
     def get_links(self):
-        """ Return a list of link brains inside the NITF object.
-        """
+        """Return a list of link brains inside the NITF object."""
         return self._get_brains('Link')
 
     def has_links(self):
-        """ Return the number of links inside the NITF object.
-        """
+        """Return the number of links inside the NITF object."""
         return len(self.get_links())
 
     def get_media(self):
-        """ Return a list of object brains inside the NITF object.
-        """
+        """Return a list of object brains inside the NITF object."""
         media_ct = [x.title for x in self.context.allowedContentTypes()]
         return self._get_brains(media_ct)
 
     def has_media(self):
-        """ Return the number of media inside the NITF object.
-        """
+        """Return the number of media inside the NITF object."""
         return len(self.get_media())
-
-
-class NITF(View):
-    """ Shows news article in NITF XML format.
-    """
-
-    def update(self):
-        self.context = aq_inner(self.context)
-        self.uuid = IUUID(self.context)
-
-    def _get_mediatype(self, mimetype):
-        """ Return one of the possible values of the media-type controlled
-        vocabulary.
-        """
-        # 'data' and 'other' are also part of the controlled vocabulary; we
-        # are not going to use 'data'
-        vocabulary = ['text', 'audio', 'image', 'video', 'application']
-        for i in vocabulary:
-            if mimetype.find(i) != -1:
-                return i
-
-        return 'other'
-
-    MEDIA = """
-<media media-type="%s">
-    <media-reference mime-type="%s" source="%s" alternate-text="%s"%s%s />
-    <media-caption>%s</media-caption>
-</media>"""
-
-    def get_media(self):
-        """ Return a list of object brains inside the NITF object.
-        """
-        media = []
-        # XXX: we could honor original order calling the get_media() method in
-        # View; how can we do that?
-        results = self.get_images() + self.get_files()
-        for r in results:
-            obj = r.getObject()
-            source = obj.absolute_url()
-            (mimetype, encoding) = mimetypes.guess_type(source)
-            # if no mime type is detected, result is None; we must change it
-            mimetype = mimetype and mimetype or ''
-            mediatype = self._get_mediatype(mimetype)
-            alternate_text = obj.Title()
-            caption = obj.Description()
-            # we only include height and/or width if we have a value for them
-            height = obj.getHeight()
-            height = height and ' height="%s"' % obj.getHeight() or ''
-            width = obj.getWidth()
-            width = width and ' width="%s"' % obj.getWidth() or ''
-            m = self.MEDIA % (mediatype, mimetype, source, alternate_text,
-                              height, width, caption)
-            media.append(m)
-
-        return media
-
-
-class NewsML(View):
-    """ Shows news article in NewsML XML format.
-    """
-
-    def version(self):
-        """ Returns news article revision number.
-        """
-        # TODO: get revision number
-        return 1
-
-    def nitf_size(self):
-        """ Returns size of the news article in NITF format.
-        """
-        # TODO: calculate size
-        return 1000
-
-    ITEM_REF = """
-<itemRef href="%s/@@nitf" size="%s"
-   contenttype="application/nitf+xml" format="fmt:nitf">
-    <title>%s</title>
-</itemRef>"""
-
-    def get_related_items(self):
-        """ Returns an itemRef tag for each related item (only News Articles).
-        """
-        items = getattr(self.context, 'relatedItems', None)
-        if items is not None:
-            related_items = []
-            for i in items:
-                href = i.to_object.absolute_url()
-                size = self.nitf_size()
-                title = i.to_object.Title()
-                item_ref = self.ITEM_REF % (href, size, title)
-                related_items.append(item_ref)
-            return related_items
 
 
 class NitfGalleria(DefaultView):
@@ -241,7 +139,8 @@ class NitfGalleria(DefaultView):
 
 
 class ImageScaling(BaseImageScaling):
-    """ view used for generating (and storing) image scales """
+
+    """View used for generating (and storing) image scales."""
 
     def __init__(self, context, request):
         self.image = context.getImage()
