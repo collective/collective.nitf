@@ -19,8 +19,8 @@ class INITF(form.Schema):
     """A news item based on the News Industry Text Format specification.
     """
 
-    #title = schema.TextLine()
-        # nitf/head/title and nitf/body/body.head/hedline/hl1
+    # title = schema.TextLine()
+    # nitf/head/title and nitf/body/body.head/hedline/hl1
 
     form.order_after(subtitle='IDublinCore.title')
     subtitle = schema.TextLine(
