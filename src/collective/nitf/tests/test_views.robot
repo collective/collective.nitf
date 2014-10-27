@@ -1,6 +1,7 @@
 *** Settings ***
 
 Resource  plone/app/robotframework/keywords.robot
+Variables  plone/app/testing/interfaces.py
 Library  Remote  ${PLONE_URL}/RobotRemote
 
 Suite Setup  Open Test Browser
@@ -30,11 +31,7 @@ Test Edit image from Media
     Wait Until Page Contains Element  css=.pb-ajax form[name=edit_form]
     Click Button  Save
 
-
 Test Delete image from Media
-    # FIXME
-    [Tags]  Expected Failure
-
     Enable Autologin as  Site Administrator
     Go to Homepage
 
@@ -58,7 +55,6 @@ Test Delete image from Media
     #Page Should Not Contain Element  css=li#sortable-img1
     Click Link  link=Media
     Page Should Not Contain Element  css=li#sortable-img1
-
 
 Test Change views
     Enable Autologin as  Site Administrator

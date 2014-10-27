@@ -1,12 +1,14 @@
 *** Settings ***
 
 Resource  plone/app/robotframework/keywords.robot
+Variables  plone/app/testing/interfaces.py
 Library  Remote  ${PLONE_URL}/RobotRemote
 
 Suite Setup  Open Test Browser
 Suite Teardown  Close all browsers
 
 *** Variables ***
+
 ${title} =  Miracle Cure
 ${subtitle} =  Extra! Extra! Read all about it
 ${description} =  The Pinball Wizard in a miracle cure!
