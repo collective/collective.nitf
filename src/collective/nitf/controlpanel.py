@@ -56,16 +56,6 @@ class INITFSettings(form.Schema):
         default=config.DEFAULT_URGENCY,
     )
 
-    relatable_content_types = schema.List(
-        title=_(u'Relatable Content Types'),
-        description=_(u'Only objects of these content types will be '
-                      u'listed in the related items widget.'),
-        required=False,
-        default=config.DEFAULT_RELATABLE_CONTENT_TYPES,
-        # we are going to list only the main content types in the widget
-        value_type=schema.Choice(vocabulary=PORTALTYPES),
-    )
-
 
 class NITFSettingsEditForm(controlpanel.RegistryEditForm):
     schema = INITFSettings

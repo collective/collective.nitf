@@ -1,72 +1,16 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-from collective.nitf.content import INITF
-from collective.nitf.controlpanel import INITFSettings
 from DateTime import DateTime
 from plone import api
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
-from plone.dexterity.browser.add import DefaultAddForm
-from plone.dexterity.browser.add import DefaultAddView
-from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
-from plone.registry.interfaces import IRegistry
-from plone.z3cform import layout
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.component import getUtility
 
 import json
 import pkg_resources
 
 PLONE_VERSION = pkg_resources.require('Plone')[0].version
-
-
-# TODO: enable_form_tabbing must be user selectable
-class AddForm(DefaultAddForm):
-
-    """Default view looks like a News Item."""
-
-    schema = INITF
-
-    def update(self):
-        super(AddForm, self).update()
-        # iterate over fieldsets
-        for group in self.groups:
-            # HACK: we need to update criteria of the ObjPathSourceBinder here
-            # as we want to list only relatable content types
-            if 'IRelatedItems.relatedItems' in group.widgets.keys():
-                registry = getUtility(IRegistry)
-                settings = registry.forInterface(INITFSettings)
-                widget = group.widgets['IRelatedItems.relatedItems']
-                criteria = widget.source.selectable_filter.criteria
-                criteria['portal_type'] = settings.relatable_content_types
-
-
-class AddView(DefaultAddView):
-    form = AddForm
-
-
-class EditForm(DefaultEditForm):
-
-    """Default view looks like a News Item."""
-
-    schema = INITF
-
-    def update(self):
-        super(EditForm, self).update()
-        # iterate over fieldsets
-        for group in self.groups:
-            # HACK: we need to update criteria of the ObjPathSourceBinder here
-            # as we want to list only relatable content types
-            if 'IRelatedItems.relatedItems' in group.widgets.keys():
-                registry = getUtility(IRegistry)
-                settings = registry.forInterface(INITFSettings)
-                widget = group.widgets['IRelatedItems.relatedItems']
-                criteria = widget.source.selectable_filter.criteria
-                criteria['portal_type'] = settings.relatable_content_types
-
-
-EditView = layout.wrap_form(EditForm)
 
 
 class View(DefaultView):

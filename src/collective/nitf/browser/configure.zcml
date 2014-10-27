@@ -61,29 +61,6 @@
         permission="zope2.View"
         />
 
-    <adapter
-      for="Products.CMFCore.interfaces.IFolderish
-           Products.CMFDefault.interfaces.ICMFDefaultSkin
-           plone.dexterity.interfaces.IDexterityFTI"
-      provides="zope.publisher.interfaces.browser.IBrowserPage"
-      factory=".AddView"
-      name="collective.nitf.content"
-      />
-    <class class=".AddView">
-      <require
-          permission="collective.nitf.AddNewsArticle"
-          interface="zope.publisher.interfaces.browser.IBrowserPage"
-          />
-    </class>
-
-    <browser:page
-        for="collective.nitf.content.INITF"
-        name="edit"
-        class=".EditView"
-        permission="cmf.ModifyPortalContent"
-        layer="collective.nitf.interfaces.INITFLayer"
-        />
-
     <browser:page
         for="collective.nitf.content.INITF"
         name="view"

@@ -5,5 +5,4 @@
  <record name="collective.nitf.controlpanel.INITFSettings.available_genres" delete="true" />
  <record name="collective.nitf.controlpanel.INITFSettings.default_genre" delete="true" />
  <record name="collective.nitf.controlpanel.INITFSettings.default_urgency" delete="true" />
- <record name="collective.nitf.controlpanel.INITFSettings.relatable_content_types" delete="true" />
 </registry>

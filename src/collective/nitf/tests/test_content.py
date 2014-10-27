@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-
-from collective.nitf.browser import AddForm
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.dexterity.fti import DexterityFTI
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 from StringIO import StringIO
-from z3c.form import field
 from zope.component import createObject
 from zope.component import queryUtility
 
@@ -52,31 +47,6 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_adding(self):
         self.assertTrue(INITF.providedBy(self.n1))
-
-    def test_add_form(self):
-        addform = AddForm(self.portal, self.layer['request'])
-        addform.fields = field.Fields(self.n1.getTypeInfo().lookupSchema())
-        addform.portal_type = 'collective.nitf.content'
-        data = {'section': u'general',
-                'IDublinCore.title': u'nitf2',
-                'genre': u'Actuality'}
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        nitf = addform.createAndAdd(data)
-        self.assertIsNotNone(nitf)
-
-    # FIXME
-    @unittest.expectedFailure
-    def test_related_items(self):
-        addform = AddForm(self.portal, self.layer['request'])
-        addform.fields = field.Fields(self.n1.getTypeInfo().lookupSchema())
-        addform.portal_type = 'collective.nitf.content'
-        data = {'section': u'general',
-                'IRelatedItems.relatedItems': [self.n1],
-                'IDublinCore.title': u'nitf2',
-                'genre': u'Actuality'}
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        nitf = addform.createAndAdd(data)
-        self.assertTrue(len(nitf.relatedItems))
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')

@@ -14,7 +14,6 @@ DEPENDENCIES = [
     # 'collective.js.charcount',
     'collective.js.galleria',
     'collective.js.jqueryui',
-    'collective.z3cform.widgets',
 ]
 
 JS = [

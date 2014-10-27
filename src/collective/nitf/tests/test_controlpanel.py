@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-from collective.nitf.config import DEFAULT_RELATABLE_CONTENT_TYPES
 from collective.nitf.config import DEFAULT_URGENCY
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.controlpanel import INITFSettings
@@ -80,13 +78,6 @@ class RegistryTestCase(unittest.TestCase):
     def test_default_urgency_record_in_registry(self):
         self.assertTrue(hasattr(self.settings, 'default_urgency'))
         self.assertEqual(self.settings.default_urgency, DEFAULT_URGENCY)
-
-    def test_relatable_content_types_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'relatable_content_types'))
-        self.assertEqual(
-            self.settings.relatable_content_types,
-            DEFAULT_RELATABLE_CONTENT_TYPES,
-        )
 
     def test_records_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
