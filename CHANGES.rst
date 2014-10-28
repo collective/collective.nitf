@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Drop support of Plone 4.2.
+  [hvelarde]
+
 - Remove dependency on collective.z3cform.widgets.
   [hvelarde]
 

@@ -58,11 +58,8 @@ To enable this product in a buildout-based installation:
     eggs =
         collective.nitf
 
-#. If you are using Plone 4.2 you need to add the following also::
-
     [versions]
     ...
-    collective.js.jqueryui = 1.8.16.9
     plone.app.layout = 2.3.12
 
 After updating the configuration you need to run ''bin/buildout'', which will
