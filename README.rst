@@ -63,7 +63,7 @@ To enable this product in a buildout-based installation:
     [versions]
     ...
     collective.js.jqueryui = 1.8.16.9
-    plone.app.layout = 2.2.13
+    plone.app.layout = 2.3.12
 
 After updating the configuration you need to run ''bin/buildout'', which will
 take care of updating your system.

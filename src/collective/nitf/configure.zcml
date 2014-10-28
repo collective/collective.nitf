@@ -9,10 +9,9 @@
 
     <five:registerPackage package="." />
     <i18n:registerTranslations directory="locales" />
-    <includeDependencies package="." />
-
-    <include package=".portlets" />
+    <include file="dependencies.zcml" />
     <include file="vocabulary.zcml" />
+    <include package=".portlets" />
 
     <permission
         id="collective.nitf.AddNewsArticle"
