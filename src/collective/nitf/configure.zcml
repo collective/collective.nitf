@@ -2,45 +2,38 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.nitf">
 
-    <five:registerPackage package="." />
-    <i18n:registerTranslations directory="locales" />
-    <include file="dependencies.zcml" />
-    <include file="vocabulary.zcml" />
-    <include package=".portlets" />
+  <five:registerPackage package="." />
+  <i18n:registerTranslations directory="locales" />
 
-    <permission
-        id="collective.nitf.AddNewsArticle"
-        title="collective.nitf: Add News Article"
-        />
+  <include file="dependencies.zcml" />
+  <include file="profiles.zcml" />
+  <include file="vocabulary.zcml" />
 
-    <browser:page
-        name="nitf-settings"
-        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        class=".controlpanel.NITFSettingsControlPanel"
-        permission="cmf.ManagePortal"
-        />
+  <include package=".browser" />
+  <include package=".portlets" />
+  <include package=".upgrades" />
 
-    <include file="profiles.zcml" />
-    <include package=".browser" />
-    <include package=".upgrades" />
+  <permission
+      id="collective.nitf.AddNewsArticle"
+      title="collective.nitf: Add News Article"
+      />
 
-    <browser:resourceDirectory
-        name="collective.nitf"
-        directory="static"
-        layer="collective.nitf.interfaces.INITFLayer"
-        />
+  <browser:page
+      name="nitf-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.NITFSettingsControlPanel"
+      permission="cmf.ManagePortal"
+      />
 
-    <adapter name="SearchableText" factory=".content.textIndexer" />
+  <browser:resourceDirectory
+      name="collective.nitf"
+      directory="static"
+      layer="collective.nitf.interfaces.INITFLayer"
+      />
 
-  <utility
-    factory=".setuphandlers.HiddenProfiles"
-    name="collective.nitf"
-    provides="Products.CMFPlone.interfaces.INonInstallable"
-    />
+  <adapter name="SearchableText" factory=".content.textIndexer" />
 
 </configure>
