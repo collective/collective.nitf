@@ -51,10 +51,11 @@ Test Delete image from Media
     Click Link  css=li#sortable-img1 a.delete
     Wait Until Page Contains  Do you really want to delete this item?
     Click Element  css=.pb-ajax input[value=Delete]
-    #Wait For Condition  return $('li#sortable-img1').length === 0;
-    #Page Should Not Contain Element  css=li#sortable-img1
-    Click Link  link=Media
-    Page Should Not Contain Element  css=li#sortable-img1
+    ${timeout} =  Get Selenium Timeout
+    ${implicit_wait} =  Get Selenium Implicit Wait
+    Wait Until Keyword Succeeds  ${timeout}  ${implicit_wait}
+    ...                          Page Should Not Contain Element  css=li#sortable-img1
+
 
 Test Change views
     Enable Autologin as  Site Administrator

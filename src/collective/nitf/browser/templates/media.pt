@@ -70,15 +70,7 @@
                 cssclass: 'overlay-delete',
                 noform: function(el) {return $.plonepopups.noformerrorshow(el, 'close');},
                 afterpost: function(el, data) {
-                    // Get the URL of the delete confirmation overlay
-                    var src = $(data).data('pbo').src.split('/');
-                    // get the ID of the image (http://.../id/delete_confirmation)
-                    var id = src.slice(-2)[0];
-                    // due to ID issues (dots, hyphens, etc.), we use this notation instead of #
-                    var li = $('li[id="sortable-' + id + '"');
-                    li.fadeOut('slow', function() {
-                        li.remove();
-                    });
+                    window.location = '@@media';
                 },
                 closeselector: '[name="form.button.Cancel"]',
                 width:'50%'
