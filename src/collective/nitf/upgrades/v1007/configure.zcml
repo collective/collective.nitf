@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    i18n_domain="brasil.gov.portal">
+
+  <!-- Profiles -->
+  <gs:registerProfile
+      name="default"
+      title="Fix collective.nitf locking behaviour"
+      directory="profiles/default"
+      description="Add locking behaviour to collective.nitf"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <!-- Upgrade Steps -->
+  <gs:upgradeSteps
+        source="1006"
+        destination="1007"
+        profile="collective.nitf:default">
+
+      <gs:upgradeStep
+          title="Fix collective.nitf locking behaviour"
+          description="Add locking behaviour to collective.nitf."
+          handler=".handler.apply_profile"
+          />
+
+  </gs:upgradeSteps>
+
+
+</configure>
