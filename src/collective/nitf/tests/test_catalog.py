@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
@@ -18,12 +17,10 @@ class CatalogTestCase(unittest.TestCase):
         self.catalog = self.portal['portal_catalog']
 
         with api.env.adopt_roles(['Manager']):
-            self.folder = api.content.create(self.portal, 'Folder', 'folder')
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.folder.invokeFactory('collective.nitf.content', 'n2')
-        self.n1 = self.folder['n1']
-        self.n2 = self.folder['n2']
+            self.n1 = api.content.create(
+                self.portal, 'collective.nitf.content', 'n1')
+            self.n2 = api.content.create(
+                self.portal, 'collective.nitf.content', 'n2')
 
     def test_interface_indexed(self):
         result = self.catalog(object_provides=INITF.__identifier__)
@@ -116,8 +113,10 @@ class CatalogTestCase(unittest.TestCase):
         """ Adding an NITF with its title only should be enough to get the
         SearchableText index indexed.
         """
-        self.folder.invokeFactory('collective.nitf.content', 'nitf')
-        nitf = self.folder['nitf']
+        with api.env.adopt_roles(['Manager']):
+            nitf = api.content.create(
+                self.portal, 'collective.nitf.content', 'nitf')
+
         nitf.title = u'title'
         nitf.reindexObject()
         result = self.catalog(SearchableText='nitf')

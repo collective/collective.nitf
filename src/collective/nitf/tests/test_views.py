@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from AccessControl import Unauthorized
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
@@ -8,7 +7,7 @@ from plone import api
 from plone.app.customerize import registration
 from plone.app.testing import logout
 from StringIO import StringIO
-from zope.interface import directlyProvides
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -20,13 +19,11 @@ class BaseViewTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        directlyProvides(self.request, INITFLayer)
+        alsoProvides(self.request, INITFLayer)
 
         with api.env.adopt_roles(['Manager']):
-            self.folder = api.content.create(self.portal, 'Folder', 'folder')
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
+            self.n1 = api.content.create(
+                self.portal, 'collective.nitf.content', 'n1')
 
 
 class DefaultViewTestCase(BaseViewTestCase):
@@ -173,10 +170,8 @@ class TraversalViewTestCase(unittest.TestCase):
         self.request = self.layer['request']
 
         with api.env.adopt_roles(['Manager']):
-            self.folder = api.content.create(self.portal, 'Folder', 'folder')
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
+            self.n1 = api.content.create(
+                self.portal, 'collective.nitf.content', 'n1')
 
     def test_images_traversal(self):
         self.n1.invokeFactory(

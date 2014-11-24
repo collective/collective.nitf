@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 
@@ -14,10 +13,8 @@ class PermissionsTest(unittest.TestCase):
         self.portal = self.layer['portal']
 
         with api.env.adopt_roles(['Manager']):
-            self.folder = api.content.create(self.portal, 'Folder', 'folder')
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
+            self.n1 = api.content.create(
+                self.portal, 'collective.nitf.content', 'n1')
 
     def test_add_permissions(self):
         permission = 'collective.nitf: Add News Article'
