@@ -1,21 +1,34 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf.config import PROJECTNAME
 from plone import api
-from Products.CMFPlone.interfaces import INonInstallable
+from Products.CMFPlone import interfaces as Plone
+from Products.CMFQuickInstallerTool import interfaces as QuickInstaller
 from zope.interface import implements
 
 import logging
 
-PROFILE_ID = 'profile-collective.nitf:default'
-
 
 class HiddenProfiles(object):
-    implements(INonInstallable)
+
+    implements(Plone.INonInstallable)
 
     def getNonInstallableProfiles(self):
-        profiles = ['collective.nitf:uninstall']
-        return profiles
+        """Do not show on Plone's list of installable profiles."""
+        return [
+            u'collective.nitf:uninstall',
+            u'collective.nitf.upgrades.to20alpha1:default',
+        ]
+
+
+class HiddenProducts(object):
+
+    implements(QuickInstaller.INonInstallable)
+
+    def getNonInstallableProducts(self):
+        """Do not show on QuickInstaller's list of installable products."""
+        return [
+            u'collective.nitf.upgrades.to20alpha1'
+        ]
 
 
 class Empty:

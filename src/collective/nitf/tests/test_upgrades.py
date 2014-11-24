@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 from plone.registry import field

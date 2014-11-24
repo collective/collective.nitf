@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf.controlpanel import INITFSettings
 from collective.nitf.portlets import latest_sectionable_nitf
 from collective.nitf.testing import INTEGRATION_TESTING

@@ -40,10 +40,8 @@ class ContentTypeTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
 
         with api.env.adopt_roles(['Manager']):
-            self.folder = api.content.create(self.portal, 'Folder', 'folder')
-
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
+            self.n1 = api.content.create(
+                self.portal, 'collective.nitf.content', 'n1')
 
     def test_adding(self):
         self.assertTrue(INITF.providedBy(self.n1))
@@ -68,8 +66,8 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IAttributeUUID.providedBy(self.n1))
 
     def test_is_selectable_as_folder_default_view(self):
-        self.folder.setDefaultPage('n1')
-        self.assertEqual(self.folder.default_page, 'n1')
+        self.portal.setDefaultPage('n1')
+        self.assertEqual(self.portal.default_page, 'n1')
 
     def test_action_is_registered(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
@@ -147,7 +145,7 @@ class ContentTypeTestCase(unittest.TestCase):
 
         # image scale using @@images
         self.assertIn(
-            'src="http://nohost/plone/folder/n1/foo/@@images/', tag(scale='preview'))
+            'src="http://nohost/plone/n1/foo/@@images/', tag(scale='preview'))
 
         # image class
         self.assertIn('class="myClass"', tag(css_class='myClass'))
@@ -200,10 +198,9 @@ class DexterityImageTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
 
         with api.env.adopt_roles(['Manager']):
-            self.folder = api.content.create(self.portal, 'Folder', 'folder')
+            self.n1 = api.content.create(
+                self.portal, 'collective.nitf.content', 'n1')
 
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        self.n1 = self.folder['n1']
         self.setUpImageType()
 
     def test_image_scale(self):
@@ -260,7 +257,7 @@ class DexterityImageTestCase(unittest.TestCase):
 
         # image scale using @@images
         self.assertIn(
-            'src="http://nohost/plone/folder/n1/foo/@@images/', tag(scale='preview'))
+            'src="http://nohost/plone/n1/foo/@@images/', tag(scale='preview'))
 
         # image class
         self.assertIn('class="myClass"', tag(css_class='myClass'))
