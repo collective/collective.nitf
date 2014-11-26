@@ -1,7 +1,7 @@
 *** Settings ***
 
-Documentation  Testing locked and unlocked
-Resource  cover.robot
+Resource  plone/app/robotframework/keywords.robot
+Variables  plone/app/testing/interfaces.py
 Library  Remote  ${PLONE_URL}/RobotRemote
 
 Suite Setup  Open Test Browser
@@ -12,39 +12,36 @@ Suite Teardown  Close all browsers
 ${ALT_ZOPE_HOST}  127.0.0.1
 ${ALT_PLONE_URL}  http://${ALT_ZOPE_HOST}:${ZOPE_PORT}/${PLONE_SITE_ID}
 ${LOCKED_MESSAGE}  This item was locked by admin 1 minute ago.
-${basic_tile_location}  'collective.cover.basic'
-${document_selector}  .ui-draggable .contenttype-document
-${tile_selector}  div.tile-container div.tile
+${title} =  Miracle Cure
+${subtitle} =  Extra! Extra! Read all about it
+${description} =  The Pinball Wizard in a miracle cure!
+${byline} =  Newsboy
+${body_html} =  <p>I'm free<br />I'm free<br />And freedom tastes of reality</p>
 
 *** Test Cases ***
 
 Test Locked Nitf
-    [Tags]  Expected Failure
-
     Log in as site owner
     Goto Homepage
-    Create Cover  My Cover  Description
-    Edit Cover Layout
 
-    Add Tile  ${basic_tile_location}
-    Save Cover Layout
+    Click Add News Article
+    Input Text  css=#form-widgets-IDublinCore-title  ${title}
+    Input Text  css=#form-widgets-subtitle  ${subtitle}
+    Input Text  css=#form-widgets-IDublinCore-description  ${description}
+    Input Text  css=#form-widgets-byline  ${byline}
 
-    Compose Cover
-    Page Should Contain   Please drag&drop some content here to populate the tile.
+    Wait For Condition  return tinyMCE.activeEditor != null
+    Execute Javascript  tinyMCE.activeEditor.setContent("${body_html}");
 
-    Click Element  css=div#contentchooser-content-show-button
+    Click Button  Save
 
-    Drag And Drop  css=${document_selector}  css=${tile_selector}
-    Page Should Contain  My document
-
-    Click Link  link=My Cover
-    Compose Cover
+    Go To  ${PLONE_URL}/miracle-cure
+    Click Link  link=Edit
 
     # open a new browser to simulate a 2-user interaction
     Open Browser  ${ALT_PLONE_URL}
     Enable Autologin as  Site Administrator
-    Goto Homepage
-    Click Link  link=My Cover
+    Go To  ${PLONE_URL}/miracle-cure
     Page Should Contain  Locked  ${LOCKED_MESSAGE}
 
     Switch Browser  1
@@ -52,36 +49,21 @@ Test Locked Nitf
     Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
 
     Switch Browser  2
-    Click Link  link=My Cover
+    Go To  ${PLONE_URL}/miracle-cure
     Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
-    Compose Cover
+    Click Link  link=Edit
 
     Switch Browser  1
-    Click Link  link=My Cover
+    Go To  ${PLONE_URL}/miracle-cure
     Page Should Contain  Locked  ${LOCKED_MESSAGE}
 
     Switch Browser  2
-    Click Link  link=View
+    Go To  ${PLONE_URL}/miracle-cure
     Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
 
-    Switch Browser  1
-    Click Link  link=My Cover
-    Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
-    Edit Cover Layout
+*** Keywords ***
 
-    Switch Browser  2
-    Click Link  link=My Cover
-    Page Should Contain  Locked  ${LOCKED_MESSAGE}
-
-    Switch Browser  1
-    Click Link  link=View
-    Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
-
-    Switch Browser  2
-    Click Link  link=My Cover
-    Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
-    Edit Cover Layout
-
-    Switch Browser  1
-    Click Link  link=My Cover
-    Page Should Contain  Locked  ${LOCKED_MESSAGE}
+Click Add News Article
+    Open Add New Menu
+    Click Link  css=a#collective-nitf-content
+    Page Should Contain  Add News Article
