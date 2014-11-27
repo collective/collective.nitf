@@ -21,7 +21,7 @@ ${body_html} =  <p>I'm free<br />I'm free<br />And freedom tastes of reality</p>
 *** Test Cases ***
 
 Test Locked Nitf
-    Log in as site owner
+    Enable Autologin as  Owner
     Goto Homepage
 
     Click Add News Article
@@ -42,6 +42,7 @@ Test Locked Nitf
     Open Browser  ${ALT_PLONE_URL}
     Enable Autologin as  Site Administrator
     Go To  ${PLONE_URL}/miracle-cure
+    Click Link  link=Edit
     Page Should Contain  Locked  ${LOCKED_MESSAGE}
 
     Switch Browser  1
@@ -55,6 +56,7 @@ Test Locked Nitf
 
     Switch Browser  1
     Go To  ${PLONE_URL}/miracle-cure
+    Click Link  link=Edit
     Page Should Contain  Locked  ${LOCKED_MESSAGE}
 
     Switch Browser  2

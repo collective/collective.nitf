@@ -84,6 +84,7 @@ setup(name='collective.nitf',
           'test': [
               'plone.app.collection',
               'plone.app.customerize',
+              'plone.app.lockingbehavior',
               'plone.app.robotframework',
               'plone.app.testing [robot] >=4.2.2',
               'plone.browserlayer',
