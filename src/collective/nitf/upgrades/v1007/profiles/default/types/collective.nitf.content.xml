@@ -2,8 +2,7 @@
 <object name="collective.nitf.content" meta_type="Dexterity FTI"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="collective.nitf">
-  <!-- enabled behaviors -->
-  <property name="behaviors" purge="false">
-    <element value="plone.app.lockingbehavior.behaviors.ILocking"/>
+  <property name="behaviors" purge="False">
+    <element value="plone.app.lockingbehavior.behaviors.ILocking" />
   </property>
 </object>

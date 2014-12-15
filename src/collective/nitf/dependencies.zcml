@@ -1,0 +1,11 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+  <include package="collective.js.galleria" />
+  <include package="collective.js.jqueryui" />
+  <include package="plone.app.contentmenu" />
+  <include package="plone.app.dexterity" />
+  <include package="plone.app.lockingbehavior" />
+  <include package="plone.app.referenceablebehavior" />
+  <include package="plone.app.relationfield" />
+  <include package="plone.formwidget.autocomplete" />
+  <include package="plone.formwidget.contenttree" />
+</configure>

@@ -1,6 +1,12 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
+1.0b4-dev (unreleased)
+^^^^^^^^^^^^^^^^^^^^^^
+
+- Add locking behaviour. [rodfersou]
+
+
 1.0b3 (2013-07-23)
 ^^^^^^^^^^^^^^^^^^
 
