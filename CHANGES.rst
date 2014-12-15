@@ -12,6 +12,9 @@ There's a frood who really knows where his towel is.
 - Drop support of Plone 4.2.
   [hvelarde]
 
+- Enable locking behaviour.
+  [rodfersou]
+
 - Remove dependency on collective.z3cform.widgets.
   [hvelarde]
 
@@ -36,10 +39,10 @@ There's a frood who really knows where his towel is.
 
 - Rename nitf_galleria template with galleria. [marcosfromero]
 
-- Remove display_macros template and update nitf_galleria with former 
+- Remove display_macros template and update nitf_galleria with former
   media-box macro code. [marcosfromero]
 
-- Remove all javascript from templates, create new nitf.js and use 
+- Remove all javascript from templates, create new nitf.js and use
   jsregistry (closes `#94`_). [marcosfromero]
 
 - Remove deprecated methods on default view.
@@ -51,7 +54,7 @@ There's a frood who really knows where his towel is.
 - Remove Pillow from dependencies as some people may prefer to use PIL.
   [hvelarde]
 
-- Add confirmation overlay before removing an image in media.pt 
+- Add confirmation overlay before removing an image in media.pt
   (closes `#85`_). [marcosfromero]
 
 - Add required script library in media.pt to prevent image not loading
@@ -86,7 +89,7 @@ There's a frood who really knows where his towel is.
 - Needless override on folder_summary_view that was causing ``AttributeError:
   'View' object has no attribute 'images'`` was removed. [hvelarde]
 
-- Changes image link behavior in view.pt for mobile devices 
+- Changes image link behavior in view.pt for mobile devices
   (closes `#62`_). [marcosfromero]
 
 
