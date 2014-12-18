@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
+import os
 import random
+import string
 from StringIO import StringIO
 from PIL import Image
 
+from collective.nitf.controlpanel import INITFSettings
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing.z2 import ZSERVER_FIXTURE
+from plone.testing import z2
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 
 
 class Fixture(PloneSandboxLayer):
@@ -24,6 +30,9 @@ class Fixture(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
         self.applyProfile(portal, 'collective.nitf:default')
+        portal_workflow = portal['portal_workflow']
+        portal_workflow.setChainForPortalTypes(
+            ('collective.nitf.content',), 'simple_publication_workflow')
 
 
 def generate_jpeg(width, height):
@@ -58,7 +67,13 @@ def generate_jpeg(width, height):
     return output.getvalue()
 
 
-class SeleniumFixture(Fixture):
+def generate_text(size):
+    chars = string.letters + string.digits
+    return ''.join(random.choice(chars) for x in range(size))
+
+
+# TODO: simplify this using a testfixture profile
+class RobotFixture(Fixture):
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
@@ -71,6 +86,17 @@ class SeleniumFixture(Fixture):
         portal.n1.img1.setImage(generate_jpeg(50, 50))
         portal.n1.img2.setImage(generate_jpeg(50, 50))
         portal.n1.img3.setImage(generate_jpeg(50, 50))
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(INITFSettings)
+        # FIXME: this needs to be available by default
+        settings.available_sections = set([u'Tommy'])
+        settings.available_genres = [u'Current']
+        open('/tmp/img1.jpg', 'w').write(generate_jpeg(50, 50))
+        open('/tmp/txt1.txt', 'w').write(generate_text(256))
+
+    def tearDownPloneSite(self, portal):
+        os.remove('/tmp/img1.jpg')
+        os.remove('/tmp/txt1.txt')
 
 
 FIXTURE = Fixture()
@@ -78,12 +104,13 @@ INTEGRATION_TESTING = IntegrationTesting(
     bases=(FIXTURE,),
     name='collective.nitf:Integration',
 )
+
 FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FIXTURE,),
     name='collective.nitf:Functional',
 )
-SELENIUM_FIXTURE = SeleniumFixture()
-SELENIUM_TESTING = FunctionalTesting(
-    bases=(SELENIUM_FIXTURE, ZSERVER_FIXTURE),
-    name='collective.nitf:Selenium',
-)
+
+ROBOT_FIXTURE = RobotFixture()
+ROBOT_TESTING = FunctionalTesting(
+    bases=(ROBOT_FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
+    name="collective.nitf:Robot")
