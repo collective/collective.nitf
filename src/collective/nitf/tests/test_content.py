@@ -72,11 +72,8 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IAttributeUUID.providedBy(self.n1))
 
     def test_locking_behavior_available(self):
-        # ILocking is not applied by default, but must be available if needed
-        try:
-            from plone.app.lockingbehavior.behaviors import ILocking  # NOQA
-        except ImportError:
-            self.fail('ILocking behavior not available')
+        from plone.app.lockingbehavior.behaviors import ILocking
+        self.assertTrue(ILocking.providedBy(self.n1))
 
     def test_action_is_registered(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
