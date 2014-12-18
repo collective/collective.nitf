@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.nitf">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.nitf:v1007"
+      directory="profiles/default"
+      description="Update collective.nitf to v1007."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:upgradeSteps
+        source="1006"
+        destination="1007"
+        profile="collective.nitf:default">
+
+      <genericsetup:upgradeStep
+          title="Add locking behavior"
+          description="Adds locking behaviour to News Article."
+          handler=".apply_profile"
+          />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

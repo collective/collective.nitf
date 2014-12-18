@@ -45,19 +45,21 @@
             />
     </browser:menuItems>
 
+    <include file="dependencies.zcml" />
+
     <include file="profiles.zcml" />
 
-	<!-- Image scale support for tile images -->
-  	<browser:page
-      	name="images"
-      	for=".content.INITF"
-      	class=".browser.ImageScaling"
-      	permission="zope2.View"
-      	/>
+    <!-- Image scale support for tile images -->
+    <browser:page
+        name="images"
+        for=".content.INITF"
+        class=".browser.ImageScaling"
+        permission="zope2.View"
+        />
 
-  	<browser:resourceDirectory
-      	name="collective.nitf"
-      	directory="static"
-      	/>
+    <browser:resourceDirectory
+        name="collective.nitf"
+        directory="static"
+        />
 
 </configure>

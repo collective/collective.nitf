@@ -17,7 +17,10 @@ class HiddenProfiles(grok.GlobalUtility):
     grok.name('collective.nitf')
 
     def getNonInstallableProfiles(self):
-        profiles = ['collective.nitf:uninstall', ]
+        profiles = [
+            'collective.nitf:uninstall',
+            'collective.nitf.upgrades.v1007:default',
+        ]
         return profiles
 
 

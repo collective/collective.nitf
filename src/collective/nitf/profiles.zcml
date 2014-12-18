@@ -72,4 +72,6 @@
       handler="collective.nitf.setuphandlers.upgrade_z3cformwidgets"
       profile="collective.nitf:default" />
 
+  <include package=".upgrades" />
+
 </configure>
