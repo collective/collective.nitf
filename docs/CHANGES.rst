@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Fix urgency field filter for Collections (closes `#111`_).
+  [rodfersou]
 
 
 1.0b4 (2014-12-26)
@@ -132,3 +133,4 @@ There's a frood who really knows where his towel is
 .. _`#33`: https://github.com/collective/collective.nitf/issues/33
 .. _`#49`: https://github.com/collective/collective.nitf/issues/49
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
+.. _`#111`: https://github.com/collective/collective.nitf/issues/111
