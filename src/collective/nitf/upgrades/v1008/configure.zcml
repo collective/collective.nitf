@@ -18,9 +18,15 @@
         profile="collective.nitf:default">
 
       <genericsetup:upgradeStep
-          title="Fix Collection filter for Urgency field"
+          title="Fix filter for Urgency field"
           description="Fix Collection filter for Urgency field."
           handler=".apply_profile"
+          />
+
+      <genericsetup:upgradeStep
+          title="Update existent collections"
+          description="Update existent collections with fixed Urgency field."
+          handler=".fix_collections"
           />
 
   </genericsetup:upgradeSteps>
