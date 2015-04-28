@@ -59,7 +59,7 @@
       <value key="enabled">True</value>
       <value key="sortable">True</value>
       <value key="operations">
-          <element>plone.app.querystring.operation.selection.is</element>
+          <element>plone.app.querystring.operation.intselection.is</element>
       </value>
       <value key="vocabulary">collective.nitf.Urgencies</value>
       <value key="group" i18n:translate="">NITF</value>
