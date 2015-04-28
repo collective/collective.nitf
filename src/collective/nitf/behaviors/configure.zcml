@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.nitf">
+
+  <include package="plone.behavior" file="meta.zcml" />
+
+  <plone:behavior
+      title="Section"
+      description="Named section where the item will appear."
+      provides="collective.nitf.behaviors.interfaces.ISection"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+
+</configure>

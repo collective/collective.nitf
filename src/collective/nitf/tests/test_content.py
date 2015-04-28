@@ -65,6 +65,10 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IReferenceable.providedBy(self.n1))
         self.assertTrue(IAttributeUUID.providedBy(self.n1))
 
+    def test_section_behavior(self):
+        from collective.nitf.behaviors.interfaces import ISection
+        self.assertTrue(ISection.providedBy(self.n1))
+
     def test_is_selectable_as_folder_default_view(self):
         self.portal.setDefaultPage('n1')
         self.assertEqual(self.portal.default_page, 'n1')

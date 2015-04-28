@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Reimplement section field as a behavior (closes `#98`_).
+  [hvelarde]
+
 - Drop support of Plone 4.2.
   [hvelarde]
 
@@ -219,3 +222,4 @@ There's a frood who really knows where his towel is.
 .. _`#84`: https://github.com/collective/collective.nitf/issues/84
 .. _`#85`: https://github.com/collective/collective.nitf/issues/85
 .. _`#94`: https://github.com/collective/collective.nitf/issues/94
+.. _`#98`: https://github.com/collective/collective.nitf/issues/98

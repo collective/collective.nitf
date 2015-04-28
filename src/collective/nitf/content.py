@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
-from plone.app.dexterity import PloneMessageFactory as _PMF
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
 from plone.directives import form
 from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
+from plone.supermodel import model
 from Products.CMFPlone.utils import safe_unicode
 from zope import schema
 from zope.component import getUtility
 from zope.interface import implements
 
 
-class INITF(form.Schema):
-    """A news item based on the News Industry Text Format specification.
-    """
+class INITF(model.Schema):
+
+    """A News Article based on the News Industry Text Format specification."""
 
     # title = schema.TextLine()
     # nitf/head/title and nitf/body/body.head/hedline/hl1
@@ -60,22 +59,7 @@ class INITF(form.Schema):
         required=False,
     )
 
-    form.fieldset(
-        'categorization',
-        label=_PMF(u'label_schema_categorization', default=u'Categorization'),
-        fields=['section', 'genre', 'urgency'],
-    )
-
-    form.order_before(section='subjects')
-    section = schema.Choice(
-        # nitf/head/pubdata/@position.section
-        title=_(u'Section'),
-        description=_(
-            u'help_section',
-            default=u'Named section where the article will appear.',
-        ),
-        vocabulary=u'collective.nitf.AvailableSections',
-    )
+    model.fieldset('categorization', fields=['genre', 'urgency'])
 
     genre = schema.Choice(
         # nitf/head/tobject/tobject.property/@tobject.property.type
@@ -99,6 +83,9 @@ class INITF(form.Schema):
 
 
 class NITF(Container):
+
+    """A News Article based on the News Industry Text Format specification."""
+
     implements(INITF)
 
     def is_empty(self):
@@ -152,13 +139,6 @@ def genre_default_value(data):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
     return settings.default_genre
-
-
-@form.default_value(field=INITF['section'])
-def section_default_value(data):
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(INITFSettings)
-    return settings.default_section
 
 
 @form.default_value(field=INITF['urgency'])
