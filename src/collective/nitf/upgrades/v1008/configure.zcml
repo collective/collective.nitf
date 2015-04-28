@@ -7,7 +7,7 @@
   <genericsetup:registerProfile
       name="default"
       title="collective.nitf:v1008"
-      directory="profiles/default"
+      directory="profile"
       description="Update collective.nitf to v1008."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
