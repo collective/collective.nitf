@@ -41,6 +41,37 @@ class UpgradeTestCaseBase(unittest.TestCase):
         return len(upgrades[0])
 
 
+class to1007TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'1006', u'1007')
+
+    def test_upgrade_to_2000_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertTrue(version >= self.to_version)
+        self.assertEqual(self._upgrades_to_do(), 1)
+
+    def test_add_locking_behavior(self):
+        title = u'Add locking behavior'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        locking_behavior = 'plone.app.lockingbehavior.behaviors.ILocking'
+        types = self.portal['portal_types']
+        nitf = types['collective.nitf.content']
+
+        # simulate state on previous version
+        behaviors = list(nitf.behaviors)
+        behaviors.remove(locking_behavior)
+        nitf.behaviors = tuple(behaviors)
+        self.assertNotIn(locking_behavior, nitf.behaviors)
+
+        # execute upgrade step and verify changes were applied
+        self._do_upgrade_step(step)
+
+        self.assertIn(locking_behavior, nitf.behaviors)
+
+
 class to2000TestCase(UpgradeTestCaseBase):
 
     def setUp(self):
