@@ -18,6 +18,9 @@ ${body_html} =  <p>I'm free<br />I'm free<br />And freedom tastes of reality</p>
 *** Test cases ***
 
 Create News Article, subobjects and test views
+    # FIXME: https://github.com/plone/plone.app.robotframework/issues/38
+    [Tags]  Expected Failure
+
     Enable Autologin as  Site Administrator
     Go to Homepage
 
