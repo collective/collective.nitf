@@ -44,7 +44,7 @@ class UpgradeTestCaseBase(unittest.TestCase):
 class to2000TestCase(UpgradeTestCaseBase):
 
     def setUp(self):
-        UpgradeTestCaseBase.setUp(self, u'1009', u'2000')
+        UpgradeTestCaseBase.setUp(self, u'1008', u'2000')
 
     def test_upgrade_to_2000_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]

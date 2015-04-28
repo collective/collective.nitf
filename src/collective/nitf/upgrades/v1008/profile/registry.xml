@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<registry
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="plone">
+  <records
+      interface="plone.app.querystring.interfaces.IQueryField"
+      prefix="plone.app.querystring.field.urgency">
+    <value key="title" i18n:translate="">Urgency</value>
+    <value key="description" i18n:translate="">News importance.</value>
+    <value key="enabled">True</value>
+    <value key="sortable">True</value>
+    <value key="operations">
+      <element>plone.app.querystring.operation.intselection.is</element>
+    </value>
+    <value key="vocabulary">collective.nitf.Urgencies</value>
+    <value key="group" i18n:translate="">NITF</value>
+  </records>
+</registry>

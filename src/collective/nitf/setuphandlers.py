@@ -16,7 +16,8 @@ class HiddenProfiles(object):
         """Do not show on Plone's list of installable profiles."""
         return [
             u'collective.nitf:uninstall',
-            u'collective.nitf.upgrades.to20alpha1:default',
+            u'collective.nitf.upgrades.v1008:default',
+            u'collective.nitf.upgrades.v2000:default',
         ]
 
 
@@ -27,7 +28,8 @@ class HiddenProducts(object):
     def getNonInstallableProducts(self):
         """Do not show on QuickInstaller's list of installable products."""
         return [
-            u'collective.nitf.upgrades.to20alpha1'
+            u'collective.nitf.upgrades.v1008',
+            u'collective.nitf.upgrades.v2000'
         ]
 
 

@@ -3,7 +3,7 @@ python: 2.7
 sudo: false
 cache:
   directories:
-    - eggs
+  - eggs
 env:
   - PLONE_VERSION=4.3
   - PLONE_VERSION=5.0
@@ -12,20 +12,20 @@ matrix:
     - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
-  - sed -ie "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
-  - mkdir -p buildout-cache/downloads
-  - python bootstrap.py
-  - bin/buildout annotate
-  - bin/buildout -Nq
+- sed -ie "s#test-4.3.x.cfg#test-$PLONE_VERSION.x.cfg#" buildout.cfg
+- python bootstrap.py
+- bin/buildout annotate
+- bin/buildout -Nq
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-script: bin/code-analysis && bin/test
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- firefox -v
+script:
+- bin/code-analysis
+- bin/test
 after_success:
-  - bin/coverage.sh
-  - pip install -q coveralls
-  - coveralls
-after_failure:
-  - firefox -v
+- bin/createcoverage
+- pip install -q coveralls
+- coveralls
 notifications:
   irc: irc.freenode.org#simplesconsultoria
