@@ -6,7 +6,7 @@ from plone import api
 import logging
 
 
-def miscellaneous(context, logger=None):
+def apply_profile(context, logger=None):
     """Apply upgrade profile; this includes:
 
     - remove character counter resources from CSS and JS registries
@@ -18,7 +18,7 @@ def miscellaneous(context, logger=None):
         # Called as upgrade step: define our own logger
         logger = logging.getLogger(PROJECTNAME)
 
-    profile = 'profile-collective.nitf.upgrades.v20:to20alpha1'
+    profile = 'profile-collective.nitf.upgrades.v2000:default'
     setup = api.portal.get_tool('portal_setup')
     setup.runAllImportStepsFromProfile(profile)
 

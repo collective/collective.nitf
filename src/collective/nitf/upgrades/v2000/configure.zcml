@@ -4,26 +4,29 @@
     i18n_domain="collective.nitf">
 
   <genericsetup:registerProfile
-      name="to20alpha1"
-      title="Upgrade profile for collective.nitf 1.x to collective.nitf 2.0a1"
-      description=""
-      directory="profiles/to_alpha1"
-      provides="Products.GenericSetup.interfaces.EXTENSION" />
+      name="default"
+      title="collective.nitf:v2000"
+      description="Upgrade collective.nitf to v2000"
+      directory="profile"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
 
   <genericsetup:upgradeSteps
-      source="1009"
+      source="1008"
       destination="2000"
       profile="collective.nitf:default">
 
     <genericsetup:upgradeStep
         title="Miscellaneous"
-        description=""
-        handler=".setuphandlers.miscellaneous" />
+        description="Remove character counter and cook resource registries."
+        handler=".apply_profile"
+        />
 
     <genericsetup:upgradeStep
         title="Update News Articles layouts"
         description=""
-        handler=".setuphandlers.update_layouts" />
+        handler=".update_layouts"
+        />
 
   </genericsetup:upgradeSteps>
 
