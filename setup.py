@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from setuptools import find_packages
 from setuptools import setup
 
@@ -26,7 +25,6 @@ setup(name='collective.nitf',
           'Operating System :: OS Independent',
           'Programming Language :: JavaScript',
           'Programming Language :: Python',
-          'Programming Language :: Python :: 2.6',
           'Programming Language :: Python :: 2.7',
           'Topic :: Office/Business :: News/Diary',
           'Topic :: Software Development :: Libraries :: Python Modules',
@@ -35,7 +33,6 @@ setup(name='collective.nitf',
       author='Héctor Velarde',
       author_email='hector.velarde@gmail.com',
       url='https://github.com/collective/collective.nitf',
-      license='GPLv2',
       packages=find_packages('src'),
       package_dir={'': 'src'},
       namespace_packages=['collective'],
@@ -61,6 +58,7 @@ setup(name='collective.nitf',
           'plone.app.registry',
           'plone.app.relationfield',
           'plone.app.textfield',
+          'plone.app.upgrade',
           'plone.app.vocabularies',
           'plone.dexterity',
           'plone.directives.form',
@@ -83,7 +81,6 @@ setup(name='collective.nitf',
       ],
       extras_require={
           'test': [
-              'plone.app.collection',
               'plone.app.customerize',
               'plone.app.robotframework',
               'plone.app.testing [robot] >=4.2.2',
