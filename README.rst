@@ -29,12 +29,16 @@ Mostly Harmless
 ---------------
 
 .. image:: https://secure.travis-ci.org/collective/collective.nitf.png?branch=1.x
-    :target: http://travis-ci.org/collective/collective.nitf
     :alt: Travis CI badge
+    :target: http://travis-ci.org/collective/collective.nitf
 
 .. image:: https://coveralls.io/repos/collective/collective.nitf/badge.png?branch=1.x
-    :target: https://coveralls.io/r/collective/collective.nitf
     :alt: Coveralls badge
+    :target: https://coveralls.io/r/collective/collective.nitf
+
+.. image:: https://pypip.in/d/collective.nitf/badge.png
+    :alt: Downloads
+    :target: https://pypi.python.org/pypi/collective.nitf/
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
