@@ -32,7 +32,7 @@ class VocabulariesTestCase(unittest.TestCase):
         available_genres = util(self.portal)
         # FIXME: we need to set up at least one genre
         self.assertEqual(len(available_genres), 0)
-        #self.assertTrue(u'Current' in available_genres)
+        # self.assertTrue(u'Current' in available_genres)
 
     def test_available_genres_vocabulary_is_sorted(self):
         self.settings.available_genres = [u"Voicer", u"Current", u"Actuality"]
@@ -49,7 +49,7 @@ class VocabulariesTestCase(unittest.TestCase):
         sections = util(self.portal)
         # FIXME: we need to set up at least one section
         self.assertEqual(len(sections), 0)
-        #self.assertTrue(u'Default' in sections)
+        # self.assertTrue(u'Default' in sections)
 
     def test_available_sections_vocabulary_is_sorted(self):
         self.settings.available_sections = set([u"5", u"4", u"3", u"2", u"1"])
