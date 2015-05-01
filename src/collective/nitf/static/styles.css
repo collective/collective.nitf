@@ -5,17 +5,17 @@
 }
 
 .portaltype-collective-nitf-content .newsImageContainer {
-	position:relative;
+    position:relative;
 }
 
 .portaltype-collective-nitf-content .newsImageContainer  .magnify {
-	background:transparent url(images/search-ico.png) no-repeat;
-	display:block;
-	height:13px;
-	width:13px;
-	position:absolute;
-	top:5px;
-	right:5px;
+    background:transparent url(images/search-ico.png) no-repeat;
+    display:block;
+    height:13px;
+    width:13px;
+    position:absolute;
+    top:5px;
+    right:5px;
 }
 
 /* used in media_sorter.pt */
