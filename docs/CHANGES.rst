@@ -1,7 +1,7 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
-1.0b5 (unreleased)
+1.0b5 (2015-05-01)
 ^^^^^^^^^^^^^^^^^^
 
 - Fix urgency field filter for Collections (closes `#111`_).
