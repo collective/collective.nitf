@@ -73,6 +73,12 @@ Check the box next to ``collective.nitf`` and click the 'Activate' button.
 	You may have to empty your browser cache and save your resource registries
 	in order to see the effects of the product installation.
 
+Behaviors
+^^^^^^^^^
+
+This package includes a behavior called ``collective.nitf.behaviors.interfaces.ISection``.
+By applying it to a Dexterity-based content type you will get a new field called ``section``.
+
 Helper views
 ^^^^^^^^^^^^
 
