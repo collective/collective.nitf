@@ -52,7 +52,7 @@ class INITFSettings(form.Schema):
     default_urgency = schema.Choice(
         title=_(u'Default Urgency'),
         vocabulary=u'collective.nitf.Urgencies',
-        required=False,
+        required=True,
         default=config.DEFAULT_URGENCY,
     )
 
