@@ -97,7 +97,7 @@ class ImageScaling(BaseImageScaling):
 
 class NITFBylineViewlet(DocumentBylineViewlet):
 
-    index = ViewPageTemplateFile("templates/nitf_byline.pt")
+    index = ViewPageTemplateFile('templates/nitf_byline.pt')
 
     def getMemberInfoByName(self, fullname):
         membership = api.portal.get_tool('portal_membership')
