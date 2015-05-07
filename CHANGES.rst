@@ -95,6 +95,9 @@ There's a frood who really knows where his towel is.
 - Changes image link behavior in view.pt for mobile devices
   (closes `#62`_). [marcosfromero]
 
+- Byline field honored in syndication (closes `#93`_).
+  [rodfersou]
+
 
 1.0b3 (2013-07-23)
 ^^^^^^^^^^^^^^^^^^
@@ -221,5 +224,6 @@ There's a frood who really knows where his towel is.
 .. _`#75`: https://github.com/collective/collective.nitf/issues/75
 .. _`#84`: https://github.com/collective/collective.nitf/issues/84
 .. _`#85`: https://github.com/collective/collective.nitf/issues/85
+.. _`#93`: https://github.com/collective/collective.nitf/issues/93
 .. _`#94`: https://github.com/collective/collective.nitf/issues/94
 .. _`#98`: https://github.com/collective/collective.nitf/issues/98
