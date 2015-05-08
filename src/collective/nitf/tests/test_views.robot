@@ -52,9 +52,6 @@ Test Delete image from Media
     ...                          Page Should Not Contain Element  css=li#sortable-img1
 
 Test Media View Reorder
-    # FIXME
-    [Tags]  Expected Failure
-
     Enable Autologin as  Site Administrator
     Go to Homepage
 
@@ -67,7 +64,7 @@ Test Media View Reorder
     Page Should Contain Element  css=#sortable-img3.sort-2
 
     [Documentation]  Move 3th image to the left.
-    Drag And Drop  css=${img3_selector}  css=.ui-sortable li:nth-of-type(1)
+    Drag And Drop  css=#sortable-img3.sort-2  css=.ui-sortable li:nth-of-type(1)
     Execute JavaScript  window.update_sortable($('#sortable-img3'), -2)
 
     Click Link  link=Media
@@ -76,7 +73,7 @@ Test Media View Reorder
     Page Should Contain Element  css=#sortable-img1.sort-1
     Page Should Contain Element  css=#sortable-img2.sort-2
 
-    Drag And Drop  css=${img1_selector}  css=.ui-sortable li:nth-of-type(3)
+    Drag And Drop  css=#sortable-img1.sort-1  css=.ui-sortable li:nth-of-type(3)
     Execute JavaScript  window.update_sortable($('#sortable-img1'), 1)
 
     Click Link  link=Media

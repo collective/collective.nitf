@@ -62,4 +62,24 @@
         directory="static"
         />
 
+  <configure
+      zcml:condition="have plone-43">
+    <adapter
+        factory=".adapters.NitfItem"
+        for="collective.nitf.content.INITF
+             Products.CMFPlone.interfaces.syndication.IFeed"
+        provides="Products.CMFPlone.interfaces.syndication.IFeedItem" />
+  </configure>
+  <configure
+      zcml:condition="not-have plone-43">
+    <configure
+        zcml:condition="installed collective.syndication">
+      <adapter
+          factory=".adapters.NitfItem"
+          for="collective.nitf.content.INITF
+               collective.syndication.interfaces.IFeed"
+          provides="collective.syndication.interfaces.IFeedItem" />
+    </configure>
+  </configure>
+
 </configure>

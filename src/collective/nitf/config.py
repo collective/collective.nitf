@@ -3,6 +3,7 @@ from collective.nitf import _
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
+
 PROJECTNAME = 'collective.nitf'
 
 # this cames from http://cv.iptc.org/newscodes/genre/
