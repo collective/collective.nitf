@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from collective.nitf import _
+from pkg_resources import get_distribution
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
 
 PROJECTNAME = 'collective.nitf'
 
@@ -193,3 +195,5 @@ URGENCIES = SimpleVocabulary([
 DEFAULT_GENRE = u'Current'
 DEFAULT_URGENCY = NORMAL
 DEFAULT_RELATABLE_CONTENT_TYPES = [u'collective.nitf.content']
+
+PLONE_VERSION = get_distribution('Plone').version
