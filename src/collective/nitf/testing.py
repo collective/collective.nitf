@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+"""Setup for tests in the package.
+
+We need to install collective.syndication to test the BylineFeed
+adapter under Plone 4.2.
+"""
 import os
 import random
 import string
@@ -6,6 +11,7 @@ from StringIO import StringIO
 from PIL import Image
 
 from collective.nitf.controlpanel import INITFSettings
+from plone import api
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
@@ -17,18 +23,25 @@ from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
+PLONE_VERSION = api.env.plone_version()
+
 
 class Fixture(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        # Load ZCML
+        if PLONE_VERSION.startswith('4.2'):
+            import collective.syndication
+            self.loadZCML(package=collective.syndication)
+
         import collective.nitf
         self.loadZCML(package=collective.nitf)
 
     def setUpPloneSite(self, portal):
-        # Install into Plone site using portal_setup
+        if PLONE_VERSION.startswith('4.2'):
+            self.applyProfile(portal, 'collective.syndication:default')
+
         self.applyProfile(portal, 'collective.nitf:default')
         portal_workflow = portal['portal_workflow']
         portal_workflow.setChainForPortalTypes(
