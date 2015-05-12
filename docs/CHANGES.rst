@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b6 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Byline field honored in syndication (closes `#93`_).
+  [rodfersou]
 
 
 1.0b5 (2015-05-01)
@@ -139,4 +140,5 @@ There's a frood who really knows where his towel is
 .. _`#33`: https://github.com/collective/collective.nitf/issues/33
 .. _`#49`: https://github.com/collective/collective.nitf/issues/49
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
+.. _`#93`: https://github.com/collective/collective.nitf/issues/93
 .. _`#111`: https://github.com/collective/collective.nitf/issues/111
