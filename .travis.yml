@@ -10,6 +10,7 @@ env:
 install:
 - sed -ie "s#test-4.3.x.cfg#test-$PLONE_VERSION.x.cfg#" buildout.cfg
 - test $PLONE_VERSION = 4.2 && sed -i "/\[versions\]/a collective.js.jqueryui = 1.8.16.9" buildout.cfg || true
+- test $PLONE_VERSION = 4.2 && sed -ie "s#test-eggs =#test-eggs = collective.syndication#" buildout.cfg || true
 - python bootstrap.py
 - bin/buildout annotate
 - bin/buildout -Nq
