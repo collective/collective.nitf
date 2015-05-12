@@ -95,9 +95,6 @@ There's a frood who really knows where his towel is.
 - Changes image link behavior in view.pt for mobile devices
   (closes `#62`_). [marcosfromero]
 
-- Byline field honored in syndication (closes `#93`_).
-  [rodfersou]
-
 
 1.0b3 (2013-07-23)
 ^^^^^^^^^^^^^^^^^^

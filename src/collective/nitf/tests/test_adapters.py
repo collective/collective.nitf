@@ -3,10 +3,10 @@ from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 from Products.CMFPlone.interfaces.syndication import IFeed
 
-import unittest2 as unittest
+import unittest
 
 
-class NitfItemTestCase(unittest.TestCase):
+class AdaptersTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
@@ -24,7 +24,7 @@ class NitfItemTestCase(unittest.TestCase):
                 container=self.folder
             )
 
-    def test_adapter(self):
+    def test_byline_feed_adapter(self):
         self.n1.byline = 'The Author'
         adapted_folder = IFeed(self.folder)
         adapted_n1 = adapted_folder.items.next()

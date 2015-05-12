@@ -38,9 +38,10 @@
   <adapter name="SearchableText" factory=".content.textIndexer" />
 
   <adapter
-      factory=".adapters.NitfItem"
+      factory=".adapters.BylineFeed"
       for="collective.nitf.content.INITF
            Products.CMFPlone.interfaces.syndication.IFeed"
-      provides="Products.CMFPlone.interfaces.syndication.IFeedItem" />
+      provides="Products.CMFPlone.interfaces.syndication.IFeedItem"
+      />
 
 </configure>
