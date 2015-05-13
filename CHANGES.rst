@@ -15,9 +15,6 @@ There's a frood who really knows where his towel is.
 - Drop support of Plone 4.2.
   [hvelarde]
 
-- Enable locking behaviour.
-  [rodfersou]
-
 - Remove dependency on collective.z3cform.widgets.
   [hvelarde]
 
@@ -94,6 +91,26 @@ There's a frood who really knows where his towel is.
 
 - Changes image link behavior in view.pt for mobile devices
   (closes `#62`_). [marcosfromero]
+
+
+1.0b6 (unreleased)
+^^^^^^^^^^^^^^^^^^
+
+- Byline field honored in syndication (closes `#93`_).
+  [rodfersou]
+
+
+1.0b5 (2015-05-01)
+^^^^^^^^^^^^^^^^^^
+
+- Fix urgency field filter for Collections (closes `#111`_).
+  [rodfersou]
+
+
+1.0b4 (2014-12-26)
+^^^^^^^^^^^^^^^^^^^^^^
+
+- Add locking behaviour. [rodfersou]
 
 
 1.0b3 (2013-07-23)
@@ -224,3 +241,4 @@ There's a frood who really knows where his towel is.
 .. _`#93`: https://github.com/collective/collective.nitf/issues/93
 .. _`#94`: https://github.com/collective/collective.nitf/issues/94
 .. _`#98`: https://github.com/collective/collective.nitf/issues/98
+.. _`#111`: https://github.com/collective/collective.nitf/issues/111
