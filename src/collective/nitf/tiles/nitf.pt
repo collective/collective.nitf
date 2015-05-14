@@ -1,0 +1,66 @@
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="collective.nitf">
+
+<body tal:define="is_empty nocall:view/is_empty">
+  <p tal:condition="python:is_empty and view.is_compose_mode()">
+    Drag&amp;drop a News Article here.
+  </p>
+
+  <div tal:condition="not:is_empty" class="nitf-basic-tile tile-content"
+       tal:define="description view/data/description|nothing">
+    <tal:fields repeat="field view/get_configured_fields">
+      <tal:title condition="python:field['id'] == 'title'">
+        <h1 tal:replace="structure view/title_tag" />
+      </tal:title>
+
+      <tal:subtitle condition="python:field['id'] == 'subtitle'">
+        <p class="" tal:content="python:field['content']">Subtitle</p>
+      </tal:subtitle>
+
+      <div tal:condition="python:field['id'] == 'media_producer'">
+        <span tal:content="python:field['content']" />
+      </div>
+
+      <tal:image
+          condition="python:field['id'] == 'image'"
+          define="scale python:field.get('scale', 'large');
+                  position python:field.get('position', '');">
+        <a class="imag" tal:attributes="href view/getURL;
+                                        title description;">
+          <img tal:define="scales view/@@images;
+                           thumbnail python: scales.scale('image', scale=scale);"
+               tal:condition="thumbnail"
+               tal:attributes="src thumbnail/url;
+                               width thumbnail/width;
+                               height thumbnail/height;
+                               class position;" />
+        </a>
+      </tal:image>
+
+      <tal:description condition="python:field['id'] == 'description'">
+        <p class="" tal:content="python:field['content']">Description</p>
+      </tal:description>
+
+      <tal:section condition="python:field['id'] == 'section'">
+        <p class="" tal:content="python:field['content']">Section</p>
+      </tal:section>
+
+      <tal:date condition="python:field['id'] == 'date'">
+        <p class="" tal:content="view/date">May 5</p>
+      </tal:date>
+
+      <tal:subjects condition="python:field['id'] == 'subjects'">
+        <span metal:use-macro="context/@@tile_macros/subjects" />
+      </tal:subjects>
+
+      <tal:last condition="repeat/field/end">
+        <div class="visualClear"><!-- --></div>
+      </tal:last>
+    </tal:fields>
+  </div>
+</body>
+</html>

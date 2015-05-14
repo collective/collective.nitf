@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Add NITF tile for collective.cover (closes `#123`_).
+  [hvelarde]
+
 - Reimplement section field as a behavior (closes `#98`_).
   [hvelarde]
 
@@ -242,3 +245,4 @@ There's a frood who really knows where his towel is.
 .. _`#94`: https://github.com/collective/collective.nitf/issues/94
 .. _`#98`: https://github.com/collective/collective.nitf/issues/98
 .. _`#111`: https://github.com/collective/collective.nitf/issues/111
+.. _`#123`: https://github.com/collective/collective.nitf/issues/123

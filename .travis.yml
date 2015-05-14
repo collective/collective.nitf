@@ -13,6 +13,7 @@ matrix:
   fast_finish: true
 install:
 - sed -ie "s#test-4.3.x.cfg#test-$PLONE_VERSION.x.cfg#" buildout.cfg
+- sed -ie "s#versions-4.3.x.cfg#versions-$PLONE_VERSION.x.cfg#" buildout.cfg
 - python bootstrap.py
 - bin/buildout annotate
 - bin/buildout -Nq

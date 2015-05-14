@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.nitf">
+
+  <include package="plone.tiles" file="meta.zcml" />
+
+  <plone:tile
+      name="collective.nitf"
+      title="News Article Tile"
+      description="A tile that shows information about a News Article."
+      icon="++resource++collective.nitf/tile-nitf.png"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".nitf.INITFTile"
+      class=".nitf.NITFTile"
+      permission="zope2.View"
+      for="*"
+      />
+
+</configure>

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+"""Setup of test for the package.
 
+We install collective.cover to test the availibility and features of
+the tile included for that package.
+"""
 from PIL import Image
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
@@ -24,13 +28,15 @@ class Fixture(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        # Load ZCML
+        import collective.cover
+        self.loadZCML(package=collective.cover)
         import collective.nitf
         self.loadZCML(package=collective.nitf)
 
     def setUpPloneSite(self, portal):
-        # Install into Plone site using portal_setup
+        self.applyProfile(portal, 'collective.cover:default')
         self.applyProfile(portal, 'collective.nitf:default')
+
         portal_workflow = portal['portal_workflow']
         portal_workflow.setChainForPortalTypes(
             ('collective.nitf.content',), 'simple_publication_workflow')
@@ -77,8 +83,7 @@ def generate_text(size):
 class RobotFixture(Fixture):
 
     def setUpPloneSite(self, portal):
-        # Install into Plone site using portal_setup
-        self.applyProfile(portal, 'collective.nitf:default')
+        super(RobotFixture, self).setUpPloneSite(portal)
         setRoles(portal, TEST_USER_ID, ['Manager'])
         portal.invokeFactory('collective.nitf.content', 'related')
         portal.invokeFactory('collective.nitf.content', 'n1')
@@ -113,4 +118,5 @@ FUNCTIONAL_TESTING = FunctionalTesting(
 ROBOT_FIXTURE = RobotFixture()
 ROBOT_TESTING = FunctionalTesting(
     bases=(ROBOT_FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
-    name='collective.nitf:Robot')
+    name='collective.nitf:Robot',
+)
