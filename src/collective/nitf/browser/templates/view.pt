@@ -7,6 +7,12 @@
       i18n:domain="collective.nitf">
 
 <head>
+  <metal:javascriptslot fill-slot="javascript_head_slot">
+    <script type="text/javascript"
+            tal:attributes="src string:${context/@@plone_portal_state/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.min.js"></script>
+    <script type="text/javascript"
+            tal:attributes="src string:${context/@@plone_portal_state/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"></script>
+  </metal:javascriptslot>
   <metal:styleslot fill-slot="style_slot">
     <link rel="stylesheet" type="text/css"
         media="all"

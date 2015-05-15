@@ -42,7 +42,7 @@ setup(name='collective.nitf',
           'AccessControl',
           'Acquisition',
           # 'collective.js.charcount',
-          'collective.js.galleria',
+          'collective.js.cycle2',
           'collective.js.jqueryui',
           'collective.prettydate >=1.1',
           'collective.z3cform.widgets',  # XXX: to be removed
