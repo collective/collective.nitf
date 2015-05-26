@@ -28,6 +28,12 @@
         handler=".update_layouts"
         />
 
+    <genericsetup:upgradeStep
+        title="Install new dependencies"
+        description=""
+        handler=".install_new_dependencies"
+        />
+
   </genericsetup:upgradeSteps>
 
 </configure>

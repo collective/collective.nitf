@@ -47,3 +47,13 @@ def update_layouts(context, logger=None):
             obj.setLayout('galleria')
             i += 1
         logger.info(u'{0} News Articles updated'.format(i))
+
+
+def install_new_dependencies(context, logger=None):
+    logger = logging.getLogger(PROJECTNAME)
+    dependencies = ('collective.js.cycle2',)
+    qi = api.portal.get_tool('portal_quickinstaller')
+    for p in dependencies:
+        if not qi.isProductInstalled(p):
+            qi.installProducts([p])
+            logger.info(u'{0} installed'.format(p))
