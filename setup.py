@@ -41,11 +41,9 @@ setup(name='collective.nitf',
       install_requires=[
           'AccessControl',
           'Acquisition',
-          # 'collective.js.charcount',
           'collective.js.cycle2',
           'collective.js.jqueryui',
           'collective.prettydate >=1.1',
-          'collective.z3cform.widgets',  # XXX: to be removed
           'plone.api',
           'plone.app.contentmenu',
           'plone.app.dexterity [relations]',
