@@ -9,14 +9,6 @@ Suite Teardown  Close all browsers
 
 *** Test cases ***
 
-Test Gallery view with no image
-    # We can wait for 15 seconds to "make sure" Galleria was definitely not run but this
-    # is not a too realiable test. If this bug wasn't fixed Galleria could take 16 secs
-    # to load (which is very unlikely)
-    Go To  ${PLONE_URL}/related/@@galleria
-    Sleep  15s
-    Page Should Not Contain  Init failed: Galleria could not find the element "#galleria"
-
 Test Edit image from Media
     Enable Autologin as  Site Administrator
     Go to Homepage
@@ -30,6 +22,7 @@ Test Edit image from Media
     Click Link  css=li#sortable-img1 a.edit
     Wait Until Page Contains Element  css=.pb-ajax form[name=edit_form]
     Click Button  Save
+
 
 Test Delete image from Media
     Enable Autologin as  Site Administrator
@@ -57,24 +50,25 @@ Test Delete image from Media
     ...                          Page Should Not Contain Element  css=li#sortable-img1
 
 
-Test Change views
+Test Change Views
     Enable Autologin as  Site Administrator
     Go to Homepage
 
     Click Link  link=n1
-    Page Should Not Contain Element  id=galleria
+    Page Should Not Contain Element  id=slideshow
     Go To  ${PLONE_URL}/n1/select_default_view
-    Select Radio Button  templateId  galleria
+    Select Radio Button  templateId  slideshow
     Click Button  Save
     Page Should Contain  View changed.
-    Page Should Contain Element  id=galleria
+    Page Should Contain Element  id=slideshow
     Go To  ${PLONE_URL}/n1/select_default_view
     Select Radio Button  templateId  view
     Click Button  Save
     Page Should Contain  View changed.
-    Page Should Not Contain Element  id=galleria
+    Page Should Not Contain Element  id=slideshow
     Click Link  id=parent-fieldname-image
     Wait Until Page Contains Element  css=.pb-ajax .cycle-slideshow .cycle-slide-active img
+
 
 Test Media View Reorder
     Enable Autologin as  Site Administrator

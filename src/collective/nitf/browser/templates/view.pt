@@ -13,11 +13,6 @@
     <script type="text/javascript"
             tal:attributes="src string:${context/@@plone_portal_state/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"></script>
   </metal:javascriptslot>
-  <metal:styleslot fill-slot="style_slot">
-    <link rel="stylesheet" type="text/css"
-        media="all"
-        tal:attributes="href string:${context/@@plone_portal_state/portal_url}/++resource++collective.nitf/galleria-theme/galleria.nitf_theme.css" />
-  </metal:styleslot>
 </head>
 
 <body>
@@ -45,9 +40,9 @@
           <div class="newsImageContainer"
               tal:define="image context/getImage"
               tal:condition="image">
-              <a href="@@galleria"
+              <a href="@@slideshow"
                  id="parent-fieldname-image"
-                 tal:attributes="href string:${context/absolute_url}/@@galleria">
+                 tal:attributes="href string:${context/absolute_url}/@@slideshow">
                <img tal:define="scales image/@@images;
                                 thumbnail python: scales.scale('image', scale='mini');"
                     tal:condition="thumbnail"

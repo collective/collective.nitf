@@ -12,7 +12,7 @@ import unittest
 
 DEPENDENCIES = [
     # 'collective.js.charcount',
-    'collective.js.galleria',
+    'collective.js.cycle2',
     'collective.js.jqueryui',
 ]
 

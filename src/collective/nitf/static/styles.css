@@ -118,7 +118,7 @@
     background: url(++resource++collective.nitf/images/icons-media.png) no-repeat scroll -15px top transparent;
 }
 
-/* Cycle2 Galleria */
+/* Cycle2 Slideshow */
 .slide.cycle-slide
 {
     overflow: hidden;
@@ -260,7 +260,7 @@ a.edit-tile-link
     display: none;
 }
 
-.wrapper-galleria {
+.wrapper-slideshow {
     min-width: 100%;
     float: left;
 }

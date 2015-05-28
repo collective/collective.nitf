@@ -106,6 +106,13 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(media[2].getObject().id, 'baz')
 
 
+class SlideshowViewTestCase(BaseViewTestCase):
+
+    def test_slideshow_view_is_registered(self):
+        registered = [v.name for v in registration.getViews(INITFLayer)]
+        self.assertIn('slideshow', registered)
+
+
 class NITFViewTestCase(BaseViewTestCase):
 
     def setUp(self):
@@ -141,16 +148,6 @@ class NewsMLViewTestCase(BaseViewTestCase):
 
     def test_nitf_size(self):
         self.assertEqual(self.view.nitf_size(), 1000)
-
-
-class GalleriaViewTestCase(BaseViewTestCase):
-
-    def test_galleria_view_is_registered(self):
-        registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertIn('galleria', registered)
-
-        # raises InvalidParameterError if the view is not registered
-        api.content.get_view(u'galleria', self.n1, self.request)
 
 
 class MediaViewTestCase(BaseViewTestCase):

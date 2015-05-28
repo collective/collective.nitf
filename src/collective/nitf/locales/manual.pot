@@ -22,11 +22,11 @@ msgid "Displays news article with image"
 msgstr ""
 
 #: configure.zcml
-msgid "Gallery View"
+msgid "Slideshow View"
 msgstr ""
 
 #: configure.zcml
-msgid "Displays a gallery in the news article"
+msgid "Displays a slideshow in the news article"
 msgstr ""
 
 #: configure.zcml

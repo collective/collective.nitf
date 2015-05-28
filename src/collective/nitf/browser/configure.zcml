@@ -18,9 +18,9 @@
             />
 
         <browser:menuItem
-            title="Gallery View"
-            action="galleria"
-            description="Displays a gallery in the news article"
+            title="Slideshow View"
+            action="slideshow"
+            description="Displays a slideshow in the news article"
             />
     </browser:menuItems>
 
@@ -99,9 +99,9 @@
 
     <browser:page
         for="collective.nitf.content.INITF"
-        name="galleria"
-        class=".NitfGalleria"
-        template="templates/galleria.pt"
+        name="slideshow"
+        class=".slideshow.SlideshowView"
+        template="templates/slideshow.pt"
         permission="zope2.View"
         layer="collective.nitf.interfaces.INITFLayer"
         />

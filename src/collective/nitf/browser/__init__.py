@@ -6,8 +6,6 @@ from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from plone.dexterity.browser.view import DefaultView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-import json
-
 
 class View(DefaultView):
 
@@ -57,25 +55,6 @@ class View(DefaultView):
     def has_media(self):
         """Return the number of media inside the NITF object."""
         return len(self.get_media())
-
-
-class NitfGalleria(DefaultView):
-
-    def imagesJson(self):
-        """ """
-        try:
-            img_brains = self.get_images()
-        except IndexError:
-            img_brains = None
-        if img_brains:
-            data = [{'image': str(brain.getPath() + '/image_preview'),
-                     'title': brain.Title,
-                     'description': brain.Description, 'right': brain.Rights(),
-                     'link': brain.getURL()} for brain in img_brains]
-        else:
-            data = []
-
-        return json.dumps(data)
 
 
 class ImageScaling(BaseImageScaling):

@@ -11,7 +11,7 @@ def apply_profile(context, logger=None):
 
     - remove character counter resources from CSS and JS registries
     - remove character counter control panel records from registry
-    - rename gallery view in News Article content type
+    - rename galleria view in News Article content type
     - cook CSS and JS resources
     """
     if logger is None:
@@ -44,7 +44,7 @@ def update_layouts(context, logger=None):
     for item in results:
         obj = item.getObject()
         if obj.getLayout() == 'nitf_galleria':
-            obj.setLayout('galleria')
+            obj.setLayout('slideshow')
             i += 1
         logger.info(u'{0} News Articles updated'.format(i))
 

@@ -36,8 +36,8 @@
             <span tal:content="context/byline" />
           </p>
         </tal:content-description>
-        <div class="wrapper-galleria">
-          <div id="galleria"
+        <div class="wrapper-slideshow">
+          <div id="slideshow"
                class="cycle-slideshow"
                data-cycle-caption-plugin="caption2"
                data-cycle-timeout="4000"
