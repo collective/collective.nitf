@@ -29,16 +29,16 @@ Mostly Harmless
 ---------------
 
 .. image:: https://secure.travis-ci.org/collective/collective.nitf.png?branch=master
-    :target: http://travis-ci.org/collective/collective.nitf
     :alt: Travis CI badge
+    :target: http://travis-ci.org/collective/collective.nitf
 
 .. image:: https://coveralls.io/repos/collective/collective.nitf/badge.png?branch=master
-    :target: https://coveralls.io/r/collective/collective.nitf
     :alt: Coveralls badge
+    :target: https://coveralls.io/r/collective/collective.nitf
 
 .. image:: https://pypip.in/d/collective.nitf/badge.png
-    :target: https://pypi.python.org/pypi/collective.nitf/
     :alt: Downloads
+    :target: https://pypi.python.org/pypi/collective.nitf/
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
@@ -50,28 +50,21 @@ Installation
 
 To enable this product in a buildout-based installation:
 
-#. Edit your buildout.cfg and add ``collective.nitf`` to the list of eggs to
-   install::
+#. Edit your buildout.cfg and add ``collective.nitf`` to the list of eggs to install::
 
     [buildout]
     ...
     eggs =
         collective.nitf
 
-    [versions]
-    ...
-    plone.app.layout = 2.3.12
-
-After updating the configuration you need to run ''bin/buildout'', which will
-take care of updating your system.
+After updating the configuration you need to run ''bin/buildout'', which will take care of updating your system.
 
 Go to the 'Site Setup' page in a Plone site and click on the 'Add-ons' link.
 
 Check the box next to ``collective.nitf`` and click the 'Activate' button.
 
 .. Note::
-	You may have to empty your browser cache and save your resource registries
-	in order to see the effects of the product installation.
+	You may have to empty your browser cache and save your resource registries in order to see the effects of the product installation.
 
 Behaviors
 ^^^^^^^^^
@@ -82,17 +75,11 @@ By applying it to a Dexterity-based content type you will get a new field called
 Helper views
 ^^^^^^^^^^^^
 
-All news articles provide @@nitf and @@newsml views that are available
-although are not registered.
+All news articles provide @@nitf and @@newsml views that are available although are not registered.
 
-Validating
-^^^^^^^^^^
+You can validate the output of the those views using services like `XML validation`_.
 
-You can validate the output of the @@nitf and @@newsml views using services
-like `XML validation`_.
-
-You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML
-Ruby Module`_ associated with it.
+You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML Ruby Module`_ associated with it.
 
 .. _`Dexterity`: http://pypi.python.org/pypi/plone.app.dexterity
 .. _`IPTC`: http://www.iptc.org/
