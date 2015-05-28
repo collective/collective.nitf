@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.config import DEFAULT_GENRE
-from collective.nitf.config import DEFAULT_URGENCY
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
@@ -48,10 +46,6 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_adding(self):
         self.assertTrue(INITF.providedBy(self.n1))
 
-    def test_default_values(self):
-        self.assertEqual(self.n1.genre, DEFAULT_GENRE)
-        self.assertEqual(self.n1.urgency, DEFAULT_URGENCY)
-
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
         self.assertIsNotNone(fti)
@@ -66,6 +60,14 @@ class ContentTypeTestCase(unittest.TestCase):
         factory = fti.factory
         new_object = createObject(factory)
         self.assertTrue(INITF.providedBy(new_object))
+
+    def test_default_genre(self):
+        from collective.nitf.config import DEFAULT_GENRE
+        self.assertEqual(self.n1.genre, DEFAULT_GENRE)
+
+    def test_default_urgency(self):
+        from collective.nitf.config import DEFAULT_URGENCY
+        self.assertEqual(self.n1.urgency, DEFAULT_URGENCY)
 
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.n1))

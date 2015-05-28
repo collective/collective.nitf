@@ -1,29 +1,32 @@
 # -*- coding: utf-8 -*-
 from collective.nitf import _
 from collective.nitf.controlpanel import INITFSettings
+from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
 from plone.directives import form
 from plone.indexer import indexer
-from plone.registry.interfaces import IRegistry
 from plone.supermodel import model
 from Products.CMFPlone.utils import safe_unicode
 from zope import schema
-from zope.component import getUtility
 from zope.interface import implements
 
 
 def genre_default_value():
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(INITFSettings)
-    return settings.default_genre
+    """Return the default value for the genre field as defined in the
+    control panel configlet.
+    """
+    record = INITFSettings.__identifier__ + '.default_genre'
+    return api.portal.get_registry_record(record)
 
 
 def urgency_default_value():
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(INITFSettings)
-    return settings.default_urgency
+    """Return the default value for the urgency field as defined in
+    the control panel configlet.
+    """
+    record = INITFSettings.__identifier__ + '.default_urgency'
+    return api.portal.get_registry_record(record)
 
 
 class INITF(model.Schema):
