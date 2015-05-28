@@ -43,9 +43,9 @@ class CatalogTestCase(unittest.TestCase):
         self.assertEqual(result[0].getURL(), self.n1.absolute_url())
 
     def test_genre_indexed(self):
-        self.n1.genre = u'Current'
+        self.n1.genre = u'Actuality'
         self.n1.reindexObject()
-        result = self.catalog(genre=u'Current')
+        result = self.catalog(genre=u'Actuality')
         self.assertEqual(1, len(result))
         self.assertEqual(result[0].getURL(), self.n1.absolute_url())
 

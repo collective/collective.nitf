@@ -61,6 +61,14 @@ class ContentTypeTestCase(unittest.TestCase):
         new_object = createObject(factory)
         self.assertTrue(INITF.providedBy(new_object))
 
+    def test_default_genre(self):
+        from collective.nitf.config import DEFAULT_GENRE
+        self.assertEqual(self.n1.genre, DEFAULT_GENRE)
+
+    def test_default_urgency(self):
+        from collective.nitf.config import DEFAULT_URGENCY
+        self.assertEqual(self.n1.urgency, DEFAULT_URGENCY)
+
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.n1))
         self.assertTrue(IAttributeUUID.providedBy(self.n1))
