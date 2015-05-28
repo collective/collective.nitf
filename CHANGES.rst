@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Fix display of byline in ``documentbyline`` viewlet (fixes `#100`_).
+  [hvelarde, rodfersou]
+
 - Replace slideshow framework machinery;
   we use `Cycle2`_ now instead of `Galleria`_.
   Don't forget do uninstall and remove collective.js.galleria if you no longer depend on it on your site (closes `#116`_).
@@ -231,6 +234,7 @@ There's a frood who really knows where his towel is.
 .. _`#93`: https://github.com/collective/collective.nitf/issues/93
 .. _`#94`: https://github.com/collective/collective.nitf/issues/94
 .. _`#98`: https://github.com/collective/collective.nitf/issues/98
+.. _`#100`: https://github.com/collective/collective.nitf/issues/100
 .. _`#111`: https://github.com/collective/collective.nitf/issues/111
 .. _`#116`: https://github.com/collective/collective.nitf/issues/116
 .. _`#118`: https://github.com/collective/collective.nitf/issues/118

@@ -8,7 +8,7 @@
       <img tal:replace="structure lock_icon" />
   </span>
 
-  <tal:author tal:define="author_short_form view/byline;"
+  <tal:author tal:define="author_short_form context/byline;"
               tal:condition="author_short_form">
   <tal:name tal:define="author_long_form string:?author=${author_short_form};
                         author_is_openid python:'/' in author_short_form;

@@ -13,14 +13,13 @@ ${title} =  Miracle Cure
 ${subtitle} =  Extra! Extra! Read all about it
 ${description} =  The Pinball Wizard in a miracle cure!
 ${byline} =  Newsboy
-${body_html} =  <p>I'm free<br />I'm free<br />And freedom tastes of reality</p>
+${body_html} =  <p>I'm free<br></br>I'm free<br></br>And freedom tastes of reality</p>
+${body_html_text_1} =  I'm free
+${body_html_text_2} =  And freedom tastes of reality
 
 *** Test cases ***
 
 Create News Article, subobjects and test views
-    # FIXME: https://github.com/plone/plone.app.robotframework/issues/38
-    [Tags]  Expected Failure
-
     Enable Autologin as  Site Administrator
     Go to Homepage
 
@@ -40,7 +39,8 @@ Create News Article, subobjects and test views
     Page Should Contain  ${subtitle}
     Page Should Contain  ${description}
     Page Should Contain  ${byline}
-    Page Should Contain  ${body_html}
+    Page Should Contain  ${body_html_text_1}
+    Page Should Contain  ${body_html_text_2}
 
     # A news article can contain images
     Open Add New Menu
@@ -77,9 +77,6 @@ Create News Article, subobjects and test views
     page should Contain  Drag and drop images to change their order on the slideshow
 
     Go To  ${PLONE_URL}/miracle-cure/@@slideshow
-    Page Should Contain  Miracle Cure
-
-    Go To  ${PLONE_URL}/miracle-cure/@@nitf
     Page Should Contain  Miracle Cure
 
 *** Keywords ***
