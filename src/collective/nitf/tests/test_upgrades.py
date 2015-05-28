@@ -80,7 +80,7 @@ class to2000TestCase(UpgradeTestCaseBase):
     def test_upgrade_to_2000_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertTrue(version >= self.to_version)
-        self.assertEqual(self._upgrades_to_do(), 2)
+        self.assertEqual(self._upgrades_to_do(), 3)
 
     def test_character_counter_css_resources(self):
         title = u'Miscellaneous'
@@ -165,7 +165,7 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         # simulate state on previous version
         view_methods = list(fti.view_methods)
-        view_methods.remove('galleria')
+        view_methods.remove('slideshow')
         view_methods.append('nitf_galleria')
         fti.view_methods = tuple(view_methods)
         self.assertEqual(len(fti.view_methods), 2)
@@ -175,7 +175,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         self._do_upgrade_step(step)
 
         self.assertEqual(len(fti.view_methods), 2)
-        self.assertItemsEqual(fti.view_methods, ['view', 'galleria'])
+        self.assertItemsEqual(fti.view_methods, ['view', 'slideshow'])
 
     def test_update_news_articles_layouts(self):
         title = u'Update News Articles layouts'
@@ -193,4 +193,23 @@ class to2000TestCase(UpgradeTestCaseBase):
         # execute upgrade step and verify changes were applied
         self._do_upgrade_step(step)
 
-        self.assertEqual(n1.getLayout(), 'galleria')
+        self.assertEqual(n1.getLayout(), 'slideshow')
+
+    def test_install_new_dependencies(self):
+        # check if the upgrade step is registered
+        title = u'Install new dependencies'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        dependencies = ('collective.js.cycle2',)
+        qi = api.portal.get_tool('portal_quickinstaller')
+        qi.uninstallProducts(dependencies)
+        for p in dependencies:
+            self.assertFalse(qi.isProductInstalled(p))
+
+        # execute upgrade step and verify changes were applied
+        self._do_upgrade_step(step)
+
+        for p in dependencies:
+            self.assertTrue(qi.isProductInstalled(p))

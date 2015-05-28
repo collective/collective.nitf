@@ -75,7 +75,7 @@ msgstr ""
 msgid "Body text"
 msgstr "Corpo do Texto"
 
-#: collective/nitf/templates/galleria.pt:42
+#: collective/nitf/templates/slideshow.pt:42
 msgid "By"
 msgstr "Por"
 
@@ -104,7 +104,7 @@ msgid "Default Urgency"
 msgstr "Urgência padrão"
 
 #: configure.zcml
-msgid "Displays a gallery in the news article"
+msgid "Displays a slideshow in the news article"
 msgstr "Exibe uma galeria de imagens no Artigo"
 
 #: configure.zcml
@@ -112,8 +112,8 @@ msgid "Displays news article with image"
 msgstr "Exibe o Artigo com imagens"
 
 #: collective/nitf/templates/media.pt:111
-msgid "Drag and drop images to change their order on the gallery."
-msgstr "Arraste as imagens para alterar a ordem da galeria"
+msgid "Drag and drop images to change their order on the slideshow."
+msgstr "Arraste as imagens para alterar sua ordem."
 
 #: collective/nitf/config.py:52
 msgid "Exclusive"
@@ -140,8 +140,8 @@ msgid "From the Scene"
 msgstr "Crônica"
 
 #: configure.zcml
-msgid "Gallery View"
-msgstr "Visão de Galeria animada"
+msgid "Slideshow View"
+msgstr "Visão de galeria de fotos"
 
 #: collective/nitf/config.py:194
 msgid "General"

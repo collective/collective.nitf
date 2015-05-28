@@ -100,7 +100,7 @@
                                     tal:define="media view/get_images;">
 
             <h1 class="documentFirstHeading" i18n:translate="">Media</h1>
-            <p i18n:translate="">Drag and drop images to change their order on the gallery.</p>
+            <p i18n:translate="">Drag and drop images to change their order on the slideshow.</p>
 
             <tal:sortable tal:condition="media">
             <ul id="sortable" class="sortable-media">

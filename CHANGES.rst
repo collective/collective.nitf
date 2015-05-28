@@ -9,8 +9,10 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Replace slideshow framework machinery; we use `Cycle2`_ now instead of `Galleria`_ (closes `#116`_).
+  [rodfersou, hvelarde]
+
 - Fix default values for genre and urgency fields (closes `#118`_).
-  [rodfersou]
 
 - Add NITF tile for collective.cover (closes `#123`_).
   [hvelarde]
@@ -235,6 +237,8 @@ There's a frood who really knows where his towel is.
 
 - Initial release.
 
+.. _`Cycle2`: http://jquery.malsup.com/cycle2/
+.. _`Galleria`: http://galleria.io/
 .. _`#33`: https://github.com/collective/collective.nitf/issues/33
 .. _`#47`: https://github.com/collective/collective.nitf/issues/47
 .. _`#49`: https://github.com/collective/collective.nitf/issues/49
@@ -248,5 +252,6 @@ There's a frood who really knows where his towel is.
 .. _`#94`: https://github.com/collective/collective.nitf/issues/94
 .. _`#98`: https://github.com/collective/collective.nitf/issues/98
 .. _`#111`: https://github.com/collective/collective.nitf/issues/111
+.. _`#116`: https://github.com/collective/collective.nitf/issues/116
 .. _`#118`: https://github.com/collective/collective.nitf/issues/118
 .. _`#123`: https://github.com/collective/collective.nitf/issues/123
