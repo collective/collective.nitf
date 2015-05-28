@@ -14,6 +14,18 @@ from zope.component import getUtility
 from zope.interface import implements
 
 
+def genre_default_value():
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(INITFSettings)
+    return settings.default_genre
+
+
+def urgency_default_value():
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(INITFSettings)
+    return settings.default_urgency
+
+
 class INITF(model.Schema):
 
     """A News Article based on the News Industry Text Format specification."""
@@ -71,6 +83,7 @@ class INITF(model.Schema):
                     u'object, not specifically its content.',
         ),
         vocabulary=u'collective.nitf.AvailableGenres',
+        defaultFactory=genre_default_value
     )
 
     urgency = schema.Choice(
@@ -79,6 +92,7 @@ class INITF(model.Schema):
         description=_(u'help_urgency',
                       default=u'News importance.'),
         vocabulary=u'collective.nitf.Urgencies',
+        defaultFactory=urgency_default_value
     )
 
 
@@ -132,20 +146,6 @@ class NITF(Container):
             view = image.unrestrictedTraverse('@@images')
             # Return the data
             return view.scale(fieldname='image', scale='thumb').data
-
-
-@form.default_value(field=INITF['genre'])
-def genre_default_value(data):
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(INITFSettings)
-    return settings.default_genre
-
-
-@form.default_value(field=INITF['urgency'])
-def urgency_default_value(data):
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(INITFSettings)
-    return settings.default_urgency
 
 
 @indexer(INITF)

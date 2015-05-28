@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from collective.nitf.config import DEFAULT_GENRE
+from collective.nitf.config import DEFAULT_URGENCY
 from collective.nitf.content import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
@@ -45,6 +47,10 @@ class ContentTypeTestCase(unittest.TestCase):
 
     def test_adding(self):
         self.assertTrue(INITF.providedBy(self.n1))
+
+    def test_default_values(self):
+        self.assertEqual(self.n1.genre, DEFAULT_GENRE)
+        self.assertEqual(self.n1.urgency, DEFAULT_URGENCY)
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
