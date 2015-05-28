@@ -9,10 +9,13 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
-- Replace slideshow framework machinery; we use `Cycle2`_ now instead of `Galleria`_ (closes `#116`_).
+- Replace slideshow framework machinery;
+  we use `Cycle2`_ now instead of `Galleria`_.
+  Don't forget do uninstall and remove collective.js.galleria if you no longer depend on it on your site (closes `#116`_).
   [rodfersou, hvelarde]
 
 - Fix default values for genre and urgency fields (closes `#118`_).
+  [rodfersou]
 
 - Add NITF tile for collective.cover (closes `#123`_).
   [hvelarde]
@@ -24,6 +27,7 @@ There's a frood who really knows where his towel is.
   [hvelarde]
 
 - Remove dependency on collective.z3cform.widgets.
+  Don't forget do uninstall and remove the package if you no longer depend on it on your site.
   [hvelarde]
 
 - Update package i18n and Spanish and Brazilian Portuguese translations.
@@ -37,30 +41,17 @@ There's a frood who really knows where his towel is.
   [hvelarde]
 
 - Character counter code was removed from package; this should be
-  reimplemented using collective.js.charcount .(closes `#75`_).
+  reimplemented using collective.js.charcount (closes `#75`_).
   [hvelarde]
 
-- Remove unused newsview div and rename mediabox with galleria div.
-  [marcosfromero]
-
-- Clean and add styles.css in cssregistry. [marcosfromero]
-
-- Rename nitf_galleria template with galleria. [marcosfromero]
-
-- Remove display_macros template and update nitf_galleria with former
-  media-box macro code. [marcosfromero]
+- Package was cleaned by removing some dependencies,
+  deprecated methods on default view,
+  unused macros from templates,
+  and needless resources, scripts and styles.
+  [marcosfromero, hvelarde]
 
 - Remove all javascript from templates, create new nitf.js and use
   jsregistry (closes `#94`_). [marcosfromero]
-
-- Remove deprecated methods on default view.
-  [hvelarde]
-
-- Remove needless resources kept in package by mistake.
-  [hvelarde]
-
-- Remove Pillow from dependencies as some people may prefer to use PIL.
-  [hvelarde]
 
 - Add confirmation overlay before removing an image in media.pt
   (closes `#85`_). [marcosfromero]
@@ -72,7 +63,7 @@ There's a frood who really knows where his towel is.
   'location' field is now above 'body text' and 'urgency' is below 'genre'.
   [hvelarde]
 
-- Reimplement keywords and document_byline viewlets with semantic markup and
+- Reimplement ``keywords`` and ``documentbyline`` viewlets with semantic markup and
   support for news article byline for INITF interface.
   [jpgimenez, hvelarde, cleberjsantos]
 
@@ -80,22 +71,11 @@ There's a frood who really knows where his towel is.
   metadata using rNews, schema.org and RDFa (closes `#47`_).
   [jpgimenez, marcosfromero, hvelarde]
 
-- Functional testing coverage was enhanced. [marcosfromero]
-
-- Remove dependency on unittest2; this means tests are not going to run on
-  Python < 2.7. [hvelarde]
-
 - Add plone.app.relationfield as a dependency; this is needed for Dexterity
   to proper handle relations (closes `#71`_). [jpgimenez]
 
-- Remove updateWidgets method on Add and Edit forms as they were used only to
-  style them; we should implement this on CSS if needed. [hvelarde]
-
 - Remove five.grok dependency, will easy the mainteinance and the
   extendibility of the package. [jpgimenez]
-
-- Needless override on folder_summary_view that was causing ``AttributeError:
-  'View' object has no attribute 'images'`` was removed. [hvelarde]
 
 - Changes image link behavior in view.pt for mobile devices
   (closes `#62`_). [marcosfromero]
