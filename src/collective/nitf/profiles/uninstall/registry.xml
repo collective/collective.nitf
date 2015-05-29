@@ -1,8 +1,4 @@
 <?xml version="1.0"?>
 <registry>
- <record name="collective.nitf.controlpanel.INITFSettings.available_sections" delete="true" />
- <record name="collective.nitf.controlpanel.INITFSettings.default_section" delete="true" />
- <record name="collective.nitf.controlpanel.INITFSettings.available_genres" delete="true" />
- <record name="collective.nitf.controlpanel.INITFSettings.default_genre" delete="true" />
- <record name="collective.nitf.controlpanel.INITFSettings.default_urgency" delete="true" />
+  <records interface="collective.nitf.controlpanel.INITFSettings" remove="true" />
 </registry>
