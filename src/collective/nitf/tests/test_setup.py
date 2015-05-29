@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import FUNCTIONAL_TESTING
 from collective.nitf.testing import INTEGRATION_TESTING
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.browserlayer.utils import registered_layers
@@ -68,6 +68,10 @@ class InstallTestCase(unittest.TestCase):
         for id in CSS:
             self.assertIn(id, resource_ids, '{0} not installed'.format(id))
 
+    def test_tile(self):
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertIn(u'collective.nitf', tiles)
+
 
 class UninstallTest(unittest.TestCase):
 
@@ -95,6 +99,10 @@ class UninstallTest(unittest.TestCase):
         resource_ids = self.portal.portal_css.getResourceIds()
         for id in CSS:
             self.assertNotIn(id, resource_ids, '{0} not removed'.format(id))
+
+    def test_tile_removed(self):
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertNotIn(u'collective.nitf', tiles)
 
     def test_link_workflow_restored(self):
         workflow_tool = self.portal.portal_workflow

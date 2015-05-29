@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-          i18n:domain="plone">
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
     <records interface="collective.nitf.controlpanel.INITFSettings" />
 
      <records  condition="installed plone.app.collection" interface="plone.app.querystring.interfaces.IQueryField"
@@ -78,9 +77,13 @@
   </records>
 
   <record name="plone.app.tiles">
+    <field type="plone.registry.field.List">
+      <title>Tiles</title>
+      <value_type type="plone.registry.field.TextLine" />
+    </field>
     <value purge="false">
       <element>collective.nitf</element>
     </value>
   </record>
 
-  </registry>
+</registry>
