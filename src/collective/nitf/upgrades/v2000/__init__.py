@@ -44,7 +44,7 @@ def update_layouts(context, logger=None):
     for item in results:
         obj = item.getObject()
         if obj.getLayout() == 'nitf_galleria':
-            obj.setLayout('slideshow')
+            obj.setLayout('slideshow_view')
             i += 1
         logger.info(u'{0} News Articles updated'.format(i))
 

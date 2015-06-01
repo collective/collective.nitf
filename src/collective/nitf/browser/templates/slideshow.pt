@@ -1,102 +1,54 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.nitf">
-  <head>
-    <metal:javascriptslot fill-slot="javascript_head_slot">
-      <script type="text/javascript"
-              tal:attributes="src string:${context/@@plone_portal_state/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.min.js"></script>
-      <script type="text/javascript"
-              tal:attributes="src string:${context/@@plone_portal_state/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"></script>
-    </metal:javascriptslot>
-  </head>
-  <body>
-    <metal:bodytext fill-slot="main">
-      <article vocab="http://schema.org/" typeof="Article"
-               prefix="rnews: http://iptc.org/std/rNews/2011-10-07#"
-               tal:define="text context/text/output|nothing">
-        <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle"
-             tal:condition="not:ajax_load" />
-        <tal:content-title condition="not: ajax_load">
-          <p class="section" tal:content="context/section" property="rnews:articleSection"/>
-          <h1 property="rnews:headline" class="documentFirstHeading"
-              tal:content="context/title"></h1>
-          <h2 class="nitfSubtitle" tal:content="context/subtitle"  property="rnews:alternativeHeadline"/>
-        </tal:content-title>
-        <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle"
-             tal:condition="not:ajax_load" />
-        <tal:content-description metal:define-macro="content-description"
-                                 condition="not: ajax_load">
-          <div class="documentDescription" tal:content="context/description"  property="rnews:description"/>
-          <p class="nitfByline" tal:condition="context/byline|nothing">
-            <span i18n:translate="">By</span>
-            <span tal:content="context/byline" />
-          </p>
-        </tal:content-description>
-        <div class="wrapper-slideshow">
-          <div id="slideshow"
-               class="cycle-slideshow"
-               data-cycle-caption-plugin="caption2"
-               data-cycle-timeout="4000"
-               data-cycle-paused="true"
-               data-cycle-pause-on-hover="false"
-               data-cycle-slides="> div.slide"
-               data-cycle-swipe="true"
-               data-cycle-swipe-fx="scrollHorz"
-               data-cycle-pager=".cycle-pager"
-               data-cycle-pager-template="<a href='#'><img src='{{thumbnail}}' width=49 height=49></a>"
-               data-cycle-overlay-template="<div id='c2-overlay-title'>{{title}}</div><div id='c2-overlay-desc'>{{desc}}</div>"
-               tal:define="view nocall:context/@@view;
-                           images view/get_images"
-               tal:condition="images">
-            <div class="cycle-prev"></div>
-            <div class="cycle-next"></div>
-            <tal:items repeat="item images">
-              <div class="slide"
-                   tal:define="item_obj item/getObject;
-                               desc python:(item.Description or item.Title);
-                               item_data python:{
-                               'title': item.Title,
-                               'data-description': desc,
-                               'alt': desc};
-                               scales item_obj/@@images;"
-                   tal:attributes="data-thumbnail python:scales.scale(fieldname='image', scale='thumb').absolute_url();
-                                   data-cycle-title item/Title;
-                                   data-cycle-desc desc;">
-                <tal:image condition="python:scales">
-                  <a href="#"
-                     tal:attributes="href python:scales.scale(fieldname='image', scale='large').absolute_url();">
-                    <img tal:replace="structure python:scales.tag(scale='large', **item_data)" />
-                  </a>
-                </tal:image>
-              </div>
-            </tal:items>
-            <div class="cycle-caption"></div>
-            <div class="cycle-overlay"></div>
-            <div class="cycle-pager-container thumbnails_square">
-              <div class="cycle-pager"></div>
-            </div>
+<div id="media"
+    tal:define="images context/get_images"
+    tal:condition="images">
+  <div class="slideshow-player">
+    <div class="cycle-player cycle-slideshow"
+         data-cycle-slides="> div"
+         data-cycle-timeout="0"
+         data-cycle-swipe="true"
+         data-cycle-prev=".slideshow-player .cycle-prev"
+         data-cycle-next=".slideshow-player .cycle-next"
+         data-allow-wrap="true"
+         data-cycle-fx="fade">
+      <div tal:repeat="image images">
+        <img tal:replace="structure image/@@images/image/large" />
+      </div>
+    </div>
+    <div class="cycle-nagivation">
+      <a href="#" class="cycle-prev"><span>&lang;</span></a>
+      <a href="#" class="cycle-next"><span>&rang;</span></a>
+    </div>
+  </div>
+  <div class="slideshow-pager">
+    <div class="slideshow-description">
+      <div class="cycle-description cycle-slideshow"
+           data-cycle-slides="> div"
+           data-cycle-timeout="0"
+           data-allow-wrap="false"
+           data-cycle-fx="fade">
+        <div tal:repeat="image images">
+          <div class="slide-pagination">
+            <span class="slide-num" tal:content="repeat/image/number" /> |
+            <span class="slide-count" tal:content="repeat/image/length" />
           </div>
+          <div class="description" tal:content="image/Description|image/Title"></div>
         </div>
-        <tal:text condition="not:ajax_load">
-          <p tal:define="is_editable context/@@plone_context_state/is_editable"
-             tal:condition="python:not text and is_editable"
-             i18n:domain="plone"
-             i18n:translate="no_body_text"
-             class="discreet">
-            This item does not have any body text, click the edit tab to change it.
-          </p>
-          <div id="parent-fieldname-text" class=""
-               tal:condition="text">
-            <div property="rnews:articleBody" tal:content="structure text">The body</div>
-          </div>
-        </tal:text>
-        <div tal:replace="structure provider:plone.belowcontentbody"
-             tal:condition="not:ajax_load" />
-      </article>
-    </metal:bodytext>
-  </body>
-</html>
+      </div>
+    </div>
+    <div class="slideshow-carrossel">
+      <div class="cycle-carrossel cycle-slideshow"
+           data-cycle-slides="> div"
+           data-cycle-timeout="0"
+           data-cycle-fx="carousel"
+           data-cycle-offset="1"
+           data-cycle-carousel-fluid="true"
+           data-cycle-prev=".slideshow-player .cycle-prev"
+           data-cycle-next=".slideshow-player .cycle-next"
+           data-allow-wrap="false">
+        <div class="thumb-itens" tal:repeat="image images">
+          <img tal:replace="structure image/@@images/image/thumb" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

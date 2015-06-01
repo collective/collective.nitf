@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_inner
 from plone import api
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
@@ -9,10 +8,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 class View(DefaultView):
 
-    """Default view looks like a News Item."""
-
-    def update(self):
-        self.context = aq_inner(self.context)
+    """Default view of a News Article."""
 
     def _get_brains(self, object_name=None):
         """Return a list of brains inside the NITF object."""
@@ -39,6 +35,16 @@ class View(DefaultView):
         """Return a list of object brains inside the NITF object."""
         media_ct = [x.title for x in self.context.allowedContentTypes()]
         return self._get_brains(media_ct)
+
+
+class Slideshow(DefaultView):
+
+    """Slideshow view of a News Article."""
+
+
+class TextOnly(DefaultView):
+
+    """Text only view of a News Article."""
 
 
 class ImageScaling(BaseImageScaling):

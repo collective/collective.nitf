@@ -111,6 +111,11 @@ class NITF(Container):
         content_filter = {'portal_type': ['File', 'Link']}
         return not self.listFolderContents(content_filter)
 
+    def get_images(self):
+        """Return a list of image objects contained in the news article."""
+        content_filter = {'portal_type': 'Image'}
+        return self.listFolderContents(content_filter)
+
     # The purpose of these methods is to emulate those on News Item
     def getImage(self):
         """Return the first Image inside the News Article.

@@ -5,6 +5,7 @@
   </property>
   <property name="view_methods" purge="False">
     <element value="nitf_galleria" remove="True" />
-    <element value="slideshow" />
+    <element value="slideshow_view" />
+    <element value="text_only_view" />
   </property>
 </object>

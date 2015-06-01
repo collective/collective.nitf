@@ -5,60 +5,35 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.nitf">
-
-<head>
-  <metal:javascriptslot fill-slot="javascript_head_slot">
-    <script type="text/javascript"
-            tal:attributes="src string:${context/@@plone_portal_state/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.min.js"></script>
-    <script type="text/javascript"
-            tal:attributes="src string:${context/@@plone_portal_state/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"></script>
-  </metal:javascriptslot>
-</head>
-
-<body>
-  <metal:bodytext fill-slot="main">
-    <metal:main define-macro="main">
+  <head>
+    <metal:javascriptslot fill-slot="javascript_head_slot">
+      <script tal:attributes="src string:${context/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.min.js"></script>
+      <script tal:attributes="src string:${context/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.carousel.min.js"></script>
+      <script tal:attributes="src string:${context/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"></script>
+    </metal:javascriptslot>
+  </head>
+  <body>
+    <metal:main fill-slot="main">
       <article vocab="http://schema.org/" typeof="Article"
           prefix="rnews: http://iptc.org/std/rNews/2011-10-07#"
           tal:define="text context/text/output|nothing">
         <div tal:replace="structure provider:plone.abovecontenttitle" />
-        <!-- content-title -->
+
         <p property="rnews:articleSection" class="section"
-           tal:content="context/section" />
+           tal:content="context/section">Section</p>
         <h1 property="rnews:headline" class="documentFirstHeading"
-            tal:content="context/title"></h1>
+            tal:content="context/title">Title</h1>
         <h2 property="rnews:alternativeHeadline" class="nitfSubtitle"
-            tal:content="context/subtitle" />
+            tal:content="context/subtitle">Subtitle</h2>
+
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-        <!-- content-description -->
         <div property="rnews:description" class="documentDescription"
-             tal:content="context/description" />
+             tal:content="context/description">Description</div>
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
-        <div id="content-core">
-          <div class="newsImageContainer"
-              tal:define="image context/getImage"
-              tal:condition="image">
-              <a href="@@slideshow"
-                 id="parent-fieldname-image"
-                 tal:attributes="href string:${context/absolute_url}/@@slideshow">
-               <img tal:define="scales image/@@images;
-                                thumbnail python: scales.scale('image', scale='mini');"
-                    tal:condition="thumbnail"
-                    tal:attributes="src thumbnail/url;
-                                    width thumbnail/width;
-                                    height thumbnail/height;
-                                    alt context/imageCaption|nothing;"
-                    property="rnews:thumbnailUrl" />
-              </a>
-              <p class="discreet"
-                  tal:condition="context/imageCaption"
-                  tal:content="context/imageCaption">
-                  Image Caption
-              </p>
-          </div>
 
+        <div id="content-core">
           <p tal:define="is_editable context/@@plone_context_state/is_editable"
              tal:condition="python:not text and is_editable"
              i18n:domain="plone"
@@ -76,6 +51,5 @@
         <div tal:replace="structure provider:plone.belowcontentbody" />
       </article>
     </metal:main>
-  </metal:bodytext>
-</body>
+  </body>
 </html>
