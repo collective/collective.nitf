@@ -51,13 +51,6 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(images[0].getObject().Title(), 'bar')
         self.assertEqual(images[0].getObject().Description(), 'baz')
 
-    def test_has_images(self):
-        has_images = self.view.has_images
-        self.assertEqual(has_images(), 0)
-
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
-        self.assertEqual(has_images(), 1)
-
     def test_get_files(self):
         files = self.view.get_files()
         self.assertEqual(len(files), 0)
@@ -70,12 +63,6 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(files[0].getObject().Title(), 'bar')
         self.assertEqual(files[0].getObject().Description(), 'baz')
 
-    def test_has_files(self):
-        self.assertEqual(self.view.has_files(), 0)
-
-        self.n1.invokeFactory('File', 'foo', file=StringIO(zptlogo))
-        self.assertEqual(self.view.has_files(), 1)
-
     def test_get_links(self):
         links = self.view.get_links()
         self.assertEqual(len(links), 0)
@@ -85,12 +72,6 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(len(links), 1)
         self.assertEqual(links[0].getObject().id, 'foo')
         self.assertEqual(links[0].getObject().remoteUrl, 'http://foo/')
-
-    def test_has_links(self):
-        self.assertEqual(self.view.has_links(), 0)
-
-        self.n1.invokeFactory('Link', 'foo', remoteUrl='http://foo/')
-        self.assertEqual(self.view.has_links(), 1)
 
     def test_get_media(self):
         media = self.view.get_media()
