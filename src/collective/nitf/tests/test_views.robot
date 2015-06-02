@@ -7,6 +7,10 @@ Library  Remote  ${PLONE_URL}/RobotRemote
 Suite Setup  Open Test Browser
 Suite Teardown  Close all browsers
 
+*** Variables ***
+
+${title} =  Miracle Cure
+
 *** Test cases ***
 
 Test Edit image from Media
@@ -55,20 +59,9 @@ Test Change Views
     Go to Homepage
 
     Click Link  link=n1
-    Page Should Not Contain Element  id=slideshow
-    Go To  ${PLONE_URL}/n1/select_default_view
-    Select Radio Button  templateId  slideshow
-    Click Button  Save
-    Page Should Contain  View changed.
-    Page Should Contain Element  id=slideshow
-    Go To  ${PLONE_URL}/n1/select_default_view
-    Select Radio Button  templateId  view
-    Click Button  Save
-    Page Should Contain  View changed.
-    Page Should Not Contain Element  id=slideshow
-    Click Link  id=parent-fieldname-image
-    Wait Until Page Contains Element  css=.pb-ajax .cycle-slideshow .cycle-slide-active img
-
+    Change View  Slideshow view
+    Change View  Text only view
+    Change View  Default view
 
 Test Media View Reorder
     Enable Autologin as  Site Administrator
@@ -100,3 +93,12 @@ Test Media View Reorder
     Page Should Contain Element  css=#sortable-img3.sort-0
     Page Should Contain Element  css=#sortable-img2.sort-1
     Page Should Contain Element  css=#sortable-img1.sort-2
+
+*** Keywords ***
+
+Change View
+    [arguments]  ${view}
+
+    Open Display Menu
+    Click Link  link=${view}
+    Page Should Contain  View changed.
