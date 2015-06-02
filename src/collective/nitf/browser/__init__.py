@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_inner
 from plone import api
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
@@ -9,10 +8,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 class View(DefaultView):
 
-    """Default view looks like a News Item."""
-
-    def update(self):
-        self.context = aq_inner(self.context)
+    """Default view of a News Article."""
 
     def _get_brains(self, object_name=None):
         """Return a list of brains inside the NITF object."""
@@ -27,34 +23,28 @@ class View(DefaultView):
         """Return a list of image brains inside the NITF object."""
         return self._get_brains('Image')
 
-    def has_images(self):
-        """Return the number of images inside the NITF object."""
-        return len(self.get_images())
-
     def get_files(self):
         """Return a list of file brains inside the NITF object."""
         return self._get_brains('File')
 
-    def has_files(self):
-        """Return the number of files inside the NITF object."""
-        return len(self.get_files())
-
     def get_links(self):
         """Return a list of link brains inside the NITF object."""
         return self._get_brains('Link')
-
-    def has_links(self):
-        """Return the number of links inside the NITF object."""
-        return len(self.get_links())
 
     def get_media(self):
         """Return a list of object brains inside the NITF object."""
         media_ct = [x.title for x in self.context.allowedContentTypes()]
         return self._get_brains(media_ct)
 
-    def has_media(self):
-        """Return the number of media inside the NITF object."""
-        return len(self.get_media())
+
+class Slideshow(DefaultView):
+
+    """Slideshow view of a News Article."""
+
+
+class TextOnly(DefaultView):
+
+    """Text only view of a News Article."""
 
 
 class ImageScaling(BaseImageScaling):

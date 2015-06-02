@@ -12,6 +12,13 @@ from zope.interface import alsoProvides
 import unittest
 
 
+class TestViewMixin:
+
+    def test_view_is_registered(self):
+        registered = [v.name for v in registration.getViews(INITFLayer)]
+        self.assertIn(self.name, registered)
+
+
 class BaseViewTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
@@ -26,18 +33,24 @@ class BaseViewTestCase(unittest.TestCase):
                 self.portal, 'collective.nitf.content', 'n1')
 
 
-class DefaultViewTestCase(BaseViewTestCase):
+class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
 
     def setUp(self):
+        self.name = u'view'
         super(DefaultViewTestCase, self).setUp()
         self.view = api.content.get_view(u'view', self.n1, self.request)
 
-    def test_default_view_is_registered(self):
-        pt = self.portal['portal_types']
-        self.assertEqual(pt['collective.nitf.content'].default_view, u'view')
+    def test_is_default_view(self):
+        types = self.portal['portal_types']
+        default_view = types['collective.nitf.content'].default_view
+        self.assertEqual(default_view, u'view')
 
-        registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertIn(u'view', registered)
+    def test_default_view_render(self):
+        name, context, request = u'view', self.n1, self.request
+        view = api.content.get_view(name, context, request)
+        self.assertNotIn('<div id="media">', view.render())
+        api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
+        self.assertIn('<div id="media">', view.render())
 
     def test_get_images(self):
         images = self.view.get_images()
@@ -51,13 +64,6 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(images[0].getObject().Title(), 'bar')
         self.assertEqual(images[0].getObject().Description(), 'baz')
 
-    def test_has_images(self):
-        has_images = self.view.has_images
-        self.assertEqual(has_images(), 0)
-
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
-        self.assertEqual(has_images(), 1)
-
     def test_get_files(self):
         files = self.view.get_files()
         self.assertEqual(len(files), 0)
@@ -70,12 +76,6 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(files[0].getObject().Title(), 'bar')
         self.assertEqual(files[0].getObject().Description(), 'baz')
 
-    def test_has_files(self):
-        self.assertEqual(self.view.has_files(), 0)
-
-        self.n1.invokeFactory('File', 'foo', file=StringIO(zptlogo))
-        self.assertEqual(self.view.has_files(), 1)
-
     def test_get_links(self):
         links = self.view.get_links()
         self.assertEqual(len(links), 0)
@@ -85,12 +85,6 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(len(links), 1)
         self.assertEqual(links[0].getObject().id, 'foo')
         self.assertEqual(links[0].getObject().remoteUrl, 'http://foo/')
-
-    def test_has_links(self):
-        self.assertEqual(self.view.has_links(), 0)
-
-        self.n1.invokeFactory('Link', 'foo', remoteUrl='http://foo/')
-        self.assertEqual(self.view.has_links(), 1)
 
     def test_get_media(self):
         media = self.view.get_media()
@@ -106,11 +100,32 @@ class DefaultViewTestCase(BaseViewTestCase):
         self.assertEqual(media[2].getObject().id, 'baz')
 
 
-class SlideshowViewTestCase(BaseViewTestCase):
+class SlideshowViewTestCase(TestViewMixin, BaseViewTestCase):
 
-    def test_slideshow_view_is_registered(self):
-        registered = [v.name for v in registration.getViews(INITFLayer)]
-        self.assertIn('slideshow', registered)
+    def setUp(self):
+        self.name = u'slideshow_view'
+        super(SlideshowViewTestCase, self).setUp()
+
+    def test_slideshow_view_render(self):
+        name, context, request = u'slideshow_view', self.n1, self.request
+        slideshow = api.content.get_view(name, context, request)
+        self.assertNotIn('<div id="media">', slideshow.render())
+        api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
+        self.assertIn('<div id="media">', slideshow.render())
+
+
+class TextOnlyViewTestCase(TestViewMixin, BaseViewTestCase):
+
+    def setUp(self):
+        self.name = u'text_only_view'
+        super(TextOnlyViewTestCase, self).setUp()
+
+    def test_text_only_view_render(self):
+        name, context, request = u'text_only_view', self.n1, self.request
+        text_only = api.content.get_view(name, context, request)
+        self.assertNotIn('<div id="media">', text_only.render())
+        api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
+        self.assertNotIn('<div id="media">', text_only.render())
 
 
 class NITFViewTestCase(BaseViewTestCase):

@@ -12,15 +12,21 @@
         menu="plone_displayviews">
 
         <browser:menuItem
-            title="News Article View"
+            title="Default view"
             action="view"
-            description="Displays news article with image"
+            description="Displays a news article with an image."
             />
 
         <browser:menuItem
-            title="Slideshow View"
-            action="slideshow"
-            description="Displays a slideshow in the news article"
+            title="Slideshow view"
+            action="slideshow_view"
+            description="Displays a slideshow in the news article."
+            />
+
+        <browser:menuItem
+            title="Text only view"
+            action="text_only_view"
+            description="Displays the text of the news article only."
             />
     </browser:menuItems>
 
@@ -99,11 +105,38 @@
 
     <browser:page
         for="collective.nitf.content.INITF"
-        name="slideshow"
-        class=".slideshow.SlideshowView"
-        template="templates/slideshow.pt"
+        name="slideshow_view"
+        class=".Slideshow"
+        template="templates/view.pt"
         permission="zope2.View"
         layer="collective.nitf.interfaces.INITFLayer"
         />
+
+  <browser:page
+      for="collective.nitf.content.INITF"
+      name="text_only_view"
+      class=".TextOnly"
+      template="templates/view.pt"
+      permission="zope2.View"
+      layer="collective.nitf.interfaces.INITFLayer"
+      />
+
+  <browser:viewlet
+      for="collective.nitf.content.INITF"
+      name="collective.nitf.image"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
+      view="collective.nitf.browser.View"
+      template="templates/image.pt"
+      permission="zope2.View"
+      />
+
+  <browser:viewlet
+      for="collective.nitf.content.INITF"
+      name="collective.nitf.slideshow"
+      manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
+      view="collective.nitf.browser.Slideshow"
+      template="templates/slideshow.pt"
+      permission="zope2.View"
+      />
 
 </configure>

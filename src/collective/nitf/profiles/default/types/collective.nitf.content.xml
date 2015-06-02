@@ -40,7 +40,8 @@
  <property name="default_view_fallback">False</property>
  <property name="view_methods">
   <element value="view"/>
-  <element value="slideshow"/>
+  <element value="slideshow_view"/>
+  <element value="text_only_view"/>
  </property>
 
  <!-- Method aliases -->

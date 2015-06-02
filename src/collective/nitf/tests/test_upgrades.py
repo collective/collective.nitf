@@ -165,7 +165,8 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         # simulate state on previous version
         view_methods = list(fti.view_methods)
-        view_methods.remove('slideshow')
+        view_methods.remove('slideshow_view')
+        view_methods.remove('text_only_view')
         view_methods.append('nitf_galleria')
         fti.view_methods = tuple(view_methods)
         self.assertEqual(len(fti.view_methods), 2)
@@ -174,8 +175,9 @@ class to2000TestCase(UpgradeTestCaseBase):
         # execute upgrade step and verify changes were applied
         self._do_upgrade_step(step)
 
-        self.assertEqual(len(fti.view_methods), 2)
-        self.assertItemsEqual(fti.view_methods, ['view', 'slideshow'])
+        self.assertEqual(len(fti.view_methods), 3)
+        self.assertItemsEqual(
+            fti.view_methods, ['view', 'slideshow_view', 'text_only_view'])
 
     def test_update_news_articles_layouts(self):
         title = u'Update News Articles layouts'
@@ -193,7 +195,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         # execute upgrade step and verify changes were applied
         self._do_upgrade_step(step)
 
-        self.assertEqual(n1.getLayout(), 'slideshow')
+        self.assertEqual(n1.getLayout(), 'slideshow_view')
 
     def test_install_new_dependencies(self):
         # check if the upgrade step is registered
