@@ -3,7 +3,8 @@ from plone import api
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from plone.dexterity.browser.view import DefaultView
-from plone.memoize import view
+from plone.memoize import ram
+from time import time
 
 
 class View(DefaultView):
@@ -68,7 +69,6 @@ class NITFBylineViewlet(DocumentBylineViewlet):
 
     """Override the document byline viewlet to include semantic markup."""
 
-    @view.memoize
     def _search_member_by_name(self, fullname):
         """Search a user by its full name and return its member
         information.
@@ -89,14 +89,22 @@ class NITFBylineViewlet(DocumentBylineViewlet):
             member = members[0].getUserId()
             return membership.getMemberInfo(member)
 
+    @ram.cache(lambda method, self, fullname: (time() // 60, fullname))
+    def search_member_by_name(self, fullname):
+        """Cached version of _search_member_by_name. Caching is done
+        for one minute to avoid performance issues when having many
+        users on sites using LDAP authentication.
+        """
+        return self._search_member_by_name(fullname)
+
     @property
     def author_id(self):
-        member = self._search_member_by_name(self.context.byline)
+        member = self.search_member_by_name(self.context.byline)
         if member:
             return member['username']
 
     def author(self):
-        return self._search_member_by_name(self.context.byline)
+        return self.search_member_by_name(self.context.byline)
 
     def authorname(self):
         return self.context.byline
