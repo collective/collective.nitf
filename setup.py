@@ -41,7 +41,7 @@ setup(name='collective.nitf',
       install_requires=[
           'AccessControl',
           'Acquisition',
-          'collective.js.cycle2',
+          'collective.js.cycle2 >=1.0b1',
           'collective.js.jqueryui',
           'collective.prettydate >=1.1',
           'plone.api',
