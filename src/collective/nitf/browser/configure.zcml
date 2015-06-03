@@ -38,12 +38,13 @@
         permission="zope2.View"
         />
 
-    <!-- Render the document byline -->
+    <!-- override the document byline to include semantic markup -->
     <browser:viewlet
         for="collective.nitf.content.INITF"
         name="plone.belowcontenttitle.documentbyline"
         manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
         class=".NITFBylineViewlet"
+        template="templates/document_byline.pt"
         permission="zope2.View"
         />
 

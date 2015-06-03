@@ -3,7 +3,8 @@ from plone import api
 from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from plone.dexterity.browser.view import DefaultView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.memoize import ram
+from time import time
 
 
 class View(DefaultView):
@@ -66,22 +67,44 @@ class ImageScaling(BaseImageScaling):
 
 class NITFBylineViewlet(DocumentBylineViewlet):
 
-    index = ViewPageTemplateFile('templates/nitf_byline.pt')
+    """Override the document byline viewlet to include semantic markup."""
 
-    def getMemberInfoByName(self, fullname):
+    def _search_member_by_name(self, fullname):
+        """Search a user by its full name and return its member
+        information.
+
+        :param fullname: full name of the user we are looking for
+        :type fullname: unicode
+        :returns: member information
+        :rtype: dict
+        """
+        if not fullname:
+            return None
+
         membership = api.portal.get_tool('portal_membership')
         members = membership.searchForMembers(name=fullname)
         if members:
-            member = members[0].getUserId()  # we care only about the first
+            # in case there are more than one members with the
+            # same fullname, we use the first one listed
+            member = members[0].getUserId()
             return membership.getMemberInfo(member)
 
-    def byline(self):
-        member = self.getMemberInfoByName(self.context.byline)
+    @ram.cache(lambda method, self, fullname: (time() // 60, fullname))
+    def search_member_by_name(self, fullname):
+        """Cached version of _search_member_by_name. Caching is done
+        for one minute to avoid performance issues when having many
+        users on sites using LDAP authentication.
+        """
+        return self._search_member_by_name(fullname)
+
+    @property
+    def author_id(self):
+        member = self.search_member_by_name(self.context.byline)
         if member:
             return member['username']
 
     def author(self):
-        return self.getMemberInfoByName(self.context.byline)
+        return self.search_member_by_name(self.context.byline)
 
     def authorname(self):
         return self.context.byline
