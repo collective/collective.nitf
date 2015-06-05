@@ -7,9 +7,9 @@
       i18n:domain="collective.nitf">
   <head>
     <metal:javascriptslot fill-slot="javascript_head_slot">
-      <script tal:attributes="src string:${context/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.min.js"></script>
-      <script tal:attributes="src string:${context/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.carousel.min.js"></script>
-      <script tal:attributes="src string:${context/portal_url}/++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"></script>
+      <tal:scripts repeat="js view/js_resources|nothing">
+        <script tal:attributes="src string:${portal_url}/${js}"></script>
+      </tal:scripts>
     </metal:javascriptslot>
   </head>
   <body>
