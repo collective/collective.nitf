@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.nitf.config import JS_RESOURCES
 from AccessControl import Unauthorized
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
@@ -36,9 +37,9 @@ class BaseViewTestCase(unittest.TestCase):
 class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
 
     def setUp(self):
-        self.name = u'view'
         super(DefaultViewTestCase, self).setUp()
-        self.view = api.content.get_view(u'view', self.n1, self.request)
+        self.name = u'view'
+        self.view = api.content.get_view(self.name, self.n1, self.request)
 
     def test_is_default_view(self):
         types = self.portal['portal_types']
@@ -46,11 +47,14 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         self.assertEqual(default_view, u'view')
 
     def test_default_view_render(self):
-        name, context, request = u'view', self.n1, self.request
-        view = api.content.get_view(name, context, request)
-        self.assertNotIn('<div id="media">', view.render())
+        self.assertNotIn('<div id="media">', self.view())
         api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
-        self.assertIn('<div id="media">', view.render())
+        self.assertIn('<div id="media">', self.view())
+
+    def test_render_js_resources(self):
+        rendered = self.view()
+        for js in JS_RESOURCES:
+            self.assertNotIn(js, rendered)
 
     def test_get_images(self):
         images = self.view.get_images()
@@ -103,29 +107,37 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
 class SlideshowViewTestCase(TestViewMixin, BaseViewTestCase):
 
     def setUp(self):
-        self.name = u'slideshow_view'
         super(SlideshowViewTestCase, self).setUp()
+        self.name = u'slideshow_view'
+        self.view = api.content.get_view(self.name, self.n1, self.request)
 
     def test_slideshow_view_render(self):
-        name, context, request = u'slideshow_view', self.n1, self.request
-        slideshow = api.content.get_view(name, context, request)
-        self.assertNotIn('<div id="media">', slideshow.render())
+        self.assertNotIn('<div id="media">', self.view())
         api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
-        self.assertIn('<div id="media">', slideshow.render())
+        self.assertIn('<div id="media">', self.view())
+
+    def test_render_js_resources(self):
+        rendered = self.view()
+        for js in JS_RESOURCES:
+            self.assertIn(js, rendered)
 
 
 class TextOnlyViewTestCase(TestViewMixin, BaseViewTestCase):
 
     def setUp(self):
-        self.name = u'text_only_view'
         super(TextOnlyViewTestCase, self).setUp()
+        self.name = u'text_only_view'
+        self.view = api.content.get_view(self.name, self.n1, self.request)
 
     def test_text_only_view_render(self):
-        name, context, request = u'text_only_view', self.n1, self.request
-        text_only = api.content.get_view(name, context, request)
-        self.assertNotIn('<div id="media">', text_only.render())
+        self.assertNotIn('<div id="media">', self.view())
         api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
-        self.assertNotIn('<div id="media">', text_only.render())
+        self.assertNotIn('<div id="media">', self.view())
+
+    def test_render_js_resources(self):
+        rendered = self.view()
+        for js in JS_RESOURCES:
+            self.assertNotIn(js, rendered)
 
 
 class NITFViewTestCase(BaseViewTestCase):

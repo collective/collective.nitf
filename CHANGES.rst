@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Load Cycle2 resources from the JS registry if available (closes `#133`_).
+  [hvelarde]
+
 - Fix display of byline and refactor override of ``documentbyline`` viewlet;
   avoid performance issues when having many users by memoizing expensive call to Membership tool (fixes `#128`_).
   [hvelarde, rodfersou]
@@ -240,3 +243,4 @@ There's a frood who really knows where his towel is.
 .. _`#118`: https://github.com/collective/collective.nitf/issues/118
 .. _`#123`: https://github.com/collective/collective.nitf/issues/123
 .. _`#128`: https://github.com/collective/collective.nitf/issues/128
+.. _`#133`: https://github.com/collective/collective.nitf/issues/133

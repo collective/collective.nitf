@@ -81,7 +81,6 @@ You can validate the output of the those views using services like `XML validati
 
 You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML Ruby Module`_ associated with it.
 
-.. _`Dexterity`: http://pypi.python.org/pypi/plone.app.dexterity
 .. _`IPTC`: http://www.iptc.org/
 .. _`NewsCodes`: http://www.iptc.org/NewsCodes/
 .. _`NewsML`: http://www.newsml.org/
@@ -90,3 +89,25 @@ You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML Ruby
 .. _`XHTML Ruby Module`: http://www.iptc.org/std/NITF/3.5/specification/xhtml-ruby-1.mod
 .. _`XML validation`: http://www.xmlvalidation.com/
 .. _`opening a support ticket`: https://github.com/collective/collective.nitf/issues
+
+Internals
+---------
+
+``collective.nitf`` uses Cycle2 slideshow plugin for jQuery and it can load its resources from the Plone JS registry if they are present there.
+
+If you're using ``collective.nitf`` with other packages that use Cycle2 also (like `sc.photogallery`_ or `covertile.cycle2`_),
+it is highly recommended that you register those resources to load them once and avoid conflicts.
+
+You can use a ``jsregistry.xml`` file that includes the following:
+
+.. code-block:: xml
+
+    <javascript id="++resource++collective.js.cycle2/jquery.cycle2.min.js"
+        cacheable="True" compression="none" cookable="True" enabled="True" />
+    <javascript id="++resource++collective.js.cycle2/jquery.cycle2.carousel.min.js"
+        cacheable="True" compression="none" cookable="True" enabled="True" />
+    <javascript id="++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"
+        cacheable="True" compression="none" cookable="True" enabled="True" />
+
+.. _`sc.photogallery`: https://pypi.python.org/pypi/sc.photogallery
+.. _`covertile.cycle2`: https://pypi.python.org/pypi/covertile.cycle2
