@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.content import INITF
+from collective.nitf.interfaces import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.referenceablebehavior.referenceable import IReferenceable

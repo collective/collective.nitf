@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.content import INITF
+from collective.nitf.interfaces import INITF
 from Products.CMFPlone.browser.syndication.adapters import DexterityItem
 from Products.CMFPlone.interfaces.syndication import IFeed
 from zope.component import adapts

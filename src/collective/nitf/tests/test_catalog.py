@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import PROJECTNAME
-from collective.nitf.content import INITF
+from collective.nitf.interfaces import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.textfield.value import RichTextValue

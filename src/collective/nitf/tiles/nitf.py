@@ -3,7 +3,7 @@ from collective.cover.tiles.basic import BasicTile
 from collective.cover.tiles.basic import IBasicTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
 from collective.nitf import _
-from collective.nitf.content import INITF
+from collective.nitf.interfaces import INITF
 from plone import api
 from plone.autoform import directives as form
 from plone.tiles.interfaces import ITileDataManager
