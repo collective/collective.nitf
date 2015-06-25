@@ -1,6 +1,5 @@
 <div i18n:domain="plone"
      id="category"
-     class="documentByLine"
      tal:define="categories context/Subject|nothing;
                  url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
      tal:condition="categories">
