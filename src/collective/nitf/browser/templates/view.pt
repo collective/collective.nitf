@@ -21,10 +21,10 @@
 
         <p property="rnews:articleSection" class="section"
            tal:content="context/section">Section</p>
-        <h1 property="rnews:headline" class="documentFirstHeading"
-            tal:content="context/title">Title</h1>
         <h2 property="rnews:alternativeHeadline" class="nitfSubtitle"
             tal:content="context/subtitle">Subtitle</h2>
+        <h1 property="rnews:headline" class="documentFirstHeading"
+            tal:content="context/title">Title</h1>
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 

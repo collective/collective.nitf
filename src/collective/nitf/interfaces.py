@@ -21,7 +21,7 @@ class INITF(model.Schema):
     # title = schema.TextLine()
     # nitf/head/title and nitf/body/body.head/hedline/hl1
 
-    form.order_after(subtitle='IDublinCore.title')
+    form.order_before(subtitle='IDublinCore.title')
     subtitle = schema.TextLine(
         # nitf/body/body.head/hedline/hl2
         title=_(u'Subtitle'),
