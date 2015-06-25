@@ -9,7 +9,8 @@
          data-cycle-prev=".slideshow-player .cycle-prev"
          data-cycle-next=".slideshow-player .cycle-next"
          data-allow-wrap="true"
-         data-cycle-fx="fade">
+         data-cycle-fx="fade"
+         data-cycle-log="false">
       <div tal:repeat="image images">
         <img tal:replace="structure image/@@images/image/large" />
       </div>
@@ -24,8 +25,11 @@
       <div class="cycle-description cycle-slideshow"
            data-cycle-slides="> div"
            data-cycle-timeout="0"
+           data-cycle-prev=".slideshow-player .cycle-prev"
+           data-cycle-next=".slideshow-player .cycle-next"
            data-allow-wrap="false"
-           data-cycle-fx="fade">
+           data-cycle-fx="fade"
+           data-cycle-log="false">
         <div tal:repeat="image images">
           <div class="slide-pagination">
             <span class="slide-num" tal:content="repeat/image/number" /> |
@@ -44,7 +48,8 @@
            data-cycle-carousel-fluid="true"
            data-cycle-prev=".slideshow-player .cycle-prev"
            data-cycle-next=".slideshow-player .cycle-next"
-           data-allow-wrap="false">
+           data-allow-wrap="false"
+           data-cycle-log="false">
         <div class="thumb-itens" tal:repeat="image images">
           <img tal:replace="structure image/@@images/image/thumb" />
         </div>

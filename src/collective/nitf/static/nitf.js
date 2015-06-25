@@ -1,5 +1,36 @@
 (function ($) {
   "use strict";
+
+  var SlideShow = (function() {
+    function SlideShow() {
+      var self = this;
+      $('#media .cycle-carrossel .thumb-itens').on('click', self, self.thumbs_click);
+      $('#media .cycle-player img').each(function() {
+        var $img = $(this);
+        if ($img.height() > $img.width()) {
+          var $player = $img.parent().parent();
+          $img.css('width', 'auto');
+          $img.height($player.height());
+        }
+      });
+    }
+    SlideShow.prototype.$ = function(selector, context) {
+      var $container;
+      $container = $(context).closest('#media');
+      return $(selector, $container);
+    };
+    SlideShow.prototype.thumbs_click = function(e) {
+      var $slideshows, index, self, $thumbs;
+      self = e.data;
+      e.preventDefault();
+      $thumbs = self.$('.cycle-carrossel', this);
+      index = $thumbs.data('cycle.API').getSlideIndex(this);
+      $slideshows = self.$('.cycle-slideshow', this);
+      $slideshows.cycle('goto', index);
+    };
+    return SlideShow;
+  })();
+
   $(document).ready(function () {
     // If this is a NITF content with an image
     var nitf_view = $('body.portaltype-collective-nitf-content.template-view').length > 0;
@@ -23,6 +54,7 @@
             onLoad: function (e) {
               // Start cycle2
               $('#slideshow').cycle();
+              new SlideShow();
             }
           }
         });
@@ -47,8 +79,14 @@
         if (!window.pageYOffset) {
           hideAddressBar();
         }
+        new SlideShow();
       });
       window.addEventListener("orientationchange", hideAddressBar);
+    }
+  });
+  $(window).load(function() {
+    if ($('body.portaltype-collective-nitf-content.template-slideshow_view').length > 0) {
+      new SlideShow();
     }
   });
 })(jQuery);
