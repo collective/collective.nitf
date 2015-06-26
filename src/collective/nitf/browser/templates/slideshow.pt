@@ -1,16 +1,17 @@
-<div id="media"
-    tal:define="images context/get_images"
-    tal:condition="images">
+<div class="slideshow-container"
+     tal:define="images context/get_images"
+     tal:condition="images"
+     tal:attributes="id string:photogallery-${context/id}">
   <div class="slideshow-player">
     <div class="cycle-player cycle-slideshow"
          data-cycle-slides="> div"
          data-cycle-timeout="0"
          data-cycle-swipe="true"
-         data-cycle-prev=".slideshow-player .cycle-prev"
-         data-cycle-next=".slideshow-player .cycle-next"
          data-allow-wrap="true"
          data-cycle-fx="fade"
-         data-cycle-log="false">
+         data-cycle-log="false"
+         tal:attributes="data-cycle-prev string:#photogallery-${context/id} .cycle-prev;
+                         data-cycle-next string:#photogallery-${context/id} .cycle-next">
       <div tal:repeat="image images">
         <img tal:replace="structure image/@@images/image/large" />
       </div>
@@ -25,9 +26,7 @@
       <div class="cycle-description cycle-slideshow"
            data-cycle-slides="> div"
            data-cycle-timeout="0"
-           data-cycle-prev=".slideshow-player .cycle-prev"
-           data-cycle-next=".slideshow-player .cycle-next"
-           data-allow-wrap="false"
+           data-allow-wrap="true"
            data-cycle-fx="fade"
            data-cycle-log="false">
         <div tal:repeat="image images">
@@ -41,13 +40,10 @@
     </div>
     <div class="slideshow-carrossel">
       <div class="cycle-carrossel cycle-slideshow"
+           data-cycle-fx="carousel"
            data-cycle-slides="> div"
            data-cycle-timeout="0"
-           data-cycle-fx="carousel"
-           data-cycle-offset="1"
            data-cycle-carousel-fluid="true"
-           data-cycle-prev=".slideshow-player .cycle-prev"
-           data-cycle-next=".slideshow-player .cycle-next"
            data-allow-wrap="false"
            data-cycle-log="false">
         <div class="thumb-itens" tal:repeat="image images">

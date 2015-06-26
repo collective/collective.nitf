@@ -43,6 +43,9 @@ class Slideshow(DefaultView):
 
     """Slideshow view of a News Article."""
 
+    def id(self):
+        return id(self)
+
     def js_resources(self):
         """Return a list of JS resources that are not available in the
         registry, but need to be loaded anyway. This way the slideshow
