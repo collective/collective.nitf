@@ -28,17 +28,14 @@ to implement a content type inspired by the specification.
 Mostly Harmless
 ---------------
 
-.. image:: https://secure.travis-ci.org/collective/collective.nitf.png?branch=master
-    :alt: Travis CI badge
+.. image:: http://img.shields.io/pypi/v/collective.nitf.svg
+    :target: https://pypi.python.org/pypi/collective.nitf
+
+.. image:: https://img.shields.io/travis/collective/collective.nitf/master.svg
     :target: http://travis-ci.org/collective/collective.nitf
 
-.. image:: https://coveralls.io/repos/collective/collective.nitf/badge.png?branch=master
-    :alt: Coveralls badge
+.. image:: https://img.shields.io/coveralls/collective/collective.nitf/master.svg
     :target: https://coveralls.io/r/collective/collective.nitf
-
-.. image:: https://pypip.in/d/collective.nitf/badge.png
-    :alt: Downloads
-    :target: https://pypi.python.org/pypi/collective.nitf/
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
