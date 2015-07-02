@@ -282,7 +282,7 @@ a.edit-tile-link
     max-width: 65%;
     margin: 0 auto;
 }
-.cycle-slideshow .cycle-slide-active img
+.cycle-slideshow .cycle-slide img
 {
     position: relative;
     top: 0;
