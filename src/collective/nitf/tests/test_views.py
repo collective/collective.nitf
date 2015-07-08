@@ -47,9 +47,9 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         self.assertEqual(default_view, u'view')
 
     def test_default_view_render(self):
-        self.assertNotIn('@@slideshow', self.view())
+        self.assertNotIn('<div id="media">', self.view())
         api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
-        self.assertIn('@@slideshow', self.view())
+        self.assertIn('<div id="media">', self.view())
 
     def test_render_js_resources(self):
         rendered = self.view()
@@ -112,9 +112,9 @@ class SlideshowViewTestCase(TestViewMixin, BaseViewTestCase):
         self.view = api.content.get_view(self.name, self.n1, self.request)
 
     def test_slideshow_view_render(self):
-        self.assertNotIn('@@slideshow', self.view())
+        self.assertNotIn('<div id="media">', self.view())
         api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
-        self.assertIn('@@slideshow', self.view())
+        self.assertIn('<div id="media">', self.view())
 
     def test_render_js_resources(self):
         rendered = self.view()
@@ -130,9 +130,9 @@ class TextOnlyViewTestCase(TestViewMixin, BaseViewTestCase):
         self.view = api.content.get_view(self.name, self.n1, self.request)
 
     def test_text_only_view_render(self):
-        self.assertNotIn('slideshow-container', self.view())
+        self.assertNotIn('<div id="media">', self.view())
         api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
-        self.assertNotIn('slideshow-container', self.view())
+        self.assertNotIn('<div id="media">', self.view())
 
     def test_render_js_resources(self):
         rendered = self.view()
