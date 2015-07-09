@@ -112,9 +112,11 @@ class SlideshowViewTestCase(TestViewMixin, BaseViewTestCase):
         self.view = api.content.get_view(self.name, self.n1, self.request)
 
     def test_slideshow_view_render(self):
-        self.assertNotIn('<div id="media">', self.view())
+        self.assertNotIn('<div class="slideshow-player">', self.view())
+        self.assertNotIn('<div class="slideshow-pager">', self.view())
         api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
-        self.assertIn('<div id="media">', self.view())
+        self.assertIn('<div class="slideshow-player">', self.view())
+        self.assertIn('<div class="slideshow-pager">', self.view())
 
     def test_render_js_resources(self):
         rendered = self.view()
