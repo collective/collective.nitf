@@ -9,6 +9,9 @@ There's a frood who really knows where his towel is.
 .. Warning::
     Upgrades are supported only from release 1.0b3.
 
+- Make control panel configlet accesible to Site Administrator role (closes `#137`_).
+  [hvelarde]
+
 - Load Cycle2 resources from the JS registry if available (closes `#133`_).
   [hvelarde]
 
@@ -244,3 +247,4 @@ There's a frood who really knows where his towel is.
 .. _`#123`: https://github.com/collective/collective.nitf/issues/123
 .. _`#128`: https://github.com/collective/collective.nitf/issues/128
 .. _`#133`: https://github.com/collective/collective.nitf/issues/133
+.. _`#137`: https://github.com/collective/collective.nitf/issues/137
