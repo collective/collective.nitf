@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
-
 from collective.nitf.config import PROJECTNAME
+from collective.nitf.logger import logger
 from plone import api
 
 import logging
@@ -57,3 +57,10 @@ def install_new_dependencies(context, logger=None):
         if not qi.isProductInstalled(p):
             qi.installProducts([p])
             logger.info(u'{0} installed'.format(p))
+
+
+def update_configlet(setup_tool):
+    """Update control panel configlet."""
+    profile = 'profile-{0}:default'.format(PROJECTNAME)
+    setup_tool.runImportStepFromProfile(profile, 'controlpanel')
+    logger.info('Control panel configlet updated.')

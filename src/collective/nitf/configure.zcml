@@ -19,6 +19,8 @@
   <include package=".tiles" zcml:condition="installed collective.cover" />
   <include package=".upgrades" />
 
+  <permission id="collective.nitf.Setup" title="collective.nitf: Setup" />
+
   <permission
       id="collective.nitf.AddNewsArticle"
       title="collective.nitf: Add News Article"
@@ -28,7 +30,7 @@
       name="nitf-settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".controlpanel.NITFSettingsControlPanel"
-      permission="cmf.ManagePortal"
+      permission="collective.nitf.Setup"
       />
 
   <browser:resourceDirectory

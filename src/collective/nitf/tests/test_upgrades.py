@@ -80,7 +80,7 @@ class to2000TestCase(UpgradeTestCaseBase):
     def test_upgrade_to_2000_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertTrue(version >= self.to_version)
-        self.assertEqual(self._upgrades_to_do(), 3)
+        self.assertEqual(self._upgrades_to_do(), 4)
 
     def test_character_counter_css_resources(self):
         title = u'Miscellaneous'
@@ -215,3 +215,21 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         for p in dependencies:
             self.assertTrue(qi.isProductInstalled(p))
+
+    def test_update_configlet(self):
+        # check if the upgrade step is registered
+        title = u'Update control panel configlet'
+        step = self._get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        cptool = api.portal.get_tool('portal_controlpanel')
+        configlet = cptool.getActionObject('Products/nitf')
+        configlet.permissions = old_permissions = ('cmf.ManagePortal',)
+        self.assertEqual(configlet.getPermissions(), old_permissions)
+
+        # run the upgrade step to validate the update
+        self._do_upgrade_step(step)
+        configlet = cptool.getActionObject('Products/nitf')
+        new_permissions = ('collective.nitf: Setup',)
+        self.assertEqual(configlet.getPermissions(), new_permissions)

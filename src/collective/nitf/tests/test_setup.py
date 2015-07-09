@@ -41,6 +41,13 @@ class InstallTestCase(unittest.TestCase):
             self.assertTrue(
                 self.qi.isProductInstalled(p), '{0} not installed'.format(p))
 
+    def test_setup_permission(self):
+        permission = 'collective.nitf: Setup'
+        roles = self.portal.rolesOfPermission(permission)
+        roles = [r['name'] for r in roles if r['selected']]
+        expected = ['Manager', 'Site Administrator']
+        self.assertListEqual(roles, expected)
+
     def test_add_permission(self):
         permission = 'collective.nitf: Add News Article'
         roles = self.portal.rolesOfPermission(permission)

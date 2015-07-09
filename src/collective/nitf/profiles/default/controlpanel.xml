@@ -3,15 +3,15 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="collective.nitf"
     purge="False">
-    <configlet title="NITF Settings"
-        action_id="nitf"
-        appId="collective.nitf"
-        category="Products"
-        condition_expr=""
-        url_expr="string:${portal_url}/@@nitf-settings"
-        icon_expr="string:${portal_url}/++resource++collective.nitf/nitf_icon.png"
-        visible="True"
-        i18n:attributes="title">
-        <permission>Manage portal</permission>
-    </configlet>
+  <configlet title="NITF Settings"
+      action_id="nitf"
+      appId="collective.nitf"
+      category="Products"
+      condition_expr=""
+      url_expr="string:${portal_url}/@@nitf-settings"
+      icon_expr="string:${portal_url}/++resource++collective.nitf/nitf_icon.png"
+      visible="True"
+      i18n:attributes="title">
+    <permission>collective.nitf: Setup</permission>
+  </configlet>
 </object>
