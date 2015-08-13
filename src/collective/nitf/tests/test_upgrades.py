@@ -20,21 +20,23 @@ class UpgradeTestCaseBase(unittest.TestCase):
         self.from_version = from_version
         self.to_version = to_version
 
-    def _get_upgrade_step(self, title):
-        """Get upgrade step."""
+    def get_upgrade_step(self, title):
+        """Get the named upgrade step."""
         self.setup.setLastVersionForProfile(self.profile_id, self.from_version)
         upgrades = self.setup.listUpgrades(self.profile_id)
         steps = [s for s in upgrades[0] if s['title'] == title]
         return steps[0] if steps else None
 
-    def _do_upgrade_step(self, step):
+    def execute_upgrade_step(self, step):
         """Execute an upgrade step."""
         request = self.layer['request']
         request.form['profile_id'] = self.profile_id
         request.form['upgrades'] = [step['id']]
         self.setup.manage_doUpgrades(request=request)
 
-    def _upgrades_to_do(self):
+    @property
+    def total_steps(self):
+        """Return the number of steps in the upgrade."""
         self.setup.setLastVersionForProfile(self.profile_id, self.from_version)
         upgrades = self.setup.listUpgrades(self.profile_id)
         assert len(upgrades) > 0
@@ -49,11 +51,11 @@ class to1007TestCase(UpgradeTestCaseBase):
     def test_upgrade_to_2000_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertTrue(version >= self.to_version)
-        self.assertEqual(self._upgrades_to_do(), 1)
+        self.assertEqual(self.total_steps, 1)
 
     def test_add_locking_behavior(self):
         title = u'Add locking behavior'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         locking_behavior = 'plone.app.lockingbehavior.behaviors.ILocking'
@@ -67,7 +69,7 @@ class to1007TestCase(UpgradeTestCaseBase):
         self.assertNotIn(locking_behavior, nitf.behaviors)
 
         # execute upgrade step and verify changes were applied
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
 
         self.assertIn(locking_behavior, nitf.behaviors)
 
@@ -80,11 +82,11 @@ class to2000TestCase(UpgradeTestCaseBase):
     def test_upgrade_to_2000_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertTrue(version >= self.to_version)
-        self.assertEqual(self._upgrades_to_do(), 4)
+        self.assertEqual(self.total_steps, 4)
 
     def test_character_counter_css_resources(self):
         title = u'Miscellaneous'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         csstool = self.portal['portal_css']
@@ -98,13 +100,13 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertNotIn(new_css, csstool.getResourceIds())
 
         # execute upgrade step and verify changes were applied
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
 
         self.assertIn(new_css, csstool.getResourceIds())
 
     def test_character_counter_js_resources(self):
         title = u'Miscellaneous'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         jstool = self.portal['portal_javascripts']
@@ -122,7 +124,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertNotIn(new_js, jstool.getResourceIds())
 
         # execute upgrade step and verify changes were applied
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
 
         for js in old_js:
             self.assertNotIn(js, jstool.getResourceIds())
@@ -130,7 +132,7 @@ class to2000TestCase(UpgradeTestCaseBase):
 
     def test_character_counter_registry_records_removed(self):
         title = u'Miscellaneous'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         registry = getUtility(IRegistry)
@@ -150,14 +152,14 @@ class to2000TestCase(UpgradeTestCaseBase):
             self.assertIn(r, registry)
 
         # execute upgrade step and verify changes were applied
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
 
         for r in records:
             self.assertNotIn(r, registry)
 
     def test_news_article_registered_views(self):
         title = u'Miscellaneous'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         ttool = self.portal['portal_types']
@@ -173,7 +175,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertItemsEqual(fti.view_methods, ['view', 'nitf_galleria'])
 
         # execute upgrade step and verify changes were applied
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
 
         self.assertEqual(len(fti.view_methods), 3)
         self.assertItemsEqual(
@@ -181,7 +183,7 @@ class to2000TestCase(UpgradeTestCaseBase):
 
     def test_update_news_articles_layouts(self):
         title = u'Update News Articles layouts'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         # create a news article and set the layout to 'nitf_galleria'
@@ -193,14 +195,14 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertEqual(n1.getLayout(), 'nitf_galleria')
 
         # execute upgrade step and verify changes were applied
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
 
         self.assertEqual(n1.getLayout(), 'slideshow_view')
 
     def test_install_new_dependencies(self):
         # check if the upgrade step is registered
         title = u'Install new dependencies'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         # simulate state on previous version
@@ -211,7 +213,7 @@ class to2000TestCase(UpgradeTestCaseBase):
             self.assertFalse(qi.isProductInstalled(p))
 
         # execute upgrade step and verify changes were applied
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
 
         for p in dependencies:
             self.assertTrue(qi.isProductInstalled(p))
@@ -219,7 +221,7 @@ class to2000TestCase(UpgradeTestCaseBase):
     def test_update_configlet(self):
         # check if the upgrade step is registered
         title = u'Update control panel configlet'
-        step = self._get_upgrade_step(title)
+        step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
 
         # simulate state on previous version
@@ -229,7 +231,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertEqual(configlet.getPermissions(), old_permissions)
 
         # run the upgrade step to validate the update
-        self._do_upgrade_step(step)
+        self.execute_upgrade_step(step)
         configlet = cptool.getActionObject('Products/nitf')
         new_permissions = ('collective.nitf: Setup',)
         self.assertEqual(configlet.getPermissions(), new_permissions)
