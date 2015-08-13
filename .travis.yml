@@ -4,6 +4,7 @@ sudo: false
 cache:
   directories:
   - eggs
+  - parts/node
 env:
   - PLONE_VERSION=4.3
   - PLONE_VERSION=5.0
@@ -12,8 +13,8 @@ matrix:
     - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
-- sed -ie "s#test-4.3.x.cfg#test-$PLONE_VERSION.x.cfg#" buildout.cfg
-- sed -ie "s#versions-4.3.x.cfg#versions-$PLONE_VERSION.x.cfg#" buildout.cfg
+- sed -ie "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
+- sed -ie "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
 - python bootstrap.py
 - bin/buildout annotate
 - bin/buildout -Nq
