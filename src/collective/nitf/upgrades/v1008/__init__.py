@@ -12,7 +12,12 @@ def fix_collections(context):
     logger.info('About to update {0} objects'.format(len(collections)))
     for col in collections:
         obj = col.getObject()
-        query = obj.getRawQuery()
+        try:
+            query = obj.getRawQuery()
+        except AttributeError:
+            # getRawQuery method may not be available on some versions of Plone
+            query = obj.getQuery()
+
         fixed_query = []
         for item in query:
             fixed_item = dict(item)
