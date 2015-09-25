@@ -15,6 +15,7 @@ def fix_collections(context):
         try:
             query = obj.getRawQuery()
         except AttributeError:
+            # getRawQuery method may not be available on some versions of Plone
             query = obj.getQuery()
 
         fixed_query = []
