@@ -4,6 +4,9 @@ There's a frood who really knows where his towel is
 1.0b6 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Fix AttributeError on upgrade step (closes `#139`_).
+  [winstonf88, rodfersou]
+
 - Byline field honored in syndication (closes `#93`_).
   [rodfersou]
 
@@ -142,3 +145,4 @@ There's a frood who really knows where his towel is
 .. _`#52`: https://github.com/collective/collective.nitf/issues/52
 .. _`#93`: https://github.com/collective/collective.nitf/issues/93
 .. _`#111`: https://github.com/collective/collective.nitf/issues/111
+.. _`#139`: https://github.com/collective/collective.nitf/issues/139
