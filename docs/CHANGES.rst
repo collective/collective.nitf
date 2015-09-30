@@ -1,7 +1,7 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
-1.0b6 (unreleased)
+1.0b6 (2015-09-30)
 ^^^^^^^^^^^^^^^^^^
 
 - Fix AttributeError on upgrade step (closes `#139`_).
