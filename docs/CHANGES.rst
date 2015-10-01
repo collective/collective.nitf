@@ -153,3 +153,4 @@ There's a frood who really knows where his towel is
 .. _`#93`: https://github.com/collective/collective.nitf/issues/93
 .. _`#111`: https://github.com/collective/collective.nitf/issues/111
 .. _`#139`: https://github.com/collective/collective.nitf/issues/139
+.. _`#143`: https://github.com/collective/collective.nitf/issues/143
