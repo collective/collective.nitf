@@ -1,7 +1,7 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
-1.0b7 (unreleased)
+1.0b7 (2015-10-01)
 ^^^^^^^^^^^^^^^^^^
 
 - Hide profiles used on upgrade steps (closes `#143`_).
