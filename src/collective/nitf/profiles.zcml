@@ -74,4 +74,7 @@
 
   <include package=".upgrades" />
 
+  <utility factory=".setuphandlers.HiddenProfiles" name="collective.nitf" />
+  <utility factory=".setuphandlers.HiddenProducts" name="collective.nitf" />
+
 </configure>

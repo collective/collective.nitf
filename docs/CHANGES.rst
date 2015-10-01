@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b7 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Hide profiles used on upgrade steps (closes `#143`_).
+  [winstonf88]
 
 
 1.0b6 (2015-09-30)
