@@ -13,6 +13,7 @@ the following people:
 - Franco Pellegrini
 - Cleber J Santos
 - Rodrigo Ferreira de Souza
+- Winston Ferreira
 
 
 You can find an updated list of package contributors on `GitHub`_.

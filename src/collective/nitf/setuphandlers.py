@@ -1,25 +1,36 @@
 # -*- coding:utf-8 -*-
 
 from collective.nitf.config import PROJECTNAME
-from five import grok
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.interfaces import INonInstallable
+from Products.CMFPlone import interfaces as Plone
+from Products.CMFQuickInstallerTool import interfaces as QuickInstaller
+from zope.interface import implements
 
 import logging
 
 PROFILE_ID = 'profile-collective.nitf:default'
 
 
-class HiddenProfiles(grok.GlobalUtility):
-
-    grok.implements(INonInstallable)
-    grok.provides(INonInstallable)
-    grok.name('collective.nitf')
+class HiddenProfiles(object):
+    implements(Plone.INonInstallable)
 
     def getNonInstallableProfiles(self):
         profiles = [
             'collective.nitf:uninstall',
             'collective.nitf.upgrades.v1007:default',
+            'collective.nitf.upgrades.v1008:default',
+        ]
+        return profiles
+
+
+class HiddenProducts(object):
+    implements(QuickInstaller.INonInstallable)
+
+    def getNonInstallableProducts(self):
+        """Do not show on QuickInstaller's list of installable products."""
+        profiles = [
+            u'collective.nitf.upgrades.v1007',
+            u'collective.nitf.upgrades.v1008',
         ]
         return profiles
 
