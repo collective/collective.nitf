@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b8 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Use "application/javascript" media type instead of the obsolete "text/javascript".
+  [hvelarde]
 
 
 1.0b7 (2015-10-01)

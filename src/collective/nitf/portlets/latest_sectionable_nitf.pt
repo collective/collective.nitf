@@ -8,7 +8,7 @@
                 portal_state context/@@plone_portal_state;
                 portal_url portal_state/portal_url;">
 
-    <script type="text/javascript">
+    <script type="application/javascript">
 
     function showNitfFilterSpinner(){
         $("#nitf-section-filter-spinner").css("display", "inline");

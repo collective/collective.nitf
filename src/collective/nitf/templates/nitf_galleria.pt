@@ -35,7 +35,7 @@
             <div id="mediabox" metal:use-macro="context/@@display_macros/macros/media-box" />
          </div>
 
-        <script type="text/javascript">
+        <script type="application/javascript">
             (function($) {
                 "use strict";
                 $(document).ready(function() {
