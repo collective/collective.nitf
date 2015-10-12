@@ -64,7 +64,7 @@
             <div class="newsview">
 	            <link rel="stylesheet" type="text/css"
 	                tal:attributes="href string:${context/@@plone_portal_state/portal_url}/++resource++collective.nitf/galleria-theme/galleria.nitf_theme.css" />
-	            <script type="text/javascript">
+	            <script type="application/javascript">
 	                (function($) {
 	                    "use strict";
 	                    $(document).ready(function() {

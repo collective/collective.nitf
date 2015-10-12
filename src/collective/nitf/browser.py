@@ -314,7 +314,7 @@ class CharactersCount(grok.View):
     def render(self):
 
         response = self.request.response
-        response.setHeader('content-type', 'text/javascript;;charset=utf-8')
+        response.setHeader('content-type', 'application/javascript')
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFCharCountSettings)
 
