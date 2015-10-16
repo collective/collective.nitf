@@ -12,7 +12,18 @@ def fix_collections(context):
     logger.info('About to update {0} objects'.format(len(collections)))
     for col in collections:
         obj = col.getObject()
-        query = obj.getRawQuery()
+
+        # XXX: To fix the query we need a list of dicts describing it.
+        #      With collections based on Archetypes we use getRawQuery;
+        #      with collections based on Dexterity (e.g., if
+        #      plone.app.contenttypes is installed) we need to use
+        #      getQuery because we have an API inconsistency.
+        #      See: https://github.com/plone/plone.app.contenttypes/issues/283
+        try:
+            query = obj.getRawQuery()  # Archetypes
+        except AttributeError:
+            query = obj.getQuery()  # Dexterity
+
         fixed_query = []
         for item in query:
             fixed_item = dict(item)
