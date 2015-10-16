@@ -1,7 +1,7 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
-1.0b8 (unreleased)
+1.0b8 (2015-10-16)
 ^^^^^^^^^^^^^^^^^^
 
 - Fix upgrade step to work with both, Archetypes and Dexterity-based collections.
