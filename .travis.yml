@@ -25,7 +25,7 @@ before_script:
 - firefox -v
 script:
 - bin/code-analysis
-- bin/test
+- test $PLONE_VERSION == 5.0 && bin/test --layer=!Robot || bin/test
 after_success:
 - bin/createcoverage -t "--layer=!Robot"
 - pip install -q coveralls

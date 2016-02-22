@@ -3,12 +3,14 @@
 
 We install collective.cover to test the availibility and features of
 the tile included for that package.
+
+For Plone 5 we need to install plone.app.contenttypes.
 """
 from PIL import Image
+from plone import api
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
-from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -19,8 +21,20 @@ from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
 
 import os
+import pkg_resources
 import random
 import string
+
+
+try:
+    pkg_resources.get_distribution('plone.app.contenttypes')
+except pkg_resources.DistributionNotFound:
+    from plone.app.testing import PLONE_FIXTURE
+else:
+    from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE as PLONE_FIXTURE
+
+
+PLONE_VERSION = api.env.plone_version()
 
 
 class Fixture(PloneSandboxLayer):
@@ -28,18 +42,28 @@ class Fixture(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        import collective.cover
-        self.loadZCML(package=collective.cover)
+        # XXX: avoid import issues with collective.cover < 1.0a13
+        if PLONE_VERSION.startswith('5'):
+            import Products.Archetypes
+            self.loadZCML(package=Products.Archetypes)
+        else:
+            import collective.cover
+            self.loadZCML(package=collective.cover)
         import collective.nitf
         self.loadZCML(package=collective.nitf)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(portal, 'collective.cover:default')
+        # XXX: avoid import issues with collective.cover < 1.0a13
+        if PLONE_VERSION.startswith('5'):
+            from plone.app.testing import quickInstallProduct
+            quickInstallProduct(portal, 'Products.Archetypes')
+        else:
+            self.applyProfile(portal, 'collective.cover:default')
+
         self.applyProfile(portal, 'collective.nitf:default')
 
         portal_workflow = portal['portal_workflow']
-        portal_workflow.setChainForPortalTypes(
-            ('collective.nitf.content',), 'simple_publication_workflow')
+        portal_workflow.setDefaultChain('simple_publication_workflow')
 
 
 def generate_jpeg(width, height):
