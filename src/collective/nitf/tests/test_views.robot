@@ -20,7 +20,7 @@ Test Edit image from Media
     Click Link  link=n1
     Click Link  link=Media
 
-    [Documentation]  Click on edit and wait until overlay is open
+    # click on edit and wait until overlay is open
     Log Source
     Mouse Over  css=li#sortable-img1
     Click Link  css=li#sortable-img1 a.edit
@@ -35,7 +35,7 @@ Test Delete image from Media
     Click Link  link=n1
     Click Link  link=Media
 
-    [Documentation]  Click on trash icon and cancel
+    # click on trash icon and cancel
     Mouse Over  css=li#sortable-img1
     Click Link  css=li#sortable-img1 a.delete
     Wait Until Page Contains  Do you really want to delete this item?
@@ -43,7 +43,7 @@ Test Delete image from Media
     Click Link  link=Media
     Page Should Contain Element  css=li#sortable-img1
 
-    [Documentation]  Click on trash icon and delete
+    # click on trash icon and delete
     Mouse Over  css=li#sortable-img1
     Click Link  css=li#sortable-img1 a.delete
     Wait Until Page Contains  Do you really want to delete this item?
@@ -70,12 +70,12 @@ Test Media View Reorder
     Click Link  link=n1
     Click Link  link=Media
 
-    [Documentation]  Images in the original order.
+    # images in the original order
     Page Should Contain Element  css=#sortable-img1.sort-0
     Page Should Contain Element  css=#sortable-img2.sort-1
     Page Should Contain Element  css=#sortable-img3.sort-2
 
-    [Documentation]  Move 3th image to the left.
+    # move 3th image to the left
     Drag And Drop  css=#sortable-img3.sort-2  css=.ui-sortable li:nth-of-type(1)
     Execute JavaScript  window.update_sortable($('#sortable-img3'), -2)
 
