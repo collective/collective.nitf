@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Package is now compatible with Plone 5.
+  [hvelarde]
+
 - Fix upgrade step to work with both, Archetypes and Dexterity-based collections.
   [rodfersou]
 
