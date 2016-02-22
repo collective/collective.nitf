@@ -28,9 +28,9 @@ class NITF(View):
         return 'other'
 
     MEDIA = """
-<media media-type="%s">
-    <media-reference mime-type="%s" source="%s" alternate-text="%s"%s%s />
-    <media-caption>%s</media-caption>
+<media media-type="{0}">
+    <media-reference mime-type="{1}" source="{2}" alternate-text="{3}"{4}{5} />
+    <media-caption>{6}</media-caption>
 </media>"""
 
     def get_media(self):
@@ -51,11 +51,11 @@ class NITF(View):
             caption = obj.Description()
             # we only include height and/or width if we have a value for them
             height = obj.getHeight()
-            height = height and ' height="%s"' % obj.getHeight() or ''
+            height = height and ' height="{0}"'.format(obj.getHeight() or '')
             width = obj.getWidth()
-            width = width and ' width="%s"' % obj.getWidth() or ''
-            m = self.MEDIA % (mediatype, mimetype, source, alternate_text,
-                              height, width, caption)
+            width = width and ' width="{0}"'.format(obj.getWidth() or '')
+            m = self.MEDIA.format(
+                mediatype, mimetype, source, alternate_text, height, width, caption)
             media.append(m)
 
         return media

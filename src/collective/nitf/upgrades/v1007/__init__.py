@@ -3,6 +3,8 @@ from collective.nitf.config import PROJECTNAME
 from plone import api
 
 import logging
+
+
 logger = logging.getLogger(PROJECTNAME)
 
 

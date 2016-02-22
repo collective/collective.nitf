@@ -109,43 +109,40 @@ class RenderTest(unittest.TestCase):
 
         # Let's create 15 nitf's for each of 3 different sections
         for index in range(1, 16):
-            self.folder.invokeFactory('collective.nitf.content',
-                                      'section1-nitf-%s' % index)
-            n = self.folder['section1-nitf-%s' % index]
-            n.title = 'Section 1 Nitf %s' % index
+            self.folder.invokeFactory(
+                'collective.nitf.content', 'section1-nitf-{0}'.format(index))
+            n = self.folder['section1-nitf-{0}'.format(index)]
+            n.title = 'Section 1 Nitf {0}'.format(index)
             n.section = 'Section 1'
-            n.genre = 'Genre %s' % index
-            n.created = DateTime('%(year)s/1/%(index)s %(index)s:00:00' %
-                                 {'year': DateTime().year(),
-                                  'index': index})
+            n.genre = 'Genre {0}'.format(index)
+            n.created = DateTime('{year}/1/{index} {index}:00:00'.format(
+                year=DateTime().year(), index=index))
             n.reindexObject()
             # After 5 indexes, publish
             if index % 5 == 0:
                 self.wf.doActionFor(n, 'publish')
 
-            self.folder.invokeFactory('collective.nitf.content',
-                                      'section2-nitf-%s' % index)
-            n = self.folder['section2-nitf-%s' % index]
-            n.title = 'Section 2 Nitf %s' % index
+            self.folder.invokeFactory(
+                'collective.nitf.content', 'section2-nitf-{0}'.format(index))
+            n = self.folder['section2-nitf-{0}'.format(index)]
+            n.title = 'Section 2 Nitf {0}'.format(index)
             n.section = 'Section 2'
-            n.genre = 'Genre %s' % index
-            n.created = DateTime('%(year)s/2/%(index)s %(index)s:00:00' %
-                                 {'year': DateTime().year(),
-                                  'index': index})
+            n.genre = 'Genre {0}'.format(index)
+            n.created = DateTime('{year}/2/{index} {index}:00:00'.format(
+                year=DateTime().year(), index=index))
             n.reindexObject()
             # After 5 indexes, publish
             if index % 5 == 0:
                 self.wf.doActionFor(n, 'publish')
 
-            self.folder.invokeFactory('collective.nitf.content',
-                                      'section3-nitf-%s' % index)
-            n = self.folder['section3-nitf-%s' % index]
-            n.title = 'Section 3 Nitf %s' % index
+            self.folder.invokeFactory(
+                'collective.nitf.content', 'section3-nitf-{0}'.format(index))
+            n = self.folder['section3-nitf-{0}'.format(index)]
+            n.title = 'Section 3 Nitf {0}'.format(index)
             n.section = 'Section 3'
-            n.genre = 'Genre %s' % index
-            n.created = DateTime('%(year)s/3/%(index)s %(index)s:00:00' %
-                                 {'year': DateTime().year(),
-                                  'index': index})
+            n.genre = 'Genre {0}'.format(index)
+            n.created = DateTime('{year}/3/{index} {index}:00:00'.format(
+                year=DateTime().year(), index=index))
 
             n.reindexObject()
             # After 5 indexes, publish
