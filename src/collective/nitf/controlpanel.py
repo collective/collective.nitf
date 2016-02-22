@@ -5,8 +5,9 @@ from collective.nitf import config
 from collective.nitf.config import DEFAULT_GENRE
 from collective.nitf.config import DEFAULT_SECTION
 from plone.app.registry.browser import controlpanel
-from zope import schema
 from plone.directives import form
+from zope import schema
+
 
 PORTALTYPES = 'plone.app.vocabularies.ReallyUserFriendlyTypes'
 

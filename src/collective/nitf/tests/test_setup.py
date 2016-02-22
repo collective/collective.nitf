@@ -10,6 +10,7 @@ from plone.testing.z2 import Browser
 
 import unittest
 
+
 DEPENDENCIES = [
     # 'collective.js.charcount',
     'collective.js.cycle2',

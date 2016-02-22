@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.config import JS_RESOURCES
 from AccessControl import Unauthorized
+from collective.nitf.config import JS_RESOURCES
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.tests.test_content import zptlogo
