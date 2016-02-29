@@ -13,7 +13,7 @@ from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.formlib import form
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -121,14 +121,13 @@ class ILatestSectionableNITFPortlet(IPortletDataProvider):
             default_query='path:'))
 
 
+@implementer(ILatestSectionableNITFPortlet)
 class Assignment(base.Assignment):
     """
     Portlet assignment.
     This is what is actually managed through the portlets UI and associated
     with columns.
     """
-
-    implements(ILatestSectionableNITFPortlet)
 
     header = u''
     limit = 10

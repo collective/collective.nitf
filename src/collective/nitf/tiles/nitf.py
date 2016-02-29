@@ -9,7 +9,7 @@ from plone.autoform import directives as form
 from plone.tiles.interfaces import ITileDataManager
 from zope import schema
 from zope.browserpage import ViewPageTemplateFile
-from zope.interface import implements
+from zope.interface import implementer
 
 
 class INITFTile(IBasicTile):
@@ -35,11 +35,10 @@ class INITFTile(IBasicTile):
     )
 
 
+@implementer(INITFTile)
 class NITFTile(BasicTile):
 
     """A tile that shows information about a News Article."""
-
-    implements(INITFTile)
 
     index = ViewPageTemplateFile('nitf.pt')
     is_configurable = True
