@@ -53,3 +53,17 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
         self.assertIn(u'foo', rendered)
         self.assertIn(u'bar', rendered)
         self.assertIn(u'baz', rendered)
+
+    def test_alt_atribute_present_in_image(self):
+        # https://github.com/collective/collective.nitf/issues/152
+        from collective.nitf.tests.test_content import zptlogo
+
+        with api.env.adopt_roles(['Manager']):
+            n1 = api.content.create(
+                self.portal, 'collective.nitf.content', title='Lorem ipsum')
+
+        api.content.create(n1, 'Image', title='Neque porro', image=zptlogo)
+        self.tile.populate_with_object(n1)
+        rendered = self.tile()
+        # title of the news article is used as alt attribute
+        self.assertIn('alt="Lorem ipsum"', rendered)

@@ -2,14 +2,13 @@
 from collective.nitf.interfaces import INITF
 from Products.CMFPlone.browser.syndication.adapters import DexterityItem
 from Products.CMFPlone.interfaces.syndication import IFeed
-from zope.component import adapts
+from zope.component import adapter
 
 
+@adapter(INITF, IFeed)
 class BylineFeed(DexterityItem):
 
     """Adapter to honor the author of a News Article in the syndication feed."""
-
-    adapts(INITF, IFeed)
 
     @property
     def author_name(self):

@@ -4,14 +4,13 @@ from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
-from zope.interface import implements
+from zope.interface import implementer
 
 
+@implementer(INITF)
 class NITF(Container):
 
     """A News Article based on the News Industry Text Format specification."""
-
-    implements(INITF)
 
     def is_empty(self):
         """Return True if the container has no files nor links inside.
