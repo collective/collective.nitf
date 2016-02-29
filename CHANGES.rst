@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.0b1 (unreleased)
+2.0b1 (2016-02-29)
 ^^^^^^^^^^^^^^^^^^
 
 - Show title of news article as ``alt`` attribute on tile's image.
