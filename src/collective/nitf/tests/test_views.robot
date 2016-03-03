@@ -7,6 +7,8 @@ Library  Remote  ${PLONE_URL}/RobotRemote
 Suite Setup  Open Test Browser
 Suite Teardown  Close all browsers
 
+Resource  ${CMFPLONE_SELECTORS}
+
 *** Variables ***
 
 ${title} =  Miracle Cure
@@ -24,7 +26,11 @@ Test Edit image from Media
     Log Source
     Mouse Over  css=li#sortable-img1
     Click Link  css=li#sortable-img1 a.edit
-    Wait Until Page Contains Element  css=.pb-ajax form[name=edit_form]
+
+    Run keyword if  '${CMFPLONE_VERSION}'.startswith('5.')
+    ...  Click button  Confirm action
+
+    Wait Until Page Contains Element  ${IMAGE_EDIT_FORM_OVERLAY}
     Click Button  Save
 
 

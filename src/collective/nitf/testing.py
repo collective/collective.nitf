@@ -7,12 +7,15 @@ the tile included for that package.
 For Plone 5 we need to install plone.app.contenttypes.
 """
 from PIL import Image
+
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import quickInstallProduct
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.namedfile import NamedImage
 from plone.testing import z2
 from StringIO import StringIO
 from z3c.relationfield import RelationValue
@@ -38,13 +41,16 @@ class Fixture(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        import collective.cover
-        self.loadZCML(package=collective.cover)
+        import Products.Archetypes
+        self.loadZCML(package=Products.Archetypes)
+        # import collective.cover
+        # self.loadZCML(package=collective.cover)
         import collective.nitf
         self.loadZCML(package=collective.nitf)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(portal, 'collective.cover:default')
+        quickInstallProduct(portal, 'Products.Archetypes')
+        # self.applyProfile(portal, 'collective.cover:default')
         self.applyProfile(portal, 'collective.nitf:default')
 
         portal_workflow = portal['portal_workflow']
@@ -95,14 +101,19 @@ class RobotFixture(Fixture):
     def setUpPloneSite(self, portal):
         super(RobotFixture, self).setUpPloneSite(portal)
         setRoles(portal, TEST_USER_ID, ['Manager'])
-        portal.invokeFactory('collective.nitf.content', 'related')
-        portal.invokeFactory('collective.nitf.content', 'n1')
+        portal.invokeFactory('collective.nitf.content', 'related', title='related')  # noqa
+        portal.invokeFactory('collective.nitf.content', 'n1', title='n1')
         portal.n1.invokeFactory('Image', 'img1')
         portal.n1.invokeFactory('Image', 'img2')
         portal.n1.invokeFactory('Image', 'img3')
-        portal.n1.img1.setImage(generate_jpeg(50, 50))
-        portal.n1.img2.setImage(generate_jpeg(50, 50))
-        portal.n1.img3.setImage(generate_jpeg(50, 50))
+        try:
+            portal.n1.img1.setImage(generate_jpeg(50, 50))
+            portal.n1.img2.setImage(generate_jpeg(50, 50))
+            portal.n1.img3.setImage(generate_jpeg(50, 50))
+        except AttributeError:
+            portal.n1.img1.image = NamedImage(generate_jpeg(50, 50))
+            portal.n1.img2.image = NamedImage(generate_jpeg(50, 50))
+            portal.n1.img3.image = NamedImage(generate_jpeg(50, 50))
         intids = getUtility(IIntIds)
         to_id = intids.getId(portal.related)
         portal.n1.relatedItems = [RelationValue(to_id), ]
