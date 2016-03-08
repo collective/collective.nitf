@@ -4,7 +4,6 @@ from collective.cover.tiles.basic import IBasicTile
 from collective.cover.tiles.configuration_view import IDefaultConfigureForm
 from collective.nitf import _
 from collective.nitf.interfaces import INITF
-from plone import api
 from plone.autoform import directives as form
 from plone.tiles.interfaces import ITileDataManager
 from zope import schema
@@ -80,9 +79,3 @@ class NITFTile(BasicTile):
               <a href="{href}">{title}</a>
             </{tag}>
             """.format(tag=tag, title=title, href=href)
-
-    @property
-    def date(self):
-        """Return the date of the object, localized."""
-        date = super(NITFTile, self).Date()
-        return api.portal.get_localized_time(date, long_format=True)

@@ -6,6 +6,12 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Fix tile date format.
+  [hvelarde]
+
+- Avoid rising exceptions when content referenced in tile is not available (fixes `#154`_).
+  [hvelarde, rodfersou]
+
 - Remove hard dependency on plone.app.referenceablebehavior as Archetypes is no longer the default framework in Plone 5.
   Under Plone < 5.0 you should now explicitly add it to the `eggs` part of your buildout configuration to avoid issues while upgrading.
   [hvelarde]
@@ -125,3 +131,4 @@ There's a frood who really knows where his towel is.
 .. _`#128`: https://github.com/collective/collective.nitf/issues/128
 .. _`#133`: https://github.com/collective/collective.nitf/issues/133
 .. _`#137`: https://github.com/collective/collective.nitf/issues/137
+.. _`#154`: https://github.com/collective/collective.nitf/issues/154
