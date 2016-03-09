@@ -2,10 +2,8 @@
 from collective.nitf.interfaces import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
-from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.fti import DexterityFTI
 from plone.dexterity.interfaces import IDexterityFTI
-from plone.uuid.interfaces import IAttributeUUID
 from StringIO import StringIO
 from zope.component import createObject
 from zope.component import queryUtility
@@ -69,10 +67,6 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_default_urgency(self):
         from collective.nitf.config import DEFAULT_URGENCY
         self.assertEqual(self.n1.urgency, DEFAULT_URGENCY)
-
-    def test_is_referenceable(self):
-        self.assertTrue(IReferenceable.providedBy(self.n1))
-        self.assertTrue(IAttributeUUID.providedBy(self.n1))
 
     def test_section_behavior(self):
         from collective.nitf.behaviors.interfaces import ISection
