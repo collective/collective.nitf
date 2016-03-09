@@ -9,6 +9,7 @@
       description="Upgrade collective.nitf to v2000"
       directory="profile"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
       />
 
   <genericsetup:upgradeSteps

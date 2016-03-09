@@ -33,6 +33,5 @@
       profile="collective.nitf:default" />
 
   <utility factory=".setuphandlers.HiddenProfiles" name="collective.nitf" />
-  <utility factory=".setuphandlers.HiddenProducts" name="collective.nitf" />
 
 </configure>

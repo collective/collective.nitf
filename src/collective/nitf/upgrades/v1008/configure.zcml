@@ -10,6 +10,7 @@
       directory="profile"
       description="Update collective.nitf to v1008."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
       />
 
   <genericsetup:upgradeSteps
