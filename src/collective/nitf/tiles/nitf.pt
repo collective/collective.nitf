@@ -6,7 +6,7 @@
     i18n:domain="collective.nitf">
 
 <body tal:define="is_empty nocall:view/is_empty">
-  <p tal:condition="python:is_empty and view.is_compose_mode()">
+  <p tal:condition="python:is_empty() and view.is_compose_mode()" i18n:translate="">
     Drag&amp;drop a News Article here.
   </p>
 
@@ -51,9 +51,16 @@
         <p class="" tal:content="python:field['content']">Section</p>
       </tal:section>
 
-      <tal:date condition="python:field['id'] == 'date'">
-        <p class="" tal:content="view/date">May 5</p>
-      </tal:date>
+      <tal:datetime condition="python:field['id'] == 'date'">
+        <time
+            tal:define="datetime python:view.Date();
+                        format python:field.get('format', 'datetime')"
+            tal:condition="datetime"
+            tal:attributes="datetime datetime"
+            tal:content="python:view.get_localized_time(datetime, format)">
+          Jul 15, 2015 01:23 PM
+        </time>
+      </tal:datetime>
 
       <tal:subjects condition="python:field['id'] == 'subjects'">
         <span metal:use-macro="context/@@tile_macros/subjects" />

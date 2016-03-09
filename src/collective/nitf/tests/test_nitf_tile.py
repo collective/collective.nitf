@@ -3,6 +3,7 @@ from collective.cover.tests.base import TestTileMixin
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.tiles.nitf import INITFTile
 from collective.nitf.tiles.nitf import NITFTile
+from lxml import etree
 from mock import Mock
 from plone import api
 
@@ -42,17 +43,18 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
         self.tile.is_compose_mode = Mock(return_value=False)
         self.assertNotIn(msg, self.tile())
 
-    def test_render_title(self):
+    def test_render(self):
         kwargs = dict(title=u'foo', subtitle=u'bar', section=u'baz')
         with api.env.adopt_roles(['Manager']):
             n1 = api.content.create(
                 self.portal, 'collective.nitf.content', 'n1', **kwargs)
 
         self.tile.populate_with_object(n1)
-        rendered = self.tile()
-        self.assertIn(u'foo', rendered)
-        self.assertIn(u'bar', rendered)
-        self.assertIn(u'baz', rendered)
+        html = etree.HTML(self.tile())
+        self.assertIn('foo', html.xpath('//h2/a/text()'))
+        self.assertIn('bar', html.xpath('//p/text()'))
+        self.assertIn('baz', html.xpath('//p/text()'))
+        self.assertTrue(html.xpath('//time'))
 
     def test_alt_atribute_present_in_image(self):
         # https://github.com/collective/collective.nitf/issues/152
@@ -64,6 +66,21 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
 
         api.content.create(n1, 'Image', title='Neque porro', image=zptlogo)
         self.tile.populate_with_object(n1)
-        rendered = self.tile()
+        html = etree.HTML(self.tile())
         # title of the news article is used as alt attribute
-        self.assertIn('alt="Lorem ipsum"', rendered)
+        self.assertIn('Lorem ipsum', html.xpath('//img/@alt'))
+
+    def test_render_deleted_object(self):
+        # https://github.com/collective/collective.nitf/issues/154
+        with api.env.adopt_roles(['Manager']):
+            n1 = api.content.create(
+                self.portal, 'collective.nitf.content', title='Lorem ipsum')
+
+        self.tile.populate_with_object(n1)
+        api.content.delete(n1)
+        # tile's data is cached; reinstantiate it
+        self.tile = self.cover.restrictedTraverse('@@collective.nitf/test')
+        html = etree.HTML(self.tile())
+        # some metadata is still present
+        self.assertIn('Lorem ipsum', html.xpath('//h2/a/text()'))
+        self.assertFalse(html.xpath('//time'))  # date is ignored
