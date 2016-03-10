@@ -12,8 +12,6 @@ from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.testing import z2
 from StringIO import StringIO
 from z3c.relationfield import RelationValue
@@ -63,7 +61,8 @@ class Fixture(PloneSandboxLayer):
         self.applyProfile(portal, 'collective.nitf:default')
 
         portal_workflow = portal['portal_workflow']
-        portal_workflow.setDefaultChain('simple_publication_workflow')
+        portal_workflow.setChainForPortalTypes(
+            ('collective.nitf.content',), 'simple_publication_workflow')
 
 
 def generate_jpeg(width, height):
@@ -108,15 +107,19 @@ class RobotFixture(Fixture):
 
     def setUpPloneSite(self, portal):
         super(RobotFixture, self).setUpPloneSite(portal)
-        setRoles(portal, TEST_USER_ID, ['Manager'])
-        portal.invokeFactory('collective.nitf.content', 'related')
-        portal.invokeFactory('collective.nitf.content', 'n1')
+        with api.env.adopt_roles(['Manager']):
+            api.content.create(
+                portal, 'collective.nitf.content', 'related')
+            api.content.create(
+                portal, 'collective.nitf.content', 'n1')
+
+        from collective.nitf.tests.api_hacks import set_image_field
         portal.n1.invokeFactory('Image', 'img1')
         portal.n1.invokeFactory('Image', 'img2')
         portal.n1.invokeFactory('Image', 'img3')
-        portal.n1.img1.setImage(generate_jpeg(50, 50))
-        portal.n1.img2.setImage(generate_jpeg(50, 50))
-        portal.n1.img3.setImage(generate_jpeg(50, 50))
+        set_image_field(portal['img1'], generate_jpeg(50, 50), 'image/png')
+        set_image_field(portal['img2'], generate_jpeg(50, 50), 'image/png')
+        set_image_field(portal['img3'], generate_jpeg(50, 50), 'image/png')
         intids = getUtility(IIntIds)
         to_id = intids.getId(portal.related)
         portal.n1.relatedItems = [RelationValue(to_id), ]
