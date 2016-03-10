@@ -108,21 +108,19 @@ class RobotFixture(Fixture):
     def setUpPloneSite(self, portal):
         super(RobotFixture, self).setUpPloneSite(portal)
         with api.env.adopt_roles(['Manager']):
-            api.content.create(
-                portal, 'collective.nitf.content', 'related')
-            api.content.create(
-                portal, 'collective.nitf.content', 'n1')
+            api.content.create(portal, 'collective.nitf.content', 'related')
+            obj = api.content.create(portal, 'collective.nitf.content', 'n1')
 
         from collective.nitf.tests.api_hacks import set_image_field
-        portal.n1.invokeFactory('Image', 'img1')
-        portal.n1.invokeFactory('Image', 'img2')
-        portal.n1.invokeFactory('Image', 'img3')
-        set_image_field(portal['img1'], generate_jpeg(50, 50), 'image/png')
-        set_image_field(portal['img2'], generate_jpeg(50, 50), 'image/png')
-        set_image_field(portal['img3'], generate_jpeg(50, 50), 'image/png')
+        api.content.create(obj, 'Image', 'img1')
+        api.content.create(obj, 'Image', 'img2')
+        api.content.create(obj, 'Image', 'img3')
+        set_image_field(obj['img1'], generate_jpeg(50, 50), 'image/png')
+        set_image_field(obj['img2'], generate_jpeg(50, 50), 'image/png')
+        set_image_field(obj['img3'], generate_jpeg(50, 50), 'image/png')
         intids = getUtility(IIntIds)
         to_id = intids.getId(portal.related)
-        portal.n1.relatedItems = [RelationValue(to_id), ]
+        portal.n1.relatedItems = [RelationValue(to_id)]
         open('/tmp/img1.jpg', 'w').write(generate_jpeg(50, 50))
         open('/tmp/txt1.txt', 'w').write(generate_text(256))
 

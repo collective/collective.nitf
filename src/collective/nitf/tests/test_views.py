@@ -3,6 +3,7 @@ from AccessControl import Unauthorized
 from collective.nitf.config import JS_RESOURCES
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.tests.api_hacks import set_image_field
 from collective.nitf.tests.test_content import zptlogo
 from plone import api
 from plone.app.customerize import registration
@@ -48,7 +49,8 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
 
     def test_default_view_render(self):
         self.assertNotIn('<div id="media">', self.view())
-        api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
+        img = api.content.create(self.n1, 'Image', title='foo')
+        set_image_field(img, zptlogo, 'image/gif')
         self.assertIn('<div id="media">', self.view())
 
     def test_render_js_resources(self):
@@ -60,13 +62,12 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         images = self.view.get_images()
         self.assertEqual(len(images), 0)
 
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
         images = self.view.get_images()
         self.assertEqual(len(images), 1)
-        self.assertEqual(images[0].getObject().id, 'foo')
-        self.assertEqual(images[0].getObject().Title(), 'bar')
-        self.assertEqual(images[0].getObject().Description(), 'baz')
+        self.assertEqual(images[0].getObject().Title(), 'foo')
+        self.assertEqual(images[0].getObject().Description(), 'bar')
 
     def test_get_files(self):
         files = self.view.get_files()
@@ -94,12 +95,13 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         media = self.view.get_media()
         self.assertEqual(len(media), 0)
 
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
+        img = api.content.create(self.n1, 'Image', title='foo')
+        set_image_field(img, zptlogo, 'image/gif')
         self.n1.invokeFactory('File', 'bar', file=StringIO(zptlogo))
         self.n1.invokeFactory('Link', 'baz', remoteUrl='http://baz/')
         media = self.view.get_media()
         self.assertEqual(len(media), 3)
-        self.assertEqual(media[0].getObject().id, 'foo')
+        self.assertEqual(media[0].getObject().Title(), 'foo')
         self.assertEqual(media[1].getObject().id, 'bar')
         self.assertEqual(media[2].getObject().id, 'baz')
 
@@ -133,7 +135,8 @@ class TextOnlyViewTestCase(TestViewMixin, BaseViewTestCase):
 
     def test_text_only_view_render(self):
         self.assertNotIn('<div id="media">', self.view())
-        api.content.create(self.n1, 'Image', 'foo', image=StringIO(zptlogo))
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
         self.assertNotIn('<div id="media">', self.view())
 
     def test_render_js_resources(self):
@@ -162,7 +165,8 @@ class NITFViewTestCase(BaseViewTestCase):
         get_media = self.view.get_media
         self.assertEqual(len(get_media()), 0)
 
-        self.n1.invokeFactory('Image', 'foo', image=StringIO(zptlogo))
+        img = api.content.create(self.n1, 'Image', title='foo')
+        set_image_field(img, zptlogo, 'image/gif')
         self.assertEqual(len(get_media()), 1)
 
 
@@ -200,9 +204,8 @@ class TraversalViewTestCase(unittest.TestCase):
                 self.portal, 'collective.nitf.content', 'n1')
 
     def test_images_traversal(self):
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
-
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
         scales = self.n1.unrestrictedTraverse('@@images')
         image = scales.scale('image')
         self.assertEqual(image.data, zptlogo)
