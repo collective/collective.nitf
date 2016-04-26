@@ -1,15 +1,9 @@
 *** Settings ***
 
-Resource  plone/app/robotframework/keywords.robot
-Variables  plone/app/testing/interfaces.py
-Library  Remote  ${PLONE_URL}/RobotRemote
+Resource  keywords.robot
 
 Suite Setup  Open Test Browser
 Suite Teardown  Close all browsers
-
-*** Variables ***
-
-${title} =  Miracle Cure
 
 *** Test cases ***
 
@@ -21,12 +15,10 @@ Test Edit image from Media
     Click Link  link=Media
 
     # click on edit and wait until overlay is open
-    Log Source
     Mouse Over  css=li#sortable-img1
     Click Link  css=li#sortable-img1 a.edit
     Wait Until Page Contains Element  css=.pb-ajax form[name=edit_form]
     Click Button  Save
-
 
 Test Delete image from Media
     Enable Autologin as  Site Administrator
@@ -50,9 +42,7 @@ Test Delete image from Media
     Click Element  css=.pb-ajax input[value=Delete]
     ${timeout} =  Get Selenium Timeout
     ${implicit_wait} =  Get Selenium Implicit Wait
-    Wait Until Keyword Succeeds  ${timeout}  ${implicit_wait}
-    ...                          Page Should Not Contain Element  css=li#sortable-img1
-
+    Wait Until Page Does Not Contain Element  css=li#sortable-img1
 
 Test Change Views
     Enable Autologin as  Site Administrator
@@ -93,13 +83,3 @@ Test Media View Reorder
     Page Should Contain Element  css=#sortable-img3.sort-0
     Page Should Contain Element  css=#sortable-img2.sort-1
     Page Should Contain Element  css=#sortable-img1.sort-2
-
-*** Keywords ***
-
-Change View
-    [arguments]  ${view}
-
-    Open Display Menu
-    Click Link  link=${view}
-    # XXX: this causes an AssertionError in Travis, but not locally
-    # Page Should Contain  View changed.
