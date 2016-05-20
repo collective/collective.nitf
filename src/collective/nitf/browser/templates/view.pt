@@ -15,8 +15,7 @@
   <body>
     <metal:main fill-slot="main">
       <article vocab="http://schema.org/" typeof="Article"
-          prefix="rnews: http://iptc.org/std/rNews/2011-10-07#"
-          tal:define="text context/text/output|nothing">
+          prefix="rnews: http://iptc.org/std/rNews/2011-10-07#">
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
         <p property="rnews:articleSection" class="section"
@@ -34,6 +33,8 @@
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <div id="content-core">
+        <metal:block define-macro="content-core"
+          tal:define="text context/text/output|nothing">
           <p tal:define="is_editable context/@@plone_context_state/is_editable"
              tal:condition="python:not text and is_editable"
              i18n:domain="plone"
@@ -46,6 +47,7 @@
                tal:condition="text">
               <div property="rnews:articleBody" tal:content="structure text">The body</div>
           </div>
+        </metal:block>
         </div>
 
         <div tal:replace="structure provider:plone.belowcontentbody" />

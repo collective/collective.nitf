@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Fix exception when syndicalize NITF (closes `161`_).
+  [rodfersou]
+
 - Fix tile date format.
   [hvelarde]
 
@@ -132,3 +135,4 @@ There's a frood who really knows where his towel is.
 .. _`#133`: https://github.com/collective/collective.nitf/issues/133
 .. _`#137`: https://github.com/collective/collective.nitf/issues/137
 .. _`#154`: https://github.com/collective/collective.nitf/issues/154
+.. _`#161`: https://github.com/collective/collective.nitf/issues/161
