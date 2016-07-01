@@ -1,10 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="collective.nitf">
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="collective.nitf">
   <head>
     <metal:javascriptslot fill-slot="javascript_head_slot">
       <tal:scripts repeat="js view/js_resources|nothing">
@@ -19,35 +19,34 @@
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
         <p property="rnews:articleSection" class="section"
-           tal:content="context/section">Section</p>
-        <h2 property="rnews:alternativeHeadline" class="nitfSubtitle"
-            tal:content="context/subtitle">Subtitle</h2>
+            tal:content="context/section">Section</p>
+        <p property="rnews:alternativeHeadline" class="nitfSubtitle"
+            tal:content="context/subtitle">Subtitle</p>
         <h1 property="rnews:headline" class="documentFirstHeading"
             tal:content="context/title">Title</h1>
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
         <div property="rnews:description" class="documentDescription"
-             tal:content="context/description">Description</div>
+            tal:content="context/description">Description</div>
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <div id="content-core">
-        <metal:block define-macro="content-core"
-          tal:define="text context/text/output|nothing">
-          <p tal:define="is_editable context/@@plone_context_state/is_editable"
-             tal:condition="python:not text and is_editable"
-             i18n:domain="plone"
-             i18n:translate="no_body_text"
-             class="discreet">
+          <metal:content-core define-macro="content-core"
+              tal:define="text context/text/output|nothing">
+            <p class="discreet"
+                tal:define="is_editable context/@@plone_context_state/is_editable"
+                tal:condition="python:not text and is_editable"
+                i18n:domain="plone"
+                i18n:translate="no_body_text">
               This item does not have any body text, click the edit tab to change it.
-          </p>
+            </p>
 
-          <div id="parent-fieldname-text" class=""
-               tal:condition="text">
+            <div id="parent-fieldname-text" class="" tal:condition="text">
               <div property="rnews:articleBody" tal:content="structure text">The body</div>
-          </div>
-        </metal:block>
+            </div>
+          </metal:content-core>
         </div>
 
         <div tal:replace="structure provider:plone.belowcontentbody" />

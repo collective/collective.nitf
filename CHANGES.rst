@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Use ``<p>`` tag to display the News Article subtitle to avoid warnings on validation.
+  [hvelarde]
+
 - Fix exception when syndicalize NITF (closes `161`_).
   [rodfersou]
 
