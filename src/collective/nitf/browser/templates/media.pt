@@ -28,6 +28,7 @@
             var msg = "Position " + pos;
             var msg2 = "\nId " + a_id;
             var base = $("base").attr("href");
+            base = base.replace(/@@media$/, '');
             var move_url = base + "folder_moveitem";
             var query = {delta: "1", id: a_id};
             var ids = id_cleaner($("#sortable").sortable("toArray"));
