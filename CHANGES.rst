@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Fade in gallery to avoid show big galleries without cycle2 loaded.
+  [rodfersou]
+
 - Use collective.js.cycle2 Cycle2SlideShow utils class.
   [rodfersou]
 

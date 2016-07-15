@@ -126,6 +126,10 @@
     max-width: 768px;
     margin: 0 auto;
     margin-bottom: 20px;
+
+    opacity: 0;
+
+    filter: alpha(opacity=0);
 }
 .portaltype-collective-nitf-content.template-slideshow_view .cycle-slideshow,
 .portaltype-collective-nitf-content.template-slideshow_view .cycle-slideshow *
