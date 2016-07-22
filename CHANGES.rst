@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Use collective.js.cycle2 Cycle2SlideShow utils class.
+  [rodfersou]
+
 - Use ``<p>`` tag to display the News Article subtitle to avoid warnings on validation.
   [hvelarde]
 
