@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
-from collective.cover.tests.base import TestTileMixin
+"""Tests in this module are executed only if collective.cover is installed."""
+from collective.nitf.testing import HAS_COVER
 from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.tiles.nitf import INITFTile
-from collective.nitf.tiles.nitf import NITFTile
 from lxml import etree
 from mock import Mock
 from plone import api
 
 import unittest
+
+if HAS_COVER:
+    from collective.cover.tests.base import TestTileMixin
+    from collective.nitf.tiles.nitf import INITFTile
+    from collective.nitf.tiles.nitf import NITFTile
+else:
+    class TestTileMixin:
+        pass
+
+    def test_suite():
+        return unittest.TestSuite()
 
 
 class NITFTileTestCase(TestTileMixin, unittest.TestCase):
@@ -58,13 +68,16 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
 
     def test_alt_atribute_present_in_image(self):
         # https://github.com/collective/collective.nitf/issues/152
-        from collective.nitf.tests.test_content import zptlogo
+        from collective.nitf.testing import FRACTAL
+        from collective.nitf.tests.api_hacks import set_image_field
 
         with api.env.adopt_roles(['Manager']):
             n1 = api.content.create(
                 self.portal, 'collective.nitf.content', title='Lorem ipsum')
 
-        api.content.create(n1, 'Image', title='Neque porro', image=zptlogo)
+        image = api.content.create(n1, 'Image', title='Neque porro')
+        set_image_field(image, FRACTAL, 'image/jpeg')
+
         self.tile.populate_with_object(n1)
         html = etree.HTML(self.tile())
         # title of the news article is used as alt attribute

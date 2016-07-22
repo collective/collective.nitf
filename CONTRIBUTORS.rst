@@ -15,6 +15,7 @@ the following people:
 - Silvestre Huens
 - Érico Andrei
 - Rodrigo Ferreira de Souza
+- Wolfgang Beyer (`Mandelbrot image set <https://commons.wikimedia.org/wiki/File:Mandel_zoom_00_mandelbrot_set.jpg>`_ used in tests)
 
 You can find an updated list of package contributors on `GitHub`_.
 

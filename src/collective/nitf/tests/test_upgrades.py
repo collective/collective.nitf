@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.testing import IS_PLONE_5
 from plone import api
 from plone.registry import field
 from plone.registry.interfaces import IRegistry
@@ -84,6 +85,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertTrue(version >= self.to_version)
         self.assertEqual(self.total_steps, 4)
 
+    @unittest.skipIf(IS_PLONE_5, 'Test not supported under Plone 5')
     def test_character_counter_css_resources(self):
         title = u'Miscellaneous'
         step = self.get_upgrade_step(title)
@@ -104,6 +106,7 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         self.assertIn(new_css, csstool.getResourceIds())
 
+    @unittest.skipIf(IS_PLONE_5, 'Test not supported under Plone 5')
     def test_character_counter_js_resources(self):
         title = u'Miscellaneous'
         step = self.get_upgrade_step(title)
