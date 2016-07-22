@@ -1,67 +1,6 @@
 (function ($) {
   "use strict";
 
-  var SlideShow = (function() {
-    function SlideShow(el) {
-      var self = this;
-      self.$el = $(el);
-      self.proportion = 3 / 2;
-      self.bind_events();
-      self.fix_image_size();
-    }
-    SlideShow.prototype.$ = function(selector) {
-      var self = this;
-      return $(selector, self.$el);
-    };
-    SlideShow.prototype.bind_events = function() {
-      var self = this;
-      self.$('.cycle-player').on('cycle-next cycle-prev', self, self.sync_slideshows);
-      self.$('.cycle-carrossel .thumb-itens').on('click', self, self.thumbs_click);
-    };
-    SlideShow.prototype.fix_image_size = function() {
-      var self, max_height, max_width, i, len, ref, img, $player, $img;
-      self = this;
-
-      // Calc max_with and max_height
-      $player = self.$('.cycle-player');
-      max_width = $player.width();
-      max_height = max_width / self.proportion;
-      // Calc max_with and max_height
-
-      // Update properties when necessary
-      ref = self.$('.cycle-player img');
-      for (i = 0, len = ref.length; i < len; i++) {
-        img = ref[i];
-        $img = $(img);
-        if ($img.height() > $img.width()) {
-          $img.css('width', 'auto');
-          $img.height(max_height);
-        } else {
-          $img.width(max_width);
-          $img.height(max_height);
-        }
-      }
-    };
-
-    SlideShow.prototype.sync_slideshows = function(e, opts) {
-      var self, index, $player, $slideshows;
-      self = e.data;
-      $slideshows = self.$('.cycle-slideshow');
-      $slideshows.cycle('goto', opts.currSlide);
-    };
-
-    SlideShow.prototype.thumbs_click = function(e) {
-      var self, index, $thumbs, $slideshows;
-      self = e.data;
-      e.preventDefault();
-      $thumbs = self.$('.cycle-carrossel');
-      index = $thumbs.data('cycle.API').getSlideIndex(this);
-      $slideshows = self.$('.cycle-slideshow');
-      $slideshows.cycle('goto', index);
-    };
-    return SlideShow;
-  })();
-
   $(document).ready(function () {
     // If this is a NITF content with an image
     var nitf_view = $('body.portaltype-collective-nitf-content.template-view').length > 0;
@@ -85,7 +24,7 @@
             onLoad: function (e) {
               // Start cycle2
               $('.cycle-slideshow').cycle();
-              new SlideShow($('.slideshow-container'));
+              new cycle2SlideShow($('.slideshow-container'));
             }
           }
         });
@@ -110,14 +49,14 @@
         if (!window.pageYOffset) {
           hideAddressBar();
         }
-        new SlideShow($('.slideshow-container'));
+        new cycle2SlideShow($('.slideshow-container'));
       });
       window.addEventListener("orientationchange", hideAddressBar);
     }
   });
   $(window).load(function() {
     if ($('body.portaltype-collective-nitf-content.template-slideshow_view').length > 0) {
-      new SlideShow($('.slideshow-container'));
+      new cycle2SlideShow($('.slideshow-container'));
     }
   });
 })(jQuery);
