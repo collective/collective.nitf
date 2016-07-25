@@ -1,27 +1,21 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import PROJECTNAME
+from collective.nitf.testing import HAS_COVER
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.testing import IS_PLONE_5
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.browserlayer.utils import registered_layers
 
 import unittest
 
 
-DEPENDENCIES = [
-    # 'collective.js.charcount',
+DEPENDENCIES = (
     'collective.js.cycle2',
     'collective.js.jqueryui',
-]
+)
 
-JS = [
-    '++resource++collective.nitf/nitf.js',
-]
-
-CSS = [
-    '++resource++collective.nitf/styles.css',
-]
+JS = '++resource++collective.nitf/nitf.js'
+CSS = '++resource++collective.nitf/styles.css'
 
 
 class InstallTestCase(unittest.TestCase):
@@ -64,16 +58,17 @@ class InstallTestCase(unittest.TestCase):
         self.assertEqual(len(chain), 1)
         self.assertEqual(chain[0], 'one_state_workflow')
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_jsregistry(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
-        for id in JS:
-            self.assertIn(id, resource_ids, '{0} not installed'.format(id))
+        self.assertIn(JS, resource_ids)
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_cssregistry(self):
         resource_ids = self.portal.portal_css.getResourceIds()
-        for id in CSS:
-            self.assertIn(id, resource_ids, '{0} not installed'.format(id))
+        self.assertIn(CSS, resource_ids)
 
+    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
     def test_tile(self):
         tiles = api.portal.get_registry_record('plone.app.tiles')
         self.assertIn(u'collective.nitf', tiles)
@@ -86,8 +81,9 @@ class UninstallTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.qi = self.portal['portal_quickinstaller']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.qi.uninstallProducts(products=[PROJECTNAME])
+
+        with api.env.adopt_roles(['Manager']):
+            self.qi.uninstallProducts(products=[PROJECTNAME])
 
     def test_uninstalled(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
@@ -96,16 +92,17 @@ class UninstallTest(unittest.TestCase):
         layers = [l.getName() for l in registered_layers()]
         self.assertNotIn('INITFLayer', layers)
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_jsregistry_removed(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
-        for id in JS:
-            self.assertNotIn(id, resource_ids, '{0} not removed'.format(id))
+        self.assertNotIn(JS, resource_ids)
 
+    @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_cssregistry_removed(self):
         resource_ids = self.portal.portal_css.getResourceIds()
-        for id in CSS:
-            self.assertNotIn(id, resource_ids, '{0} not removed'.format(id))
+        self.assertNotIn(CSS, resource_ids)
 
+    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
     def test_tile_removed(self):
         tiles = api.portal.get_registry_record('plone.app.tiles')
         self.assertNotIn(u'collective.nitf', tiles)

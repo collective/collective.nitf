@@ -49,11 +49,15 @@ class NITF(View):
             mediatype = self._get_mediatype(mimetype)
             alternate_text = obj.Title()
             caption = obj.Description()
+
             # we only include height and/or width if we have a value for them
-            height = obj.getHeight()
-            height = height and ' height="{0}"'.format(obj.getHeight() or '')
-            width = obj.getWidth()
-            width = width and ' width="{0}"'.format(obj.getWidth() or '')
+            try:
+                height, width = obj.getHeight(), obj.getWidth()
+                height = ' height="{0}"'.format(height) if height else ''
+                width = ' width="{0}"'.format(width) if width else ''
+            except AttributeError:  # FIXME: Dexterity
+                width = height = ''
+
             m = self.MEDIA.format(
                 mediatype, mimetype, source, alternate_text, height, width, caption)
             media.append(m)

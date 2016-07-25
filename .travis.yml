@@ -6,21 +6,22 @@ cache:
   - eggs
   - parts/node
 env:
-  - PLONE_VERSION=4.3
-  - PLONE_VERSION=5.0
+- PLONE_VERSION=4.3 TEST_EGGS=collective.cover[test]
+- PLONE_VERSION=4.3 TEST_EGGS=plone.app.contenttypes
+- PLONE_VERSION=5.0
 matrix:
   allow_failures:
-    - env: PLONE_VERSION=5.0
+  - env: PLONE_VERSION=4.3 TEST_EGGS=plone.app.contenttypes
+  - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
 - sed -ie "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
 - sed -ie "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
 - python bootstrap.py
-- bin/buildout annotate
-- bin/buildout -Nq
+- bin/buildout buildout:test-eggs=$TEST_EGGS annotate
+- bin/buildout buildout:test-eggs=$TEST_EGGS
 before_script:
 - export DISPLAY=:99.0
-- export GROK_DISABLE_TEMPLATE_WARNING=on
 - sh -e /etc/init.d/xvfb start
 - firefox -v
 script:
@@ -28,7 +29,7 @@ script:
 - bin/test
 after_success:
 - bin/createcoverage -t "--layer=!Robot"
-- pip install -q coveralls
+- pip install coveralls
 - coveralls
 notifications:
   irc: irc.freenode.org#simplesconsultoria

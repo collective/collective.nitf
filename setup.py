@@ -79,7 +79,6 @@ setup(name='collective.nitf',
       ],
       extras_require={
           'test': [
-              'collective.cover[test]',
               'mock',
               'plone.app.customerize',
               'plone.app.robotframework',

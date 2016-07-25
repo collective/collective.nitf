@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.interfaces import INITF
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.tests.api_hacks import set_image_field
 from plone import api
-from plone.dexterity.fti import DexterityFTI
 from plone.dexterity.interfaces import IDexterityFTI
-from StringIO import StringIO
 from zope.component import createObject
 from zope.component import queryUtility
 
@@ -100,8 +99,8 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_image_scale(self):
         self.assertIsNone(self.n1.getImage())
 
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
 
         scales = self.n1.unrestrictedTraverse('@@images')
         scale = scales.scale('image', 'thumb')
@@ -111,160 +110,41 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_getImage(self):
         self.assertIsNone(self.n1.getImage())
 
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
         image = self.n1.getImage()
-        self.assertEqual(image.id, 'foo')
-        self.assertEqual(image.Title(), 'bar')
-        self.assertEqual(image.Description(), 'baz')
+        self.assertEqual(image.Title(), 'foo')
+        self.assertEqual(image.Description(), 'bar')
 
     def test_imageCaption(self):
-        imageCaption = self.n1.imageCaption
-        self.assertIsNone(imageCaption())
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
-        self.assertEqual(imageCaption(), 'baz')
+        self.assertIsNone(self.n1.imageCaption())
+
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
+        self.assertEqual(self.n1.imageCaption(), 'bar')
 
     def test_image_thumb(self):
-        thumb = self.n1.image_thumb
+        self.assertIsNone(self.n1.image_thumb())
 
-        # no images in news article, so no thumb must be present
-        self.assertIsNone(thumb())
-
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
-        self.assertIsNotNone(thumb())
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
+        self.assertIsNotNone(self.n1.image_thumb())
 
     def test_tag(self):
-        tag = self.n1.tag
+        self.assertIsNone(self.n1.tag())
 
-        # no images in news article, so no tag must be present
-        self.assertIsNone(tag())
+        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        set_image_field(img, zptlogo, 'image/gif')
 
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=StringIO(zptlogo))
-
-        # image title must be in both, alt and title attributes
-        self.assertIn('alt="baz" title="bar"', tag())
+        # image alt and title attributes
+        self.assertIn('alt="bar" title="foo"', self.n1.tag())
 
         # image size
-        self.assertIn('height="16" width="16', tag())
+        self.assertIn('height="16" width="16', self.n1.tag())
 
         # image scale using @@images
         self.assertIn(
-            'src="http://nohost/plone/n1/foo/@@images/', tag(scale='preview'))
+            'src="http://nohost/plone/n1/foo/@@images/', self.n1.tag(scale='preview'))
 
         # image class
-        self.assertIn('class="myClass"', tag(css_class='myClass'))
-
-
-IMAGE_SCHEMA = """<model xmlns="http://namespaces.plone.org/supermodel/schema"
-       xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
-       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-       i18n:domain="plone">
-  <schema>
-    <field name="title" type="zope.schema.TextLine">
-      <description />
-      <required>False</required>
-      <title>Title</title>
-    </field>
-    <field name="description" type="zope.schema.Text">
-      <description />
-      <required>False</required>
-      <title>Description</title>
-    </field>
-    <field name="image" type="plone.namedfile.field.NamedBlobImage"
-        marshal:primary="true">
-      <description />
-      <title i18n:translate="Image">Image</title>
-    </field>
-  </schema>
-</model>"""
-
-
-def dummy_image(data):
-    from plone.namedfile.file import NamedBlobImage
-    return NamedBlobImage(
-        data=data,
-        filename=u'zptlogo.gif')
-
-
-class DexterityImageTestCase(unittest.TestCase):
-
-    layer = INTEGRATION_TESTING
-
-    def setUpImageType(self):
-        portal = self.portal
-        tt = portal.portal_types
-        del tt['Image']
-        fti = DexterityFTI('Image')
-        portal.portal_types._setObject('Image', fti)
-        fti.model_source = IMAGE_SCHEMA
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-
-        with api.env.adopt_roles(['Manager']):
-            self.n1 = api.content.create(
-                self.portal, 'collective.nitf.content', 'n1')
-
-        self.setUpImageType()
-
-    def test_image_scale(self):
-        self.assertIsNone(self.n1.getImage())
-
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
-        view = self.n1.restrictedTraverse('@@images')
-        scale = view.scale('image', 'thumb')
-        self.assertEqual(scale.height, 16)
-        self.assertEqual(scale.width, 16)
-
-    def test_getImage(self):
-        self.assertIsNone(self.n1.getImage())
-
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
-        image = self.n1.getImage()
-        self.assertEqual(image.id, 'foo')
-        self.assertEqual(image.Title(), 'bar')
-        self.assertEqual(image.Description(), 'baz')
-
-    def test_imageCaption(self):
-        imageCaption = self.n1.imageCaption
-        self.assertIsNone(imageCaption())
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
-        self.assertEqual(imageCaption(), 'baz')
-
-    def test_image_thumb(self):
-        thumb = self.n1.image_thumb
-
-        # no images in news article, so no thumb must be present
-        self.assertIsNone(thumb())
-
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
-        self.assertIsNotNone(thumb())
-
-    def test_tag(self):
-        tag = self.n1.tag
-
-        # no images in news article, so no tag must be present
-        self.assertIsNone(tag())
-
-        self.n1.invokeFactory(
-            'Image', 'foo', title='bar', description='baz', image=dummy_image(zptlogo))
-
-        # image title must be in both, alt and title attributes
-        self.assertIn('alt="baz" title="bar"', tag())
-
-        # image size
-        self.assertIn('height="16" width="16', tag())
-
-        # image scale using @@images
-        self.assertIn(
-            'src="http://nohost/plone/n1/foo/@@images/', tag(scale='preview'))
-
-        # image class
-        self.assertIn('class="myClass"', tag(css_class='myClass'))
+        self.assertIn('class="myClass"', self.n1.tag(css_class='myClass'))

@@ -47,7 +47,7 @@ Create News Article
     Open Add New Menu
     Click Link  css=a#image
     Page Should Contain  Add Image
-    Choose File  css=#image_file  /tmp/img1.jpg
+    Choose File  css=#image_file  /tmp/640px-Mandel_zoom_00_mandelbrot_set.jpg
     Click Button  Save
     Page Should Contain  Changes saved
 
@@ -56,7 +56,7 @@ Create News Article
     Open Add New Menu
     Click Link  css=a#file
     Page Should Contain  Add File
-    Choose File  css=#file_file  /tmp/txt1.txt
+    Choose File  css=#file_file  /tmp/random.txt
     Click Button  Save
     Page Should Contain  Changes saved
 

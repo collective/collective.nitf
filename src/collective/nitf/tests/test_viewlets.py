@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-"""for more information on how to test viewlets, see:
-http://docs.plone.org/develop/plone/views/viewlets.html#finding-viewlets-programmatically
+"""Tests in this module are not executed in Plone 5 as the documentbyline
+viewlet is not visible by default. We need to find out how to fix that.
+
+For more information on how to test viewlets, see:
+http://docs.plone.org/develop/plone/views/viewlets.html
 """
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.testing import IS_PLONE_5
 from plone import api
 from Products.Five.browser import BrowserView as View
 from zope.component import getMultiAdapter
@@ -11,6 +15,10 @@ from zope.interface import alsoProvides
 from zope.viewlet.interfaces import IViewletManager
 
 import unittest
+
+if IS_PLONE_5:
+    def test_suite():
+        return unittest.TestSuite()
 
 
 class DocumentBylineViewletTestCase(unittest.TestCase):
