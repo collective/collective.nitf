@@ -11,6 +11,7 @@ env:
 - PLONE_VERSION=5.0
 matrix:
   allow_failures:
+  - env: PLONE_VERSION=4.3 TEST_EGGS=plone.app.contenttypes
   - env: PLONE_VERSION=5.0
   fast_finish: true
 install:
@@ -21,7 +22,6 @@ install:
 - bin/buildout buildout:test-eggs=$TEST_EGGS
 before_script:
 - export DISPLAY=:99.0
-- export GROK_DISABLE_TEMPLATE_WARNING=on
 - sh -e /etc/init.d/xvfb start
 - firefox -v
 script:
