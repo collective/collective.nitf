@@ -8,6 +8,7 @@ Suite Teardown  Close all browsers
 *** Test cases ***
 
 Test Edit image from Media
+    [Tags]  issue_172
     Enable Autologin as  Site Administrator
     Go to Homepage
 
