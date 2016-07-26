@@ -6,8 +6,8 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- The `getImage()` method of the `NITF` class is deprecated and will be removed on next release;
-  use `image()` instead.
+- The `getImage()` and `imageCaption()` methods of the `NITF` class are deprecated and will be removed on next release;
+  use `image()` and `media_caption()` instead.
   [hvelarde]
 
 - Fix issue with `collective.nitf.image` viewlet raising `AttributeError` when plone.app.contenttypes is installed (closes `169`_).

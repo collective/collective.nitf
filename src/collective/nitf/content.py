@@ -30,6 +30,20 @@ class NITF(Container):
         images = self.get_images()
         return images[0] if len(images) > 0 else None
 
+    def media_caption(self):
+        """Return the description of the first contained image."""
+        try:
+            return self.image().Description()
+        except AttributeError:
+            return u''
+
+    def media_producer(self):
+        """Return the author of the first contained image."""
+        try:
+            return self.image().Rights()
+        except AttributeError:
+            return u''
+
     # XXX: emulate News Item methods and
     #      deal with issues created by our fake image field
 
@@ -37,12 +51,9 @@ class NITF(Container):
     def getImage(self):
         return self.image()
 
+    @deprecation.deprecate('imageCaption() is deprecated; use media_caption.')
     def imageCaption(self):
-        """Return the description of the first contained image."""
-        try:
-            return self.image().Description()
-        except AttributeError:
-            return u''
+        return self.media_caption()
 
     image_thumb = image
 

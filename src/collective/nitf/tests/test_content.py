@@ -107,12 +107,19 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertEqual(scale.height, 16)
         self.assertEqual(scale.width, 16)
 
-    def test_imageCaption(self):
-        self.assertEqual(self.n1.imageCaption(), u'')
+    def test_media_caption(self):
+        self.assertEqual(self.n1.media_caption(), u'')
 
         img = api.content.create(self.n1, 'Image', title='foo', description='bar')
         set_image_field(img, zptlogo, 'image/gif')
-        self.assertEqual(self.n1.imageCaption(), 'bar')
+        self.assertEqual(self.n1.media_caption(), 'bar')
+
+    def test_media_producer(self):
+        self.assertEqual(self.n1.media_producer(), u'')
+
+        img = api.content.create(self.n1, 'Image', title='foo', rights='bar')
+        set_image_field(img, zptlogo, 'image/gif')
+        self.assertEqual(self.n1.media_producer(), 'bar')
 
     def test_image_thumb(self):
         self.assertIsNone(self.n1.image_thumb())
