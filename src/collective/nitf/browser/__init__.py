@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import JS_RESOURCES
 from plone import api
-from plone.app.imaging.scaling import ImageScaling as BaseImageScaling
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from plone.dexterity.browser.view import DefaultView
 from plone.memoize import ram
@@ -62,23 +61,6 @@ class Slideshow(DefaultView):
 class TextOnly(DefaultView):
 
     """Text only view of a News Article."""
-
-
-class ImageScaling(BaseImageScaling):
-
-    """View used for generating (and storing) image scales."""
-
-    def __init__(self, context, request):
-        self.image = context.getImage()
-        self.context = self.image or context
-        self.request = request
-
-    def scale(self, fieldname=None, scale=None, height=None, width=None,
-              **parameters):
-        if not self.image:
-            return None
-        view = self.image.restrictedTraverse('@@images')
-        return view.scale(fieldname, scale, height, width, **parameters)
 
 
 class NITFBylineViewlet(DocumentBylineViewlet):

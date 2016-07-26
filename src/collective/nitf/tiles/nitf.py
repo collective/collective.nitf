@@ -58,7 +58,7 @@ class NITFTile(BasicTile):
             data = data_mgr.get()
             data['subtitle'] = obj.subtitle
             data['section'] = obj.section
-            image = obj.getImage()
+            image = obj.image()
             data['media_producer'] = image.Rights() if image is not None else ''
             data_mgr.set(data)
 

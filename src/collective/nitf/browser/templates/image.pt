@@ -1,4 +1,4 @@
-<div id="media" tal:condition="context/getImage">
+<div id="media" tal:condition="context/image">
   <img tal:replace="structure context/@@images/image/large" />
   <p class="discreet"
       tal:condition="context/imageCaption"

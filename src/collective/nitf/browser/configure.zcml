@@ -30,13 +30,14 @@
             />
     </browser:menuItems>
 
-    <!-- Image scale support for tile images -->
-    <browser:page
-        name="images"
-        for="collective.nitf.content.INITF"
-        class=".ImageScaling"
-        permission="zope2.View"
-        />
+  <!-- XXX: deal with issues created by our fake image field -->
+  <browser:page
+      for="collective.nitf.content.INITF"
+      name="images"
+      class=".scaling.ImageScaling"
+      allowed_interface="plone.app.imaging.interfaces.IImageScaling"
+      permission="zope2.View"
+      />
 
     <!-- override the document byline to include semantic markup -->
     <browser:viewlet
