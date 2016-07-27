@@ -6,6 +6,13 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- The `getImage()` and `imageCaption()` methods of the `NITF` class are deprecated and will be removed on next release;
+  use `image()` and `media_caption()` instead.
+  [hvelarde]
+
+- Fix issue with `collective.nitf.image` viewlet raising `AttributeError` when plone.app.contenttypes is installed (closes `169`_).
+  [hvelarde]
+
 - Use ``<p>`` tag to display the News Article subtitle to avoid warnings on validation.
   [hvelarde]
 
@@ -139,3 +146,4 @@ There's a frood who really knows where his towel is.
 .. _`#137`: https://github.com/collective/collective.nitf/issues/137
 .. _`#154`: https://github.com/collective/collective.nitf/issues/154
 .. _`#161`: https://github.com/collective/collective.nitf/issues/161
+.. _`#169`: https://github.com/collective/collective.nitf/issues/169

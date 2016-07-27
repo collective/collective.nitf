@@ -4,6 +4,7 @@ from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
+from zope.deprecation import deprecation
 from zope.interface import implementer
 
 
@@ -19,48 +20,49 @@ class NITF(Container):
         return not self.listFolderContents(content_filter)
 
     def get_images(self):
-        """Return a list of image objects contained in the news article."""
+        """Return a list of images contained in the News Article."""
         content_filter = {'portal_type': 'Image'}
         return self.listFolderContents(content_filter)
 
-    # The purpose of these methods is to emulate those on News Item
-    def getImage(self):
-        """Return the first Image inside the News Article.
-        """
-        content_filter = {'portal_type': 'Image'}
-        images = self.listFolderContents(content_filter)
+    # FIXME: @property
+    def image(self):
+        """Return the first contained image."""
+        images = self.get_images()
         return images[0] if len(images) > 0 else None
 
-    image = getImage  # XXX: a hack to support summary_view
+    def media_caption(self):
+        """Return the description of the first contained image."""
+        try:
+            return self.image().Description()
+        except AttributeError:
+            return u''
 
+    def media_producer(self):
+        """Return the author of the first contained image."""
+        try:
+            return self.image().Rights()
+        except AttributeError:
+            return u''
+
+    # XXX: emulate News Item methods and
+    #      deal with issues created by our fake image field
+
+    @deprecation.deprecate('getImage() is deprecated; use image().')
+    def getImage(self):
+        return self.image()
+
+    @deprecation.deprecate('imageCaption() is deprecated; use media_caption.')
     def imageCaption(self):
-        image = self.getImage()
-        if image is not None:
-            return image.Description()
+        return self.media_caption()
+
+    image_thumb = image
 
     def tag(self, **kwargs):
-        # tag original implementation returns object title in both, alt and
-        # title attributes
-        image = self.getImage()
-        if image is not None:
-            scales = image.restrictedTraverse('@@images')
-            if 'scale' in kwargs:
-                scale_id = kwargs.get('scale')
-                del kwargs['scale']
-            else:
-                scale_id = 'thumb'
-            kwargs['alt'] = image.Description()
-            kwargs['title'] = image.Title()
-            scale = scales.scale(fieldname='image', scale=scale_id)
-            return scale.tag(**kwargs)
-
-    def image_thumb(self):
-        """Return a thumbnail."""
-        image = self.getImage()
-        if image is not None:
-            view = image.unrestrictedTraverse('@@images')
-            # Return the data
-            return view.scale(fieldname='image', scale='thumb').data
+        try:
+            scales = self.image().restrictedTraverse('@@images')
+            return scales.tag('image', **kwargs)
+        except AttributeError:
+            return None
 
 
 @indexer(INITF)

@@ -97,7 +97,7 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertFalse(self.n1.is_empty())
 
     def test_image_scale(self):
-        self.assertIsNone(self.n1.getImage())
+        self.assertIsNone(self.n1.image())
 
         img = api.content.create(self.n1, 'Image', title='foo', description='bar')
         set_image_field(img, zptlogo, 'image/gif')
@@ -107,21 +107,19 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertEqual(scale.height, 16)
         self.assertEqual(scale.width, 16)
 
-    def test_getImage(self):
-        self.assertIsNone(self.n1.getImage())
+    def test_media_caption(self):
+        self.assertEqual(self.n1.media_caption(), u'')
 
         img = api.content.create(self.n1, 'Image', title='foo', description='bar')
         set_image_field(img, zptlogo, 'image/gif')
-        image = self.n1.getImage()
-        self.assertEqual(image.Title(), 'foo')
-        self.assertEqual(image.Description(), 'bar')
+        self.assertEqual(self.n1.media_caption(), 'bar')
 
-    def test_imageCaption(self):
-        self.assertIsNone(self.n1.imageCaption())
+    def test_media_producer(self):
+        self.assertEqual(self.n1.media_producer(), u'')
 
-        img = api.content.create(self.n1, 'Image', title='foo', description='bar')
+        img = api.content.create(self.n1, 'Image', title='foo', rights='bar')
         set_image_field(img, zptlogo, 'image/gif')
-        self.assertEqual(self.n1.imageCaption(), 'bar')
+        self.assertEqual(self.n1.media_producer(), 'bar')
 
     def test_image_thumb(self):
         self.assertIsNone(self.n1.image_thumb())
@@ -137,7 +135,7 @@ class ContentTypeTestCase(unittest.TestCase):
         set_image_field(img, zptlogo, 'image/gif')
 
         # image alt and title attributes
-        self.assertIn('alt="bar" title="foo"', self.n1.tag())
+        self.assertIn('alt="foo" title="foo"', self.n1.tag())
 
         # image size
         self.assertIn('height="16" width="16', self.n1.tag())

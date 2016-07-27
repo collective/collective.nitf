@@ -8,6 +8,8 @@ Library  Remote  ${PLONE_URL}/RobotRemote
 
 ${title_selector} =  input#form-widgets-IDublinCore-title
 ${description_selector} =  textarea#form-widgets-IDublinCore-description
+${file_field_selector} =  //input[@id="file_file" or @id="form-widgets-file-input"]
+${image_field_selector} =  //input[@id="image_file" or @id="form-widgets-image-input"]
 ${title} =  Miracle Cure
 ${subtitle} =  Extra! Extra! Read all about it
 ${description} =  The Pinball Wizard in a miracle cure!
@@ -47,7 +49,7 @@ Create News Article
     Open Add New Menu
     Click Link  css=a#image
     Page Should Contain  Add Image
-    Choose File  css=#image_file  /tmp/640px-Mandel_zoom_00_mandelbrot_set.jpg
+    Choose File  xpath=${image_field_selector}  /tmp/640px-Mandel_zoom_00_mandelbrot_set.jpg
     Click Button  Save
     Page Should Contain  Changes saved
 
@@ -56,7 +58,7 @@ Create News Article
     Open Add New Menu
     Click Link  css=a#file
     Page Should Contain  Add File
-    Choose File  css=#file_file  /tmp/random.txt
+    Choose File  xpath=${file_field_selector}  /tmp/random.txt
     Click Button  Save
     Page Should Contain  Changes saved
 

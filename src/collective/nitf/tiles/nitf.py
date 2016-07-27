@@ -6,6 +6,7 @@ from collective.nitf import _
 from collective.nitf.interfaces import INITF
 from plone.autoform import directives as form
 from plone.tiles.interfaces import ITileDataManager
+from plone.uuid.interfaces import IUUID
 from zope import schema
 from zope.browserpage import ViewPageTemplateFile
 from zope.interface import implementer
@@ -51,15 +52,25 @@ class NITFTile(BasicTile):
         return ['collective.nitf.content']
 
     def populate_with_object(self, obj):
-        super(NITFTile, self).populate_with_object(obj)
+        super(BasicTile, self).populate_with_object(obj)
 
         if INITF.providedBy(obj):
+            image = obj.image()
+            data = dict(
+                title=obj.title,
+                description=obj.description,
+                subtitle=obj.subtitle,
+                section=obj.section,
+                uuid=IUUID(obj),
+                date=True,
+                subjects=True,
+                image=self.get_image_data(image),
+                media_producer=obj.media_producer,
+            )
+            # clear scales as new image is getting saved
+            self.clear_scales()
+
             data_mgr = ITileDataManager(self)
-            data = data_mgr.get()
-            data['subtitle'] = obj.subtitle
-            data['section'] = obj.section
-            image = obj.getImage()
-            data['media_producer'] = image.Rights() if image is not None else ''
             data_mgr.set(data)
 
     def _get_field_configuration(self, field):

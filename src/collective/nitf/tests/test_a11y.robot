@@ -10,6 +10,7 @@ Suite Teardown  Close All Browsers
 *** Test cases ***
 
 Test A11Y
+    [Tags]  issue_172
     [Documentation]  Test content type views for accessibility errors.
 
     Enable Autologin as  Site Administrator
