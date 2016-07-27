@@ -6,17 +6,17 @@ There's a frood who really knows where his towel is.
 2.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- The `getImage()` and `imageCaption()` methods of the `NITF` class are deprecated and will be removed on next release;
-  use `image()` and `media_caption()` instead.
+- The ``getImage()`` and ``imageCaption()`` methods of the ``NITF`` class are deprecated and will be removed on next release;
+  use ``image()`` and ``media_caption()`` instead.
   [hvelarde]
 
-- Fix issue with `collective.nitf.image` viewlet raising `AttributeError` when plone.app.contenttypes is installed (closes `169`_).
+- Fix issue with ``collective.nitf.image`` viewlet raising ``AttributeError`` when plone.app.contenttypes is installed (closes `#169`_).
   [hvelarde]
 
 - Use ``<p>`` tag to display the News Article subtitle to avoid warnings on validation.
   [hvelarde]
 
-- Fix exception when syndicalize NITF (closes `161`_).
+- Fix exception when syndicalize NITF (closes `#161`_).
   [rodfersou]
 
 - Fix tile date format.
