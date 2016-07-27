@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.0b2 (unreleased)
+2.0b2 (2016-07-27)
 ^^^^^^^^^^^^^^^^^^
 
 - The ``getImage()`` and ``imageCaption()`` methods of the ``NITF`` class are deprecated and will be removed on next release;
