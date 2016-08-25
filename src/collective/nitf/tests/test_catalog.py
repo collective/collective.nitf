@@ -57,11 +57,12 @@ class CatalogTestCase(unittest.TestCase):
         self.assertEqual(result[0].getURL(), self.n1.absolute_url())
 
     def test_urgency_indexed(self):
-        self.n1.urgency = '5'
+        from collective.nitf.config import HIGH
+        self.n1.urgency = HIGH
         self.n1.reindexObject()
-        result = self.catalog(urgency='5')
-        self.assertEqual(1, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
+        results = self.catalog(urgency=HIGH)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
     def test_location_indexed(self):
         self.n1.location = u'México, DF'
