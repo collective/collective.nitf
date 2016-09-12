@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 2.0b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Fix issue in NITF tile that was causing an exception when dropping content into it (fixes `#175`_).
+  [rodfersou]
 
 
 2.0b2 (2016-07-27)
@@ -153,3 +154,4 @@ There's a frood who really knows where his towel is.
 .. _`#154`: https://github.com/collective/collective.nitf/issues/154
 .. _`#161`: https://github.com/collective/collective.nitf/issues/161
 .. _`#169`: https://github.com/collective/collective.nitf/issues/169
+.. _`#175`: https://github.com/collective/collective.nitf/issues/175
