@@ -2,7 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = '2.0b3'
+version = '2.0b4.dev0'
 description = "A content type inspired on the IPTC's News Industry Text Format specification."
 long_description = (
     open('README.rst').read() + '\n' +
@@ -30,7 +30,7 @@ setup(name='collective.nitf',
           'Topic :: Software Development :: Libraries :: Python Modules',
       ],
       keywords='plone dexterity iptc newsml nitf',
-      author='Héctor Velarde',
+      author='Hector Velarde',
       author_email='hector.velarde@gmail.com',
       url='https://github.com/collective/collective.nitf',
       packages=find_packages('src'),
