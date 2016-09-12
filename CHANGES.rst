@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.0b3 (unreleased)
+2.0b3 (2016-09-12)
 ^^^^^^^^^^^^^^^^^^
 
 - Fix issue in NITF tile that was causing an exception when dropping content into it (fixes `#175`_).
