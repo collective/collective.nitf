@@ -65,7 +65,7 @@ class NITFTile(BasicTile):
                 date=True,
                 subjects=True,
                 image=self.get_image_data(image),
-                media_producer=obj.media_producer,
+                media_producer=obj.media_producer(),
             )
             # clear scales as new image is getting saved
             self.clear_scales()
