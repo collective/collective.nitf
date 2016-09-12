@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+"""The News Article content type.
+
+We have to deal with issues created by a fake image field on it.
+Note that methods in this class can not be declared as properties
+(acquisition chain is lost).
+"""
 from collective.nitf.interfaces import INITF
 from plone.app.textfield.interfaces import ITransformer
 from plone.dexterity.content import Container
@@ -14,8 +20,7 @@ class NITF(Container):
     """A News Article based on the News Industry Text Format specification."""
 
     def is_empty(self):
-        """Return True if the container has no files nor links inside.
-        """
+        """Check if the container has no files nor links inside."""
         content_filter = {'portal_type': ['File', 'Link']}
         return not self.listFolderContents(content_filter)
 
@@ -24,21 +29,20 @@ class NITF(Container):
         content_filter = {'portal_type': 'Image'}
         return self.listFolderContents(content_filter)
 
-    # FIXME: @property
     def image(self):
-        """Return the first contained image."""
+        """Return the first image."""
         images = self.get_images()
         return images[0] if len(images) > 0 else None
 
     def media_caption(self):
-        """Return the description of the first contained image."""
+        """Return the description of the first image."""
         try:
             return self.image().Description()
         except AttributeError:
             return u''
 
     def media_producer(self):
-        """Return the author of the first contained image."""
+        """Return the author of the first image."""
         try:
             return self.image().Rights()
         except AttributeError:
