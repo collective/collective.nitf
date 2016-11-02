@@ -41,7 +41,6 @@ class CollectionTypeTestCase(unittest.TestCase):
         self.assertEqual(len(self.c1.queryCatalog()), 2)
 
         n3 = api.content.create(self.folder, 'collective.nitf.content', 'n3')
-        n3 = self.folder['n3']
         n3.urgency = c.HIGH
         n3.reindexObject()
         self.assertEqual(len(self.c1.queryCatalog()), 3)

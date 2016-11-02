@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 2.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Don't show image on tile collection if image attribute is None (fixes `#178`_).
+  [rodfersou]
 
 
 2.0b3 (2016-09-12)
@@ -161,3 +162,4 @@ There's a frood who really knows where his towel is.
 .. _`#161`: https://github.com/collective/collective.nitf/issues/161
 .. _`#169`: https://github.com/collective/collective.nitf/issues/169
 .. _`#175`: https://github.com/collective/collective.nitf/issues/175
+.. _`#178`: https://github.com/collective/collective.nitf/issues/178
