@@ -6,8 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Don't show image on tile collection if image attribute is None (fixes `#178`_).
-  [rodfersou]
+- Do not try to create scales on news article with no lead image;
+  this was causing issues in some Collection view methods and in collective.cover's Collection tile (fixes `#178`_).
+  [hvelarde]
 
 
 2.0b3 (2016-09-12)

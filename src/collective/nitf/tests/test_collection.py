@@ -12,6 +12,7 @@ class CollectionTypeTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.request = self.layer['request']
 
         with api.env.adopt_roles(['Manager']):
             self.folder = api.content.create(
@@ -108,3 +109,24 @@ class CollectionTypeTestCase(unittest.TestCase):
         self.assertEqual(len(self.c1.queryCatalog()), 2)
         expected = [b.getObject() for b in self.c1.queryCatalog()]
         self.assertEqual([n2, n3], expected)
+
+    def test_render_view_methods(self, ):
+        # https://github.com/collective/collective.nitf/issues/178
+        from collective.nitf.testing import get_image
+        from collective.nitf.testing import IMAGES
+        from collective.nitf.tests.api_hacks import set_image_field
+
+        # news article with lead image
+        obj = api.content.create(self.folder, 'collective.nitf.content', 'n1')
+        api.content.create(obj, 'Image', 'img1')
+        set_image_field(obj['img1'], get_image(IMAGES[0]), 'image/jpeg')
+        # news article without lead image
+        api.content.create(self.folder, 'collective.nitf.content', 'n2')
+        assert len(self.c1.queryCatalog()) == 2
+
+        # traverse view methods and assert they are rendered without errors
+        types = self.portal['portal_types']
+        view_methods = types['Collection'].view_methods
+        for view in view_methods:
+            rendered = self.c1.restrictedTraverse(view)()
+            self.assertIsInstance(rendered, unicode)

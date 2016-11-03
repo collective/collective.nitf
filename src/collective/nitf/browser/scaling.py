@@ -32,12 +32,13 @@ class ImageScaling(BaseImageScaling):
         raise TraversalError(self, name)
 
     def scale(self, fieldname=None, scale=None, height=None, width=None, **kwargs):
-        """Fix image generation on summary_view in collections."""
-        if fieldname == 'image':
-            image = self.context.image()
-            scales = image.restrictedTraverse('@@images')
-            return scales.scale(fieldname, scale, height, width, **kwargs)
-        else:
-            # XXX: check if we're getting here at some point
-            return super(ImageScaling, self).scale(
-                fieldname, scale, height, width, **kwargs)
+        """Deal with issues created by our fake image field."""
+        if fieldname != 'image':
+            return None
+
+        image = self.context.image()
+        if image is None:
+            return None
+
+        scales = image.restrictedTraverse('@@images')
+        return scales.scale(fieldname, scale, height, width, **kwargs)
