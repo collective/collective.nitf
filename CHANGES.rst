@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.0b4 (unreleased)
+2.0b4 (2016-11-03)
 ^^^^^^^^^^^^^^^^^^
 
 - Do not try to create scales on news article with no lead image;
