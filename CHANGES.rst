@@ -3,6 +3,12 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
+2.0b5 (unreleased)
+^^^^^^^^^^^^^^^^^^
+
+- Nothing changed yet.
+
+
 2.0b4 (2016-11-03)
 ^^^^^^^^^^^^^^^^^^
 
