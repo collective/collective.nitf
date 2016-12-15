@@ -103,6 +103,9 @@ class ContentTypeTestCase(unittest.TestCase):
         set_image_field(img, zptlogo, 'image/gif')
 
         scales = self.n1.unrestrictedTraverse('@@images')
+        self.assertEqual(scales.getImageSize(), (0, 0))
+        self.assertEqual(scales.getImageSize('image'), (16, 16))
+
         scale = scales.scale('image', 'thumb')
         self.assertEqual(scale.height, 16)
         self.assertEqual(scale.width, 16)
