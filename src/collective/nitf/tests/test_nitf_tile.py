@@ -8,6 +8,7 @@ from plone import api
 
 import unittest
 
+
 if HAS_COVER:
     from collective.cover.tests.base import TestTileMixin
     from collective.nitf.tiles.nitf import INITFTile

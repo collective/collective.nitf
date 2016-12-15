@@ -16,6 +16,7 @@ from zope.viewlet.interfaces import IViewletManager
 
 import unittest
 
+
 if IS_PLONE_5:
     def test_suite():
         return unittest.TestSuite()
