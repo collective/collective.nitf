@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 2.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Fix exception getting image size with ``ImageScaling`` adapter (refs. `sc.social.like #87`_).
+  [rodfersou]
 
 
 2.0b4 (2016-11-03)
@@ -170,3 +171,4 @@ There's a frood who really knows where his towel is.
 .. _`#169`: https://github.com/collective/collective.nitf/issues/169
 .. _`#175`: https://github.com/collective/collective.nitf/issues/175
 .. _`#178`: https://github.com/collective/collective.nitf/issues/178
+.. _`sc.social.like #87`: https://github.com/collective/sc.social.like/issues/87

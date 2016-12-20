@@ -42,3 +42,17 @@ class ImageScaling(BaseImageScaling):
 
         scales = image.restrictedTraverse('@@images')
         return scales.scale(fieldname, scale, height, width, **kwargs)
+
+    def getImageSize(self, fieldname=None):
+        """Deal with issues created by our fake image field."""
+        if fieldname != 'image':
+            return (0, 0)
+
+        image = self.context.image()
+        if image is None:
+            return (0, 0)
+
+        try:  # Archetypes
+            return image.image.getImageSize()
+        except AttributeError:  # Dexterity
+            return (image.width, image.height)
