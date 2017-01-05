@@ -23,9 +23,9 @@ Test Folder Full View
     Open Add New Menu
     Click Link  css=a#folder
     Page Should Contain  Add Folder
-    Input Text  css=#form-widgets-IDublinCore-title  Test Folder
+    Input Text  css=#form-widgets-IDublinCore-title,#title  Test Folder
     Click Button  Save
-    Page Should Contain  Item created
+    Page Should Contain  Test Folder
 
     Click Add News Article
     Input Text  css=#form-widgets-IDublinCore-title  ${title}
