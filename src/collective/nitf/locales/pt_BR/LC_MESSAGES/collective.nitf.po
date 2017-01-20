@@ -17,7 +17,7 @@ msgstr ""
 
 #: configure.zcml
 msgid "A Dexterity-based content type inspired on the News Industry Text Format specification."
-msgstr "Tipod e conteúdo baseado em Dexterity e inspirado na especificação  NITF (News Industry Text Format)"
+msgstr "Tipo de conteúdo baseado em Dexterity e inspirado na especificação NITF (News Industry Text Format)"
 
 #: collective/nitf/profiles/default/types/collective.nitf.content.xml
 msgid "A news article"
@@ -308,7 +308,7 @@ msgstr "Seção usada por padrão no conteúdo novo."
 
 #: collective/nitf/controlpanel.py:36
 msgid "Select the list of available genres in the site. Genres indicate a nature, journalistic or intellectual characteristic of items."
-msgstr "Selecione a lista de gêneros disponíveis no site. Os gêneros indicam a índole,  jornalística ou intelectual, que  carateriza os itens."
+msgstr "Selecione a lista de gêneros disponíveis no site. Os gêneros indicam a índole, jornalística ou intelectual, que carateriza os itens."
 
 #: collective/nitf/portlets/latest_sectionable_nitf.py:110
 msgid "Show dates in a pretty format (ie. \"4 hours ago\")."
@@ -410,4 +410,3 @@ msgstr "Um título secundário do Artigo"
 #: collective/nitf/content.py:95
 msgid "help_urgency"
 msgstr "Importância do Artigo"
-
