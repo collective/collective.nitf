@@ -24,6 +24,9 @@ def fix_collections(context):
         except AttributeError:
             query = obj.getQuery()  # Dexterity
 
+        if query is None:
+            continue  # collection has no query defined
+
         fixed_query = []
         for item in query:
             fixed_item = dict(item)
