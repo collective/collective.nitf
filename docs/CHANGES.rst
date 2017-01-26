@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b9 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Handle corner case when upgrade step for 1008 found a collection with no query defined.
+  [hvelarde]
 
 
 1.0b8 (2015-10-16)
