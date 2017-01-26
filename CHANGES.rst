@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Handle corner case when upgrade step for 1008 found a collection with no query defined.
+  [hvelarde]
+
 - Simplify slideshow template to avoid depending on context id;
   this solves an issue when id ends with ".html".
   [rodfersou]
