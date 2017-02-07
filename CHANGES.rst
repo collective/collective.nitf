@@ -6,6 +6,10 @@ There's a frood who really knows where his towel is.
 2.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Simplify slideshow template to avoid depending on context id;
+  this solves an issue when id ends with ".html".
+  [rodfersou]
+
 - Refactor static resources.
   [rodfersou]
 

@@ -101,16 +101,20 @@
   }
 
   /* Prev/Next arrows */
-  .cycle-prev,
-  .cycle-next {
+  #content a.cycle-prev,
+  #content a.cycle-next {
     position: absolute;
     z-index: 110;
     top: 0;
+    bottom: 0;
 
-    width: 25%;
-    height: 79%;
+    overflow: hidden;
+
+    width: 15%;
 
     cursor: pointer;
+    white-space: nowrap;
+    text-indent: 101%;
 
     opacity: .7;
     border: none;
@@ -119,13 +123,13 @@
   .cycle-prev {
     left: 0;
 
-    background: url(images/prev-arrow.png) no-repeat scroll 10% 50% rgba(0, 0, 0, 0);
+    background: url(images/prev-arrow.svg) no-repeat scroll 20% 50% rgba(0, 0, 0, 0);
   }
 
   .cycle-next {
     right: 0;
 
-    background: url(images/next-arrow.png) no-repeat scroll 90% 50% rgba(0, 0, 0, 0);
+    background: url(images/next-arrow.svg) no-repeat scroll 80% 50% rgba(0, 0, 0, 0);
   }
 
   .cycle-prev:hover,
@@ -134,6 +138,9 @@
   }
 
   .cycle-carrossel .thumb-itens {
+    min-width: 128px;
+    margin-right: 5px;
+
     cursor: pointer;
   }
 
@@ -228,26 +235,70 @@
   }
 
   .cycle-slideshow {
-    max-width: 65%;
-    margin: 0 auto;
+    .cycle-slide {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      img {
+        position: relative;
+        top: 0;
+        left: 0;
+
+        display: block;
+
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        padding: 0;
+      }
+    }
+    /* Stop Flash of unstyled content */
     .slide {
+      display: none;
+
       min-width: 100%;
       img {
         min-width: 100%;
       }
     }
-    .cycle-slide img {
-      position: relative;
-      top: 0;
-      left: 0;
+  }
 
-      display: block;
+  .slideshow-container {
+    display: flex;
+    flex-direction: column;
 
-      padding: 0;
+    width: 768px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .slideshow-player {
+    position: relative;
+    .cycle-slide {
+      display: flex !important;
+
+      align-items: center;
+      justify-content: center;
     }
-    /* Stop Flash of unstyled content */
-    .slide {
-      display: none;
-    }
+  }
+
+  .slideshow-carrossel .cycle-slide {
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cycle-carousel-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
   }
 }
