@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add webpack.
+  [rodfersou]
+
 - Add classes to HTML elements on tile for easy visual customization.
   [agnogueira]
 
