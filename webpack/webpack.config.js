@@ -1,6 +1,6 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
-  entry: './app/main.js',
+  entry: './app/nitf.js',
   output: {
     filename: 'nitf.js',
     path: '../src/collective/nitf/static',
@@ -49,6 +49,6 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    new ExtractTextPlugin({ filename: 'styles.css', disable: false, allChunks: true })
+    new ExtractTextPlugin({ filename: 'nitf.css', disable: false, allChunks: true })
   ]
 }

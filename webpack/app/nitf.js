@@ -1,4 +1,4 @@
-import './main.less';
+import './nitf.less';
 import './nitf_icon.png';
 import './tile-nitf.png';
 

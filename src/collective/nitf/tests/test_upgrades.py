@@ -238,3 +238,40 @@ class to2000TestCase(UpgradeTestCaseBase):
         configlet = cptool.getActionObject('Products/nitf')
         new_permissions = ('collective.nitf: Setup',)
         self.assertEqual(configlet.getPermissions(), new_permissions)
+
+
+class to2001TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'2000', u'2001')
+
+    def test_upgrade_to_2001_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertTrue(version >= self.to_version)
+        self.assertEqual(self.total_steps, 3)
+
+    @unittest.skipIf(IS_PLONE_5, 'Upgrade step not supported under Plone 5')
+    def test_fix_resources_references(self):
+        # address also an issue with Setup permission
+        title = u'Fix resource references'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        from collective.nitf.upgrades.v2001 import _rename_resources
+        from collective.nitf.upgrades.v2001 import RESOURCES_TO_FIX
+        RESOURCES_TO_FIX_INVERSE = {v: k for k, v in RESOURCES_TO_FIX.items()}
+
+        css_tool = api.portal.get_tool('portal_css')
+        _rename_resources(css_tool, RESOURCES_TO_FIX_INVERSE)
+
+        css_ids = css_tool.getResourceIds()
+        self.assertIn('++resource++collective.nitf/styles.css', css_ids)
+        self.assertNotIn('++resource++collective.nitf/nitf.css', css_ids)
+
+        # run the upgrade step to validate the update
+        self.execute_upgrade_step(step)
+
+        css_ids = css_tool.getResourceIds()
+        self.assertIn('++resource++collective.nitf/nitf.css', css_ids)
+        self.assertNotIn('++resource++collective.nitf/styles.css', css_ids)
