@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import PROJECTNAME
-from collective.nitf.testing import DEXTERITY_ONLY
 from collective.nitf.testing import HAS_COVER
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.testing import IS_PLONE_5
@@ -109,7 +108,7 @@ class UninstallTest(unittest.TestCase):
         self.assertNotIn(u'collective.nitf', tiles)
 
     # FIXME: https://github.com/collective/collective.nitf/issues/168
-    @unittest.skipIf(DEXTERITY_ONLY, 'Known failure')
+    @unittest.expectedFailure
     def test_link_workflow_restored(self):
         workflow_tool = self.portal.portal_workflow
         chain = workflow_tool.getChainForPortalType('Link')

@@ -84,11 +84,6 @@ class RenderTest(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
-    def set_default_workflow(self):
-        # setup default workflow in tests
-        types = ('collective.nitf.content',)
-        self.wf.setChainForPortalTypes(types, 'simple_publication_workflow')
-
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
@@ -99,13 +94,11 @@ class RenderTest(unittest.TestCase):
         self.portal.invokeFactory('Folder', 'test-folder')
         self.folder = self.portal['test-folder']
 
-        self.set_default_workflow()
         # Let's create 3 sections in the registry
         registry = getUtility(IRegistry)
         settings = registry.forInterface(INITFSettings)
-        settings.available_sections = set([u'Section 1',
-                                           u'Section 2',
-                                           u'Section 3'])
+        settings.available_sections = set([
+            u'General', u'Section 1', u'Section 2', u'Section 3'])
 
         # Let's create 15 nitf's for each of 3 different sections
         for index in range(1, 16):
