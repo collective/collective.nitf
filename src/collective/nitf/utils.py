@@ -20,3 +20,11 @@ def urgency_default_value():
     """
     record = INITFSettings.__identifier__ + '.default_urgency'
     return api.portal.get_registry_record(record)
+
+
+def section_default_value():
+    """Return the default value for the section field as defined in
+    the control panel configlet.
+    """
+    record = INITFSettings.__identifier__ + '.default_section'
+    return api.portal.get_registry_record(record)

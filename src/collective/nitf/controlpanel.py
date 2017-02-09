@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-
 from collective.nitf import _
 from collective.nitf import config
 from collective.nitf.config import DEFAULT_GENRE
 from collective.nitf.config import DEFAULT_SECTION
 from plone.app.registry.browser import controlpanel
-from plone.directives import form
+from plone.autoform import directives as form
+from plone.supermodel import model
 from zope import schema
 
 
 PORTALTYPES = 'plone.app.vocabularies.ReallyUserFriendlyTypes'
 
 
-class INITFSettings(form.Schema):
+class INITFSettings(model.Schema):
     """ Interface for the control panel form.
     """
     form.widget(available_sections='z3c.form.browser.textlines.TextLinesFieldWidget')

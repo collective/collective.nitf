@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from collective.nitf import _
-from collective.nitf.defaults import genre_default_value
-from collective.nitf.defaults import urgency_default_value
+from collective.nitf.utils import genre_default_value
+from collective.nitf.utils import urgency_default_value
 from plone.app.textfield import RichText
-from plone.directives import form
+from plone.autoform import directives as form
 from plone.supermodel import model
 from zope import schema
 from zope.interface import Interface

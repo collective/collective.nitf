@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove dependency on plone.directives.form and latest traces of Grok.
+  [hvelarde]
+
 - Fix exception getting image size with ``ImageScaling`` adapter (refs. `sc.social.like #87`_).
   [rodfersou]
 

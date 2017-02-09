@@ -1,15 +1,14 @@
 # coding: utf-8
 from collective.nitf import _
-from collective.nitf.controlpanel import INITFSettings
-from plone.directives import form
-from plone.registry.interfaces import IRegistry
+from collective.nitf.utils import section_default_value
+from plone.autoform import directives as form
+from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from zope import schema
-from zope.component import getUtility
 from zope.interface import provider
 
 
-@provider(form.IFormFieldProvider)
+@provider(IFormFieldProvider)
 class ISection(model.Schema):
 
     """Behavior interface to make a content type support sections."""
@@ -25,11 +24,5 @@ class ISection(model.Schema):
             default=u'Named section where the item will appear.',
         ),
         vocabulary=u'collective.nitf.AvailableSections',
+        defaultFactory=section_default_value,
     )
-
-
-@form.default_value(field=ISection['section'])
-def section_default_value(data):
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(INITFSettings)
-    return settings.default_section
