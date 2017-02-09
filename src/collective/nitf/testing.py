@@ -64,9 +64,7 @@ class Fixture(PloneSandboxLayer):
 
         self.applyProfile(portal, 'collective.nitf:default')
 
-        portal_workflow = portal['portal_workflow']
-        portal_workflow.setChainForPortalTypes(
-            ('collective.nitf.content',), 'simple_publication_workflow')
+        portal.portal_workflow.setDefaultChain('simple_publication_workflow')
 
         for i in IMAGES:
             origin = os.path.join(os.path.dirname(__file__), 'tests', i)
