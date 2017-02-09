@@ -61,7 +61,7 @@ Go to the 'Site Setup' page in a Plone site and click on the 'Add-ons' link.
 Check the box next to ``collective.nitf`` and click the 'Activate' button.
 
 .. Note::
-	You may have to empty your browser cache and save your resource registries in order to see the effects of the product installation.
+        You may have to empty your browser cache and save your resource registries in order to see the effects of the product installation.
 
 Behaviors
 ^^^^^^^^^
@@ -108,3 +108,42 @@ You can use a ``jsregistry.xml`` file that includes the following:
 
 .. _`sc.photogallery`: https://pypi.python.org/pypi/sc.photogallery
 .. _`covertile.cycle2`: https://pypi.python.org/pypi/covertile.cycle2
+
+
+Development
+^^^^^^^^^^^
+
+To develop this package we use Webpack to process static resources.  To make a contribuition in this package static resources, after run buildout, you should start the instance in one shell and start Webpack watcher at other shell with the command:
+
+
+.. code-block:: bash
+
+    $ ./bin/npm_watch
+
+Then go to ``webpack/app`` folder and edit LESS and JS files, Webpack watcher will create the final resources in the right place and format (CSS and JS are minified and images optimized).
+
+There are also other commands added to more complex scenarios:
+
+
+.. code-block:: bash
+
+    $ ./bin/webpack_env
+
+This command will set the buildout node installation in the system PATH, this way you can use Webpack as it is described at Webpack docs.
+
+
+.. code-block:: bash
+
+    $ ./bin/npm_dev
+
+This command generate JS and CSS without the minify step, and it is used to check what code is generated in a more readable way.
+
+
+.. code-block:: bash
+
+    $ ./bin/npm_build
+
+This command rebuild the static files and exit (insted of keep watching the changes).
+
+
+The generated JS file is also a UMD package, what provides compatibility with most popular script loaders.
