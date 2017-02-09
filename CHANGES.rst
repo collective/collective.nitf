@@ -11,7 +11,8 @@ There's a frood who really knows where his towel is.
 
 - Fix exception getting image size with ``ImageScaling`` adapter (refs. `sc.social.like #87`_).
   [rodfersou]
-
+- Add class for tile html elements (fixes `#177`_).
+  [agnogueira]
 
 2.0b4 (2016-11-03)
 ^^^^^^^^^^^^^^^^^^
@@ -175,3 +176,4 @@ There's a frood who really knows where his towel is.
 .. _`#175`: https://github.com/collective/collective.nitf/issues/175
 .. _`#178`: https://github.com/collective/collective.nitf/issues/178
 .. _`sc.social.like #87`: https://github.com/collective/sc.social.like/issues/87
+.. _`#177`: https://github.com/collective/collective.nitf/issues/177
