@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 2.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add classes to HTML elements on tile for easy visual customization.
+  [agnogueira]
+
 - Remove dependency on plone.directives.form and latest traces of Grok.
   [hvelarde]
 
@@ -155,6 +158,7 @@ There's a frood who really knows where his towel is.
 
 .. _`Cycle2`: http://jquery.malsup.com/cycle2/
 .. _`Galleria`: http://galleria.io/
+.. _`sc.social.like #87`: https://github.com/collective/sc.social.like/issues/87
 .. _`#47`: https://github.com/collective/collective.nitf/issues/47
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
 .. _`#71`: https://github.com/collective/collective.nitf/issues/71
@@ -174,4 +178,3 @@ There's a frood who really knows where his towel is.
 .. _`#169`: https://github.com/collective/collective.nitf/issues/169
 .. _`#175`: https://github.com/collective/collective.nitf/issues/175
 .. _`#178`: https://github.com/collective/collective.nitf/issues/178
-.. _`sc.social.like #87`: https://github.com/collective/sc.social.like/issues/87

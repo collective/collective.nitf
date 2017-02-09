@@ -18,11 +18,11 @@
       </tal:title>
 
       <tal:subtitle condition="python:field['id'] == 'subtitle'">
-        <p class="" tal:content="python:field['content']">Subtitle</p>
+        <p tal:content="python:field['content']" class="tile-subtitle">Subtitle</p>
       </tal:subtitle>
 
       <div tal:condition="python:field['id'] == 'media_producer'">
-        <span tal:content="python:field['content']" />
+        <span tal:content="python:field['content']" class="tile-media-producer" />
       </div>
 
       <tal:image
@@ -44,11 +44,11 @@
       </tal:image>
 
       <tal:description condition="python:field['id'] == 'description'">
-        <p class="" tal:content="python:field['content']">Description</p>
+        <p tal:content="python:field['content']" class="tile-description">Description</p>
       </tal:description>
 
       <tal:section condition="python:field['id'] == 'section'">
-        <p class="" tal:content="python:field['content']">Section</p>
+        <p tal:content="python:field['content']" class="tile-section">Section</p>
       </tal:section>
 
       <tal:datetime condition="python:field['id'] == 'date'">
