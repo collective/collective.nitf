@@ -1,6 +1,6 @@
 language: python
 python: 2.7
-sudo: false
+sudo: required
 cache:
   directories:
   - eggs
@@ -24,6 +24,7 @@ install:
 - bin/buildout buildout:test-eggs=$TEST_EGGS annotate
 - bin/buildout buildout:test-eggs=$TEST_EGGS
 before_script:
+- cat ~/.local/share/applications/mimeapps.list
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - firefox -v
@@ -36,7 +37,6 @@ after_success:
 - coveralls
 - free -g
 after_script:
-- cat ~/.local/share/applications/mimeapps.list
 - ps aux
 # Firefox complains: GConf-WARNING **: Got Disconnected from DBus.
 # And then it keeps hanging, causing a failed job after 30-50 minutes.
