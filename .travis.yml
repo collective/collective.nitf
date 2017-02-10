@@ -1,6 +1,6 @@
 language: python
 python: 2.7
-sudo: required
+sudo: false
 cache:
   directories:
   - eggs
@@ -31,12 +31,12 @@ script:
 - bin/code-analysis
 - bin/test
 after_success:
-- echo $BROWSER
 - bin/createcoverage -t "--layer=!Robot"
 - pip install coveralls
 - coveralls
 - free -g
 after_script:
+- cat ~/.local/share/applications/mimeapps.lis
 - ps aux
 # Firefox complains: GConf-WARNING **: Got Disconnected from DBus.
 # And then it keeps hanging, causing a failed job after 30-50 minutes.
