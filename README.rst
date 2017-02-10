@@ -60,9 +60,6 @@ Go to the 'Site Setup' page in a Plone site and click on the 'Add-ons' link.
 
 Check the box next to ``collective.nitf`` and click the 'Activate' button.
 
-.. Note::
-	You may have to empty your browser cache and save your resource registries in order to see the effects of the product installation.
-
 Behaviors
 ^^^^^^^^^
 
@@ -108,3 +105,38 @@ You can use a ``jsregistry.xml`` file that includes the following:
 
 .. _`sc.photogallery`: https://pypi.python.org/pypi/sc.photogallery
 .. _`covertile.cycle2`: https://pypi.python.org/pypi/covertile.cycle2
+
+Development
+^^^^^^^^^^^
+
+We use Webpack to process static resources on this package.
+Webpack processes LESS and JS files, minifies the resulting CSS and JS, and optimizes all images.
+The final JS file is also a UMD package, which provides compatibility with most popular script loaders.
+
+To contribute, you should start the instance in one shell and start Webpack watcher on another with the following command:
+
+.. code-block:: bash
+
+    $ bin/npm_watch
+
+Then go to ``webpack/app`` folder and edit LESS and JS files;
+Webpack watcher will automatically create the final resources in the right place.
+
+There are also other commands added to handle more complex scenarios.
+The following command will set the buildout node installation in the system PATH, this way you can use Webpack as described on Webpack docs.
+
+.. code-block:: bash
+
+    $ bin/webpack_env
+
+The following command generates JS and CSS without the minify step (it can be used to check the code being generated in a human readable way).
+
+.. code-block:: bash
+
+    $ bin/npm_dev
+
+The following command rebuilds static files and exit (insted of keep watching the changes):
+
+.. code-block:: bash
+
+    $ bin/npm_build

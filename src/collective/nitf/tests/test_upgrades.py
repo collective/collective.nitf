@@ -238,3 +238,42 @@ class to2000TestCase(UpgradeTestCaseBase):
         configlet = cptool.getActionObject('Products/nitf')
         new_permissions = ('collective.nitf: Setup',)
         self.assertEqual(configlet.getPermissions(), new_permissions)
+
+
+class to2001TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'2000', u'2001')
+
+    def test_upgrade_to_2001_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertGreaterEqual(version, self.to_version)
+        self.assertEqual(self.total_steps, 3)
+
+    @unittest.skipIf(IS_PLONE_5, 'Upgrade step not supported under Plone 5')
+    def test_fix_resources_references(self):
+        # address also an issue with Setup permission
+        title = u'Fix resource references'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        from collective.nitf.upgrades.v2001 import NEW
+        from collective.nitf.upgrades.v2001 import OLD
+
+        css_tool = api.portal.get_tool('portal_css')
+        css_tool.getResource(NEW).setCompression('safe')
+        css_tool.renameResource(NEW, OLD)
+
+        ids = css_tool.getResourceIds()
+        self.assertNotIn(NEW, ids)
+        self.assertIn(OLD, ids)
+        self.assertEqual(css_tool.getResource(OLD).getCompression(), 'safe')
+
+        # run the upgrade step to validate the update
+        self.execute_upgrade_step(step)
+
+        ids = css_tool.getResourceIds()
+        self.assertNotIn(OLD, ids)
+        self.assertIn(NEW, ids)
+        self.assertEqual(css_tool.getResource(NEW).getCompression(), 'none')

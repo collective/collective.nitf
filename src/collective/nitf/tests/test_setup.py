@@ -15,7 +15,7 @@ DEPENDENCIES = (
 )
 
 JS = '++resource++collective.nitf/nitf.js'
-CSS = '++resource++collective.nitf/styles.css'
+CSS = '++resource++collective.nitf/nitf.css'
 
 
 class InstallTestCase(unittest.TestCase):
