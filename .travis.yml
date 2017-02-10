@@ -36,7 +36,7 @@ after_success:
 - coveralls
 - free -g
 after_script:
-- cat ~/.local/share/applications/mimeapps.lis
+- cat ~/.local/share/applications/mimeapps.list
 - ps aux
 # Firefox complains: GConf-WARNING **: Got Disconnected from DBus.
 # And then it keeps hanging, causing a failed job after 30-50 minutes.
