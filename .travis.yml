@@ -37,7 +37,7 @@ after_success:
 - free -g
 after_script:
 - ps aux
-- xdg-settings --list
+- xdg-settings get default-web-browser
 # Firefox complains: GConf-WARNING **: Got Disconnected from DBus.
 # And then it keeps hanging, causing a failed job after 30-50 minutes.
 # So we just kill Firefox.
