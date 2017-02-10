@@ -1,6 +1,6 @@
 language: python
 python: 2.7
-sudo: false
+sudo: required
 cache:
   directories:
   - eggs
@@ -31,7 +31,7 @@ script:
 - bin/code-analysis
 - bin/test
 after_success:
-- export BROWSER=firefox
+- echo $BROWSER
 - bin/createcoverage -t "--layer=!Robot"
 - pip install coveralls
 - coveralls
