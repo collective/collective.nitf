@@ -1,6 +1,6 @@
 language: python
 python: 2.7
-sudo: required
+sudo: false
 cache:
   directories:
   - eggs
@@ -24,7 +24,7 @@ install:
 - bin/buildout buildout:test-eggs=$TEST_EGGS annotate
 - bin/buildout buildout:test-eggs=$TEST_EGGS
 before_script:
-- cat ~/.local/share/applications/mimeapps.list
+- cat /usr/lib/chromium-browser/chrome-sandbox
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - firefox -v
