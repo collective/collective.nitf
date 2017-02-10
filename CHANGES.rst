@@ -6,7 +6,7 @@ There's a frood who really knows where his towel is.
 2.0b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Add webpack.
+- Refactor static resources.
   [rodfersou]
 
 - Add classes to HTML elements on tile for easy visual customization.

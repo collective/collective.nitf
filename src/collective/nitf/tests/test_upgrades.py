@@ -247,7 +247,7 @@ class to2001TestCase(UpgradeTestCaseBase):
 
     def test_upgrade_to_2001_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
-        self.assertTrue(version >= self.to_version)
+        self.assertGreaterEqual(version, self.to_version)
         self.assertEqual(self.total_steps, 3)
 
     @unittest.skipIf(IS_PLONE_5, 'Upgrade step not supported under Plone 5')
@@ -258,20 +258,22 @@ class to2001TestCase(UpgradeTestCaseBase):
         self.assertIsNotNone(step)
 
         # simulate state on previous version
-        from collective.nitf.upgrades.v2001 import _rename_resources
-        from collective.nitf.upgrades.v2001 import RESOURCES_TO_FIX
-        RESOURCES_TO_FIX_INVERSE = {v: k for k, v in RESOURCES_TO_FIX.items()}
+        from collective.nitf.upgrades.v2001 import NEW
+        from collective.nitf.upgrades.v2001 import OLD
 
         css_tool = api.portal.get_tool('portal_css')
-        _rename_resources(css_tool, RESOURCES_TO_FIX_INVERSE)
+        css_tool.getResource(NEW).setCompression('safe')
+        css_tool.renameResource(NEW, OLD)
 
-        css_ids = css_tool.getResourceIds()
-        self.assertIn('++resource++collective.nitf/styles.css', css_ids)
-        self.assertNotIn('++resource++collective.nitf/nitf.css', css_ids)
+        ids = css_tool.getResourceIds()
+        self.assertNotIn(NEW, ids)
+        self.assertIn(OLD, ids)
+        self.assertEqual(css_tool.getResource(OLD).getCompression(), 'safe')
 
         # run the upgrade step to validate the update
         self.execute_upgrade_step(step)
 
-        css_ids = css_tool.getResourceIds()
-        self.assertIn('++resource++collective.nitf/nitf.css', css_ids)
-        self.assertNotIn('++resource++collective.nitf/styles.css', css_ids)
+        ids = css_tool.getResourceIds()
+        self.assertNotIn(OLD, ids)
+        self.assertIn(NEW, ids)
+        self.assertEqual(css_tool.getResource(NEW).getCompression(), 'none')
