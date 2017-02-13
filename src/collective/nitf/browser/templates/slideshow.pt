@@ -1,7 +1,7 @@
-<div class="slideshow-container"
+<div id="nitf-slideshow"
+     class="slideshow-container"
      tal:define="images context/get_images"
-     tal:condition="images"
-     tal:attributes="id string:photogallery-${context/id}">
+     tal:condition="images">
   <div class="slideshow-player">
     <div class="cycle-player cycle-slideshow"
          data-cycle-slides="> div"
@@ -10,8 +10,8 @@
          data-allow-wrap="true"
          data-cycle-fx="fade"
          data-cycle-log="false"
-         tal:attributes="data-cycle-prev string:#photogallery-${context/id} .cycle-prev;
-                         data-cycle-next string:#photogallery-${context/id} .cycle-next">
+         data-cycle-prev="#nitf-slideshow .cycle-prev"
+         data-cycle-next="#nitf-slideshow .cycle-next">
       <div tal:repeat="image images">
         <img tal:replace="structure image/@@images/image/large" />
       </div>
