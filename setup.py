@@ -5,7 +5,7 @@ from setuptools import setup
 
 import os
 
-version = '1.0b9.dev0'
+version = '1.0b10.dev0'
 description = "A content type inspired on the IPTC's News Industry Text "
 "Format specification."
 long_description = (
@@ -36,7 +36,7 @@ setup(name='collective.nitf',
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='plone dexterity iptc newsml nitf',
-      author='Héctor Velarde',
+      author='Hector Velarde',
       author_email='hector.velarde@gmail.com',
       url='https://github.com/collective/collective.nitf',
       license='GPLv2',
