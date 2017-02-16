@@ -1,7 +1,7 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
-1.0b10 (unreleased)
+1.0b10 (2017-02-16)
 ^^^^^^^^^^^^^^^^^^^
 
 - Fix brown bag release.
