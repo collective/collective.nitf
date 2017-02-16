@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.0b5 (unreleased)
+2.1b1 (2017-02-16)
 ^^^^^^^^^^^^^^^^^^
 
 - Handle corner case when upgrade step for 1008 found a collection with no query defined.
