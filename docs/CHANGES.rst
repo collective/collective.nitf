@@ -1,7 +1,14 @@
 There's a frood who really knows where his towel is
 ---------------------------------------------------
 
-1.0b9 (unreleased)
+1.0b10 (unreleased)
+^^^^^^^^^^^^^^^^^^^
+
+- Fix brown bag release.
+  [hvelarde]
+
+
+1.0b9 (2017-02-16)
 ^^^^^^^^^^^^^^^^^^
 
 - Handle corner case when upgrade step for 1008 found a collection with no query defined.
