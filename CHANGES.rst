@@ -6,7 +6,9 @@ There's a frood who really knows where his towel is.
 2.1b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- The portlet used to show the latest news articles by section was removed;
+  the package no longer dependes on collective.prettydate, neither on the ``uid_catalog`` tool.
+  [hvelarde]
 
 
 2.1b4 (2017-10-18)

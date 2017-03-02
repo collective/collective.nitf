@@ -54,6 +54,12 @@
         />
 
     <genericsetup:upgradeStep
+        title="Remove NITF portlet"
+        description="Walk over the site to search and remove portlet assignments."
+        handler=".remove_nitf_portlet"
+        />
+
+    <genericsetup:upgradeStep
         title="Cook CSS resources"
         description="There were changes in the CSS files, so we need to cook the resources."
         handler="..cook_css_resources"
