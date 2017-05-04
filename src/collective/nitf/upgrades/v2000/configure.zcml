@@ -41,6 +41,18 @@
         handler=".update_configlet"
         />
 
+    <genericsetup:upgradeStep
+        title="Update behavior"
+        description=""
+        handler=".update_behavior"
+        />
+
+    <genericsetup:upgradeStep
+        title="Reindex objects"
+        description=""
+        handler=".reindex_objects"
+        />
+
   </genericsetup:upgradeSteps>
 
 </configure>

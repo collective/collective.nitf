@@ -2,10 +2,12 @@
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.testing import IS_PLONE_5
 from plone import api
+from plone.dexterity.interfaces import IDexterityFTI
 from plone.registry import field
 from plone.registry.interfaces import IRegistry
 from plone.registry.record import Record
 from zope.component import getUtility
+from zope.component import queryUtility
 
 import unittest
 
@@ -83,7 +85,7 @@ class to2000TestCase(UpgradeTestCaseBase):
     def test_upgrade_to_2000_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertTrue(version >= self.to_version)
-        self.assertEqual(self.total_steps, 4)
+        self.assertEqual(self.total_steps, 6)
 
     @unittest.skipIf(IS_PLONE_5, 'Test not supported under Plone 5')
     def test_character_counter_css_resources(self):
@@ -238,6 +240,29 @@ class to2000TestCase(UpgradeTestCaseBase):
         configlet = cptool.getActionObject('Products/nitf')
         new_permissions = ('collective.nitf: Setup',)
         self.assertEqual(configlet.getPermissions(), new_permissions)
+
+    def test_update_behavior(self):
+        # check if the upgrade step is registered
+        title = u'Update behavior'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version
+        fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
+        behaviors = list(fti.behaviors)
+        behaviors.remove('plone.app.relationfield.behavior.IRelatedItems')
+        behaviors.remove('collective.nitf.behaviors.interfaces.ISection')
+        behaviors.append('plone.app.referenceablebehavior.referenceable.IReferenceable')
+        fti.behaviors = tuple(behaviors)
+        self.assertIn('plone.app.referenceablebehavior.referenceable.IReferenceable', fti.behaviors)
+        self.assertNotIn('plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)
+        self.assertNotIn('collective.nitf.behaviors.interfaces.ISection', fti.behaviors)
+
+        # run the upgrade step to validate the update
+        self.execute_upgrade_step(step)
+        self.assertNotIn('plone.app.referenceablebehavior.referenceable.IReferenceable', fti.behaviors)
+        self.assertIn('plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)
+        self.assertIn('collective.nitf.behaviors.interfaces.ISection', fti.behaviors)
 
 
 class to2001TestCase(UpgradeTestCaseBase):
