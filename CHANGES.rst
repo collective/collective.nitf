@@ -6,8 +6,8 @@ There's a frood who really knows where his towel is.
 2.1b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Review upgrade step from profile 1008 to 2000 (fixes `#198`_).
-  [rodfersou]
+- Fix upgrade process between versions 1.0 and 2.0 (fixes `#198`_).
+  [rodfersou, hvelarde]
 
 
 2.1b1 (2017-02-16)

@@ -5,54 +5,49 @@ from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
 from zope.component import getUtility
 
-import logging
+import transaction
 
 
-def apply_profile(context, logger=None):
+def get_valid_objects(brains):
+    """Generate a list of objects associated with valid brains."""
+    for b in brains:
+        try:
+            obj = b.getObject()
+        except KeyError:
+            obj = None
+
+        if obj is None:  # warn on broken entries in the catalog
+            logger.warn(
+                u'Invalid reference in the catalog: {0}'.format(b.getPath()))
+            continue
+        yield obj
+
+
+def apply_profile(setup_tool):
     """Apply upgrade profile; this includes:
 
     - remove character counter resources from CSS and JS registries
     - remove character counter control panel records from registry
     - rename galleria view in News Article content type
-    - cook CSS and JS resources
     """
-    if logger is None:
-        # Called as upgrade step: define our own logger
-        logger = logging.getLogger(PROJECTNAME)
-
     profile = 'profile-collective.nitf.upgrades.v2000:default'
-    setup = api.portal.get_tool('portal_setup')
-    setup.runAllImportStepsFromProfile(profile)
-
-    portal_css = api.portal.get_tool('portal_css')
-    portal_css.cookResources()
-    logger.info(u'CSS resources cooked')
-    portal_js = api.portal.get_tool('portal_javascripts')
-    portal_js.cookResources()
-    logger.info(u'JS resources cooked')
+    setup_tool.runAllImportStepsFromProfile(profile)
 
 
-def update_layouts(context, logger=None):
-    if logger is None:
-        # Called as upgrade step: define our own logger
-        logger = logging.getLogger(PROJECTNAME)
-
+def update_layouts(setup_tool):
     # update existing objects
-    logger.info(u'Updating layout of News Articles')
-    catalog = api.portal.get_tool('portal_catalog')
-    results = catalog(portal_type='collective.nitf.content')
-    logger.info(u'{0} News Articles found'.format(len(results)))
+    logger.info(u'Updating layout of news articles')
+    results = api.content.find(portal_type='collective.nitf.content')
+    logger.info(u'Found {0} news articles'.format(len(results)))
     i = 0
-    for item in results:
-        obj = item.getObject()
+    for obj in get_valid_objects(results):
         if obj.getLayout() == 'nitf_galleria':
             obj.setLayout('slideshow_view')
             i += 1
-        logger.info(u'{0} News Articles updated'.format(i))
+        logger.info(u'{0} news articles updated'.format(i))
 
 
-def install_new_dependencies(context, logger=None):
-    logger = logging.getLogger(PROJECTNAME)
+def install_new_dependencies(setup_tool):
     dependencies = ('collective.js.cycle2',)
     qi = api.portal.get_tool('portal_quickinstaller')
     for p in dependencies:
@@ -68,31 +63,38 @@ def update_configlet(setup_tool):
     logger.info('Control panel configlet updated.')
 
 
-def update_behavior(setup_tool):
-    """Update behavior."""
+BEHAVIORS_TO_REMOVE = frozenset([
+    'plone.app.referenceablebehavior.referenceable.IReferenceable',
+])
+BEHAVIORS_TO_ADD = frozenset([
+    'plone.app.relationfield.behavior.IRelatedItems',
+    'collective.nitf.behaviors.interfaces.ISection',
+])
+
+
+def update_behaviors(setup_tool):
+    """Update News Article behaviors."""
     fti = getUtility(IDexterityFTI, name='collective.nitf.content')
-    behaviors = list(fti.behaviors)
-    behavior = 'plone.app.referenceablebehavior.referenceable.IReferenceable'
-    if behavior in behaviors:
-        behaviors.remove(behavior)
-    to_add = [
-        'plone.app.relationfield.behavior.IRelatedItems',
-        'collective.nitf.behaviors.interfaces.ISection'
-    ]
-    for behavior in to_add:
-        if behavior in behaviors:
-            continue
-        behaviors.append(behavior)
-    fti.behaviors = tuple(behaviors)
-    logger.info('Behavior updated.')
+    fti.behaviors = tuple(
+        set(fti.behaviors) - BEHAVIORS_TO_REMOVE | BEHAVIORS_TO_ADD)
+    logger.info('News Article behaviors updated.')
 
 
-def reindex_objects(setup_tool):
-    """Reindex objects."""
-    logger.info(u'Reindex News Articles')
+def reindex_news_articles(setup_tool):
+    """Reindex news articles to fix interfaces."""
+    logger.info(
+        u'Reindexing the catalog. '
+        u'This process could take a long time on large sites. Be patient.'
+    )
     results = api.content.find(portal_type='collective.nitf.content')
-    logger.info(u'{0} News Articles found'.format(len(results)))
-    for item in results:
-        obj = item.getObject()
+    logger.info(u'Found {0} news articles'.format(len(results)))
+    n = 0
+    for obj in get_valid_objects(results):
         obj.reindexObject()
-    logger.info('Objects reindexed.')
+        n += 1
+        if n % 1000 == 0:
+            transaction.savepoint(optimistic=True)
+            logger.info('{0} items processed.'.format(n))
+
+    transaction.savepoint(optimistic=True)
+    logger.info('Done.')
