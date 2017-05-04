@@ -3,7 +3,7 @@ from collective.nitf.config import PROJECTNAME
 from collective.nitf.logger import logger
 from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
-from zope.component import queryUtility
+from zope.component import getUtility
 
 import logging
 
@@ -70,11 +70,19 @@ def update_configlet(setup_tool):
 
 def update_behavior(setup_tool):
     """Update behavior."""
-    fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
+    fti = getUtility(IDexterityFTI, name='collective.nitf.content')
     behaviors = list(fti.behaviors)
-    behaviors.remove('plone.app.referenceablebehavior.referenceable.IReferenceable')
-    behaviors.append('plone.app.relationfield.behavior.IRelatedItems')
-    behaviors.append('collective.nitf.behaviors.interfaces.ISection')
+    behavior = 'plone.app.referenceablebehavior.referenceable.IReferenceable'
+    if behavior in behaviors:
+        behaviors.remove(behavior)
+    to_add = [
+        'plone.app.relationfield.behavior.IRelatedItems',
+        'collective.nitf.behaviors.interfaces.ISection'
+    ]
+    for behavior in to_add:
+        if behavior in behaviors:
+            continue
+        behaviors.append(behavior)
     fti.behaviors = tuple(behaviors)
     logger.info('Behavior updated.')
 
@@ -82,8 +90,7 @@ def update_behavior(setup_tool):
 def reindex_objects(setup_tool):
     """Reindex objects."""
     logger.info(u'Reindex News Articles')
-    catalog = api.portal.get_tool('portal_catalog')
-    results = catalog(portal_type='collective.nitf.content')
+    results = api.content.find(portal_type='collective.nitf.content')
     logger.info(u'{0} News Articles found'.format(len(results)))
     for item in results:
         obj = item.getObject()

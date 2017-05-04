@@ -7,7 +7,6 @@ from plone.registry import field
 from plone.registry.interfaces import IRegistry
 from plone.registry.record import Record
 from zope.component import getUtility
-from zope.component import queryUtility
 
 import unittest
 
@@ -248,7 +247,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertIsNotNone(step)
 
         # simulate state on previous version
-        fti = queryUtility(IDexterityFTI, name='collective.nitf.content')
+        fti = getUtility(IDexterityFTI, name='collective.nitf.content')
         behaviors = list(fti.behaviors)
         behaviors.remove('plone.app.relationfield.behavior.IRelatedItems')
         behaviors.remove('collective.nitf.behaviors.interfaces.ISection')
