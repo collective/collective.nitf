@@ -82,19 +82,22 @@ def update_behaviors(setup_tool):
 
 def reindex_news_articles(setup_tool):
     """Reindex news articles to fix interfaces."""
+    test = 'test' in setup_tool.REQUEST  # used to ignore transactions on tests
     logger.info(
         u'Reindexing the catalog. '
         u'This process could take a long time on large sites. Be patient.'
     )
+    catalog = api.portal.get_tool('portal_catalog')
     results = api.content.find(portal_type='collective.nitf.content')
     logger.info(u'Found {0} news articles'.format(len(results)))
     n = 0
     for obj in get_valid_objects(results):
-        obj.reindexObject()
+        catalog.catalog_object(obj, idxs=['object_provides'], update_metadata=False)
         n += 1
-        if n % 1000 == 0:
-            transaction.savepoint(optimistic=True)
+        if n % 1000 == 0 and not test:
+            transaction.commit()
             logger.info('{0} items processed.'.format(n))
 
-    transaction.savepoint(optimistic=True)
+    if not test:
+        transaction.commit()
     logger.info('Done.')

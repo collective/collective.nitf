@@ -17,6 +17,9 @@ class UpgradeTestCaseBase(unittest.TestCase):
 
     def setUp(self, from_version, to_version):
         self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        self.request.set('test', True)  # avoid transaction commits on tests
+
         self.setup = self.portal['portal_setup']
         self.profile_id = u'collective.nitf:default'
         self.from_version = from_version
@@ -31,10 +34,9 @@ class UpgradeTestCaseBase(unittest.TestCase):
 
     def execute_upgrade_step(self, step):
         """Execute an upgrade step."""
-        request = self.layer['request']
-        request.form['profile_id'] = self.profile_id
-        request.form['upgrades'] = [step['id']]
-        self.setup.manage_doUpgrades(request=request)
+        self.request.form['profile_id'] = self.profile_id
+        self.request.form['upgrades'] = [step['id']]
+        self.setup.manage_doUpgrades(request=self.request)
 
     @property
     def total_steps(self):
