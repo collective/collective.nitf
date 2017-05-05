@@ -84,6 +84,32 @@ You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML Ruby
 .. _`XML validation`: http://www.xmlvalidation.com/
 .. _`opening a support ticket`: https://github.com/collective/collective.nitf/issues
 
+Migration from 1.x to 2.x
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When migrate from version 1.x to 2.x these changes happen in your portal:
+
+* Now we have a specific permissions to update the configlet ``collective.nitf: Setup``.
+* There is no character counter when create a new NITF document.
+* Static resources are now named ``nitf.css`` and ``nitf.js`` (easier to debug at the browser).
+* The default behaviors of this content type change:
+
+  * Remove ``plone.app.referenceablebehavior.referenceable.IReferenceable`` behavior.
+  * Add ``plone.app.relationfield.behavior.IRelatedItems`` behavior.
+  * Add ``collective.nitf.behaviors.interfaces.ISection`` behavior.
+
+* Default views also change, what require to review your site theme:
+
+  * Default view shows a big image in the news item.
+  * Rename view ``nitf_galleria`` to ``slideshow_view``.  Now ``collective.nitf`` uses ``cycle2`` instead of ``galleria`` to create the slideshow, what make it easier to theme.
+  * Add new view ``text_only_view`` to open the text without the default big image.
+
+* This package now depends on `collective.js.cycle2`_, and this is the home of cycle2 static resources.
+
+There is an upgrade step to update all content (rename the views, change the behaviors as described above) and also this upgrade step will reindex all objects.
+
+.. _`collective.js.cycle2`: https://github.com/collective/collective.js.cycle2
+
 Internals
 ---------
 
