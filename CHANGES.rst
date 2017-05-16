@@ -6,7 +6,9 @@ There's a frood who really knows where his towel is.
 2.1b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Fix upgrade process between versions 1.0 and 2.0;
+  check documentation on migration from 1.x to 2.x (closes `#198`_).
+  [rodfersou, hvelarde]
 
 
 2.1b1 (2017-02-16)
@@ -194,3 +196,4 @@ There's a frood who really knows where his towel is.
 .. _`#169`: https://github.com/collective/collective.nitf/issues/169
 .. _`#175`: https://github.com/collective/collective.nitf/issues/175
 .. _`#178`: https://github.com/collective/collective.nitf/issues/178
+.. _`#198`: https://github.com/collective/collective.nitf/issues/198
