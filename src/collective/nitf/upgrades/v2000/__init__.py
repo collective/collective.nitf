@@ -63,9 +63,6 @@ def update_configlet(setup_tool):
     logger.info('Control panel configlet updated.')
 
 
-BEHAVIORS_TO_REMOVE = frozenset([
-    'plone.app.referenceablebehavior.referenceable.IReferenceable',
-])
 BEHAVIORS_TO_ADD = frozenset([
     'plone.app.relationfield.behavior.IRelatedItems',
     'collective.nitf.behaviors.interfaces.ISection',
@@ -75,8 +72,7 @@ BEHAVIORS_TO_ADD = frozenset([
 def update_behaviors(setup_tool):
     """Update News Article behaviors."""
     fti = getUtility(IDexterityFTI, name='collective.nitf.content')
-    fti.behaviors = tuple(
-        set(fti.behaviors) - BEHAVIORS_TO_REMOVE | BEHAVIORS_TO_ADD)
+    fti.behaviors = tuple(set(fti.behaviors) | BEHAVIORS_TO_ADD)
     logger.info('News Article behaviors updated.')
 
 

@@ -250,21 +250,19 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         # simulate state on previous version
         from collective.nitf.upgrades.v2000 import BEHAVIORS_TO_ADD
-        from collective.nitf.upgrades.v2000 import BEHAVIORS_TO_REMOVE
+        REFERENCEABLE = 'plone.app.referenceablebehavior.referenceable.IReferenceable'
         fti = getUtility(IDexterityFTI, name='collective.nitf.content')
         fti.behaviors = tuple(
-            set(fti.behaviors) - BEHAVIORS_TO_ADD | BEHAVIORS_TO_REMOVE)
+            set(fti.behaviors) - BEHAVIORS_TO_ADD | set([REFERENCEABLE]))
         for b in BEHAVIORS_TO_ADD:
             self.assertNotIn(b, fti.behaviors)
-        for b in BEHAVIORS_TO_REMOVE:
-            self.assertIn(b, fti.behaviors)
+        self.assertIn(REFERENCEABLE, fti.behaviors)
 
         # run the upgrade step to validate the update
         self.execute_upgrade_step(step)
-        self.assertNotIn(
-            'plone.app.referenceablebehavior.referenceable.IReferenceable', fti.behaviors)
         self.assertIn('plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)
         self.assertIn('collective.nitf.behaviors.interfaces.ISection', fti.behaviors)
+        self.assertIn(REFERENCEABLE, fti.behaviors)  # should not be removed
 
     def test_reindex_news_articles(self):
         # check if the upgrade step is registered

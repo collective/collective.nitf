@@ -84,32 +84,6 @@ You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML Ruby
 .. _`XML validation`: http://www.xmlvalidation.com/
 .. _`opening a support ticket`: https://github.com/collective/collective.nitf/issues
 
-Migration from 1.x to 2.x
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-When migrate from version 1.x to 2.x these changes happen in your portal:
-
-* Now we have a specific permissions to update the configlet ``collective.nitf: Setup``.
-* There is no character counter when create a new NITF document.
-* Static resources are now named ``nitf.css`` and ``nitf.js`` (easier to debug at the browser).
-* The default behaviors of this content type change:
-
-  * Remove ``plone.app.referenceablebehavior.referenceable.IReferenceable`` behavior.
-  * Add ``plone.app.relationfield.behavior.IRelatedItems`` behavior.
-  * Add ``collective.nitf.behaviors.interfaces.ISection`` behavior.
-
-* Default views also change, what require to review your site theme:
-
-  * Default view shows a big image in the news item.
-  * Rename view ``nitf_galleria`` to ``slideshow_view``.  Now ``collective.nitf`` uses ``cycle2`` instead of ``galleria`` to create the slideshow, what make it easier to theme.
-  * Add new view ``text_only_view`` to open the text without the default big image.
-
-* This package now depends on `collective.js.cycle2`_, and this is the home of cycle2 static resources.
-
-There is an upgrade step to update all content (rename the views, change the behaviors as described above) and also this upgrade step will reindex all objects.
-
-.. _`collective.js.cycle2`: https://github.com/collective/collective.js.cycle2
-
 Internals
 ---------
 
@@ -166,3 +140,27 @@ The following command rebuilds static files and exit (insted of keep watching th
 .. code-block:: bash
 
     $ bin/npm_build
+
+Migration from 1.x to 2.x
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You have to be aware of the following changes when migrating from version 1.x to 2.x:
+
+* Package is no longer compatible with Plone 4.2
+* Package no longer depends on Grok
+* Package no longer depends on `collective.z3cform.widgets <http://pypi.python.org/pypi/collective.z3cform.widgets>`_;
+  you should uninstall that dependency manually if there is no other package depending on it on your site
+* Package no longer depends on `plone.app.referenceablebehavior <http://pypi.python.org/pypi/plone.app.referenceablebehavior>`_;
+  the ``IReferenceable`` behavior included there is no longer assigned by default
+* The character counter is no longer available
+* We use `Cycle2 <http://jquery.malsup.com/cycle2/>`_ instead of `Galleria <https://galleria.io/>`_ as the framework for the slideshow view;
+  package now depends on `collective.js.cycle2 <https://pypi.python.org/pypi/collective.js.cycle2>`_
+* The following views are available for a News Article: ``view``, ``slideshow_view`` and ``text_only_view``
+* View templates were completely refactored and support for semantic markup was added;
+  the default view displays a bigger image
+* The following behaviors are assigned by default to the News Article content type: ``plone.app.relationfield.behavior.IRelatedItems`` and ``collective.nitf.behaviors.interfaces.ISection``
+* A new permission ``collective.nitf: Setup`` is available to access the control panel configlet and is assigned by default to ``Manager`` and ``Site Administrator`` roles
+* Static resources are now named ``nitf.css`` and ``nitf.js`` (easier to debug at the browser)
+
+An upgrade step is available to remove old resources, rename the views, and reindex all News Articles to reflect changes.
+The upgrade step will not remove the ``plone.app.referenceablebehavior.referenceable.IReferenceable`` behavior if applied.
