@@ -201,3 +201,5 @@ JS_RESOURCES = (
     '++resource++collective.js.cycle2/jquery.cycle2.carousel.min.js',
     '++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js',
 )
+
+NOT_RENDERED_ANONYMOUS_TILE_TOKEN = '<span id="tile-content-not-available"></span>'

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """Tests in this module are executed only if collective.cover is installed."""
+from collective.nitf.config import NOT_RENDERED_ANONYMOUS_TILE_TOKEN
 from collective.nitf.testing import HAS_COVER
 from collective.nitf.testing import INTEGRATION_TESTING
 from lxml import etree
 from mock import Mock
 from plone import api
+from plone.app.testing import logout
 
 import unittest
 
@@ -98,3 +100,15 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
         # some metadata is still present
         self.assertIn('Lorem ipsum', html.xpath('//h2/a/text()'))
         self.assertFalse(html.xpath('//time'))  # date is ignored
+
+    def test_dont_render_for_anonymous(self):
+        # https://github.com/collective/collective.nitf/issues/185
+        with api.env.adopt_roles(['Manager']):
+            n1 = api.content.create(
+                self.portal, 'collective.nitf.content', title='Lorem ipsum')
+            self.tile.populate_with_object(n1)
+
+        logout()
+        html = self.tile()
+        self.assertNotIn('Lorem ipsum', html)
+        self.assertIn(NOT_RENDERED_ANONYMOUS_TILE_TOKEN, html)

@@ -6,6 +6,10 @@ There's a frood who really knows where his towel is.
 2.1b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Don't render tile for anonymous users if related nitf content is unpublished.
+  (closes `#185`_).
+  [idgserpro]
+
 - Fix upgrade process between versions 1.0 and 2.0;
   check documentation on migration from 1.x to 2.x (closes `#198`_).
   [rodfersou, hvelarde]
@@ -196,4 +200,5 @@ There's a frood who really knows where his towel is.
 .. _`#169`: https://github.com/collective/collective.nitf/issues/169
 .. _`#175`: https://github.com/collective/collective.nitf/issues/175
 .. _`#178`: https://github.com/collective/collective.nitf/issues/178
+.. _`#185`: https://github.com/collective/collective.nitf/issues/185
 .. _`#198`: https://github.com/collective/collective.nitf/issues/198
