@@ -85,8 +85,9 @@ class NITFTile(BasicTile):
     def title_tag(self):
         field = self._get_field_configuration('title')
         tag, title, href = field['htmltag'], field['content'], self.getURL()
-        return u"""
-            <{tag}>
-              <a href="{href}">{title}</a>
-            </{tag}>
-            """.format(tag=tag, title=title, href=href)
+        if href:
+            return u'<{tag}><a href="{href}">{title}</a></{tag}>'.format(
+                tag=tag, href=href, title=title)
+        else:
+            # in HTML5 the href attribute may be omitted (placeholder link)
+            return u'<{tag}><a>{title}</a></{tag}>'.format(tag=tag, title=title)
