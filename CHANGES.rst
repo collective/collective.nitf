@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.1b2 (unreleased)
+2.1b2 (2017-06-12)
 ^^^^^^^^^^^^^^^^^^
 
 - Do not create a link to ``None`` on the tile.
