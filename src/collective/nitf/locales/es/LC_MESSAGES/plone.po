@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2013-11-22 20:53+0000\n"
+"POT-Creation-Date: 2017-06-30 19:24+0000\n"
 "PO-Revision-Date: 2013-11-22 18:59-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Spanish <https://github.com/collective>\n"
@@ -70,4 +70,3 @@ msgstr "Subtítulo"
 #: collective/nitf/profiles/default/registry.xml
 msgid "Urgency"
 msgstr "Urgencia"
-
