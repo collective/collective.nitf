@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.nitf.Extensions.Install import remove_tile
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.testing import IS_PLONE_5
 from plone import api
@@ -284,6 +285,22 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.execute_upgrade_step(step)
         results = api.content.find(portal_type='collective.nitf.content')
         self.assertEqual(len(results), 10)  # no failure and catalog unaffected
+
+    def test_nitf_tile_registry_from_1x_to_2x(self):
+        # check if the upgrade step is registered
+        title = u'Miscellaneous'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        # simulate state on previous version, because profiles/default registers
+        # this tile, so we remove it first.
+        remove_tile(self.portal)
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertNotIn(u'collective.nitf', tiles)
+
+        self.execute_upgrade_step(step)
+        tiles = api.portal.get_registry_record('plone.app.tiles')
+        self.assertIn(u'collective.nitf', tiles)
 
 
 class to2001TestCase(UpgradeTestCaseBase):
