@@ -6,7 +6,8 @@ There's a frood who really knows where his towel is.
 2.1b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Remove ``relatable_content_types`` registry record when upgrading to 2.x (closes `#208`_).
+  [idgserpro]
 
 
 2.1b2 (2017-06-12)
@@ -205,3 +206,4 @@ There's a frood who really knows where his towel is.
 .. _`#175`: https://github.com/collective/collective.nitf/issues/175
 .. _`#178`: https://github.com/collective/collective.nitf/issues/178
 .. _`#198`: https://github.com/collective/collective.nitf/issues/198
+.. _`#208`: https://github.com/collective/collective.nitf/issues/208
