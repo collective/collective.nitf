@@ -6,8 +6,7 @@ There's a frood who really knows where his towel is.
 2.1b3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Add removal of relatable_content_types registry to upgradeStep between 1.x
-  and 2.x upgrade (closes `#208`_).
+- Remove ``relatable_content_types`` registry record when upgrading to 2.x (closes `#208`_).
   [idgserpro]
 
 
