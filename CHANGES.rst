@@ -19,8 +19,8 @@ There's a frood who really knows where his towel is.
 - Do not create a link to ``None`` on the tile.
   [hvelarde]
 
-- Fix upgrade process between versions 1.0 and 2.0;
-  check documentation on migration from 1.x to 2.x (closes `#198`_).
+- Fix upgrade process between versions 1.x and 2.x;
+  check documentation on migration for more information (closes `#198`_).
   [rodfersou, hvelarde]
 
 
