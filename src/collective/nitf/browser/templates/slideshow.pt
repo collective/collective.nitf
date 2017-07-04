@@ -1,4 +1,4 @@
-<div class="swiper-container gallery-top"
+<div class="swiper-container"
      tal:define="images context/get_images"
      tal:condition="images">
   <div class="swiper-wrapper">

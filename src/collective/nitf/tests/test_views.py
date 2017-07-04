@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.config import CSS_RESOURCES
-from collective.nitf.config import JS_RESOURCES
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import FRACTAL
 from collective.nitf.testing import INTEGRATION_TESTING
@@ -53,16 +51,6 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         image = api.content.create(self.n1, 'Image', title='foo')
         set_image_field(image, FRACTAL, 'image/jpeg')
         self.assertIn('<div id="media">', self.view())
-
-    def test_render_css_resources(self):
-        rendered = self.view()
-        for css in CSS_RESOURCES:
-            self.assertNotIn(css, rendered)
-
-    def test_render_js_resources(self):
-        rendered = self.view()
-        for js in JS_RESOURCES:
-            self.assertNotIn(js, rendered)
 
     def test_get_images(self):
         images = self.view.get_images()
@@ -120,22 +108,12 @@ class SlideshowViewTestCase(TestViewMixin, BaseViewTestCase):
         self.view = api.content.get_view(self.name, self.n1, self.request)
 
     def test_slideshow_view_render(self):
-        self.assertNotIn('<div class="slideshow-player">', self.view())
-        self.assertNotIn('<div class="slideshow-pager">', self.view())
+        self.assertNotIn('<div class="swiper-container">', self.view())
+        self.assertNotIn('<div class="swiper-pagination">', self.view())
         image = api.content.create(self.n1, 'Image', 'foo')
         set_image_field(image, FRACTAL, 'image/jpeg')
-        self.assertIn('<div class="slideshow-player">', self.view())
-        self.assertIn('<div class="slideshow-pager">', self.view())
-
-    def test_render_css_resources(self):
-        rendered = self.view()
-        for css in CSS_RESOURCES:
-            self.assertIn(css, rendered)
-
-    def test_render_js_resources(self):
-        rendered = self.view()
-        for js in JS_RESOURCES:
-            self.assertIn(js, rendered)
+        self.assertIn('<div class="swiper-container">', self.view())
+        self.assertIn('<div class="swiper-pagination">', self.view())
 
 
 class TextOnlyViewTestCase(TestViewMixin, BaseViewTestCase):
@@ -150,11 +128,6 @@ class TextOnlyViewTestCase(TestViewMixin, BaseViewTestCase):
         image = api.content.create(self.n1, 'Image', title='foo', description='bar')
         set_image_field(image, FRACTAL, 'image/jpeg')
         self.assertNotIn('<div id="media">', self.view())
-
-    def test_render_js_resources(self):
-        rendered = self.view()
-        for js in JS_RESOURCES:
-            self.assertNotIn(js, rendered)
 
 
 class NITFViewTestCase(BaseViewTestCase):

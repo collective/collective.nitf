@@ -12,6 +12,10 @@ There's a frood who really knows where his towel is.
     This version removes tile registration/removal;
     you must depend on plone.app.tiles >= 3.0.0 to avoid issues with ``collective.nitf`` tile.
 
+- Remove dependency on Cycle2;
+  If you don't have other package depending on collective.js.cycle2 you are safe to uninstall it (closes `#200`_).
+  [rodfersou]
+
 - Remove needless tile registration/removal when using plone.app.tiles >= 3.0.0.
   [hvelarde]
 
@@ -41,10 +45,6 @@ There's a frood who really knows where his towel is.
 
 2.1b3 (2017-07-05)
 ^^^^^^^^^^^^^^^^^^
-
-- Remove dependency on Cycle2;
-  If you don't have other package depending on collective.js.cycle2 you are safe to uninstall it (closes `#200`_).
-  [rodfersou]
 
 - Add NITF tile for collective.cover when upgrading to 2.x (closes `#205`_).
   [idgserpro]

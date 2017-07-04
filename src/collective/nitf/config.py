@@ -194,11 +194,3 @@ URGENCIES = SimpleVocabulary([
 DEFAULT_GENRE = u'Current'
 DEFAULT_SECTION = _(u'General')
 DEFAULT_URGENCY = NORMAL
-
-# Swiper JS resources used by the package
-CSS_RESOURCES = (
-    '//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css',
-)
-JS_RESOURCES = (
-    '//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js',
-)

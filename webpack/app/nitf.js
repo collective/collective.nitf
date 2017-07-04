@@ -13,5 +13,3 @@ $(window).load(() => {
     });
   }
 });
-
-module.exports = SlideShow;

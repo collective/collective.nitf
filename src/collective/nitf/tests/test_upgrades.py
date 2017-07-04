@@ -9,16 +9,7 @@ from plone.registry.interfaces import IRegistry
 from plone.registry.record import Record
 from zope.component import getUtility
 
-import pkg_resources
 import unittest
-
-
-try:
-    pkg_resources.get_distribution('collective.js.cycle2')
-except pkg_resources.DistributionNotFound:
-    HAS_CYCLE2 = False
-else:
-    HAS_CYCLE2 = True
 
 
 class UpgradeTestCaseBase(unittest.TestCase):
@@ -215,26 +206,6 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         self.assertEqual(n1.getLayout(), 'slideshow_view')
 
-    @unittest.skipIf(not HAS_CYCLE2, 'Test not supported without Cycle2')
-    def test_install_new_dependencies(self):
-        # check if the upgrade step is registered
-        title = u'Install new dependencies'
-        step = self.get_upgrade_step(title)
-        self.assertIsNotNone(step)
-
-        # simulate state on previous version
-        dependencies = ('collective.js.cycle2',)
-        qi = api.portal.get_tool('portal_quickinstaller')
-        qi.uninstallProducts(dependencies)
-        for p in dependencies:
-            self.assertFalse(qi.isProductInstalled(p))
-
-        # execute upgrade step and verify changes were applied
-        self.execute_upgrade_step(step)
-
-        for p in dependencies:
-            self.assertTrue(qi.isProductInstalled(p))
-
     def test_update_configlet(self):
         # check if the upgrade step is registered
         title = u'Update control panel configlet'
@@ -376,7 +347,7 @@ class to2003TestCase(UpgradeTestCaseBase):
     def test_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertGreaterEqual(int(version), int(self.to_version))
-        self.assertEqual(self.total_steps, 1)
+        self.assertEqual(self.total_steps, 5)
 
     def test_remove_portlet_registration(self):
         title = u'Remove portlet registration'
