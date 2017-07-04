@@ -9,7 +9,16 @@ from plone.registry.interfaces import IRegistry
 from plone.registry.record import Record
 from zope.component import getUtility
 
+import pkg_resources
 import unittest
+
+
+try:
+    pkg_resources.get_distribution('collective.js.cycle2')
+except pkg_resources.DistributionNotFound:
+    HAS_CYCLE2 = False
+else:
+    HAS_CYCLE2 = True
 
 
 class UpgradeTestCaseBase(unittest.TestCase):
@@ -206,6 +215,7 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         self.assertEqual(n1.getLayout(), 'slideshow_view')
 
+    @unittest.skipIf(not HAS_CYCLE2, 'Test not supported without Cycle2')
     def test_install_new_dependencies(self):
         # check if the upgrade step is registered
         title = u'Install new dependencies'

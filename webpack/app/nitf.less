@@ -87,218 +87,57 @@
 
 /* Cycle2 Slideshow */
 .portaltype-collective-nitf-content.template-slideshow_view {
-  .slideshow-player {
-    position: relative;
+  .swiper-container {
+    width: 768px;
   }
+  .swiper-slide {
+    font-size: 18px;
 
-  .slide.cycle-slide {
-    overflow: hidden;
-
-    max-width: 100%;
-    > a {
-      line-height: 0;
-    }
-  }
-
-  /* Prev/Next arrows */
-  #content a.cycle-prev,
-  #content a.cycle-next {
-    position: absolute;
-    z-index: 110;
-    top: 0;
-    bottom: 0;
-
-    overflow: hidden;
-
-    width: 15%;
-
-    cursor: pointer;
-    white-space: nowrap;
-    text-indent: 101%;
-
-    opacity: .7;
-    border: none;
-  }
-
-  .cycle-prev {
-    left: 0;
-
-    background: url(images/prev-arrow.svg) no-repeat scroll 20% 50% rgba(0, 0, 0, 0);
-  }
-
-  .cycle-next {
-    right: 0;
-
-    background: url(images/next-arrow.svg) no-repeat scroll 80% 50% rgba(0, 0, 0, 0);
-  }
-
-  .cycle-prev:hover,
-  .cycle-next:hover {
-    opacity: 1;
-  }
-
-  .cycle-carrossel .thumb-itens {
-    min-width: 128px;
-    margin-right: 5px;
-
-    cursor: pointer;
-  }
-
-  a.edit-tile-link {
-    z-index: 150;
-  }
-
-  .cycle-pager-container {
-    position: absolute;
-    z-index: 110;
-    top: 0;
-
-    width: 100%;
-
-    text-align: center;
-  }
-
-  .cycle-pager {
-    display: inline-block;
-
-    margin: 0 auto;
-    padding: 8px;
-    > span {
-      cursor: pointer;
-    }
-    .cycle-pager-active {
-      opacity: 1;
-    }
-  }
-
-  .cycle-pager-container {
-    &.thumbnails_square .cycle-pager {
-      background: white;
-
-      a:last-child img {
-        margin-right: 0;
-      }
-      img {
-        margin-right: 8px;
-
-        border-radius: 5px;
-      }
-    }
-    &.numbers .cycle-pager {
-      opacity: .6;
-      background-color: #222;
-    }
-  }
-
-  #content .cycle-pager-container.numbers a:link {
-    font-size: 1.25em;
-
-    padding: 0 .25em;
-
-    color: white;
-  }
-
-  .cycle-caption {
-    position: absolute;
-    z-index: 120;
-    top: 15px;
-    right: 15px;
-
-    color: white;
-  }
-
-  .cycle-overlay {
-    position: absolute;
-    z-index: 120;
-    bottom: 0;
-
-    width: 100%;
-    padding: 15px 0;
-
-    opacity: .5;
-    color: white;
-    background: none repeat scroll 0 0 black;
-    > div {
-      padding: 0 15px;
-    }
-  }
-
-  /* Stop overlay being bigger than slides */
-  .slide.cycle-sentinel {
-    min-height: 6em;
-  }
-
-  .wrapper-slideshow {
-    float: left;
-
-    min-width: 100%;
-  }
-
-  .cycle-slideshow {
-    .cycle-slide {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      img {
-        position: relative;
-        top: 0;
-        left: 0;
-
-        display: block;
-
-        width: auto;
-        max-width: 100%;
-        height: auto;
-        max-height: 100%;
-        padding: 0;
-      }
-    }
-    /* Stop Flash of unstyled content */
-    .slide {
-      display: none;
-
-      min-width: 100%;
-      img {
-        min-width: 100%;
-      }
-    }
-  }
-
-  .slideshow-container {
     display: flex;
     flex-direction: column;
 
-    width: 768px;
-    max-width: 100%;
-    margin: 0 auto;
-  }
+    text-align: center;
 
-  .slideshow-player {
-    position: relative;
-    .cycle-slide {
-      display: flex !important;
-
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .slideshow-carrossel .cycle-slide {
-    display: flex !important;
+    background: #FFF;
 
     align-items: center;
     justify-content: center;
   }
+  .swiper-player {
+    position: relative;
 
-  .cycle-carousel-wrap {
+    width: 100%;
+
+    background: #000;
+  }
+  .aspect-16-9:before {
+    display: block;
+
+    width: 100%;
+    // https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin/
+    // 16:9 = 9/16 * 100 = 56.25
+    padding-top: 56.25%;
+
+    content: '';
+  }
+  .swiper-image-wrapper {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+  }
+  .swiper-image-wrapper img {
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 100% !important;
+  }
+  .swiper-description {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 7px;
 
-    display: flex;
+    text-align: start;
   }
 }

@@ -10,7 +10,6 @@ import unittest
 
 
 DEPENDENCIES = (
-    'collective.js.cycle2',
     'collective.js.jqueryui',
 )
 

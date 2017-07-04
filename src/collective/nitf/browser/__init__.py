@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.nitf.config import CSS_RESOURCES
 from collective.nitf.config import JS_RESOURCES
 from plone import api
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
@@ -41,6 +42,18 @@ class View(DefaultView):
 class Slideshow(DefaultView):
 
     """Slideshow view of a News Article."""
+
+    def css_resources(self):
+        """Return a list of CSS resources that are not available in the
+        registry, but need to be loaded anyway. This way the slideshow
+        could use resources registered locally or globally.
+
+        :returns: list of ids
+        :rtype: list
+        """
+        css_registry = api.portal.get_tool('portal_css')
+        global_resources = css_registry.getResourceIds()
+        return [r for r in CSS_RESOURCES if r not in global_resources]
 
     def js_resources(self):
         """Return a list of JS resources that are not available in the

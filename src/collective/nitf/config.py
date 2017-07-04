@@ -195,9 +195,10 @@ DEFAULT_GENRE = u'Current'
 DEFAULT_SECTION = _(u'General')
 DEFAULT_URGENCY = NORMAL
 
-# Cycle2 JS resources used by the package
+# Swiper JS resources used by the package
+CSS_RESOURCES = (
+    '//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css',
+)
 JS_RESOURCES = (
-    '++resource++collective.js.cycle2/jquery.cycle2.min.js',
-    '++resource++collective.js.cycle2/jquery.cycle2.carousel.min.js',
-    '++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js',
 )

@@ -40,7 +40,6 @@ setup(name='collective.nitf',
       zip_safe=False,
       install_requires=[
           'Acquisition',
-          'collective.js.cycle2 >=1.0b1',
           'collective.js.jqueryui',
           'collective.prettydate >=1.1',
           'plone.api',

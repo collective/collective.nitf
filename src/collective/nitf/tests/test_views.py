@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.nitf.config import CSS_RESOURCES
 from collective.nitf.config import JS_RESOURCES
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import FRACTAL
@@ -52,6 +53,11 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         image = api.content.create(self.n1, 'Image', title='foo')
         set_image_field(image, FRACTAL, 'image/jpeg')
         self.assertIn('<div id="media">', self.view())
+
+    def test_render_css_resources(self):
+        rendered = self.view()
+        for css in CSS_RESOURCES:
+            self.assertNotIn(css, rendered)
 
     def test_render_js_resources(self):
         rendered = self.view()
@@ -120,6 +126,11 @@ class SlideshowViewTestCase(TestViewMixin, BaseViewTestCase):
         set_image_field(image, FRACTAL, 'image/jpeg')
         self.assertIn('<div class="slideshow-player">', self.view())
         self.assertIn('<div class="slideshow-pager">', self.view())
+
+    def test_render_css_resources(self):
+        rendered = self.view()
+        for css in CSS_RESOURCES:
+            self.assertIn(css, rendered)
 
     def test_render_js_resources(self):
         rendered = self.view()
