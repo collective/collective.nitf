@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.1b3 (unreleased)
+2.1b3 (2017-07-05)
 ^^^^^^^^^^^^^^^^^^
 
 - Add NITF tile for collective.cover when upgrading to 2.x (closes `#205`_).
