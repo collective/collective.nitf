@@ -7,6 +7,7 @@ Note that methods in this class can not be declared as properties
 """
 from collective.nitf.interfaces import INITF
 from plone.app.textfield.interfaces import ITransformer
+from plone.app.textfield.value import IRichTextValue
 from plone.dexterity.content import Container
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
@@ -76,17 +77,20 @@ def textIndexer(obj):
     """
     transformer = ITransformer(obj)
     text = obj.text
-    if text:
-        text = transformer(obj.text, 'text/plain')
+    if IRichTextValue.providedBy(text):
+        text = transformer(text, 'text/plain')
+    else:
+        text = ''
 
-    searchable_text = [safe_unicode(entry) for entry in (
-        obj.id,
-        obj.Title(),
-        obj.subtitle,
-        obj.Description(),
-        obj.byline,
-        text,
-        obj.location,
-    ) if entry]
+    keywords = u' '.join(safe_unicode(s) for s in obj.Subject())
 
-    return u' '.join(searchable_text)
+    return u' '.join((
+        safe_unicode(obj.id),
+        safe_unicode(obj.title) or u'',
+        safe_unicode(obj.subtitle) or u'',
+        safe_unicode(obj.description) or u'',
+        safe_unicode(obj.byline) or u'',
+        safe_unicode(text),
+        safe_unicode(obj.location) or u'',
+        safe_unicode(keywords),
+    ))
