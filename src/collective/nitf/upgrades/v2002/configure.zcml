@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.nitf">
+
+  <genericsetup:upgradeSteps
+      source="2001"
+      destination="2002"
+      profile="collective.nitf:default">
+
+    <genericsetup:upgradeStep
+        title="Reindex SearchableText"
+        description="Fix the SearchableText index of news articles."
+        handler=".reindex_searchable_text"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>
