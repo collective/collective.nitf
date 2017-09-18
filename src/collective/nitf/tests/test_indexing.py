@@ -14,7 +14,6 @@ class IndexingTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.catalog = self.portal['portal_catalog']
 
         with api.env.adopt_roles(['Manager']):
             self.n1 = api.content.create(
@@ -23,10 +22,10 @@ class IndexingTestCase(unittest.TestCase):
                 self.portal, 'collective.nitf.content', 'n2')
 
     def test_interface_indexed(self):
-        result = self.catalog(object_provides=INITF.__identifier__)
-        self.assertEqual(2, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
-        self.assertEqual(result[1].getURL(), self.n2.absolute_url())
+        results = api.content.find(object_provides=INITF.__identifier__)
+        self.assertEqual(2, len(results))
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
+        self.assertEqual(results[1].getURL(), self.n2.absolute_url())
 
     def test_portal_type_indexed(self):
         results = api.content.find(portal_type='collective.nitf.content')
@@ -49,9 +48,9 @@ class IndexingTestCase(unittest.TestCase):
     def test_subtitle_indexed(self):
         self.n1.subtitle = u'subtítulo'
         self.n1.reindexObject()
-        result = self.catalog(subtitle=u'subtítulo')
-        self.assertEqual(1, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
+        results = api.content.find(subtitle=u'subtítulo')
+        self.assertEqual(1, len(results))
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
     def test_description_indexed(self):
         self.n1.description = u'descripción'
@@ -63,38 +62,38 @@ class IndexingTestCase(unittest.TestCase):
     def test_byline_indexed(self):
         self.n1.byline = u'Héctor Velarde'
         self.n1.reindexObject()
-        result = self.catalog(byline='Héctor')
-        self.assertEqual(1, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
+        results = api.content.find(byline='Héctor')
+        self.assertEqual(1, len(results))
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
     def test_genre_indexed(self):
         self.n1.genre = u'Actuality'
         self.n1.reindexObject()
-        result = self.catalog(genre=u'Actuality')
-        self.assertEqual(1, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
+        results = api.content.find(genre=u'Actuality')
+        self.assertEqual(1, len(results))
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
     def test_section_indexed(self):
         self.n1.section = u'foo'
         self.n1.reindexObject()
-        result = self.catalog(section=u'foo')
-        self.assertEqual(1, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
+        results = api.content.find(section=u'foo')
+        self.assertEqual(1, len(results))
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
     def test_urgency_indexed(self):
         from collective.nitf.config import HIGH
         self.n1.urgency = HIGH
         self.n1.reindexObject()
-        results = self.catalog(urgency=HIGH)
+        results = api.content.find(urgency=HIGH)
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
     def test_location_indexed(self):
         self.n1.location = u'México, DF'
         self.n1.reindexObject()
-        result = self.catalog(location='México')
-        self.assertEqual(1, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
+        results = api.content.find(location='México')
+        self.assertEqual(1, len(results))
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
     def test_keywords_indexed(self):
         self.n1.subject = ('foo', 'baz')
@@ -141,7 +140,7 @@ class IndexingTestCase(unittest.TestCase):
     def test_byline_in_searchable_text(self):
         self.n1.byline = u'Héctor Velarde'
         self.n1.reindexObject()
-        results = self.catalog(SearchableText=u'Héctor')
+        results = api.content.find(SearchableText=u'Héctor')
         self.assertEqual(1, len(results))
         self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
@@ -155,7 +154,7 @@ class IndexingTestCase(unittest.TestCase):
     def test_location_in_searchable_text(self):
         self.n1.location = u'México, DF'
         self.n1.reindexObject()
-        results = self.catalog(SearchableText=u'México')
+        results = api.content.find(SearchableText=u'México')
         self.assertEqual(1, len(results))
         self.assertEqual(results[0].getURL(), self.n1.absolute_url())
 
@@ -184,6 +183,6 @@ class IndexingTestCase(unittest.TestCase):
         self.n1.reindexObject()
         qi = self.portal['portal_quickinstaller']
         qi.reinstallProducts(products=[PROJECTNAME])
-        result = self.catalog(SearchableText='Héctor')
-        self.assertEqual(1, len(result))
-        self.assertEqual(result[0].getURL(), self.n1.absolute_url())
+        results = api.content.find(SearchableText='Héctor')
+        self.assertEqual(1, len(results))
+        self.assertEqual(results[0].getURL(), self.n1.absolute_url())
