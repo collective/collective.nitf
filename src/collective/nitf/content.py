@@ -75,18 +75,21 @@ def textIndexer(obj):
     text as plain text.
     """
     transformer = ITransformer(obj)
-    text = obj.text
-    if text:
+
+    try:
         text = transformer(obj.text, 'text/plain')
+    except AttributeError:
+        text = ''
 
-    searchable_text = [safe_unicode(entry) for entry in (
-        obj.id,
-        obj.Title(),
-        obj.subtitle,
-        obj.Description(),
-        obj.byline,
-        text,
-        obj.location,
-    ) if entry]
+    keywords = u' '.join(safe_unicode(s) for s in obj.Subject())
 
-    return u' '.join(searchable_text)
+    return u' '.join((
+        safe_unicode(obj.id),
+        safe_unicode(obj.title) or u'',
+        safe_unicode(obj.subtitle) or u'',
+        safe_unicode(obj.description) or u'',
+        safe_unicode(obj.byline) or u'',
+        safe_unicode(text),
+        safe_unicode(obj.location) or u'',
+        safe_unicode(keywords),
+    ))

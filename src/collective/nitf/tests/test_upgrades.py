@@ -340,3 +340,35 @@ class to2001TestCase(UpgradeTestCaseBase):
         self.assertNotIn(OLD, ids)
         self.assertIn(NEW, ids)
         self.assertEqual(css_tool.getResource(NEW).getCompression(), 'none')
+
+
+class to2002TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'2001', u'2002')
+
+    def test_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self.total_steps, 1)
+
+    def test_reindex_news_articles(self):
+        # check if the upgrade step is registered
+        title = u'Reindex SearchableText'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        with api.env.adopt_roles(['Manager']):
+            for i in xrange(0, 10):
+                api.content.create(self.portal, 'collective.nitf.content', str(i))
+
+        # break the catalog by deleting an object without notifying
+        self.portal['0'].subject = ('foo', 'bar')
+        results = api.content.find(SearchableText='foo')
+        self.assertEqual(len(results), 0)
+
+        # run the upgrade step to validate the update
+        self.execute_upgrade_step(step)
+        results = api.content.find(SearchableText='foo')
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].getURL(), self.portal['0'].absolute_url())
