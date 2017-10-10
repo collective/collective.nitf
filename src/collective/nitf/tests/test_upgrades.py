@@ -362,7 +362,7 @@ class to2002TestCase(UpgradeTestCaseBase):
             for i in xrange(0, 10):
                 api.content.create(self.portal, 'collective.nitf.content', str(i))
 
-        # break the catalog by deleting an object without notifying
+        # update metadata without notifying
         self.portal['0'].subject = ('foo', 'bar')
         results = api.content.find(SearchableText='foo')
         self.assertEqual(len(results), 0)
