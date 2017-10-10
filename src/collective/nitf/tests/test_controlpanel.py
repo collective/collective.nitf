@@ -31,6 +31,10 @@ class ControlPanelTestCase(unittest.TestCase):
         with self.assertRaises(Unauthorized):
             self.portal.restrictedTraverse('@@nitf-settings')
 
+    def test_site_administrator_can_access_configlet(self):
+        with api.env.adopt_roles(['Site Administrator']):
+            self.portal.restrictedTraverse('@@nitf-settings')
+
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']
                    for a in self.controlpanel.listActions()]
