@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.1b4 (unreleased)
+2.1b4 (2017-10-18)
 ^^^^^^^^^^^^^^^^^^
 
 - ``SearchableText`` index for News Article content type now includes object keywords (fixes `brasil.gov.portal#155 <https://github.com/plonegovbr/brasil.gov.portal/issues/155>`_).
