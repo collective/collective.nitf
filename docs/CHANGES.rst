@@ -4,7 +4,8 @@ There's a frood who really knows where his towel is
 1.0b11 (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Media view broke when inserted content type different from Image (closes `#201`_).
+  [rodfersou]
 
 
 1.0b10 (2017-02-16)
@@ -184,3 +185,4 @@ There's a frood who really knows where his towel is
 .. _`#111`: https://github.com/collective/collective.nitf/issues/111
 .. _`#139`: https://github.com/collective/collective.nitf/issues/139
 .. _`#143`: https://github.com/collective/collective.nitf/issues/143
+.. _`#201`: https://github.com/collective/collective.nitf/issues/201
