@@ -16,12 +16,12 @@ class AdaptersTestCase(unittest.TestCase):
             self.folder = api.content.create(
                 type='Folder',
                 title='test-folder',
-                container=self.portal
+                container=self.portal,
             )
             self.n1 = api.content.create(
                 type='collective.nitf.content',
                 title='n1',
-                container=self.folder
+                container=self.folder,
             )
 
     def test_byline_feed_adapter(self):

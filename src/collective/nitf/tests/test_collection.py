@@ -24,11 +24,11 @@ class CollectionTypeTestCase(unittest.TestCase):
             {
                 'i': 'portal_type',
                 'o': 'plone.app.querystring.operation.selection.is',
-                'v': ['collective.nitf.content']
-            }
+                'v': ['collective.nitf.content'],
+            },
         ])
 
-    def test_urgency_filter(self, ):
+    def test_urgency_filter(self):
         self.assertEqual(len(self.c1.queryCatalog()), 0)
 
         n1 = api.content.create(self.folder, 'collective.nitf.content', 'n1')
@@ -50,13 +50,13 @@ class CollectionTypeTestCase(unittest.TestCase):
             {
                 'i': 'portal_type',
                 'o': 'plone.app.querystring.operation.selection.is',
-                'v': ['collective.nitf.content']
+                'v': ['collective.nitf.content'],
             },
             {
                 'i': 'urgency',
                 'o': 'plone.app.querystring.operation.intselection.is',
-                'v': [c.LOW]
-            }
+                'v': [c.LOW],
+            },
         ])
         self.assertEqual(len(self.c1.queryCatalog()), 1)
         expected = self.c1.queryCatalog()[0].getObject()
@@ -66,13 +66,13 @@ class CollectionTypeTestCase(unittest.TestCase):
             {
                 'i': 'portal_type',
                 'o': 'plone.app.querystring.operation.selection.is',
-                'v': ['collective.nitf.content']
+                'v': ['collective.nitf.content'],
             },
             {
                 'i': 'urgency',
                 'o': 'plone.app.querystring.operation.intselection.is',
-                'v': [c.NORMAL]
-            }
+                'v': [c.NORMAL],
+            },
         ])
         self.assertEqual(len(self.c1.queryCatalog()), 1)
         expected = self.c1.queryCatalog()[0].getObject()
@@ -82,13 +82,13 @@ class CollectionTypeTestCase(unittest.TestCase):
             {
                 'i': 'portal_type',
                 'o': 'plone.app.querystring.operation.selection.is',
-                'v': ['collective.nitf.content']
+                'v': ['collective.nitf.content'],
             },
             {
                 'i': 'urgency',
                 'o': 'plone.app.querystring.operation.intselection.is',
-                'v': [c.HIGH]
-            }
+                'v': [c.HIGH],
+            },
         ])
         self.assertEqual(len(self.c1.queryCatalog()), 1)
         expected = self.c1.queryCatalog()[0].getObject()
@@ -98,19 +98,19 @@ class CollectionTypeTestCase(unittest.TestCase):
             {
                 'i': 'portal_type',
                 'o': 'plone.app.querystring.operation.selection.is',
-                'v': ['collective.nitf.content']
+                'v': ['collective.nitf.content'],
             },
             {
                 'i': 'urgency',
                 'o': 'plone.app.querystring.operation.intselection.is',
-                'v': [c.NORMAL, c.HIGH]
-            }
+                'v': [c.NORMAL, c.HIGH],
+            },
         ])
         self.assertEqual(len(self.c1.queryCatalog()), 2)
         expected = [b.getObject() for b in self.c1.queryCatalog()]
         self.assertEqual([n2, n3], expected)
 
-    def test_render_view_methods(self, ):
+    def test_render_view_methods(self):
         # https://github.com/collective/collective.nitf/issues/178
         from collective.nitf.testing import get_image
         from collective.nitf.testing import IMAGES
