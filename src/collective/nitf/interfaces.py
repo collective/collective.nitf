@@ -10,12 +10,10 @@ from zope.interface import Interface
 
 
 class INITFLayer(Interface):
-    """ A layer specific for this add-on product.
-    """
+    """ A layer specific for this add-on product."""
 
 
 class INITF(model.Schema):
-
     """A News Article based on the News Industry Text Format specification."""
 
     # title = schema.TextLine()
@@ -71,7 +69,7 @@ class INITF(model.Schema):
                     u'object, not specifically its content.',
         ),
         vocabulary=u'collective.nitf.AvailableGenres',
-        defaultFactory=genre_default_value
+        defaultFactory=genre_default_value,
     )
 
     urgency = schema.Choice(
@@ -80,5 +78,5 @@ class INITF(model.Schema):
         description=_(u'help_urgency',
                       default=u'News importance.'),
         vocabulary=u'collective.nitf.Urgencies',
-        defaultFactory=urgency_default_value
+        defaultFactory=urgency_default_value,
     )

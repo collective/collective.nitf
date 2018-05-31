@@ -11,7 +11,7 @@ def reindex_searchable_text(setup_tool):
     logger.info('Reindexing the catalog')
     catalog = api.portal.get_tool('portal_catalog')
     results = catalog(portal_type='collective.nitf.content')
-    logger.info(u'Found {0} news articles'.format(len(results)))
+    logger.info('Found {0} news articles'.format(len(results)))
     for n, obj in enumerate(get_valid_objects(results), start=1):
         catalog.catalog_object(obj, idxs=['SearchableText'])
         if n % 1000 == 0:

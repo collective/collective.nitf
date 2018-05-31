@@ -35,8 +35,7 @@ def fix_collections(context):
             fixed_query.append(fixed_item)
         obj.setQuery(fixed_query)
         logger.info(
-            'Collection {0} at {1} updated'.format(col.id, col.getPath())
-        )
+            'Collection {0} at {1} updated'.format(col.id, col.getPath()))
     logger.info('Done')
 
 

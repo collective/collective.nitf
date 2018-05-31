@@ -18,7 +18,7 @@ def get_valid_objects(brains):
 
         if obj is None:  # warn on broken entries in the catalog
             logger.warn(
-                u'Invalid reference in the catalog: {0}'.format(b.getPath()))
+                'Invalid reference in the catalog: {0}'.format(b.getPath()))
             continue
         yield obj
 
@@ -36,15 +36,15 @@ def apply_profile(setup_tool):
 
 def update_layouts(setup_tool):
     # update existing objects
-    logger.info(u'Updating layout of news articles')
+    logger.info('Updating layout of news articles')
     results = api.content.find(portal_type='collective.nitf.content')
-    logger.info(u'Found {0} news articles'.format(len(results)))
+    logger.info('Found {0} news articles'.format(len(results)))
     i = 0
     for obj in get_valid_objects(results):
         if obj.getLayout() == 'nitf_galleria':
             obj.setLayout('slideshow_view')
             i += 1
-        logger.info(u'{0} news articles updated'.format(i))
+        logger.info('{0} news articles updated'.format(i))
 
 
 def install_new_dependencies(setup_tool):
@@ -53,7 +53,7 @@ def install_new_dependencies(setup_tool):
     for p in dependencies:
         if not qi.isProductInstalled(p):
             qi.installProducts([p])
-            logger.info(u'{0} installed'.format(p))
+            logger.info('{0} installed'.format(p))
 
 
 def update_configlet(setup_tool):
@@ -80,12 +80,11 @@ def reindex_news_articles(setup_tool):
     """Reindex news articles to fix interfaces."""
     test = 'test' in setup_tool.REQUEST  # used to ignore transactions on tests
     logger.info(
-        u'Reindexing the catalog. '
-        u'This process could take a long time on large sites. Be patient.'
-    )
+        'Reindexing the catalog. '
+        'This process could take a long time on large sites. Be patient.')
     catalog = api.portal.get_tool('portal_catalog')
     results = api.content.find(portal_type='collective.nitf.content')
-    logger.info(u'Found {0} news articles'.format(len(results)))
+    logger.info('Found {0} news articles'.format(len(results)))
     n = 0
     for obj in get_valid_objects(results):
         catalog.catalog_object(obj, idxs=['object_provides'], update_metadata=False)
