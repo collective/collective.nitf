@@ -96,37 +96,3 @@ def reindex_news_articles(setup_tool):
     if not test:
         transaction.commit()
     logger.info('Done.')
-
-
-def remove_nitf_portlet(setup_tool):
-    """Walk over the site to search and remove any portlet assignment
-    referring to the `collective.nitf.LatestSectionableNITFPortlet`.
-    """
-    from collective.nitf.portlets.latest_sectionable_nitf import Assignment
-    from plone.portlets.interfaces import ILocalPortletAssignable
-    from plone.portlets.interfaces import IPortletAssignmentMapping
-    from plone.portlets.interfaces import IPortletManager
-    from zope.component import getMultiAdapter
-
-    def remove_assignments(obj):
-        if not ILocalPortletAssignable.providedBy(obj):
-            return
-        for name in ('plone.leftcolumn', 'plone.rightcolumn'):
-            manager = getUtility(IPortletManager, name=name)
-            mapping = getMultiAdapter((obj, manager), IPortletAssignmentMapping)
-            for i in mapping.keys():
-                if not isinstance(mapping[i], Assignment):
-                    continue
-                logger.info('Removing portlet assignment in "{0}"'.format(obj))
-                del mapping[i]
-
-    # remove assignments on portal objects
-    catalog = api.portal.get_tool('portal_catalog')
-    results = catalog()
-    for obj in get_valid_objects(results):
-        remove_assignments(obj)
-
-    # remove assignments on portal root
-    remove_assignments(api.portal.get())
-
-    # TODO: remove portlet definition

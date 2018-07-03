@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
-"""BBB: Backwards compatibility code to be removed after release 2.2b1."""
+# BBB: this module will be removed in version 3.0
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.interface import implementer
+
+import logging
+import warnings
+
+
+logging.captureWarnings(True)
 
 
 class ILatestSectionableNITFPortlet(IPortletDataProvider):
@@ -16,8 +22,12 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
     """BBB."""
+
     def render(self):
-        return u''
+        msg = (
+            'Use of portlet "Latest Sectionable NITF" is deprecated; '
+            'remove assignment manually from {0}'.format(self.context))
+        warnings.warn(msg, DeprecationWarning)
 
 
 class AddForm(base.AddForm):

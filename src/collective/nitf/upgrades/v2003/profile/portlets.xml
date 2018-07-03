@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<portlets>
+  <portlet remove="true" addview="collective.nitf.LatestSectionableNITFPortlet" />
+</portlets>

@@ -4,4 +4,5 @@
   <include package=".v2000" />
   <include package=".v2001" />
   <include package=".v2002" />
+  <include package=".v2003" />
 </configure>

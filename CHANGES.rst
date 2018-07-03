@@ -6,8 +6,11 @@ There's a frood who really knows where his towel is.
 2.1b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- The portlet used to show the latest news articles by section was removed;
-  the package no longer dependes on collective.prettydate, neither on the ``uid_catalog`` tool.
+.. Warning::
+    This version disables usage of Latest Sectionable NITF portlet.
+    Remove manually all Latest Sectionable NITF portlets before upgrading.
+
+- Latest Sectionable NITF portlet was disabled and will be completely removed in version 3.0.
   [hvelarde]
 
 

@@ -372,3 +372,21 @@ class to2002TestCase(UpgradeTestCaseBase):
         results = api.content.find(SearchableText='foo')
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0].getURL(), self.portal['0'].absolute_url())
+
+
+class to2003TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'2002', u'2003')
+
+    def test_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertGreaterEqual(int(version), int(self.to_version))
+        self.assertEqual(self.total_steps, 1)
+
+    def test_remove_portlet_registration(self):
+        title = u'Remove portlet registration'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        self.execute_upgrade_step(step)
