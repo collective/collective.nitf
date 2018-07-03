@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.moves import range  # noqa: I001
 from collective.nitf.Extensions.Install import remove_tile
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.testing import IS_PLONE_5
@@ -272,7 +273,7 @@ class to2000TestCase(UpgradeTestCaseBase):
         self.assertIsNotNone(step)
 
         with api.env.adopt_roles(['Manager']):
-            for i in xrange(0, 10):
+            for i in range(0, 10):
                 api.content.create(self.portal, 'collective.nitf.content', str(i))
 
         # break the catalog by deleting an object without notifying
@@ -359,7 +360,7 @@ class to2002TestCase(UpgradeTestCaseBase):
         self.assertIsNotNone(step)
 
         with api.env.adopt_roles(['Manager']):
-            for i in xrange(0, 10):
+            for i in range(0, 10):
                 api.content.create(self.portal, 'collective.nitf.content', str(i))
 
         # update metadata without notifying
