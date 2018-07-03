@@ -1,6 +1,7 @@
 *.egg-info
 *.mo
 *.pyc
+*.pyo
 *~
 .coverage
 .installed.cfg
