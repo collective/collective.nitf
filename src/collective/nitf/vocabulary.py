@@ -24,8 +24,7 @@ def AvailableGenresVocabulary(context):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(INITFSettings)
     available_genres = list(settings.available_genres)
-    # sort by translated genre
-    available_genres.sort(lambda a, b: cmp(_(a), _(b)))
+    available_genres.sort(key=lambda i: _(i))  # sort by translated genre
     items = []
     for genre in available_genres:
         token = _normalize_token(genre)

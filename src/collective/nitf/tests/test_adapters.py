@@ -27,5 +27,5 @@ class AdaptersTestCase(unittest.TestCase):
     def test_byline_feed_adapter(self):
         self.n1.byline = 'The Author'
         adapted_folder = IFeed(self.folder)
-        adapted_n1 = adapted_folder.items.next()
+        adapted_n1 = next(adapted_folder.items)
         self.assertEqual(adapted_n1.author_name, 'The Author')

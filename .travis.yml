@@ -32,7 +32,7 @@ before_script:
 script:
 - bin/code-analysis
 - bin/test
-- bin/pylint --py3k --disable=no-absolute-import src/collective/nitf || true
+- bin/pylint --py3k --disable=no-absolute-import src/collective/nitf
 after_success:
 - pip install coverage
 - coverage run bin/test --layer=\!Robot

@@ -79,7 +79,7 @@ def get_image(name):
 def generate_text(size):
     import random
     import string
-    chars = string.letters + string.digits
+    chars = string.ascii_letters + string.digits
     return ''.join(random.choice(chars) for x in range(size))
 
 
