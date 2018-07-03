@@ -3,6 +3,7 @@ from collective.nitf import config as c
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 
+import six
 import unittest
 
 
@@ -129,4 +130,4 @@ class CollectionTypeTestCase(unittest.TestCase):
         view_methods = types['Collection'].view_methods
         for view in view_methods:
             rendered = self.c1.restrictedTraverse(view)()
-            self.assertIsInstance(rendered, unicode)
+            self.assertIsInstance(rendered, six.text_type)
