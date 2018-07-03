@@ -70,7 +70,7 @@ You have to be aware of the following changes when migrating from version 1.x to
 
 * Package is no longer compatible with Plone 4.2
 * Latest Sectionable NITF portlet was disabled and will be completely removed in version 3.0;
-  you should remove all Latest Sectionable NITF portlets from your site before upgrading.
+  you should remove all Latest Sectionable NITF portlets from your site before upgrading
 * Package no longer depends on Grok
 * Package no longer depends on `collective.z3cform.widgets <http://pypi.python.org/pypi/collective.z3cform.widgets>`_;
   you should uninstall that dependency manually if there is no other package depending on it on your site
