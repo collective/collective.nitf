@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.nitf">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.nitf (v2003)"
+      directory="profile"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:upgradeSteps
+      source="2002"
+      destination="2003"
+      profile="collective.nitf:default">
+
+    <genericsetup:upgradeDepends
+        title="Remove portlet registration"
+        import_profile="collective.nitf.upgrades.v2003:default"
+        />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

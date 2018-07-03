@@ -13,7 +13,7 @@ def get_valid_objects(brains):
     for b in brains:
         try:
             obj = b.getObject()
-        except KeyError:
+        except (AttributeError, KeyError):
             obj = None
 
         if obj is None:  # warn on broken entries in the catalog

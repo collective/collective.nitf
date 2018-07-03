@@ -6,7 +6,12 @@ There's a frood who really knows where his towel is.
 2.1b5 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+.. Warning::
+    This version disables usage of Latest Sectionable NITF portlet.
+    Remove manually all Latest Sectionable NITF portlets before upgrading.
+
+- Latest Sectionable NITF portlet was disabled and will be completely removed in version 3.0.
+  [hvelarde]
 
 
 2.1b4 (2017-10-18)

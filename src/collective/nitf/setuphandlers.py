@@ -2,18 +2,29 @@
 from collective.nitf.config import PROJECTNAME
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
+from Products.CMFQuickInstallerTool import interfaces as BBB
 from zope.interface import implementer
 
 import logging
 
 
+@implementer(BBB.INonInstallable)  # BBB: Plone 4.3
 @implementer(INonInstallable)
-class HiddenProfiles(object):
+class NonInstallable(object):  # pragma: no cover
 
+    @staticmethod
+    def getNonInstallableProducts():
+        """Hide in the add-ons configlet."""
+        return [
+            u'collective.nitf.upgrades.v2003',
+        ]
+
+    @staticmethod
     def getNonInstallableProfiles(self):
-        """Do not show on Plone's list of installable profiles."""
+        """Hide at site creation."""
         return [
             u'collective.nitf:uninstall',
+            u'collective.nitf.upgrades.v2003:default',
         ]
 
 
