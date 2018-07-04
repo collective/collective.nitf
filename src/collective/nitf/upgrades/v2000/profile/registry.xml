@@ -7,14 +7,4 @@
   <record name="collective.nitf.controlpanel.INITFCharCountSettings.title_max_chars" delete="true" />
   <record name="collective.nitf.controlpanel.INITFCharCountSettings.title_optimal_chars" delete="true" />
   <record name="collective.nitf.controlpanel.INITFSettings.relatable_content_types" delete="true" />
-
-  <record name="plone.app.tiles">
-    <field type="plone.registry.field.List">
-      <title>Tiles</title>
-      <value_type type="plone.registry.field.TextLine" />
-    </field>
-    <value purge="false">
-      <element>collective.nitf</element>
-    </value>
-   </record>
 </registry>

@@ -9,28 +9,17 @@
       title="collective.nitf"
       description="A Dexterity-based content type inspired on the News Industry Text Format specification."
       directory="profiles/default"
-      provides="Products.GenericSetup.interfaces.EXTENSION" />
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler="collective.nitf.setuphandlers.run_after"
+      />
 
   <genericsetup:registerProfile
       name="uninstall"
       title="collective.nitf uninstall"
       directory="profiles/uninstall"
       description="Uninstall profile for the collective.nitf package."
-      provides="Products.GenericSetup.interfaces.EXTENSION" />
-
-  <genericsetup:importStep
-      name="collective.nitf"
-      title="collective.nitf special import handlers"
-      description=""
-      handler="collective.nitf.setuphandlers.import_various" />
-
-  <genericsetup:upgradeStep
-      title="Add catalog indexes"
-      description=""
-      source="1000"
-      destination="1001"
-      handler="collective.nitf.setuphandlers.add_catalog_indexes"
-      profile="collective.nitf:default" />
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
 
   <utility
       factory=".setuphandlers.NonInstallable"

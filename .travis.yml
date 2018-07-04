@@ -31,7 +31,7 @@ before_script:
 - firefox -v
 script:
 - bin/code-analysis
-- bin/test
+- CATALOG_OPTIMIZATION_DISABLED=true bin/test
 - bin/pylint --py3k --disable=no-absolute-import src/collective/nitf
 after_success:
 - pip install coverage

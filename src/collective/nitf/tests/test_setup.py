@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import PROJECTNAME
-from collective.nitf.testing import HAS_COVER
 from collective.nitf.testing import INTEGRATION_TESTING
+from collective.nitf.testing import IS_BBB
 from collective.nitf.testing import IS_PLONE_5
-from plone import api
+from collective.nitf.testing import QIBBB
 from plone.browserlayer.utils import registered_layers
 
 import unittest
@@ -18,7 +18,7 @@ JS = '++resource++collective.nitf/nitf.js'
 CSS = '++resource++collective.nitf/nitf.css'
 
 
-class InstallTestCase(unittest.TestCase):
+class InstallTestCase(unittest.TestCase, QIBBB):
 
     layer = INTEGRATION_TESTING
 
@@ -26,8 +26,16 @@ class InstallTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
         self.qi = self.portal['portal_quickinstaller']
 
+    @unittest.skipIf(IS_BBB, 'Plone >= 5.1')
     def test_installed(self):
-        self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
+        from Products.CMFPlone.utils import get_installer
+        qi = get_installer(self.portal, self.request)
+        self.assertTrue(qi.is_product_installed(PROJECTNAME))
+
+    @unittest.skipUnless(IS_BBB, 'Plone < 5.1')
+    def test_installed_BBB(self):
+        qi = getattr(self.portal, 'portal_quickinstaller')
+        self.assertTrue(qi.isProductInstalled(PROJECTNAME))
 
     def test_dependencies_installed(self):
         for p in DEPENDENCIES:
@@ -68,24 +76,22 @@ class InstallTestCase(unittest.TestCase):
         resource_ids = self.portal.portal_css.getResourceIds()
         self.assertIn(CSS, resource_ids)
 
-    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
-    def test_tile(self):
-        tiles = api.portal.get_registry_record('plone.app.tiles')
-        self.assertIn(u'collective.nitf', tiles)
 
-
-class UninstallTest(unittest.TestCase):
+class UninstallTest(unittest.TestCase, QIBBB):
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.qi = self.portal['portal_quickinstaller']
+        self.request = self.layer['request']
+        self.qi = self.uninstall()  # BBB: QI compatibility
 
-        with api.env.adopt_roles(['Manager']):
-            self.qi.uninstallProducts(products=[PROJECTNAME])
-
+    @unittest.skipIf(IS_BBB, 'Plone >= 5.1')
     def test_uninstalled(self):
+        self.assertFalse(self.qi.is_product_installed(PROJECTNAME))
+
+    @unittest.skipUnless(IS_BBB, 'Plone < 5.1')
+    def test_uninstalled_BBB(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
     def test_addon_layer_removed(self):
@@ -101,11 +107,6 @@ class UninstallTest(unittest.TestCase):
     def test_cssregistry_removed(self):
         resource_ids = self.portal.portal_css.getResourceIds()
         self.assertNotIn(CSS, resource_ids)
-
-    @unittest.skipUnless(HAS_COVER, 'plone.app.tiles must be installed')
-    def test_tile_removed(self):
-        tiles = api.portal.get_registry_record('plone.app.tiles')
-        self.assertNotIn(u'collective.nitf', tiles)
 
     # FIXME: https://github.com/collective/collective.nitf/issues/168
     @unittest.expectedFailure

@@ -1,12 +1,10 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.nitf">
 
-  <five:registerPackage package="." />
   <i18n:registerTranslations directory="locales" />
 
   <include file="dependencies.zcml" />
