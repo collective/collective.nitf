@@ -31,6 +31,10 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
         self.tile.__name__ = u'collective.nitf'
         self.tile.id = u'test'
 
+    @unittest.skip('BBB: deprecated test defined in TestTileMixin')
+    def test_tile_registration(self):
+        pass
+
     @unittest.expectedFailure  # FIXME: raises BrokenImplementation
     def test_interface(self):
         self.interface = INITFTile

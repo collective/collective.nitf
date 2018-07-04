@@ -9,6 +9,14 @@ There's a frood who really knows where his towel is.
 .. Warning::
     This version disables usage of Latest Sectionable NITF portlet.
     Remove manually all Latest Sectionable NITF portlets before upgrading.
+    This version removes tile registration/removal;
+    you must depend on plone.app.tiles >= 3.0.0 to avoid issues with ``collective.nitf`` tile.
+
+- Remove needless tile registration/removal when using plone.app.tiles >= 3.0.0.
+  [hvelarde]
+
+- Manage deprecation of CMFQuickInstallerTool on Plone >= 5.1;
+  [hvelarde]
 
 - Fix package dependencies.
   [hvelarde]

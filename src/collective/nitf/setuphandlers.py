@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.config import PROJECTNAME
+from collective.nitf.logger import logger
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFQuickInstallerTool import interfaces as BBB
 from zope.interface import implementer
-
-import logging
 
 
 @implementer(BBB.INonInstallable)  # BBB: Plone 4.3
@@ -32,7 +30,7 @@ class Empty:
     pass
 
 
-def add_catalog_indexes(context, logger=None):
+def add_catalog_indexes():
     """ Method to add our wanted indexes to the portal_catalog. See
     http://maurits.vanrees.org/weblog/archive/2009/12/catalog for more
     information.
@@ -45,10 +43,6 @@ def add_catalog_indexes(context, logger=None):
         extras.index_type = index_type
         extras.lexicon_id = lexicon_id
         return extras
-
-    if logger is None:
-        # Called as upgrade step: define our own logger
-        logger = logging.getLogger(PROJECTNAME)
 
     profile = 'profile-collective.nitf:default'
     setup = api.portal.get_tool('portal_setup')
@@ -82,13 +76,5 @@ def add_catalog_indexes(context, logger=None):
         catalog.manage_reindexIndex(ids=indexables)
 
 
-def import_various(context):
-    """ Import step for configuration that is not handled in XML files.
-    """
-    # Only run step if a flag file is present
-    if context.readDataFile('collective.nitf.marker.txt') is None:
-        return
-
-    logger = context.getLogger(PROJECTNAME)
-    site = context.getSite()
-    add_catalog_indexes(site, logger)
+def run_after(context):
+    add_catalog_indexes()
