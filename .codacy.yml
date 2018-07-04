@@ -1,3 +1,7 @@
+engines:
+  bandit:
+    exclude_paths:
+    - "**/tests/**"
 exclude_paths:
 - bootstrap.py
 - setup.py
