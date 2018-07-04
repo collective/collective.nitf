@@ -14,12 +14,13 @@ class NITF(View):
         self.context = aq_inner(self.context)
         self.uuid = IUUID(self.context)
 
-    def _get_mediatype(self, mimetype):
-        """ Return one of the possible values of the media-type controlled
+    @staticmethod
+    def _get_mediatype(mimetype):
+        """Return one of the possible values of the media-type controlled
         vocabulary.
         """
-        # 'data' and 'other' are also part of the controlled vocabulary; we
-        # are not going to use 'data'
+        # 'data' and 'other' are also part of the controlled vocabulary
+        # we are not going to use 'data'
         vocabulary = ['text', 'audio', 'image', 'video', 'application']
         for i in vocabulary:
             if mimetype.find(i) != -1:
@@ -43,7 +44,7 @@ class NITF(View):
         for r in results:
             obj = r.getObject()
             source = obj.absolute_url()
-            (mimetype, encoding) = mimetypes.guess_type(source)
+            (mimetype, _) = mimetypes.guess_type(source)
             # if no mime type is detected, result is None; we must change it
             mimetype = mimetype and mimetype or ''
             mediatype = self._get_mediatype(mimetype)
