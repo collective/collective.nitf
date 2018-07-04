@@ -123,7 +123,7 @@ class CollectionTypeTestCase(unittest.TestCase):
         set_image_field(obj['img1'], get_image(IMAGES[0]), 'image/jpeg')
         # news article without lead image
         api.content.create(self.folder, 'collective.nitf.content', 'n2')
-        assert len(self.c1.queryCatalog()) == 2
+        self.assertEqual(len(self.c1.queryCatalog()), 2)
 
         # traverse view methods and assert they are rendered without errors
         types = self.portal['portal_types']

@@ -44,7 +44,7 @@ class UpgradeTestCaseBase(unittest.TestCase):
         """Return the number of steps in the upgrade."""
         self.setup.setLastVersionForProfile(self.profile_id, self.from_version)
         upgrades = self.setup.listUpgrades(self.profile_id)
-        assert len(upgrades) > 0
+        self.assertGreater(len(upgrades), 0)
         return len(upgrades[0])
 
 

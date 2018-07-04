@@ -39,7 +39,7 @@ class DocumentBylineViewletTestCase(unittest.TestCase):
                 self.portal, 'collective.nitf.content', 'n1')
 
     def _get_viewlet_manager(self, context, request=None, name=None):
-        assert name is not None
+        self.assertIsNotNone(name)
         if request is None:
             request = self.request
         view = View(context, request)
@@ -51,7 +51,7 @@ class DocumentBylineViewletTestCase(unittest.TestCase):
         manager = self._get_viewlet_manager(context, name=manager)
         manager.update()
         viewlet = [v for v in manager.viewlets if v.__name__ == name]
-        assert len(viewlet) == 1
+        self.assertEqual(len(viewlet), 1)
         return viewlet[0]
 
     def test_non_overrides(self):
