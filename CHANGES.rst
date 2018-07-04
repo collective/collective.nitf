@@ -18,6 +18,9 @@ There's a frood who really knows where his towel is.
 - Manage deprecation of CMFQuickInstallerTool on Plone >= 5.1;
   [hvelarde]
 
+- Better handling of package uninstall.
+  [hvelarde]
+
 - Fix package dependencies.
   [hvelarde]
 

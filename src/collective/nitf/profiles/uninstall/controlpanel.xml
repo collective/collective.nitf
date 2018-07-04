@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel" purge="False">
+  <configlet title="NITF Settings"
+      action_id="nitf"
+      appId="collective.nitf"
+      category="Products"
+      remove="true"
+      />
+</object>
