@@ -10,6 +10,9 @@ There's a frood who really knows where his towel is.
     This version disables usage of Latest Sectionable NITF portlet.
     Remove manually all Latest Sectionable NITF portlets before upgrading.
 
+- Fix package dependencies.
+  [hvelarde]
+
 - Small code refactor to increase future Python 3 compatibility;
   add dependency on `six <https://pypi.python.org/pypi/six>`_.
   [hvelarde]
