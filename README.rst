@@ -77,8 +77,7 @@ You have to be aware of the following changes when migrating from version 1.x to
 * Package no longer depends on `plone.app.referenceablebehavior <http://pypi.python.org/pypi/plone.app.referenceablebehavior>`_;
   the ``IReferenceable`` behavior included there is no longer assigned by default
 * The character counter is no longer available
-* We use `Cycle2 <http://jquery.malsup.com/cycle2/>`_ instead of `Galleria <https://galleria.io/>`_ as the framework for the slideshow view;
-  package now depends on `collective.js.cycle2 <https://pypi.python.org/pypi/collective.js.cycle2>`_
+* We use `Swiper <http://idangero.us/swiper/>`_ as the framework for the slideshow view.
 * The following views are available for a News Article: ``view``, ``slideshow_view`` and ``text_only_view``
 * View templates were completely refactored and support for semantic markup was added;
   the default view displays a bigger image
@@ -112,28 +111,6 @@ You may use the `NITF Document Type Definition`_ version 3.5 and the `XHTML Ruby
 .. _`XHTML Ruby Module`: http://www.iptc.org/std/NITF/3.5/specification/xhtml-ruby-1.mod
 .. _`XML validation`: http://www.xmlvalidation.com/
 .. _`opening a support ticket`: https://github.com/collective/collective.nitf/issues
-
-Internals
----------
-
-``collective.nitf`` uses Cycle2 slideshow plugin for jQuery and it can load its resources from the Plone JS registry if they are present there.
-
-If you're using ``collective.nitf`` with other packages that use Cycle2 also (like `sc.photogallery`_ or `covertile.cycle2`_),
-it is highly recommended that you register those resources to load them once and avoid conflicts.
-
-You can use a ``jsregistry.xml`` file that includes the following:
-
-.. code-block:: xml
-
-    <javascript id="++resource++collective.js.cycle2/jquery.cycle2.min.js"
-        cacheable="True" compression="none" cookable="True" enabled="True" />
-    <javascript id="++resource++collective.js.cycle2/jquery.cycle2.carousel.min.js"
-        cacheable="True" compression="none" cookable="True" enabled="True" />
-    <javascript id="++resource++collective.js.cycle2/jquery.cycle2.swipe.min.js"
-        cacheable="True" compression="none" cookable="True" enabled="True" />
-
-.. _`sc.photogallery`: https://pypi.python.org/pypi/sc.photogallery
-.. _`covertile.cycle2`: https://pypi.python.org/pypi/covertile.cycle2
 
 Development
 ^^^^^^^^^^^

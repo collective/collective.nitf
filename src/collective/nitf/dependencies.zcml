@@ -1,6 +1,5 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
-  <include package="collective.js.cycle2" />
   <include package="collective.js.jqueryui" />
   <include package="plone.app.contentmenu" />
   <include package="plone.app.dexterity" />

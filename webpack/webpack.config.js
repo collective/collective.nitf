@@ -3,7 +3,7 @@ module.exports = {
   entry: './app/nitf.js',
   output: {
     filename: 'nitf.js',
-    path: '../src/collective/nitf/static',
+    path: __dirname + '/../src/collective/nitf/static',
     libraryTarget: 'umd',
     publicPath: '++resource++collective.nitf/',
     library: 'collective.nitf'
@@ -17,8 +17,17 @@ module.exports = {
       test: /\.less$/,
       exclude: /node_modules/,
       loader: ExtractTextPlugin.extract({
-        fallbackLoader: 'style-loader',
-        loader: 'css-loader?importLoaders=1!postcss-loader!less-loader'
+        fallback: 'style-loader',
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader',
+          'less-loader'
+        ]
       })
     }, {
       test: /.*\.(gif|png|jpe?g)$/i,
@@ -49,6 +58,10 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    new ExtractTextPlugin({ filename: 'nitf.css', disable: false, allChunks: true })
+    new ExtractTextPlugin({
+      filename: 'nitf.css',
+      disable: false,
+      allChunks: true
+    })
   ]
 }

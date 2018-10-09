@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.config import JS_RESOURCES
 from plone import api
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from plone.dexterity.browser.view import DefaultView
@@ -41,18 +40,6 @@ class View(DefaultView):
 class Slideshow(DefaultView):
 
     """Slideshow view of a News Article."""
-
-    def js_resources(self):
-        """Return a list of JS resources that are not available in the
-        registry, but need to be loaded anyway. This way the slideshow
-        could use resources registered locally or globally.
-
-        :returns: list of ids
-        :rtype: list
-        """
-        js_registry = api.portal.get_tool('portal_javascripts')
-        global_resources = js_registry.getResourceIds()
-        return [r for r in JS_RESOURCES if r not in global_resources]
 
 
 class TextOnly(DefaultView):

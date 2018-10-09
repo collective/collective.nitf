@@ -5,13 +5,6 @@
     lang="en"
     metal:use-macro="context/main_template/macros/master"
     i18n:domain="collective.nitf">
-  <head>
-    <metal:javascriptslot fill-slot="javascript_head_slot">
-      <tal:scripts repeat="js view/js_resources|nothing">
-        <script tal:attributes="src string:${portal_url}/${js}"></script>
-      </tal:scripts>
-    </metal:javascriptslot>
-  </head>
   <body>
     <metal:main fill-slot="main">
       <article vocab="http://schema.org/" typeof="Article"
