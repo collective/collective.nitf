@@ -1,4 +1,5 @@
-<div id="media" tal:define="image context/image" tal:condition="image">
+<div id="media" tal:define="image context/image" tal:condition="image"
+     i18n:domain="collective.nitf">
   <img tal:replace="structure context/@@images/image/large" />
   <p class="discreet">
     <span
@@ -8,7 +9,13 @@
     </span>
     <span
         tal:condition="image/Rights"
-        tal:replace="string: - Foto: ${image/Rights}">
+        tal:omit-tag=""
+        i18n:translate="">
+      - Foto:
+    </span>
+    <span
+        tal:condition="image/Rights"
+        tal:replace="image/Rights">
       Rights
     </span>
   </p>
