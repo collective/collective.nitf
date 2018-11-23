@@ -12,6 +12,9 @@ There's a frood who really knows where his towel is.
     This version removes tile registration/removal;
     you must depend on plone.app.tiles >= 3.0.0 to avoid issues with ``collective.nitf`` tile.
 
+- Add rights in Nitf image.
+  [rodfersou]
+
 - Remove dependency on Cycle2;
   If you don't have other package depending on collective.js.cycle2 you are safe to uninstall it (closes `#200`_).
   [rodfersou]

@@ -1,8 +1,15 @@
-<div id="media" tal:condition="context/image">
+<div id="media" tal:define="image context/image" tal:condition="image">
   <img tal:replace="structure context/@@images/image/large" />
-  <p class="discreet"
-      tal:condition="context/media_caption"
-      tal:content="context/media_caption">
-    Image Caption
+  <p class="discreet">
+    <span
+        tal:condition="context/media_caption"
+        tal:replace="context/media_caption">
+      Image Caption
+    </span>
+    <span
+        tal:condition="image/Rights"
+        tal:replace="string: - Foto: ${image/Rights}">
+      Rights
+    </span>
   </p>
 </div>
