@@ -17,15 +17,13 @@ matrix:
   allow_failures:
   - env: PLONE_VERSION=5.1
   fast_finish: true
-before_install:
-# FIXME: I have no idea how and why six==1.11.0 is being installed
-- pip uninstall -y six
 install:
-- sed -ie "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
-- sed -ie "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
-- python bootstrap.py
-- bin/buildout buildout:test-eggs=$TEST_EGGS annotate
-- bin/buildout buildout:test-eggs=$TEST_EGGS
+  - sed -ie "s#test-4.3#test-$PLONE_VERSION#" buildout.cfg
+  - sed -ie "s#versions-4.3#versions-$PLONE_VERSION#" buildout.cfg
+  - virtualenv .
+  - bin/pip install -r requirements.txt
+  - bin/buildout buildout:test-eggs=$TEST_EGGS annotate
+  - bin/buildout buildout:test-eggs=$TEST_EGGS
 before_script:
   - firefox -v
 script:

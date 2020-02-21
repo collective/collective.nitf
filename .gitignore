@@ -23,3 +23,6 @@ parts/
 src/collective.*
 src/plone.*
 var/
+/share/
+/local
+/pip-selfcheck.json
