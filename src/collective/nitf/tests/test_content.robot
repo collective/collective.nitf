@@ -37,6 +37,7 @@ Test Folder Full View
     Page Should Contain  Item created
 
     Click Link  link=Test Folder
+    Sleep  1s
     Open Display Menu
     Click Link  link=All content
     Check Status Message  View changed
