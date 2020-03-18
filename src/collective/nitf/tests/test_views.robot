@@ -37,6 +37,7 @@ Test Delete image from Media
     Page Should Contain Element  css=li#sortable-img1
 
     # click on trash icon and delete
+    Mouse Out  css=li#sortable-img1
     Mouse Over  css=li#sortable-img1
     Click Link  css=li#sortable-img1 a.delete
     Wait Until Page Contains  Do you really want to delete this item?
@@ -67,8 +68,7 @@ Test Media View Reorder
     Page Should Contain Element  css=#sortable-img3.sort-2
 
     # move 3th image to the left
-    Drag And Drop  css=#sortable-img3.sort-2  css=.ui-sortable li:nth-of-type(1)
-    Execute JavaScript  window.update_sortable($('#sortable-img3'), -2)
+    Drag And Drop By Offset  css=#sortable-img3.sort-2  -350  -10
 
     Click Link  link=Media
 
@@ -76,8 +76,7 @@ Test Media View Reorder
     Page Should Contain Element  css=#sortable-img1.sort-1
     Page Should Contain Element  css=#sortable-img2.sort-2
 
-    Drag And Drop  css=#sortable-img1.sort-1  css=.ui-sortable li:nth-of-type(3)
-    Execute JavaScript  window.update_sortable($('#sortable-img1'), 1)
+    Drag And Drop By Offset  css=#sortable-img1.sort-1  200  -10
 
     Click Link  link=Media
 

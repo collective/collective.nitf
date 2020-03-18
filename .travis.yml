@@ -8,7 +8,9 @@ cache:
   - eggs
   - parts/node
 addons:
-  firefox: 45.8.0esr
+  apt:
+    packages:
+      - firefox-geckodriver
 env:
 - PLONE_VERSION=4.3 TEST_EGGS=collective.cover[test]
 - PLONE_VERSION=4.3 TEST_EGGS=plone.app.contenttypes

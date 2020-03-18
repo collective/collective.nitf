@@ -46,6 +46,7 @@ Create News Article
     Page Should Contain  ${body_html_text_2}
 
     # A news article can contain images
+    Wait Until Page Contains Element  css=a#image
     Open Add New Menu
     Click Link  css=a#image
     Page Should Contain  Add Image
@@ -88,6 +89,7 @@ Delete
 Change View
     [arguments]  ${view}
 
+    Wait Until Element Is Visible  css=#plone-contentmenu-actions
     Open Display Menu
     Click Link  link=${view}
     Page Should Contain  View changed
