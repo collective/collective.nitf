@@ -26,3 +26,4 @@ var/
 /share/
 /local
 /pip-selfcheck.json
+/pyvenv.cfg
