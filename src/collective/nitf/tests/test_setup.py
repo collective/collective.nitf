@@ -56,7 +56,7 @@ class InstallTestCase(unittest.TestCase, QIBBB):
         self.assertListEqual(roles, expected)
 
     def test_addon_layer(self):
-        layers = [l.getName() for l in registered_layers()]
+        layers = [layer.getName() for layer in registered_layers()]
         self.assertIn('INITFLayer', layers)
 
     def test_link_workflow_changed(self):
@@ -94,7 +94,7 @@ class UninstallTest(unittest.TestCase, QIBBB):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
     def test_addon_layer_removed(self):
-        layers = [l.getName() for l in registered_layers()]
+        layers = [layer.getName() for layer in registered_layers()]
         self.assertNotIn('INITFLayer', layers)
 
     @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
