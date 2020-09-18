@@ -18,7 +18,7 @@ class NonInstallable(object):  # pragma: no cover
         ]
 
     @staticmethod
-    def getNonInstallableProfiles(self):
+    def getNonInstallableProfiles():
         """Hide at site creation."""
         return [
             u'collective.nitf:uninstall',

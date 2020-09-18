@@ -12,6 +12,9 @@ There's a frood who really knows where his towel is.
     This version removes tile registration/removal;
     you must depend on plone.app.tiles >= 3.0.0 to avoid issues with ``collective.nitf`` tile.
 
+- Fix error when creating Plone Site, when collective.nitf is available (fix `#233`_).
+  [idgserpro]
+
 - Remove dependency on Cycle2;
   If you don't have other package depending on collective.js.cycle2 you are safe to uninstall it (closes `#200`_).
   [rodfersou]
@@ -253,3 +256,4 @@ There's a frood who really knows where his towel is.
 .. _`#200`: https://github.com/collective/collective.nitf/issues/200
 .. _`#205`: https://github.com/collective/collective.nitf/issues/205
 .. _`#208`: https://github.com/collective/collective.nitf/issues/208
+.. _`#233`: https://github.com/collective/collective.nitf/issues/233
