@@ -5,6 +5,7 @@ from collective.nitf.testing import IS_BBB
 from collective.nitf.testing import IS_PLONE_5
 from collective.nitf.testing import QIBBB
 from plone.browserlayer.utils import registered_layers
+from Products.CMFPlone.browser.admin import AddPloneSite
 
 import unittest
 
@@ -64,6 +65,19 @@ class InstallTestCase(unittest.TestCase, QIBBB):
         chain = workflow_tool.getChainForPortalType('Link')
         self.assertEqual(len(chain), 1)
         self.assertEqual(chain[0], 'one_state_workflow')
+
+    def test_hide_extensions_profiles(self):
+        app = self.layer['app']
+        request = self.layer['request']
+        add_plone_site = AddPloneSite(app, request)
+        profiles = add_plone_site.profiles()
+        extensions_profiles = profiles['extensions']
+        profiles_ids = [profile['id'] for profile in extensions_profiles]
+        nitf_profiles = [
+            profile_id for profile_id in profiles_ids
+            if profile_id.startswith(PROJECTNAME)
+        ]
+        self.assertEqual([u'collective.nitf:default'], nitf_profiles)
 
     @unittest.skipIf(IS_PLONE_5, 'No easy way to test this under Plone 5')
     def test_jsregistry(self):

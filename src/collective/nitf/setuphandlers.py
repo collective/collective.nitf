@@ -6,7 +6,7 @@ from Products.CMFQuickInstallerTool import interfaces as BBB
 from zope.interface import implementer
 
 
-@implementer(BBB.INonInstallable)  # BBB: Plone 4.3
+@implementer(BBB.INonInstallable)  # BBB: Plone < 5.2
 @implementer(INonInstallable)
 class NonInstallable(object):  # pragma: no cover
 
@@ -18,7 +18,7 @@ class NonInstallable(object):  # pragma: no cover
         ]
 
     @staticmethod
-    def getNonInstallableProfiles(self):
+    def getNonInstallableProfiles():
         """Hide at site creation."""
         return [
             u'collective.nitf:uninstall',
