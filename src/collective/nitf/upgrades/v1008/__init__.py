@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from collective.nitf.config import PROJECTNAME
 from plone.app.upgrade.utils import loadMigrationProfile
+from Products.CMFPlone.utils import safe_hasattr
 
 import logging
 
@@ -22,6 +23,12 @@ def fix_collections(context):
         try:
             query = obj.getRawQuery()  # Archetypes
         except AttributeError:
+            # Empty Collections created with plone.app.contenttypes 1.0 and
+            # migrated to plone.app.contenttypes 1.1.x are missing the query
+            # attribute
+            if not safe_hasattr(obj, 'query'):
+                obj.query = []
+                continue
             query = obj.getQuery()  # Dexterity
 
         if query is None:

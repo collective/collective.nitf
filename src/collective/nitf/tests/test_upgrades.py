@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from six.moves import range  # noqa: I001
+from collective.nitf.testing import DEXTERITY_ONLY
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.testing import IS_PLONE_5
 from plone import api
@@ -7,6 +7,8 @@ from plone.dexterity.interfaces import IDexterityFTI
 from plone.registry import field
 from plone.registry.interfaces import IRegistry
 from plone.registry.record import Record
+from Products.CMFPlone.utils import safe_hasattr
+from six.moves import range
 from zope.component import getUtility
 
 import unittest
@@ -77,6 +79,32 @@ class to1007TestCase(UpgradeTestCaseBase):
         self.execute_upgrade_step(step)
 
         self.assertIn(locking_behavior, nitf.behaviors)
+
+
+class to1008TestCase(UpgradeTestCaseBase):
+
+    def setUp(self):
+        UpgradeTestCaseBase.setUp(self, u'1007', u'1008')
+
+    def test_upgrade_to_1008_registrations(self):
+        version = self.setup.getLastVersionForProfile(self.profile_id)[0]
+        self.assertTrue(version >= self.to_version)
+        self.assertEqual(self.total_steps, 2)
+
+    def test_fix_collections(self):
+        title = u'Update existent collections'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        with api.env.adopt_roles(['Manager']):
+            collection = api.content.create(self.portal, 'Collection', 'c1')
+
+        if DEXTERITY_ONLY:
+            self.assertFalse(safe_hasattr(collection, 'query'))
+
+        self.execute_upgrade_step(step)
+
+        self.assertTrue(safe_hasattr(collection, 'query'))
 
 
 class to2000TestCase(UpgradeTestCaseBase):
@@ -242,8 +270,10 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         # run the upgrade step to validate the update
         self.execute_upgrade_step(step)
-        self.assertIn('plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)
-        self.assertIn('collective.nitf.behaviors.interfaces.ISection', fti.behaviors)
+        self.assertIn(
+            'plone.app.relationfield.behavior.IRelatedItems', fti.behaviors)
+        self.assertIn(
+            'collective.nitf.behaviors.interfaces.ISection', fti.behaviors)
         self.assertIn(REFERENCEABLE, fti.behaviors)  # should not be removed
 
     def test_reindex_news_articles(self):
@@ -254,7 +284,8 @@ class to2000TestCase(UpgradeTestCaseBase):
 
         with api.env.adopt_roles(['Manager']):
             for i in range(0, 10):
-                api.content.create(self.portal, 'collective.nitf.content', str(i))
+                api.content.create(
+                    self.portal, 'collective.nitf.content', str(i))
 
         # break the catalog by deleting an object without notifying
         self.portal._delObject('0', suppress_events=True)
@@ -325,7 +356,8 @@ class to2002TestCase(UpgradeTestCaseBase):
 
         with api.env.adopt_roles(['Manager']):
             for i in range(0, 10):
-                api.content.create(self.portal, 'collective.nitf.content', str(i))
+                api.content.create(
+                    self.portal, 'collective.nitf.content', str(i))
 
         # update metadata without notifying
         self.portal['0'].subject = ('foo', 'bar')
