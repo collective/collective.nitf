@@ -30,7 +30,8 @@ class BaseViewTestCase(unittest.TestCase):
 
         with api.env.adopt_roles(['Manager']):
             self.n1 = api.content.create(
-                self.portal, 'collective.nitf.content', 'n1')
+                self.portal, 'collective.nitf.content', 'n1',
+            )
 
 
 class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
@@ -98,6 +99,21 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         self.assertEqual(media[0].getObject().Title(), 'foo')
         self.assertEqual(media[1].getObject().id, 'bar')
         self.assertEqual(media[2].getObject().id, 'baz')
+
+    def test_render_plone_below_contenttitle(self):
+        image = api.content.create(self.n1, 'Image', title='img_foo')
+        set_image_field(image, FRACTAL, 'image/jpeg')
+        file = api.content.create(
+            self.n1, 'File', title='file_foo', description='file_bar',
+        )
+        set_file_field(file, FRACTAL, 'image/jpeg')
+        file2 = api.content.create(
+            self.n1, 'File', title='file_foo2', description='file_bar2',
+        )
+        set_file_field(file2, FRACTAL, 'image/jpeg')
+        with api.env.adopt_roles(['Manager']):
+            viewlets = self.n1.restrictedTraverse('@@manage-viewlets')()
+        self.assertIn('Viewlet: plone.belowcontenttitle.contents', viewlets)
 
 
 class SlideshowViewTestCase(TestViewMixin, BaseViewTestCase):
@@ -187,7 +203,8 @@ class TraversalViewTestCase(unittest.TestCase):
 
         with api.env.adopt_roles(['Manager']):
             self.n1 = api.content.create(
-                self.portal, 'collective.nitf.content', 'n1')
+                self.portal, 'collective.nitf.content', 'n1',
+            )
 
     def test_images_traversal(self):
         from collective.nitf.testing import DEXTERITY_ONLY

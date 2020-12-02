@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone import api
+from plone.app.layout.viewlets.content import ContentRelatedItems
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
 from plone.dexterity.browser.view import DefaultView
 from plone.memoize import ram
@@ -90,3 +91,13 @@ class NITFBylineViewlet(DocumentBylineViewlet):
 
     def authorname(self):
         return self.context.byline
+
+
+class NITFBelowContentTitleContents(ContentRelatedItems):
+    def related_items(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        path = '/'.join(self.context.getPhysicalPath())
+        brains = catalog(
+            Type=['Link', 'File'], path=path, sort_on='getObjPositionInParent',
+        )
+        return brains

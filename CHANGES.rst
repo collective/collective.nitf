@@ -12,6 +12,9 @@ There's a frood who really knows where his towel is.
     This version removes tile registration/removal;
     you must depend on plone.app.tiles >= 3.0.0 to avoid issues with ``collective.nitf`` tile.
 
+- Fix rendering plone.belowcontenttitle.contents when adding a Link or a File inside a nitf content and plone.app.contenttypes is installed (fix `#228`_)
+  [idgserpro]
+
 - Fix AttributeError: query when running upgradeStep 1008 (fix `#226`_)
   [idgserpro]
 
@@ -260,4 +263,5 @@ There's a frood who really knows where his towel is.
 .. _`#205`: https://github.com/collective/collective.nitf/issues/205
 .. _`#208`: https://github.com/collective/collective.nitf/issues/208
 .. _`#226`: https://github.com/collective/collective.nitf/issues/226
+.. _`#228`: https://github.com/collective/collective.nitf/issues/228
 .. _`#233`: https://github.com/collective/collective.nitf/issues/233
