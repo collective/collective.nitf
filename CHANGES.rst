@@ -12,6 +12,9 @@ There's a frood who really knows where his towel is.
     This version removes tile registration/removal;
     you must depend on plone.app.tiles >= 3.0.0 to avoid issues with ``collective.nitf`` tile.
 
+- Remove SearchableText from metadata of catalog (fix `#232`_).
+  [idgserpro]
+
 - Fix rendering plone.belowcontenttitle.contents when adding a Link or a File inside a nitf content and plone.app.contenttypes is installed (fix `#228`_)
   [idgserpro]
 
@@ -264,4 +267,5 @@ There's a frood who really knows where his towel is.
 .. _`#208`: https://github.com/collective/collective.nitf/issues/208
 .. _`#226`: https://github.com/collective/collective.nitf/issues/226
 .. _`#228`: https://github.com/collective/collective.nitf/issues/228
+.. _`#232`: https://github.com/collective/collective.nitf/issues/232
 .. _`#233`: https://github.com/collective/collective.nitf/issues/233

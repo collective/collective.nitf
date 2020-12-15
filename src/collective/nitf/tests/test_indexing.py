@@ -186,3 +186,8 @@ class IndexingTestCase(unittest.TestCase):
         results = api.content.find(SearchableText='Héctor')
         self.assertEqual(1, len(results))
         self.assertEqual(results[0].getURL(), self.n1.absolute_url())
+
+    def test_searchable_text_not_in_metadata(self):
+        """Confirms that SearchableText is not in metadata."""
+        portal_catalog = api.portal.get_tool('portal_catalog')
+        self.assertNotIn('SearchableText', portal_catalog.schema())
