@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from collective.nitf.logger import logger
-from collective.nitf.upgrades.v2000 import get_valid_objects
+from collective.nitf.upgrades import get_valid_objects
 from plone import api
 
 import transaction

@@ -1,26 +1,12 @@
 # -*- coding:utf-8 -*-
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.logger import logger
+from collective.nitf.upgrades import get_valid_objects
 from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
 from zope.component import getUtility
 
 import transaction
-
-
-def get_valid_objects(brains):
-    """Generate a list of objects associated with valid brains."""
-    for b in brains:
-        try:
-            obj = b.getObject()
-        except (AttributeError, KeyError):
-            obj = None
-
-        if obj is None:  # warn on broken entries in the catalog
-            logger.warn(
-                'Invalid reference in the catalog: {0}'.format(b.getPath()))
-            continue
-        yield obj
 
 
 def apply_profile(setup_tool):
@@ -87,7 +73,8 @@ def reindex_news_articles(setup_tool):
     logger.info('Found {0} news articles'.format(len(results)))
     n = 0
     for obj in get_valid_objects(results):
-        catalog.catalog_object(obj, idxs=['object_provides'], update_metadata=False)
+        catalog.catalog_object(
+            obj, idxs=['object_provides'], update_metadata=False)
         n += 1
         if n % 1000 == 0 and not test:
             transaction.commit()

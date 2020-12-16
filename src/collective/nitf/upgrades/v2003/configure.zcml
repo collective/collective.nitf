@@ -44,6 +44,12 @@
         handler="..cook_javascript_resources"
         />
 
+    <genericsetup:upgradeStep
+        title="Remove SearchableText metadata"
+        description="Remove SearchableText metadata and reindex objects."
+        handler=".remove_searchabletext_metadata"
+        />
+
   </genericsetup:upgradeSteps>
 
 </configure>

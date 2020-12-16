@@ -379,11 +379,40 @@ class to2003TestCase(UpgradeTestCaseBase):
     def test_registrations(self):
         version = self.setup.getLastVersionForProfile(self.profile_id)[0]
         self.assertGreaterEqual(int(version), int(self.to_version))
-        self.assertEqual(self.total_steps, 5)
+        self.assertEqual(self.total_steps, 6)
 
     def test_remove_portlet_registration(self):
         title = u'Remove portlet registration'
         step = self.get_upgrade_step(title)
         self.assertIsNotNone(step)
+
+        self.execute_upgrade_step(step)
+
+    def test_remove_searchabletext_metadata(self):
+        title = u'Remove SearchableText metadata'
+        step = self.get_upgrade_step(title)
+        self.assertIsNotNone(step)
+
+        portal_catalog = api.portal.get_tool('portal_catalog')
+        portal_catalog.addColumn('SearchableText')
+
+        from plone.app.textfield.value import RichTextValue
+        with api.env.adopt_roles(['Manager']):
+            n1 = api.content.create(
+                self.portal,
+                'collective.nitf.content',
+                'n1',
+            )
+            n1.text = RichTextValue(u'Rich Text', 'text/plain', 'text/html')
+            n1.reindexObject()
+        brain = api.content.find(id=u'n1')[0]
+        self.assertIn(u'Rich Text', brain.SearchableText)
+
+        self.execute_upgrade_step(step)
+
+        self.assertNotIn('SearchableText', portal_catalog.schema())
+
+        brain = api.content.find(id=u'n1')[0]
+        self.assertFalse(hasattr(brain, 'SearchableText'))
 
         self.execute_upgrade_step(step)

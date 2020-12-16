@@ -7,5 +7,4 @@
  <column value="section"/>
  <column value="urgency"/>
  <column value="location"/>
- <column value="SearchableText"/>
 </object>
