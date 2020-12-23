@@ -247,6 +247,7 @@ There's a frood who really knows where his towel is.
 
 
 .. _`Cycle2`: http://jquery.malsup.com/cycle2/
+.. _`Galleria`: https://galleriajs.github.io
 .. _`sc.social.like #87`: https://github.com/collective/sc.social.like/issues/87
 .. _`#47`: https://github.com/collective/collective.nitf/issues/47
 .. _`#62`: https://github.com/collective/collective.nitf/issues/62
