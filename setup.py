@@ -2,6 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
+
 version = '2.1.1.dev0'
 description = "A content type inspired on the IPTC's News Industry Text Format specification."
 long_description = (
@@ -15,7 +16,7 @@ setup(name='collective.nitf',
       description=description,
       long_description=long_description,
       classifiers=[
-          'Development Status :: 4 - Beta',
+          'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
           'Framework :: Plone',
           'Framework :: Plone :: 4.3',
