@@ -6,15 +6,14 @@ from collective.nitf.controlpanel import INITFSettings
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.schema.vocabulary import SimpleVocabulary
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 
-import unicodedata
 
-
-# TODO: use plone.i18n normalizer
 def _normalize_token(token):
     """Normalize a token using ascii as encoding."""
-    normalize = unicodedata.normalize
-    return normalize('NFKD', token).encode('ascii', 'ignore').lower()
+    normalizer = getUtility(IIDNormalizer)
+
+    return normalizer.normalize(token).lower()
 
 
 def AvailableGenresVocabulary(context):
