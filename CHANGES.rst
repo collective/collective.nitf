@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.1.1 (unreleased)
+2.1.1 (2021-04-15)
 ^^^^^^^^^^^^^^^^^^
 
 - Add a transaction note for upgradeStep v2003, available at `Undo` tab in `/` in the ZMI, to make review easier after running since it can modify thousands of objects. (complements `#232`_).
