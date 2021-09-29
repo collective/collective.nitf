@@ -31,11 +31,11 @@ Mostly Harmless
 .. image:: http://img.shields.io/pypi/v/collective.nitf.svg
     :target: https://pypi.python.org/pypi/collective.nitf
 
-.. image:: https://img.shields.io/travis/collective/collective.nitf/master.svg
-    :target: http://travis-ci.org/collective/collective.nitf
+.. image:: https://img.shields.io/github/workflow/status/collective/collective.nitf/Plone%20package/master?label=GitHub%20Actions
+   :target: https://github.com/collective/collective.nitf/actions/workflows/plone-package.yml
 
-.. image:: https://img.shields.io/coveralls/collective/collective.nitf/master.svg
-    :target: https://coveralls.io/r/collective/collective.nitf
+.. image:: https://codecov.io/gh/collective/collective.nitf/branch/master/graph/badge.svg?token=U4hNE2t5sA
+   :target: https://codecov.io/gh/collective/collective.nitf
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
