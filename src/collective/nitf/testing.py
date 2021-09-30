@@ -6,6 +6,9 @@ For Plone 5 we need to install plone.app.contenttypes.
 Tile for collective.cover is only tested in Plone 4.3.
 """
 from plone import api
+from plone.app.contenttypes.testing import (
+    PLONE_APP_CONTENTTYPES_FIXTURE as PLONE_FIXTURE,
+)
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -19,19 +22,6 @@ import os
 import pkg_resources
 import shutil
 
-
-try:
-    pkg_resources.get_distribution("plone.app.contenttypes")
-except pkg_resources.DistributionNotFound:
-    from plone.app.testing import PLONE_FIXTURE
-
-    DEXTERITY_ONLY = False
-else:
-    from plone.app.contenttypes.testing import (
-        PLONE_APP_CONTENTTYPES_FIXTURE as PLONE_FIXTURE,
-    )
-
-    DEXTERITY_ONLY = True
 
 try:
     pkg_resources.get_distribution("collective.cover")

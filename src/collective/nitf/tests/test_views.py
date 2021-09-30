@@ -211,19 +211,9 @@ class TraversalViewTestCase(unittest.TestCase):
             )
 
     def test_images_traversal(self):
-        from collective.nitf.testing import DEXTERITY_ONLY
-        from collective.nitf.testing import IS_PLONE_5
-
         image = api.content.create(self.n1, "Image", title="foo", description="bar")
         set_image_field(image, FRACTAL, "image/jpeg")
         scale = self.n1.unrestrictedTraverse("@@images").scale("image")
 
         # FIXME: acquisition?
-        if IS_PLONE_5 or DEXTERITY_ONLY:
-            # (Pdb) scale
-            # <plone.namedfile.scaling.ImageScale object at 0x7eff7b683650>
-            self.assertEqual(scale.index_html(), FRACTAL)
-        else:
-            # (Pdb) scale
-            # <plone.app.blob.field.BlobWrapper object at 0x7f85bdb6b8c0>
-            self.assertEqual(scale.data, FRACTAL)
+        self.assertEqual(scale.index_html(), FRACTAL)
