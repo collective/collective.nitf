@@ -15,6 +15,7 @@ jobs:
                   - 'Plone43'
                   - 'Plone43_TEST_EGGS_COVER'
                   - 'Plone43_TEST_EGGS_PAC'
+                  - 'Plone52'
                 python-version: [2.7]
 
         steps:
