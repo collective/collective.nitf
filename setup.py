@@ -60,7 +60,6 @@ setup(
         "plone.app.registry",
         "plone.app.relationfield",
         "plone.app.textfield",
-        "plone.app.upgrade",
         "plone.app.vocabularies",
         "plone.autoform",
         "plone.behavior",
