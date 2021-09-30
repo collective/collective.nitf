@@ -85,14 +85,14 @@ class RegistryTestCase(unittest.TestCase):
         with api.env.adopt_roles(["Manager"]):
             qi.uninstallProducts(products=[PROJECTNAME])
 
-        BASE_REGISTRY = "collective.nitf.controlpanel.INITFSettings.%s"
+        BASE_REGISTRY = "collective.nitf.controlpanel.INITFSettings.{0}"
         records = [
-            BASE_REGISTRY % "available_sections",
-            BASE_REGISTRY % "default_section",
-            BASE_REGISTRY % "available_genres",
-            BASE_REGISTRY % "default_genre",
-            BASE_REGISTRY % "default_urgency",
-            BASE_REGISTRY % "relatable_content_types",
+            BASE_REGISTRY.format("available_sections"),
+            BASE_REGISTRY.format("default_section"),
+            BASE_REGISTRY.format("available_genres"),
+            BASE_REGISTRY.format("default_genre"),
+            BASE_REGISTRY.format("default_urgency"),
+            BASE_REGISTRY.format("relatable_content_types"),
         ]
 
         for r in records:
