@@ -6,7 +6,7 @@ There's a frood who really knows where his towel is.
 2.1.2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Drop support to Plone 4.3.
+- Drop support to Plone 4.3 and Plone 5.1.
   [wesleybl]
 
 - Remove old upgrade steps.

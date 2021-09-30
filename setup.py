@@ -71,7 +71,7 @@ setup(
         "plone.registry",
         "plone.supermodel",
         "plone.uuid",
-        "Products.CMFPlone >=5.1",
+        "Products.CMFPlone >=5.2",
         "Products.CMFQuickInstallerTool",
         "Products.GenericSetup",
         "setuptools",
