@@ -3,7 +3,7 @@ from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
 from collective.nitf.testing import IS_BBB
 from collective.nitf.testing import IS_PLONE_5
-from collective.nitf.testing import QIBBB
+from plone import api
 from plone.browserlayer.utils import registered_layers
 from Products.CMFPlone.browser.admin import AddPloneSite
 
@@ -16,12 +16,13 @@ JS = "++resource++collective.nitf/nitf.js"
 CSS = "++resource++collective.nitf/nitf.css"
 
 
-class InstallTestCase(unittest.TestCase, QIBBB):
+class InstallTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.qi = self.portal["portal_quickinstaller"]
 
     @unittest.skipIf(IS_BBB, "Plone >= 5.1")
@@ -91,7 +92,7 @@ class InstallTestCase(unittest.TestCase, QIBBB):
         self.assertIn(CSS, resource_ids)
 
 
-class UninstallTest(unittest.TestCase, QIBBB):
+class UninstallTest(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
 
@@ -99,6 +100,14 @@ class UninstallTest(unittest.TestCase, QIBBB):
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
         self.qi = self.uninstall()  # BBB: QI compatibility
+
+    def uninstall(self):
+        from Products.CMFPlone.utils import get_installer
+
+        qi = get_installer(self.portal, self.request)
+        with api.env.adopt_roles(["Manager"]):
+            qi.uninstall_product(PROJECTNAME)
+        return qi
 
     @unittest.skipIf(IS_BBB, "Plone >= 5.1")
     def test_uninstalled(self):
