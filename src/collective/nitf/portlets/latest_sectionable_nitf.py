@@ -26,7 +26,8 @@ class Renderer(base.Renderer):
     def render(self):
         msg = (
             'Use of portlet "Latest Sectionable NITF" is deprecated; '
-            'remove assignment manually from {0}'.format(self.context))
+            "remove assignment manually from {0}".format(self.context)
+        )
         warnings.warn(msg, DeprecationWarning)
 
 

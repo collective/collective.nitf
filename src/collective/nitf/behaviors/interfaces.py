@@ -13,16 +13,16 @@ class ISection(model.Schema):
 
     """Behavior interface to make a content type support sections."""
 
-    model.fieldset('categorization', fields=['section'])
-    form.order_before(section='genre')
+    model.fieldset("categorization", fields=["section"])
+    form.order_before(section="genre")
 
     # nitf/head/pubdata/@position.section
     section = schema.Choice(
-        title=_(u'Section'),
+        title=_(u"Section"),
         description=_(
-            u'help_section',
-            default=u'Named section where the item will appear.',
+            u"help_section",
+            default=u"Named section where the item will appear.",
         ),
-        vocabulary=u'collective.nitf.AvailableSections',
+        vocabulary=u"collective.nitf.AvailableSections",
         defaultFactory=section_default_value,
     )

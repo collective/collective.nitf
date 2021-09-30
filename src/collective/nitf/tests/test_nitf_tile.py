@@ -14,6 +14,7 @@ if HAS_COVER:
     from collective.nitf.tiles.nitf import INITFTile
     from collective.nitf.tiles.nitf import NITFTile
 else:
+
     class TestTileMixin:
         pass
 
@@ -28,10 +29,10 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
     def setUp(self):
         super(NITFTileTestCase, self).setUp()
         self.tile = NITFTile(self.cover, self.request)
-        self.tile.__name__ = u'collective.nitf'
-        self.tile.id = u'test'
+        self.tile.__name__ = u"collective.nitf"
+        self.tile.id = u"test"
 
-    @unittest.skip('BBB: deprecated test defined in TestTileMixin')
+    @unittest.skip("BBB: deprecated test defined in TestTileMixin")
     def test_tile_registration(self):
         pass
 
@@ -47,10 +48,10 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
         self.assertTrue(self.tile.is_droppable)
 
     def test_accepted_content_types(self):
-        self.assertEqual(self.tile.accepted_ct(), ['collective.nitf.content'])
+        self.assertEqual(self.tile.accepted_ct(), ["collective.nitf.content"])
 
     def test_render_empty(self):
-        msg = u'Drag&amp;drop a News Article here.'
+        msg = u"Drag&amp;drop a News Article here."
 
         self.tile.is_compose_mode = Mock(return_value=True)
         self.assertIn(msg, self.tile())
@@ -59,46 +60,49 @@ class NITFTileTestCase(TestTileMixin, unittest.TestCase):
         self.assertNotIn(msg, self.tile())
 
     def test_render(self):
-        kwargs = dict(title=u'foo', subtitle=u'bar', section=u'baz')
-        with api.env.adopt_roles(['Manager']):
+        kwargs = dict(title=u"foo", subtitle=u"bar", section=u"baz")
+        with api.env.adopt_roles(["Manager"]):
             n1 = api.content.create(
-                self.portal, 'collective.nitf.content', 'n1', **kwargs)
+                self.portal, "collective.nitf.content", "n1", **kwargs
+            )
 
         self.tile.populate_with_object(n1)
         html = etree.HTML(self.tile())
-        self.assertIn('foo', html.xpath('//h2/a/text()'))
-        self.assertIn('bar', html.xpath('//p/text()'))
-        self.assertIn('baz', html.xpath('//p/text()'))
-        self.assertTrue(html.xpath('//time'))
+        self.assertIn("foo", html.xpath("//h2/a/text()"))
+        self.assertIn("bar", html.xpath("//p/text()"))
+        self.assertIn("baz", html.xpath("//p/text()"))
+        self.assertTrue(html.xpath("//time"))
 
     def test_alt_atribute_present_in_image(self):
         # https://github.com/collective/collective.nitf/issues/152
         from collective.nitf.testing import FRACTAL
         from collective.nitf.tests.api_hacks import set_image_field
 
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             n1 = api.content.create(
-                self.portal, 'collective.nitf.content', title='Lorem ipsum')
+                self.portal, "collective.nitf.content", title="Lorem ipsum"
+            )
 
-        image = api.content.create(n1, 'Image', title='Neque porro')
-        set_image_field(image, FRACTAL, 'image/jpeg')
+        image = api.content.create(n1, "Image", title="Neque porro")
+        set_image_field(image, FRACTAL, "image/jpeg")
 
         self.tile.populate_with_object(n1)
         html = etree.HTML(self.tile())
         # title of the news article is used as alt attribute
-        self.assertIn('Lorem ipsum', html.xpath('//img/@alt'))
+        self.assertIn("Lorem ipsum", html.xpath("//img/@alt"))
 
     def test_render_deleted_object(self):
         # https://github.com/collective/collective.nitf/issues/154
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             n1 = api.content.create(
-                self.portal, 'collective.nitf.content', title='Lorem ipsum')
+                self.portal, "collective.nitf.content", title="Lorem ipsum"
+            )
 
         self.tile.populate_with_object(n1)
         api.content.delete(n1)
         # tile's data is cached; reinstantiate it
-        self.tile = self.cover.restrictedTraverse('@@collective.nitf/test')
+        self.tile = self.cover.restrictedTraverse("@@collective.nitf/test")
         html = etree.HTML(self.tile())
         # some metadata is still present
-        self.assertIn('Lorem ipsum', html.xpath('//h2/a/text()'))
-        self.assertFalse(html.xpath('//time'))  # date is ignored
+        self.assertIn("Lorem ipsum", html.xpath("//h2/a/text()"))
+        self.assertFalse(html.xpath("//time"))  # date is ignored

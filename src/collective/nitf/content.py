@@ -21,12 +21,12 @@ class NITF(Container):
 
     def is_empty(self):
         """Check if the container has no files nor links inside."""
-        content_filter = {'portal_type': ['File', 'Link']}
+        content_filter = {"portal_type": ["File", "Link"]}
         return not self.listFolderContents(content_filter)
 
     def get_images(self):
         """Return a list of images contained in the News Article."""
-        content_filter = {'portal_type': 'Image'}
+        content_filter = {"portal_type": "Image"}
         return self.listFolderContents(content_filter)
 
     def image(self):
@@ -39,23 +39,23 @@ class NITF(Container):
         try:
             return self.image().Description()
         except AttributeError:
-            return u''
+            return u""
 
     def media_producer(self):
         """Return the author of the first image."""
         try:
             return self.image().Rights()
         except AttributeError:
-            return u''
+            return u""
 
     # XXX: emulate News Item methods and
     #      deal with issues created by our fake image field
 
-    @deprecation.deprecate('getImage() is deprecated; use image().')
+    @deprecation.deprecate("getImage() is deprecated; use image().")
     def getImage(self):
         return self.image()
 
-    @deprecation.deprecate('imageCaption() is deprecated; use media_caption.')
+    @deprecation.deprecate("imageCaption() is deprecated; use media_caption.")
     def imageCaption(self):
         return self.media_caption()
 
@@ -63,8 +63,8 @@ class NITF(Container):
 
     def tag(self, **kwargs):
         try:
-            scales = self.image().restrictedTraverse('@@images')
-            return scales.tag('image', **kwargs)
+            scales = self.image().restrictedTraverse("@@images")
+            return scales.tag("image", **kwargs)
         except AttributeError:
             return None
 
@@ -77,19 +77,21 @@ def textIndexer(obj):
     transformer = ITransformer(obj)
 
     try:
-        text = transformer(obj.text, 'text/plain')
+        text = transformer(obj.text, "text/plain")
     except AttributeError:
-        text = ''
+        text = ""
 
-    keywords = u' '.join(safe_unicode(s) for s in obj.Subject())
+    keywords = u" ".join(safe_unicode(s) for s in obj.Subject())
 
-    return u' '.join((
-        safe_unicode(obj.id),
-        safe_unicode(obj.title) or u'',
-        safe_unicode(obj.subtitle) or u'',
-        safe_unicode(obj.description) or u'',
-        safe_unicode(obj.byline) or u'',
-        safe_unicode(text),
-        safe_unicode(obj.location) or u'',
-        safe_unicode(keywords),
-    ))
+    return u" ".join(
+        (
+            safe_unicode(obj.id),
+            safe_unicode(obj.title) or u"",
+            safe_unicode(obj.subtitle) or u"",
+            safe_unicode(obj.description) or u"",
+            safe_unicode(obj.byline) or u"",
+            safe_unicode(text),
+            safe_unicode(obj.location) or u"",
+            safe_unicode(keywords),
+        )
+    )

@@ -9,8 +9,8 @@ import logging
 def fix_collections(context):
     """Update to 1008 version."""
     logger = logging.getLogger(PROJECTNAME)
-    collections = context.portal_catalog(portal_type='Collection')
-    logger.info('About to update {0} objects'.format(len(collections)))
+    collections = context.portal_catalog(portal_type="Collection")
+    logger.info("About to update {0} objects".format(len(collections)))
     for col in collections:
         obj = col.getObject()
 
@@ -26,7 +26,7 @@ def fix_collections(context):
             # Empty Collections created with plone.app.contenttypes 1.0 and
             # migrated to plone.app.contenttypes 1.1.x are missing the query
             # attribute
-            if not safe_hasattr(obj, 'query'):
+            if not safe_hasattr(obj, "query"):
                 obj.query = []
                 continue
             query = obj.getQuery()  # Dexterity
@@ -37,18 +37,17 @@ def fix_collections(context):
         fixed_query = []
         for item in query:
             fixed_item = dict(item)
-            if item['i'] == 'urgency':
-                fixed_item['o'] = 'plone.app.querystring.operation.intselection.is'
+            if item["i"] == "urgency":
+                fixed_item["o"] = "plone.app.querystring.operation.intselection.is"
             fixed_query.append(fixed_item)
         obj.setQuery(fixed_query)
-        logger.info(
-            'Collection {0} at {1} updated'.format(col.id, col.getPath()))
-    logger.info('Done')
+        logger.info("Collection {0} at {1} updated".format(col.id, col.getPath()))
+    logger.info("Done")
 
 
 def apply_profile(context):
     """Update to 1008 version."""
     logger = logging.getLogger(PROJECTNAME)
-    profile = 'profile-collective.nitf.upgrades.v1008:default'
+    profile = "profile-collective.nitf.upgrades.v1008:default"
     loadMigrationProfile(context, profile)
-    logger.info('Updated to version 1008')
+    logger.info("Updated to version 1008")

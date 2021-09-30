@@ -21,6 +21,7 @@ import unittest
 
 
 if IS_PLONE_5:
+
     def test_suite():
         return unittest.TestSuite()
 
@@ -30,16 +31,18 @@ class DocumentBylineViewletTestCase(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
+        self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         alsoProvides(self.request, INITFLayer)
 
-        self.manager = 'plone.belowcontenttitle'
-        self.viewlet = 'plone.belowcontenttitle.documentbyline'
+        self.manager = "plone.belowcontenttitle"
+        self.viewlet = "plone.belowcontenttitle.documentbyline"
 
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             self.n1 = api.content.create(
-                self.portal, 'collective.nitf.content', 'n1',
+                self.portal,
+                "collective.nitf.content",
+                "n1",
             )
 
     def _get_viewlet_manager(self, context, request=None, name=None):
@@ -48,7 +51,9 @@ class DocumentBylineViewletTestCase(unittest.TestCase):
             request = self.request
         view = View(context, request)
         manager = getMultiAdapter(
-            (context, request, view), IViewletManager, name,
+            (context, request, view),
+            IViewletManager,
+            name,
         )
         return manager
 
@@ -62,42 +67,45 @@ class DocumentBylineViewletTestCase(unittest.TestCase):
     def test_non_overrides(self):
         context = self.portal
         documentbyline = self._get_viewlet(context, self.manager, self.viewlet)
-        self.assertFalse(hasattr(documentbyline, '_search_member_by_name'))
+        self.assertFalse(hasattr(documentbyline, "_search_member_by_name"))
 
     def test_overrides(self):
         context = self.n1
         documentbyline = self._get_viewlet(context, self.manager, self.viewlet)
-        self.assertTrue(hasattr(documentbyline, '_search_member_by_name'))
+        self.assertTrue(hasattr(documentbyline, "_search_member_by_name"))
 
     def test_render_empty_byline(self):
         documentbyline = self._get_viewlet(self.n1, self.manager, self.viewlet)
 
         self.assertNotIn(
-            u'<span class="documentAuthor">', documentbyline.render(),
+            u'<span class="documentAuthor">',
+            documentbyline.render(),
         )
 
     def test_render_non_existent_user(self):
         documentbyline = self._get_viewlet(self.n1, self.manager, self.viewlet)
 
-        self.n1.byline = u'Keith Moon'
+        self.n1.byline = u"Keith Moon"
         self.assertIn(
-            u'<span class="documentAuthor">', documentbyline.render(),
+            u'<span class="documentAuthor">',
+            documentbyline.render(),
         )
         self.assertNotIn(u'property="rnews:author"', documentbyline.render())
-        self.assertIn(u'Keith Moon', documentbyline.render())
+        self.assertIn(u"Keith Moon", documentbyline.render())
 
     def test_render_existent_user(self):
         api.user.create(
-            email='foo@bar.com',
-            username='keith-moon',
-            properties=dict(fullname=u'Keith Moon'),
+            email="foo@bar.com",
+            username="keith-moon",
+            properties=dict(fullname=u"Keith Moon"),
         )
 
         documentbyline = self._get_viewlet(self.n1, self.manager, self.viewlet)
 
-        self.n1.byline = u'Keith Moon'
+        self.n1.byline = u"Keith Moon"
         self.assertIn(
-            u'<span class="documentAuthor">', documentbyline.render(),
+            u'<span class="documentAuthor">',
+            documentbyline.render(),
         )
         self.assertIn(
             u'<a href="http://nohost/plone/author/keith-moon" property="rnews:author">Keith Moon</a>',
@@ -106,22 +114,31 @@ class DocumentBylineViewletTestCase(unittest.TestCase):
 
     def test_render_viewlet_plone_below_contenttitle_file(self):
         file = api.content.create(
-            self.n1, 'File', title='foo_related', description='bar_related',
+            self.n1,
+            "File",
+            title="foo_related",
+            description="bar_related",
         )
-        set_file_field(file, FRACTAL, 'image/jpeg')
+        set_file_field(file, FRACTAL, "image/jpeg")
         viewlet = NITFBelowContentTitleContents(
-            self.portal, self.request, None, None,
+            self.portal,
+            self.request,
+            None,
+            None,
         )
         viewlet.update()
         rendered = viewlet.render()
-        self.assertIn('foo_related', rendered)
-        self.assertIn('bar_related', rendered)
+        self.assertIn("foo_related", rendered)
+        self.assertIn("bar_related", rendered)
 
     def test_empty_render_viewlet_plone_below_contenttitle(self):
         viewlet = NITFBelowContentTitleContents(
-            self.portal, self.request, None, None,
+            self.portal,
+            self.request,
+            None,
+            None,
         )
         viewlet.update()
         rendered = viewlet.render()
-        empty_rendering = u'\n'
+        empty_rendering = u"\n"
         self.assertEqual(empty_rendering, rendered)

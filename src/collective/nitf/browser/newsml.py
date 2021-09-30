@@ -23,9 +23,8 @@ class NewsML(View):
 </itemRef>"""
 
     def get_related_items(self):
-        """Returns an itemRef tag for each related item (only News Articles).
-        """
-        items = getattr(self.context, 'relatedItems', None)
+        """Returns an itemRef tag for each related item (only News Articles)."""
+        items = getattr(self.context, "relatedItems", None)
         if items is not None:
             related_items = []
             for i in items:

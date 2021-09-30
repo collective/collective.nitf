@@ -17,7 +17,7 @@ class ImageScaling(BaseImageScaling):
         See: https://github.com/collective/collective.nitf/pull/171
         """
         if not furtherPath:
-            if safe_hasattr(self, '_image_fieldname'):
+            if safe_hasattr(self, "_image_fieldname"):
                 scale_name = name
                 name = self._image_fieldname
             else:
@@ -26,26 +26,26 @@ class ImageScaling(BaseImageScaling):
             if image is not None:
                 return image.tag()
             raise TraversalError(self, name)
-        if name == 'image':
+        if name == "image":
             self._image_fieldname = name
             return self
         raise TraversalError(self, name)
 
     def scale(self, fieldname=None, scale=None, height=None, width=None, **kwargs):
         """Deal with issues created by our fake image field."""
-        if fieldname != 'image':
+        if fieldname != "image":
             return None
 
         image = self.context.image()
         if image is None:
             return None
 
-        scales = image.restrictedTraverse('@@images')
+        scales = image.restrictedTraverse("@@images")
         return scales.scale(fieldname, scale, height, width, **kwargs)
 
     def getImageSize(self, fieldname=None):
         """Deal with issues created by our fake image field."""
-        if fieldname != 'image':
+        if fieldname != "image":
             return (0, 0)
 
         image = self.context.image()

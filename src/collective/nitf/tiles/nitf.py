@@ -17,20 +17,20 @@ class INITFTile(IBasicTile):
     """A tile that shows information about a News Article."""
 
     subtitle = schema.Text(
-        title=_(u'Subtitle'),
+        title=_(u"Subtitle"),
         required=False,
     )
 
-    form.omitted('section')
-    form.no_omit(IDefaultConfigureForm, 'section')
+    form.omitted("section")
+    form.no_omit(IDefaultConfigureForm, "section")
     section = schema.Text(
-        title=_(u'Section'),
+        title=_(u"Section"),
         required=False,
     )
 
     media_producer = schema.TextLine(
         # nitf/body/body.content/media/media-producer
-        title=_(u'Image Rights'),
+        title=_(u"Image Rights"),
         required=False,
     )
 
@@ -40,16 +40,16 @@ class NITFTile(BasicTile):
 
     """A tile that shows information about a News Article."""
 
-    index = ViewPageTemplateFile('nitf.pt')
+    index = ViewPageTemplateFile("nitf.pt")
     is_configurable = True
     is_editable = True
     is_droppable = True
 
-    short_name = _(u'msg_short_name_nitf', u'News Article')
+    short_name = _(u"msg_short_name_nitf", u"News Article")
 
     def accepted_ct(self):
         """Return a list of content types accepted by the tile."""
-        return ['collective.nitf.content']
+        return ["collective.nitf.content"]
 
     def populate_with_object(self, obj):
         super(BasicTile, self).populate_with_object(obj)
@@ -79,15 +79,16 @@ class NITFTile(BasicTile):
         structure.
         """
         fields = self.get_configured_fields()
-        return [f for f in fields if f['id'] == field][0]
+        return [f for f in fields if f["id"] == field][0]
 
     @property
     def title_tag(self):
-        field = self._get_field_configuration('title')
-        tag, title, href = field['htmltag'], field['content'], self.getURL()
+        field = self._get_field_configuration("title")
+        tag, title, href = field["htmltag"], field["content"], self.getURL()
         if href:
             return u'<{tag}><a href="{href}">{title}</a></{tag}>'.format(
-                tag=tag, href=href, title=title)
+                tag=tag, href=href, title=title
+            )
         else:
             # in HTML5 the href attribute may be omitted (placeholder link)
-            return u'<{tag}><a>{title}</a></{tag}>'.format(tag=tag, title=title)
+            return u"<{tag}><a>{title}</a></{tag}>".format(tag=tag, title=title)
