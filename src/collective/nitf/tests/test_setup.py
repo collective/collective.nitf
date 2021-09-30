@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.testing import IS_BBB
 from collective.nitf.testing import IS_PLONE_5
 from plone import api
 from plone.browserlayer.utils import registered_layers
@@ -25,17 +24,11 @@ class InstallTestCase(unittest.TestCase):
         self.request = self.layer["request"]
         self.qi = self.portal["portal_quickinstaller"]
 
-    @unittest.skipIf(IS_BBB, "Plone >= 5.1")
     def test_installed(self):
         from Products.CMFPlone.utils import get_installer
 
         qi = get_installer(self.portal, self.request)
         self.assertTrue(qi.is_product_installed(PROJECTNAME))
-
-    @unittest.skipUnless(IS_BBB, "Plone < 5.1")
-    def test_installed_BBB(self):
-        qi = getattr(self.portal, "portal_quickinstaller")
-        self.assertTrue(qi.isProductInstalled(PROJECTNAME))
 
     def test_dependencies_installed(self):
         for p in DEPENDENCIES:
@@ -109,13 +102,8 @@ class UninstallTest(unittest.TestCase):
             qi.uninstall_product(PROJECTNAME)
         return qi
 
-    @unittest.skipIf(IS_BBB, "Plone >= 5.1")
     def test_uninstalled(self):
         self.assertFalse(self.qi.is_product_installed(PROJECTNAME))
-
-    @unittest.skipUnless(IS_BBB, "Plone < 5.1")
-    def test_uninstalled_BBB(self):
-        self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
 
     def test_addon_layer_removed(self):
         layers = [layer.getName() for layer in registered_layers()]

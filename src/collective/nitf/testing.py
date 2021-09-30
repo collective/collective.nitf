@@ -41,7 +41,6 @@ else:
     HAS_COVER = True
 
 IS_PLONE_5 = api.env.plone_version().startswith("5")
-IS_BBB = api.env.plone_version().startswith("4.3")
 
 
 # set of images to be used on tests
