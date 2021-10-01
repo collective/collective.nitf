@@ -16,39 +16,38 @@ class ControlPanelTestCase(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        self.controlpanel = self.portal['portal_controlpanel']
+        self.portal = self.layer["portal"]
+        self.controlpanel = self.portal["portal_controlpanel"]
 
     def test_controlpanel_has_view(self):
-        request = self.layer['request']
-        view = api.content.get_view(u'nitf-settings', self.portal, request)
+        request = self.layer["request"]
+        view = api.content.get_view(u"nitf-settings", self.portal, request)
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
+
         logout()
         with self.assertRaises(Unauthorized):
-            self.portal.restrictedTraverse('@@nitf-settings')
+            self.portal.restrictedTraverse("@@nitf-settings")
 
     def test_site_administrator_can_access_configlet(self):
-        with api.env.adopt_roles(['Site Administrator']):
-            self.portal.restrictedTraverse('@@nitf-settings')
+        with api.env.adopt_roles(["Site Administrator"]):
+            self.portal.restrictedTraverse("@@nitf-settings")
 
     def test_controlpanel_installed(self):
-        actions = [a.getAction(self)['id']
-                   for a in self.controlpanel.listActions()]
-        self.assertIn('nitf', actions, 'control panel not installed')
+        actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
+        self.assertIn("nitf", actions, "control panel not installed")
 
     def test_controlpanel_removed_on_uninstall(self):
-        qi = self.portal['portal_quickinstaller']
+        qi = self.portal["portal_quickinstaller"]
 
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             qi.uninstallProducts(products=[PROJECTNAME])
 
-        actions = [a.getAction(self)['id']
-                   for a in self.controlpanel.listActions()]
-        self.assertNotIn('nitf', actions, 'control panel not removed')
+        actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
+        self.assertNotIn("nitf", actions, "control panel not removed")
 
 
 class RegistryTestCase(unittest.TestCase):
@@ -56,44 +55,44 @@ class RegistryTestCase(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.registry = getUtility(IRegistry)
         self.settings = self.registry.forInterface(INITFSettings)
 
     def test_available_sections_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'available_sections'))
-        self.assertEqual(self.settings.available_sections, set([u'General']))
+        self.assertTrue(hasattr(self.settings, "available_sections"))
+        self.assertEqual(self.settings.available_sections, set([u"General"]))
 
     def test_default_section_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'default_section'))
-        self.assertEqual(self.settings.default_section, u'General')
+        self.assertTrue(hasattr(self.settings, "default_section"))
+        self.assertEqual(self.settings.default_section, u"General")
 
     def test_available_genres_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'available_genres'))
-        self.assertEqual(self.settings.available_genres, [u'Current'])
+        self.assertTrue(hasattr(self.settings, "available_genres"))
+        self.assertEqual(self.settings.available_genres, [u"Current"])
 
     def test_default_genre_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'default_genre'))
-        self.assertEqual(self.settings.default_genre, u'Current')
+        self.assertTrue(hasattr(self.settings, "default_genre"))
+        self.assertEqual(self.settings.default_genre, u"Current")
 
     def test_default_urgency_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'default_urgency'))
+        self.assertTrue(hasattr(self.settings, "default_urgency"))
         self.assertEqual(self.settings.default_urgency, DEFAULT_URGENCY)
 
     def test_records_removed_on_uninstall(self):
-        qi = self.portal['portal_quickinstaller']
+        qi = self.portal["portal_quickinstaller"]
 
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             qi.uninstallProducts(products=[PROJECTNAME])
 
-        BASE_REGISTRY = 'collective.nitf.controlpanel.INITFSettings.%s'
+        BASE_REGISTRY = "collective.nitf.controlpanel.INITFSettings.{0}"
         records = [
-            BASE_REGISTRY % 'available_sections',
-            BASE_REGISTRY % 'default_section',
-            BASE_REGISTRY % 'available_genres',
-            BASE_REGISTRY % 'default_genre',
-            BASE_REGISTRY % 'default_urgency',
-            BASE_REGISTRY % 'relatable_content_types',
+            BASE_REGISTRY.format("available_sections"),
+            BASE_REGISTRY.format("default_section"),
+            BASE_REGISTRY.format("available_genres"),
+            BASE_REGISTRY.format("default_genre"),
+            BASE_REGISTRY.format("default_urgency"),
+            BASE_REGISTRY.format("relatable_content_types"),
         ]
 
         for r in records:

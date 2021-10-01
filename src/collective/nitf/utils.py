@@ -10,7 +10,7 @@ def genre_default_value():
     """Return the default value for the genre field as defined in the
     control panel configlet.
     """
-    record = INITFSettings.__identifier__ + '.default_genre'
+    record = INITFSettings.__identifier__ + ".default_genre"
     return api.portal.get_registry_record(record)
 
 
@@ -18,7 +18,7 @@ def urgency_default_value():
     """Return the default value for the urgency field as defined in
     the control panel configlet.
     """
-    record = INITFSettings.__identifier__ + '.default_urgency'
+    record = INITFSettings.__identifier__ + ".default_urgency"
     return api.portal.get_registry_record(record)
 
 
@@ -26,5 +26,5 @@ def section_default_value():
     """Return the default value for the section field as defined in
     the control panel configlet.
     """
-    record = INITFSettings.__identifier__ + '.default_section'
+    record = INITFSettings.__identifier__ + ".default_section"
     return api.portal.get_registry_record(record)

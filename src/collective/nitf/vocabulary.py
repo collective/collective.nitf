@@ -14,11 +14,11 @@ import unicodedata
 def _normalize_token(token):
     """Normalize a token using ascii as encoding."""
     normalize = unicodedata.normalize
-    return normalize('NFKD', token).encode('ascii', 'ignore').lower()
+    return normalize("NFKD", token).encode("ascii", "ignore").lower()
 
 
 def AvailableGenresVocabulary(context):
-    """ Creates a vocabulary with the available genres stored in the registry;
+    """Creates a vocabulary with the available genres stored in the registry;
     the vocabulary is normalized to allow the use of non-ASCII characters.
     """
     registry = getUtility(IRegistry)
@@ -33,7 +33,7 @@ def AvailableGenresVocabulary(context):
 
 
 def SectionsVocabulary(context):
-    """ Creates a vocabulary with the available sections stored in the
+    """Creates a vocabulary with the available sections stored in the
     registry; the vocabulary is normalized to allow the use of non-ASCII
     characters.
     """
@@ -49,12 +49,10 @@ def SectionsVocabulary(context):
 
 
 def GenresVocabulary(context):
-    """ Creates a vocabulary to expose Genres
-    """
+    """Creates a vocabulary to expose Genres"""
     return GENRES
 
 
 def UrgenciesVocabulary(context):
-    """ Creates a vocabulary to expose Urgencies
-    """
+    """Creates a vocabulary to expose Urgencies"""
     return URGENCIES

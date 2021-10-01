@@ -10,10 +10,10 @@ logger = logging.getLogger(PROJECTNAME)
 
 def add_locking_behaviour(context):
     """Add locking behaviour to News Article."""
-    locking_behavior = 'plone.app.lockingbehavior.behaviors.ILocking'
-    types = api.portal.get_tool('portal_types')
-    nitf = types['collective.nitf.content']
+    locking_behavior = "plone.app.lockingbehavior.behaviors.ILocking"
+    types = api.portal.get_tool("portal_types")
+    nitf = types["collective.nitf.content"]
     behaviors = list(nitf.behaviors)
     behaviors.append(locking_behavior)
     nitf.behaviors = tuple(behaviors)
-    logger.info('ILocking behavior added to News Article content type.')
+    logger.info("ILocking behavior added to News Article content type.")

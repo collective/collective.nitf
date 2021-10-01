@@ -13,24 +13,23 @@ class View(DefaultView):
 
     def _get_brains(self, object_name=None):
         """Return a list of brains inside the NITF object."""
-        catalog = api.portal.get_tool('portal_catalog')
-        path = '/'.join(self.context.getPhysicalPath())
-        brains = catalog(Type=object_name, path=path,
-                         sort_on='getObjPositionInParent')
+        catalog = api.portal.get_tool("portal_catalog")
+        path = "/".join(self.context.getPhysicalPath())
+        brains = catalog(Type=object_name, path=path, sort_on="getObjPositionInParent")
 
         return brains
 
     def get_images(self):
         """Return a list of image brains inside the NITF object."""
-        return self._get_brains('Image')
+        return self._get_brains("Image")
 
     def get_files(self):
         """Return a list of file brains inside the NITF object."""
-        return self._get_brains('File')
+        return self._get_brains("File")
 
     def get_links(self):
         """Return a list of link brains inside the NITF object."""
-        return self._get_brains('Link')
+        return self._get_brains("Link")
 
     def get_media(self):
         """Return a list of object brains inside the NITF object."""
@@ -64,7 +63,7 @@ class NITFBylineViewlet(DocumentBylineViewlet):
         if not fullname:
             return None
 
-        membership = api.portal.get_tool('portal_membership')
+        membership = api.portal.get_tool("portal_membership")
         members = membership.searchForMembers(name=fullname)
         if members:
             # in case there are more than one members with the
@@ -84,7 +83,7 @@ class NITFBylineViewlet(DocumentBylineViewlet):
     def author_id(self):
         member = self.search_member_by_name(self.context.byline)
         if member:
-            return member['username']
+            return member["username"]
 
     def author(self):
         return self.search_member_by_name(self.context.byline)
@@ -95,9 +94,11 @@ class NITFBylineViewlet(DocumentBylineViewlet):
 
 class NITFBelowContentTitleContents(ContentRelatedItems):
     def related_items(self):
-        catalog = api.portal.get_tool('portal_catalog')
-        path = '/'.join(self.context.getPhysicalPath())
+        catalog = api.portal.get_tool("portal_catalog")
+        path = "/".join(self.context.getPhysicalPath())
         brains = catalog(
-            Type=['Link', 'File'], path=path, sort_on='getObjPositionInParent',
+            Type=["Link", "File"],
+            path=path,
+            sort_on="getObjPositionInParent",
         )
         return brains

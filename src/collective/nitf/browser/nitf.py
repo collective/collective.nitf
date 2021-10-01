@@ -21,12 +21,12 @@ class NITF(View):
         """
         # 'data' and 'other' are also part of the controlled vocabulary
         # we are not going to use 'data'
-        vocabulary = ['text', 'audio', 'image', 'video', 'application']
+        vocabulary = ["text", "audio", "image", "video", "application"]
         for i in vocabulary:
             if mimetype.find(i) != -1:
                 return i
 
-        return 'other'
+        return "other"
 
     MEDIA = """
 <media media-type="{0}">
@@ -35,8 +35,7 @@ class NITF(View):
 </media>"""
 
     def get_media(self):
-        """ Return a list of object brains inside the NITF object.
-        """
+        """Return a list of object brains inside the NITF object."""
         media = []
         # XXX: we could honor original order calling the get_media() method in
         # View; how can we do that?
@@ -46,7 +45,7 @@ class NITF(View):
             source = obj.absolute_url()
             (mimetype, _) = mimetypes.guess_type(source)
             # if no mime type is detected, result is None; we must change it
-            mimetype = mimetype and mimetype or ''
+            mimetype = mimetype and mimetype or ""
             mediatype = self._get_mediatype(mimetype)
             alternate_text = obj.Title()
             caption = obj.Description()
@@ -54,13 +53,14 @@ class NITF(View):
             # we only include height and/or width if we have a value for them
             try:
                 height, width = obj.getHeight(), obj.getWidth()
-                height = ' height="{0}"'.format(height) if height else ''
-                width = ' width="{0}"'.format(width) if width else ''
+                height = ' height="{0}"'.format(height) if height else ""
+                width = ' width="{0}"'.format(width) if width else ""
             except AttributeError:  # FIXME: Dexterity
-                width = height = ''
+                width = height = ""
 
             m = self.MEDIA.format(
-                mediatype, mimetype, source, alternate_text, height, width, caption)
+                mediatype, mimetype, source, alternate_text, height, width, caption
+            )
             media.append(m)
 
         return media

@@ -10,12 +10,12 @@ import unittest
 
 
 files = os.listdir(os.path.dirname(__file__))
-tests = [f for f in files if f.startswith('test_') and f.endswith('.robot')]
+tests = [f for f in files if f.startswith("test_") and f.endswith(".robot")]
 
-noncritical = ['Expected Failure']
+noncritical = ["Expected Failure"]
 if DEXTERITY_ONLY:
     # FIXME: https://github.com/collective/collective.nitf/issues/172
-    noncritical.append('issue_172')
+    noncritical.append("issue_172")
 
 # skip RobotFramework tests in Plone 5
 if IS_PLONE_5:
@@ -24,10 +24,13 @@ if IS_PLONE_5:
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTests([
-        layered(
-            robotsuite.RobotTestSuite(t, noncritical=noncritical),
-            layer=ROBOT_TESTING)
-        for t in tests
-    ])
+    suite.addTests(
+        [
+            layered(
+                robotsuite.RobotTestSuite(t, noncritical=noncritical),
+                layer=ROBOT_TESTING,
+            )
+            for t in tests
+        ]
+    )
     return suite
