@@ -30,8 +30,6 @@ except pkg_resources.DistributionNotFound:
 else:
     HAS_COVER = True
 
-IS_PLONE_5 = api.env.plone_version().startswith("5")
-
 
 # set of images to be used on tests
 IMAGES = (

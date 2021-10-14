@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.testing import IS_PLONE_5
 from plone import api
 from plone.browserlayer.utils import registered_layers
 from Products.CMFPlone.browser.admin import AddPloneSite
@@ -74,12 +73,14 @@ class InstallTestCase(unittest.TestCase):
         ]
         self.assertEqual([u"collective.nitf:default"], nitf_profiles)
 
-    @unittest.skipIf(IS_PLONE_5, "No easy way to test this under Plone 5")
+    # FIXME: Make the test work in Plone 5.
+    @unittest.skip("No easy way to test this under Plone 5")
     def test_jsregistry(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
         self.assertIn(JS, resource_ids)
 
-    @unittest.skipIf(IS_PLONE_5, "No easy way to test this under Plone 5")
+    # FIXME: Make the test work in Plone 5.
+    @unittest.skip("No easy way to test this under Plone 5")
     def test_cssregistry(self):
         resource_ids = self.portal.portal_css.getResourceIds()
         self.assertIn(CSS, resource_ids)
@@ -109,12 +110,14 @@ class UninstallTest(unittest.TestCase):
         layers = [layer.getName() for layer in registered_layers()]
         self.assertNotIn("INITFLayer", layers)
 
-    @unittest.skipIf(IS_PLONE_5, "No easy way to test this under Plone 5")
+    # FIXME: Make the test work in Plone 5.
+    @unittest.skip("No easy way to test this under Plone 5")
     def test_jsregistry_removed(self):
         resource_ids = self.portal.portal_javascripts.getResourceIds()
         self.assertNotIn(JS, resource_ids)
 
-    @unittest.skipIf(IS_PLONE_5, "No easy way to test this under Plone 5")
+    # FIXME: Make the test work in Plone 5.
+    @unittest.skip("No easy way to test this under Plone 5")
     def test_cssregistry_removed(self):
         resource_ids = self.portal.portal_css.getResourceIds()
         self.assertNotIn(CSS, resource_ids)

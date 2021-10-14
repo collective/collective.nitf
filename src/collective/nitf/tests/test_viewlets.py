@@ -9,7 +9,6 @@ from collective.nitf.browser import NITFBelowContentTitleContents
 from collective.nitf.interfaces import INITFLayer
 from collective.nitf.testing import FRACTAL
 from collective.nitf.testing import INTEGRATION_TESTING
-from collective.nitf.testing import IS_PLONE_5
 from collective.nitf.tests.api_hacks import set_file_field
 from plone import api
 from Products.Five.browser import BrowserView as View
@@ -20,12 +19,10 @@ from zope.viewlet.interfaces import IViewletManager
 import unittest
 
 
-if IS_PLONE_5:
-
-    def test_suite():
-        return unittest.TestSuite()
-
-
+# FIXME: Plone 5
+@unittest.skip(
+    "Tests in this module are not executed in Plone 5. See module docstring."
+)
 class DocumentBylineViewletTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING

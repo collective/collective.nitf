@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from collective.nitf.testing import IS_PLONE_5
 from collective.nitf.testing import ROBOT_TESTING
 from plone.testing import layered
 
@@ -15,9 +14,8 @@ noncritical = ["Expected Failure"]
 # FIXME: https://github.com/collective/collective.nitf/issues/172
 noncritical.append("issue_172")
 
-# skip RobotFramework tests in Plone 5
-if IS_PLONE_5:
-    tests = []
+# FIXME: Make RobotFramework tests work in Plone 5
+tests = []
 
 
 def test_suite():
