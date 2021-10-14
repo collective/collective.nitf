@@ -2,11 +2,9 @@
 from collective.nitf.logger import logger
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
-from Products.CMFQuickInstallerTool import interfaces as BBB
 from zope.interface import implementer
 
 
-@implementer(BBB.INonInstallable)  # BBB: Plone < 5.2
 @implementer(INonInstallable)
 class NonInstallable(object):  # pragma: no cover
     @staticmethod
