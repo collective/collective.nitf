@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.nitf\n"
-"POT-Creation-Date: 2017-06-30 19:24+0000\n"
+"POT-Creation-Date: 2021-10-14 18:02+0000\n"
 "PO-Revision-Date: 2013-11-22 19:23-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: Portuguese <https://github.com/collective>\n"
@@ -14,10 +14,6 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
-
-#: collective/nitf/profiles/default/portlets.xml
-msgid "A portlet which shows the latest NITF created and can be filtered by section."
-msgstr "Um portlet que mostra os últimos artigos criados por seção."
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "A subordinate headline for the article."
@@ -42,10 +38,6 @@ msgstr "Local do evento. Onde um evento aconteceu (não onde a história foi esc
 #: collective/nitf/profiles/default/registry.xml
 msgid "Genre"
 msgstr "Gênero"
-
-#: collective/nitf/profiles/default/portlets.xml
-msgid "Latest Sectionable NITF"
-msgstr "Últimos artigos por seção"
 
 #: collective/nitf/profiles/default/registry.xml
 msgid "Location"
