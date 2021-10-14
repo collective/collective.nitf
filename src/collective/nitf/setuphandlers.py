@@ -12,16 +12,13 @@ class NonInstallable(object):  # pragma: no cover
     @staticmethod
     def getNonInstallableProducts():
         """Hide in the add-ons configlet."""
-        return [
-            u"collective.nitf.upgrades.v2003",
-        ]
+        return []
 
     @staticmethod
     def getNonInstallableProfiles():
         """Hide at site creation."""
         return [
             u"collective.nitf:uninstall",
-            u"collective.nitf.upgrades.v2003:default",
         ]
 
 
