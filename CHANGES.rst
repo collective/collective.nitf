@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-2.1.2 (unreleased)
+3.0.0 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
 - Drop support to Plone 4.3 and Plone 5.1.

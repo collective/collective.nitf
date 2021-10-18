@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = "2.1.2.dev0"
+version = "3.0.0.dev0"
 description = (
     "A content type inspired on the IPTC's News Industry Text Format specification."
 )
