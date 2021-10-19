@@ -5,6 +5,15 @@ There's a frood who really knows where his towel is.
 
 3.0.0 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+.. Warning::
+    For now, the upgrade steps was not been implemented to migrate ``collective.nitf``
+    from Plone 4.3 to Plone 5.2. Version 3.0.0 should be installed on a Plone 5.2 that
+    has never had ``collective.nitf`` installed before. It is recommended that migrations
+    from Plone 4.3 to Plone 5.2 be done with
+    `collective.transmogrifier <https://github.com/collective/collective.transmogrifier>`_ 
+    or `collective.exportimport <https://github.com/collective/collective.exportimport>`_ .
+    If you prefer to migrate via Plone migration, you will have to do the migration scripts
+    to migrate ``collective.nitf``. Contributions here are welcome!
 
 - Drop support to Plone 4.3 and Plone 5.1.
   [wesleybl]
