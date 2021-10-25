@@ -35,7 +35,7 @@
       for="collective.nitf.content.INITF"
       name="images"
       class=".scaling.ImageScaling"
-      allowed_interface="plone.app.imaging.interfaces.IImageScaling"
+      allowed_attributes="scale tag"
       permission="zope2.View"
       />
 
