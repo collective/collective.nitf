@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = "2.1.2.dev0"
+version = "3.0.0.dev0"
 description = (
     "A content type inspired on the IPTC's News Industry Text Format specification."
 )
@@ -24,7 +24,6 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.3",
         "Framework :: Plone :: Addon",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: System Administrators",
@@ -72,8 +71,7 @@ setup(
         "plone.registry",
         "plone.supermodel",
         "plone.uuid",
-        "Products.CMFPlone >=4.3",
-        "Products.CMFQuickInstallerTool",
+        "Products.CMFPlone >=5.2",
         "Products.GenericSetup",
         "setuptools",
         "zope.browserpage",

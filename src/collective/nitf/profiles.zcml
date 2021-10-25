@@ -27,12 +27,4 @@
       provides="Products.CMFPlone.interfaces.INonInstallable"
       />
 
-  <!-- BBB: Plone < 5.2 -->
-  <utility
-      factory=".setuphandlers.NonInstallable"
-      name="collective.nitf"
-      provides="Products.CMFQuickInstallerTool.interfaces.INonInstallable"
-      />
-
-
 </configure>

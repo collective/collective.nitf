@@ -5,8 +5,10 @@ For Plone 5 we need to install plone.app.contenttypes.
 
 Tile for collective.cover is only tested in Plone 4.3.
 """
-from collective.nitf.config import PROJECTNAME
 from plone import api
+from plone.app.contenttypes.testing import (
+    PLONE_APP_CONTENTTYPES_FIXTURE as PLONE_FIXTURE,
+)
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -22,44 +24,11 @@ import shutil
 
 
 try:
-    pkg_resources.get_distribution("plone.app.contenttypes")
-except pkg_resources.DistributionNotFound:
-    from plone.app.testing import PLONE_FIXTURE
-
-    DEXTERITY_ONLY = False
-else:
-    from plone.app.contenttypes.testing import (
-        PLONE_APP_CONTENTTYPES_FIXTURE as PLONE_FIXTURE,
-    )
-
-    DEXTERITY_ONLY = True
-
-try:
     pkg_resources.get_distribution("collective.cover")
 except pkg_resources.DistributionNotFound:
     HAS_COVER = False
 else:
     HAS_COVER = True
-
-IS_PLONE_5 = api.env.plone_version().startswith("5")
-IS_BBB = api.env.plone_version().startswith("4.3")
-
-
-class QIBBB:
-    """BBB: remove on deprecation of Plone 4.3."""
-
-    def uninstall(self):
-        if IS_BBB:
-            qi = self.portal["portal_quickinstaller"]
-            with api.env.adopt_roles(["Manager"]):
-                qi.uninstallProducts([PROJECTNAME])
-        else:
-            from Products.CMFPlone.utils import get_installer
-
-            qi = get_installer(self.portal, self.request)
-            with api.env.adopt_roles(["Manager"]):
-                qi.uninstall_product(PROJECTNAME)
-        return qi
 
 
 # set of images to be used on tests
