@@ -47,7 +47,6 @@ setup(
     install_requires=[
         "Acquisition",
         "collective.js.jqueryui",
-        "collective.prettydate >=1.1",
         "plone.api",
         "plone.app.content",
         "plone.app.contentmenu",
