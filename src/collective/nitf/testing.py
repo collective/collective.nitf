@@ -69,7 +69,8 @@ class Fixture(PloneSandboxLayer):
 
 def get_image(name):
     image = os.path.join(os.path.dirname(__file__), "tests", name)
-    return open(image).read()
+    with open(image, "rb") as f:
+        return f.read()
 
 
 def generate_text(size):

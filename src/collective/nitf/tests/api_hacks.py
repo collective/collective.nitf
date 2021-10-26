@@ -6,14 +6,9 @@ def set_image_field(obj, image, content_type):
     """Set image field in object on both, Archetypes and Dexterity."""
     from plone.namedfile.file import NamedBlobImage
 
-    try:
-        obj.setImage(image)  # Archetypes
-    except AttributeError:
-        # Dexterity
-        data = image if isinstance(image, str) else image.getvalue()
-        obj.image = NamedBlobImage(data=data, contentType=content_type)
-    finally:
-        obj.reindexObject()
+    data = image if isinstance(image, bytes) else image.getvalue()
+    obj.image = NamedBlobImage(data=data, contentType=content_type)
+    obj.reindexObject()
 
 
 def set_file_field(obj, file, content_type):
