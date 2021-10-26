@@ -13,7 +13,7 @@ jobs:
             matrix:
                 plone-version:
                   - 'Plone52'
-                python-version: [2.7]
+                python-version: [2.7, 3.7, 3.8]
 
         steps:
             - uses: actions/checkout@v2
@@ -54,7 +54,7 @@ jobs:
             #   run: |
             #       tox -r -e black-check
             - name: lint
-              run: tox -r -e py27-lint
+              run: tox -r -e lint
             - name: Test with tox
               run: |
                   tox -r
