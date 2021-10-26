@@ -14,6 +14,7 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
+from six.moves import range
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
@@ -76,7 +77,7 @@ def generate_text(size):
     import string
 
     chars = string.ascii_letters + string.digits
-    return "".join(random.choice(chars) for x in range(size))
+    return "".join(random.choice(chars) for _ in range(size))
 
 
 # TODO: simplify this using a testfixture profile
