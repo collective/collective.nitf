@@ -3,7 +3,4 @@
   <javascript id="//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"
       cacheable="False" compression="none" cookable="False" enabled="True"
       expression="" inline="False" />
-  <javascript cacheable="True" compression="none" cookable="True"
-      enabled="True" expression=""
-      id="++resource++collective.nitf/nitf.js" inline="False"/>
 </object>

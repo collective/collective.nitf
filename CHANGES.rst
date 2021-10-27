@@ -15,6 +15,9 @@ There's a frood who really knows where his towel is.
     If you prefer to migrate via Plone migration, you will have to do the migration scripts
     to migrate ``collective.nitf``. Contributions here are welcome!
 
+- Register static resources in Resource Registry.
+  [wesleybl]
+
 - Add suport to Python 3.7 and 3.8.
   [wesleybl]
 

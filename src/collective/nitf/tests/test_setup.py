@@ -3,15 +3,18 @@ from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 from plone.browserlayer.utils import registered_layers
+from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.browser.admin import AddPloneSite
+from Products.CMFPlone.interfaces.resources import IBundleRegistry
+from zope.component import getUtility
 
 import unittest
 
 
 DEPENDENCIES = ("collective.js.jqueryui",)
 
-JS = "++resource++collective.nitf/nitf.js"
-CSS = "++resource++collective.nitf/nitf.css"
+JS = "++plone++collective.nitf/nitf.js"
+CSS = "++plone++collective.nitf/nitf.css"
 
 
 class InstallTestCase(unittest.TestCase):
@@ -22,6 +25,10 @@ class InstallTestCase(unittest.TestCase):
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
         self.qi = self.portal["portal_quickinstaller"]
+        self.registry = getUtility(IRegistry)
+        self.bundles = self.registry.collectionOfInterface(
+            IBundleRegistry, prefix="plone.bundles"
+        )
 
     def test_installed(self):
         from Products.CMFPlone.utils import get_installer
@@ -74,17 +81,13 @@ class InstallTestCase(unittest.TestCase):
         ]
         self.assertEqual([u"collective.nitf:default"], nitf_profiles)
 
-    # FIXME: Make the test work in Plone 5.
-    @unittest.skip("No easy way to test this under Plone 5")
     def test_jsregistry(self):
-        resource_ids = self.portal.portal_javascripts.getResourceIds()
-        self.assertIn(JS, resource_ids)
+        bundle = self.bundles["nitf"]
+        self.assertEqual(bundle.jscompilation, JS)
 
-    # FIXME: Make the test work in Plone 5.
-    @unittest.skip("No easy way to test this under Plone 5")
     def test_cssregistry(self):
-        resource_ids = self.portal.portal_css.getResourceIds()
-        self.assertIn(CSS, resource_ids)
+        bundle = self.bundles["nitf"]
+        self.assertEqual(bundle.csscompilation, CSS)
 
 
 class UninstallTest(unittest.TestCase):
@@ -94,7 +97,11 @@ class UninstallTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
-        self.qi = self.uninstall()  # BBB: QI compatibility
+        self.qi = self.uninstall()
+        self.registry = getUtility(IRegistry)
+        self.bundles = self.registry.collectionOfInterface(
+            IBundleRegistry, prefix="plone.bundles"
+        )
 
     def uninstall(self):
         from Products.CMFPlone.utils import get_installer
@@ -111,17 +118,8 @@ class UninstallTest(unittest.TestCase):
         layers = [layer.getName() for layer in registered_layers()]
         self.assertNotIn("INITFLayer", layers)
 
-    # FIXME: Make the test work in Plone 5.
-    @unittest.skip("No easy way to test this under Plone 5")
-    def test_jsregistry_removed(self):
-        resource_ids = self.portal.portal_javascripts.getResourceIds()
-        self.assertNotIn(JS, resource_ids)
-
-    # FIXME: Make the test work in Plone 5.
-    @unittest.skip("No easy way to test this under Plone 5")
-    def test_cssregistry_removed(self):
-        resource_ids = self.portal.portal_css.getResourceIds()
-        self.assertNotIn(CSS, resource_ids)
+    def test_bundle_removed(self):
+        self.assertNotIn("nitf", self.bundles.keys())
 
     # FIXME: https://github.com/collective/collective.nitf/issues/168
     @unittest.expectedFailure

@@ -4,9 +4,7 @@ module.exports = {
   output: {
     filename: 'nitf.js',
     path: __dirname + '/../src/collective/nitf/static',
-    libraryTarget: 'umd',
-    publicPath: '++resource++collective.nitf/',
-    library: 'collective.nitf'
+    publicPath: '++plone++collective.nitf/',
   },
   module: {
     rules: [{

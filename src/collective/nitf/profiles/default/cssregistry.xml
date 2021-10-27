@@ -4,8 +4,4 @@
       title="" cacheable="False" compression="none" cookable="False"
       enabled="1" expression="" media="screen"
       rel="stylesheet" rendering="link" />
-  <stylesheet id="++resource++collective.nitf/nitf.css"
-      title="" cacheable="True" compression="none" cookable="True"
-      enabled="1" expression="" media="screen"
-      rel="stylesheet" rendering="link" />
 </object>
