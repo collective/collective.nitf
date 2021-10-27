@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<object name="portal_css">
-  <stylesheet id="//cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css"
-      title="" cacheable="False" compression="none" cookable="False"
-      enabled="1" expression="" media="screen"
-      rel="stylesheet" rendering="link" />
-</object>
