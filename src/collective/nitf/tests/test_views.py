@@ -100,7 +100,6 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         self.assertEqual(media[1].getObject().id, "bar")
         self.assertEqual(media[2].getObject().id, "baz")
 
-    @unittest.skip("Test failure in Plone 5.2")
     def test_render_plone_below_contenttitle(self):
         image = api.content.create(self.n1, "Image", title="img_foo")
         set_image_field(image, FRACTAL, "image/jpeg")
