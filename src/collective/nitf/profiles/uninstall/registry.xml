@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
 <registry>
   <records interface="collective.nitf.controlpanel.INITFSettings" remove="true" />
+  <records prefix="plone.bundles/nitf"
+           interface="Products.CMFPlone.interfaces.IBundleRegistry" remove="True"/>
 </registry>

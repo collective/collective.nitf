@@ -71,6 +71,7 @@ setup(
         "plone.namedfile",
         "plone.portlets",
         "plone.registry",
+        "plone.resource",
         "plone.supermodel",
         "plone.uuid",
         "Products.CMFPlone >=5.2",
