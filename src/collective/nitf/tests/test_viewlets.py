@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Tests in this module are not executed in Plone 5 as the documentbyline
-viewlet is not visible by default. We need to find out how to fix that.
+"""Tests of viewlets.
 
 For more information on how to test viewlets, see:
 http://docs.plone.org/develop/plone/views/viewlets.html
@@ -19,10 +18,6 @@ from zope.viewlet.interfaces import IViewletManager
 import unittest
 
 
-# FIXME: Plone 5
-@unittest.skip(
-    "Tests in this module are not executed in Plone 5. See module docstring."
-)
 class DocumentBylineViewletTestCase(unittest.TestCase):
 
     layer = INTEGRATION_TESTING
