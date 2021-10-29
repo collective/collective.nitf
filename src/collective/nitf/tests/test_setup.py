@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from collective.nitf.config import PROJECTNAME
 from collective.nitf.testing import INTEGRATION_TESTING
-from plone import api
 from plone.browserlayer.utils import registered_layers
 from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.browser.admin import AddPloneSite
 from Products.CMFPlone.interfaces.resources import IBundleRegistry
+from Products.CMFPlone.utils import get_installer
 from zope.component import getUtility
 
 import unittest
@@ -24,23 +24,19 @@ class InstallTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
-        self.qi = self.portal["portal_quickinstaller"]
+        self.installer = get_installer(self.portal, self.request)
         self.registry = getUtility(IRegistry)
         self.bundles = self.registry.collectionOfInterface(
             IBundleRegistry, prefix="plone.bundles"
         )
 
     def test_installed(self):
-        from Products.CMFPlone.utils import get_installer
+        self.assertTrue(self.installer.is_product_installed(PROJECTNAME))
 
-        qi = get_installer(self.portal, self.request)
-        self.assertTrue(qi.is_product_installed(PROJECTNAME))
-
-    @unittest.skip("Test failure in Plone 5.2")
     def test_dependencies_installed(self):
         for p in DEPENDENCIES:
             self.assertTrue(
-                self.qi.isProductInstalled(p), "{0} not installed".format(p)
+                self.installer.isProductInstalled(p), "{0} not installed".format(p)
             )
 
     def test_setup_permission(self):
@@ -97,22 +93,15 @@ class UninstallTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
-        self.qi = self.uninstall()
+        self.installer = get_installer(self.portal, self.request)
+        self.installer.uninstall_product(PROJECTNAME)
         self.registry = getUtility(IRegistry)
         self.bundles = self.registry.collectionOfInterface(
             IBundleRegistry, prefix="plone.bundles"
         )
 
-    def uninstall(self):
-        from Products.CMFPlone.utils import get_installer
-
-        qi = get_installer(self.portal, self.request)
-        with api.env.adopt_roles(["Manager"]):
-            qi.uninstall_product(PROJECTNAME)
-        return qi
-
     def test_uninstalled(self):
-        self.assertFalse(self.qi.is_product_installed(PROJECTNAME))
+        self.assertFalse(self.installer.is_product_installed(PROJECTNAME))
 
     def test_addon_layer_removed(self):
         layers = [layer.getName() for layer in registered_layers()]
