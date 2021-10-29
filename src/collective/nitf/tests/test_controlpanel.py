@@ -6,6 +6,7 @@ from collective.nitf.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import logout
 from plone.registry.interfaces import IRegistry
+from Products.CMFPlone.utils import get_installer
 from zope.component import getUtility
 
 import unittest
@@ -17,13 +18,12 @@ class ControlPanelTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.controlpanel = self.portal["portal_controlpanel"]
 
-    @unittest.skip("Test failure in Plone 5.2")
     def test_controlpanel_has_view(self):
         request = self.layer["request"]
         view = api.content.get_view(u"nitf-settings", self.portal, request)
-        view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
@@ -41,12 +41,11 @@ class ControlPanelTestCase(unittest.TestCase):
         actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
         self.assertIn("nitf", actions, "control panel not installed")
 
-    @unittest.skip("Test failure in Plone 5.2")
     def test_controlpanel_removed_on_uninstall(self):
-        qi = self.portal["portal_quickinstaller"]
+        installer = get_installer(self.portal, self.request)
 
         with api.env.adopt_roles(["Manager"]):
-            qi.uninstallProducts(products=[PROJECTNAME])
+            installer.uninstall_product(PROJECTNAME)
 
         actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
         self.assertNotIn("nitf", actions, "control panel not removed")
@@ -58,6 +57,7 @@ class RegistryTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.registry = getUtility(IRegistry)
         self.settings = self.registry.forInterface(INITFSettings)
 
@@ -81,12 +81,11 @@ class RegistryTestCase(unittest.TestCase):
         self.assertTrue(hasattr(self.settings, "default_urgency"))
         self.assertEqual(self.settings.default_urgency, DEFAULT_URGENCY)
 
-    @unittest.skip("Test failure in Plone 5.2")
     def test_records_removed_on_uninstall(self):
-        qi = self.portal["portal_quickinstaller"]
+        installer = get_installer(self.portal, self.request)
 
         with api.env.adopt_roles(["Manager"]):
-            qi.uninstallProducts(products=[PROJECTNAME])
+            installer.uninstall_product(PROJECTNAME)
 
         BASE_REGISTRY = "collective.nitf.controlpanel.INITFSettings.{0}"
         records = [
