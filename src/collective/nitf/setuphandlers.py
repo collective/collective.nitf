@@ -52,7 +52,6 @@ def add_catalog_indexes():
         ("section", "FieldIndex"),
         ("urgency", "FieldIndex"),
         ("location", "ZCTextIndex"),
-        ("SearchableText", "ZCTextIndex"),
     )
 
     indexables = []
