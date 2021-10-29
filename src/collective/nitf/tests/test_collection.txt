@@ -12,15 +12,13 @@ Functional test for collections to filter nitf gnere and section:
     >>> browser.open(portalURL + '/login_form')
     >>> browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
     >>> browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
-    >>> browser.getControl(name='submit').click()
+    >>> browser.getControl(name='buttons.login').click()
 
     >>> 'You are now logged in' in browser.contents
     True
 
-Let's create a collection and verify our criteria was added:
-
-    >>> browser.getLink('Home').click()
-    >>> browser.getLink('Collection').click()
+Let's verify our criteria was added. `@@qsOptions` return criterias of collections:
+    >>> browser.open('{0}/@@qsOptions'.format(portalURL))
     >>> 'NITF' in browser.contents
     True
     >>> 'Genre' in browser.contents
@@ -34,4 +32,20 @@ Let's create a collection and verify our criteria was added:
     >>> 'Urgency' in browser.contents
     True
     >>> 'Location' in browser.contents
+    True
+
+Let's create a collection and verify our columns was added:
+    >>> browser.open(portalURL)
+    >>> browser.getLink('Collection').click()
+    >>> 'genre' in browser.contents
+    True
+    >>> 'section' in browser.contents
+    True
+    >>> 'subtitle' in browser.contents
+    True
+    >>> 'author' in browser.contents
+    True
+    >>> 'urgency' in browser.contents
+    True
+    >>> 'location' in browser.contents
     True

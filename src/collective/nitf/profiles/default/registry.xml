@@ -2,7 +2,7 @@
 <registry xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
     <records interface="collective.nitf.controlpanel.INITFSettings" />
 
-     <records  condition="installed plone.app.collection" interface="plone.app.querystring.interfaces.IQueryField"
+     <records interface="plone.app.querystring.interfaces.IQueryField"
           prefix="plone.app.querystring.field.genre">
       <value key="title" i18n:translate="">Genre</value>
       <value key="description" i18n:translate="">An NITF genre field</value>
