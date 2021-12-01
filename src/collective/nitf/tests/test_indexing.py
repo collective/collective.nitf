@@ -175,14 +175,14 @@ class IndexingTestCase(unittest.TestCase):
         self.assertIn(self.n1.absolute_url(), results)
         self.assertIn(self.n2.absolute_url(), results)
 
-    @unittest.skip("Test failure in Plone 5.2")
     def test_catalog_not_lost_on_package_reinstall(self):
         """Catalog information should not be lost on package reinstall.
         https://github.com/collective/collective.nitf/issues/33
         """
+        qi = self.portal["portal_quickinstaller"]
+        qi.installProducts(products=[PROJECTNAME])
         self.n1.byline = u"Héctor Velarde"
         self.n1.reindexObject()
-        qi = self.portal["portal_quickinstaller"]
         qi.reinstallProducts(products=[PROJECTNAME])
         results = api.content.find(SearchableText="Héctor")
         self.assertEqual(1, len(results))
