@@ -6,93 +6,17 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="collective.nitf">
 
-<head tal:define="portal_state context/@@plone_portal_state;
-                  portal_url portal_state/portal_url;">
-
-
-    <metal:javascriptslot fill-slot="javascript_head_slot">
-        <script type="text/javascript">
-        function update_sortable(item, delta) {
-            var id_cleaner = function(ids) {
-                var cleaned = new Array();
-                for (i=0;i<ids.length;i++) {
-                   cleaned[i] = ids[i].replace('sortable-', "");
-                   }
-               return cleaned;
-            };
-            var items= $("#sortable").sortable("toArray");
-            var prev = item.prev();
-            var prev_pos = undefined;
-            var a_id = item.attr("id").replace('sortable-', "");
-            var pos = item.index();
-            var msg = "Position " + pos;
-            var msg2 = "\nId " + a_id;
-            var base = $("base").attr("href");
-            base = base.replace(/@@media$/, '');
-            var move_url = base + "folder_moveitem";
-            var query = {delta: "1", id: a_id};
-            var ids = id_cleaner($("#sortable").sortable("toArray"));
-            var prev_msg = "\nPrev pos: ";
-
-            prev_pos = item.attr("class").replace('sort-', "");
-
-            if(delta == undefined) {
-                delta = pos - prev_pos;
-            }
-
-            prev_msg += prev_pos;
-            msg2 += "\nDelta: " + delta;
-            msg2 += "\n" + move_url;
-            msg2 += "\n" + query;
-            msg2 += "\n" + ids;
-            msg2 += "\n" + prev_msg;
-            $.post(move_url, { delta: delta, item_id: a_id});
-            $("#sortable").sortable("refresh");
-        };
-
-        $(function() {
-
-            $('#sortable a.draggable-item').prepOverlay({
-                    subtype: 'ajax',
-                    filter: '#content',
-                    noform:'close'
-            });
-
-            $('#sortable a.button.edit').prepOverlay({
-                    subtype: 'ajax',
-                    filter: '#content',
-                    formselector: 'form',
-                    noform:'close'
-            });
-            $('a.delete').prepOverlay({
-                subtype: 'ajax',
-                filter: '#content',
-                formselector: '#delete_confirmation',
-                cssclass: 'overlay-delete',
-                noform: function(el) {return $.plonepopups.noformerrorshow(el, 'close');},
-                afterpost: function(el, data) {
-                    window.location = '@@media';
-                },
-                closeselector: '[name="form.button.Cancel"]',
-                width:'50%'
-            });
-            $("#sortable").sortable({
-                helper : 'clone',
-                placeholder: "ui-state-highlight",
-                update: function(event, ui){
-                    update_sortable(ui.item);
-                }
-            });
-        });
-        </script>
-            <script type="text/javascript" charset="iso-8859-1" src="widgets/js/keywordmultiselect.js"
-             tal:attributes="src string:${portal_url}/widgets/js/keywordmultiselect.js">
-            </script>
-    </metal:javascriptslot>
-</head>
-
-<body tal:define="errors options/state/getErrors">
+<body>
     <metal:main fill-slot="main">
+        <script>
+          function update_sortable(item, delta) {
+            var selected_id = item[0].id;
+            var actual_url = location.protocol + '//' + location.host + location.pathname;
+            var context_url = actual_url.replace(/@@media$/, '');
+            var move_url = context_url + 'fc-itemOrder';
+            $.post(move_url, { delta: delta, id: selected_id});
+          }
+        </script>
         <tal:protect tal:condition="python: not checkPermission('List folder contents', here)"
                      tal:replace="here/raiseUnauthorized" />
 
@@ -104,20 +28,20 @@
             <p i18n:translate="">Drag and drop images to change their order on the slideshow.</p>
 
             <tal:sortable tal:condition="media">
-            <ul id="sortable" class="sortable-media">
+            <ul class="sortable-media pat-sortable" data-pat-sortable="drop:update_sortable"
+                tal:define="normalizeString python:plone_view.normalizeString">
                 <tal:items tal:repeat="item media">
-                <li class="ui-state-default"
-                       tal:define="item_id item/getId|item/id;
-                                   item_url item/getURL|item/absolute_url;
-                                   obj python:item.getObject()"
-                       tal:attributes="id string:sortable-${item_id};
-                                   class string:sort-${repeat/item/index}">
+                <li tal:define="item_id item/getId|item/id;
+                                item_url item/getURL|item/absolute_url;
+                                normalized_type python: normalizeString(item.portal_type);
+                                obj python:item.getObject()"
+                    tal:attributes="id item_id;
+                                    class string:sort-${repeat/item/index}">
                     <a href=""
                        tal:define="item_title_or_id item/pretty_title_or_id;
                                    item_description item/Description;"
-                       tal:attributes="href string:${item_url}/view;
-                                       id string:folder-contents-item-${item_id};"
-                       class="draggable-item">
+                       tal:attributes="href string:${item_url};"
+                       class="pat-plone-modal" data-pat-plone-modal="image: true">
                         <tal:block tal:define="photo nocall:obj/image | nothing;
                                                scale obj/@@images">
                           <img src="" alt="" title=""
@@ -125,12 +49,11 @@
                                tal:replace="structure python:scale.scale('image', scale='thumb').tag()" />
                         </tal:block>
                     </a>
-                    <a class="button edit"
+                    <a class="button edit pat-plone-modal"
                        tal:attributes="href string:${item_url}/edit"><span class="icon"></span>Editar</a>
-                    <a class="button delete"
+                    <a class="button delete pat-plone-modal"
                        tal:attributes="href string:${context/absolute_url}/${item_id}/delete_confirmation"><span class="icon"></span></a>
-                    <img src="" alt="icon" title=""
-                               tal:attributes="src python:obj.getIcon(True)" />
+                    <span tal:attributes="class python:'contenttype-{0}'.format(normalized_type)" />
                 </li>
                 </tal:items>
             </ul>

@@ -11,7 +11,7 @@ from zope.component import getUtility
 import unittest
 
 
-DEPENDENCIES = ("collective.js.jqueryui",)
+DEPENDENCIES = ()
 
 JS = "++plone++collective.nitf/nitf.js"
 CSS = "++plone++collective.nitf/nitf.css"

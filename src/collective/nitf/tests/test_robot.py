@@ -15,7 +15,7 @@ noncritical = ["Expected Failure"]
 noncritical.append("issue_172")
 
 # FIXME: Make RobotFramework tests work in Plone 5
-tests = []
+tests = ["test_views.robot"]
 
 
 def test_suite():

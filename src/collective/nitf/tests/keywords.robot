@@ -92,4 +92,3 @@ Change View
     Wait Until Element Is Visible  css=#plone-contentmenu-actions
     Open Display Menu
     Click Link  link=${view}
-    Page Should Contain  View changed

@@ -49,7 +49,6 @@ setup(
     python_requires="~=2.7, ~=3.7, ~=3.8",
     install_requires=[
         "Acquisition",
-        "collective.js.jqueryui",
         "plone.api",
         "plone.app.content",
         "plone.app.contentmenu",
@@ -95,6 +94,7 @@ setup(
             "plone.browserlayer",
             "plone.namedfile",
             "plone.testing",
+            "Products.CMFCore",
             "robotsuite",
             "six",
             "z3c.relationfield",
