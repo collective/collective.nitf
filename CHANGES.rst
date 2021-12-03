@@ -18,7 +18,7 @@ There's a frood who really knows where his towel is.
 - Fix documentbyline viewlet in Plone 5.2.
   [wesleybl]
 
-- Load Swiper resources without Resource Registry. Resources are loaded on the Nitf view page.
+- Load Swiper with webpack.
   [wesleybl]
 
 - Register internal static resources in Resource Registry.
