@@ -26,6 +26,6 @@
     "svg-url-loader": "^2.0.1"
   },
   "dependencies": {
-    "swiper": "^3.4.2"
+    "swiper": "^6.8.4"
   }
 }

@@ -18,7 +18,7 @@ There's a frood who really knows where his towel is.
 - Fix documentbyline viewlet in Plone 5.2.
   [wesleybl]
 
-- Load Swiper with webpack.
+- Load Swiper with webpack e upgrade to 6.8.4.
   [wesleybl]
 
 - Register internal static resources in Resource Registry.
