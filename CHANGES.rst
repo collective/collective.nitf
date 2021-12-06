@@ -34,7 +34,7 @@ There's a frood who really knows where his towel is.
 - Add suport to Python 3.7 and 3.8.
   [wesleybl]
 
-- Remove dependency on unused package ``collective.prettydate``.
+- Remove dependency on unused packages ``collective.prettydate`` and ``plone.app.contentmenu``.
   [wesleybl]
 
 - Remove dependency on plone.app.imaging.

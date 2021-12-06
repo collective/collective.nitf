@@ -51,7 +51,6 @@ setup(
         "Acquisition",
         "plone.api",
         "plone.app.content",
-        "plone.app.contentmenu",
         "plone.app.dexterity [relations]",
         "plone.app.layout",
         "plone.app.lockingbehavior",
