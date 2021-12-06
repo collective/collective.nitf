@@ -21,7 +21,7 @@ ${body_html} =  <p>I'm free<br />I'm free<br />And freedom tastes of reality</p>
 *** Test Cases ***
 
 Test Locking Behavior
-    Enable Autologin as  Owner
+    Log In As Site Owner
     Goto Homepage
 
     Click Add News Article
@@ -45,24 +45,23 @@ Test Locking Behavior
     Click Link  link=Edit
     Page Should Contain  Locked  ${LOCKED_MESSAGE}
 
-    # FIXME: http://stackoverflow.com/q/27430323/644075
-    # Switch Browser  1
-    # Click Link  link=View
-    # Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
+    Switch Browser  1
+    Click button  Save
+    Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
 
-    # Switch Browser  2
-    # Go To  ${PLONE_URL}/miracle-cure
-    # Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
-    # Click Link  link=Edit
+    Switch Browser  2
+    Go To  ${PLONE_URL}/miracle-cure
+    Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
+    Click Link  link=Edit
 
-    # Switch Browser  1
-    # Go To  ${PLONE_URL}/miracle-cure
-    # Click Link  link=Edit
-    # Page Should Contain  Locked  ${LOCKED_MESSAGE}
+    Switch Browser  1
+    Go To  ${PLONE_URL}/miracle-cure
+    Click Link  link=Edit
+    Page Should Contain  Locked  ${LOCKED_MESSAGE}
 
-    # Switch Browser  2
-    # Go To  ${PLONE_URL}/miracle-cure
-    # Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
+    Switch Browser  2
+    Go To  ${PLONE_URL}/miracle-cure
+    Page Should Not Contain  Locked  ${LOCKED_MESSAGE}
 
 *** Keywords ***
 
