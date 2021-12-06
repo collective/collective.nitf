@@ -63,8 +63,6 @@ setup(
         "plone.autoform",
         "plone.behavior",
         "plone.dexterity",
-        "plone.formwidget.autocomplete",
-        "plone.formwidget.contenttree",
         "plone.indexer",
         "plone.memoize",
         "plone.namedfile",

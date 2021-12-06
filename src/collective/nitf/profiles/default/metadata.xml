@@ -5,7 +5,5 @@
   <dependency>profile-plone.app.dexterity:default</dependency>
   <dependency>profile-plone.app.registry:default</dependency>
   <dependency>profile-plone.app.relationfield:default</dependency>
-  <dependency>profile-plone.formwidget.autocomplete:default</dependency>
-  <dependency>profile-plone.formwidget.contenttree:default</dependency>
  </dependencies>
 </metadata>

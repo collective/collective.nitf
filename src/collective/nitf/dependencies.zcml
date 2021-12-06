@@ -4,7 +4,5 @@
   <include package="plone.app.dexterity" />
   <include package="plone.app.lockingbehavior" />
   <include package="plone.app.relationfield" />
-  <include package="plone.formwidget.autocomplete" />
-  <include package="plone.formwidget.contenttree" />
 
 </configure>

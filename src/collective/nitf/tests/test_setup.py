@@ -11,8 +11,6 @@ from zope.component import getUtility
 import unittest
 
 
-DEPENDENCIES = ()
-
 JS = "++plone++collective.nitf/nitf.js"
 CSS = "++plone++collective.nitf/nitf.css"
 
@@ -32,12 +30,6 @@ class InstallTestCase(unittest.TestCase):
 
     def test_installed(self):
         self.assertTrue(self.installer.is_product_installed(PROJECTNAME))
-
-    def test_dependencies_installed(self):
-        for p in DEPENDENCIES:
-            self.assertTrue(
-                self.installer.isProductInstalled(p), "{0} not installed".format(p)
-            )
 
     def test_setup_permission(self):
         permission = "collective.nitf: Setup"
