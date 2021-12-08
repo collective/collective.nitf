@@ -1,6 +1,18 @@
 @import "~swiper/swiper-bundle.css";
 
-/* used in media_sorter.pt */
+/* used in media.pt */
+li.item-dragging.dragging {
+  list-style:none;
+  a{
+    &.button.edit.pat-plone-modal{
+        display: none;
+    }
+  }
+  span{
+    display: none;
+  }
+}
+
 .sortable-media {
   margin: 0 !important;
   padding: 0;
@@ -12,8 +24,8 @@
 
     float: left;
 
-    width: 128px;
-    height: 128px;
+    width: 140px;
+    height: 132px;
     margin: 0 10px 10px 0;
     padding: 4px;
 
@@ -22,16 +34,6 @@
     &:hover .button {
       visibility: visible;
     }
-  }
-  .draggable-item {
-    display: block;
-    overflow: hidden;
-
-    height: 90px;
-
-    cursor: move;
-
-    border: medium none;
   }
   .button {
     right: 0;
@@ -60,6 +62,9 @@
       height: 15px;
     }
     &.edit {
+      position: absolute;
+      top: 94px;
+      right: 4px;
       background: none repeat scroll 0 0 #75AD0A;
       .icon {
         line-height: 50px;
@@ -73,7 +78,9 @@
     &.delete {
       position: absolute;
       top: 0;
-      right: 0;
+      right: 3px;
+      padding-right: 4px;
+
 
       background-color: #C43C35;
       .icon {

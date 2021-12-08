@@ -15,6 +15,12 @@ There's a frood who really knows where his towel is.
     If you prefer to migrate via Plone migration, you will have to do the migration scripts
     to migrate ``collective.nitf``. Contributions here are welcome!
 
+- Remove dependency on ``collective.js.jqueryui``.
+  [wesleybl]
+
+- Fix Media View in Plone 5.2.
+  [wesleybl]
+
 - Fix documentbyline viewlet in Plone 5.2.
   [wesleybl]
 

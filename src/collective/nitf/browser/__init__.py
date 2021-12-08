@@ -27,15 +27,6 @@ class View(DefaultView):
         """Return a list of file brains inside the NITF object."""
         return self._get_brains("File")
 
-    def get_links(self):
-        """Return a list of link brains inside the NITF object."""
-        return self._get_brains("Link")
-
-    def get_media(self):
-        """Return a list of object brains inside the NITF object."""
-        media_ct = [x.title for x in self.context.allowedContentTypes()]
-        return self._get_brains(media_ct)
-
 
 class Slideshow(DefaultView):
 

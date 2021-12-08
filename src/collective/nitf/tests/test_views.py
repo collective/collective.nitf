@@ -75,31 +75,6 @@ class DefaultViewTestCase(TestViewMixin, BaseViewTestCase):
         self.assertEqual(files[0].getObject().Title(), "foo")
         self.assertEqual(files[0].getObject().Description(), "bar")
 
-    def test_get_links(self):
-        links = self.view.get_links()
-        self.assertEqual(len(links), 0)
-
-        self.n1.invokeFactory("Link", "foo", remoteUrl="http://foo/")
-        links = self.view.get_links()
-        self.assertEqual(len(links), 1)
-        self.assertEqual(links[0].getObject().id, "foo")
-        self.assertEqual(links[0].getObject().remoteUrl, "http://foo/")
-
-    def test_get_media(self):
-        media = self.view.get_media()
-        self.assertEqual(len(media), 0)
-
-        image = api.content.create(self.n1, "Image", title="foo")
-        set_image_field(image, FRACTAL, "image/jpeg")
-        file = api.content.create(self.n1, "File", title="bar")
-        set_file_field(file, FRACTAL, "image/jpeg")
-        self.n1.invokeFactory("Link", "baz", remoteUrl="http://baz/")
-        media = self.view.get_media()
-        self.assertEqual(len(media), 3)
-        self.assertEqual(media[0].getObject().Title(), "foo")
-        self.assertEqual(media[1].getObject().id, "bar")
-        self.assertEqual(media[2].getObject().id, "baz")
-
     def test_render_plone_below_contenttitle(self):
         image = api.content.create(self.n1, "Image", title="img_foo")
         set_image_field(image, FRACTAL, "image/jpeg")

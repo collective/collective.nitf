@@ -7,6 +7,5 @@
   <dependency>profile-plone.app.relationfield:default</dependency>
   <dependency>profile-plone.formwidget.autocomplete:default</dependency>
   <dependency>profile-plone.formwidget.contenttree:default</dependency>
-  <dependency>profile-collective.js.jqueryui:default</dependency>
  </dependencies>
 </metadata>

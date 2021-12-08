@@ -14,6 +14,7 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
+from Products.CMFCore.indexing import processQueue
 from six.moves import range
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
@@ -101,6 +102,7 @@ class RobotFixture(Fixture):
         to_id = intids.getId(portal.related)
         portal.n1.relatedItems = [RelationValue(to_id)]
         open("/tmp/random.txt", "w").write(generate_text(256))
+        processQueue()
 
 
 FIXTURE = Fixture()
