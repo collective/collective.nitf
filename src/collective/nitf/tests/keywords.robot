@@ -52,7 +52,7 @@ Create News Article
     Page Should Contain  Add Image
     Choose File  xpath=${image_field_selector}  /tmp/640px-Mandel_zoom_00_mandelbrot_set.jpg
     Click Button  Save
-    Page Should Contain  Changes saved
+    Page Should Contain  Item created
 
     # A news article can contain files
     Click Link  link=Miracle Cure
@@ -61,17 +61,18 @@ Create News Article
     Page Should Contain  Add File
     Choose File  xpath=${file_field_selector}  /tmp/random.txt
     Click Button  Save
-    Page Should Contain  Changes saved
+    Page Should Contain  Item created
 
     # A news article can contain links
     Click Link  link=Miracle Cure
     Open Add New Menu
     Click Link  css=a#link
-    Input Text  css=#title  An URL
-    Input Text  css=#description  The description of the URL
-    Input Text  css=#remoteUrl  http://foo.bar
+    Input Text  css=${title_selector}  An URL
+    Input Text  css=${description_selector}  The description of the URL
+    Click Link  External
+    Input Text  form.widgets.remoteUrl.external  http://foo.bar
     Click Button  Save
-    Page Should Contain  Changes saved
+    Page Should Contain  Item created
 
     Click Link  link=Miracle Cure
 
@@ -83,8 +84,10 @@ Update
 Delete
     Open Action Menu
     Click Link  css=a#plone-contentmenu-actions-delete
-    Click Button  Delete
-    Page Should Contain  Plone site
+    Wait Until Element Is Visible  css=.pattern-modal-buttons
+    Click Button  css=.pattern-modal-buttons #form-buttons-Delete
+    Wait Until Element Is Not Visible  css=.pattern-modal-buttons
+    Page Should Contain  Miracle Cure has been deleted
 
 Change View
     [arguments]  ${view}

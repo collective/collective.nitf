@@ -8,7 +8,6 @@ Suite Teardown  Close all browsers
 *** Test cases ***
 
 Test CRUD
-    [Tags]  issue_172
     Enable Autologin as  Site Administrator
     Goto Homepage
 
@@ -37,10 +36,8 @@ Test Folder Full View
     Page Should Contain  Item created
 
     Click Link  link=Test Folder
-    Sleep  1s
-    Open Display Menu
-    Click Link  link=All content
-    Check Status Message  View changed
+    Change View  All content
+    Page Should Contain Element  css=.template-full_view
 
     # all elements must be visible on the view
     Page Should Contain  ${title}
