@@ -15,6 +15,10 @@ There's a frood who really knows where his towel is.
     If you prefer to migrate via Plone migration, you will have to do the migration scripts
     to migrate ``collective.nitf``. Contributions here are welcome!
 
+- Views now inherit from Products.Five.BrowserView instead of
+  plone.dexterity.browser.view.DefaultView.
+  [wesleybl]
+
 - Remove Latest Sectionable NITF portlet.
   [wesleybl]
 

@@ -2,12 +2,12 @@
 from plone import api
 from plone.app.layout.viewlets.content import ContentRelatedItems
 from plone.app.layout.viewlets.content import DocumentBylineViewlet
-from plone.dexterity.browser.view import DefaultView
 from plone.memoize import ram
+from Products.Five import BrowserView
 from time import time
 
 
-class View(DefaultView):
+class View(BrowserView):
 
     """Default view of a News Article."""
 
@@ -28,12 +28,12 @@ class View(DefaultView):
         return self._get_brains("File")
 
 
-class Slideshow(DefaultView):
+class Slideshow(BrowserView):
 
     """Slideshow view of a News Article."""
 
 
-class TextOnly(DefaultView):
+class TextOnly(BrowserView):
 
     """Text only view of a News Article."""
 
