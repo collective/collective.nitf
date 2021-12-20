@@ -14,7 +14,6 @@
 
   <include package=".behaviors" />
   <include package=".browser" />
-  <include package=".portlets" />
   <include package=".tiles" zcml:condition="installed collective.cover" />
   <include package=".upgrades" />
 
